@@ -1,0 +1,141 @@
+ <style>
+    .more-info{
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+}
+.more-info a{
+    text-decoration: none;
+}
+.discover{
+    font-size: 13px;
+    color: #898697;
+
+}
+.buy_now{
+  background: none repeat scroll 0 0 #254F73;
+  border: medium none;
+  color: #FEFEFE !important;
+  font-size: 13px !important;
+  letter-spacing: 2px;
+  line-height: 27px;
+  padding: 12px 30px;
+  text-transform: uppercase;
+
+}
+.buy{
+    margin-top:20px;
+}
+.social_box{
+    margin-top: 20px;
+}
+.close{
+    float: none;
+}
+.modal-header{
+    text-align: right;
+}
+.pad .likes{
+    font-size: 30px;
+}
+.pad .likes a{
+    text-decoration: none;
+    color:#8c8982;
+}
+.pad .likes a .fa-thumbs-up{
+    color:#8c8982;
+}
+.btn{
+    display: initial;
+    border-radius: 0;
+}
+</style>
+<div class="more-info">
+    <div class="pad">
+        <div>
+        <a href="javascript:void(0);" class="likes check-like" id="<?php echo base64_encode($this->feedDataDetail['id']); ?>">
+            <?php if(in_array($this->feedDataDetail['id'], $likearray)) { ?>
+            <i id="like<?php echo $this->feedDataDetail['id']; ?>" class="fa fa-thumbs-up"></i>  
+            <?php } else { ?>
+                <i id="popup_like<?php echo $this->feedDataDetail['id']; ?>" class="fa fa-thumbs-o-up"></i> 
+            <?php } ?>
+        </a>
+        </div>
+        <span class="like_count like_<?php echo $this->feedDataDetail['id']; ?>"><?php echo ($this->feedDataDetail['likesCount'] > 0) ? $this->feedDataDetail['likesCount'].' likes' : "&nbsp;"; ?> </span>
+        <h4><?php echo $this->feedDataDetail['caption']; ?></h4>
+        <p><?php echo $this->feedDataDetail['price']; ?><span class="currency"><?php echo $this->feedDataDetail['currency'] ?></span></p>
+        <div class="buy">
+        <?php 
+            $disable='';
+            $add ='add to cart';
+            if(in_array($this->feedDataDetail['id'],$listItemCart)){ 
+                $disable = 'disabled="disabled"';
+                $add ='added to cart';
+            }
+        ?>
+        
+            <a data-feedid="<?php echo $this->feedDataDetail['id']; ?>" class="btn buy_now addCart" <?php echo $disable ?> target="_blank" href="javascript:void(0)"><?php echo $add ?></a>
+        </div>
+        <br>
+        <a class="discover" href="#" data-toggle="modal" data-target="#myModal_discover" data-value="<?php echo base64_encode($this->feedDataDetail['id']); ?>">DISCOVER <i class="fa fa-long-arrow-right"></i></a>
+    </div>
+       <div class="social_box">
+            <ul class="list-inline">
+<!-- Go to www.addthis.com/dashboard to generate a new set of sharing buttons -->
+<a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://<?=URL_APPLICATION?>%2Fservice%2Ffeeddatadetail%2F<?php echo $this->feedDataDetail['id'].'/'.rand();?>&pubid=ra-556ffe7b6e111a33&ct=1&title=Polo%20Ralph%20Lauren%20Big%20and%20Tall%20Pima%20Cotton%20V%20Neck%20Sweater&pco=tbxnj-1.0" target="_blank"><img src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/facebook.png" border="0" alt="Facebook"/></a>
+<a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=http://<?=URL_APPLICATION?>%2Fservice%2Ffeeddatadetail%2F<?php echo $this->feedDataDetail['id'].'/'.rand();?>&pubid=ra-556ffe7b6e111a33&ct=1&title=Polo%20Ralph%20Lauren%20Big%20and%20Tall%20Pima%20Cotton%20V%20Neck%20Sweater&pco=tbxnj-1.0" target="_blank"><img src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/pinterest.png" border="0" alt="Pinterest"/></a>
+<a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=http://<?=URL_APPLICATION?>%2Fservice%2Ffeeddatadetail%2F<?php echo $this->feedDataDetail['id'].'/'.rand();?>&pubid=ra-556ffe7b6e111a33&ct=1&title=Polo%20Ralph%20Lauren%20Big%20and%20Tall%20Pima%20Cotton%20V%20Neck%20Sweater&pco=tbxnj-1.0" target="_blank"><img src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/twitter.png" border="0" alt="Twitter"/></a>
+<a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=http://<?=URL_APPLICATION?>%2Fservice%2Ffeeddatadetail%2F<?php echo $this->feedDataDetail['id'].'/'.rand();?>&pubid=ra-556ffe7b6e111a33&ct=1&title=Polo%20Ralph%20Lauren%20Big%20and%20Tall%20Pima%20Cotton%20V%20Neck%20Sweater&pco=tbxnj-1.0" target="_blank"><img src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/google_plusone_share.png" border="0" alt="Google+"/></a>
+<a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=http://<?=URL_APPLICATION?>%2Fservice%2Ffeeddatadetail%2F<?php echo $this->feedDataDetail['id'].'/'.rand();?>&pubid=ra-556ffe7b6e111a33&ct=1&title=Polo%20Ralph%20Lauren%20Big%20and%20Tall%20Pima%20Cotton%20V%20Neck%20Sweater&pco=tbxnj-1.0" target="_blank"><img src="https://cache.addthiscdn.com/icons/v2/thumbs/32x32/email.png" border="0" alt="Email"/></a>
+
+           <!--  <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://trung.lnove.com/service/feeddatadetail/64613/709431108&amp;title=Lnove - Izod Striped Wrinkle Free Shirt" target="_blank"><img src="/img/f.png"></a></li>
+            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=http://trung.lnove.com/service/feeddatadetail/64613/709431108&amp;title=Lnove - Izod Striped Wrinkle Free Shirt" target="_blank"><img src="/img/p1.png"></a></li>
+            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=http://trung.lnove.com/service/feeddatadetail/64613/709431108&amp;title=Lnove - Izod Striped Wrinkle Free Shirt" target="_blank"><img src="/img/t.png"></a></li>
+            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=http://trung.lnove.com/service/feeddatadetail/64613/709431108&amp;title=Lnove - Izod Striped Wrinkle Free Shirt" target="_blank"><img src="/img/g.png"></a></li>
+            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=http://trung.lnove.com/service/feeddatadetail/64613/709431108&amp;title=Lnove - Izod Striped Wrinkle Free Shirt" target="_blank"><img src="/img/msg.png"></a></li> -->
+            </ul>
+         </div>
+
+</div>
+
+<script>
+        /*****************block for handling likes product**************/
+        $('.more-info .likes').on('click', function () {
+            current = $(this);
+            var id = $(this).attr("id");
+            var url = "/service/likeclosset/";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {closesetId: id},
+                dataType: 'json',
+                success: function (result) {
+                    var classname= 'growl-success';
+                    if (result.status == 'N') {
+                        classname ='growl-missing';
+                        //alert(result.mgs);
+                    } else if (result.status == 'Y') {
+                        var likesd = result.count + ' likes';
+                        $('.like_' + result.idf).html(likesd);
+
+                        if($(this).find('#like'+result.idf)) {
+                            $('#like'+result.idf).attr('class','fa fa-thumbs-up');
+                            $("#popup_like" +result.idf).attr('class','fa fa-thumbs-up');
+                        }
+                    } else {
+                        //alert("Internal Server Error");
+                    }
+                     jQuery.gritter.add({
+                        title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                </div>',
+                        class_name: classname,
+                        sticky: false,
+                        time: 3000
+                    })
+                }
+            });
+        });
+</script>
+
+

@@ -1,0 +1,270 @@
+/* Add here all your CSS customizations */
+
+
+/* Mega Menu (Signin/SignUp) */
+nav.mega-menu .mega-menu-signin {
+	margin-right: 15px;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+nav.mega-menu .mega-menu-signin .dropdown-menu {
+	width: 40%;
+	right: 150px;
+	margin-top: 0;
+	-moz-border-radius: 6px 0 6px 6px;
+	-webkit-border-radius: 6px 0 6px 6px;
+	border-radius: 6px 0 6px 6px;
+}
+
+nav.mega-menu .mega-menu-signin a {
+	color: #444;
+}
+
+nav.mega-menu .mega-menu-signin .icon-user {
+	margin-right: 5px;
+}
+
+nav.mega-menu .mega-menu-signin .mega-menu-sub-title {
+	margin-bottom: 10px;
+	display: block;
+}
+
+nav.mega-menu .mega-menu-signin .sign-up-info,
+nav.mega-menu .mega-menu-signin .log-in-info {
+	text-align: center;
+	display: block;
+}
+
+body header nav.mega-menu .mega-menu-signin ul.dropdown-menu li a,
+body header nav.mega-menu .mega-menu-signin ul.dropdown-menu:hover li:hover li:hover a {
+	background-color: transparent !important;
+	color: #333;
+	padding: 0;
+	margin: 0;
+}
+
+nav.mega-menu .mega-menu-signin.signin .signin-form {
+	display: block;
+}
+
+nav.mega-menu .mega-menu-signin.signin .signup-form {
+	display: none;
+}
+
+nav.mega-menu .mega-menu-signin.signin .recover-form {
+	display: none;
+}
+
+nav.mega-menu .mega-menu-signin.signup .signin-form {
+	display: none;
+}
+
+nav.mega-menu .mega-menu-signin.signup .signup-form {
+	display: block;
+}
+
+nav.mega-menu .mega-menu-signin.signup .recover-form {
+	display: none;
+}
+
+nav.mega-menu .mega-menu-signin.recover .signin-form {
+	display: none;
+}
+
+nav.mega-menu .mega-menu-signin.recover .signup-form {
+	display: none;
+}
+
+nav.mega-menu .mega-menu-signin.recover .recover-form {
+	display: block;
+}
+
+nav.mega-menu .mega-menu-signin.logged .user-avatar .img-thumbnail img {
+	max-width: 55px;
+}
+
+nav.mega-menu .mega-menu-signin.logged .user-avatar .img-thumbnail {
+    float: left;
+    margin-right: 15px;
+}
+
+nav.mega-menu .mega-menu-signin.logged .user-avatar strong {
+	color: #111;
+	display: block;
+	padding-top: 7px;
+}
+
+nav.mega-menu .mega-menu-signin.logged .user-avatar span {
+	color: #666;
+	display: block;
+	font-size: 12px;
+}
+
+nav.mega-menu .mega-menu-signin.logged .user-avatar p {
+	color: #999;
+	margin: 0 0 0 25px;
+	text-align: left;
+}
+
+nav.mega-menu .mega-menu-signin.logged .list-account-options {
+	list-style: square;
+	margin-top: 6px;
+}
+
+nav.mega-menu .mega-menu-signin.logged .list-account-options a:hover {
+	text-decoration: none;
+}
+
+/* Mega Menu */
+@media (min-width: 992px) {
+	nav.mega-menu .nav,
+	nav.mega-menu .dropup,
+	nav.mega-menu .dropdown,
+	nav.mega-menu .collapse {
+		position: static;
+	}
+
+	header nav.mega-menu ul.nav-main .mega-menu-content {
+		text-shadow: none;
+	}
+
+	header nav.mega-menu ul.nav-main li.mega-menu-item ul.dropdown-menu {
+		background: #FFF !important;
+		border-top: 6px solid #CCC;
+		color: #777;
+		-moz-box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+		-webkit-box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+		box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+	}
+
+	header nav.mega-menu ul.nav-main li.mega-menu-fullwidth ul.dropdown-menu {
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+	}
+
+	header.flat-menu nav.mega-menu ul.nav-main li.mega-menu-fullwidth ul.dropdown-menu {
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
+		border-radius: 0;
+	}
+
+	header nav.mega-menu ul.nav-main li.mega-menu-item .mega-menu-sub-title {
+		color: #333333;
+		display: block;
+		font-size: 1em;
+		font-weight: 600;
+		padding-bottom: 5px;
+		text-transform: uppercase;
+	}
+
+	header nav.mega-menu ul.nav-main li.mega-menu-item ul.sub-menu {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	header nav.mega-menu ul.nav-main li.mega-menu-item ul.sub-menu a {
+		color: #777;
+		text-shadow: none;
+		margin: 0 0 0 -8px;
+		padding: 3px 8px;
+		text-transform: none;
+		font-size: 0.9em;
+		display: block;
+		font-weight: normal;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+	}
+
+	header nav.mega-menu ul.nav-main li.mega-menu-item:hover ul.sub-menu li:hover a:hover {
+		background: none !important;
+		text-decoration: none;
+	}
+
+	nav.mega-menu .navbar-inner,
+	nav.mega-menu .container {
+		position: relative;
+	}
+
+	nav.mega-menu .dropdown-menu {
+		left: auto;
+	}
+
+	nav.mega-menu .dropdown-menu > li {
+		display: block;
+	}
+
+	nav.mega-menu .nav.pull-right .dropdown-menu {
+		right: 0;
+	}
+
+	nav.mega-menu .mega-menu-content {
+		padding: 20px 30px;
+	}
+
+	nav.mega-menu .mega-menu-content:before,
+	nav.mega-menu .mega-menu-content:after {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+
+	nav.mega-menu .mega-menu-content:after {
+		clear: both;
+	}
+
+	nav.mega-menu.navbar .nav > li > .dropdown-menu:after,
+	nav.mega-menu.navbar .nav > li > .dropdown-menu:before {
+		display: none;
+	}
+
+	nav.mega-menu .dropdown.mega-menu-fullwidth .dropdown-menu {
+		width: 100%;
+		left: 0;
+		right: 0;
+	}
+}
+
+.h-h3-style {
+		font-size: 22px;
+		color: #101010;
+		text-transform: uppercase;
+		font-weight: bold;
+		text-align: center;
+		margin: 0px 0px 10px 0px;
+		padding: 0;
+	}
+
+.h-style-center {
+		font-size: 19px;
+		text-align: center;
+	}
+
+.h-style {
+		font-size: 19px;
+		padding: 0px 0px 0px 40px;
+	}
+
+.h-h4-style {
+		color: #444446;
+		font-size: 22px;
+		text-transform: uppercase;
+		font-weight: bold;
+		padding: 60px 0px 0px 0px;
+	}
+
+.h-h5-style {
+		color: #5F5F5F;
+		font-size: 20px;
+		font-weight: bold;
+		padding: 120px 0px 0px 0px;
+		text-transform: capitalize;
+	}
+
+.h-style-left {
+		font-size: 19px;
+		padding: 0;
+	}

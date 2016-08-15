@@ -1,0 +1,153 @@
+<br /><br />
+<style>
+<!--
+.attributesCol{width:50%; float:left}
+.itemInfoCol{
+		width:50%; 
+		float:right; 
+		padding-left:10px; 
+		background-image:url('<?=$this->item['imageurl']?>'); 
+		background-size:auto 200px; 
+		background-repeat:no-repeat;
+		background-position: top right; 
+	}
+.itemInfoCol .row{clear: both; width: 100%; padding: 3px 0 3px 20px}	
+.itemInfoCol .left{width:130px; float: left; font-weight: bold}
+.itemInfoCol .right{width:300px; float: left}
+.attributes{border-bottom:1px solid #CCC}
+-->
+</style>
+
+<script>
+$(document).ready(function() { 
+	$("#ignoreItem").click(function(e) {
+		if( $("#ignoreItem").is(':checked') ){
+        	$('.attribute').prop('checked', false);
+        	$('.attribute').prop('disabled', true);
+		}
+		else {
+			$('.attribute').prop('disabled', false);
+		}
+    });
+});
+</script>
+
+<form action="/feed/add-info?pid=<?=$this->item['id']?>" method="post" name="addInfo" id="addInfo">
+<div class="attributesCol">
+	
+	<div class="attributes" style="padding-left:0px">
+		<input id="ignoreItem" name="ignoreItem" type="checkbox" />&nbsp;&nbsp;Ignore this item
+		<br /><br /><br />
+	</div>
+	
+	<?php
+	function printAttributes( $attributes, &$level ) {
+		foreach( $attributes as $att ) {
+			
+			$str  = '<div class="attributes" style="padding-left:'.($level*100).'px">';
+			$str .= $att['pid'] != 0 ? '<input class="attribute" type="checkbox" name="id'.$att['id'].'" value="'.$att['id'].'" />&nbsp;&nbsp;' : '';
+			$str .= $att['title'];
+			$str .= '</div>';
+			
+			echo $str;
+			
+			if(count($att['child'])) {
+				$level++;
+				printAttributes( $att['child'], $level );
+				$level--;
+			}
+		} 
+	}
+	
+	$level = 0;
+	printAttributes($this->attributes, $level);
+	?>
+</div>
+
+
+
+<div class="itemInfoCol">
+	
+	<input class="btn btn-primary" type="submit" value="Save" />
+	<br /><br />
+	
+	<? if( is_array($this->item) ) { ?>
+		
+			<div class="row">
+				<div class="left">ID:</div> 
+				<div class="right"><?=$this->item['id']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">Program Name:</div> 
+				<div class="right"><?=$this->item['programname']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">Program URL:</div> 
+				<div class="right"><?=$this->item['programurl']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">Last Updated:</div> 
+				<div class="right"><?=$this->item['lastupdated']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">SKU:</div> 
+				<div class="right"><?=$this->item['sku']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">Currency:</div> 
+				<div class="right"><?=$this->item['currency']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">Price:</div> 
+				<div class="right"><?=$this->item['price']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">In-Stock:</div> 
+				<div class="right"><?=$this->item['instock']?></div> 
+			</div>
+			
+			<div class="row">
+				<div class="left">Adv. Category:</div> 
+				<div class="right"><?=$this->item['advertisercategory']?></div> 
+			</div>		
+			
+					<div class="row">
+				<div class="left">Name</div> 
+				<div class="right"><?=$this->item['name']?></div> 
+			</div>
+					
+			<div class="row">
+				<div class="left">Description:</div> 
+				<div class="right"><?=$this->item['description']?></div> 
+			</div>
+					
+			<div class="row">
+				<div class="left">Buy URL:</div> 
+				<div class="right"><a href="<?=$this->item['buyurl']?>" target="_blank"><?=$this->item['buyurl']?></a></div> 
+			</div>
+					
+			<div class="row">
+				<div class="left">Impression URL:</div> 
+				<div class="right"><a href="<?=$this->item['impressionurl']?>" target="_blank"><?=$this->item['impressionurl']?></a></div> 
+			</div>
+					
+			<div class="row">
+				<div class="left">Image URL:</div> 
+				<div class="right"><a href="<?=$this->item['imageurl']?>" target="_blank"><?=$this->item['imageurl']?></a></div> 
+			</div>
+					
+	<? }?>
+</div>
+
+<div style="clear: both; padding-top: 30px">
+	<input class="btn btn-primary" type="submit" value="Save" />
+</div>
+
+</form>

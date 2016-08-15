@@ -1,0 +1,656 @@
+<link rel="stylesheet"  href="<?php echo $this->basePath(); ?>/vendor/multiselect/css/common.css"   type="text/css" />
+<link type="text/css" rel="stylesheet"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/ui.all.css" />
+<link type="text/css"   href="<?php echo $this->basePath(); ?>/vendor/multiselect/css/ui.multiselect.css"   rel="stylesheet" />
+<script type="text/javascript"  src="<?php echo $this->basePath(); ?>/vendor/multiselect/js/jquery-ui-1.8.custom.min.js"></script>
+<script type="text/javascript"  src="<?php echo $this->basePath(); ?>/vendor/multiselect/js/plugins/localisation/jquery.localisation-min.js"></script>
+<script type="text/javascript"  src="<?php echo $this->basePath(); ?>/vendor/multiselect/js/plugins/scrollTo/jquery.scrollTo-min.js"></script>
+<script type="text/javascript"  src="<?php echo $this->basePath(); ?>/vendor/multiselect/js/ui.multiselect.js"></script>
+<?php 
+
+    echo $this->headLink()
+     ->appendStylesheet($this->basePath() . '/vendor/bootstrap/bootstrap-combined.min.css')
+     ->appendStylesheet($this->basePath() . '/vendor/bootstrap/tabcordion-demo.css')
+     ->appendStylesheet($this->basePath() . '/css/style.css')
+     ->appendStylesheet($this->basePath() . '/css/edit.styleinline.css')
+
+     ;
+
+ ?>
+
+<style>
+ 
+.activecolor {
+	border: 2px solid black;
+	background-image: url("<?php echo $this->basePath();?>/img/tick.png");
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+    .logo{
+        /*margin-right: 53px;*/
+        width: 20%;
+        text-align: center;
+        margin-left: 0;
+    }
+  .community a{
+    color:#fff;
+    text-decoration: none;
+  }
+  .right_block .get_style img {
+      margin-right: 6px !important;
+      margin-bottom: 2px !important;
+  }
+	
+ </style>
+
+<script>
+$(document).ready(function() {
+        $("#ignoreItem").click(function(e) {
+            if( $("#ignoreItem").is(':checked') ){
+                $('.attribute').prop('checked', false);
+                $('.attribute').prop('disabled', true);
+            }
+            else {
+                $('.attribute').prop('disabled', false);
+            }
+    });
+});
+</script>
+
+<script
+    src="<?php echo $this->basePath(); ?>/vendor/bootstrap/bootstrap.min.js"></script>
+<script
+    src="<?php echo $this->basePath(); ?>/vendor/bootstrap/tabcordion.js"></script>
+
+<br /><br /><br />
+<div class="container" style="background-color: #F6F6F4;">
+    <form id="editAttribsForm" action="/bucket/edit-bucket-attribute?bdid=<?=$this->item['id'].'&tabactive='.$this->tabactive ?>"
+        method="post" name="addInfo" id="addInfo">
+        <div class="attributesCol">
+            <?php
+            function printAttributes( $attributes, &$level, $parentId=0, $product_attributes ) {
+                
+                foreach( $attributes as $att ) {
+
+                    $str  = '<div class="attributes" style="padding-left:'.($level*100).'px">';
+                    
+                    $checked = '';
+                    if (isset($product_attributes['categories']) ){
+                        if( 
+                                (is_array($product_attributes['categories']) && in_array($att['id'], $product_attributes['categories'])) ||
+                                ($att['id'] == $product_attributes['categories']) 
+                            ) {
+                            $checked = 'checked="checked"';
+                        }
+                    }
+                    $str .= $att['pid'] != 0 ? '<input name="categories[] "'.$checked.' data-parent="'.$parentId.'" class="attribute" type="checkbox" id="id'.$att['id'].'" value="'.$att['id'].'" />&nbsp;&nbsp;' : '';
+                    $str .= $att['title'];
+                    $str .= '</div>';
+
+                    echo $str;
+
+                    if(count($att['child'])) {
+                            $level++;
+                            printAttributes( $att['child'], $level, $att['id'], $product_attributes );
+                            $level--;
+                    }
+                }
+            }
+    
+            $level = 0;
+            //printAttributes($this->attributes, $level, 0, $this->bucket_attributes);
+
+            
+            function getChildAttribute($attributes, $attributeId = 1){
+                $listItem = array();
+                foreach ($attributes[$attributeId]['child'] as $value) {
+                    $listItem[] = $value;
+                }
+                return $listItem;
+            } 
+            ?>
+
+            <!-- tab -->
+            <!-- level 1 -->
+
+            <div class="tabcordion tabbable">
+                <div class="btn-lv1">
+                    <ul class="nav nav-tabs">
+                <?php
+                    $listItemCategory =  getChildAttribute($attributes);
+                    $i = 0;
+                    //$tabpage = 1;
+                    $listItemLevel2 = array();
+                    
+                    $bFound = false;
+                    foreach ($listItemCategory as $value) {
+
+                        if(in_array($value['id'], $this->bucket_attributes_ids)) {
+                            $bFound = true;
+                        }
+                    }
+                    
+                    foreach ($listItemCategory as $value) {
+              
+                        $listItemLevel2[$value['id']] = $value['child'];  ?>
+                        <li class="level1 <?=(in_array($value['id'], $this->bucket_attributes_ids)?'active':(!$bFound && $i==0?'active':''))?>"
+                            data-id="<?=$value['id']?>">
+                            <a data-target="#tab-<?php echo $value['id']?>" data-toggle="tab"
+                            class="accordion-toggle collapsed">
+                                <button class="btn btn-default"><?php echo $value['title']; ?></button>
+
+                            </a>
+                        </li> 
+                        <?php 
+
+                            $i++;
+                        } 
+                    ?>
+                    
+
+                </ul>
+                </div>
+                <div class="tab-content" style="display: block;">
+                    <?php 
+
+                    $i=0;
+                    foreach ($listItemLevel2 as $key => $valuelv1) {  ?>
+                    <div
+                        class="parentClass<?=$key?> home tab-pane collapse <?=(in_array($key, $this->bucket_attributes_ids)?'active':(!$bFound && $i==0?'active':''))?>"
+                        id="tab-<?php echo $key;?>" style="height: auto;">
+                        <!-- level 2 -->
+                        <div class="tabcordion tabbable">
+                            <ul class="nav nav-tabs">
+
+                                <?php 
+                                    $i =0;
+                                    $listItemLevel3 = array();
+                                    
+                                    $bFound = false;
+                                    foreach ($valuelv1 as $valuelv2) {
+
+                                        if(in_array($valuelv2['id'], $this->bucket_attributes_ids)) {
+                                            $bFound = true;
+                                        }
+                                    }                                    
+                                    
+                                    
+                                    foreach ($valuelv1 as $valuelv2) {
+                                         $listItemLevel3[$valuelv2['id']] = $valuelv2['child'];  ?>
+                                         <li
+                                    class="level2 <?=(in_array($valuelv2['id'], $this->bucket_attributes_ids)?'active':(!$bFound && $i==0?'active':''))?>"
+                                    data-id="<?=$valuelv2['id']?>"><a
+                                    data-target="#tab-<?php echo $valuelv2['id']?>"
+                                    data-toggle="tab" class="accordion-toggle collapsed">
+                                                <?php echo $valuelv2['title']?>
+                                            </a></li> <?php
+                                        $i++;
+                                    } 
+
+                                ?>
+                            </ul>
+                            <div class="tab-content" style="display: block;">
+                                <?php 
+
+                                
+                                $bFound = false;
+                                foreach ($listItemLevel3 as $key=>$valuelv2) {
+                                    if(in_array($key, $this->bucket_attributes_ids)) {
+                                        $bFound = true;
+                                    }
+                                }                                
+                                
+                                $i=0;
+                                foreach ($listItemLevel3 as $key=>$valuelv2) {   ?>
+                                <div
+                                    class="parentClass<?=$key?> home tab-pane collapse <?=(in_array($key, $this->bucket_attributes_ids)?'active':(!$bFound && $i==0?'active':''))?>"
+                                    id="tab-<?php echo $key;?>" style="height: auto;">
+                                    <!-- level 3 -->
+                                    <div class="tabcordion tabs-left tabbable">
+                                        <ul class="nav nav-tabs">
+
+                                              <?php 
+                                                $i =0;
+                                                $listItemLevel4 = array();
+                                                 
+                                    foreach ($valuelv2 as $valuelv3) {
+                                        $val= array();
+                                        foreach ($valuelv3['child'] as $key => $value) {
+                                            $value['inputType'] = $valuelv3['inputType'];
+                                            $val[$key] =  $value;
+                                        }
+
+                                        //$listItemLevel4[$valuelv3['id']] = $valuelv3['child'];
+                                        $listItemLevel4[$valuelv3['id']] =   $val;
+                                              
+                                 ?>
+
+                                 <li
+                                                class="level3 <?php if($i==0) echo 'active'; ?>"
+                                                data-id="<?=$valuelv3['id']?>"><a
+                                                data-target="#tab-<?php echo $valuelv3['id']?>"
+                                                data-toggle="tab" class="accordion-toggle collapsed">
+
+                                        <?php echo $valuelv3['title']?>
+                                    </a></li>
+                                <?php $i++;} 
+                                ?>                                       
+                                        </ul>
+                                        <div class="tab-content" style="display: block;">
+                                            <?php
+                                            $i=0;
+                                             foreach ($listItemLevel4 as $key => $valuelv3) {
+                                                  
+                                                 foreach ($valuelv3 as $value) {
+                                                     $inputType = $value['inputType'];
+                                                     if($inputType != "color")  $inputType = 'multiselect';
+                                                     break;
+                                                 }
+                                            ?>
+                                            <div
+                                                data-inputtype="<?=$inputType?>"
+                                                class="parentClass<?=$key?> level4 home in tab-pane collapse <?php if($i==0) echo 'active'; ?>"
+                                                id="tab-<?php echo $key;?>" style="height: auto;">
+                                                
+                                                
+                                                <?php 
+                                                $sCondition = 'inclusive';
+                                                   foreach ($valuelv3 as $valuelv4) { 
+                                                        $selected='';
+                                                      foreach ($this->bucket_attributes as $value) {
+                                                            foreach ($value as $attr) {
+                                                                if($attr['value']==$valuelv4['title'] && $attr['attributeParentId'] == $key){
+                                                                        $sCondition = $attr['condition'];
+
+                                                                    }
+                                                            }
+                                                        }     
+                                                   }                                           
+                                                ?>
+                                                
+                                                <table>
+                                                    <tr>
+                                                        <td><input type="radio" class="inclusive_exclusive" name="inclusive_exclusive<?=$key?>" value="inclusive" <?=($sCondition=='inclusive'?'checked="checked"':'')?> /></td>
+                                                        <td>Inclusive</td>
+                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td><input type="radio" class="inclusive_exclusive" name="inclusive_exclusive<?=$key?>" value="exclusive" <?=($sCondition=='exclusive'?'checked="checked"':'')?> /></td>
+                                                        <td>Exclusive</td>
+                                                    </tr>
+                                                </table>
+
+                                                <br /><br />
+                                            <?php 
+                                                if($inputType !='multiselect') { 
+                                            ?>
+                
+                                            <!-- level 4 -->
+                                                <ul class="list-attr">
+                                                <?php 
+                                                $type='checkbox';
+                                                    foreach ($valuelv3 as $valuelv4) {  
+                                                      
+                                                        if($valuelv4['inputType']=="radio") {
+                                                            $type = "radio";
+                                                        }
+                                                        else   
+                                                        if($valuelv4['inputType']=="checkbox") {
+                                                            $type="checkbox";
+                                                        }
+                                                        else if($valuelv4['inputType']=="color") {
+                                                            $type ='color';
+                                                        }
+                                                            $checked = '';
+                                                            $active='';
+                                                            $activecolor='';
+
+                                                        foreach ($this->bucket_attributes as $value) {
+                                                            foreach ($value as $attr) {
+                                                                if(($attr['value']==$valuelv4['title'] || $attr['value'] == $valuelv4['id']) && $attr['attributeParentId'] == $key){
+                                                                        $checked= 'checked'; 
+                                                                        $active = 'active';
+                                                                        $activecolor = 'activecolor'; 
+                                                                    }
+                                                            }
+                                                        }
+
+                                                  
+
+                                                 ?>
+                                                 <!-- checkbox -->
+                                                 <?php if($type == 'checkbox') { ?>
+                                                          <li><label><input
+                                                            <?php echo $checked; ?> type="checkbox"
+                                                            class="categories <?php echo $active ?>"
+                                                            value="<?php echo $valuelv4['id'] ?>">&nbsp;&nbsp;&nbsp;<?php echo $valuelv4['title'] ?></label></li>
+                                                    <!-- end checkbox -->
+                                                <?php } else  if($type == 'radio') { ?>
+                                                    <!-- radio -->
+                                                    <!-- <input type="radio" name="option" id="<?php echo $valuelv4['id'] ?>" value="<?php echo $valuelv4['id'] ?>"/>
+                                                    <label for="<?php echo $valuelv4['id'] ?>" class="outfit">
+                                                        <span class="fa-stack option-radio">
+                                                            <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                            <i class="fa fa-circle fa-stack-1x"></i>
+                                                        </span> <?php echo $valuelv4['title'] ?>
+                                                    </label> -->
+                                                    <li><input <?php echo $checked; ?> type="radio"
+                                                        value="<?php echo $valuelv4['id'] ?>"
+                                                        name="<?php echo $key ?>"
+                                                        id="<?php echo $valuelv4['id'] ?>"
+                                                        class="categories <?php echo $active ?>"> <label
+                                                        for="<?php echo $valuelv4['id'] ?>">
+                                                                <?php echo $valuelv4['title'] ?>
+                                                        </label></li>
+                                                    <!-- end radio -->
+                                                <?php } else if($type == 'color') { ?>
+                                                <!-- color -->
+                                                    <li class="color <?php echo $active; ?> btn-01 btn-coloer-01 colorattrselection <?php echo $activecolor; ?>" style="background-color:<?php echo $valuelv4['title']; ?>;border:solid 1px <?php echo $valuelv4['title']; ?>;" data-value="<?php echo $valuelv4['id']; ?>" title="<?php echo $valuelv4['title']; ?>">
+                                                    </li>
+
+                                                <?php   } ?> <!-- end color -->
+
+                                                <?php $i++; }?>
+                                                    
+                                            </ul>
+
+                                                <!-- end level 4 -->
+
+                                            <?php } else { ?>
+                                                <select  class="multiselect" multiple="multiple">
+                                                <?php  
+                                                    $a = 1;
+                                                    foreach ($valuelv3 as $valuelv4) { 
+                                                        $selected='';
+                                                      foreach ($this->bucket_attributes as $value) {
+                                                            foreach ($value as $attr) {
+                                                                if(($attr['value']==$valuelv4['title'] || $attr['value'] == $valuelv4['id']) && $attr['attributeParentId'] == $key){
+                                                                        $selected= 'selected'; 
+
+                                                                 }
+                                                            }
+                                                        }
+
+
+                                                    ?>
+                                                <option
+                                                        <?php echo $selected;?>
+                                                        value="<?php echo $valuelv4['id']; ?>"><?php echo $valuelv4['title']  ?>
+                                                </option>
+                                                <?php } ?>
+
+                                                </select>
+                                            <?php } ?>
+
+                                            </div>
+                                            <!-- end div level4 -->
+                                             <?php  $i ++; 
+                                             } ?> <!-- end foreach listItemLevel4 -->
+
+                                        </div>
+                                    </div>
+                                    <!-- end level 3 -->
+                                </div>
+
+                                <?php
+                                    $i ++;
+                                    }
+                                 ?>
+                            </div>
+                        </div>
+                        <!-- end level 2 -->
+                    </div>
+                    <?php $i++; } ?>
+            
+         
+                </div>
+            </div>
+            <!-- end level 1 -->
+            <!-- end tab -->
+        </div>
+
+
+
+        
+
+
+        <div style="clear: both; padding-top: 30px">
+            <input class="btn btn-primary" type="button" value="Save" id="save" />
+            <input class="btn btn-primary" type="button" value="Back" id="btnBack" />            
+        </div>
+
+
+        <input type="hidden" id="categories" class="form-control"
+            name="categories" value="">
+
+    </form>
+</div>
+
+
+
+<script>
+
+function verify() {
+    
+    var IDS = [];
+    var attributes = getAttrCategories();
+    attributes = JSON.parse(attributes);
+    $.map(attributes, function(n, i){
+        n = n.split(':'); 
+        IDS.push( parseInt(n[1]) );
+    })
+
+    found =false;
+    $.map([<?=implode(',', $this->level1CategoryIds)?>], function(n, i){
+        if( $.inArray( n, IDS ) != -1 ) {
+            found =true;
+        }
+    })  
+    if(!found) {
+        alert('Please provide Major Category.');
+        return false;
+    }   
+
+    found =false;
+    $.map([<?=implode(',', $this->level2CategoryIds)?>], function(n, i){
+        if( $.inArray( n, IDS ) != -1 ) {
+            found =true;
+        }
+    })  
+    if(!found) {
+        alert('Please provide Sub Category.');
+        return false;
+    }       
+
+
+    found =false;
+    $.map([<?=implode(',', $this->categoryTypeIds)?>], function(n, i){
+        if( $.inArray( n, IDS ) != -1 ) {
+            found =true;
+        }
+    })  
+    if(!found) {
+        alert('Please provide Type.');
+        return false;
+    } 
+
+    return true;
+        
+}
+
+
+function getAttrCategories() {
+    
+    var attributes = [];
+
+    $('.level1.active').each(function(key,value) {
+        
+        console.log('catagory1 - ' + $(value).data('id') );
+        attributes.push('catagory:' + $(value).data('id'));
+        
+        $('.parentClass'+$(value).data('id')+' .level2.active').each(function(key,value) {
+         
+          console.log('catagory2 - ' + $(value).data('id') );
+          attributes.push( 'catagory:' + $(value).data('id') );
+          
+          $('.parentClass'+$(value).data('id')+' .level3').each(function(key,value){
+
+        	  $('.parentClass'+$(value).data('id')+' input[name=inclusive_exclusive]:checked').val();
+
+          	console.log('catagory3 - ' + $(value).data('id') );
+            if( $('.parentClass'+$(value).data('id')).data('inputtype')=='radio' ) {
+              val = $.map($('.parentClass'+$(value).data('id')+' .categories input[type=radio]:checked'), function(n, i){return n.value;}).join(',');
+              if( val ) {
+                //console.log('att:'+$(value).data('id')+' - ' + val );
+                attributes.push( 'attribute:' + val );
+              }
+            }
+
+            
+            if( $('.parentClass'+$(value).data('id')).data('inputtype')=='checkbox' ) {
+              val = $.map($('.parentClass'+$(value).data('id')+' input[type=checkbox]:checked'), function(n, i){return n.value;}).join(',');
+              if( val ) {
+                //console.log('att:'+$(value).data('id')+' - ' + val );
+                attributes.push( 'attribute:' + val );
+              }
+            }   
+
+
+            if( $('.parentClass'+$(value).data('id')).data('inputtype')=='multiselect' ) {
+                val = $('.parentClass'+$(value).data('id')+' select').val();
+                val = (val ? val.join(',') : '' );
+                if( val ) {
+                    //console.log('att:'+$(value).data('id')+' - ' + val );
+                    attributes.push( 'attribute:' + val + '#' + $('.parentClass'+$(value).data('id')+' .inclusive_exclusive:checked').val() );
+                }               
+            }                   
+
+            if( $('.parentClass'+$(value).data('id')).data('inputtype')=='color' ) {
+                val = $.map($('.parentClass'+$(value).data('id')+' .color.active'), function(n, i){return $(n).data('value');}).join(',');
+                if( val ) {
+                    //console.log('att:'+$(value).data('id')+' - ' + val );
+                    attributes.push( 'attribute:' + val );
+                }               
+            } 
+                        
+            
+          });      
+        });
+    });
+
+    //console.log( JSON.stringify(attributes) );
+    return JSON.stringify(attributes);
+}
+
+
+$(document).ready(function(){
+       $(".multiselect").multiselect();
+       $("#save").on('click',function(e){
+           if( verify() ) {
+                $(".multiselect option:selected").addClass("active");
+                $("#categories").val(getAttrCategories());
+                
+               $('#editAttribsForm').submit(); 
+            }
+
+       });
+
+       $("#btnBack").on('click',function(e){
+           window.location = "/bucket?tabactive=<?=$this->tabactive?>&reason=back";
+       });
+       
+
+//        var listId = getAttrCategories();
+//        if(listId.length > 0) 
+//             listId= listId.toString();
+//             console.log(listId);
+//         $("#categories").val(listId);
+
+
+/*        $(".level4 input[type=checkbox]").click(function(){
+            if($(this).hasClass('active'))
+            $(this).removeClass('active');
+            else
+            $(this).addClass('active');
+         var listId = getAttrCategories();
+         if(listId.length > 0) 
+            listId= listId.toString();
+            console.log(listId);
+            $("#categories").val(listId);
+       });
+
+        $(".level4 input[type=radio]").click(function(){
+            console.log($(this).parents(".level4.active").find($("input[type=radio]")));
+            $(this).parents(".level4.active").find($("input[type=radio]")).removeClass('active');
+          
+            //$(this).parent.removeClass('active');
+            $(this).addClass('active');
+
+         var listId = getAttrCategories();
+         if(listId.length > 0) 
+            listId= listId.toString();
+            console.log(listId);
+            $("#categories").val(listId);
+       });*/
+
+        $(".level4 li.color").click(function(){
+            if($(this).hasClass('active'))
+                $(this).removeClass('active');
+                else
+                $(this).addClass('active');
+
+//              var listId = getAttrCategories();
+//              if(listId.length > 0) 
+//                 listId= listId.toString();
+//                 //console.log(listId);
+//                 $("#categories").val(listId);
+       }); 
+
+    $(".colorattrselection").click(function () {
+        $(this).toggleClass('activecolor');
+    });         
+
+});
+
+
+(function($) {
+        
+    $('.attributesCol input[type=checkbox]').click(function () {
+        obj = this;
+        if( $(obj).prop('checked') ) {
+            while( $(obj).attr('id') != undefined ) {
+                $('#id'+$(obj).data('parent')).prop('checked',true);
+                obj = $('#id'+$(obj).data('parent'));
+
+                //mycode 
+               // $("#catids").val($(obj).val());
+            }
+        }
+        else {
+            unCheck( obj );
+
+        }
+   });
+
+    function unCheck( obj ) {
+        $('input[data-parent="'+$(obj).val()+'"]').each(function () {
+            $(this).prop('checked',false);
+            unCheck( this )
+        });
+    }
+
+    $(".colorselection").click(function () {
+        $(this).toggleClass('activecolor');
+        var colors = '';
+        var allSelectedColors = $(".colorselection.activecolor");
+        $(allSelectedColors).each(function () {
+            colors += ($(this).attr('value')) + ',';
+        })
+        $("#colors").val(colors);
+    });
+
+    
+})(jQuery);    
+
+$(".btn-group button").click(function(){
+    return false;
+});      
+</script>

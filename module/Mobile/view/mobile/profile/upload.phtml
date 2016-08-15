@@ -1,0 +1,147 @@
+  <?php
+        echo $this->headLink()->prependStylesheet($this->basePath() . '/templates/mobile/bootstrap-toggle-master/css/bootstrap-toggle.min.css');
+    ?>
+<style type="text/css">
+#upload{
+    display:none
+}
+</style>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script>
+
+    jQuery.validator.setDefaults({
+        ignore: [],
+      debug: true,
+      success: "valid"
+});
+  $("#myForm").validate({
+     errorPlacement: function(error, element) {
+            },
+             
+            invalidHandler: function(form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                     myalert('myalertID1', 'type_missing','Oops', validator.errorList[0].message ,'');  
+                 $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                    $("button.my_btn_ok").click(function(){
+                        $('a.close-reveal-modal').trigger('click');
+                        });
+                    }); 
+                    validator.errorList[0].element.focus(); //Set Focus
+                }
+            },
+     rules: {
+         profilepic: {
+            required: true,
+            extension: "gif|jpg|jpeg|png"
+         }
+     },
+     messages: {
+         profilepic: {
+            required: 'Please upload your picture.',
+            extension: 'Please upload only gif, jpg, jpeg and png image files'
+         }
+     }
+  });
+});
+</script>
+<div class="profile-page bg-top">
+	 <div class="container">
+                <section id="main-content-wrap">
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="button-list">
+                                    <button type="button" class="btn-block btn-account" id="">account</button>
+                                    <a href="/profile"><button type="button" class="btn-block btn-account btn-account-edit" id="">EDIT MY STYLE QUESTIONS</button></a>
+                                    <button type="button" class="btn-block btn-account btn-account-edit" id="">orders</button>
+                                </div>
+
+                <?php if ($this->flashmessage) { ?>
+                    <div class="green_box"><p><?php echo $this->flashmessage; ?></p></div>
+                <?php } ?>
+                                <form name="myForm" id="myForm" method="POST" class="form" enctype="multipart/form-data">
+                                <div class="profile">
+                                    
+                                        <h3 class="title-profile text-center">Account</h3>
+                                        <div class="form-group">
+                                        	<?php 
+                                        	 	$basePath = $this->basePath('img/profilepic/'.$userdata['user_prp_pic']); 
+                                        	 	if (isset($userdata['user_prp_pic']) && !empty($userdata['user_prp_pic'])) {
+                                        	 ?>
+                                            <img class="img-responsive center-block profile_pic" src="<?php echo $basePath; ?>" alt="">
+                                            <?php } else {
+                                            ?>
+												
+											<img class="img-responsive center-block profile_pic" src="/img/profilepic/profile.png" alt="">
+                                           
+
+                                            <?php } ?>
+                                             <p class="text-center upload"><a id="upload_link" href="">Upload Picture</a></p>
+                                             <input id="upload" type="file" name="profilepic"/>
+                                        </div>
+                                 
+                           
+                          
+                                     
+                                        <div class="form-group">             
+                                        <button type="submit" class="btn-block btn-account btn-account-edit" id="submit1">save</button>
+                                        </div>
+
+                                    
+                                </div>
+
+
+                                <input type="hidden" value="<?php echo $userdata['user_prp_pic']; ?>" id="oldpic" name="oldpic">
+                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div><!-- /.container -->
+</div>
+<script>
+$( document ).ready(function() {
+    var box = $('.green_box');
+
+    box.addClass('visuallyhidden');
+    
+    box.one('transitionend', function(e) {
+
+      box.addClass('hidden');
+
+    });
+    
+});
+
+
+
+//  $("#submit1").on("click", function (e) {
+
+//     $("#myForm").submit();
+
+// });
+</script>
+<script type="text/javascript">
+ function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.profile_pic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+    $(function(){
+        $("#upload_link").on('click', function(e){
+            e.preventDefault();
+            $("#upload:hidden").trigger('click');
+        });
+        $("#upload").change(function(){
+            readURL(this);
+        });
+    });
+</script>

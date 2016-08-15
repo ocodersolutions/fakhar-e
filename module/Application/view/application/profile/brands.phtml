@@ -1,0 +1,167 @@
+<style>
+<!--
+.check1{margin-left: 95px;}
+.brand_image{
+	text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+}
+
+.brand_image .mBox {
+    display: inline-block;
+    *display: inline;
+    zoom: 1
+	
+}
+.brand_image .stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+-->
+</style>
+<div class="container topnavi">
+    <div class="brand-box">
+        <div class="menu-box">
+            <ul class="about">
+                <li>
+                    <a>LOOK YOU&#39;D WEAR<div class="fa"><i class="fa fa-check green"></i></div></a>
+                </li>
+                <li>
+                    <a>ABOUT YOU<div class="fa"><i class="fa fa-check green"></i></div></a>
+                </li>
+                <li>
+                    <a>YOUR SIZE<div class="fa"><i class="fa fa-check green"></i></div></a>
+                </li>
+                <li  class="blue">
+                    <a class="active">FAVOURITE BRAND<div class="fa"></div></a>
+                </li>
+                <li>
+                    <a>YOUR LOOK<div class="fa"></i></div></a>
+                </li>
+                <li>
+                    <a>SIGN UP<div class="fa"></div></a>
+                </li>
+            </ul>
+            <div class="clr"></div>
+        </div><!--menu-box -->
+
+        <div class="clr"></div>
+
+        <div class="choose-box">
+            <h1>Choose your Favourite Brands</h1>
+
+            <div class="brand_image" id="listBrands">
+                <?php
+                $i = 1;
+                $lock = 0;
+                foreach ($this->brands as $aBox) {
+                    if ($aBox['value']) {
+                        $lock = 1;
+                    }
+                    if ($i % 6 != 0) {
+                        $cls = 'marrgt';
+                    } else {
+                        $cls = 'marrgtLast';
+                        
+                    }
+                        $classes = $aBox['value'] ? 'check fa fa-check' : 'check1';
+                    ?>
+                    <div class="mBox">
+                        <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
+                            <div class="image_one <?php echo $cls; ?>"><img alt="" src="/img/projects/<?php echo $aBox['img'] ?>"></div>
+                            <div class="checkmark <?php echo $classes;?>"> </div>
+                        </a>
+                    </div>
+                    <?php
+                        if ($i % 6 == 0) {
+                     ?>
+                            <span class="stretch"></span><div class="clr"></div>
+                    <?php   }                    
+                            $i++;
+                        }
+                    ?>
+                 <span class="stretch"></span>
+                <div class="clr"></div>
+            </div><!--brand-image -->
+            <a href="javascript:void(0);" class="next fr" id="btnNextStep">NEXT ></a>
+            <div class="clr"></div>
+            <a href="" id="clearFilters" class="italic-box fr"> <i>Clear filters</i></a>
+            <div class="clr"></div>
+            <div class="bottm"></div>
+            <div class="clr"></div>
+
+        </div><!--choose-box -->
+    </div><!--brand-box -->
+
+
+</div><!--container-->
+
+<form id="myForm" method="POST">
+    <?php foreach ($this->brands as $aBox) { ?>
+    <input type="checkbox" id="id<?php echo $aBox['name'] ?>Input" name="<?php echo $aBox['name'] ?>" style="display:none" />
+    <?php } ?>
+    <input type="hidden" name="myFormBtn" value="yes" />
+</form>
+
+<script>
+    (function () {
+
+        $(".thumb-info").on("click", function (e) {
+
+            e.preventDefault();
+
+            if ($(this).hasClass("lock")) {
+                $(this).removeClass("lock");
+                $(this).find('.checkmark').removeClass("check fa fa-check");
+                $(this).find('.checkmark').addClass("check1");
+            } else {
+                $(this).addClass("lock");
+                $(this).find('.checkmark').removeClass("check1");
+                $(this).find('.checkmark').addClass("check fa fa-check");
+            }
+
+            return false;
+
+        });
+
+
+        $("#btnNextStep").on("click", function (e) {
+
+            if ($("#listBrands .lock").length < 1) {
+                // swal({title: "Oops...", text: "CHOOSE AT LEAST ONE OF YOUR FAVORITE BRAND.", type: "error"});
+                myalert('myalertid1','type_missing','Oops, seems like you forgot to choose at least one of your favorite brand. Don\'t be shy we are here to help.',''); 
+                 $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                    $("button.my_btn_ok").click(function(){
+                        $('a.close-reveal-modal').trigger('click');
+                        });
+                    });
+                return false;
+            }
+
+            $(".thumb-info").each(function (index, element) {
+                if ($(element).hasClass("lock")) {
+                    $("#" + element.id + "Input").prop("checked", true);
+                }
+                else {
+                    $("#" + element.id + "Input").prop("checked", false);
+                }
+            });
+
+            $("#myForm").submit();
+
+        });
+
+    })();
+    $(window).load(function () {
+        var url = "/profile/profiletraking";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {page: 'brands'},
+            dataType: 'json',
+            success: function (result) {
+            }});
+    });
+</script>

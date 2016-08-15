@@ -1,0 +1,1052 @@
+ <?php
+$sessionCart = new \Zend\Session\Container('cart');
+//$this->allBrands = $this->__viewVariables['allBrands'];
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <meta charset="utf-8">
+        
+        
+<link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-icon-57x57.png?a=1">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/favicons/apple-icon-60x60.png?a=1">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-icon-72x72.png?a=1">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicons/apple-icon-76x76.png?a=1">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-icon-114x114.png?a=1">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-icon-120x120.png?a=1">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-icon-144x144.png?a=1">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/favicons/apple-icon-152x152.png?a=1">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png?a=1">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/favicons/android-icon-192x192.png?a=1">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png?a=1">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/favicon-96x96.png?a=1">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png?a=1">
+<link rel="manifest" href="/img/favicons/manifest.json?a=1">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/favicons/ms-icon-144x144.png?a=1">
+<meta name="theme-color" content="#ffffff">
+        
+       <?php echo $this->headTitle("El Nove - Dress to the nines")->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+        <?php echo $this->headLink()->appendStylesheet(array(
+            'rel' => 'shortcut icon', 
+            'type' => 'image/vnd.microsoft.icon', 
+            'href' => $this->basePath() . '/img/tie-ico.png'),'PREPEND')
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/css/bootstrap.min.css')
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/fonts/font-awesome/css/font-awesome.css')
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/css/build.css')
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/bootstrap-toggle-master/css/bootstrap-toggle.min.css')
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/sweetalert-master/dist/sweetalert.css')
+                       
+                         ->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/normalize.css')
+                         ->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.css')
+                         // ->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.skinHTML5.css')
+                          ->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css')
+                         ->appendStylesheet($this->basePath() . '/templates/mobile/bootstrap-datetimepicker-master/build/css/bootstrap-datetimepicker.min.css')
+
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/css/slidebars.min.css')
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/css/sidebar.css')
+                        ->appendStylesheet($this->basePath() . '/templates/mobile/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/myalert/css/foundation.css')
+                        ->prependStylesheet($this->basePath() . '/css/jquery.gritter.css')
+                        ->appendStylesheet($this->basePath() . '/myalert/css/style.css')
+                    ;
+
+
+                echo $this->headScript()->appendFile($this->basePath().'/templates/mobile/js/jquery.js')
+                ->appendFile('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')
+                ->appendFile($this->basePath().'/templates/mobile/js/bootstrap.min.js')
+                ->appendFile($this->basePath(). '/templates/mobile/js/slidebars.min.js')
+                      ->appendFile($this->basePath(). '/templates/mobile/sweetalert-master/dist/sweetalert.min.js')
+                     ->appendFile($this->basePath() . '/templates/mobile/ion.rangeSlider/js/ion.rangeSlider.min.js')
+                 ->appendFile($this->basePath() . '/templates/mobile/bootstrap-toggle-master/js/bootstrap-toggle.min.js')
+                 
+                  ->appendFile($this->basePath() . '/templates/mobile/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js')
+                   ->appendFile($this->basePath() . '/templates/mobile/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.fr.js')
+                 ->appendFile($this->basePath() . '/templates/mobile/bootstrap-toggle-master/js/bootstrap-toggle.min.js')
+                 ->appendFile($this->basePath() . '/templates/mobile/js/headroom.js')
+                  ;       
+                  
+         ?> 
+          <script type="text/javascript" src="<?php echo $this->basePath() ?>/myalert/js/foundation.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/myalert/js/foundation.reveal.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/myalert/js/modernizr.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath() ?>/myalert/js/fastclick.js"></script>
+        <script src="<?php echo $this->basePath() ?>/myalert/js/my_alert.js"></script>
+        <script type="text/javascript" src="<?php echo $this->basePath()?>/js/jquery.gritter.min.js"></script>
+
+<style>
+    .filter-page .back{
+        position: fixed;
+    }
+        .modal-dialog {
+ /* width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 10px 0;*/
+    width: 80%;
+  margin: 98px auto;
+  height: auto;
+}
+.modal-open .modal{
+    overflow-y:hidden;
+}
+.modal-content {
+  height: 100%;
+  border-radius: 0;
+}
+
+.modal-backdrop{
+    /*z-index: inherit;*/
+}
+.modal .pad span{
+      color: #898697;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.modal .pad h4{
+      margin: 14px 0 0;
+  padding: 0;
+  font-size: 17px;
+  color: #3a3843;
+  font-family: 'Roboto Bold';
+}
+.modal .pad p{
+    font-size: 16px;
+  color: #fa7062;
+  margin-top: 10px;
+  margin-bottom: 7px;
+}
+.close {
+    font-size: 45px;
+}
+.modal-header{
+    padding: 0 15px;
+}
+ul.navbar-nav{
+    width: 100%;
+}
+.social_box_pop {
+    background: none repeat scroll 0 0 #E2E4E4;
+    margin: -15px;
+}
+.close{
+    float: none;
+}
+.modal-header{
+    text-align: right;
+}
+.social_box_pop ul {
+    margin: 0 auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.social_box_pop ul li{
+    float: left;
+    width: 20%;
+}
+.scale_modal_content{
+    width: 260px;
+    margin: 0 auto;
+}
+.scale_modal_dialog{
+    margin-top: 300px;
+}
+.my_close{
+    width: 10%;
+}
+.my_close a{
+    text-decoration: none;
+}
+a.x_close{
+    top:2px !important;
+    padding: 4px 8px;
+}
+.reveal-modal .paragraph{
+    font-size: 17px;
+}
+#main-content-wrap{
+    min-height: 880px !important;
+}
+.gritter-item .my_close{
+    height: 40px;
+}
+.gritter-item a.x_close{
+    padding: 5px 10px;
+}
+
+.headroom {
+    transition: transform 200ms linear;
+}
+.headroom--pinned {
+    transform: translateY(0%);
+}
+.headroom--unpinned {
+    transform: translateY(-100%);
+}
+
+.slide {
+    transition: transform 200ms linear;
+}
+.slide--reset {
+    transform: translateY(0%);
+}
+.slide--down {
+    transform: translateY(-200%);
+}
+.continue {
+    zoom: 1;
+}
+
+.continue:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+#myModal_discover{
+    padding: 0 !important;
+}
+#myModal_discover .modal-dialog {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#myModal_discover .modal-content{
+    overflow: scroll;
+}
+
+@media (max-width: 767px) {
+    .reveal-modal{
+        top: 100px !important;
+    }
+    .reveal-modal .header{
+        min-height: 105px;
+    }
+}
+@media (max-width: 480px) {
+    .gritter-item a.x_close{
+        padding: 5px 8px;
+        line-height: 21px;
+    }
+    .gritter-item a.x_close{
+        font-size: 10px !important
+    }
+    .gritter-item .my_close{
+        height: 34px;
+    }
+    #gritter-notice-wrapper{
+        width: 330px !important;
+    }
+    .gritter-title{
+        font-size: 11px;
+    }
+    .reveal-modal .my_title{
+        font-size: 14px;
+    }
+    .reveal-modal .header{
+        min-height: 65px;
+    }
+    .reveal-modal .paragraph{
+        font-size: 13px;
+    }
+    .under_area{
+        margin-top: 30px !important;
+    }
+}
+@media (max-width: 380px){
+    #gritter-notice-wrapper{
+        width: 295px !important;
+    }
+}
+.btn-default.disabled, .btn-default.disabled.active, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled:focus, .btn-default.disabled:hover, .btn-default[disabled], .btn-default[disabled].active, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled]:focus, .btn-default[disabled]:hover, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default.active, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:hover{
+    background-color: #a7b8c7 !important;
+}
+</style>
+
+</head>
+
+<body>
+<div class="my_alert">
+        <?php include('alert.phtml') ?>
+    </div>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5F6KJB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5F6KJB');</script>
+<!-- End Google Tag Manager -->    
+    
+<div class="mobile-version">
+    <nav class="navbar navbar-fixed-top sb-slide headroom" role="navigation">
+        <div class="sb-toggle-left navbar-left">
+            <img class="iconmenu" src="<?php echo $this->basePath() . "/templates/mobile"; ?>/images/iconmenu.png" alt="">
+            <!-- <div class="navicon-line"></div>
+            <div class="navicon-line"></div>
+            <div class="navicon-line"></div> -->
+        </div>
+        <div class="logo clearfix">
+            <a href="/service">
+                <img class="img-responsive center-block" src="<?php echo $this->basePath(); ?>/img/lnove_logo.png" alt="">
+            </a>
+        </div>
+        <?php if($this->identity()){ ?>
+         <div class="count-cart">  
+         <a href="/service/cart">
+            <div>Cart <span id="cart_number">
+            <?php 
+                if($sessionCart->offsetExists('cartNumber')) {
+                    echo $sessionCart->cartNumber;
+                }
+                else echo 0;
+             ?>
+            </span></div>
+            </a>
+        </div>
+        <?php } ?>
+    </nav>
+    <div class="sb-slidebar sb-left">
+     <?php if( $this->identity()) { ?>
+        <nav>
+            <ul class="nav navbar-nav sb-menu">
+                <li>
+                    <a class="navmenu-brand" href="#">Welcome, <span><?php  echo $this->identity()->firstName;?></span></a>
+                  <a href="/service">GET STYLED</a>
+                </li>
+
+               <!--  <li><a href="/mycloset">My Closet</a></li> -->
+                <li><a href="/mycloset"><span><img src="<?php echo $this->basePath() . "/templates/mobile"; ?>/images/closeticon.png"></span> My closet</a></li>
+                <li><a href="<?php echo 'http://'.URL_BLOG ?>">Blog</a></li>
+                <li><a href="/profile/myaccount">My Account</a></li>
+               <!--  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu Sections<span class="glyphicon glyphicon-menu-down push-right" aria-hidden="true"></span></a>
+                    <ul class="dropdown-menu navmenu-nav">
+                        <li><a href="#">How It Works</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Privacy & Policies</a></li>
+                        <li><a href="#">Exchange & Returns</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </li> -->
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+        </nav>
+            <?php }  else {?>
+       
+                <nav>
+            <ul class="nav navbar-nav sb-menu">
+                <li>
+                    <a class="navmenu-brand" href="#">Welcome, <span>ELNOVE</span></a>
+                 <!--    <a href=""><span><img src="<?php echo $this->basePath() . "/templates/mobile"; ?>/images/closeticon.png"></span>MY CLOSET</a> -->
+                </li>
+               
+
+                <li><a href="/auth/login">Sign in</a></li>
+                <li><a href="/profile">Get Started</a></li>
+
+          
+            </ul>
+        </nav>
+         <?php } ?>
+
+
+    </div>
+    <div class="sb-slidebar sb-right sb-width-custom bgwhite" data-sb-width="80%">
+        <div class="filter-page">
+                <div class="top">
+                    <div class="back clearfix">  
+                        <div class="icon">x</div>
+                    </div>
+                    <div class="filter-title clearfix">refined by</div>
+                </div>
+                <div class="filter">
+                    <div class="filter-type">
+                        <div class="list-filter-type">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="mypanel">
+                                    <div class="heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                CATEGORIES
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <div class="list-checkbox">
+                                            
+                                            <div id="tree" class="aciTree">
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                         <!--        <div class="mypanel">
+                                    <div class="heading" role="tab" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                VENUES
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            <div class="list-checkbox">
+                                                <div class="checkbox">
+                                                    <input id="checkbox3" class="styled" checked="" type="checkbox">
+                                                    <label for="checkbox3">
+                                                        All
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input id="checkbox4" class="styled" type="checkbox">
+                                                    <label for="checkbox4">
+                                                        Work
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input id="checkbox5" class="styled" checked="" type="checkbox">
+                                                    <label for="checkbox5">
+                                                        Night Out
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input id="checkbox6" class="styled" type="checkbox">
+                                                    <label for="checkbox6">
+                                                        Casual
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                  <?php if (!empty($this->__viewVariables['allBrands']) || !empty($this->__viewVariables['allTopBrands'])) {  ?>
+                                <div class="mypanel">
+                                    <div class="heading" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                BRANDS
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                              
+                                    
+                                        <div class="panel-body form">
+                                                <input type="text" value="" data-msg-required="" maxlength="100" class="form-control flat" placeholder="Search more brands" name="brandautocomplete" id="brandautocomplete">
+                                            <div class="list-checkbox">
+                                            <ul class="list-brands">
+                                                    <?php if (!empty($this->__viewVariables['allTopBrands'])) { ?>
+                                                <?php foreach ($this->__viewVariables['allTopBrands'] as $brand) { ?>
+                                                <li>
+                                                <div class="checkbox">
+                                                    <input id="<?php echo $brand['id']; ?>" class="brandSelection styled" name="option" type="checkbox" value="<?php echo $brand['id']; ?>">
+                                                    <label for="<?php echo $brand['id']; ?>">
+                                                            <?php echo $brand['title']; ?>
+                                                    </label>
+                                                </div>
+                                                </li>
+                                                          <?php } ?>
+                                            <?php } ?>
+                                                    
+                                                    <?php if (!empty($this->__viewVariables['allBrands'])) { ?>
+                                                <?php foreach ($this->__viewVariables['allBrands'] as $brand) { ?>
+                                                <li>
+                                                <div class="checkbox">
+                                                    <input id="<?php echo $brand['id']; ?>" class="brandSelection styled" name="option" type="checkbox" value="<?php echo $brand['id']; ?>">
+                                                    <label for="<?php echo $brand['id']; ?>">
+                                                            <?php echo $brand['title']; ?>
+                                                    </label>
+                                                </div>
+                                                </li>
+                                                          <?php } ?>
+                                            <?php } ?>
+                                           <!--      <div class="checkbox">
+                                                    <input id="checkbox8" class="styled" type="checkbox">
+                                                    <label for="checkbox8">
+                                                        Lorem Sample
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input id="checkbox9" class="styled" checked="" type="checkbox">
+                                                    <label for="checkbox9">
+                                                        Brand
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input id="checkbox10" class="styled" type="checkbox">
+                                                    <label for="checkbox10">
+                                                        Lorem Sample
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input id="checkbox11" class="styled" type="checkbox">
+                                                    <label for="checkbox11">
+                                                        Lorem Sample
+                                                    </label>
+                                                </div> -->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                     
+                                    </div>
+                                </div>
+                                   <?php } ?>
+                                <div class="mypanel price">
+                                    <div class="heading" role="tab" id="headingFour">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                price
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+                                        <div class="panel-body">
+                                            <div id="priceboxglobalOverlay" style="width:100%; height: 100px; margin-top:-10px; z-index: 1000; display:block; position:absolute; background-image:url(/img/spacer.gif)"></div> 
+                                            <div class="ranger" id="priceboxglobal" style="display: block; opacity: 0.2;">
+                                            <input type="text" id="rangeprice" value="" name="range" />
+                                            </div>
+                                            <div class="checkbox checkbox-primary profilePrices">
+                                                <input id="profilePrices" class="styled" type="checkbox" checked>
+                                                <label for="profilePrices">
+                                                    Show MY PRICES only
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <?php if (!empty($this->__viewVariables['allColors'])) { ?>
+                                <div class="mypanel">
+                                    <div class="heading" role="tab" id="headingFive">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                color
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+                                        <div class="panel-body">
+                                                <div class="list-checkbox-circle">
+                                                <ul class="ul-1">
+                                                <?php 
+                                                    foreach ($this->__viewVariables['allColors'] as $color) { 
+                                                 ?>
+                                                    <li>
+                                                        <div class="checkbox">
+                                                        <input type="checkbox"  name="" id="<?php echo $color['value']; ?>" >
+                                                        <label  value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>" class="colorselection" for="<?php echo $color['value']; ?>">
+                                                        </label>
+                                                         </div>
+                                                    </li>
+                                                   <?php } ?>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <?php } ?>
+
+                                <?php if (!empty($this->__viewVariables['allStores']) || !empty($this->__viewVariables['allTopStores'])) { ?>
+                                <div class="mypanel">
+                                    <div class="heading" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                store
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">
+                                        <div class="panel-body">
+                                                <form class="form" action="">
+                                                <input type="text" id="storeautocomplete" name="storeautocomplete" data-msg-required="" maxlength="100" class="form-control flat" placeholder="Search more stores">
+                                            </form>
+                                            <div class="list-checkbox">
+                                              <?php if (!empty($this->__viewVariables['allTopStores'])) { ?>
+                                                <?php foreach ($this->__viewVariables['allTopStores'] as $store) { ?>
+                                                <div class="checkbox">
+                                                    <input id="<?php echo $store['title']; ?>" class="storeSelection styled" value="<?php echo $store['id']; ?>" type="checkbox">
+                                                    <label for="<?php echo $store['title']; ?>">
+                                                        <?php echo $store['title']; ?>
+                                                    </label>
+                                                </div>
+
+                                                        <?php } ?>
+                                                <?php } ?>
+
+                                                 <?php if (!empty($this->__viewVariables['allStores'])) { ?>
+                                                <?php foreach ($this->__viewVariables['allStores'] as $store) { ?>
+                                                <div class="checkbox">
+                                                    <input id="<?php echo $store['title']; ?>" class="storeSelection brandstyled" value="<?php echo $store['id']; ?>" type="checkbox">
+                                                    <label for="<?php echo $store['title']; ?>">
+                                                        <?php echo $store['title']; ?>
+                                                    </label>
+                                                </div>
+
+                                                        <?php } ?>
+                                            <?php } ?>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <div class="mypanel">
+                                    <div class="heading" role="tab" id="headingSeven">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                                <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                                                deals
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">
+                                        <div class="panel-body">
+                                            <div class="list-radio final">
+                                                <div class="radio">
+                                                    <input type="radio" name="radio4" id="radio16" onclick="chooseDeals(this, 'onsale');">
+                                                    <label for="radio16" class="sale-option-checkbox">
+                                                    All Items on Sale
+                                                    </label>
+                                                 </div> 
+                                                 <div class="radio">
+                                                    <input type="radio" name="radio4" id="radio17"  onclick="chooseDeals(this, 'todaynew');"> 
+                                                    <label for="radio17" class="sale-option-checkbox">
+                                                  New Today
+                                                    </label>
+                                                 </div> 
+                                                    <div class="radio">
+                                                    <input type="radio" name="radio4" id="radio18"  onclick="chooseDeals(this, 'newthisweek');">
+                                                    <label for="radio18" class="sale-option-checkbox">
+                                                  New this week
+                                                    </label>
+                                                 </div> 
+                                                 <div class="radio">
+                                                    <input type="radio" name="radio4" id="radio19" onclick="chooseDeals(this, 'freeshipping');">
+                                                    <label for="radio19" class="sale-option-checkbox">
+                                                    Free Shipping
+                                                    </label>
+                                                 </div> 
+                                                    <div class="radio">
+                                                    <input type="radio" name="radio4" id="radio20" onclick="chooseDeals(this, 'specialoffer');">
+                                                    <label for="radio20" class="sale-option-checkbox">
+                                                    Special Offer
+                                                    </label>
+                                                 </div> 
+                                                 <div class="radio">
+                                                    <input type="radio" name="radio4" id="radio21" onclick="chooseDeals(this, 'discountcode');">
+                                                    <label for="radio21" class="sale-option-checkbox">
+                                                  Discount
+                                                    </label>
+                                                 </div> 
+
+                                              
+                                            </div>
+                                            <div class="ranger">
+                                                <input type="text" id="range" value="" name="range" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="mypanel">
+                                    <div class="heading" role="tab" id="headingSeven">
+                                
+                                    </div>
+                                    <div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">
+                                        <div class="panel-body">
+                                            <button type="button" class="btn-block btn-account btn-account-edit" id="">filter</button>
+                                            <div class="text-center text-cf">Clear filter</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <div id="sb-site">      
+        <section id="main-content-wrap">
+            <?php echo $this->content; ?>
+        </section>
+    </div>
+       <!-- Modal show more info -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body modal-body-showmore">
+                       
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+
+        <!-- Modal show discover -->
+        <div class="modal fade" id="myModal_discover" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div> -->
+                    <div class="modal-body">
+                       <div>test</div>
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+
+
+
+    
+            <!-- Modal show social -->
+               <div class="modal fade" id="myModal_social" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog scale_modal_dialog">
+                    <div class="modal-content scale_modal_content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body modal-body-social">
+                           <div class="social_box_pop">
+                                <ul class="clearfix social_html">
+                                </ul>
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+                    <!-- end -->
+
+
+    <div id="loading-div-background">
+    <div id="loading-div" class="ui-corner-all" >
+      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading.."/>
+      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+     </div>
+</div>   
+</div>
+
+  
+    <script>
+      (function($) {
+        $(document).ready(function() {
+          $.slidebars();
+        });
+      }) (jQuery);
+    </script>
+    <script type="text/javascript">
+    $('.click_to_top').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+
+    $('li.dropdown').click(function() {
+        $('li.dropdown ul').slideToggle();
+    });
+
+
+       // trước khi nhấn continue chỉ hiện wrap-1
+    var wrapNumber = $(".wrap").length;
+    if(wrapNumber > 1)
+    {
+        for (i = 2; i <= wrapNumber; i++) { 
+            var selector = ".wrap-" + i;
+            $(selector).hide();
+        }
+    }
+    // $('.btn-continue:not(:last)').click(function(){
+        
+    //     $(this).parents('.wrap').hide().next().show(); 
+    //     $('html, body').animate({scrollTop : 0},800);
+    //     return false;
+    // });
+    
+    //close sidebar right
+
+ 
+   var mySlidebars = new $.slidebars();
+    $('.filter-page .back').on('click', function() {
+        $( ".sb-toggle-right" ).trigger( "click" );
+    });
+
+
+
+     
+ 
+</script>
+<script>
+        $(window).load(function () {
+             $("#range").ionRangeSlider({
+            type:'single',
+            hide_min_max: true,
+            keyboard: true,
+            min: 0,
+            max: 100,
+            from: 100,
+            step: 1,
+            postfix: "%",
+            onStart: function (value) {
+                $("#duration").val(value.from);
+            },
+            onFinish: function (value) {
+                $("#duration").val(value.from);
+                loadProductData();
+            },
+        });
+
+            $("#rangeprice").ionRangeSlider({
+                hide_min_max: true,
+            
+                min: 0,
+                max: 1000,
+                from: 0,
+                to: 1000,
+                type: 'double',
+                step: 1,
+                prefix: "$",
+                onStart: function (value) {
+                    $("#minamount").val(value.from);
+                    $("#maxamount").val(value.to);
+                },
+                onFinish: function (value) {
+                    $("#minamount").val(value.from);
+                    $("#maxamount").val(value.to);
+                    loadProductData();
+                },
+            });
+        });
+
+    $("body").on("click",".show-moreinfo",function(){
+
+        $.ajax({
+            url: '/service/moreinfo',
+            type: 'POST',
+            data: 'id='+ $(this).data('value'),
+            dataType: 'html',
+            beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+            success: function (result) {
+                // var json = jQuery.parseJSON(result);
+                // console.log(json);
+                $(".modal-body-showmore").html(result);
+               hideAjxLoadingDiv();
+             
+        }});
+    });
+    
+    $("body").on("click",".discover",function(){
+        $("#myModal").modal('hide'); 
+
+        $.ajax({
+            url: '/service/feeddatadetail',
+            type: 'POST',
+            data: 'id='+ $(this).data('value'),
+            dataType: 'html',
+            beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+            success: function (result) {
+                // var json = jQuery.parseJSON(result);
+                // console.log(json);
+                hideAjxLoadingDiv();
+                $("#myModal_discover .modal-body").html(result);
+            }
+        });
+
+    });
+
+    $("body").on("click",".back",function(){
+        $("#myModal_discover").modal('hide');
+    });
+</script>
+<script type="text/javascript">
+     function showAjxLoadingDiv(target)
+    {
+        $("#loading-div-background").show();
+         //$("#ajx_loader_div").css({display: 'block'});
+         $(".top_page").css({display: 'none'});
+    }
+      function hideAjxLoadingDiv()
+    {
+       // $("#ajx_loader_div").css({display: 'none'});
+
+        $(".top_page").css({display: 'block'});
+        $("#loading-div-background").hide();
+    }
+</script>
+
+<script type="text/javascript">
+    // grab an element
+var myElement1 = document.querySelector(".navbar-fixed-top");
+// construct an instance of Headroom, passing the element
+var headroom1  = new Headroom(myElement1);
+// initialise
+headroom1.init();
+
+
+    var bttHeadroom = new Headroom(document.querySelector(".stick"), {
+        classes : {
+            initial : "slide",
+            pinned : "slide--reset",
+            unpinned : "slide--down"
+        }
+    });
+    bttHeadroom.init();
+
+</script>
+
+<script type="text/javascript">
+    $('body').on('click', '.type_close', function () {
+        $('.gritter-close').trigger('click');
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+            /*****************block for adding this product into my coloseset**************/
+        $('body').on('click', ".mycloseset",function () {
+            var id = $(this).attr("id");
+            var url = "/service/likeclosset/";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {closesetId: id},
+                dataType: 'json',
+                success: function (result) {
+                     var classname= 'growl-success';
+                    if (result.status == 'N') {
+                        classname ='growl-missing';
+                    } else if (result.status == 'Y') {
+                        $(".save-closet").text("saved to my closet")
+                        var likesd = result.count + ' likes';
+                        $('.like_' + result.idf).html(likesd);
+                        $('.like' + result.idf).attr("class","fa fa-thumbs-up");
+                        $('#like' + result.idf).attr("class","fa fa-thumbs-up");
+                 
+                    } else {
+                        //alert("Internal Server Error");
+                    }
+                     jQuery.gritter.add({
+                        title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                </div>',
+                        class_name: classname,
+                        sticky: false,
+                        time: 3000
+                    });
+                }
+            });
+        });
+        /*****************End block for adding this product into my coloseset**************/
+    });
+</script>
+<script type="text/javascript">
+    $("body").on("click",".addCart",function(){
+        feed_id = $(this).data('feedid');
+        current = this;
+         if(feed_id > 0 ){
+            $.ajax({
+                url: '/service/add-to-cart',
+                type: 'POST',
+                data: 'id='+ feed_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                    //var json = jQuery.parseJSON(result);
+                    $("#cart_number").text(result);
+                    //console.log(result);
+                    // $(current).parents(".continue").html('<button data-feedid="' + feed_id +'" class="btn btn-default btn-submit btn-block btn-continue disableCart">disable from cart</button>');
+
+                    // $('[data-feedid='+ feed_id +']').removeClass("addCart").addClass('disableCart').text('disable from cart');
+            
+                    //$(current).addClass('disabled');
+                    $('[data-feedid='+ feed_id +']').addClass('disabled').text('Added to cart');
+
+                   
+                    hideAjxLoadingDiv();
+                 
+                }
+            });
+        }
+    });
+
+    $("body").on("click",".disableCart",function(){
+        feed_id = $(this).data('feedid');
+        current = this;
+         if(feed_id > 0 ){
+            $.ajax({
+                url: '/service/disable-from-cart',
+                type: 'POST',
+                data: 'id='+ feed_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                    //var json = jQuery.parseJSON(result);
+                    $("#cart_number").text(result);
+                    //console.log(result);
+                    $(current).parents(".continue").html('<button data-feedid="' + feed_id +'" class="btn btn-default btn-submit btn-block btn-continue addCart">add to cart</button>');
+
+                    $('[data-feedid='+ feed_id +']').removeClass("disableCart").addClass('addCart').text('add to cart');
+                    hideAjxLoadingDiv();
+                }
+            });
+        }
+    });
+</script>
+<script type="text/javascript">
+    $("#profilePrices").change(function () {
+        if($(this).prop('checked')) {
+            $('#priceboxglobal').css('opacity', 0.2);
+            $('#profileBasePrices').val(1); 
+            $("#priceboxglobalOverlay").show();
+        }
+        else {
+            $('#priceboxglobal').css('opacity', 1);
+            $('#profileBasePrices').val(0);
+            $("#priceboxglobalOverlay").hide();
+        }
+        loadProductData(); 
+    }) 
+</script>
+</body>
+
+</html>

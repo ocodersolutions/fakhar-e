@@ -1,0 +1,83 @@
+<?php if(count($outfit_details) > 0) { ?>
+<?php foreach ($outfit_details as $key => $outfitsData) {
+                ?>
+<a href="/mybought/outfit-details/<?php echo $key; ?>" target="_top">
+                <?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
+                    <div class="row grid-row resize">
+                        <div class="col-xs-6">
+                            <div class="bigger">
+                            <?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
+                          
+
+                                     <img src="<?php echo $outfitsData[0]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[0]['caption'] ?>" class="resize_follow_big">
+                                
+
+
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" class="resize_follow_big"/>
+                                <?php } ?>
+                            </div>
+                            <div class="smaller">
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
+                                             <!-- <a target="_blank" href="/service/feeddatadetail/<?php echo $outfitsData[1]['id']; ?>/<?php echo rand(); ?>"> -->
+                                                
+                                <img src="<?php echo $outfitsData[1]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[1]['caption'] ?>"   class="resize_follow_small">
+                              
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product"   class="resize_follow_small"/>
+                                <?php } ?>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>
+                                            
+                                <img src="<?php echo $outfitsData[2]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[2]['caption'] ?>"   class="resize_follow_small">
+                             
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product"   class="resize_follow_small"/>
+                                <?php } ?>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="smaller">
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>
+                                              
+                                <img src="<?php echo $outfitsData[3]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[3]['caption'] ?>"  class="resize_follow_small">
+                               
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product"  class="resize_follow_small"/>
+                                <?php } ?>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>
+                                               
+                                <img src="<?php echo $outfitsData[4]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[4]['caption'] ?>" class="resize_follow_small">
+                             
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                                <?php } ?>
+                                    </div>
+                            </div>
+                            <div class="bigger">
+                                <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
+                                   
+                                    <img src="<?php echo $outfitsData[5]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[5]['caption'] ?>" class="resize_follow_big">
+                                
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" class="resize_follow_big"/>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div> 
+
+        
+
+      
+                         <?php } ?>
+                </a>
+                <?php } ?>
+            <?php } else { ?>
+    <div class="col-md-3 noitem" style="text-align: center;width: 100%;">Oops No Record found.</div>
+<?php } ?>

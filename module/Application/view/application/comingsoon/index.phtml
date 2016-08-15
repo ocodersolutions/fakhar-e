@@ -1,0 +1,368 @@
+<style>
+<!--
+.csContainer{
+	width: 90%;
+	min-width: 480px;
+	min-height: 800px;
+    margin-left: auto ;
+    margin-right: auto;
+	margin-top: 20px;
+    background-image: url("/img/coming_soon/cs_background.jpg");
+	background-position: top center;
+}
+
+
+.csContainer .csHeader{
+	width: 100%;
+	box-sizing: border-box;
+	height: 70px;	
+	padding: 19px 44px 19px 19px;
+}
+
+
+.blue_btn  {
+    padding: 0 15px;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+    background: #6b8ad1;
+    border: 0;
+    line-height: 30px;
+    border-bottom: 2px solid #5f7bba;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.header_right_full   {
+    width: 490px;
+    float: right;
+    margin: 0px 0 0 0;
+}
+
+.csLink {
+    color: #fff;
+    float: left;
+    font-size: 13px;
+    line-height: 30px;
+    margin: 0 57px 0 0;
+    text-transform: uppercase;
+}
+
+.csMessageBold {
+	font-size: 20px;
+	font-weight: bold;
+	color: #FFF;
+	margin-top:62px;
+	text-align: center;
+}
+
+.csEmailBox {
+	font-size: 13px;
+	margin-top:62px;
+	text-align: center;
+	width:526px;
+    margin-left: auto ;
+    margin-right: auto;	
+	 clear:both;
+}
+.csEmailBox .csTextBox {
+	border: none;
+	width:321px;
+	height: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin: none;
+	height: 45px;
+}
+
+.csEmailBox .csEmailButton {
+	border: none;
+	width:175px;
+	height: 100%;
+	margin-right: none;
+	background-color: #6b8ad1;
+	color: #fff;
+	margin: none;
+	height: 47px;
+}
+
+.csAgreeBox {
+	margin-top:15px;
+	width:526px;
+    margin-left: auto ;
+    margin-right: auto;	
+}
+.csAgreeBox .rightBox {
+	float:right; width:25px; padding-top:25px
+}
+.csAgreeBox .leftBox {
+	float:left; width:490px; color: #FFF; text-align:right
+}
+.csSteps {
+	margin-top:60px;
+	width:80%;
+    margin-left: auto ;
+    margin-right: auto;	
+}
+
+.csCopyRight {
+	margin-top:20px;
+	width:100%;
+    margin-left: auto ;
+    margin-right: auto;	
+	color: #FFF;
+	font-size: 11px;
+	 padding-bottom: 20px;	
+}
+
+.csLinks {
+	margin-top:20px;
+	width:100%;
+    margin-left: auto ;
+    margin-right: auto;	
+	
+}
+
+.owlBox img{
+	width: 200px;
+}
+/* @media (min-width: 1200px) { */
+/*     .csContainer{ */
+/*          width: 1110px;  */
+/*     }	 */
+/*     .csSteps { */
+/*     	width:1020px; */
+/*     }   */
+/*     .owlBox img{ */
+/*     	width: 340px; */
+/*     }  */
+/* } */
+
+/* @media (min-width: 1600px) { */
+/*     .csContainer{ */
+/*         width: 1512px;  */
+/*     } */
+/*     .csSteps { */
+/*     	width:1020px; */
+/*     }   */
+/*     .owlBox img{ */
+/*     	width: 340px; */
+/*     }       	 */
+/* } */
+
+.joinBetaMessage {
+	height: 100px;
+	color: #FFF;
+	text-align: center;
+	font-size: 30px;
+	margin-top: 100px;
+	font-style: italic;
+}
+
+  .col-sm-4 {
+  	float:left;
+    width: 33.33%; 	
+  }
+  
+  
+  @media (max-width: 900px) { 
+   .col-sm-4{ 
+   	 width: 100%; 	
+    clear:both
+   }	   
+  } 
+  
+ @media (max-width: 610px) { 
+   .csAgreeBox, .csEmailBox{ 
+   	 width: 325px; 
+   }	  
+   #btnJoinBeta  {
+   	margin-top: 10px;
+  } 
+    .csAgreeBox .rightBox {
+    	
+    }
+    .csAgreeBox .leftBox {
+    	width:295px;
+    	font-size:15px
+    }  
+    .csLink{
+    	margin-right:35px;
+    }
+    .header_right_full{
+    	width: 440px;
+    }
+    .csContainer .csHeader {
+        padding-right: 10px;
+    }    
+}
+  
+.row:after {
+  clear: both;
+}
+-->
+</style>
+
+
+<div class="csContainer">
+
+    <div class="csHeader">
+
+    
+            <div class="header_right_full">
+                <a class="csLink" href="<?=$this->basePath()?>/comingsoon/how-it-works">How it works</a>
+                <a class="csLink" href="http://<?=URL_BLOG?>/">Blog</a>
+                <a class="csLink" href="<?=$this->basePath()?>/comingsoon/contact-us">Contact Us</a>
+                <a class="blue_btn" href="<?=$this->basePath()?>/auth/login">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SIGN IN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </div>    
+    
+    
+    </div>
+    
+    <div align="center" style="margin-top:52px">
+        <img src="<?=$this->basePath()?>/img/coming_soon/csLogo.png" alt="">
+    </div>
+    
+    <? if( isset($this->joinBetaComplete) && $this->joinBetaComplete===true ) { ?>
+    <div class="joinBetaMessage">
+        Thanks
+    </div>     
+    <? } else { ?>
+    
+    <div class="csMessageBold">
+        Sign up and receive an invite and<br />become one of the first El Nove users
+    </div>   
+     
+    <form>   
+        <div class="csEmailBox">
+            <input class="csTextBox" type="text" value="" id="emailAddreess" placeholder="Your Email Address" /><input id="btnJoinBeta" class="csEmailButton" type="button" value="JOIN BETA" placeholder="Your Email Address"  />
+        </div>
+        
+       
+        <div class="csAgreeBox">
+    
+            <div class="rightBox">
+                 <a href="#" class="thumb-info">
+                    <div id="rcvEmailChkBox" class="checkmark check1"> </div>
+                </a>
+            </div>
+            <div class="leftBox">
+                I like to receive emails with the latest news.
+            </div>
+                   
+        </div>    
+   </form>
+   <? } ?>
+   
+    
+    <div class="csSteps" align="center">
+     
+       
+                <div class="col-sm-4"> 
+                        <img src="<?=$this->basePath()?>/img/coming_soon/step1.png">
+                 </div>
+                <div class="col-sm-4"> 
+                        <img src="<?=$this->basePath()?>/img/coming_soon/step2.png">
+                 </div>
+                <div class="col-sm-4"> 
+                        <img src="<?=$this->basePath()?>/img/coming_soon/step3.png">
+                 </div>
+    
+    </div>  
+    
+    <div style="clear:both"></div>
+    
+    <div class="csLinks" align="center">
+        <a href="#"><img src="<?=$this->basePath()?>/img/coming_soon/twitter.png" alt=""></a> &nbsp;&nbsp;
+        <a href="#"><img src="<?=$this->basePath()?>/img/coming_soon/facebook.png" alt=""></a> &nbsp;&nbsp;
+        <a href="#"><img src="<?=$this->basePath()?>/img/coming_soon/instagram.png" alt=""></a> &nbsp;&nbsp;
+        <a href="#"><img src="<?=$this->basePath()?>/img/coming_soon/v.png" alt=""></a>
+    </div>      
+    
+    
+    <div class="csCopyRight" align="center">
+        COPYRIGHT 2014 EXAMPLE LOREM IPUM. ALL RIGHTS RESERVED
+    </div>      
+    
+</div>
+
+
+<form method="post" id="joinBetaForm">
+<input type="checkbox" name="joinBetaCheckBox" id="joinBetaCheckBox" >
+<input type="hidden" name="joinBetaEmail" id="joinBetaEmail" >
+</form>
+
+<script src="/js/owl.carousel.js"></script>
+<script>
+
+    function validateEmail(sEmail) {
+    	var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+    	if (filter.test(sEmail)) {
+    		   return true;
+    	}
+    	else {
+    		   return false;
+    	}
+    }
+	
+    (function () {
+
+        $(".thumb-info").on("click", function (e) {
+
+            e.preventDefault();
+
+            if ($(this).hasClass("lock")) {
+                $(this).removeClass("lock");
+                $(this).find('.checkmark').removeClass("check fa fa-check");
+                $(this).find('.checkmark').addClass("check1");
+            } else {
+                $(this).addClass("lock");
+                $(this).find('.checkmark').removeClass("check1");
+                $(this).find('.checkmark').addClass("check fa fa-check");
+            }
+
+            return false;
+
+        });
+        
+
+//         var owl = $("#owl-demo1");
+//         owl.owlCarousel({
+//         	items : 3,
+//             itemsDesktop : [1199,3],
+//             itemsDesktopSmall : [979,3],
+//             navigation : false,
+//             autoPlay: 3000,
+//             pagination : false
+//         });
+
+        $('#btnJoinBeta').on("click", function(e) {
+
+        	if( !validateEmail($("#emailAddreess").val())  ) {
+            	alert('Enter a valid Email address');
+            	return false;
+        	}
+        	
+     	    $("#joinBetaCheckBox").prop("checked", $('#rcvEmailChkBox').hasClass("fa-check"));
+      	    $("#joinBetaEmail").val( $("#emailAddreess").val() );
+
+
+        	$("#joinBetaForm").submit();
+        });
+
+  
+    })();
+
+
+    
+
+</script>
+
+    
+
+    
+    
+    

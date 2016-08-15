@@ -1,0 +1,416 @@
+ <?php 
+    $ssSystem = new \Zend\Session\Container('system');
+    $pre_url = $ssSystem->offsetGet('previous-url');
+     $countOutfit =  count($this->outfits); 
+     $page_url_outfit = $this->serverUrl() . '/service?outfit=' . $this->outfits[0]['outfit_id'];
+    $title_outfit = 'ELNove - ' . $this->outfits[0]['outfittitle'];
+ ?>
+ <style type="text/css">
+ .navigation{
+    padding: 0px 15px !important;
+ }
+ .top_page{
+    padding-bottom:80px; 
+ }
+ .req10-page .fixed-bottom{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+ }
+ .my_row{
+    margin-right: 0px;
+    margin-left: 0px;
+ }
+ .popover-content ul li{
+    display: inline;
+    text-align: center;
+ }
+ .popover-content ul li a{
+    float: left;
+    width: 20%;
+ }
+  .popover-content ul {
+    padding-left: 0;
+    width: 150px;
+  }
+  .btn-block+.btn-block{
+    margin-top: 0;
+  }
+  .clsBboughtEntireOutfit{
+    font-family: 'Roboto Regular';
+  }
+   .top_page{
+    margin-bottom: 75px;
+  }
+ </style>
+ <section id="main-content-wrap" class="req10-page">
+            <div class="container">
+                  <div class="navigation">   
+                    <div class="row">   
+                        <div class="col-xs-4"> 
+                            <div class="back">  
+                                <a href="<?php echo $pre_url; ?>">
+                                <div class="icon">x</div><div class="back-text">back</div>
+                                </a>
+                            </div> 
+                        </div>
+                        <div class="col-xs-8">  
+                        
+                        </div>
+                    </div>
+            </div>
+                <section>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="block reset-margin-pading">
+                                    <?php 
+                                        if($countOutfit > 0) {
+                                            foreach ($this->outfits as  $value) {
+                                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $value['feedId'] . '/' . rand();
+                                                $title = 'Lnove - ' . $value['caption'];
+                                    ?>
+                                    <div class="block-cart">
+                                        <div class="relative img-product display-block">
+                                        <a href="#" data-toggle="modal" data-target="#myModal" class="show-moreinfo" data-value="<?php echo $value['id']; ?>"> 
+                                            <img class="img-responsive" src="<?php echo $value['imageurl'] ?>" alt="">
+                                          </a>
+                                        <div class="top-left">
+                                                <a href="javascript:void(0)" class="moveAarticleToBought" data-articleid="<?php echo base64_encode($value['id']); ?>">
+                                                    <img class="img-responsive " src="/templates/mobile/images/usd_black.png" alt="<?php echo $value['price'] ?>" title="<?php echo $value['price'] ?>" >
+                                                </a>
+                                            </div>
+                                            <?php if(isset($value['feedId']) && $value['onsale'] == 'Y') { ?>
+                                            <div class="top-right">
+                                                <div class="discount"><?php echo round(($value['price']-$value['saleprice'])/$value['price']*100)?>%<br/>OFF</div>
+                                            </div>
+                                            <?php }//end if ?>
+
+                                            <div class="row pull-child">
+                                                <div class='col-xs-12'>    
+                                                    <div  class="opacity">
+                                                        <div>
+                                                            <div class="col-xs-6 bottom-left">
+                                                                <div class="product-name"><?php echo $this->string_helper($value['caption']) ?></div>
+                                                                <div class="price"><?php echo $value['price'].' '.$value['currency']; ?></div>
+                                                            </div>
+                                                            <div class='col-xs-6 bottom-right check-like'>
+                                                                <?php if(in_array($value['id'], $likearray)) { ?>
+                                                                       <a href="javascript:void(0);" class="likes check-like checked" id="<?php echo base64_encode($value['id']); ?>">
+                                                                    <i id="like<?php echo $value['id'] ?>" class="fa fa-thumbs-up"></i>  
+                                                                    <?php } else { ?>
+                                                                    <a href="javascript:void(0);" class="likes check-like" id="<?php echo base64_encode($value['id']); ?>">
+                                                                    <i id="like<?php echo $value['id'] ?>" class="fa fa-thumbs-o-up"></i> 
+                                                                </a>
+                                                                <?php } ?>
+                                                                <!-- <i class="fa fa-thumbs-up"></i>  -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                       
+
+                                        </div>
+                                        <div class="share-add-to-cart">
+                                        <a href="#" data-toggle="modal" data-target="#myModal_social" data-value="<?php echo $value['id']; ?>" class="popup-share"> 
+                                            <div class="share check-like">
+                                                <i class="fa fa-share-alt"></i>
+                                            </div>
+                                            </a>
+                                            <div class="add-to-cart">
+                                                <div class="continue ">
+                                                <?php 
+                                                     $disable='';
+                                                      $add ='add to cart';
+                                                    if(in_array($value['id'],$this->listItemCart)) { 
+                                                        $disable = 'disabled="disabled"';
+                                                         $added ='add to cart';
+                                                    }
+                                                ?>
+                                                <button  data-feedid="<?php echo $value['id']; ?>" class="btn btn-default btn-submit btn-block btn-continue addCart" <?php echo $disable ?>><?php echo $add; ?></button>
+                                                  <!-- <button onClick="addCart(<?php echo $value['id']?>)" class="btn btn-default btn-submit btn-block btn-continue" id="">add to cart</button> -->
+                                                </div>
+                                            </div>
+
+                                            <!-- hêre -->
+                                                 <div class="social_box_pop" style="display:none">
+                                <ul class="clearfix social_html">
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+                                            </ul>
+                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <?php } }?>
+
+
+
+                                    <div class="top_page">
+                                        <img src="<?php echo $this->basePath() ?>/templates/mobile/images/arrow.png" class="click_to_top">
+                                        <p class="click_to_top">TOP OF PAGE</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                       
+                </section>
+
+                
+            </div><!-- /.container -->
+               <div class="bottom fixed-bottom">
+    <div class="position-relative">
+        <div class="save-share">
+            <div class="container">
+                <div class="row my_row">
+                    <div class="col-xs-6 text-left unsavecloseout pointer" data-outfitid="<?php echo $this->outfit_id ?>">
+                        <i class="fa fa-thumbs-o-up check-like"></i>
+                        Unsave this Outfit
+                    </div>
+                     <div class="col-xs-6 text-right pointer" data-container="body" data-toggle="popover" data-placement="top">
+                        <i class="fa fa-share-alt"></i>
+                        Share this Outfit
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button data-outfitid="<?php echo base64_encode($this->outfits[0]['outfit_id']); ?>" type="button" class="btn btn-default btn-submit btn-block btn-continue clsBboughtEntireOutfit" style="background-color: #8c8982">bought entire outfit</button>
+        <button onClick="addOutfitToCart(<?php echo $this->outfits[0]['outfit_id'] ?>)" type="button" class="btn btn-default btn-submit btn-block btn-continue add-outfit-to-cart">ADD OUTFIT TO CART</button>
+        <div class="social_outfit" style="display:none">
+         <ul class="clearfix" >
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/f.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/t.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/g.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+</ul>
+</div>
+   
+    </div>
+</div> 
+
+</section>
+
+ 
+
+
+<script type="text/javascript">
+        function addCart(feed_id){
+        if(feed_id > 0 ){
+            
+            $.ajax({
+                url: '/service/add-to-cart',
+                type: 'POST',
+                data: 'id='+ feed_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                    //var json = jQuery.parseJSON(result);
+                    $("#cart_number").text(result);
+                    //console.log(result);
+                    hideAjxLoadingDiv();
+                 
+                }
+            });
+        }
+    }
+
+      $("body").on("click",".popup-share",function(){
+            var html = $(this).parents('.share-add-to-cart').find("ul").html();
+            $(".social_html").html(html);
+        });
+
+      $('body').on("click",".likes", function () {
+            var current = $(this);
+            if($(this).hasClass('checked')) {
+                class_name ='growl-missing';
+                   jQuery.gritter.add({
+                                //title: result.mgs,
+                                title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + 'You have already added this article to your closet' +'</div></div><div class="my_close my_wrap_close">\
+                <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                </div>',
+                                class_name: class_name,
+                                sticky: false,
+                                time: 3000
+                            })
+            } else {
+                 var id = $(this).attr("id");
+
+                var url = "/service/likeclosset/";
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {closesetId: id},
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.status == 'N') {
+                          //alert(result.mgs)
+                        } else if (result.status == 'Y') {
+                            class_name ='growl-success';
+                            jQuery.gritter.add({
+                                //title: result.mgs,
+                                title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                    <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                    </div>',
+                                class_name: class_name,
+                                sticky: false,
+                                time: 3000
+                            })
+                            var likesd = result.count + ' likes';
+                            $('.like_' + result.idf).html(likesd);
+
+                            if($(this).find('#like'+result.idf)) {
+                                $('#like'+result.idf).attr('class','fa fa-thumbs-up');
+                                current.addClass("checked");
+                            }
+
+                        } else {
+                            //alert("Internal Server Error");
+                        }
+                    }
+                });
+            }
+           
+        });
+</script>
+<script type="text/javascript">
+
+        /*unsave outfit*/
+        $('body').on('click', '.unsavecloseout', function () {
+              var objThisRef = this; 
+              myalert('unsavecloseoutAlert1','type_remove','Are you sure?','you want to unlike this Outfit?',null,null,
+                 function(){
+
+                      $.ajax({
+                          url: "/mycloset/un-save-outfit/",
+                          type: 'POST',
+                          data: {outfitId: $(objThisRef).data("outfitid")},
+                          dataType: 'json',
+                          success: function (result) {
+                               if (result.status == 'Y') {
+                                  myalert('unsavecloseoutAlert2','type_success','Removed','This Outfit Removed from  your closet',null,null,function(){ window.location.href = '/mycloset';});
+                              } else {
+                                  myalert('unsavecloseoutAlert3', 'type_remove','Internal Server Error', 'Please contact site administrator.');
+                              }
+                          }
+                      
+                      });  
+                  }                                 
+              );
+
+        }); 
+        /*end unsave outfit*/
+    //add outfit to cart
+     function addOutfitToCart(outfit_id){
+        if(outfit_id > 0 ){
+            $.ajax({
+                url: '/service/add-outfit-to-cart',
+                type: 'POST',
+                data: 'outfit_id='+ outfit_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                    console.log(result);
+                    //var json = jQuery.parseJSON(result);
+                    $("#cart_number").text(result);
+                    //$(".block").find(".addCart").removeClass("addCart").addClass('disableCart').text('disable from cart');
+                    $(".block").find(".addCart").not(".disabled").addClass("disabled");
+                    hideAjxLoadingDiv();
+
+                }
+            });
+        }
+    }
+
+    $("[data-toggle=popover]").popover({
+    html: true, 
+    content: function() {
+        //$(".social_outfit").show();
+          return $('.social_outfit').html();
+        }
+    });
+
+        $(function () {
+            function moveAarticleToBoughtFunction() {
+                var objThisRef = this; 
+                myalert(
+                    'moveToBoughtAlert1', 'type_remove','Are you sure?','you want to move this article to bought items?',null,null,
+                    function(){
+                        $.ajax({
+                            url: "/mybought/articlebought/",
+                            type: 'POST',
+                            data: {feeddataid: $(objThisRef).data("articleid")},
+                            dataType: 'json',
+                            success: function (result) {
+                                if (result.status == 'Y') {
+                                    $('#moveToBoughtAlert1').foundation('reveal','close');
+                                    $(objThisRef).closest(".block-cart").css("display", "none");
+                                     //myalert('moveToBoughtAlert2', 'type_success','Moved!',result.mgs);  
+                                     jQuery.gritter.add({title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                                                     <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                                                  </div>',
+                                         class_name: 'growl-success',
+                                         sticky: false,
+                                         time: 3000
+                                     });                                               
+                                } else {
+                                    myalert('moveToBoughtAlert3', 'type_remove','Internal Server Error', 'Please contact site administrator.');
+                                }
+                            }});                        
+                                  
+                        });                         
+                }
+                $('.moveAarticleToBought').click(moveAarticleToBoughtFunction);
+                $('body').on('click', '.moveAarticleToBought', moveAarticleToBoughtFunction);
+                
+            
+                $('body').on('click', '.clsBboughtEntireOutfit', function () {
+
+                    var objThisRef = this; 
+                    myalert(
+                            'outFitBoughtID', 'type_remove','Are you sure','you want to move this outfit to bought items?',null,null, 
+                            function(){
+
+                                 $.ajax({
+                                     url: "/mybought/outfitbought/",
+                                     type: 'POST',
+                                     data: {outfitId: $(objThisRef).data("outfitid")}, 
+                                     dataType: 'json',
+                                     success: function (result) {
+                                          if (result.status == 'Y') {
+                                              
+                                              $('#outFitBoughtID').foundation('reveal','close');
+
+                                              $( ".block" ).css( "display", "none" );
+                                              $(".fixed-bottom").css("display","none");
+                                              jQuery.gritter.add({title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                                                              <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                                                           </div>',
+                                                  class_name: 'growl-success',
+                                                  sticky: false,
+                                                  time: 3000
+                                              });
+
+                                            window.location.href="/mycloset";                                                
+                                                                          
+                                         } else {
+                                             myalert('outFitBoughtID3', 'type_remove','Internal Server Error', 'Please contact site administrator.');
+                                         }
+                                     }}); 
+                                 }
+                            );
+
+                });
+
+            });
+
+</script>

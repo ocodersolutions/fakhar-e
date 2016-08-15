@@ -1,0 +1,313 @@
+<?php 
+
+//print_r($this->data);
+?>
+                <div class="big_box1" style="<?=(isset($this->float)?'float:'.$this->float:'')?>; position:relative;">
+                    <div class="img_box_main">
+                        <div class="main_big_product_box1">
+                            <?php if(isset($this->data[0]) && $this->data[0]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($this->data[0]['price']-$this->data[0]['saleprice'])/$this->data[0]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <input type="hidden" id="closesetId<?=$this->id?>" name="closesetId<?=$this->id?>" value="<?php echo base64_encode($this->data[0]['outfit_id']); ?>"/>
+                            <input type="hidden" id="closesetIdOpen<?=$this->id?>"  value="<?php echo ($this->data[0]['outfit_id']); ?>"/>
+                            <div class="main_big_product_img_box">
+                                <?php if (isset($this->data[0]['feedId']) && !empty($this->data[0]['feedId'])) { ?>
+                                <img src="<?php echo $this->data[0]['imageurl']; ?>" id="img">
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+                            <?php if (isset($this->data[0]['feedId']) && !empty($this->data[0]['feedId'])) { ?>
+                                <div class="main_big_product_tag_box">
+                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?php echo  base64_encode($this->data[0]['id']); ?>">
+                                        <?php if(in_array($this->data[0]['id'], $this->likesArray)) { ?>
+                                            <img src="/img/thumb.png" alt="Like" id="likeout<?php echo $this->data[0]['id'];?>" />
+                                        <?php } else { ?>
+                                            <img class ="my_tooltip" title="Save article to your closet" src="/img/blank_like.png" alt="Like" id="likeout<?php echo $this->data[0]['id'];?>" />
+                                        <?php } ?>
+                                    </a>
+                                </div>
+
+                                <div class="box-block1">
+                                    <div class="pad">
+                                        <span class="like_<?php echo  $this->data[0]['id']; ?>"><?php echo  $this->data[0]['likesCount'] != 0 ? $this->data[0]['likesCount'] . ' likes' : ""; ?></span>
+                                        <h4><?php echo $this->string_helper($this->data[0]['caption']); ?></h4>
+                                        <p><?php echo ($this->data[0]['onsale']=='Y'?$this->data[0]['saleprice']:$this->data[0]['price']) ?><span class="currency"><?php echo $this->data[0]['currency'] ?></span></p>
+                                        <a class="buy_now my_tooltip" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->data[0]['id']))); ?>" title="Purchase article through our partner">buy now</a>
+                                        <br>
+                                        <a data-value="<?php echo $this->data[0]['id']; ?>" class="discover my_tooltip" href="javascript:void(0)"  title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                                    </div>
+                                    <div class="social_box1">
+                                        <?php
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $this->data[0]['id'] . '/' . rand();
+                                        $title = 'Lnove - ' . $this->data[0]['caption'];
+                                        ?>
+                                        <ul>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="main_big_product_tag_box">&nbsp;</div>
+                            <?php } ?>
+                            <div class="clr"></div>
+                        </div>
+
+
+
+                        <div class="main_sm_product_box1">
+                            <?php if(isset($this->data[1]) && $this->data[1]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($this->data[1]['price']-$this->data[1]['saleprice'])/$this->data[1]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <div class="main_sm_product_img_box">
+                                <?php if (isset($this->data[1]['feedId']) && !empty($this->data[1]['feedId'])) { ?>
+                                <img src="<?php echo $this->data[1]['imageurl']; ?>" id="img">
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+
+                            <?php if (isset($this->data[1]['feedId']) && !empty($this->data[1]['feedId'])) { ?>
+
+                                <div class="main_sm_product_tag_box">
+                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?php echo  base64_encode($this->data[1]['id']); ?>">
+                                        <?php if(in_array($this->data[1]['id'], $this->likesArray)) { ?>
+                                            <img src="/img/thumb.png" alt="Like" id="likeout<?php echo $this->data[1]['id'];?>" />
+                                        <?php } else { ?>
+                                            <img class ="my_tooltip" title="Save article to your closet" src="/img/blank_like.png" alt="Like" id="likeout<?php echo $this->data[1]['id'];?>" />
+                                        <?php } ?>
+                                    </a>
+                                </div>
+
+                                <div class="box-block3 blok">
+                                    <div class="pad">
+                                        <span class="like_<?php echo  $this->data[1]['id']; ?>"><?php echo  $this->data[1]['likesCount'] != 0 ? $this->data[1]['likesCount'] . ' likes' : ""; ?></span>
+                                        <h4><?php echo $this->string_helper($this->data[1]['caption']); ?></h4>
+                                        <p><?php echo ($this->data[1]['onsale']=='Y'?$this->data[1]['saleprice']:$this->data[1]['price'])?><span class="currency"><?php echo $this->data[0]['currency'] ?></span></p>
+                                        <a class="buy_now my_tooltip" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->data[1]['id']))); ?>"  title="Purchase article through our partner">buy now</a>
+                                        <br>
+                                        <a  data-value="<?php echo $this->data[1]['id']; ?>" class="discover my_tooltip" href="javascript:void(0)" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                                    </div>
+                                    <div class="social_box1">
+                                        <?php
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $this->data[1]['id'] . '/' . rand();
+                                        $title = 'Lnove - ' . $this->data[1]['caption'];
+                                        ?>
+                                        <ul>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="main_big_product_tag_box">&nbsp;</div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="main_sm_product_box1">
+                            <?php if(isset($this->data[2]) && $this->data[2]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($this->data[2]['price']-$this->data[2]['saleprice'])/$this->data[2]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <div class="main_sm_product_img_box">
+                                <?php if (isset($this->data[2]['feedId']) && !empty($this->data[2]['feedId'])) { ?>
+                                <img src="<?php echo $this->data[2]['imageurl']; ?>" id="img">
+                                <?php } else { ?>
+                                    <img class ="my_tooltip" title="Save article to your closet" src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+                            <?php if (isset($this->data[2]['feedId']) && !empty($this->data[2]['feedId'])) { ?>
+                                <div class="main_sm_product_tag_box">
+                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?php echo  base64_encode($this->data[2]['id']); ?>">
+                                        <?php if(in_array($this->data[2]['id'], $this->likesArray)) { ?>
+                                            <img src="/img/thumb.png" alt="Like" id="likeout<?php echo $this->data[2]['id'];?>" />
+                                        <?php } else { ?>
+                                            <img class ="my_tooltip" title="Save article to your closet" src="/img/blank_like.png" alt="Like" id="likeout<?php echo $this->data[2]['id'];?>" />
+                                        <?php } ?>
+                                    </a>
+                                </div>
+
+                                <div class="box-block3 blok">
+                                    <div class="pad">
+                                        <span class="like_<?php echo  $this->data[2]['id']; ?>"><?php echo  $this->data[2]['likesCount'] != 0 ? $this->data[2]['likesCount'] . ' likes' : ""; ?></span>
+                                        <h4><?php echo $this->string_helper($this->data[2]['caption']); ?></h4>
+                                        <p><?php echo ($this->data[2]['onsale']=='Y'?$this->data[2]['saleprice']:$this->data[2]['price'])?><span class="currency"><?php echo $this->data[0]['currency'] ?></span></p>
+                                        <a class="buy_now my_tooltip" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->data[2]['id']))); ?>"  title="Purchase article through our partner">buy now</a>
+                                        <br>
+                                        <a  data-value="<?php echo $this->data[2]['id']; ?>" class="discover my_tooltip" href="javascript:void(0)" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                                    </div>
+                                    <div class="social_box1">
+                                        <?php
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $this->data[2]['id'] . '/' . rand();
+                                        $title = 'Lnove - ' . $this->data[2]['caption'];
+                                        ?>
+                                        <ul>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="main_big_product_tag_box">&nbsp;</div>
+                            <?php } ?>
+                        </div>
+
+                    </div>
+
+
+                    <div class="img_box_main left_m_space">
+
+                        <div class="main_sm_product_box1">
+                            <?php if(isset($this->data[3]) && $this->data[3]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($this->data[3]['price']-$this->data[3]['saleprice'])/$this->data[3]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <div class="main_sm_product_img_box">
+                                <?php if (isset($this->data[3]['feedId']) && !empty($this->data[3]['feedId'])) { ?>
+                                <img src="<?php echo $this->data[3]['imageurl']; ?>" id="img">
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+                            <?php if (isset($this->data[3]['feedId']) && !empty($this->data[3]['feedId'])) { ?>
+                                <!--<div class="orange_img fr"><p>6%</p></div>-->
+                                <div class="main_sm_product_tag_box">
+                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?php echo  base64_encode($this->data[3]['id']); ?>">
+                                        <?php if(in_array($this->data[3]['id'], $this->likesArray)) { ?>
+                                            <img src="/img/thumb.png" alt="Like" id="likeout<?php echo $this->data[3]['id'];?>" />
+                                        <?php } else { ?>
+                                            <img class ="my_tooltip" title="Save article to your closet" src="/img/blank_like.png" alt="Like" id="likeout<?php echo $this->data[3]['id'];?>" />
+                                        <?php } ?>
+                                    </a>
+                                </div>
+
+                                <div class="box-block3 blok">
+                                    <div class="pad">
+                                        <span class="like_<?php echo  $this->data[3]['id']; ?>"><?php echo  $this->data[3]['likesCount'] != 0 ? $this->data[3]['likesCount'] . ' likes' : ""; ?></span>
+                                        <h4><?php echo $this->string_helper($this->data[3]['caption']); ?></h4>
+                                        <p><?php echo ($this->data[3]['onsale']=='Y'?$this->data[3]['saleprice']:$this->data[3]['price'])?><span class="currency"><?php echo $this->data[0]['currency'] ?></span></p>
+                                        <a class="buy_now my_tooltip" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->data[3]['id']))); ?>"  title="Purchase article through our partner">buy now</a>
+                                        <br>
+                                        <a data-value="<?php echo $this->data[3]['id']; ?>" class="discover my_tooltip" href="javascript:void(0)" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                                    </div>
+                                    <div class="social_box1">
+                                        <?php
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $this->data[3]['id'] . '/' . rand();
+                                        $title = 'Lnove - ' . $this->data[3]['caption'];
+                                        ?>
+                                        <ul>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="main_big_product_tag_box">&nbsp;</div>
+                            <?php } ?>
+                        </div>
+
+                        <div class="main_sm_product_box1">
+                            <?php if(isset($this->data[4]) && $this->data[4]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($this->data[4]['price']-$this->data[4]['saleprice'])/$this->data[4]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <div class="main_sm_product_img_box">
+                                <?php if (isset($this->data[4]['feedId']) && !empty($this->data[4]['feedId'])) { ?>
+                                <img src="<?php echo $this->data[4]['imageurl']; ?>" id="img">
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+                            <?php if (isset($this->data[4]['feedId']) && !empty($this->data[4]['feedId'])) { ?>
+                                <div class="main_sm_product_tag_box">
+                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?php echo  base64_encode($this->data[4]['id']); ?>">
+                                        <?php if(in_array($this->data[4]['id'], $this->likesArray)) { ?>
+                                            <img src="/img/thumb.png" alt="Like" id="likeout<?php echo $this->data[4]['id'];?>" />
+                                        <?php } else { ?>
+                                            <img class ="my_tooltip" title="Save article to your closet" src="/img/blank_like.png" alt="Like" id="likeout<?php echo $this->data[4]['id'];?>" />
+                                        <?php } ?>
+                                    </a>
+                                </div>
+                                <div class="box-block3 blok">
+                                    <div class="pad">
+                                        <span class="like_<?php echo  $this->data[4]['id']; ?>"><?php echo  $this->data[4]['likesCount'] != 0 ? $this->data[4]['likesCount'] . ' likes' : ""; ?></span>
+                                        <h4><?php echo $this->string_helper($this->data[4]['caption']); ?></h4>
+                                        <p><?php echo ($this->data[4]['onsale']=='Y'?$this->data[4]['saleprice']:$this->data[4]['price'])?><span class="currency"><?php echo $this->data[0]['currency'] ?></span></p>
+                                        <a class="buy_now my_tooltip" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->data[4]['id']))); ?>"  title="Purchase article through our partner">buy now</a>
+                                        <br>
+                                        <a data-value="<?php echo $this->data[4]['id']; ?>" class="discover my_tooltip" href="javascript:void(0)" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                                    </div>
+                                    <div class="social_box1">
+                                        <?php
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $this->data[4]['id'] . '/' . rand();
+                                        $title = 'Lnove - ' . $this->data[4]['caption'];
+                                        ?>
+                                        <ul>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="main_big_product_tag_box">&nbsp;</div>
+                            <?php } ?>
+                        </div>
+
+
+
+
+                        <div class="main_big_product_box1">
+                            <?php if(isset($this->data[5]) && $this->data[5]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($this->data[5]['price']-$this->data[5]['saleprice'])/$this->data[5]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <div class="main_big_product_img_box">
+                                <?php if (isset($this->data[5]['feedId']) && !empty($this->data[5]['feedId'])) { ?>
+                                <img src="<?php echo $this->data[5]['imageurl']; ?>" id="img">
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+                            <?php if (isset($this->data[5]['feedId']) && !empty($this->data[5]['feedId'])) { ?>
+                                <div class="main_big_product_tag_box">
+                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?php echo  base64_encode($this->data[5]['id']); ?>">
+                                        <?php if(in_array($this->data[5]['id'], $this->likesArray)) { ?>
+                                            <img src="/img/thumb.png" alt="Like" id="likeout<?php echo $this->data[5]['id'];?>" />
+                                        <?php } else { ?>
+                                            <img class ="my_tooltip" title="Save article to your closet" src="/img/blank_like.png" alt="Like" id="likeout<?php echo $this->data[5]['id'];?>" />
+                                        <?php } ?>
+                                    </a>
+                                </div>
+
+                                <div class="box-block1">
+                                    <div class="pad">
+                                        <span class="like_<?php echo  $this->data[5]['id']; ?>"><?php echo  $this->data[5]['likesCount'] != 0 ? $this->data[5]['likesCount'] . ' likes' : ""; ?></span>
+                                        <h4><?php echo $this->string_helper($this->data[5]['caption']); ?></h4>
+                                        <p><?php echo ($this->data[5]['onsale']=='Y'?$this->data[5]['saleprice']:$this->data[5]['price'])?><span class="currency"><?php echo $this->data[0]['currency'] ?></span></p>
+                                        <a class="buy_now my_tooltip" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->data[5]['id']))); ?>"  title="Purchase article through our partner">buy now</a>
+                                        <br>
+                                        <a  data-value="<?php echo $this->data[5]['id']; ?>" class="discover my_tooltip" href="javascript:void(0)" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im" ></a>
+                                    </div>
+
+                                    <div class="social_box1">
+                                        <?php
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $this->data[5]['id'] . '/' . rand();
+                                        $title = 'Lnove - ' . $this->data[5]['caption'];
+                                        ?>
+                                        <ul>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
+                                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="main_big_product_tag_box">&nbsp;</div>
+                            <?php } ?>
+                        </div>
+
+                    </div>
+                    <div class="clr"></div>
+                </div>  <!-- big_box-->

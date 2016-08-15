@@ -1,0 +1,102 @@
+<div class="col-md-6">
+    <div class="col-md-12 top-heading-02">
+        <hr>
+        <h3>Outfit details</h3>
+    </div>
+    <form id="outfitPopupform" method="post" action="<?php echo $this->basePath('service/add-outfit')?>">
+        <?php if(isset($this->outfit['outfit_id'])):?>
+        <input type="hidden" name="outfit_id" value="<?php echo $this->outfit['outfit_id'];?>" />
+        <?php endif;?>
+        <table style="width: 700px;" class="table">
+            <tr>
+                <td>
+                    <label>Title</label>
+                </td>
+                <td>
+                    <input type="text" name="title" id="title" class="form-control" value="<?php if(isset($this->outfit['title'])){ echo $this->outfit['title'];}?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Start Date</label>
+                </td>
+                <td>
+                    <input type="text" id="start_date" name="start_date" class="form-control" value="<?php if(isset($this->outfit['start_date'])){ echo date('Y-m-d', strtotime($this->outfit['start_date']));}?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>End Date</label>
+                </td>
+                <td>
+                    <input type="text" id="end_date" name="end_date"  class="form-control" value="<?php if(isset($this->outfit['end_date'])){ echo date('Y-m-d', strtotime($this->outfit['end_date']));}?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Venue</label>
+                </td>
+                <td>
+                    <select name="venue"  class="form-control">
+                        <option value="Work" <?php if(isset($this->outfit['venue']) && $this->outfit['venue']=='Work'){ echo 'selected';}?>>Work</option>
+                        <option value="Night Out" <?php if(isset($this->outfit['venue']) && $this->outfit['venue']=='Night Out'){ echo 'selected';}?>>Night Out</option>
+                        <option value="Casual" <?php if(isset($this->outfit['venue']) && $this->outfit['venue']=='Casual'){ echo 'selected';}?>>Casual</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Status</label>
+                </td>
+                <td>
+                    <select name="status"  class="form-control">
+                        <option value="0" <?php if(isset($this->outfit['status']) && $this->outfit['status']=='0'){ echo 'selected';}?>>Disable</option>
+                        <option value="1" <?php if(isset($this->outfit['status']) && $this->outfit['status']=='1'){ echo 'selected';}?>>Enable</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Description</label>
+                </td>
+                <td>
+                    <textarea name="description" class="form-control"><?php if(isset($this->outfit['description'])){ echo $this->outfit['description'];}?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" name="save_exit" id="save_exit" value="">
+                    <input type="button" onclick="validate();" value="Save & Exit" class="btn btn-primary btn-cta-blue">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="submit" value="Save & Continue" class="btn btn-primary btn-cta-blue pull-right">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+    function validate() {
+        $('#save_exit').val('yes');
+        $('#outfitPopupform').submit();
+    }
+    $('#outfitPopupform').submit(function(){
+        if(!$('#title').val()) {
+            alert('Please enter title value');
+            return false;
+        }
+    });
+   
+    $('#start_date').datetimepicker({
+	timepicker:false,
+        format:'Y-m-d',
+	formatDate:'Y-m-d',
+        step:5,
+        minDate: new Date()
+    });
+    $('#end_date').datetimepicker({
+	timepicker:false,
+        format:'Y-m-d',
+	formatDate:'Y-m-d',
+        step:5,
+        minDate: new Date()
+    });
+</script>

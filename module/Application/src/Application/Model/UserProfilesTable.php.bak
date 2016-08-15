@@ -1,0 +1,276 @@
+<?php
+
+namespace Application\Model;
+
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Delete;
+use Zend\Db\Sql\Select;
+
+class UserProfilesTable extends BasicTableAdapter {
+
+    protected $table = 'UserProfiles';
+
+    public function updateUserProfile($iUserId, $aData) {
+
+        $sql = new Sql($this->getDBAdapter());
+        foreach ($aData as $key1 => $val1) {
+
+            if (isset($key1) && !empty($key1)) {
+                $delete = new Delete();
+                $delete->from($this->table);
+                $delete->where("userId = {$iUserId}");
+                $delete->where("keyLevel1 = '{$key1}'");
+                //echo $sql->getSqlStringForSqlObject($delete);
+                $sql->prepareStatementForSqlObject($delete)->execute();
+            }
+            if (is_array($val1)) {
+                foreach ($val1 as $key2 => $val2) {
+                    if (is_array($val2)) {
+
+                        foreach ($val2 as $key3 => $val3) {
+                            $oInsert = $sql->insert($this->table)->values(array('userId' => $iUserId, 'keyLevel1' => $key1, 'keyLevel2' => $key2, 'value' => $val3));
+                            $sql->prepareStatementForSqlObject($oInsert)->execute();
+                        }
+                    } else {
+                        $oInsert = $sql->insert($this->table)->values(array('userId' => $iUserId, 'keyLevel1' => $key1, 'keyLevel2' => $key2, 'value' => $val2));
+                        $sql->prepareStatementForSqlObject($oInsert)->execute();
+                    }
+                }
+            } else {
+                $oInsert = $sql->insert($this->table)->values(array('userId' => $iUserId, 'keyLevel1' => $key1, 'value' => $val1));
+                $sql->prepareStatementForSqlObject($oInsert)->execute();
+            }
+        }
+    }
+
+    public function getUserProfile() {
+        $oAuth = $this->getServiceLocator()->get('AuthService');
+        if ($oAuth->hasIdentity()) {
+
+            $sql = new Sql($this->getDBAdapter());
+
+            $select = new Select();
+            $select->from(array('up' => $this->table));
+            $select->where("up.userId = {$oAuth->getIdentity()->userId}");
+
+            $results = $sql->prepareStatementForSqlObject($select)->execute();
+
+            $profileArr = array();
+            foreach ($results as $row) {
+                $profileArr[$row['keyLevel1']][$row['keyLevel2']][] = $row['value'];
+            }
+
+            $returnArr = array();
+            foreach ($profileArr as $key1 => $val1) {
+                if (is_array($val1)) {
+                    foreach ($val1 as $key2 => $val2) {
+                        if ($key1 == 'style')
+                            $returnArr[$key1][$key2] = $val2;
+                        else
+                            $returnArr[$key1][$key2] = $val2[0];
+                    }
+                }
+            }
+
+            return $returnArr;
+        }
+    }
+
+    public function getStyleQuestions() {
+        $aUserProfile = $this->getUserProfile();
+
+        $aData = is_array($aUserProfile['style']['work']) ? $aUserProfile['style']['work'] : array();
+        $aStyles['work'] = array(
+            array('name' => 'BusinessFormal', 'img' => 'Work_Box1.jpg', 'value' => in_array('BusinessFormal', $aData)),
+            array('name' => 'BusinessProfessional', 'img' => 'Work_Box2.jpg', 'value' => in_array('BusinessProfessional', $aData)),
+            array('name' => 'BusinessCasual', 'img' => 'Work_Box3.jpg', 'value' => in_array('BusinessCasual', $aData)),
+            array('name' => 'Casual', 'img' => 'Work_Box4.jpg', 'value' => in_array('Casual', $aData))
+        );
+
+        $aData = is_array($aUserProfile['style']['night_out']) ? $aUserProfile['style']['night_out'] : array();
+        $aStyles['night_out'] = array(
+            array('name' => 'SuitedUp', 'img' => 'Nightout_Box1.jpg', 'value' => in_array('SuitedUp', $aData)),
+            array('name' => 'Lounger', 'img' => 'Nightout_Box2.jpg', 'value' => in_array('Lounger', $aData)),
+            array('name' => 'Preppy', 'img' => 'Nightout_Box3.jpg', 'value' => in_array('Preppy', $aData)),
+            array('name' => 'Clubber', 'img' => 'Nightout_Box4.jpg', 'value' => in_array('Clubber', $aData))
+        );
+
+        $aData = is_array($aUserProfile['style']['casual']) ? $aUserProfile['style']['casual'] : array();
+        $aStyles['casual'] = array(
+            array('name' => 'Cozy', 'img' => 'Casual_Box1.jpg', 'value' => in_array('Cozy', $aData)),
+            array('name' => 'Lounger', 'img' => 'Casual_Box2.jpg', 'value' => in_array('Lounger', $aData)),
+            array('name' => 'Preppy', 'img' => 'Casual_Box3.jpg', 'value' => in_array('Preppy', $aData)),
+            array('name' => 'Clubber', 'img' => 'Casual_Box4.jpg', 'value' => in_array('Clubber', $aData))
+        );
+
+        $aData = is_array($aUserProfile['style']['never_wear']) ? $aUserProfile['style']['never_wear'] : array();
+        $aStyles['never_wear'] = array(
+            array('name' => 'Pink', 'img' => 'NeverWear_Box1.jpg', 'value' => in_array('Pink', $aData)),
+            array('name' => 'Strips', 'img' => 'NeverWear_Box2.jpg', 'value' => in_array('Strips', $aData)),
+            array('name' => 'SkinnyJeans', 'img' => 'NeverWear_Box3.jpg', 'value' => in_array('SkinnyJeans', $aData)),
+            array('name' => 'Plaid', 'img' => 'NeverWear_Box4.jpg', 'value' => in_array('Plaid', $aData))
+        );
+
+        return $aStyles;
+    }
+
+    public function getAboutYouQuestions() {
+        $aUserProfile = $this->getUserProfile();
+
+        $sData = (isset($aUserProfile['you']['body_shape']) ? $aUserProfile['you']['body_shape'] : '');
+        $aStyles['body_shape'] = array(
+            array('name' => 'Skinny', 'img' => 'BodyShape_Box1.jpg', 'value' => ($sData == 'Skinny')),
+            array('name' => 'Fit', 'img' => 'BodyShape_Box2.jpg', 'value' => ($sData == 'Fit')),
+            array('name' => 'Round', 'img' => 'BodyShape_Box3.jpg', 'value' => ($sData == 'Round'))
+        );
+
+        $sData = (isset($aUserProfile['you']['skin_tone']) ? $aUserProfile['you']['skin_tone'] : '');
+        $aStyles['skin_tone'] = array(
+            array('name' => 'White', 'img' => 'SkinTone_Box1.jpg', 'value' => ($sData == 'White')),
+            array('name' => 'Asian', 'img' => 'SkinTone_Box2.jpg', 'value' => ($sData == 'Asian')),
+            array('name' => 'Brown', 'img' => 'SkinTone_Box3.jpg', 'value' => ($sData == 'Brown')),
+            array('name' => 'Black', 'img' => 'SkinTone_Box4.jpg', 'value' => ($sData == 'Black'))
+        );
+
+        $aStyles['weight'] = array(
+            'name' => 'Weight',
+            'min' => '100',
+            'max' => '350',
+            'step' => '5',
+            'value' => (isset($aUserProfile['you']['weight']) ? $aUserProfile['you']['weight'] : '-1')
+        );
+
+        $aStyles['height'] = array(
+            'name' => 'Height',
+            'min' => '5',
+            'max' => '7',
+            'step' => '.1',
+            'value' => (isset($aUserProfile['you']['height']) ? $aUserProfile['you']['height'] : '-1')
+        );
+
+        return $aStyles;
+    }
+
+    public function getSizeQuestions() {
+        $aUserProfile = $this->getUserProfile();
+
+        
+        $aStyles['waist'] = array(
+            'name' => 'waist',
+            'list' => array(),
+            'value' => (isset($aUserProfile['size']['waist']) ? $aUserProfile['size']['waist'] : '')
+        );
+        $aStyles['waist']['list'][''] = 'Waist';
+        for ($i = 28; $i <= 44; $i++)
+            $aStyles['waist']['list'][$i] = $i;
+        $aStyles['waist']['list']['dont_know'] = 'Don&rsquo;t Know';
+        $aStyles['waist']['list']['other'] = 'Other';
+        
+
+        $aStyles['inseam'] = array(
+            'name' => 'inseam',
+            'list' => array(),
+            'value' => (isset($aUserProfile['size']['inseam']) ? $aUserProfile['size']['inseam'] : '')
+        );
+        $aStyles['inseam']['list'][''] = 'Inseam';
+        for ($i = 28; $i <= 44; $i+=2)
+            $aStyles['inseam']['list'][$i] = $i;
+        $aStyles['inseam']['list']['dont_know'] = 'Don&rsquo;t Know';
+        $aStyles['inseam']['list']['other'] = 'Other';
+
+        
+        $aStyles['shoeSize'] = array(
+            'name' => 'shoeSize',
+            'list' => array(),
+            'value' => (isset($aUserProfile['size']['shoeSize']) ? $aUserProfile['size']['shoeSize'] : '')
+        );
+        $aStyles['shoeSize']['list'][''] = 'Shoe Size';
+        for ($i = 7; $i <= 15; $i+=.5)
+            $aStyles['shoeSize']['list'][$i] = $i;
+        $aStyles['shoeSize']['list']['dont_know'] = 'Don&rsquo;t Know';
+        $aStyles['shoeSize']['list']['other'] = 'Other';
+
+        
+        $aStyles['jacketSize'] = array(
+            'name' => 'jacketSize',
+            'list' => array(),
+            'value' => (isset($aUserProfile['size']['jacketSize']) ? $aUserProfile['size']['jacketSize'] : '')
+        );
+        $aStyles['jacketSize']['list'][''] = 'Jacket Size';
+        for ($i = 34; $i <= 50; $i+=4)
+            $aStyles['jacketSize']['list'][$i] = $i;
+        $aStyles['jacketSize']['list']['dont_know'] = 'Don&rsquo;t Know';
+        $aStyles['jacketSize']['list']['other'] = 'Other';
+
+        
+        $aStyles['shirtSize'] = array(
+            'name' => 'shirtSize',
+            'list' => array(''=>'Jacket Size', 'XS'=>'XS', 'S'=>'S', 'M'=>'M', 'L'=>'L', 'XL'=>'XL', '2XL'=>'2XL', '3XL'=>'3XL', 'dont_know'=>'Don&rsquo;t Know'),
+            'value' => (isset($aUserProfile['size']['shirtSize']) ? $aUserProfile['size']['shirtSize'] : '')
+        );
+
+        $aStyles['waistOther'] = $aUserProfile['size']['waistOther'];
+        $aStyles['inseamOther'] = $aUserProfile['size']['inseamOther'];
+        $aStyles['shoeSizeOther'] = $aUserProfile['size']['shoeSizeOther'];
+        $aStyles['jacketSizeOther'] = $aUserProfile['size']['jacketSizeOther'];
+        $aStyles['shirtSizeOther'] = $aUserProfile['size']['shirtSizeOther'];
+
+
+        return $aStyles;
+    }
+
+    public function getBrandQuestions() {
+        $aUserProfile = $this->getUserProfile();
+
+        $aBrands = array();
+        for ($i = 1; $i <= 12; $i++) {
+            $aBrands[] = array('name' => "brand{$i}", 'img' => 'project-2.jpg', 'value' => (isset($aUserProfile['brands']) && in_array($i, $aUserProfile['brands'])));
+        }
+
+        return $aBrands;
+    }
+
+    public function getPriceQuestions() {
+        $aUserProfile = $this->getUserProfile();
+
+        $aStyles = array(
+            array(
+                'title' => 'ON A DRESS SHIRT',
+                'name' => 'shirt',
+                'minPrice' => 25,
+                'maxPrice' => 250,
+                'step' => 5,
+                'value' => (isset($aUserProfile['prices']['shirt']) ? $aUserProfile['prices']['shirt'] : '250')
+            ),
+            array(
+                'title' => 'ON A PAIR OF SHOES',
+                'name' => 'shoes',
+                'minPrice' => 60,
+                'maxPrice' => 350,
+                'step' => 5,
+                'value' => (isset($aUserProfile['prices']['shoes']) ? $aUserProfile['prices']['shoes'] : '350')
+            ),
+            array(
+                'title' => 'ON A SUIT',
+                'name' => 'suit',
+                'minPrice' => 200,
+                'maxPrice' => 1500,
+                'step' => 50,
+                'value' => (isset($aUserProfile['prices']['suit']) ? $aUserProfile['prices']['suit'] : '1500')
+            ),
+            array(
+                'title' => 'ON A WATCH',
+                'name' => 'watch',
+                'minPrice' => 50,
+                'maxPrice' => 350,
+                'step' => 5,
+                'value' => (isset($aUserProfile['prices']['watch']) ? $aUserProfile['prices']['watch'] : '350')
+            ),
+        );
+
+        return $aStyles;
+    }
+
+}

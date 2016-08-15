@@ -1,0 +1,1952 @@
+<?php
+$outfitsData = $this->outfits;
+$outfitsLikes = $this->outfitsLikes;
+?>
+<!--<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/bootstrap-select/bootstrap-select.css">-->
+<!--<link href="/css/edit.css" media="screen" rel="stylesheet" type="text/css">-->
+<!--<link rel="stylesheet/less" type="text/css" href="/css/bootstrap-progressbar-3.0.0.less">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-progressbar-3.0.0.css">-->
+
+<link type="text/css"  href="<?php echo $this->basePath(); ?>/css/onlymodal.css"   rel="stylesheet" />
+<link type="text/css"  href="<?php echo $this->basePath(); ?>/css/showfeeddetail.css"   rel="stylesheet" />
+<link rel="stylesheet" href="<?php echo $this->basePath(); ?>/vendor/jqueryui/development-bundle/themes/base/jquery.ui.all.css">
+<link rel="stylesheet" href="<?php echo $this->basePath(); ?>/fa/css/build.css">
+
+<!--<link rel="stylesheet" href="/vendor/jqueryui/custom.css">-->
+
+<script src="<?php echo $this->basePath(); ?>/vendor/bootstrap/bootstrap-select/bootstrap-select.js"></script>
+<script src="<?php echo $this->basePath(); ?>/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
+<script src="<?php echo $this->basePath(); ?>/simpleexpand/simple-expand.min.js"></script>
+<script src="<?php echo $this->basePath(); ?>/templates/mobile/js/bootstrap.min.js"></script> 
+
+<style>
+    .productsBox .overlay{margin-left:70px; top:90px; }
+    .productsBox .overlay .plus{background-image:none}
+    .productsBox .overlay .minus{background-image:none}
+
+    ul.scrollheight { height: 300px;overflow-y: auto;}
+    .activebrand{background-color: #CCCCCC;}
+    .activecolor{border:2px solid black;}
+    .activedeal {background:#e06;text-decoration:none;}
+    .activecolor{border:2px solid black; background-image: url("/img/tick2.png"); background-size: 20px 15px; background-repeat: no-repeat; background-position: center center;}
+
+    .form-control{height: 34px; padding:2px 2px 2px 6px; font-style:italic; font-size: 11px;}
+
+    section.toggle {margin-top:0px}
+    section.toggle input {
+        height: auto;
+        margin: 0;
+        opacity: 1;
+        position: static;
+        width: auto;
+    }
+    section.toggle label { border:none; color: #000; padding: 3px 20px 3px 10px }
+    section.toggle.active {
+        /*background-color: #fbfcfb;*/
+        border-color: #fbfcfb;
+    }
+    section.toggle.active > label {
+        background: none repeat scroll 0 0 #F4F4F4;
+        border-color: #CCCCCC;
+    }
+    section.toggle .toggle-content{
+        white-space:nowrap;
+    }
+
+    section.toggle .toggle-content .aciTree label{
+        border: none;
+        background: none;
+        border-style: none;
+        border-left-style: none;
+        border-right-style: none;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    section.toggle .toggle-content .aciTree label:before{
+        border: none;
+        background: none;
+        border-style: none;
+        border-left-style: none;
+        border-right-style: none;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    .outfitSharingLinks{
+        display:none;
+    }
+</style>
+<style>
+    .price-box {
+        background: none repeat scroll 0 0 #E9E9E9;
+        margin: 20px auto 0 7px;
+        width: 200px;
+    }
+    .form-pricing {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border-radius: 4px 4px 4px 4px;
+        padding: 5px;
+    }
+    .price-slider {
+        margin-bottom: 30px;
+    }
+    .col-sm-padding {
+        padding: 0;
+    }
+
+    .ui-corner-all {
+        border-radius: 4px 4px 4px 4px;
+    }
+    .ui-widget-content {
+        background: none repeat scroll 0 0 #DCF0F0;
+        border: 1px solid #AAAAAA;
+        color: #222222;
+        height: 8px;
+        margin-top: 0;
+    }
+    .ui-slider .ui-slider-handle {
+        cursor: pointer;
+    }
+    .ui-slider-horizontal .ui-slider-handle {
+        margin-left: -0.5em;
+    }
+    .ui-slider-horizontal .ui-slider-handle {
+        top: -0.9em;
+    }
+    .ui-slider .ui-slider-handle {
+        color: #FFFFFF;
+        cursor: default;
+        font-size: 15px;
+        height: 2em;
+        line-height: 30px;
+        margin: 0 -30px auto !important;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+        width: 3.4em;
+        z-index: 2;
+    }
+    .ui-slider a, .ui-slider a:focus {
+        cursor: pointer;
+        outline: medium none;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default {
+        background: none repeat scroll 0 0 #254F73 !important;
+        border: 1px solid #254F73 !important;
+        box-shadow: none;
+        height: 13px;
+        margin: 10px -5px auto !important;
+        width: 13px;
+    }
+    .ui-corner-all {
+        border-radius: 4px 4px 4px 4px;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default lable {
+        color: #FFFFFF !important;
+    }
+    .ui-slider-handle.ui-state-default.ui-corner-all > label {
+        color: #5E5E5E !important;
+        left: -28px;
+        position: absolute;
+        top: -24px;
+    }
+    #slider > a:nth-child(even) > label:first-child {
+        left: -10px;
+        width: 35px;
+    }
+    #slider2 > a > label:first-child {
+        left: -22px;
+        width: 40px;
+    }
+    label {
+        margin-bottom: 7px;
+    }
+    .price-slider span {
+        color: #7F8C8D;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 200;
+    }
+    .price-min-max {
+        background-image: url("/img/step_bars.jpg");
+        height: 8px;
+        margin-top: -24px;
+        position: relative;
+        display: none;
+    }
+    .col-sm-padding {
+        padding: 0;
+    }
+    .ui-autocomplete { height: auto !important; }
+    .ui-menu .ui-menu-item a{ font-size: 13px !important; }
+    .sharepoup{
+        top: -110px;
+        cursor: pointer;
+    }
+    .outfitcheckbox{
+        cursor: pointer;
+    }
+
+    .outfitsnot{
+        text-align: center;
+        font-size: 25px;
+        margin-top: 30px;
+    }
+    
+    .outfitSharingLinks{
+    	display:none;
+    }
+     #loading-div-background 
+    {
+        display:none;
+        position:fixed;
+        top:0;
+        left:0;
+        background:black;
+        width:100%;
+        height:100%;
+        opacity: 0.6;
+        z-index: 1000;
+     }
+    #loading-div
+    {
+         width: 300px;
+         height: 150px;
+         text-align:center;
+         position:absolute; 
+         left: 50%;
+         top: 50%;
+         margin-left:-150px;
+         margin-top: -100px;
+    	opacity: 1;
+     }    
+     
+     
+        .toggle.expander.expanded {
+            padding-left: 22px;
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-image: url('/img/down.png');
+        }
+    
+        .toggle.expander.collapsed {
+            padding-left: 22px;
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-image: url('/img/right.png');
+        } 
+        .cat h5{
+            cursor: pointer;
+        } 
+         button.deal{
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+        #tree .aciTreeText{
+            font-family: 'Roboto' !important;
+        }
+
+        /* style for checkbox */
+
+        .brandslist .checkbox label::before{
+            border-radius: 0;
+            border-color: #acaeb5;
+        }
+        .brandslist .checkbox label::after{
+            background-color: #acaeb5;
+        }
+        .brandslist .checkbox input[type="checkbox"]:checked + label::after{
+            content: ' ';
+        }
+        .brandslist .checkbox label::before{
+            width: 14px;
+            height: 14px;
+        }
+        .brandslist .checkbox label::after {
+            width: 12px;
+            height: 14px;
+        }
+        #slider > a > label {
+            width:50px;
+        }
+        .round-color li{
+            font-size: 13px;
+            font-family: 'Roboto';
+        }
+        .round-color .fa-check{
+            color:#fff;
+        }
+        .round-color .fa-check:before {
+            margin-left: 3px;
+        }
+        .deals_box label{
+            margin-bottom: 0;
+        }
+        .deals_box .fa-circle-o:before {
+            font-size: 17px;
+        }
+  
+</style>
+<!--============================================================contener-01=============-->
+<script type="text/javascript">var feedsids = {};</script>
+<!--============================================================contener-01 end =============-->
+<div class="full">
+    <div class="container" style="background-color:#F6F6F4;">
+        <div id="blue-btn-top">
+
+            <div id="div1">
+                <div class="blue-btn1"></div>
+                <div class="clr"></div>
+                <p class="head1"></p>
+            </div>
+
+            <div class="bg_color">
+                <ul class="list-box">
+                    <li><a href="<?php echo $this->url('mycloset', array()); ?>">SAVED</a></li>
+                    <li class="active1"><a href="<?php echo $this->url('mybought', array()); ?>">BOUGHT</a></li>
+                </ul>
+            </div>
+
+            <!--<div id="leftaction">
+                <ul class="left-box-check">
+                    <li><input type="checkbox" name="all" id="check1" value="All"/>
+                        <label for="check1">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            All
+                        </label></li>
+                    <li><input type="checkbox" name="outfit[]" id="check2" value="Work"/>
+                        <label for="check2">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            Work
+                        </label></li>
+                    <li><input type="checkbox" name="outfit[]" id="check3" value="Night Out"/>
+                        <label for="check3">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            Night Out
+                        </label></li>
+                    <li><input type="checkbox" name="outfit[]" id="check4" value="Casual"/>
+                        <label for="check4">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            Casual
+                        </label></li>
+                </ul>
+                <div class="refresh refreshout">
+                    <a href="javascript:void(0);"><img src="/img/refresh.png">Refresh Outfit </a>
+                </div>
+                <div class="refresh">
+                    <?php //echo number_format($outfitsLikes) . ' Likes'; ?>
+                </div>
+                <div class="share1 shclose">
+                    <a href="javascript:void(0);"><img src="/img/white-share.png">Share this outfit </a>
+                </div>
+            </div>-->
+        </div>
+        <div id="outfit-block" style="display: none;">
+        
+        
+        <div class="left-link-box">
+            <div class="radio-box">
+                <form>
+                    <input type="radio" name="option" id="radio1" value="outfit" class="checkoption" checked="checked" />
+                    <label for="radio1" class="outfit">
+                        <span class="fa-stack ">
+                            <i class="fa fa-circle-o fa-stack-1x"></i>
+                            <i class="fa fa-circle fa-stack-1x"></i>
+                        </span>
+                        OUTFIT
+                    </label>
+                    <input type="radio" name="option" id="radio2" value="article" class="checkoption" />
+                    <label for="radio2"  class="outfit">
+                        <span class="fa-stack">
+                            <i class="fa fa-circle-o fa-stack-1x"></i>
+                            <i class="fa fa-circle fa-stack-1x"></i>
+                        </span>
+                        ARTICLES
+                    </label>
+                </form>
+            </div>
+
+            <div class="refined">
+                <h1>REFINED BY</h1>
+                <div class="cat page_left_menu ">
+                    <h5 class="expander toggle expanded">VENUES</h5>
+                    <div class="content">
+                        <ul>
+                        <li><input type="checkbox" name="all" id="check1" checked value="All"/>
+                            <label for="check1">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            All
+                            </label>
+                        </li>
+                        <li><input type="checkbox" name="outfit[]" id="check2" checked value="Work"/>
+                            <label for="check2">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            Work
+                            </label>
+                        </li>
+                        <li><input type="checkbox" name="outfit[]" id="check3" checked value="Night Out"/>
+                            <label for="check3">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            Night Out
+                            </label>
+                        </li>
+                        <li><input type="checkbox" name="outfit[]" id="check4" checked value="Casual"/>
+                            <label for="check4">
+                            <span class="fa-stack outfitcheckbox">
+                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                <i class="fa fa-square fa-stack-1x"></i>
+                            </span>
+                            Casual
+                            </label>
+                        </li>
+                    </ul>
+                    </div>
+                    
+                </div>
+                <div class="clr"></div>
+            </div>
+        </div><!-- left_link_box-->
+
+
+        
+              <div id="slideout" style="right:-65px;">
+                <a class="link-settings-colors sharepoup"><img src="/img/switch.png" /></a>
+                <div id="slideout_inner">
+                    <form id="switchform">
+                        <ul>
+                            <li><a id="sharingLinkFacebook" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=http://<?php echo URL_APPLICATION?>/&title=ELNove" target="_blank" ><img src="/img/white_fb.png"></a></li>
+                            <li><a id="sharingLinkPinterest" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=http://<?php echo URL_APPLICATION?>/&title=ELNove" target="_blank" ><img src="/img/white_p.png"></a></li>
+                            <li><a id="sharingLinkTwitter" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=http://<?php echo URL_APPLICATION?>/&title=ELNove" target="_blank" ><img src="/img/white-t.png"></a></li>
+                            <li><a id="sharingLinkGoogle" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=http://<?php echo URL_APPLICATION?>/&title=ELNove" target="_blank" ><img src="/img/white_google.png"></a></li>
+                            <li><a id="sharingLinkEmail" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=http://<?php echo URL_APPLICATION?>/&title=ELNove" target="_blank" ><img src="/img/white_msg.png"></a></li>
+                        </ul>
+
+                    </form>
+                </div>
+            </div>  
+            
+            
+        <div class="right-link-box" id="rightLinBoxOutfits">
+            <div class="bg_color" style="background-color: #F6F6F4">
+            <!--  <ul class="list-box">
+                <li class="active1"><a href="<?php echo $this->url('mycloset', array()); ?>">SAVED</a></li>
+                <li><a href="<?php echo $this->url('mybought', array()); ?>">BOUGHT</a></li>
+            </ul> -->
+            <div class="clr"></div>
+
+            <?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
+
+            <?php foreach($outfitsData as $key => $outfitData) { ?>
+
+            <div class="big_box">
+                <div class="img_box_main">
+                    <div class="main_big_product_box">
+                        <?php if(isset($outfitData[0]['feedId']) && $outfitData[0]['onsale'] == 'Y') {?><div class="salePrice"><?php echo round(($outfitData[0]['price']-$outfitData[0]['saleprice'])/$outfitData[0]['price']*100)?>%<br/>OFF</div><?php }?>
+                        <div class="main_big_product_img_box">
+                            <?php if (isset($outfitData[0]['feedId']) && !empty($outfitData[0]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[0]['imageurl']; ?>" id="img" height="369px">
+                            <?php } else { ?>
+                                <img src="/img/big_img.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_big_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[0]['feedId']) && !empty($outfitData[0]['feedId'])) { ?>
+                        <div class="box-block1">
+                            <div class="pad">
+                                <span class="like_<?php echo  $outfitData[0]['id']; ?>"><?php echo  $outfitData[0]['likesCount'] != 0 ? $outfitData[0]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[0]['caption']); ?></h4>
+                                <p><?php echo ($outfitData[0]['onsale']=='Y'?$outfitData[0]['saleprice']:$outfitData[0]['price'])?><span class="currency"><?php echo $outfitData[0]['currency'] ?></span></p>
+                                <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[0]['id']))); ?>">buy now</a>
+                                <br>
+                                <a href="javascript:void(0)" data-value="<?php echo $outfitData[0]['id']; ?>" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[0]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[0]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_sm_product_box">
+                        <?php if(isset($outfitData[1]['feedId']) && $outfitData[1]['onsale'] == 'Y') {?><div class="salePrice"><?php echo round(($outfitData[1]['price']-$outfitData[1]['saleprice'])/$outfitData[1]['price']*100)?>%<br/>OFF</div><?php }?>
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[1]['feedId']) && !empty($outfitData[1]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[1]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[1]['feedId']) && !empty($outfitData[1]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?php echo  $outfitData[1]['id']; ?>"><?php echo  $outfitData[1]['likesCount'] != 0 ? $outfitData[1]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[1]['caption']); ?></h4>
+                                <p><?php echo ($outfitData[1]['onsale']=='Y'?$outfitData[1]['saleprice']:$outfitData[1]['price'])?><span class="currency"><?php echo $outfitData[1]['currency'] ?></span></p>
+                                <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[1]['id']))); ?>">buy now</a>
+                                <br>
+                                <a href="javascript:void(0)" data-value="<?php echo $outfitData[1]['id']; ?>" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[1]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[1]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_sm_product_box">
+                        <?php if(isset($outfitData[2]['feedId']) && $outfitData[2]['onsale'] == 'Y') {?><div class="salePrice"><?php echo round(($outfitData[2]['price']-$outfitData[2]['saleprice'])/$outfitData[2]['price']*100)?>%<br/>OFF</div><?php }?>
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[2]['feedId']) && !empty($outfitData[2]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[2]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[2]['feedId']) && !empty($outfitData[2]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?php echo  $outfitData[2]['id']; ?>"><?php echo  $outfitData[2]['likesCount'] != 0 ? $outfitData[2]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[2]['caption']); ?></h4>
+                                <p><?php echo ($outfitData[2]['onsale']=='Y'?$outfitData[2]['saleprice']:$outfitData[2]['price'])?><span class="currency"><?php echo $outfitData[2]['currency'] ?></span></p>
+                                <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[2]['id']))); ?>">buy now</a>
+                                <br>
+                                <a href="javascript:void(0)" data-value="<?php echo $outfitData[2]['id']; ?>" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[2]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[2]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="img_box_main">
+                    <div class="main_sm_product_box">
+                        <?php if(isset($outfitData[3]['feedId']) && $outfitData[3]['onsale'] == 'Y') {?><div class="salePrice"><?php echo round(($outfitData[3]['price']-$outfitData[3]['saleprice'])/$outfitData[3]['price']*100)?>%<br/>OFF</div><?php }?>
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[3]['feedId']) && !empty($outfitData[3]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[3]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[3]['feedId']) && !empty($outfitData[3]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?php echo  $outfitData[3]['id']; ?>"><?php echo  $outfitData[3]['likesCount'] != 0 ? $outfitData[3]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[3]['caption']); ?></h4>
+                                <p><?php echo ($outfitData[3]['onsale']=='Y'?$outfitData[3]['saleprice']:$outfitData[3]['price'])?><span class="currency"><?php echo $outfitData[3]['currency'] ?></span></p>
+                                <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[3]['id']))); ?>">buy now</a>
+                                <br>
+                                <a href="javascript:void(0)" data-value="<?php echo $outfitData[3]['id']; ?>" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[3]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[3]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_sm_product_box">
+				        <?php if(isset($outfitData[4]['feedId']) && $outfitData[4]['onsale'] == 'Y') {?><div class="salePrice"><?php echo round(($outfitData[4]['price']-$outfitData[4]['saleprice'])/$outfitData[4]['price']*100)?>%<br/>OFF</div><?php }?>
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[4]['feedId']) && !empty($outfitData[4]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[4]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[4]['feedId']) && !empty($outfitData[4]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?php echo  $outfitData[4]['id']; ?>"><?php echo  $outfitData[4]['likesCount'] != 0 ? $outfitData[4]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[4]['caption']); ?></h4>
+								<p><?php echo ($outfitData[4]['onsale']=='Y'?$outfitData[4]['saleprice']:$outfitData[4]['price'])?><span class="currency"><?php echo $outfitData[4]['currency'] ?></span></p>
+                                <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[4]['id']))); ?>">buy now</a>
+                                <br>
+                                <a href="javascript:void(0)" data-value="<?php echo $outfitData[4]['id']; ?>" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[4]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[4]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_big_product_box">
+						<?php if(isset($outfitData[5]['feedId']) && $outfitData[5]['onsale'] == 'Y') {?><div class="salePrice"><?php echo round(($outfitData[5]['price']-$outfitData[5]['saleprice'])/$outfitData[5]['price']*100)?>%<br/>OFF</div><?php }?>
+                        <div class="main_big_product_img_box">
+                            <?php if (isset($outfitData[5]['feedId']) && !empty($outfitData[5]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[5]['imageurl']; ?>" id="img" height="369px">
+                            <?php } else { ?>
+                                <img src="/img/big_img.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_big_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[5]['feedId']) && !empty($outfitData[5]['feedId'])) { ?>
+                        <div class="box-block1 blok1">
+                            <div class="pad">
+                                <span class="like_<?php echo  $outfitData[5]['id']; ?>"><?php echo  $outfitData[5]['likesCount'] != 0 ? $outfitData[5]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[5]['caption']); ?></h4>
+                                <p><?php echo ($outfitData[5]['onsale']=='Y'?$outfitData[5]['saleprice']:$outfitData[5]['price'])?><span class="currency"><?php echo $outfitData[5]['currency'] ?></span></p>
+                                <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[5]['id']))); ?>">buy now</a>
+                                <br>
+                                <a href="javascript:void(0)" data-value="<?php echo $outfitData[5]['id']; ?>" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[5]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[5]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="black-box">
+                
+                    <div class="outfitSharingLinks">url=<?php echo $this->serverUrl() . '/service?outfitd=' . $outfitData[0]['outfit_id']?>&title=<?php echo 'ELNove - ' . $outfitData[0]['outfittitle']?></div>                
+                
+                    <div class="thumb ">
+                        &nbsp;
+                    </div>
+                    <div class="thumb shareDiv shclose">
+                        <a href="javascript:void(0);"><img src="img/share2.png" alt="image"> SHARE THIS OUTFIT</a>
+                    </div>
+                    <div class="thumb">
+                        <a href="javascript:void(0);" class="cUnBoughtThisOutfit" data-outfitid="<?php echo base64_encode($key)?>"><p>unbought this outfit</p></a>
+                    </div>
+                    <a href="javascript:void(0);"><img src="img/white-like.png" alt="image"> <span><?php echo number_format($outfitsLikes[$key]); ?></span></a>
+                </div>
+                <div class="clr"></div>
+            </div>  <!-- big_box-->
+
+            <div class="clr"></div>
+
+            <?php } ?>
+
+            <?php } ?>
+
+            </div>
+        </div>            
+            
+            
+            
+
+        </div>
+        <div id="article-block" style="display:block">
+            <div class="left-link-box">
+                <div class="radio-box" style="display:none">
+                <form>
+                    <input type="radio" name="option" id="radio1" value="outfit" class="checkoption" />
+                    <label for="radio1" class="outfit">
+                        <span class="fa-stack ">
+                            <i class="fa fa-circle-o fa-stack-1x"></i>
+                            <i class="fa fa-circle fa-stack-1x"></i>
+                        </span>
+                        OUTFIT
+                    </label>
+                    <input type="radio" name="option" id="radio2" value="article" class="checkoption"  checked="checked"  />
+                    <label for="radio2"  class="outfit">
+                        <span class="fa-stack">
+                            <i class="fa fa-circle-o fa-stack-1x"></i>
+                            <i class="fa fa-circle fa-stack-1x"></i>
+                        </span>
+                        ARTICLES
+                    </label>
+                </form>
+                </div>
+
+                <div class="refined">
+                    <h1>REFINED BY</h1>
+                    <div class="cat page_left_menu ">
+                        <section class="toggle active">
+                            <h5 class="expander toggle collapsed"> categories</h5>
+                            <div class="content">
+                                <div class="toggle-content">
+                                    <div id="tree" class="aciTree"><div>
+                                </div>
+                            </div>
+                        </section>
+                     </div>
+
+                                <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
+
+                                    <div class="cat page_left_menu brandslist">
+                                        <h5 class="expander toggle collapsed"> BRANDS</h5>
+                                        <div class="content">
+                                        <input type="text" class="form-control form-control-01 brand" name="brandautocomplete" id="brandautocomplete" placeholder="Search more brands">
+                                        <ul>
+                                            <?php if (!empty($this->allTopBrands)) { ?>
+                                                <?php foreach ($this->allTopBrands as $brand) { ?>
+                                                    <li><input type="checkbox" name="option" id="<?php echo $brand['id']; ?>" class="brandSelection" value="<?php echo $brand['id']; ?>" />
+                                                        <label for="<?php echo $brand['id']; ?>">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                                                <i class="fa fa-square fa-stack-1x"></i>
+                                                            </span>
+                                                            <?php echo $brand['title']; ?>
+                                                        </label>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+
+                                            <?php if (!empty($this->allBrands)) { ?>
+                                                <?php foreach ($this->allBrands as $brand) { ?>
+                                                    <li>
+                                                   <div class="checkbox">
+                                                    <input id="<?php echo $brand['id']; ?>" class="brandSelection styled" type="checkbox" name="option" value="<?php echo $brand['id']; ?>">
+                                                    <label for="<?php echo $brand['id']; ?>">
+                                                        <?php  echo $brand['title']; ?>
+                                                    </label>
+                                                </div>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </ul>
+                                        </div>
+                                    </div>
+
+                                <?php } ?>
+
+                                <div class="cat page_left_menu ">
+                                    <h5 class="expander toggle collapsed"> PRICE</h5>
+                                    <div class="content">
+                                    <div class="price-box">
+                                        <form class="form-horizontal form-pricing" role="form">
+                                            <div class="price-slider">
+                                                <div class="col-sm-12 col-sm-padding">
+                                                    <div id="slider" class="slider-01"></div>
+                                                </div>
+                                            </div>
+                                            <div class="price-min-max">
+                                                <div class="col-lg-6 col-sm-padding" style="text-align:left; margin-top:5px;color:#aaaaaa;">
+                                                    <span>0</span><span class="currency"><?php echo $this->currency ?></span>
+                                                </div>
+                                                <div class="col-lg-6 col-sm-padding" style="text-align:right;margin-top:5px;color:#aaaaaa;">
+                                                    <span><?php echo $this->maxRangePrice; ?></span><span class="currency"><?php echo $this->currency ?></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <?php if (!empty($this->allColors)) { ?>
+
+                                    <div class="cat page_left_menu ">
+                                        <h5 class="expander toggle collapsed"> COLOR</h5>
+                                        <div class="content">
+                                        <ul class="round-color">
+                                            <?php
+                                            if (!empty($this->allColors)) {
+                                                foreach ($this->allColors as $color) {
+                                                    if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
+                                                    ?>
+                                                    <li class="btn-01 btn-coloer-01 colorselection" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></li>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </ul>
+                                        </div>
+                                    </div>
+
+                                <?php } ?>
+
+                                <?php if ((!empty($this->allStores) || !empty($this->allTopStores))) { ?>
+
+                                    <div class="cat page_left_menu ">
+                                        <h5 class="expander toggle collapsed">STORE</h5>
+                                        <div class="content">
+                                        <input type="text" class="form-control form-control-01 brand" id="storeautocomplete" name="storeautocomplete" placeholder="Search more stores">
+                                        <ul>
+
+                                            <?php if (!empty($this->allTopStores)) { ?>
+                                                <?php foreach ($this->allTopStores as $store) { ?>
+                                                    <li><input class="storeSelection" type="checkbox" name="option" id="<?php echo $store['title']; ?>"  value="<?php echo $store['id']; ?>" />
+                                                        <label for="<?php echo $store['title']; ?>">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                                                <i class="fa fa-square fa-stack-1x"></i>
+                                                            </span>
+                                                            <?php echo $store['title']; ?>
+                                                        </label>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+
+                                            <?php if (!empty($this->allStores)) { ?>
+                                                <?php foreach ($this->allStores as $store) { ?>
+                                                    <li><input class="storeSelection" type="checkbox" name="option" id="<?php echo $store['title']; ?>"  value="<?php echo $store['id']; ?>" />
+                                                        <label for="<?php echo $store['title']; ?>">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                                                <i class="fa fa-square fa-stack-1x"></i>
+                                                            </span>
+                                                            <?php echo $store['title']; ?>
+                                                        </label>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+
+                                        </ul>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+
+                                <div class="cat page_left_menu deals_box">
+                                    <h5 class="expander toggle collapsed"> DEALS</h5>
+                                    <div class="content">
+                                    <ul>
+                                        <li><input type="radio" name="option" id="deal1" onclick="chooseDeals(this, 'onsale');" />
+                                            <label for="deal1"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> All Items on Sale
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal2" onclick="chooseDeals(this, 'todaynew');" />
+                                            <label for="deal2"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> New Today
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal3" onclick="chooseDeals(this, 'newthisweek');" />
+                                            <label for="deal3"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> New this week
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal4" onclick="chooseDeals(this, 'freeshipping');" />
+                                            <label for="deal4" class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> Free Shipping
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal5" onclick="chooseDeals(this, 'specialoffer');" />
+                                            <label for="deal5"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> Special Offer
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal6" onclick="chooseDeals(this, 'discountcode');" />
+                                            <label for="deal6"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> Discount
+                                            </label>
+                                        </li>
+                                    </ul>
+
+                                    <div class="cat page_left_menu ">
+                                        <div class="price-box">
+                                            <form class="form-horizontal form-pricing" role="form">
+                                                <div class="price-slider">
+                                                    <div class="col-sm-12 col-sm-padding">
+                                                        <div id="slider2" class="slider-02"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="price-min-max">
+                                                    <div class="col-lg-6 col-sm-padding" style="text-align:left;margin-top:5px; color:#aaaaaa;">
+                                                        <span>0%</span>
+                                                    </div>
+                                                    <div class="col-lg-6 col-sm-padding" style="text-align:right;margin-top:5px; color:#aaaaaa;">
+                                                        <span>100%</span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                    <div class="clr"></div>
+                                    <button class="deal">FILTER</button>
+                                
+                                </div>
+
+                                <div class="clr"></div>
+                            </div>
+                    </div><!-- left_link_box-->
+
+
+
+                    <div class="right-link-box">
+
+                        <div class="clr"></div>
+
+                        <div class="image-box bottomWorkingArea" id="productlisting">
+
+                            <?php
+                            foreach ($this->feedData as $prod) {
+
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand();
+                                $title = 'ELNove - ' . $prod->caption;
+                                ?>
+                                <div class="main_big1_product_box productsBox draggable-element">
+                                    <!--<div class="portfolio-item img-thumbnail productsBox">-->
+
+                                    <div class="main_big1_product_img_box">
+                                        <img src="<?php echo $prod->feedimageurl; ?>" id="img">
+                                        <!--<img src="/feed/<?//= $prod->feedId; ?>/<?//= $prod->img_local_name; ?>" id="img">-->
+                                    </div>
+                                    <?php if($prod->onsale == 'Y') {?><div class="salePrice"><?php echo round(($prod->price-$prod->saleprice)/$prod->price*100)?>%<br/>OFF</div><?php }?>
+                                    <div class="main_big1_product_tag_box">
+                                        <a href="javascript:void(0);" class="fl idUnBboughtArticle" data-articleid="<?php echo base64_encode($prod->feeddataid)?>">
+                                            <img src="img/price_green.png" alt="<?php echo $prod->price;?>" title="<?php echo $prod->price;?>" />
+                                        </a>
+                                        <!-- <a href="javascript:void(0);"  class="fr likes" id="<?php echo base64_encode($prod->feeddataid); ?>">
+                                            <img src="img/thumb.png" alt="Like" />
+                                        </a> -->
+                                    </div>
+                                    <div class="box-block">
+                                        <div class="pad">
+                                            <span class="like_<?php echo  $prod->feeddataid; ?>"><?php echo  $prod->likesCount != 0 ? $prod->likesCount . ' likes' : ""; ?></span>
+                                            <h4><?php echo $this->string_helper($prod->caption); ?></h4>
+                                            <p><?php echo ($prod->onsale=='Y'?$prod->saleprice:$prod->price)?><span class="currency"><?php echo $prod->currency ?></span></p>
+                                            <a class="buy_now gotourl my_tooltip" 
+                                            title="Purchase article through our partner" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>">buy now</a>
+                                            <br/>
+                                            <a href="javascript:void(0)"  data-value="<?php echo $prod->feeddataid; ?>" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="img/right1.png" id="im"></a>
+                                        </div>
+                                        <div class="social_box">
+                                            <ul>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/f.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/p1.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/t.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/g.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/msg.png"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!--</div>-->
+                                </div>	
+                            <?php } ?>
+
+                        </div>
+
+                        <div id='loading' style="text-align:center;padding-top:20px;display:none;" class="col-md-10">
+                            <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>"/>
+                        </div>
+                        <div id='ajx_loader_div' style="display:none;z-index:999999;">
+                            <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>" id="ajx_loader_image" />
+                        </div>
+
+                        <div class="clr"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+            </div><!--container-->
+        </div>
+
+        <br /><br /><br /><br />
+
+        <script src="<?php echo $this->basePath('vendor/jqModal/jqModal.js') ?>"></script>
+
+        <form id="productFilterDetail" name="productFilterDetail">
+            <input type="hidden" id="minamount" class="form-control" name="minamount">
+            <input type="hidden" id="maxamount" class="form-control" name="maxamount">
+            <input type="hidden" id="minduration" class="form-control" name="minduration">
+            <input type="hidden" id="maxduration" class="form-control" name="maxduration">
+            <input type="hidden" id="catids" class="form-control" name="catids">
+            <input type="hidden" id="brands" class="form-control" name="brands">
+            <input type="hidden" id="colors" class="form-control" name="colors">
+            <input type="hidden" id="stores" class="form-control" name="stores">
+            <input type="hidden" id="deals" class="form-control" name="deals">
+            <input type="hidden" id="onsale" class="form-control" name="onsale">
+            <input type="hidden" id="todaynew" class="form-control" name="todaynew">
+            <input type="hidden" id="newthisweek" class="form-control" name="newthisweek">
+            <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
+            <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
+            <input type="hidden" id="discountcode" class="form-control" name="discountcode">
+            <input type="hidden" id="page" class="form-control" name="page" value="2">
+            <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
+        </form>
+
+
+        <!--=================script-by-designer=============-->
+
+     <script src="<?php echo $this->basePath(); ?>/js/showfeeddetail.js"></script>
+      <script src="<?php echo $this->basePath(); ?>/js/clearfilter.js"></script>  
+        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                $(document).on('click', '.overlay-01', function () {
+                                                    reditectToBuyurl(this);
+                                                });
+                                                $('.overlay-01').click(function () {
+                                                    reditectToBuyurl(this);
+                                                });
+                                                function reditectToBuyurl(obj) {
+                                                    $("#contener-01").css("display", "block");
+                                                    $('.progress-bar').progressbar();
+                                                    $('#productbuyurl').attr('href', $(obj).attr('href'));
+                                                    setTimeout(function () {
+                                                        jQuery('#productbuyurl')[0].click();
+                                                        $("#contener-01").css("display", "none");
+                                                    }, 2000);
+                                                }
+                                            });
+                                            $(function () {
+                                                $(".btn-01").click(function () {
+                                                    // remove classes from all
+                                                    $(".btn-01").removeClass("active");
+                                                    $(this).addClass("active");
+                                                });
+                                            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $(".slider-01").click(function () {
+                    // remove classes from all
+                    $(".price-form-01").css("display", "block");
+                    // add class to the one we clicked
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $(".price-01").click(function () {
+                    // remove classes from all
+                    $(".price-form-01").css("display", "none");
+                    // add class to the one we clicked
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $(".slider-02").click(function () {
+                    // remove classes from all
+                    $(".price-form-02").css("display", "block");
+                    // add class to the one we clicked
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $(".price-02").click(function () {
+                    // remove classes from all
+                    $(".price-form-02").css("display", "none");
+                    // add class to the one we clicked
+                });
+            });
+
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+               $("#slider").slider({
+                    range: true,
+                    min: 0,
+                    max: <?php echo $this->maxRangePrice; ?>,
+                    values: [0, <?php echo $this->maxRangePrice; ?>],
+                    slide: function (event, ui) {
+                        update(1, ui.values); //changed
+                    },
+                    stop: function (event, ui) {
+                        loadProductData();
+                    }
+                });
+                $("#slider2").slider({
+                    range: true,
+                    min: 0,
+                    max: 100,
+                    values: [0,100],
+                    step: 10,
+                    slide: function (event, ui) {
+                        update(2, ui.values); //changed
+                    },
+                    stop: function (event, ui) {
+                        loadProductData();
+                    }
+                });
+
+
+                //Added, set initial value.
+                $("#minamount").val($("#slider").slider("option", "min"));
+                $("#maxamount").val($("#slider").slider("option", "max"));
+               
+
+                $("#minduration").val($("#slider2").slider("option", "min"));
+                $("#maxduration").val($("#slider2").slider("option", "max"));
+
+                update();
+            });
+
+            //changed. now with parameter
+            function update(slider, val) {
+                //changed. Now, directly take value from ui.value. if not set (initial, will use current value.)
+                var $minamount = slider == 1 ? val[0] : $("#minamount").val();
+                var $maxamount = slider == 1 ? val[1] : $("#maxamount").val();
+                //var $duration = slider == 2 ? val : $("#duration").val();
+
+                var minduration = slider == 2 ? val[0] : $("#minduration").val();
+                var maxduration = slider == 2 ? val[1] : $("#maxduration").val();
+
+                /* commented
+                 $amount = $( "#slider" ).slider( "value" );
+                 $duration = $( "#slider2" ).slider( "value" );
+                 */
+
+                //$total = "$" + ($amount * $duration);
+                $("#minamount").val($minamount);
+                $("#maxamount").val($maxamount);
+                //$("#amount-label").text($amount);
+                
+                /*my close*/
+                    // $("#duration").val($duration);
+                    // $("#duration-label").text($duration);
+                /*end*/
+
+                $("#minduration").val(minduration);
+                $("#maxduration").val(maxduration);
+
+                // $("#total").val($total);
+                //$("#total-label").text($total);
+                sliderLinks = $('#slider a');
+
+                $(sliderLinks[0]).html('<label >' + $minamount + '</label>');
+              if($maxamount >= <?php echo $this->maxRangePrice;?>) {
+            	  $(sliderLinks[1]).html('<label ><?php echo $this->maxRangePrice;?>+' + ' </label>');
+                  $("#maxamount").val(<?php echo $this->actualMaxRangePrice?>);
+              } else {
+                $(sliderLinks[1]).html('<label >' + $maxamount + ' </label>');
+              }
+             
+              
+
+                sliderLinks = $('#slider2 a');
+                $(sliderLinks[0]).html('<label>' + minduration +"<span>%</span>" + ' </label>');
+                $(sliderLinks[1]).html('<label >' + maxduration + "<span >%</span>" + ' </label>');
+                //$('#slider2 a').html('<label style="margin-left:15px;">' + $duration + '%</label>');
+            }
+        </script>
+        <script type="text/javascript">
+
+            /*$(document).ready(function() {
+             $(".overlay-02").css("display","none");
+             
+             $(".thumb-info").hover(function(){
+             $(hover-one).css("display","block");
+             },function(){
+             $(hover-one).css("display","none");
+             });
+             });	*/
+
+            $(document).ready(function () {
+                $(document).on('mouseenter', '.thumb-info', function () {
+                    $(this).find(".overlay-02").css("display", "block");
+                }).on('mouseleave', '.thumb-info', function () {
+                    $(this).find(".overlay-02").css("display", "none");
+                });
+            });
+
+            $(document).ready(function () {
+                $(document).on('click', '.aciTreeLi', function () {
+                    var fontthis = this;
+                    $(fontthis).siblings(".aciTreeLi").find(".aciTreeText").removeClass("font-bold");
+                    $(fontthis).find(fontthis).addClass("font-bold");
+                    //		$(fontthis).parents(".aciTreeText").addClass(".font-bold");
+                });
+            });
+        </script>
+
+        <!--=================script-by-designer end portfolio-single-project.html====================-->
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+            	$('.expander').simpleexpand();
+            	
+                $('.checkoption').on('click', function () {
+                    var valueD = $(this).val();
+                    if (valueD == 'article') {
+                        $('#outfit-block').hide();
+                        //$('#blue-btn-top').show();
+                        $('#article-block').show();
+                        //$('#linktabs').show();
+                        //$('#outfit-block').hide();
+                        //$('.outfitrefresh').hide();
+                        //$('#leftaction').hide();
+                    } else {
+                        //$('#blue-btn-top').hide();
+                        $('#article-block').hide();
+                        $('#outfit-block').show();
+                        //$('#linktabs').hide();
+                        //$('#outfit-block').show();
+                        //$('.outfitrefresh').show();
+                        //$('#leftaction').show();
+                    }
+                });
+                                
+
+                $("#idArticlesPerPageSelect").change(function () {
+                    $("#ArticlesPerPageForm").submit()
+                });
+
+                $('.selectpicker').selectpicker({
+                    //'selectedText': 'cat'
+                    width: '120px'
+                });
+
+                var t = $('#dialog');
+
+                $('#dialog').jqm({
+                    trigger: 'div.productdialogs',
+                    ajax: '@href', /* Extract ajax URL from the 'href' attribute of triggering element */
+                    target: t,
+                    modal: true, /* FORCE FOCUS */
+                });
+
+                $('input.jqmdX')
+                        .hover(
+                                function () {
+                                    $(this).addClass('jqmdXFocus');
+                                },
+                                function () {
+                                    $(this).removeClass('jqmdXFocus');
+                                })
+                        .focus(
+                                function () {
+                                    this.hideFocus = true;
+                                    $(this).addClass('jqmdXFocus');
+                                })
+                        .blur(
+                                function () {
+                                    $(this).removeClass('jqmdXFocus');
+                                });
+
+                $('input.jqmdX')
+                        .hover(
+                                function () {
+                                    $(this).addClass('jqmdXFocus');
+                                },
+                                function () {
+                                    $(this).removeClass('jqmdXFocus');
+                                })
+                        .focus(
+                                function () {
+                                    this.hideFocus = true;
+                                    $(this).addClass('jqmdXFocus');
+                                })
+                        .blur(
+                                function () {
+                                    $(this).removeClass('jqmdXFocus');
+                                });
+
+                $('#dialog').css('padding-bottom', '0px');
+
+                $(".bottomWorkingArea .productsBox").on("click", function (e) {
+
+                    if ($(this).find(".lock").length) {
+                        $(this).find(".lock").removeClass('lock').addClass('open')
+                    }
+                    else {
+                        $(this).find(".open").removeClass('open').addClass('lock')
+                    }
+
+                    return false;
+
+                });
+
+                $(".topWorkingArea .topBigBox,.topMediumBox,.topSmallBox").on("click", function (e) {
+
+                    if ($(this).find(".open").length) {
+                        $(this).find(".open").removeClass('open')
+                        $(this).find(".plus").addClass('plusOpen')
+                        $(this).find(".minus").addClass('minusOpen')
+                    }
+                    else {
+                        $(this).find(".lock").addClass('open')
+                        $(this).find(".plus").removeClass('plusOpen')
+                        $(this).find(".minus").removeClass('minusOpen')
+                    }
+                    return false;
+                });
+            });
+        </script>
+
+        <script class="code" type="text/javascript">
+
+            $(function () {
+
+                // init the tree
+                $('#tree').aciTree({
+                    ajax: {
+                        url: '/attributes/get-categories-json?mapped=true&ec=<?php echo  $this->excludeCats ?>&levels=3&id='
+                    },
+                    checkbox: true
+                });
+
+                $('#tree').on('acitree', function (event, api, item, eventName, options) {
+                    switch (eventName) {
+                        case 'checked':
+                            //alert(item);
+                            //alert('checked: ' + api.getId(item));
+                            //break;
+                        case 'unchecked':
+                            getAllCheckedElements(event, api, item, eventName, options);
+                            loadProductData();
+                            break;
+                        case 'init' :
+                            getAllCheckedElements(event, api, item, eventName, options);
+                            break;
+                    }
+                });
+
+            });
+
+            function getAllCheckedElements(event, api, item, eventName, options)
+            {
+                var checkedElements = $("#tree .aciTreeLi .aciTreeLeaf");
+                checkedElementsArr = api.checkboxes(checkedElements, true);
+                var catIdStr = '';
+                checkedElementsArr.each(function (index, item) {
+                    var $item = $(item);
+                    catIdStr += api.getId($item) + ',';
+                    //console.log(api.getId($item) + ": " + api.getLabel($item));
+                });
+                $("#catids").val(catIdStr);
+            }
+
+        </script>
+
+        <script type="text/javascript">
+            var loading = 0;
+            var endData = 0;
+            function loadProductData(isLazyLoading)
+            {
+                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                {
+                    $("#loading-div-background").show();
+                    $("#page").val(1);
+                    endData = 0;
+                }
+                else {
+                	$("#loading-div-background").show();
+                }
+                loading = 1;
+                var url = "/mybought/getfeeds/" + Math.random();
+                var filterData = $("#productFilterDetail").serialize();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: filterData,
+                    dataType: 'html',
+                    success: function (result) {
+                        loading = 0;
+                        if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                        {
+                            $("#productlisting").html(result);
+                            $("#loading-div-background").hide();
+                            $("#page").val(2);
+                            //enableDragg();
+                        }
+                        else
+                        {
+                            if (result.indexOf('No Record') > 0)
+                            {
+                                endData = 1;
+                            }
+                            else
+                            {
+                                $("#page").val(parseInt($("#page").val()) + 1);
+                                $("#productlisting").append(result);
+                                //enableDragg();
+                            }
+                            $("#loading-div-background").hide();
+                        }
+                    }});
+            }
+
+            $(function () {
+
+                function UnBboughtArticle(){
+                     var objThisRef = this; 
+                    myalert(
+                            'moveFromBoughtAlert1', 'type_remove','Are you sure?','You want to this article to remove from Bought Section!',null,null,
+                            function(){
+                                 $.ajax({
+                                 url: "/mybought/un-bought-article/",
+                                 type: 'POST',
+                                 data: {articleId: $(objThisRef).data("articleid")},
+                                 dataType: 'json',
+                                 success: function (result) {
+                                      if (result.status == 'Y') {
+                                          $('#moveFromBoughtAlert1').foundation('reveal','close');
+                                          $(objThisRef).closest( "div.main_big1_product_box" ).css( "display", "none" );
+                                          //swal({title:"Moved!", text:result.msg, type:"success"}, function(){}); 
+                                         //myalert('moveFromBoughtAlert2', 'type_success','Moved!',result.mgs,null,null, function(){$('#moveFromBoughtAlert2').foundation('reveal','close'); });
+                                          jQuery.gritter.add({title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                                                         <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                                                      </div>',
+                                             class_name: 'growl-success',
+                                             sticky: false,  
+                                             time: 3000
+                                          });                                         
+                                         //myalert('moveFromBoughtAlert3', 'type_remove','Internal Server Error', 'Please contact site administrator.'); 
+                                     } else {
+                                         //swal("Error!", "Internal Server Error", "error"); 
+                                         myalert('moveFromBoughtAlert3', 'type_remove','Internal Server Error', 'Please contact site administrator.');
+                                     }
+                                 }});                       
+                                      
+                            });
+                }
+            	$('body').on('click', '.idUnBboughtArticle', UnBboughtArticle);   
+                 $('.idUnBboughtArticle').click(UnBboughtArticle);
+
+            	
+                $(".check_category").click(function () {
+                    if ($(this).is(':checked') == true) {
+                        var $infos = $(this).parent('.category');
+                        $infos.find("input[type=checkbox]").prop("checked", true);
+                    } else {
+                        var $infos = $(this).parent('.category');
+                        $infos.find("input[type=checkbox]").prop("checked", false);
+                    }
+                })
+
+                $(".check_subcategory").click(function () {
+                    if ($(this).is(':checked') == true) {
+                        //alert('Hello');
+                        var $infos = $(this).parents('.subcategory');
+                        $infos.find("input[type=checkbox]").prop("checked", true);
+                    } else {
+                        //alert('Hey');
+                        var $infos = $(this).parents('.subcategory');
+                        $infos.find("input[type=checkbox]").prop("checked", false);
+                    }
+                })
+
+                $(".brandSelection").click(function () {
+                    $(this).toggleClass('activebrand');
+                    var brands = '';
+                    var allSelectedBrands = $(".brandSelection");
+                    $(allSelectedBrands).each(function () {
+                        if ($(this).hasClass('activebrand')) {
+                            brands += ($(this).attr('value')) + ',';
+                        }
+                    })
+                    $("#brands").val(brands);
+                    loadProductData();
+                })
+
+                $(".storeSelection").click(function () {
+                    //alert('hello');
+                    $(this).toggleClass('activebrand');
+                    var stores = '';
+                    var allSelectedStores = $(".storeSelection");
+                    $(allSelectedStores).each(function () {
+                        if ($(this).hasClass('activebrand')) {
+                            stores += ($(this).attr('value')) + ',';
+                        }
+                    })
+                    $("#stores").val(stores);
+                    loadProductData();
+                })
+
+
+                var availableBrandTags = <?php echo $this->jsonBrands; ?>;
+                $("#brandautocomplete").autocomplete({
+                    source: availableBrandTags,
+                    select: function (event, ui) {
+                        $(".brandslist ul li input[value=" + ui.item.id + "]").addClass('activebrand').prop('checked',true);
+                       
+                        $("#brands").val($("#brands").val() + ui.item.id +',');
+             
+                        loadProductData();
+                        return false;
+                    }
+                });
+
+                var availableStoreTags = <?php echo $this->jsonStores; ?>;
+                $("#storeautocomplete").autocomplete({
+                    source: availableStoreTags,
+                    select: function (event, ui) {
+                        $("ul.storeSelection li[value=" + ui.item.id + "]").addClass('activebrand');
+                        $("#stores").val($("#stores").val() + ui.item.id);
+                        loadProductData();
+                        return false;
+                    }
+                });
+
+                $(".colorselection").click(function () {
+                    $(this).toggleClass('activecolor');
+                    var colors = '';
+                    var allSelectedColors = $(".colorselection.activecolor");
+                    $(allSelectedColors).each(function () {
+                        colors += ($(this).attr('value')) + ',';
+                    })
+                    $("#colors").val(colors);
+                    loadProductData();
+                });
+            });
+
+
+            function chooseDeals(currref, dealName)
+            {
+      
+                $('.sale-option-checkbox', currref).toggleClass('activedeal');
+                if ($('.sale-option-checkbox', currref).hasClass('activedeal'))
+                {
+                    $("#" + dealName).val(1);
+                }
+                else
+                {
+                    $("#" + dealName).val('');
+                }
+                loadProductData();
+            }
+            $(document).ready(function () {
+                $(window).scroll(function () {
+
+                	$('.left-link-box').hcSticky({stickTo:document, top:80, bottom:10}); 
+                	
+                    if ($("#loading-div-background").css('display') == 'block')
+                    {
+                        var windowheight = $(window).height();
+                        var scrolltop = $($("#productlisting")).scrollTop();
+                        var windowwidth = $(window).width();
+                        //showAjxLoadingDiv($("#productlisting"));
+                        // $("#ajx_loader_image").css({top: scrolltop + (windowheight / 2), left: windowwidth / 2, position: 'absolute'});
+                    }
+
+
+
+                    if ($(window).scrollTop() + $(window).height() >= ($('#productlisting').offset().top + $("#productlisting").height()) + 10) {
+                        if (loading == 0 && endData == 0)
+                        {
+                            loadProductData(1);
+                        }
+                    }
+                });
+
+                /*****************block for handling likes product**************/
+                $('.likes').on('click', function () {
+                    var id = $(this).attr("id");
+                    var url = "/service/likeclosset/";
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {closesetId: id},
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.status == 'N') {
+                                alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                var likesd = result.count + ' likes';
+                                $('.like_' + result.idf).html(likesd);
+                            } else {
+                                alert("Internal Server Error");
+                            }
+                        }});
+                });
+                $('body').on('click', '.likes', function () {
+                    var id = $(this).attr("id");
+                    var url = "/service/likeclosset/";
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {closesetId: id},
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.status == 'N') {
+                                alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                var likesd = result.count + ' likes';
+                                $('.like_' + result.idf).html(likesd);
+                            } else {
+                                alert("Internal Server Error");
+                            }
+                        }});
+                });
+
+                $('body').on('click', '.likesout', function () {
+                    var id = $(this).attr("id");
+                    var url = "/service/likeclosset/";
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {closesetId: id},
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.status == 'N') {
+                                alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                var likesd = result.count + ' likes';
+                                $('.like_' + result.idf).html(likesd);
+                            } else {
+                                alert("Internal Server Error");
+                            }
+                        }});
+                });
+
+                /*****************block for handling likes product**************/
+
+
+            });
+
+            function showAjxLoadingDiv(target)
+            {
+                //var target=$('#'+targetId);
+                var tarheight = $(target).height();
+                var tartop = $(target).offset().top;
+                var tarleft = $(target).offset().left;
+
+                var scrollheight = $(target).height();
+                var scrollwidth = $(target).width();
+                var windowheight = $(target).height();
+                var windowwidth = $(target).width();
+                $("#ajx_loader_div").css({height: scrollheight, width: scrollwidth, display: 'block', top: (tartop - (30)), left: tarleft, position: 'absolute'});
+                $("#ajx_loader_image").css({top: windowheight / 2, left: windowwidth / 2, position: 'absolute'});
+            }
+
+            function hideAjxLoadingDiv()
+            {
+                $("#ajx_loader_div").css({display: 'none'});
+            }
+
+            function toggleslide(obj) {
+                $('#outfit-window').toggle();
+                $('#article-window').toggle();
+                $('#productlisting').toggle();
+                $("#loading-div-background").hide();
+                if ($(obj).html() == 'Show Outfit') {
+                    $(obj).html('Show Articles');
+                } else {
+                    $(obj).html('Show Outfit');
+                }
+            }
+            $(document).on('click', '.refresh', function (e) {
+                $.ajax({
+                    url: '<?php echo $this->basePath('service') ?>',
+                    success: function (data) {
+                        $('#outfit-window').html($(data).find("#outfit-window").html());
+                    }
+                });
+            });
+
+
+            $(window).load(function () {
+
+         	    $('body').on('click', '.cUnBoughtThisOutfit', function () {
+
+                    var objThisRef = this; 
+
+                    myalert(
+                    	    'outFitBoughtID', 'type_remove','Are you sure?','You you sure you want to remove this Outfit form Bought Section!',"Yes, remove it!",null,
+                    	    function(){
+
+                                 $.ajax({
+                                     url: "/mybought/un-bought-outfit/",
+                                     type: 'POST',
+                                     data: {outfitId: $(objThisRef).data("outfitid")},
+                                     dataType: 'json',
+                                     success: function (result) {
+                                          if (result.status == 'Y') {
+                                              
+                                        	  $('#outFitBoughtID').foundation('reveal','close');
+                                        	  
+                                        	  $(objThisRef).closest( "div.big_box" ).css( "display", "none" );
+                                              jQuery.gritter.add({title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                                                              <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                                                           </div>',
+                                                  class_name: 'growl-success',
+                                                  sticky: false,
+                                                  time: 3000
+                                              });                                        	  
+                                              
+                                         } else {
+                                              myalert('outFitBoughtID3', 'type_remove','Internal Server Error', 'Please contact site administrator.');
+                                         }
+                                     }}); 
+                                 }
+                            );
+
+                    
+//                 	swal({
+//                   		  title: "Are you sure?",
+//                   		  text: "You you sure you want to remove this Outfit form Bought Section!",
+//                   		  type: "warning",
+//                   		  showCancelButton: true,
+//                   		  confirmButtonColor: "#DD6B55",
+//                   		  confirmButtonText: "Yes, remove it!",
+//                   		  closeOnConfirm: false
+//               		},
+//               		function(){
+//                         $.ajax({
+//                             url: "/mybought/un-bought-outfit/",
+//                             type: 'POST',
+//                             data: {outfitId: $(objThisRef).data("outfitid")},
+//                             dataType: 'json',
+//                             success: function (result) {
+//                                  if (result.status == 'Y') {
+//                                      swal({title:"Moved!", text:result.msg, type:"success"}, function(){ window.location.reload();}); 
+//                                 } else {
+//                                     swal("Error!", "Internal Server Error", "error"); 
+//                                 }
+//                             }});                  		
+                              
+//               		});
+                });                
+
+
+                $('.square1').on('click', function () {
+                    var valueD = $(this).html();
+                    if (valueD == 'on') {
+                        $(this).html('off');
+                        $(this).removeClass('on');
+                        $(this).addClass('off');
+                        $('#article-block').show();
+                        $('#outfit-block').hide();
+                        $('.outfitrefresh').hide();
+                        $('#leftaction').hide();
+                    } else {
+                        $(this).html('on');
+                        $(this).removeClass('off');
+                        $(this).addClass('on');
+                        $('#article-block').hide();
+                        $('#outfit-block').show();
+                        $('.outfitrefresh').show();
+                        $('#leftaction').show();
+                    }
+                });
+                $('.refreshout').on('click', function () {
+                    getOutfit();
+                });
+
+                
+                $('body').on('click', '.sharepoup', function () {
+                    $('#slideout_inner').css('right', '-165px');
+                    $('#slideout').css('right', '-65px');
+                    $(this).removeClass('shopen');
+                    $(this).addClass('shclose');
+                    $('.shareDiv').removeClass('shopen');
+                    $('.shareDiv').addClass('shclose');   
+
+                });
+
+                $('body').on('click', '.shareDiv', function () {
+                    var clases = $(this).attr('class');
+                    var classesA = clases.split(" ");
+                    if (classesA[2] == 'shclose') {
+                        $('#slideout_inner').css('right', '0');
+                        $('#slideout').css('right', '90px');
+                        $(this).removeClass('shclose');
+                        $(this).addClass('shopen');
+
+                        
+                        var link = $(this).closest( "div.black-box" ).find(".outfitSharingLinks").html();
+                        $('#sharingLinkFacebook').attr("href", ('https://api.addthis.com/oexchange/0.8/forward/facebook/offer?'+link) );
+                        $('#sharingLinkPinterest').attr("href", ('https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?'+link) );
+                        $('#sharingLinkTwitter').attr("href", ('https://api.addthis.com/oexchange/0.8/forward/twitter/offer?'+link) );
+                        $('#sharingLinkGoogle').attr("href", ('https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?'+link) );
+                        $('#sharingLinkEmail').attr("href", ('https://api.addthis.com/oexchange/0.8/forward/email/offer?'+link) );
+                        
+                    } else {
+                        $('#slideout_inner').css('right', '-165px');
+                        $('#slideout').css('right', '-65px');
+                        $(this).removeClass('shopen');
+                        $(this).addClass('shclose');
+                    }
+                })
+
+                /*****************block for adding this product into my coloseset**************/
+                $('.savecloseout').on('click', function () {
+                    var id = $('#closesetId').val();
+                    var url = "/service/outfitclosset/";
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {closesetId: id},
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.status == 'N') {
+                                alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                alert("This Outfit Successfully added into your closet");
+                                //var likesd = result.count + ' likes';
+                                //$('#like_' + result.idf).html(likesd);
+                            } else {
+                                alert("Internal Server Error");
+                            }
+                        }});
+                });
+                /*****************End block for adding this product into my coloseset**************/
+
+                /*******************block for filter jquery *********/
+                $('#check1').on('click', function () {
+                    if ($(this).is(':checked')) {
+                        $('input[type="checkbox"]').prop('checked', true);
+                    } else {
+                        $('input[type="checkbox"]').prop('checked', false);
+                    }
+                    getOutfit();
+                });
+                $("input[name='outfit[]']").on('click', function () {
+                    var checkedLen = $('input[name="outfit[]"]:checked').length;
+                    var totalCheckBox = $('input[name="outfit[]"]').length;
+                    if (checkedLen == totalCheckBox) {
+                        $('#check1').prop('checked', true);
+                    } else {
+                        $('#check1').prop('checked', false);
+                    }
+                    getOutfit();
+                });
+
+                var getOutfit = function () {
+                    var val1 = [];
+                    var result = {};
+                    $("input[name='outfit[]']:checked").each(function (i) {
+                        val1[i] = $(this).val();
+                        result['outfit'] = val1;
+                    });
+                    $.ajax({
+                        url: '/mybought/alloutfits', 
+                        type: 'POST',
+                        data: {filterArg: result},
+                        success: function (data) {
+                            $('#rightLinBoxOutfits').html(data);
+                        }
+                    });
+                }
+
+
+          		<?php if( isset($this->defaultView) && $this->defaultView=='article' ) {?> 
+          		$( ".checkoption" ).trigger( "click" );
+          		<?php }?>                  
+
+                /*******************End block for filter jquery *********/
+            });
+
+
+
+        </script>
+
+        <!--<script src="/vendor/jquery-ui.min.js"></script>-->
+        <!--<script type="text/javascript" src="/js/bootstrap-progressbar.js"></script>-->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:none">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content grey_bg">
+      <div class="modal-body append">
+        
+      </div>
+  
+    </div>
+  </div>
+</div>  
+
+<div id="loading-div-background">
+    <div id="loading-div" class="ui-corner-all" >
+      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading.."/>
+      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+    </div>
+</div>          

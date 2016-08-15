@@ -1,0 +1,489 @@
+<?php  ?>
+<div class="req2a-page">
+	   <div class="wrap wrap-1">
+            <div class="container">
+                <section>
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box">
+                                    <div class="block find-stitch-block">
+                                    <h3 class="title lowcase title-find-stitch">Choose the Look You Would Wear</h3>
+                                    <div class="form-group">
+                                        <ul class="list-radio list-radio-find-stitch list-inline">
+                                            <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio1" value="option1" checked="">
+                                                <label for="radio1" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                                 <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio4" value="option1" >
+                                                <label for="radio4" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio5" value="option1" >
+                                                    <label for="radio5" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio6" value="option1" >
+                                                    <label for="radio6" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                   
+                                        <h4 class="question question-find-stitch">What would you wear to Work?</h4>
+                                        <p class="choose">Choose as many as apply</p>
+                                        <div class="list-product" id="listWork">
+                                     
+                                            <div class="row">
+                                              <?php
+                                                 foreach ($this->work as $aBox) {
+                                                 $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank'; 
+                                             ?>
+                                                <div class="col-xs-6 thumb-info <?php echo ($aBox['value'] ? 'lock' : '')?>" id="id<?php echo $aBox['name']  ?>">
+                                                    <div class="relative">
+                                                        <img class="img-responsive" src="<?php echo $this->basePath().'/img/profile/'.$aBox['img'] ?>" alt="">
+                                                        <div class="checkmark <?php echo $classes ?>"></div>
+                                                    </div>
+                                                </div>
+                                                <?php } ?>
+                                            </div>
+                              
+                                            
+                                        </div>
+                                  
+
+                                              
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                        </div>
+
+
+                 
+                    </div>
+                </section>
+                
+            </div><!-- /.container -->
+            <div class="continue">
+                <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="">Continue</button>
+            </div>
+        </div>
+         <div class="wrap wrap-2">
+            <div class="container">
+                <section>
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box">
+                                    <div class="block find-stitch-block">
+                                    <h3 class="title lowcase title-find-stitch">Choose the Look You Would Wear</h3>
+                                    <div class="form-group">
+                                        <ul class="list-radio list-radio-find-stitch list-inline">
+                                            <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio2" id="radio2" value="option1" checked="">
+                                                <label for="radio2" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                                 <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio2" id="radio2" value="option1" >
+                                                <label for="radio2" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                   
+                                        <h4 class="question question-find-stitch">What would you wear on a Night Out?</h4>
+                                        <p class="choose">Choose as many as apply</p>
+                                        <div class="list-product" id="listNIGHTOUT">
+                                          
+                                                    <?php
+                                                    $count = 0;
+                                             foreach ($this->night_out as $aBox) {
+                                             $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank'; 
+                                                if($count % 2 ==0 ) echo '<div class="row">';
+                                             ?>
+                                                <div class="col-xs-6 thumb-info <?php echo  ($aBox['value'] ? 'lock' : '')?>" id="id<?php echo  $aBox['name']  ?>">
+                                                    <div class="relative">
+                                                        <img class="img-responsive" src="<?php echo $this->basePath().'/img/profile/'.$aBox['img'] ?>" alt="">
+                                                        <div class="checkmark <?php echo $classes ?>"></div>
+                                                    </div>
+                                                </div>
+                                                <?php $check = $count +1; if($check % 2 == 0 ) echo '</div>'; $count++; } ?>
+                                          
+                                           
+                                        </div>
+                                  
+
+                                              
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                        </div>
+
+
+                 
+                    </div>
+                </section>
+                
+            </div><!-- /.container -->
+            <div class="continue">
+                <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="">Continue</button>
+            </div>
+        </div>
+         <div class="wrap wrap-3">
+            <div class="container">
+                <section>
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box">
+                                    <div class="block find-stitch-block">
+                                    <h3 class="title lowcase title-find-stitch">Choose the Look You Would Wear</h3>
+                                    <div class="form-group">
+                                        <ul class="list-radio list-radio-find-stitch list-inline">
+                                            <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio3" id="radio3" value="option1" checked="" >
+                                                <label for="radio3" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio3" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio3" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                                 <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio3" id="radio3" value="option1" >
+                                                <label for="radio3" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio3" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio3" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                   
+                                        <h4 class="question question-find-stitch">What would you wear Casually?</h4>
+                                        <p class="choose">Choose as many as apply</p>
+                                        <div class="list-product" id="listCASUAL">
+                                           
+                                            <?php 
+                                            $count = 0;
+                                             foreach ($this->casual as $aBox) {
+                                             $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank'; 
+                                               if($count % 2 ==0 ) echo '<div class="row">';
+                                             ?>
+                                                <div class="col-xs-6 thumb-info <?php echo  ($aBox['value'] ? 'lock' : '')?>" id="id<?php echo  $aBox['name']  ?>">
+                                                    <div class="relative">
+                                                        <img class="img-responsive" src="<?php echo $this->basePath().'/img/profile/'.$aBox['img'] ?>" alt="">
+                                                        <div class="checkmark <?php echo $classes ?>"></div>
+                                                    </div>
+                                                </div>
+                                             <?php $check = $count +1; if($check % 2 == 0 ) echo '</div>'; $count++; } ?>
+                                         
+                                          
+                                        </div>
+                                  
+
+                                              
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                        </div>
+
+
+                 
+                    </div>
+                </section>
+                
+            </div><!-- /.container -->
+            <div class="continue">
+                <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="">Continue</button>
+            </div>
+        </div>
+
+        <div class="wrap wrap-4">
+            <div class="container">
+                <section>
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box">
+                                    <div class="block find-stitch-block">
+                                    <h3 class="title lowcase title-find-stitch">Choose the Look You Would Wear</h3>
+                                    <div class="form-group">
+                                        <ul class="list-radio list-radio-find-stitch list-inline">
+                                            <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio4" id="radio4" value="option1" checked="" >
+                                                <label for="radio4" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio4" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio4" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                                 <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio4" id="radio4" value="option1" >
+                                                <label for="radio4" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio4" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio4" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                   
+                                        <h4 class="question question-find-stitch">What would you never wear?</h4>
+                                        <p class="choose">Choose as many as apply</p>
+                                        <div class="list-product">
+                                            
+                                               <?php  $count = 0; foreach ($this->never_wear as $aBox) {
+                                             $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank'; 
+                                              if($count % 2 ==0 ) echo '<div class="row">';
+                                             ?>
+                                                <div class="col-xs-6 thumb-info <?php echo  ($aBox['value'] ? 'lock' : '')?>" id="id<?php echo  $aBox['name']  ?>">
+                                                    <div class="relative">
+                                                        <img class="img-responsive" src="<?php echo $this->basePath().'/img/profile/'.$aBox['img'] ?>" alt="">
+                                                        <div class="checkmark <?php echo $classes ?>"></div>
+                                                    </div>
+                                                </div>
+                                             <?php $check = $count +1; if($check % 2 == 0 ) echo '</div>'; $count++; } ?>
+                                            
+                                         
+                                        </div>
+                                  
+
+                                              
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                        </div>
+
+
+                 
+                    </div>
+                </section>
+                
+            </div><!-- /.container -->
+            <div class="continue">
+               <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="btnNextStep">Continue</button>
+            </div>
+        </div>
+        <form id="myForm" method="POST">
+             <?php 
+
+             foreach($this->work as $aBox) { ?>
+    <input type="checkbox" id="id<?php echo  $aBox['name'] ?>Input" name="<?php echo  $aBox['name'] ?>" style="display:none" />
+    <?php }?>
+    <?php foreach($this->night_out as $aBox) {?><input type="checkbox" id="id<?php echo  $aBox['name'] ?>Input" name="<?php echo  $aBox['name'] ?>" style="display:none" /><?php }?>
+    <?php foreach($this->casual as $aBox) {?><input type="checkbox" id="id<?php echo  $aBox['name'] ?>Input" name="<?php echo  $aBox['name'] ?>" style="display:none" /><?php }?>
+    <?php foreach($this->never_wear as $aBox) {?><input type="checkbox" id="id<?php echo  $aBox['name'] ?>Input" name="<?php echo  $aBox['name'] ?>" style="display:none" /><?php }?>
+    <input type="hidden" name="myFormBtn" value="yes" />
+        </form>
+</div>
+<script>
+
+         $(".thumb-info").on("click", function (e) {
+
+            e.preventDefault();
+
+            if ($(this).hasClass("lock")) {
+                $(this).removeClass("lock");
+                $(this).find('.checkmark').removeClass("check-one fa fa-check");
+                $(this).find('.checkmark').addClass("check-blank");
+            } else {
+                $(this).addClass("lock");
+                $(this).find('.checkmark').removeClass("check-blank");
+                $(this).find('.checkmark').addClass("check-one fa fa-check");
+            }
+            return false;
+
+        });
+
+      $('.wrap-1 .btn-continue').click(function(){
+        // if($(this).parents('.wrap').find('.lock').length < 1) {
+        //     //sweetAlert("Oops...", "Select one or many.", "error");
+        //     myalert('myalertid1','type_missing',"Oops"," Seems like you forgot to tell us what you would wear to work. Let us learn about you, so we can dress you to the nines.",'');
+        //      $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+        //                  $("button.my_btn_ok").click(function(){
+        //                     $('a.close-reveal-modal').trigger('click');
+        //                 });
+        //             });
+        //      return false;
+        //  }
+        if ($("#listWork .lock").length < 1) {
+                  myalert('myalertid1','type_missing',"Oops"," Seems like you forgot to tell us what you would wear to work. Let us learn about you, so we can dress you to the nines.",'');
+             $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                         $("button.my_btn_ok").click(function(){
+                            $('a.close-reveal-modal').trigger('click');
+                        });
+                    });
+            return false;
+        }
+         
+
+        $(this).parents('.wrap').hide().next().show(); 
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+
+    $('.wrap-2 .btn-continue').click(function(){
+            if ($("#listNIGHTOUT .lock").length < 1) {
+                //alert('A NIGHT OUT: Choose one or many.')
+                 myalert('myalertid2','type_missing','Oops','Seems like you forgot to tell us what you would wear on a night out.  Let us learn about you, so we can dress you to the nines.','');
+                  $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                    $("button.my_btn_ok").click(function(){ // click button
+                        $('a.close-reveal-modal').trigger('click'); // will close modal
+                        });
+                    });
+                  
+                return false;
+            }
+        $(this).parents('.wrap').hide().next().show(); 
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+
+    $('.wrap-3 .btn-continue').click(function(){
+            if ($("#listCASUAL .lock").length < 1) {
+                     myalert('myalertid3','type_missing','Oops', 'seems like you forgot to tell us what you would wear casually. Let us learn about you, so we can dress you to the nines.','');
+                  $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                    $("button.my_btn_ok").click(function(){ // click button
+                        $('a.close-reveal-modal').trigger('click'); // will close modal
+                        });
+                    });
+                  
+                return false;
+            }
+        $(this).parents('.wrap').hide().next().show(); 
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+
+       
+      $("#btnNextStep").on("click", function (e) {
+        $(".thumb-info").each(function (index, element) {
+                if ($(element).hasClass("lock")) {
+                    $("#" + element.id + "Input").prop("checked", true);
+                }
+                else {
+                    $("#" + element.id + "Input").prop("checked", false);
+                }
+            });
+        $("#myForm").submit();
+      });
+
+         $(window).load(function () {
+        var url = "/profile/profiletraking";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {page: 'profile'},
+            dataType: 'json',
+            success: function (result) {
+                //console.log(result);
+            }});
+    });
+</script>

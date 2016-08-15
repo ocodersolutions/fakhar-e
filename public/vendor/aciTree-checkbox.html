@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/vendor/aciTree/css/aciTree.css" media="all">
+        <link rel="stylesheet" type="text/css" href="/vendor/aciTree/css/demo.css" media="all">
+        <script type="text/javascript" src="/vendor/aciTree/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/vendor/aciTree/js/jquery.aciPlugin.min.js"></script>
+        <script type="text/javascript" src="/vendor/aciTree/js/jquery.aciTree.dom.js"></script>
+        <script type="text/javascript" src="/vendor/aciTree/js/jquery.aciTree.core.js"></script>
+        <script type="text/javascript" src="/vendor/aciTree/js/jquery.aciTree.selectable.js"></script>
+        <script type="text/javascript" src="/vendor/aciTree/js/jquery.aciTree.checkbox.js"></script>
+        <script type="text/javascript" src="/vendor/aciTree/js/jquery.aciTree.radio.js"></script>
+    </head>
+    <body>
+
+        <div>
+
+
+            <div id="tree" class="aciTree"><div>
+
+
+            <script class="code" type="text/javascript">
+
+                $(function() {
+
+                    // init the tree
+                    $('#tree').aciTree({
+                        ajax: {
+                            url: '/vendor/aciTree/json/checkbox.json'
+                        },
+                        checkbox: true
+                    });
+
+
+                });
+
+            </script>
+
+
+        </div>
+
+
+    </body>
+</html>

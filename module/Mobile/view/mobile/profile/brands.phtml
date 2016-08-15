@@ -1,0 +1,152 @@
+<div class="req2d-page">
+	   <div class="container">
+                <section id="main-content-wrap">
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="box">
+                                    <div class="block find-stitch-block">
+                                    <h3 class="title lowcase title-find-stitch">Choose Your Favourite Brands</h3>
+                                    <div class="form-group">
+                                        <ul class="list-radio list-radio-find-stitch list-inline">
+                                            <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio1" value="option1" >
+                                                <label for="radio1" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                                 <li><div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio4" value="option1" checked="">
+                                                <label for="radio4" class="radio-label">
+                                                </label>
+                                            </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio5" value="option1" >
+                                                    <label for="radio5" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio1" id="radio6" value="option1" >
+                                                    <label for="radio6" class="radio-label">
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                   
+                                        <p class="choose">Choose as many as apply</p>
+                                        <div class="list-product" id="listBrands">
+                                        	<?php 
+                                        		$count = 0;
+                                    			foreach ($this->brands as $aBox) {
+								                   $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+								                   if($count % 3 ==0 ) echo '<div class="row">';
+								                  
+                                        	?>
+                                           
+	                                                <div class="col-xs-4 thumb-info <?php echo  ($aBox['value'] ? 'lock' : '') ?>" id="id<?php echo  $aBox['name'] ?>">
+	                                                    <div class="relative">
+	                                                        <img class="img-responsive" src="<?php echo $this->basePath().'/templates/mobile/images/'.$aBox['img'] ?>" alt="">
+	                                                        <div class="checkmark <?php echo $classes;?>"></div>
+	                                                    </div>
+	                                                </div>
+                                              
+                                            
+                                    
+                                     		<?php $check = $count +1; if($check % 3 == 0 ) echo '</div>'; $count++; } ?>
+                                        </div>
+                                  
+
+                                              
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                        </div>
+
+
+                 
+                    </div>
+                </section>
+                
+            </div><!-- /.container -->
+            <div class="continue">
+               <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="btnNextStep">Continue</button>
+            </div>
+            <form id="myForm" method="POST">
+			    <?php foreach ($this->brands as $aBox) { ?>
+			    <input type="checkbox" id="id<?php echo  $aBox['name'] ?>Input" name="<?php echo  $aBox['name'] ?>" style="display:none" /><?php } ?>
+			    <input type="hidden" name="myFormBtn" value="yes" />
+			</form>
+</div>
+
+<script>
+    $(".thumb-info").on("click", function (e) {
+
+        e.preventDefault();
+   
+        if ($(this).hasClass("lock")) {
+            $(this).removeClass("lock");
+            $(this).find('.checkmark').removeClass("check-one fa fa-check");
+            $(this).find('.checkmark').addClass("check-blank");
+        } else {
+            $(this).addClass("lock");
+            $(this).find('.checkmark').removeClass("check-blank");
+            $(this).find('.checkmark').addClass("check-one fa fa-check");
+        }
+        return false;
+
+    });
+
+        $("#btnNextStep").on("click", function (e) {
+
+            if ($("#listBrands .lock").length < 1) {
+                sweetAlert("Oops...", "CHOOSE AT LEAST ONE OF YOUR FAVORITE BRAND.", "error");
+                return false;
+            }
+
+            $(".thumb-info").each(function (index, element) {
+                if ($(element).hasClass("lock")) {
+                    $("#" + element.id + "Input").prop("checked", true);
+                }
+                else {
+                    $("#" + element.id + "Input").prop("checked", false);
+                }
+            });
+
+            $("#myForm").submit();
+
+        });
+
+
+        $(window).load(function () {
+	        var url = "/profile/profiletraking";
+	        $.ajax({
+	            url: url,
+	            type: 'POST',
+	            data: {page: 'brands'},
+	            dataType: 'json',
+	            success: function (result) {
+	            }});
+   		 });
+
+
+</script>

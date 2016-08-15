@@ -1,0 +1,313 @@
+<style>
+<!--
+.inLineCheckboxes .cb{float:left; padding-right:10px;}
+.inLineCheckboxes .cb input[type="radio"]{margin-top:0px}
+.inLineCheckboxes .lbl{float:left; padding-right:10px; width:80px}
+-->
+</style>
+
+<div class="col-md-6">
+    <div class="col-md-12 top-heading-02">
+        <hr>
+        <h3>Outfit details</h3>
+    </div>
+    <form id="outfitPopupform" method="post" action="<?php echo $this->basePath('service/add-outfit')?>">
+        <?php if(isset($this->outfit['outfit_id'])):?>
+        <input type="hidden" name="outfit_id" value="<?php echo $this->outfit['outfit_id'];?>" />
+        <?php endif;?>
+        <table style="width: 900px;" class="table">
+            <tr>
+                <td>
+                    <label>Title</label>
+                </td>
+                <td>
+                    <input type="text" name="title" id="title" class="form-control" value="<?php if(isset($this->outfit['title'])){ echo $this->outfit['title'];}?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Start Date</label>
+                </td>
+                <td>
+                    <input type="text" id="start_date" name="start_date" class="form-control" value="<?php if(isset($this->outfit['start_date'])){ echo date('Y-m-d', strtotime($this->outfit['start_date']));}?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>End Date</label>
+                </td>
+                <td>
+                    <input type="text" id="end_date" name="end_date"  class="form-control" value="<?php if(isset($this->outfit['end_date'])){ echo date('Y-m-d', strtotime($this->outfit['end_date']));}?>">
+                    <a href="#" id="neverExpire">Never Expire</a>
+                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Venue</label>
+                </td>
+                <td class="inLineCheckboxes" style="padding:8px 0">
+                    <?php 
+                    $aVenues = array(
+                        'WorkOffice' => 'Work Office',
+                        'WorkPreppy' => 'Work Preppy',
+                        'WorkHipster' => 'Work Hipster',
+                        'WorkLeisure' => 'Work Leisure', 
+                        'NightOutOffice' => 'NightOut Office',
+                        'NightOutPreppy' => 'NightOut Preppy',
+                        'NightOutHipster' => 'NightOut Hipster',
+                        'NightOutLeisure' => 'NightOut Leisure', 
+                        'CasualOffice' => 'Casual Office',
+                        'CasualPreppy' => 'Casual Preppy',
+                        'CasualHipster' => 'Casual Hipster',
+                        'CasualLeisure' => 'Casual Leisure'	
+                    );
+                    $i = 0;
+                    foreach($aVenues as $key => $val) {
+                    ?>
+                    <div class="cb">
+                      <input type="checkbox" name="sub_venues[]" value="<?php echo $key?>" <?php if(isset($this->outfit['sub_venues']) && strstr($this->outfit['sub_venues'], $key)!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl" style="width:120px"><?php echo $val?></div>
+                    <?php 
+                        if( ++$i == 4) { echo '<div style="clear:both"></div>'; $i = 0; }
+                    } ?>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <label>Season</label>
+                </td>
+                <td class="inLineCheckboxes">
+                    <div class="cb">
+                      <input type="checkbox" name="season[]" value="Fall" id="checkboxPrimary" <?php if(isset($this->outfit['season']) && strstr($this->outfit['season'], 'Fall')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">Fall</div>
+                    <div class="cb">
+                      <input type="checkbox" name="season[]" value="Winter" id="checkboxPrimary" <?php if(isset($this->outfit['season']) && strstr($this->outfit['season'], 'Winter')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">Winter</div>
+                    <div class="cb">
+                      <input type="checkbox" name="season[]" value="Spring" id="checkboxPrimary" <?php if(isset($this->outfit['season']) && strstr($this->outfit['season'], 'Spring')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">Spring</div>   
+                    <div class="cb">
+                      <input type="checkbox" name="season[]" value="Summer" id="checkboxPrimary" <?php if(isset($this->outfit['season']) && strstr($this->outfit['season'], 'Summer')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">Summer</div>  
+                </td>
+            </tr>            
+              
+            <tr>
+                <td>
+                    <label>Serviceable Area</label>
+                </td>
+                <td class="inLineCheckboxes">
+                    <div class="cb">
+                      <input type="checkbox" name="serviceable_area[]" value="All" id="checkboxPrimary" <?php if(isset($this->outfit['serviceable_area']) && strstr($this->outfit['serviceable_area'], 'All')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">All</div>
+                    <div class="cb">
+                      <input type="checkbox" name="serviceable_area[]" value="CA" id="checkboxPrimary" <?php if(isset($this->outfit['serviceable_area']) && strstr($this->outfit['serviceable_area'], 'CA')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">CA</div>
+                    <div class="cb">
+                      <input type="checkbox" name="serviceable_area[]" value="US" id="checkboxPrimary" <?php if(isset($this->outfit['serviceable_area']) && strstr($this->outfit['serviceable_area'], 'US')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">USA</div>   
+                    <div class="cb">
+                      <input type="checkbox" name="serviceable_area[]" value="UK" id="checkboxPrimary" <?php if(isset($this->outfit['serviceable_area']) && strstr($this->outfit['serviceable_area'], 'UK')!==false){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">UK</div>  
+                </td>
+            </tr>    
+            
+            
+            <tr>
+                <td>
+                    <label>Status</label>
+                </td>
+                <td class="inLineCheckboxes">
+                    <div class="cb">
+                      <input type="radio" name="status" value="1" id="checkboxPrimary" <?php if(isset($this->outfit['status']) && $this->outfit['status']=='1'){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">Enable</div>
+                    <div class="cb">
+                      <input type="radio" name="status" value="0" id="checkboxPrimary" <?php if(!isset($this->outfit['status']) || (isset($this->outfit['status']) && $this->outfit['status']=='0')){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">Disable</div>
+                </td>
+            </tr>             
+
+            <tr>
+                <td>
+                    <label>Mobile Certified Only</label>
+                </td>
+                <td class="inLineCheckboxes">
+                    <div class="cb">
+                      <input type="radio" name="mobile_certified_only" value="1" id="checkboxPrimary" <?php if(isset($this->outfit['mobile_certified_only']) && $this->outfit['mobile_certified_only']=='1'){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">Yes</div>
+                    <div class="cb">
+                      <input type="radio" name="mobile_certified_only" value="0" id="checkboxPrimary" <?php if(!isset($this->outfit['mobile_certified_only']) || (isset($this->outfit['mobile_certified_only']) && $this->outfit['mobile_certified_only']=='0')){ echo 'checked="checked"';}?> style="display:block" />
+                    </div>
+                    <div  class="lbl">No</div> 
+                </td>
+            </tr>              
+
+                      
+            <tr>
+                <td>
+                    <label>Description</label>
+                </td>
+                <td>
+                    <textarea name="description" id="description" class="form-control" style="width:500px; margin-bottom:20px"><?php if(isset($this->outfit['description'])){ echo $this->outfit['description'];}?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" name="save_exit" id="save_exit" value="">
+                    <input type="button" onclick="validate();" value="Save & Exit" class="btn btn-primary btn-cta-blue">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="submit" value="Save & Continue" class="btn btn-primary btn-cta-blue pull-right">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+
+    function validate() {
+        $('#save_exit').val('yes');
+        $('#outfitPopupform').submit();
+    }
+    // check compare date without time
+    Date.prototype.sameDay = function(d) {
+      return this.getFullYear() === d.getFullYear()
+        && this.getDate() === d.getDate()
+        && this.getMonth() === d.getMonth();
+    }
+    // event handle lost focus start_date
+//     $("#start_date").focusout(function() {
+//         var now = new Date();
+//         var start_date = new Date($('#start_date').val().trim());
+//         if(!now.sameDay(start_date)){
+//             alert('Please enter start_date from now');
+//             return false;
+//         }
+//     });
+
+    $("#end_date").focusout(function() {
+        var end_date = new Date($('#end_date').val().trim());
+        var start_date = new Date($('#start_date').val().trim());
+        if(end_date < start_date){
+            alert('Please enter end_date after start_date');
+            return false;
+        }
+    });
+    $('#outfitPopupform').submit(function(){
+
+    	$('#title').val( $('#title').val().trim() );
+        if(!$('#title').val()) {
+            alert('Please enter title value');
+            return false;
+        }
+        var now = new Date();
+        var start_date = new Date($('#start_date').val().trim());
+        var end_date = new Date($('#end_date').val().trim());
+    	$('#start_date').val( $('#start_date').val().trim() );
+        if(!$('#start_date').val()) {
+            alert('Please enter start_date');
+            return false;
+        }
+//         else if(!now.sameDay(start_date)){
+//             alert('Please enter start_date from now');
+//             return false;
+//         }
+
+    	$('#end_date').val( $('#end_date').val().trim() );
+        if(!$('#end_date').val()) {
+            alert('Please enter end');
+            return false;
+        } else if(end_date < start_date){
+            alert('Please enter end_date after start date');
+            return false;
+        }
+
+        if( $('input[name="sub_venues[]"]:checked').length == 0 ) {
+            alert('Please select venue');
+            return false;
+        }    
+
+        if( $('input[name="season[]"]:checked').length == 0 ) {
+            alert('Please select seasons');
+            return false;
+        }   
+
+        if( $('input[name="serviceable_area[]"]:checked').length == 0 ) {
+            alert('Please serviceable areas');
+            return false;
+        } 
+
+    	$('#description').val( $('#description').val().trim() );
+        if(!$('#description').val()) {
+            alert('Please enter Description');
+            return false;
+        }         
+                              
+    });
+
+    $('#neverExpire').click(function(event){
+    	event.preventDefault();
+    	$('#end_date').val('2038-01-01');
+    });
+
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
+
+    $( "#start_date" ).datetimepicker({
+      //changeMonth: true,//this option for allowing user to select month
+      //changeYear: true //this option for allowing user to select from year range
+        minDate: new Date(),
+         format:'Y-m-d',
+         formatDate:'Y-m-d',
+         step:5,
+         timepicker:false,
+         todayButton:true,
+         onSelectDate : function(ct,$i){
+            var selectedDate = new Date(ct.dateFormat('Y-m-d'));
+            var msecsInADay = 86400000;
+            var endDate = new Date(selectedDate.getTime());
+            $("#end_date").datetimepicker({
+                minDate:endDate,
+                formatDate:'Y-m-d',
+                //value:ct.dateFormat('Y-m-d'),
+                value:addDays(ct.dateFormat('Y-m-d'),0).dateFormat('Y-m-d'),
+            });
+        }
+    });
+    
+    $('#end_date').datetimepicker({
+        format:'Y-m-d',
+         formatDate:'Y-m-d',
+         step:5,
+         timepicker:false,
+          todayButton:true,
+    });
+ //    $('#start_date').datetimepicker({
+	// timepicker:false,
+ //        format:'Y-m-d',
+ //        formatDate:'Y-m-d',
+ //        step:5,
+ //        minDate: new Date()
+ //    });
+ //    $('#end_date').datetimepicker({
+	//    timepicker:false,
+ //        format:'Y-m-d',
+	//     formatDate:'Y-m-d',
+ //        step:5,
+ //        minDate: new Date()
+ //    });
+</script>

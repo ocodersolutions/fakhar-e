@@ -1,0 +1,521 @@
+<link rel="stylesheet" href="/vendor/jqueryui/development-bundle/themes/base/jquery.ui.all.css">
+<link rel="stylesheet" href="/vendor/jqueryui/custom.css">
+
+
+<script src="/vendor/jqueryui/js/jquery-1.9.1.js"></script>
+<script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.core.js"></script>
+<script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.widget.js"></script>
+<script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.mouse.js"></script>
+<script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
+<script type="text/javascript" src="/vendor/jquery-multi-open-accordion/jquery.multi-accordion-1.5.3.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/bootstrap-select/bootstrap-select.css">
+<script src="/vendor/bootstrap/bootstrap-select/bootstrap-select.js"></script>
+
+
+<style>
+    <!--
+    .btn-default{	background-color:#16979d; color:#FFF; font-weight:bold;}
+    .btn-default:hover{ background-color:#16979d; color:#FFF; font-weight:bold; }  
+    .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default { background-color:#16979d; color:#FFF; font-weight:bold; }
+
+    .pagination .btn-default{	background-color:#e3e4e5; color:#000; font-weight:bold; width:150px}
+    .pagination .btn-default:hover{ background-color:#e3e4e5; color:#000; font-weight:bold; }  
+    .pagination .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default { background-color:#e3e4e5; color:#000; font-weight:bold; }
+    .pagination .selectpickerDiv1{width:150px; float:right; margin-right:10px}
+    .pagination .selectpickerDiv2{float:right; padding-top:7px}
+
+    .optionsList{}
+    .optionsList td{padding-top:15px}
+    .topBigBox{height:480px}
+    .topBigBox img{height:420px;}
+
+    .topMediumBox{height:275px; width: 100%;}
+    .topMediumBox img{height:216px;  width: 100%}
+    .topSmallBox{height:195px; width: 100%;  margin-top:10px}
+    .topSmallBox img{height:136px;  width: 100%}
+
+    .overlay{margin-left:80px; top:180px; width:92px; height:43px; position:absolute; z-index:99}
+    .overlay .plus{float:left; margin-top:10px; width:26px; height:26px; background-image:url('/img/service/plus.png')}
+    .overlay .lock{float:left; width:30px;  margin-left:5px; height:43px; background-image:url('/img/service/lock.png')}
+    .overlay .open{background-image:url('/img/service/unlock.png')}
+    .overlay .minus{float:left; margin-top:10px;  margin-left:5px; width:26px; height:26px; background-image:url('/img/service/minus.png')}
+
+    .topMediumBox .overlay{top:85px;}
+
+    .topSmallBox .overlay{top:45px;}
+
+    .topWorkingArea{}
+    .topWorkingArea .img-thumbnail{border-color:#FFF}
+    .topWorkingArea .img-thumbnail:hover{border-color:#DDDDDD}
+    .topWorkingArea .actions .socialmedia{height:27px; width:27px; background:url('/img/service/socialmedia.jpg'); float:right; margin-left:5px;}
+    .topWorkingArea .actions .arrows{height:27px; width:27px; background:url('/img/service/arrows.jpg'); float:right; margin-left:5px;}
+    .topWorkingArea .actions .refresh{height:27px; width:35px; background:url('/img/service/refresh.jpg'); float:right; margin-left:5px;}
+    .topWorkingArea .actions .save{height:27px; width:27px; background:url('/img/service/save.jpg'); float:right; margin-left:5px;}
+
+    .articleInfo{width:100%}
+    .articleInfo .article{width:65%; float:left}
+    .articleInfo .article div{font-size: 14px; width: 100%}
+    .articleInfo .links{width:35%;float:right; margin-top:15px}
+    .articleInfo .links div{float:right; height:20px; margin-left:5px}
+    .articleInfo .links .socailmedia{width:20px; background:url('/img/service/socialmedia.png'); }
+    .articleInfo .links .dontknow{ width:23px; background:url('/img/service/dontknow.png'); }
+    .articleInfo .links .search{width:21px; background:url('/img/service/search.png'); }
+
+    .productsBox .overlay{margin-left:70px; top:90px; }
+    .productsBox .overlay .plus{background-image:none}
+    .productsBox .overlay .minus{background-image:none}
+
+    .bottomWorkingArea .img-thumbnail{border-color:#FFF}
+    .bottomWorkingArea .img-thumbnail:hover{border-color:#DDDDDD}
+
+    .productsBox .articleInfo .links{margin-top:10px}
+    .productsBox .articleInfo .links div{height:14px; margin-left:5px}
+    .productsBox .articleInfo .links .socailmedia{width:14px; background-size:auto 14px; }
+    .productsBox .articleInfo .links .search{width:15px; background-size:auto 14px; }
+
+    /* .topMediumBox .articleInfo .article div{font-size: 11px;}
+    .topMediumBox .articleInfo .links{margin-top:10px}
+    .topMediumBox .articleInfo .links div{height:14px; margin-left:5px}
+    .topMediumBox .articleInfo .links .socailmedia{width:14px; background-size:auto 14px; }
+    .topMediumBox .articleInfo .links .search{width:15px; background-size:auto 14px; }
+    
+    .topSmallBox .articleInfo .article div{font-size: 11px;}
+    .topSmallBox .articleInfo .links{margin-top:10px}
+    .topSmallBox .articleInfo .links div{height:14px; margin-left:5px}
+    .topSmallBox .articleInfo .links .socailmedia{width:14px; background-size:auto 14px; }
+    .topSmallBox .articleInfo .links .search{width:15px; background-size:auto 14px; }
+    */
+    .form-control{height: 34px; padding:2px 2px 2px 6px; font-style:italic; font-size: 11px;}
+
+    .pageTitle { width:100%; text-align:center;}
+    .left { float:left; width:350px;}
+    .center { display: inline-block; margin:0 auto; width:350px;}
+    .right { float:right; width:350px; margin-top:35px}
+    .right .input-group{ width: 200px; float:right }
+    .right .venueBox{float:right; width:100px; margin-left:5px}
+
+    section.toggle {margin-top:0px}
+    section.toggle label { border:none; color: #000; padding: 3px 20px 3px 10px }
+    section.toggle.active {
+        background-color: #fbfcfb;
+        border-color: #fbfcfb;
+    }
+    section.toggle.active > label {
+        background: none repeat scroll 0 0 #F4F4F4;
+        border-color: #CCCCCC;
+    }
+
+
+    .bigShare{width:36px; height:57px; background:url(/img/engine/bigicons.jpg) 0 0; float:left; margin-left:18px;}
+    .bigLock{width:38px; height:57px; background:url(/img/engine/bigicons.jpg) -54px 0; float:left; margin-left:18px;}
+    .bigPlus{width:36px; height:57px; background:url(/img/engine/bigicons.jpg) -112px 0; float:left; margin-left:18px;}
+    .bigSave{width:41px; height:57px; background:url(/img/engine/bigicons.jpg) -168px 0; float:left; margin-left:18px;}
+
+    .bigShare:hover{background-position:0 57px;}
+    .bigLock:hover{background-position:-54px 61px;}
+    .bigPlus:hover{background-position:-112px 59px;}
+    .bigSave:hover{background-position:-168px 59px;}
+
+    .getDressed{padding-top:5px; clear:both}
+    .getDressed .btn-lg{padding-top:5px; padding-bottom:5px; width:100%}
+
+    .btn-default .caret {
+        border-top-color: #FFFFFF;
+    }
+    -->
+</style>
+
+
+<div class="pageTitle">
+    <div class="left">&nbsp;</div>
+
+    <div class="center">		 
+        <h2 style="margin: 10px 0 0 0"><strong>GET DRESSED</strong></h2>
+        PURCHASE YOUR OUTFIT ON OUR PARTER'S SITE
+    </div>
+
+    <div class="right">
+        <div class="search">
+            <form method="get" action="" id="searchForm" novalidate="novalidate">
+                <div class="venueBox">
+                    <select class="selectpicker">
+                        <option value="" selected="selected">SORT</option>
+                        <option>Sample</option>
+                        <option>Sample</option>
+                        <option>Sample</option>
+                        <option>Sample</option>
+                    </select>	
+                </div>					
+            </form>
+        </div>	
+    </div>		
+
+</div>
+
+<br /><br />
+
+<div class="row">
+    <div class="col-md-12 bottomWorkingArea">
+        <div class="col-md-4">
+            <div class="portfolio-item img-thumbnail productsBox">
+                <a href="portfolio-single-project.html" class="thumb-info">
+                    <img alt="" class="img-responsive" src="<?php if(isset($this->outfits[0]['uid'])){ echo '/feed/'.$this->outfits[0]['feedId'].'/'.$this->outfits[0]['img_local_name'];}else{ echo '/img/projects/project-2.jpg';}?>" >
+                </a>
+                <div class="articleInfo">
+                    <div class="article">
+                        <div class="articleName"><?php if(isset($this->outfits[0]['caption'])){ echo $this->outfits[0]['caption'];}else{ echo 'Product Name';}?></div>
+                        <div class="articlePrice"><?php if(isset($this->outfits[0]['price'])){ echo $this->outfits[0]['price'];}else{ echo '0.00';}?><span class="currency"><?php echo $this->outfits[0]['currency'] ?></span></div>
+                    </div>
+                    <div class="links">
+                        <div class="search jqModal"></div>  
+                        <div class="socailmedia"></div>
+                    </div>
+                </div>
+                <div class="getDressed"> 
+                    <a href="<?php if(isset($this->outfits[0]['buyurl'])){ echo $this->outfits[0]['buyurl'];} else {echo '#';}?>" <?php if(isset($this->outfits[0]['buyurl'])){ ?>target="_blank"<?php }?>>
+                        <input class="btn btn-primary btn-lg" type="button" data-loading-text="Loading..." value="BUY @ {SUPPLIER}">
+                    </a>
+                </div>								
+            </div>
+        </div>	
+
+        <div class="col-md-4 logos">
+            <div class="portfolio-item img-thumbnail productsBox">
+                <a href="portfolio-single-project.html" class="thumb-info">
+                    <img alt="" class="img-responsive" src="<?php if(isset($this->outfits[1]['uid'])){ echo '/feed/'.$this->outfits[1]['feedId'].'/'.$this->outfits[1]['img_local_name'];}else{ echo '/img/projects/project-2.jpg';}?>">
+                </a>
+                <div class="articleInfo">
+                    <div class="article">
+                        <div class="articleName"><?php if(isset($this->outfits[1]['caption'])){ echo $this->outfits[1]['caption'];}else{ echo 'Product Name';}?></div>
+                        <div class="articlePrice"><?php if(isset($this->outfits[1]['price'])){ echo $this->outfits[1]['price'];}else{ echo '0.00';}?><span class="currency"><?php echo $this->outfits[1]['currency'] ?></span></div>
+                    </div>
+                    <div class="links">
+                        <div class="search jqModal"></div>  
+                        <div class="socailmedia"></div>
+                    </div>
+                </div>
+                <div class="getDressed"> 
+                    <a href="<?php if(isset($this->outfits[1]['buyurl'])){ echo $this->outfits[1]['buyurl'];} else {echo '#';}?>" <?php if(isset($this->outfits[1]['buyurl'])){ ?>target="_blank"<?php }?>>
+                        <input class="btn btn-primary btn-lg" type="button" data-loading-text="Loading..." value="BUY @ {SUPPLIER}">
+                    </a>
+                </div>								
+            </div>
+        </div>	
+
+        <div class="col-md-4 logos">
+            <div class="portfolio-item img-thumbnail productsBox">
+                <a href="portfolio-single-project.html" class="thumb-info">
+                    <img alt="" class="img-responsive" src="<?php if(isset($this->outfits[2]['uid'])){ echo '/feed/'.$this->outfits[2]['feedId'].'/'.$this->outfits[2]['img_local_name'];}else{ echo '/img/projects/project-2.jpg';}?>" >
+                </a>
+                <div class="articleInfo">
+                    <div class="article">
+                        <div class="articleName"><?php if(isset($this->outfits[2]['caption'])){ echo $this->outfits[2]['caption'];}else{ echo 'Product Name';}?></div>
+                        <div class="articlePrice"><?php if(isset($this->outfits[2]['price'])){ echo $this->outfits[2]['price'];}else{ echo '0.00';}?><span class="currency"><?php echo $this->outfits[2]['currency'] ?></span></div>
+                    </div>
+                    <div class="links">
+                        <div class="search jqModal"></div>  
+                        <div class="socailmedia"></div>
+                    </div>
+                </div>
+                <div class="getDressed"> 
+                    <a href="<?php if(isset($this->outfits[2]['buyurl'])){ echo $this->outfits[2]['buyurl'];} else {echo '#';}?>" <?php if(isset($this->outfits[2]['buyurl'])){ ?>target="_blank"<?php }?>>
+                        <input class="btn btn-primary btn-lg" type="button" data-loading-text="Loading..." value="BUY @ {SUPPLIER}">
+                    </a>
+                </div>								
+            </div>
+        </div>
+        <div style="clear:both; padding-top:10px; width:100%"></div>
+
+        <div class="col-md-4 logos">
+            <div class="portfolio-item img-thumbnail productsBox">
+                <a href="portfolio-single-project.html" class="thumb-info">
+                    <img alt="" class="img-responsive" src="<?php if(isset($this->outfits[3]['uid'])){ echo '/feed/'.$this->outfits[3]['feedId'].'/'.$this->outfits[3]['img_local_name'];}else{ echo '/img/projects/project-2.jpg';}?>" >
+                </a>
+                <div class="articleInfo">
+                    <div class="article">
+                        <div class="articleName"><?php if(isset($this->outfits[3]['caption'])){ echo $this->outfits[3]['caption'];}else{ echo 'Product Name';}?></div>
+                        <div class="articlePrice"><?php if(isset($this->outfits[3]['price'])){ echo $this->outfits[3]['price'];}else{ echo '0.00';}?><span class="currency"><?php echo $this->outfits[3]['currency'] ?></span></div>
+                    </div>
+                    <div class="links">
+                        <div class="search jqModal"></div>  
+                        <div class="socailmedia"></div>
+                    </div>
+                </div>
+                <div class="getDressed"> 
+                    <a href="<?php if(isset($this->outfits[3]['buyurl'])){ echo $this->outfits[3]['buyurl'];} else {echo '#';}?>" <?php if(isset($this->outfits[3]['buyurl'])){ ?>target="_blank"<?php }?>>
+                        <input class="btn btn-primary btn-lg" type="button" data-loading-text="Loading..." value="BUY @ {SUPPLIER}">
+                    </a>
+                </div>								
+            </div>
+        </div>	
+
+        <div class="col-md-4 logos">
+            <div class="portfolio-item img-thumbnail productsBox">
+                <a href="portfolio-single-project.html" class="thumb-info">
+                    <img alt="" class="img-responsive" src="<?php if(isset($this->outfits[4]['uid'])){ echo '/feed/'.$this->outfits[4]['feedId'].'/'.$this->outfits[4]['img_local_name'];}else{ echo '/img/projects/project-2.jpg';}?>" >
+                </a>
+                <div class="articleInfo">
+                    <div class="article">
+                        <div class="articleName"><?php if(isset($this->outfits[4]['caption'])){ echo $this->outfits[4]['caption'];}else{ echo 'Product Name';}?></div>
+                        <div class="articlePrice"><?php if(isset($this->outfits[4]['price'])){ echo $this->outfits[4]['price'];}else{ echo '0.00';}?><span class="currency"><?php echo $this->outfits[4]['currency'] ?></span></div>
+                    </div>
+                    <div class="links">
+                        <div class="search jqModal"></div>  
+                        <div class="socailmedia"></div>
+                    </div>
+                </div>
+                <div class="getDressed"> 
+                    <a href="<?php if(isset($this->outfits[4]['buyurl'])){ echo $this->outfits[4]['buyurl'];} else {echo '#';}?>"  <?php if(isset($this->outfits[4]['buyurl'])){ ?>target="_blank"<?php }?>>
+                        <input class="btn btn-primary btn-lg" type="button" data-loading-text="Loading..." value="BUY @ {SUPPLIER}">
+                    </a>
+                </div>								
+            </div>
+        </div>	
+
+        <div class="col-md-4 logos">
+            <div class="portfolio-item img-thumbnail productsBox">
+                <a href="portfolio-single-project.html" class="thumb-info">
+                    <img alt="" class="img-responsive" src="<?php if(isset($this->outfits[5]['uid'])){ echo '/feed/'.$this->outfits[5]['feedId'].'/'.$this->outfits[5]['img_local_name'];}else{ echo '/img/projects/project-2.jpg';}?>" >
+                </a>
+                <div class="articleInfo">
+                    <div class="article">
+                        <div class="articleName"><?php if(isset($this->outfits[5]['caption'])){ echo $this->outfits[5]['caption'];}else{ echo 'Product Name';}?></div>
+                        <div class="articlePrice"><?php if(isset($this->outfits[5]['price'])){ echo $this->outfits[5]['price'];}else{ echo '0.00';}?><span class="currency"><?php echo $this->outfits[5]['currency'] ?></span></div>
+                    </div>
+                    <div class="links">
+                        <div class="search jqModal"></div>  
+                        <div class="socailmedia"></div>
+                    </div>
+                </div>
+                <div class="getDressed"> 
+                    <a href="<?php if(isset($this->outfits[5]['buyurl'])){ echo $this->outfits[5]['buyurl'];} else {echo '#';}?>" <?php if(isset($this->outfits[5]['buyurl'])){ ?>target="_blank"<?php }?>>
+                        <input class="btn btn-primary btn-lg" type="button" data-loading-text="Loading..." value="BUY @ {SUPPLIER}">
+                    </a>
+                </div>								
+            </div>
+        </div>	
+
+    </div>	
+</div>
+
+<br /><br /><br /><br />
+
+
+<style>
+    <!--
+    /* jqModal base Styling courtesy of;
+      Brice Burgess <bhb@iceburg.net> */
+
+    /* The Window's CSS z-index value is respected (takes priority). If none is supplied,
+      the Window's z-index value will be set to 3000 by default (in jqModal.js). You
+      can change this value by either;
+        a) supplying one via CSS
+        b) passing the "zIndex" parameter. E.g.  (window).jqm({zIndex: 500}); */
+
+    .jqmWindow {
+        display: none;
+
+        position: absolute;
+        top: 12%;
+        left:20%;
+        /* left: 50%; 
+        margin-left: auto;
+        margin-right: auto; */
+        width: 808px;
+
+        background-color: #FFF;
+        color: #333;
+        border: 1px solid black;
+        padding: 12px;
+    }
+    .jqmWindow  .img-thumbnail{border-color:#FFF}
+
+    .jqmOverlay { background-color: #000; }
+
+    /* Fixed posistioning emulation for IE6
+         Star selector used to hide definition from browsers other than IE6
+         For valid CSS, use a conditional include instead */
+    * html .jqmWindow {
+        position: absolute;
+        top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+    }
+
+
+    .jqmWindow .topBigBox{height:480px}
+    .jqmWindow .topBigBox img{height:470px;}
+    .jqmWindow .topSmallBox{height:195px; width: 100%;  margin-top:10px}
+    .jqmWindow .topSmallBox img{height:185px;  width: 100%}
+    .jqmWindow .descriptionBox{}
+    .jqmWindow .descriptionBox .supplier{font-weight:bold; font-size:18px; padding-bottom:8px}
+    .jqmWindow .descriptionBox .description{color:#919191; padding-bottom:20px}
+    .jqmWindow .descriptionBox .recommended{}
+    .jqmWindow .descriptionBox .recommended span{color:#919191;} 
+    .jqmWindow .myclose{float:right}
+    .jqmWindow .pAarticleInfo{font-weight:normal; font-size:25px; line-height:30px; padding-bottom:5px}
+    .jqmWindow .pAarticleInfo span{}
+    .jqmWindow .jHeader{margin-bottom:20px}
+
+    /* [[[ Button classes ]]] */
+    input.jqmdX {
+        position: absolute;
+        right: 7px;
+        top: 4px;
+        padding: 0 0 0 0;
+        height: 30px;
+        width: 30px;
+        overflow: hidden;
+    }
+    input.jqmdXFocus {background-position: bottom left; outline: none;}
+
+    div.jqmdBC button, div.jqmdBC input[type="submit"] {
+        margin: 8px 10px 4px 10px;
+        color: #777;
+        background-color: #fff;
+        cursor: pointer;
+    }
+
+    div.jqmDialog input:focus, div.jqmDialog input.iefocus { background-color: #eaffc3; }
+    .
+    -->
+</style>
+
+<script src="/vendor/jqModal/jqModal.js"></script>
+
+<div class="jqmWindow" id="dialog" style="padding-bottom:none">
+
+    <div style="height:25px">
+        <input type="image" src="/vendor/jquery_modal_box/images/close.png" class="jqmdX jqmClose"  />
+    </div> 
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container portfolio-item img-thumbnail" style="padding-top:0px; padding-bottom:20px">
+                <div class="col-md-12">
+                    <div class="container" style="width:100%; padding-right:0px">
+
+                        <div class="col-md-4 jHeader">
+                            <div class="col-md-12 pAarticleInfo">
+                                Product Name <br />
+                                <span>$0.00</span>
+                            </div>	
+                        </div>			
+                        <div class="col-md-4">
+                            <div class="col-md-12 logos">
+                                <div class="bigShare"></div>
+                                <div class="bigLock"></div>
+                                <div class="bigPlus"></div>
+                                <div class="bigSave"></div>
+                            </div>	
+                        </div>
+                        <div class="col-md-4" style="margin-top:15px;">
+                            <div align="right">
+                                <input class="btn btn-primary btn-lg" type="button" onclick="" data-loading-text="Loading..." value="GET DRESSED"><br />
+                                at {supplier}&nbsp;
+                            </div>
+
+                        </div>	
+
+                    </div>
+                </div>			
+
+
+
+
+
+                <div class="col-md-4">
+                    <div class="col-md-12 logos">
+                        <div class="portfolio-item img-thumbnail topBigBox">
+                            <a href="portfolio-single-project.html" class="thumb-info">
+                                <img alt="" class="img-responsive" src="/img/service/pant.jpg" >
+                            </a>
+                        </div>
+                    </div>	
+                </div>			
+
+                <div class="col-md-8" style="padding-left: 0px; padding-right: 0px;">
+
+                    <div class="col-md-12"> 
+                        <div class="portfolio-item topMediumBox">
+                            <div class="descriptionBox">
+                                <div class="supplier">Supplier</div>
+                                <div class="description">
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                </div>
+                                <div class=recommended>Recommended Size: <span>M</span></div>
+                                <div class=recommended>Recommended Color: <span>White</span></div>
+                            </div>
+                        </div>
+                    </div>	
+
+                    <div class="col-md-4 logos">
+                        <div class="portfolio-item img-thumbnail topSmallBox"> 
+                            <a href="portfolio-single-project.html" class="thumb-info">
+                                <img alt="" class="img-responsive" src="/img/projects/project-2.jpg" >
+                            </a>
+                        </div>
+                    </div>											
+
+                    <div class="col-md-4 logos">
+                        <div class="portfolio-item img-thumbnail topSmallBox">
+                            <a href="portfolio-single-project.html" class="thumb-info">
+                                <img alt="" class="img-responsive" src="/img/projects/project-2.jpg" >
+                            </a>
+                        </div>
+                    </div>	
+
+                    <div class="col-md-4 logos">
+                        <div class="portfolio-item img-thumbnail topSmallBox">
+                            <a href="portfolio-single-project.html" class="thumb-info">
+                                <img alt="" class="img-responsive" src="/img/projects/project-2.jpg" >
+                            </a>
+                        </div>
+                    </div>	
+
+                </div>						
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>	
+</div>
+
+<script type="text/javascript">
+                        $().ready(function () {
+                            $('#dialog').jqm();
+
+                            $('.selectpicker').selectpicker({
+                                //'selectedText': 'cat'
+                                width: '100px'
+                            });
+
+                            $('input.jqmdX')
+                                    .hover(
+                                            function () {
+                                                $(this).addClass('jqmdXFocus');
+                                            },
+                                            function () {
+                                                $(this).removeClass('jqmdXFocus');
+                                            })
+                                    .focus(
+                                            function () {
+                                                this.hideFocus = true;
+                                                $(this).addClass('jqmdXFocus');
+                                            })
+                                    .blur(
+                                            function () {
+                                                $(this).removeClass('jqmdXFocus');
+                                            });
+
+                            $('#dialog').css('padding-bottom', '0px');
+                        });
+
+
+
+</script>

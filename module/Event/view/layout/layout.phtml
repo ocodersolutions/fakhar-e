@@ -1,0 +1,359 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <div id="fb-root"></div>
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle("LNOVE")->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/tie-ico.png'))
+				        //->prependStylesheet($this->basePath() . '/css/theme-responsive.css')
+				        //->prependStylesheet($this->basePath() . '/css/skins/blue.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+				        //->prependStylesheet($this->basePath() . '/css/custom.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme-elements.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme.css')
+				        //->prependStylesheet($this->basePath() . '/vendor/magnific-popup/magnific-popup.css')
+				        //->prependStylesheet($this->basePath() . '/vendor/flexslider/flexslider.css')
+				        //->prependStylesheet($this->basePath() . '/css/fonts/font-awesome/css/font-awesome.css')
+				        //->prependStylesheet($this->basePath() . '/css/bootstrap_additional.css')
+				        //->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+                        //->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.css')
+                        //->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.structure.css')
+                        //->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.theme.css')
+                        ->prependStylesheet($this->basePath() . '/css/lnovecustom.css')
+                        ->prependStylesheet($this->basePath() . '/css/normalize.css')
+                        ->prependStylesheet($this->basePath() . '/css/owl.carousel.css')
+                        ->prependStylesheet($this->basePath() . '/fa/css/font-awesome.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/js/sweetalert-master/dist/sweetalert.css');
+        ?>
+		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\/script>')</script>-->
+
+        <!-- Scripts -->
+        <?php //echo $this->headScript()->prependFile($this->basePath() . '/vendor/modernizr.js')
+                                      //->prependFile($this->basePath() . '/js/jquery-ui.js');
+        ?>
+
+        <?php
+        echo $this->headScript()->prependFile($this->basePath() . '/js/jquery.gray.js')
+                                ->prependFile($this->basePath() . '/js/jquery.js');
+        ?>
+
+		<!--[if IE]>
+			<!--<link rel="stylesheet" href="/css/ie.css">-->
+		<![endif]-->
+
+		<!--[if lte IE 8]>
+			<!--<script src="/vendor/respond.js"></script>-->
+		<![endif]-->
+
+        <meta property="og:image" content="http://<?=URL_APPLICATION?>/img/lnove_logo.png" />
+        <meta property="og:title" content="Lnove" />
+        <meta property="og:site_name" content="Lnove"/>
+        <meta property="og:url" content="http://<?=URL_APPLICATION?>/" />
+        <meta property="og:description" content="Lnove" />
+
+    </head>
+    <body>
+    
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5F6KJB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5F6KJB');</script>
+<!-- End Google Tag Manager -->      
+    
+    
+<style type="text/css">
+header{
+	-webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+        box-sizing: border-box;
+	position:fixed;
+	top:0px;
+	z-index:9999;
+	height:80px;
+	
+}
+</style>    
+    
+    
+    <header class="fixed-nav-bar">
+
+        <div class="container">
+
+            <?php if( isset($this->showHeaderLinks) && $this->showHeaderLinks=='LOGGED_IN' ) { ?>
+
+                <nav>
+                    <ul id="navbar">
+                        <li><a href="javascript:void(0);" id="menuicon"><img src="/img/menu_icon.png" alt="menu" /></a>
+                            <ul class="mainmenu hidemenu1">
+                                <li><a href="/info/how-it-works">How it works</a></li>
+                                <li><a href="/info/about-us">About Us</a></li>
+                                <li><a href="<?=URL_HTTP_BLOG?>">Blog</a></li>
+                                <li><a href="/info/frequently-asked-questions">FAQ</a></li>
+                                <li><a href="/info/shipping">Shipping</a></li>
+                                <li><a href="/info/pricing">Pricing</a></li>
+                                <li><a href="/info/privacy-and-policies">Privacy and Policies</a></li>
+                                <li><a href="/info/exchange_and_return">Exchange & Returns</a></li>
+                                <li><a href="/info/careers">Careers</a></li>
+                                <li><a href="/info/contact-us">Contact Us</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="closet">
+                    <img src="/img/hanger.png">
+                    <a href="<?php echo $this->url('mycloset'); ?>"  id="blue-clr" >MY CLOSET</a>
+                </div>
+                <div class="community">
+                    <img src="/img/get_style1.jpg">
+                    <a href="<?=$this->basePath()?>/service" >   GET STYLED </a>
+                </div>
+                <div class="logo">
+                    <a href="<?php echo $this->basePath('/')?>"><img src="/img/lnove_logo.png" alt="lnove" /></a>
+                </div>
+                <div class="closet">
+                    <a href="" >Welcome, <span><?php echo $this->firstName; ?> </span> </a>
+                </div>
+                <div class="community">
+                    <div id="demo9">
+                        <div class="wrapper">
+                            <div class="content">
+                                <ul>
+                                    <a href="/profile/myaccount"><li>My Profile</li></a>
+                                    <a href="#"><li>Consectetur adipisicing</li></a>
+                                    <a href="#"><li>Reprehenderit</li></a>
+                                    <a href="/auth/logout"><li>Logout</li></a>
+                                </ul>
+                            </div>
+                            <div class="parent">MY ACCOUNT &nbsp; <i class="fa fa-caret-down"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart">cart <div id="cart">0</div></div>
+
+            <?php } else { ?>
+
+                <nav>
+                    <ul id="navbar">
+                        <li><a href="javascript:void(0);" id="menuicon"><img src="/img/menu_icon.png" alt="menu" class="fleft" />  Menu</a>
+                            <ul class="mainmenu hidemenu">
+                                <li><a href="/info/how-it-works">How it works</a></li>
+                                <li><a href="/info/about-us">About Us</a></li>
+                                <li><a href="<?=URL_HTTP_BLOG?>">Blog</a></li>
+                                <li><a href="/info/frequently-asked-questions">FAQ</a></li>
+                                <li><a href="/info/shipping">Shipping</a></li>
+                                <li><a href="/info/pricing">Pricing</a></li>
+                                <li><a href="/info/privacy-and-policies">Privacy and Policies</a></li>
+                                <li><a href="/info/exchange_and_return">Exchange & Returns</a></li>
+                                <li><a href="/info/careers">Careers</a></li>
+                                <li><a href="/info/contact-us">Contact Us</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="header_right">
+                    <a  href="/auth/login" class="link_new">SIGN IN</a>
+                    <?php
+                    $step = 0;
+                    $request_uri = $_SERVER['REQUEST_URI'];
+                    if($request_uri == '/profile') {
+                        $step = 1;
+                    } else if($request_uri == '/profile/you') {
+                        $step = 2;
+                    } else if($request_uri == '/profile/size') {
+                        $step = 3;
+                    } else if($request_uri == '/profile/brands') {
+                        $step = 4;
+                    } else if($request_uri == '/profile/price') {
+                        $step = 5;
+                    } else if($request_uri == '/profile/signup') {
+                        $step = 6;
+                    }
+                    ?>
+                    <?php if($step != 0) { ?>
+                        <a  href="" class="green_btn">Step <?php echo $step; ?> of 6</a>
+                    <?php } else { ?>
+                        <a href="/profile" class="green_btn">GET STARTED</a>
+                    <?php } ?>
+                </div>
+
+                <div class="logo2">
+                    <a href="<?php echo $this->basePath('/')?>"><img src="/img/lnove_logo.png" alt="lnove" /></a>
+                </div>
+
+            <?php } ?>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="clr"></div>
+    </header>
+    <div class="clr" style="margin-top:80px"></div>
+
+
+
+    <?php echo $this->content; ?>
+
+
+
+    <div class="clr"></div>
+    <footer>
+        <div class="container">
+            <div class="left-foot">
+                <div class="foot_row">
+                    <ul class="list">
+                        <li><a href="/info/how-it-works">How it works</a></li>
+                        <li><a href="/info/about-us">About Us</a></li>
+                        <li><a href="http://<?=URL_BLOG?>">Blog</a></li>
+                        <li><a href="/info/frequently-asked-questions">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="foot_row large">
+                    <ul class="list">
+                        <li><a href="/info/frequently-asked-questions?tag=shipping">Shipping</a></li>
+                        <li><a href="/info/frequently-asked-questions?tag=pricing">Pricing</a></li>
+                        <li><a href="/info/privacy-and-policies">Privacy and Policies</a></li>
+                        <li><a href="/info/terms-and-conditions">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="foot_row large">
+                    <ul class="list">
+                        <li><a href="/info/frequently-asked-questions?tag=shipping">Exchanges & Returns</a></li>
+                        <li><a href="/info/contact-us">Contact Us</a></li>
+                        <li><a href="/info/careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input" placeholder=" Your email Address">
+                    <button class="button">  <img src="/img/arrow-right.png"></i>
+
+                    </button>
+                </div>
+            </div>
+            <div class="right-foot">
+                <div>
+                    <h4>CONTACT US</h4>
+                    <span>Via Lorem Ipsum, 38 <br> 20121</span>
+                    <p>City - Country</p>
+                    <p>Tel. +00 00 00000000</p>
+                    <p>email@example.com</p>
+                </div>
+            </div>
+            <div class="clr"></div>
+        </div>
+        </div>
+        </div>
+        <div class="clr"></div>
+        </section>
+    </footer>
+    <div class="last-foot">
+        <div class="container">
+            <div class="copy">COPYRIGHT 2016 STITCH STYLE SOLUTIONS INC. ALL RIGHTS RESERVED</div>
+            <div class="social">
+                <ul class="link">
+                    <li>
+                        <a href=""> <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>                
+                    <li>
+                        <a href=""> <i class="fa fa-facebook "></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=""> <i class="instagram_icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=""> <i class="vimo_icon"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/js/owl.carousel.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var owl = $("#owl-demo1");
+            owl.owlCarousel({
+                itemsCustom : [
+                    [0, 2],
+                    [1200, 2],
+                    [1920, 3]
+                ],
+                navigation : false,
+                autoPlay: 3000
+            });
+            if (screen.width <= 768) {
+                window.location = "<?=URL_HTTP_BLOG?>";
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var owl = $("#owl-demo");
+            owl.owlCarousel({
+                itemsCustom : [
+                    [0, 2],
+                    [1200, 2],
+                    [1920, 2]
+                ],
+                navigation : true,
+                pagination:false,
+                autoPlay: 3000
+            });
+        });
+    </script>
+    <script>
+        $(document).mouseup(function (e)
+        {
+            var container = $('#menuicon');
+
+            if (!container.is(e.target) // if the target of the click isn't the container...
+                && container.has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                if($('.mainmenu').hasClass('showmenu'))
+                    $('.mainmenu').removeClass('showmenu').addClass('hidemenu');
+
+                if($('.mainmenu').hasClass('showmenu1'))
+                    $('.mainmenu').removeClass('showmenu1').addClass('hidemenu1');
+            }
+            else
+            {
+                if($('.mainmenu').hasClass('hidemenu'))
+                    $('.mainmenu').removeClass('hidemenu').addClass('showmenu');
+
+                if($('.mainmenu').hasClass('hidemenu1'))
+                    $('.mainmenu').removeClass('hidemenu1').addClass('showmenu1');
+            }
+        });
+    </script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/sweetalert-master/dist/sweetalert.min.js"></script>
+    </body>
+</html>

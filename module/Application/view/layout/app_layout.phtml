@@ -1,0 +1,276 @@
+<?php echo "app layout";exit(0);echo $this->doctype(); ?>
+
+<html lang="en">
+    <div id="fb-root"></div>
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle("ELNOVE")->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            //->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        	->appendName('viewport', 'width=1190, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+        
+<link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/img/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">         
+
+        <!-- Le styles -->
+        <?php echo $this->headLink()
+				        ->prependStylesheet($this->basePath() . '/css/theme-responsive.css')
+				        ->prependStylesheet($this->basePath() . '/css/skins/blue.css')
+				        ->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+				        ->prependStylesheet($this->basePath() . '/css/custom.css')
+				        ->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+				        ->prependStylesheet($this->basePath() . '/css/theme-elements.css')
+				        ->prependStylesheet($this->basePath() . '/css/theme.css')
+				        ->prependStylesheet($this->basePath() . '/vendor/magnific-popup/magnific-popup.css')
+				        ->prependStylesheet($this->basePath() . '/vendor/flexslider/flexslider.css')
+				        ->prependStylesheet($this->basePath() . '/css/fonts/font-awesome/css/font-awesome.css')
+				        //->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+				        ->prependStylesheet($this->basePath() . '/vendor/magnific-popup/magnific-popup.css')
+				        ->prependStylesheet($this->basePath() . '/vendor/flexslider/flexslider.css')
+				        ->prependStylesheet($this->basePath() . '/css/fonts/font-awesome/css/font-awesome.css')
+				        ->prependStylesheet($this->basePath() . '/css/bootstrap_additional.css')
+				        ->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+                                        ->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.css')
+                                        ->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.structure.css')
+                                        ->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.theme.css')
+                                        ;?>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\/script>')</script>
+
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/vendor/modernizr.js')
+            ->prependFile($this->basePath() . '/js/jquery-ui.js');
+        ?>
+
+		<!--[if IE]>
+			<link rel="stylesheet" href="/css/ie.css">
+		<![endif]-->
+
+		<!--[if lte IE 8]>
+			<script src="/vendor/respond.js"></script>
+		<![endif]-->
+<style type="text/css">
+/*.col-md-3 {
+    width: 20%;
+}
+.col-md-9 {
+    width: 80%;
+}*/
+body.sticky-menu-active header{top: -40px}
+.siteWideMessage{
+	width:100%;
+	min-width: 1170px;
+	background-color:#fffa9c;
+	text-transform:uppercase;
+	text-align:center;
+	position:fixed;
+	top:0px;
+	z-index:9999;
+	height:22px;
+
+}
+</style>
+
+
+
+    </head>
+    <body <? if( isset($this->showSmallHeader) && $this->showSmallHeader == true ) { ?>class="sticky-menu-active" style="padding-top:70px"<? }?>>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5F6KJB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5F6KJB');</script>
+<!-- End Google Tag Manager -->    
+
+
+
+	<div class="body">
+		<header>
+			<div role="main" class="siteWideMessage">We are currently under development. webSite is for review purposes only.</div>
+			<div class="container">
+					<h1 class="logo">
+						<a href="/">
+							<img alt="" src="/img/logo.png"
+								<? if( isset($this->showSmallHeader) && $this->showSmallHeader == true ) { ?>
+									style="height: 40px; width: 167px; top: 28px;"
+								<? }?>
+								/>
+						</a>
+					</h1>
+
+					<?php if( isset($this->showHeaderLinks) && $this->showHeaderLinks=='NOT_LOGGED_IN' ) {?>
+					<div class="search myAccountSearch">
+						<!--<div class="input-group" style="float:right">
+							HAVE AN ACCOUNT? <a href="#">SIGN IN</a>
+						</div>-->
+						<div class="header-links">
+							<ul class="header-links">
+								<li class="howitworks"><a href="/info/how-it-works">HOW IT WORKS</a></li>
+								<li class="faq"><a href="#">FAQ</a></li>
+								<li class="getstarted"><a href="/profile">GET STARTED</a></li>
+							</ul>
+						</div>
+					</div>
+					<?php }?>
+
+
+					<?php if( isset($this->showHeaderLinks) && $this->showHeaderLinks=='LOGGED_IN' ) {?>
+					<div class="search myAccountSearch">
+						<div class="header-links"  style="float:right">
+									<div class="myAccount">
+										<a href="#" class="myAccountTitle">MY ACCOUNT &#9660;</a> | <img alt="" src="/img/engine/cart.png"><br />
+										<div class="myAccountLinks">
+											<a href="#">My Closet</a><br />
+											<a href="/profile">Profile Changes</a><br />
+											<a href="/auth/logout">Log Out</a>
+										</div>
+									</div>
+
+						</div>
+						<div class="input-group" style="float:right;">
+							WELCOME, <a href="#" style="color:#B50000">USER</a> &nbsp;&nbsp;|
+						</div>
+
+					</div>
+					<?php }?>
+
+				</div>
+				<div class="navbar-collapse nav-main-collapse collapse" style="width: 1px">
+					<div class="container">
+						<div class="header-links" style="min-height:40px"></div>
+					</div>
+				</div>
+			</header>
+
+			<div role="main" class="main" style="border-top:1px solid #dddddd">
+
+				<div class="container">
+
+						<?php echo $this->content; ?>
+
+				</div>
+
+			</div>
+			<?php if( !isset($this->showFooter) || $this->showFooter !=false ) {?>
+			<footer class="maxWidth">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5">
+							<div class="col-md-4">
+								<ul class="list">
+			                        <li><a href="/info/how-it-works">How it works</a></li>
+			                        <li><a href="/info/about-us">About Us</a></li>
+			                        <li><a href="http://<?=URL_BLOG?>">Blog</a></li>
+			                        <li><a href="/info/frequently-asked-questions">FAQ</a></li>
+			                    </ul>
+							</div>
+							<div class="col-md-4">
+								<ul class="list">
+			                        <li><a href="/info/frequently-asked-questions?tag=shipping">Shipping</a></li>
+			                        <li><a href="/info/frequently-asked-questions?tag=pricing">Pricing</a></li>
+			                        <li><a href="/info/privacy-and-policies">Privacy and Policies</a></li>
+			                        <li><a href="/info/terms-and-conditions">Terms and Conditions</a></li>
+			                    </ul>
+							</div>
+							<div class="col-md-4">
+								<ul class="list">
+			                        <li><a href="/info/frequently-asked-questions?tag=shipping">Exchanges & Returns</a></li>
+			                        <li><a href="/info/contact-us">Contact Us</a></li>
+			                        <li><a href="/info/careers">Careers</a></li>
+			                    </ul>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div align="center" style="margin-top:40px">
+								<!-- <h5><img src="/img/tie.png" /></h5>  -->
+							</div>
+						</div>
+						<div class="col-md-5">
+							<?php if( isset($this->showHeaderLinks) && $this->showHeaderLinks=='LOGGED_IN' ) {?>
+							<div>
+								<div class="col-md-8">
+									<div align="right" style="padding-right:20px">
+										WELCOME, <a href="#" style="color:#B50000">USER</a>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<div class="myAccount">
+										<a href="#" class="myAccountTitle">MY ACCOUNT</a> | <img alt="" src="/img/engine/cart.png"><br />
+										<a href="#">My Closet</a><br />
+										<a href="/profile">Profile Changes</a><br />
+										<a href="/auth/logout">Log Out</a>
+									</div>
+								</div>
+
+							<?php } else {?>
+							<div style="margin-top:40px">
+								<div class="col-md-9">
+									<div align="right" style="margin-top:10px">
+										<h3><a href="#" style="font-size:11px">LOG-IN</a></h3>
+									</div>
+								</div>
+
+								<div class="col-md-3">
+									<input class="btn btn-primary btn-lg btn-cta-blue" type="button" data-loading-text="Loading..." onclick="window.location='/profile'" value="GET STARTED">
+								</div>
+							</div>
+							<?php } ?>
+
+						</div>
+				</div>
+				</div>
+			</footer>
+			<?php }?>
+		</div>
+<script type="text/javascript">
+var showSmallHeader = <?=(( $this->layout()->showSmallHeader == true ) ? "true" : "false")?>;
+</script>
+		<!-- Libs -->
+		<script src="/js/plugins.js"></script>
+		<script src="/vendor/jquery.easing.js"></script>
+		<script src="/vendor/jquery.appear.js"></script>
+		<script src="/vendor/jquery.cookie.js"></script>
+		<script src="/vendor/bootstrap.js"></script>
+		<script src="/vendor/twitterjs/twitter.js"></script>
+		<script src="/vendor/flexslider/jquery.flexslider.js"></script>
+		<script src="/vendor/jflickrfeed/jflickrfeed.js"></script>
+		<script src="/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="/vendor/jquery.validate.js"></script>
+		<script src="/vendor/bootstrap/bootstrap-lightbox/bootstrap-lightbox.min.js"></script>
+
+		<!-- Theme Initializer -->
+		<script src="/js/theme.js"></script>
+
+		<!-- Custom JS -->
+		<script src="/js/custom.js"></script>
+
+
+    </body>
+</html>

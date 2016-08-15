@@ -1,0 +1,251 @@
+<div class="refined">
+                    <h1>REFINED BY</h1>
+                    <div class="cat page_left_menu">
+                        <div class="filter-section">
+                            <input name="keyword" id="keyword" type="text" class="input-filter">
+                            <span>
+                            <button class="btn_filter"><img class="icon_search" src="/img/search.png"></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cat page_left_menu ">
+                        <section class="toggle active">
+                            <h5 class="expander toggle collapsed"> categories</h5>
+                            <div class="content">
+                                <div id="catBtnDiv" class="toggle-content">
+                                    <div id="tree" class="aciTree"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                                <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
+
+                                    <div class="cat page_left_menu brandslist">
+                                        <h5 class="expander toggle collapsed"> BRANDS</h5>
+                                        <div class="content">
+                                            <input type="text" class="form-control form-control-01 brand" name="brandautocomplete" id="brandautocomplete" placeholder="Search more brands">
+                                        <ul>
+                                            <?php if (!empty($this->allTopBrands)) { ?>
+                                                <?php foreach ($this->allTopBrands as $brand) { ?>
+                                                    <li>
+
+                                                  <!--   <input type="checkbox" name="option" id="<?php echo $brand['id']; ?>" class="brandSelection" value="<?php echo $brand['id']; ?>" />
+                                                        <label for="<?php echo $brand['id']; ?>">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                                                <i class="fa fa-square fa-stack-1x"></i>
+                                                            </span>
+                                                            <?php echo $brand['title']; ?>
+                                                        </label> -->
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+
+                                            <?php if (!empty($this->allBrands)) { ?>
+                                                <?php 
+                                                $i = 1;
+                                                foreach ($this->allBrands as $brand) { ?>
+                                                    <li>
+                                                    <div class="checkbox">
+                                                    <input id="<?php echo $brand['id']; ?>" class="brandSelection styled" type="checkbox" name="option" value="<?php echo $brand['id']; ?>">
+                                                    <label for="<?php echo $brand['id']; ?>">
+                                                        <?php  echo $brand['title']; ?>
+                                                    </label>
+                                                </div>
+                                     
+                                                    <!-- <input type="checkbox" name="option" id="<?php echo $brand['id']; ?>" class="brandSelection" value="<?php echo $brand['id']; ?>" />
+                                                        <label for="<?php echo $brand['id']; ?>">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                                                <i class="fa fa-square fa-stack-1x"></i>
+                                                            </span>
+                                                            <?php echo $brand['title']; ?>
+                                                        </label> -->
+                                                    </li>
+                                                <?php $i++; } ?>
+                                            <?php } ?>
+                                        </ul>
+                                        </div>
+                                        
+                                    </div>
+
+                                <?php } ?>
+
+                                <div class="cat page_left_menu ">
+                                    <h5 class="expander toggle collapsed">PRICE</h5>
+                                    <div class="content">
+                                         <div class="price-box">
+                                        <form class="form-horizontal form-pricing" role="form">
+                                            <div class="price-slider">
+                                                <div class="col-sm-12 col-sm-padding">
+                                                    <div id="slider" class="slider-01"></div>
+                                                </div>
+                                            </div>
+                                            <div class="price-min-max">
+                                                <div class="col-lg-6 col-sm-padding" style="text-align:left; margin-top:5px;color:#aaaaaa;">
+                                                    <span>0</span>
+                                                </div>
+                                                <div class="col-lg-6 col-sm-padding" style="text-align:right;margin-top:5px;color:#aaaaaa;">
+                                                    <span><?php echo $this->maxRangePrice; ?></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                   
+                                </div>
+
+                                <?php if (!empty($this->allColors)) { ?>
+
+                                    <div class="cat page_left_menu ">
+                                        <h5 class="expander toggle collapsed">COLOR</h5>
+                                        <div class="content">
+                                            <ul class="round-color">
+                                            <?php
+                                            if (!empty($this->allColors)) {
+                                                foreach ($this->allColors as $color) {
+                                                    if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
+                                                    ?>
+                                                    <li class="fa btn-01 btn-coloer-01 colorselection" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></li>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </ul>
+                                        </div>
+                                        
+                                    </div>
+
+                                <?php } ?>
+                                
+                                <div style="display:none">
+                                <?php if (!empty($this->allStores) || !empty($this->allTopStores)) { ?>
+
+                                    <div class="cat page_left_menu ">
+                                        <h5> <img  src="/img/down.png">STORE</h5>
+                                        <input type="text" class="form-control form-control-01 brand" id="storeautocomplete" name="storeautocomplete" placeholder="Search more stores">
+                                        <ul>
+
+                                            <?php if (!empty($this->allTopStores)) { ?>
+                                                <?php foreach ($this->allTopStores as $store) { ?>
+                                                    <li><input class="storeSelection" type="checkbox" name="option" id="<?php echo $store['title']; ?>"  value="<?php echo $store['id']; ?>" />
+                                                        <label for="<?php echo $store['title']; ?>">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                                                <i class="fa fa-square fa-stack-1x"></i>
+                                                            </span>
+                                                            <?php echo $store['title']; ?>
+                                                        </label>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+
+                                            <?php if (!empty($this->allStores)) { ?>
+                                                <?php foreach ($this->allStores as $store) { ?>
+                                                    <li><input class="storeSelection" type="checkbox" name="option" id="<?php echo $store['title']; ?>"  value="<?php echo $store['id']; ?>" />
+                                                        <label for="<?php echo $store['title']; ?>">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square-o fa-stack-1x"></i>
+                                                                <i class="fa fa-square fa-stack-1x"></i>
+                                                            </span>
+                                                            <?php echo $store['title']; ?>
+                                                        </label>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+
+                                        </ul>
+                                    </div>
+                                <?php } ?>
+                                </div>
+
+
+                                <div class="cat page_left_menu deals_box">
+                                    <h5 class="expander toggle collapsed">DEALS</h5>
+                                    <div class="content">
+                                        <ul>
+                                        <li><input type="radio" name="option" id="deal1" onclick="chooseDeals(this, 'onsale');" />
+                                            <label for="deal1"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> All Items on Sale
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal2" onclick="chooseDeals(this, 'todaynew');" />
+                                            <label for="deal2"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> New Today
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal3" onclick="chooseDeals(this, 'newthisweek');" />
+                                            <label for="deal3"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> New this week
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal4" onclick="chooseDeals(this, 'freeshipping');" />
+                                            <label for="deal4" class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> Free Shipping
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal5" onclick="chooseDeals(this, 'specialoffer');" />
+                                            <label for="deal5"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> Special Offer
+                                            </label>
+                                        </li>
+                                        <li><input type="radio" name="option" id="deal6" onclick="chooseDeals(this, 'discountcode');" />
+                                            <label for="deal6"  class="outfit">
+                                                <span class="fa-stack sale-option-checkbox">
+                                                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                                                    <i class="fa fa-circle fa-stack-1x"></i>
+                                                </span> Discount
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    
+                          
+
+                                    <div class="cat page_left_menu ">
+                                        <div class="price-box">
+                                            <form class="form-horizontal form-pricing" role="form">
+                                                <div class="price-slider">
+                                                    <div class="col-sm-12 col-sm-padding">
+                                                        <div id="slider2" class="slider-02"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="price-min-max">
+                                                    <div class="col-lg-6 col-sm-padding" style="text-align:left;margin-top:5px; color:#aaaaaa;">
+                                                        <span>0%</span>
+                                                    </div>
+                                                    <div class="col-lg-6 col-sm-padding" style="text-align:right;margin-top:5px; color:#aaaaaa;">
+                                                        <span>100%</span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    
+                                    </div>
+                                    
+                                    
+                                    <div class="clr"></div>
+                                    <button class="deal">CLEAR FILTER</button>
+                                  <!--   <div class="clr"></div>
+                                    <a href="/service?dv=article" class="clear">Clear filter</a> -->
+                                </div>
+
+                                <div class="clr"></div>
+                            </div>

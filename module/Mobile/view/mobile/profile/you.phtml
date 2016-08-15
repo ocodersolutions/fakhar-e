@@ -1,0 +1,498 @@
+<?php
+$weightValue = $this->weight['value'];
+$weightMin = $this->weight['min'];
+$weightMax = $this->weight['max'];
+$weightStep = $this->weight['step'];
+
+$heightValue = $this->height['value'];
+$heightMin = $this->height['min'];
+$heightMax = $this->height['max'];
+$heightStep = $this->height['step'];
+
+echo $this->headLink()->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.skinHTML5.css')->appendStylesheet($this->basePath() . '/templates/mobile/css/style.css');
+?>
+
+<div class="req2b-page">
+    <!-- ABOUT YOU - STEP 1 (Weight, Height, Body Shape) -->
+    <div class="wrap wrap-1">
+        <div class="about container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="block find-stitch-block">
+                        <h3 class="title lowcase title-find-stitch">Tell Us About You</h3>
+                        <div class="form-group">
+                            <ul class="list-radio list-radio-find-stitch list-inline">
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled/>
+                                        <label for="radio2" class="radio-label"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled checked="" />
+                                        <label for="radio2" class="radio-label"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled />
+                                        <label for="radio3" class="radio-label"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled />
+                                        <label for="radio2" class="radio-label"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled />
+                                        <label for="radio2" class="radio-label"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled />
+                                        <label for="radio3" class="radio-label"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="question-criteria">
+                            <h4 class="question question-find-stitch capitalize">How Much Do You Weigh?</h4>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input type="text" class="lb" id="weightSliderValue"/> lb
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="ranger">
+                                        <input type="text" id="weightrange" value="" name="weightrange" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="question-criteria">
+                            <h4 class="question question-find-stitch">How Tall Are You?</h4>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input type="text" class="lb" id="heightSliderValue"/> 
+                                    <span class="point-char">.</span> 
+                                    <input type="text" class="lb" id="heightSliderValueInch" />Ft
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="ranger">
+                                        <input type="text" id="heightrange" value="" name="heightrange" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="question-criteria has-border-bottom" id="listBODYSHAPE">
+                            <h4 class="question question-find-stitch capitalize">What's Your Body Shape?</h4>
+                            <div class="row">
+                                <?php 
+                                $count = 0;
+                                foreach($this->body_shape as $aBox) { 
+                                    $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank'; 
+                                    if($count % 3 ==0 ) echo '<div class="row">';
+                                ?>    
+                                <div class="col-xs-4">
+                                    <div class="relative thumb-info body-shape <?php echo ($aBox['value']?'lock':'')?>" id="id<?php echo $aBox['name']  ?>">
+                                        <img class="img-responsive body_shape_item"  src="<?php echo $this->basePath().'/img/profile/'.$aBox['img'] ?>" alt="">
+                                        <div class="checkmark <?php echo $classes;?>"></div>
+                                    </div>
+                                </div>
+                                <?php $check = $count +1; if($check % 3 == 0 ) echo '</div>'; $count++; } ?>
+                            </div>
+                        </div>       
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.container -->
+        <div class="continue">
+            <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="">Continue</button>
+        </div>
+    </div>
+    
+    <!-- ABOUT YOU - STEP 2 (Skin Tone) -->
+    <div class="wrap wrap-2">
+        <div class="container">
+            <section>
+                <div class="about">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="block find-stitch-block">
+                                <h3 class="title lowcase title-find-stitch">Tell Us About You</h3>
+                                <div class="form-group">
+                                    <ul class="list-radio list-radio-find-stitch list-inline">
+                                        <li><div class="radio radio-find-stitch">
+                                            <input type="radio" disabled name="radio1" id="radio1" value="option1" >
+                                            <label for="radio1" class="radio-label">
+                                            </label>
+                                        </div>
+                                        </li>
+                                        <li>
+                                            <div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio2" value="option1" checked="">
+                                                <label for="radio2" class="radio-label">
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio3" value="option1" >
+                                                <label for="radio3" class="radio-label">
+                                                </label>
+                                            </div>
+                                        </li>
+                                             <li><div class="radio radio-find-stitch">
+                                            <input type="radio" disabled name="radio1" id="radio1" value="option1" >
+                                            <label for="radio1" class="radio-label">
+                                            </label>
+                                        </div>
+                                        </li>
+                                        <li>
+                                            <div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio2" value="option1" >
+                                                <label for="radio2" class="radio-label">
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="radio radio-find-stitch">
+                                                <input type="radio" disabled name="radio1" id="radio3" value="option1" >
+                                                <label for="radio3" class="radio-label">
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="question-criteria none-border" id="listSKINTONE">
+                                    <h4 class="question question-find-stitch">What Is Your Skin Tone?</h4>
+                                    <div class="list-product">
+                                        <div class="row">
+                                          <?php 
+                                          $count = 0;
+                                          foreach($this->skin_tone as $aBox) { 
+                                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+                                             if($count % 2 ==0 ) echo '<div class="row">';
+                                            ?>
+                                            <div class="col-xs-6 thumb-info skin-tone <?php echo ($aBox['value']?'lock':'')?>" id="id<?php echo $aBox['name']?>">
+                                                <div class="relative">
+                                                    <img class="img-responsive"  src="<?php echo $this->basePath().'/img/profile/'.$aBox['img'] ?>" alt="">
+                                                    <div class="checkmark <?php echo $classes;?>"></div>
+                                                </div>
+                                            </div>
+                                           <?php $check = $count +1; if($check % 2 == 0 ) echo '</div>'; $count++; } ?>   
+                                    </div>
+                                </div> 
+                                </div>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div><!-- /.container -->
+        <div class="continue">
+            <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="btnNextStep">Continue</button>
+        </div>
+    </div>
+    
+    <!-- FORM FOR SUBMIT -->
+    <form id="myForm" method="POST">
+        <input type="hidden" id="idWeightSliderInput" name="<?php echo $this->weight['name']?>" value="<?php echo $this->weight['value'] ?>" />
+        <input type="hidden" id="idHeightSliderInput" name="<?php echo $this->height['name']?>" value="<?php echo $this->height['value']?>" />
+        <?php foreach($this->body_shape as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name']?>Input" name="<?php echo $aBox['name']?>" style="display:none" /> <?php } ?>
+        <?php foreach($this->skin_tone as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name']?>Input" name="<?php echo $aBox['name']?>" style="display:none" /><?php } ?>
+        <input type="hidden" name="myFormBtn" value="yes" />
+    </form>
+</div>
+
+<script src="<?php echo $this->basePath().'/templates/mobile' ?>/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+<script type="text/javascript">
+    /*** Script for Close Popup alert ***/
+    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+        $("button.my_btn_ok").click(function(){
+            $('a.close-reveal-modal').trigger('click');
+        });
+    });
+
+    $(function () {
+        /*** WEIGHT SLIDER ***/
+        var weightValue = <?php echo $weightValue ?>;
+        var weightMin = <?php echo $weightMin ?>;
+        var weightMax = <?php echo $weightMax ?>;
+        var weightStep = <?php echo $weightStep ?>;
+
+        $("#weightrange").ionRangeSlider({
+            hide_min_max: true,
+            type: "single",
+            min: weightMin,
+            max: weightMax,
+            from: (weightValue > weightMax) ? weightMax : weightValue,
+            keyboard: true,
+            step: weightStep,
+            hide_from_to:true,
+            onStart: function (value) {
+                if($( "#idHeightSliderInput" ).val() > 0) {
+                    $("#weightSliderValue").val(value.from);
+                    $( "#idWeightSliderInput" ).val(value.from);
+                }
+            },
+            onChange:function(){
+                weightInput = $('#weightrange').prop("value");
+                $("#weightSliderValue").val(weightInput);
+                $("#idWeightSliderInput").val(weightInput);
+            }
+        });
+        //Save slider instance to var for update
+        var weightSlider = $("#weightrange").data("ionRangeSlider");
+        //Set value init when update
+        <?php if(isset($weightValue) && $weightValue>0) {?>
+            $("#weightSliderValue").val(weightValue >= weightMax ? weightMax+'+' : weightValue);
+            $("#idWeightSliderInput").val(weightValue);
+        <?php } ?>
+        //Process when client input anything to textbox
+        $("#weightSliderValue").keyup(function(){
+            this.value = this.value.replace(/[^0-9]/g,'');
+            newWeight = this.value > weightMax ? weightMax : this.value;
+            weightSlider.update({
+                from: newWeight,
+            });
+            $( "#idWeightSliderInput" ).val(newWeight);
+        });
+        //Process when client move out textbox
+        $("#weightSliderValue").change(function(){
+            var newWeight = this.value;
+            if(newWeight < weightMin){
+                $( "#idWeightSliderInput" ).val('');
+                myalert('alertErrorWeight','type_missing','Oops', 'Min weight must be '+weightMin+' lb.','');
+            }
+            if(newWeight > weightMax){
+                $( "#weightSliderValue" ).val(weightMax+'+');
+            }
+        });
+
+        /*** HEIGHT SLIDER ***/
+        var heightValue = <?php echo $heightValue ?>;
+        var heightMax = <?php echo $heightMax ?>;
+        var heightMaxArr = heightMax.toFixed(2).split(".");
+        heightMaxArr[1] = heightMaxArr[1] > 11 ? heightMaxArr[1]/10 : heightMaxArr[1];
+        var heightMin = <?php echo $heightMin ?>;
+        var heightMinArr = heightMin.toFixed(2).split(".");
+        heightMinArr[1] = heightMinArr[1] > 11 ? heightMinArr[1]/10 : heightMinArr[1];
+        var heightStep = <?php echo $heightStep ?>;
+
+        <?php 
+        $iSelectedIndex = 0;
+        $sHeightValues = array();
+        for($i=$heightMin; $i<$heightMax; $i++) {
+            for($j=0; $j<12; $j++) {
+                $sHeightValues[] = "{$i}.{$j}";             
+                if($heightValue == "$i.$j"){
+                    $iSelectedIndex = count($sHeightValues)-1;
+                }
+            }
+        }
+        $sHeightValues[] = $heightMax . '.0';
+        if($heightValue >= ($this->height['max'])){
+            $iSelectedIndex = count($sHeightValues)-1;
+        }
+        
+        echo 'var aHeightValues = ["' . implode('","', $sHeightValues) . '"];'; 
+        ?>
+        
+        $("#heightrange").ionRangeSlider({
+            hide_min_max: true,
+            type: "single",
+            min: 0,
+            max: <?php echo count($sHeightValues)-1?>,
+            from: <?php echo $iSelectedIndex ?>,
+            keyboard: true,
+            step: 1,
+            hide_from_to:true,
+            onStart: function (value) {
+                var heightNew = aHeightValues[value.from];
+                if($( "#idHeightSliderInput" ).val() > 0) {
+                    var heightArr = heightNew.split(".");
+                    $("#heightSliderValue").val(heightNew >= heightMax ? heightMaxArr[0] : heightArr[0]);
+                    $("#heightSliderValueInch").val(heightNew >= heightMax ? (heightMaxArr[1]>0?heightMaxArr[1]:'0'+'+') : heightArr[1]);
+                }
+            },
+            onChange:function(){
+                heightNew = $('#heightrange').prop("value");
+                var heightArr = aHeightValues[heightNew].split(".");
+                $("#heightSliderValue").val(heightArr[0] >= heightMax ? heightMax : heightArr[0]);
+                $("#heightSliderValueInch").val(heightArr[0] >= heightMax ? '0+' : heightArr[1]);
+                $("#idHeightSliderInput").val(aHeightValues[heightNew]);
+            }
+        });
+        //Save slider instance to var for update
+        var heightSlider = $("#heightrange").data("ionRangeSlider");
+        //Process when client input anything to textbox
+        $("#heightSliderValue").keyup(function(){
+            $("#heightSliderValueInch").val($("#heightSliderValueInch").val().replace("+", ""));
+            this.value = this.value.replace(/[^0-9]/g,'');
+            var newHeightFeet = this.value;
+            var newHeightInch = $("#heightSliderValueInch").val();
+            var newHeightPosition = (newHeightFeet-heightMinArr[0])*12+(newHeightInch-heightMinArr[1]);
+            newHeightPosition = newHeightPosition > <?php echo count($sHeightValues)-1?> ? <?php echo count($sHeightValues)-1?> : newHeightPosition;
+            heightSlider.update({
+                from: newHeightPosition
+            });
+            $( "#idHeightSliderInput" ).val(newHeightFeet+newHeightInch/10);
+        });
+        $("#heightSliderValueInch").keyup(function(){
+            this.value = this.value.replace(/[^0-9]/g,'');
+            var newHeightFeet = $("#heightSliderValue").val();
+            var newHeightInch = this.value;
+            if(newHeightInch < 0 || newHeightInch > 11){
+                myalert('alertErrorHeight1','type_missing','Oops', 'Height must be from X.0 to X.11','');
+                $(this).val('');
+            } else {
+                var newHeightPosition = (newHeightFeet-heightMinArr[0])*12+(newHeightInch-heightMinArr[1]);
+                newHeightPosition = newHeightPosition > <?php echo count($sHeightValues)-1?> ? <?php echo count($sHeightValues)-1?> : newHeightPosition;
+                heightSlider.update({
+                    from: newHeightPosition
+                });
+                $( "#idHeightSliderInput" ).val(newHeightFeet+newHeightInch/10);
+            }
+        });
+        //Process when client move out textbox
+        $("#heightSliderValue").change(function(){
+            $("#heightSliderValueInch").val($("#heightSliderValueInch").val().replace("+", ""));
+            var newHeightFeet = this.value;
+            var newHeightInch = $("#heightSliderValueInch").val();
+            var newHeight = parseFloat(newHeightFeet)+parseFloat(newHeightInch/10);
+            if(newHeight < heightMin){
+                $( "#idHeightSliderInput" ).val('');
+                myalert('alertErrorHeight','type_missing','Oops', 'Min height must be '+heightMin+' Ft.','');
+            }
+            if(newHeight > heightMax){
+                $( "#heightSliderValue" ).val(heightMaxArr[0]);
+                $( "#heightSliderValueInch" ).val((heightMaxArr[1]>0?heightMaxArr[1]:0)+'+');
+            }
+        });
+        $("#heightSliderValueInch").change(function(){
+            var newHeightFeet = $("#heightSliderValue").val();
+            var newHeightInch = this.value;
+            var newHeight = parseFloat(newHeightFeet)+parseFloat(newHeightInch/10);
+            if(newHeight < heightMin){
+                $( "#idHeightSliderInput" ).val('');
+                myalert('alertErrorHeight','type_missing','Oops', 'Min height must be '+heightMin+' Ft.','');
+            }
+            if(newHeight > heightMax){
+                $( "#heightSliderValue" ).val(heightMaxArr[0]);
+                $( "#heightSliderValueInch" ).val((heightMaxArr[1]>0?heightMaxArr[1]:0)+'+');
+            }
+        });        
+    })
+
+    //CONTINUE FOR STEP 1
+    $('.wrap-1 .btn-continue').click(function(){
+        if( $( "#idWeightSliderInput" ).val()< 1 ) {
+            myalert('alertWeightError','type_missing','Oops', 'Seems like you forgot to tell us your weight. Don\'t be shy we are here to help.','');              
+            $('html, body').animate({scrollTop: $("#weightSliderValue").offset().top - 200}, 500);
+            return false;
+        }
+        if( $( "#idHeightSliderInput" ).val() < 1 ) {  
+            myalert('alertHeightError','type_missing','Oops', 'Seems like you forgot to tell us your height. Don\'t be shy we are here to help.','');   
+            $('html, body').animate({scrollTop: $("#heightSliderValue").offset().top - 200}, 500);
+            return false;
+        }
+        if ($("#listBODYSHAPE .lock").length < 1) {
+            myalert('myalertid3','type_missing','Oops','Seems like you forgot to tell us your body shape. Don\'t be shy we are here to help.','');  
+            $('html, body').animate({scrollTop: $("#listBODYSHAPE").offset().top - 200}, 500);
+            return false;
+        }
+
+        $(this).parents('.wrap').hide().next().show(); 
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+
+    
+    /*end */
+    /* relative thumb-info - checkmark check-blank  |  relative thumb-info lock - checkmark check-one fa fa-check*/
+
+    $(".thumb-info").on("click", function(e) {
+        e.preventDefault();
+
+        if($(this).hasClass("lock")) {
+            if($(this).hasClass("body-shape")) {
+                $(this).parents("#listBODYSHAPE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+                $(".body-shape").removeClass("lock");
+            }
+
+            if($(this).hasClass("skin-tone")) {
+                $(this).parents( "#listSKINTONE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+                $(".skin-tone").removeClass("lock");
+            }
+
+            $(this).removeClass("lock");
+            $(this).find('.checkmark').removeClass("check-one fa fa-check");
+            $(this).find('.checkmark').addClass("check-blank");
+
+        } else {
+            if($(this).hasClass("body-shape")) {
+                $(this).parents( "#listBODYSHAPE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+                $(".body-shape").removeClass("lock");
+            }
+
+            if($(this).hasClass("skin-tone")) {
+                $(this).parents( "#listSKINTONE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+                $(".skin-tone").removeClass("lock");
+            }
+
+            $(this).addClass("lock");
+            $(this).find('.checkmark').removeClass("check-blank");
+            $(this).find('.checkmark').addClass("check-one fa fa-check");
+        }
+
+        return false;
+
+    });
+
+    $("#btnNextStep").on("click", function(e) {
+
+        if ($("#listSKINTONE .lock").length < 1) {
+            myalert('myalertid4','type_missing','Oops', 'Seems like you forgot to tell us your skin tone. Don\'t be shy we are here to help.','');  
+            $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                $("button.my_btn_ok").click(function(){ // click button
+                    $('a.close-reveal-modal').trigger('click'); // will close modal
+                });
+            });
+              
+            return false;
+        }
+
+        $(".thumb-info").each( function( index, element ){
+            if($(element).hasClass("lock")) {
+                $("#"+element.id+"Input").prop( "checked", true );
+            } else {
+                $("#"+element.id+"Input").prop( "checked", false );
+            }
+        });
+
+        // $( "#idWeightSliderInput" ).val( $( "#weightSlider" ).slider( "value" ) );
+        // $( "#idHeightSliderInput" ).val( $( "#heightSlider" ).slider( "value" ) );
+
+        $( "#myForm" ).submit();
+
+    });
+
+    $(window).load(function () {
+        var url = "/profile/profiletraking";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {page: 'you'},
+            dataType: 'json',
+            success: function (result) {
+            }});
+    });
+</script>

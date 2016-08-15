@@ -1,0 +1,53 @@
+<?php
+$likearray = $this->likearray;
+
+if (!empty($this->feedData)) {
+    foreach ($this->feedData as $prod) {
+
+        $page_url = $this->serverUrl().'/service/feeddatadetail/'.$prod['feeddataid'].'/'.rand();
+        $title = 'ELNove - '.$prod['caption'];
+        ?>
+        <div class="main_big1_product_box productsBox draggable-element">
+            <div class="portfolio-item img-thumbnail productsBox">
+            
+            <?php if($prod['onsale'] == 'Y') {?><div class="salePrice"><?=round(($prod['price']-$prod['saleprice'])/$prod['price']*100)?>%<br/>OFF</div><?php }?>
+
+            <div class="main_big1_product_img_box thumb-info">
+                <img class="img-responsive" data-id="<?php echo $prod['uid']; ?>" data-name="<?php echo $prod['caption']; ?>" data-price="<?php echo $prod['price']; ?>" src="<?php echo $prod['feedimageurl']; ?>" id="img">
+            </div>
+            <div class="main_big1_product_tag_box">
+                <a href="javascript:void(0);"  class="fr likes" id="<?= base64_encode($prod['feeddataid']); ?>">
+                    <?php if(in_array($prod['feeddataid'], $likearray)) { ?>
+                        <img src="/img/thumb.png" alt="Like" id="like<?php echo $prod['feeddataid'];?>" />
+                    <?php } else { ?>
+                        <img src="/img/blank_like.png" alt="Like" id="like<?php echo $prod['feeddataid'];?>" />
+                    <?php } ?>
+                </a>
+            </div>
+            <div class="box-block">
+                <div class="pad">
+                    <span id="like_<?= $prod['feeddataid']; ?>"><?= $prod['likesCount'] != 0 ? $prod['likesCount'] . ' likes' : ""; ?></span>
+                    <h4><?php echo $this->string_helper($prod['caption']); ?></h4>
+                    <p><?php echo ($prod['onsale']=='Y'?$prod['saleprice']:$prod['price'])?><span class="currency"><?php echo $prod['currency'] ?></p>
+                    <a class="buy_now gotourl my_tooltip" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod['feeddataid']))); ?>" title="Purchase article through our partner">buy now</a>
+                    <br/>
+                    <a class="discover my_tooltip" title="Learn more about this article"  data-value="<?php echo $prod['feeddataid']; ?>" href="javascript:void(0)" >DISCOVER <img src="/img/right1.png" id="im"></a>
+                </div>
+                <div class="social_box">
+                    <ul>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/f.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/p1.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/t.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/g.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/msg.png"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    <?php } ?>
+
+<?php } else { ?>
+    <div class="col-md-3" style="text-align: center;width: 100%;">Oops No Record found.</div>
+<?php } ?>

@@ -1,0 +1,91 @@
+<?php
+$outfitsData = $this->outfits;
+$likearray = $this->likearray;
+?>
+<style type="text/css">
+.outfitsnot{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 30px;
+}
+</style>
+
+<input type="hidden" id="outfits_offset" value="<?=$this->outfits_offset?>"  />
+<input type="hidden" id="outfits_count" value="<?=$this->outfits_count?>"  />
+
+<div id="slideout" style="right:-65px;">
+    <a class="link-settings-colors sharepoup"><img src="/img/switch.png" /></a>
+    <div id="slideout_inner">
+        <form id="switchform">
+            <ul>
+                <?php
+                $page_url = $this->serverUrl() . '/service?outfit=' . $outfitsData[1][0]['outfit_id'];
+                $title = 'ELNove - ' . $outfitsData[1][0]['outfittitle'];
+                ?>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_fb.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_p.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white-t.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_google.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_msg.png"></a></li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+<?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
+    <div class="big_box1_outer">
+        <div class="prevOutfit">
+            <?php echo $this->partial('service_outfits', array('data'=>$outfitsData[0], 'likesArray'=>$likearray, 'float'=>'right', 'id'=>'left'));?>
+            <div class="overlay"><img src="/img/grey_arrow_left.png"  class="my_tooltip" title="Previous outfit" /></div>
+        </div>
+        <?php echo $this->partial('service_outfits', array('data'=>$outfitsData[1], 'likesArray'=>$likearray));?>
+        <div class="nextOutfit">
+            <?php echo $this->partial('service_outfits', array('data'=>@$outfitsData[2], 'likesArray'=>$likearray, 'float'=>'left', 'id'=>'right'));?>
+            <div class="overlay"><img src="/img/grey_arrow_right.png" class="my_tooltip" title="Next outfit" /></div>
+        </div>
+    </div>
+    
+    <div class="clr"></div>
+    
+    <div align="right"><a class="iFeelLucky" href="/profile"><span>I FEEL LUCKY</span></a> </div>
+    
+    <div class="outfit_desc_block">
+        <div class="profileImg" style="background-image:url(/img/profilepic/<?=$this->outfitsData[1]['user_prp_pic']?>);"></div>
+        <div class="profileCreator">
+            <div class="createdBy">CREATED BY</div> 
+            <?=$this->outfitsData[1]['firstName']?> <?=$this->outfitsData[1]['lastName']?>
+        </div>
+        <div class="outFitDesc"> 
+            <div class="createdBy">VENUE: <?=str_replace('|', ', ', $this->outfitsData[1]['venue'])?></div> 
+            <div class="outfitDescription"><?=$this->outfitsData[1]['description']?></div> 
+        </div>  
+         <div class="outFitSharing"> 
+            <div class="refresh savecloseout my_tooltip" title="Save outfit to your closet">
+                <a href="javascript:void(0);"><div class="saveoutfit"></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save this Outfit </a>
+            </div>
+
+            <div id="idSharethisOutfit" class="share1 shclose">
+                <a href="javascript:void(0);"><div class="shareoutfit"></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Share this outfit </a>
+
+                  <div class='arrow_box' id="shareThisOutfitPopup" style="display:none">
+                    <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_fb.png"></a>
+                    <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_p.png"></a>
+                    <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white-t.png"></a>
+                    <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_google.png"></a>
+                    <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_msg.png"></a>
+                  </div>                            
+                
+            </div>     
+            
+            <div class="outfitlikes">
+                <img alt="" src="<?=($this->outfitsData[1]['outfitLikesCount']>0?'/img/thumb.png':'/img/blank-2.png')?>"> <span><?=$this->outfitsData[1]['outfitLikesCount']?><span>
+            </div>
+                            
+        </div>  
+    </div>      
+<?php } else { ?>
+    <div class="outfitsnot" style="font-size: 20px; line-height: 40px; text-align: center; margin: 25px;">
+        Outfits not available.
+    </div>
+<?php } ?>
+            

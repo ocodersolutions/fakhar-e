@@ -1,0 +1,225 @@
+<div class="profile_wear_page container topnavi">
+    <div class="brand-box ">
+        <div class="menu-box <?=($this->mode=='edit')?'menu-box-bigger':''?>">
+            <ul class="about">
+                <li class="blue">
+                    <a href="javascript:void(0)" class="active">LOOK YOU&#39;D WEAR<div class="fa"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/profile/you">ABOUT YOU<div class="fa"></div></a>
+                </li>
+                <li>
+                    <a href="/profile/size">YOUR SIZE<div class="fa"></div></a>
+                </li>
+                <!-- <li>
+                    <a>FAVOURITE BRAND<div class="fa"></div></a>
+                </li> -->
+                <li>
+                    <a href="/profile/price">YOUR LOOK<div class="fa"></div></a>
+                </li>
+                <?php if( $this->mode == 'new' ) { ?>
+                <li>
+                    <a href="/profile/signup">SIGN UP<div class="fa"></div></a>
+                </li>
+                <?php }?>
+            </ul>
+            <div class="clr"></div>
+        </div><!--menu-box -->
+        <div class="clr"></div>
+
+        <div class="page_one-box">
+            <h1 class="title-page">Choose the Look You Would Wear</h1>
+            <div class="select-all">Select All That Apply</div>
+            <div class="look_box " id="ChoosetheLookYouWouldWear">
+                <div class="left_look fl">
+                    <h1>What Would You Wear To Work?</h1>
+                    <div class="row" id="listWork">
+                        <?php
+                        foreach ($this->work as $aBox) {
+                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+                        ?>
+                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>" >
+                                <div class="box">
+                                    <div class="image_left">
+                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="checkmark <?php echo $classes; ?>"></div>
+                                </div>
+                            </a>
+                        <?php } ?>
+                    </div><!--row-->
+
+                    <h1>What Would You Wear Casually? </h1>
+                    <div class="row" id="listCASUAL">
+                        <?php
+                        foreach ($this->casual as $aBox) {
+                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+                        ?>
+                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
+                                <div class="box">
+                                    <div class="image_left">
+                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="checkmark <?php echo $classes; ?>"> </div>
+                                </div>
+                            </a>
+                        <?php } ?>
+                    </div><!--row-->
+                </div><!-- left_look -->
+
+                <!-- ------------------ right-look box start ----------- -->
+                <div class="left_look fr">
+                    <h1>What Would You Wear On A Night Out?</h1>
+                    <div class="row" id="listNIGHTOUT">
+                        <?php
+                        foreach ($this->night_out as $aBox) {
+                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank ';
+                        ?>
+                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
+                                <div class="box">
+                                    <div class="image_left">
+                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="checkmark <?php echo $classes; ?>"> </div>
+                                </div>
+                            </a>
+                        <?php } ?>
+                    </div><!--row-->
+
+                    <h1>What Would You Never Wear?</h1>
+                    <div class="row" id="listNEVERWEAR">
+                        <?php
+                        foreach ($this->never_wear as $aBox) {
+                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+                        ?>
+                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
+                                <div class="box">
+                                    <div class="image_left">
+                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+                                    </div>
+                                    <div class="clr"></div>
+                                    <div class="checkmark <?php echo $classes; ?>"> </div>
+                                </div>
+                            </a>
+                        <?php } ?>
+                    </div><!--row-->
+                </div><!-- left_look -->
+                <div class="clr"></div>
+
+                <div class="next fr mynext" id="btnNextStep">
+                    <a href="javascript:void(0);" style="color:#fff">NEXT ></a>
+                </div>
+                <div class="clr"></div>
+
+                <a href="javascript:void(0)" id="clearFilters" class="italic-box fr hlink"> <i>Clear filters</i></a>
+            </div><!-- look_box -->
+        </div><!--page_one-box-->
+        <div class="clr"></div>
+    </div><!--brand-box -->
+</div><!--container-->
+
+<form id="myForm" method="POST">
+    <?php foreach($this->work as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name'] ?>Input" name="<?php echo $aBox['name'] ?>" style="display:none" /><?php }?>
+    <?php foreach($this->night_out as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name'] ?>Input" name="<?php echo $aBox['name'] ?>" style="display:none" /><?php }?>
+    <?php foreach($this->casual as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name'] ?>Input" name="<?php echo $aBox['name'] ?>" style="display:none" /><?php }?>
+    <?php foreach($this->never_wear as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name'] ?>Input" name="<?php echo $aBox['name'] ?>" style="display:none" /><?php }?>
+    <input type="hidden" name="myFormBtn" value="yes" />
+</form>
+
+<script>
+(function () {
+    $(".thumb-info").on("click", function (e) {
+        e.preventDefault();
+        if ($(this).hasClass("lock")) {
+            $(this).removeClass("lock");
+            $(this).find('.checkmark').removeClass("check-one fa fa-check");
+            $(this).find('.checkmark').addClass("check-blank");
+        } else {
+            $(this).addClass("lock");
+            $(this).find('.checkmark').removeClass("check-blank");
+            $(this).find('.checkmark').addClass("check-one fa fa-check");
+        }
+        return false;
+    });
+
+    $("#btnNextStep").on("click", function (e) {
+        if ($("#listWork .lock").length < 1) {
+        	e.preventDefault();
+            myalert('myalertid1','type_missing',"Oops"," Seems like you forgot to tell us what you would wear to work. Let us learn about you, so we can dress you to the nines.",'');
+               $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                     $("button.my_btn_ok").click(function(){
+                        $('a.close-reveal-modal').trigger('click');
+                    });
+                });
+             $('html, body').animate({
+                 scrollTop: $("#ChoosetheLookYouWouldWear").offset().top - 100
+             }, 500); 
+            return false;
+        }
+
+        if ($("#listNIGHTOUT .lock").length < 1) {
+            myalert('myalertid2','type_missing','Oops','Seems like you forgot to tell us what you would wear on a night out.  Let us learn about you, so we can dress you to the nines.','');
+            $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                $("button.my_btn_ok").click(function(){ // click button
+                    $('a.close-reveal-modal').trigger('click'); // will close modal
+                });
+            });
+            $('html, body').animate({
+                 scrollTop: $("#listNIGHTOUT").offset().top - 100
+            }, 500);                  
+            return false;
+        }
+
+        if ($("#listCASUAL .lock").length < 1) {
+            myalert('myalertid3','type_missing','Oops', 'seems like you forgot to tell us what you would wear casually. Let us learn about you, so we can dress you to the nines.','');
+            $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                $("button.my_btn_ok").click(function(){
+                    $('a.close-reveal-modal').trigger('click');
+                });
+            });
+            $('html, body').animate({
+                scrollTop: $("#listCASUAL").offset().top - 200
+            }, 500);
+            return false;
+        }
+
+        $(".thumb-info").each(function (index, element) {
+            if ($(element).hasClass("lock")) {
+                $("#" + element.id + "Input").prop("checked", true);
+            }
+            else {
+                $("#" + element.id + "Input").prop("checked", false);
+            }
+        });
+
+        $("#myForm").submit();
+    });
+
+})();
+$(window).load(function () {
+    var url = "/profile/profiletraking";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {page: 'profile'},
+        dataType: 'json',
+        success: function (result) {
+            //console.log(result);
+        }
+    });
+});
+
+$("#clearFilters").click(function(){
+    $(".thumb-info").each(function (index, element) {
+        if ($(element).hasClass("lock")) {
+            $("#" + element.id + "Input").prop("checked", false);
+            $(element).removeClass("lock");
+            $(element).find(".checkmark").removeClass("check-one fa fa-check").addClass("check-blank");
+        }
+    });
+});
+</script>

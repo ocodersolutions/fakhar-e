@@ -1,0 +1,266 @@
+<?php
+$outfitsData = $this->outfits;
+?>
+
+
+            <?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
+
+            <?php foreach($outfitsData as $key => $outfitData) { ?>
+            
+
+
+            <div class="big_box">
+                <div class="img_box_main">
+                    <div class="main_big_product_box">
+                        <div class="main_big_product_img_box">
+                            <?php if (isset($outfitData[0]['feedId']) && !empty($outfitData[0]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[0]['imageurl']; ?>" id="img" height="369px">
+                            <?php } else { ?>
+                                <img src="/img/big_img.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_big_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[0]['feedId']) && !empty($outfitData[0]['feedId'])) { ?>
+                        <div class="box-block1">
+                            <div class="pad">
+                                <span class="like_<?= $outfitData[0]['id']; ?>"><?= $outfitData[0]['likesCount'] != 0 ? $outfitData[0]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[0]['caption']); ?></h4>
+                                <p><?php echo $outfitData[0]['price'] != '' ? '$' . $outfitData[0]['price'] : ''; ?></p>
+                                <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[0]['id']))); ?>">buy now</a>
+                                <br>
+                                <a target="_blank" class="discover" href="service/feeddatadetail/<?php echo $outfitsData[0]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[0]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[0]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_sm_product_box">
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[1]['feedId']) && !empty($outfitData[1]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[1]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[1]['feedId']) && !empty($outfitData[1]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?= $outfitData[1]['id']; ?>"><?= $outfitData[1]['likesCount'] != 0 ? $outfitData[1]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[1]['caption']); ?></h4>
+                                <p><?php echo $outfitData[1]['price'] != '' ? '$' . $outfitData[1]['price'] : ''; ?></p>
+                                <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[1]['id']))); ?>">buy now</a>
+                                <br>
+                                <a target="_blank" class="discover" href="service/feeddatadetail/<?php echo $outfitsData[1]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[1]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[1]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_sm_product_box">
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[2]['feedId']) && !empty($outfitData[2]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[2]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[2]['feedId']) && !empty($outfitData[2]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?= $outfitData[2]['id']; ?>"><?= $outfitData[2]['likesCount'] != 0 ? $outfitData[2]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[2]['caption']); ?></h4>
+                                <p><?php echo $outfitData[2]['price'] != '' ? '$' . $outfitData[2]['price'] : ''; ?></p>
+                                <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[2]['id']))); ?>">buy now</a>
+                                <br>
+                                <a target="_blank" class="discover" href="service/feeddatadetail/<?php echo $outfitsData[2]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[2]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[2]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="img_box_main">
+                    <div class="main_sm_product_box">
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[3]['feedId']) && !empty($outfitData[3]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[3]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[3]['feedId']) && !empty($outfitData[3]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?= $outfitData[3]['id']; ?>"><?= $outfitData[3]['likesCount'] != 0 ? $outfitData[3]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[3]['caption']); ?></h4>
+                                <p><?php echo $outfitData[3]['price'] != '' ? '$' . $outfitData[3]['price'] : ''; ?></p>
+                                <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[3]['id']))); ?>">buy now</a>
+                                <br>
+                                <a target="_blank" class="discover" href="service/feeddatadetail/<?php echo $outfitsData[3]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[3]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[3]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_sm_product_box">
+                        <div class="main_sm_product_img_box">
+                            <?php if (isset($outfitData[4]['feedId']) && !empty($outfitData[4]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[4]['imageurl']; ?>" id="img" height="251px">
+                            <?php } else { ?>
+                                <img src="/img/small_img2.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_sm_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[4]['feedId']) && !empty($outfitData[4]['feedId'])) { ?>
+                        <div class="box-block2 blok1">
+                            <div class="pad">
+                                <span class="like_<?= $outfitData[4]['id']; ?>"><?= $outfitData[4]['likesCount'] != 0 ? $outfitData[4]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[4]['caption']); ?></h4>
+                                <p><?php echo $outfitData[4]['price'] != '' ? '$' . $outfitData[4]['price'] : ''; ?></p>
+                                <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[4]['id']))); ?>">buy now</a>
+                                <br>
+                                <a target="_blank" class="discover" href="service/feeddatadetail/<?php echo $outfitsData[4]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[4]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[4]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="main_big_product_box">
+                        <div class="main_big_product_img_box">
+                            <?php if (isset($outfitData[5]['feedId']) && !empty($outfitData[5]['feedId'])) { ?>
+                                <img src="<?php echo $outfitData[5]['imageurl']; ?>" id="img" height="369px">
+                            <?php } else { ?>
+                                <img src="/img/big_img.jpg" alt="product" />
+                            <?php } ?>
+                        </div>
+                        <div class="main_big_product_tag_box">
+                        </div>
+                        <?php if (isset($outfitData[5]['feedId']) && !empty($outfitData[5]['feedId'])) { ?>
+                        <div class="box-block1 blok1">
+                            <div class="pad">
+                                <span class="like_<?= $outfitData[5]['id']; ?>"><?= $outfitData[5]['likesCount'] != 0 ? $outfitData[5]['likesCount'] . ' likes' : ""; ?></span>
+                                <h4><?php echo $this->string_helper($outfitData[5]['caption']); ?></h4>
+                                <p><?php echo $outfitData[5]['price'] != '' ? '$' . $outfitData[5]['price'] : ''; ?></p>
+                                <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitData[5]['id']))); ?>">buy now</a>
+                                <br>
+                                <a target="_blank" class="discover" href="service/feeddatadetail/<?php echo $outfitsData[5]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                            </div>
+                            <div class="social_box1">
+                                <?php
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitData[5]['id'] . '/' . rand();
+                                $title = 'ELNove - ' . $outfitData[5]['caption'];
+                                ?>
+                                <ul>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                                    <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="black-box">
+                
+                    <div class="outfitSharingLinks">url=<?=$this->serverUrl() . '/service?outfitd=' . $outfitData[0]['outfit_id']?>&title=<?='ELNove - ' . $outfitData[0]['outfittitle']?></div>                
+                
+                    <div class="thumb ">
+                        <a href="javascript:void(0);" class="unsavecloseout" data-outfitid="<?=base64_encode($key)?>" ><img src="img/white-like.png" alt="image">UNSAVE THIS OUTFIT</a>
+                    </div>
+                    <div class="thumb shareDiv shclose">
+                        <a href="javascript:void(0);"><img src="img/share2.png" alt="image"> SHARE THIS OUTFIT</a>
+                    </div>
+                    <div class="thumb">
+                        <a href="javascript:void(0);" id="idBboughtEntireOutfit" data-outfitid="<?=base64_encode($key)?>"><p>bought entire outfit</p></a>
+                    </div>
+                    <a href="javascript:void(0);"><img src="img/white-like.png" alt="image"> <span><?php echo number_format($outfitsLikes[$key]); ?></span></a>
+                </div>
+                <div class="clr"></div>
+            </div>  <!-- big_box-->
+
+            <div class="clr"></div>
+
+            <?php } ?>
+
+            <?php }  else { ?>
+    <div class="outfitsnot">
+ Outfits not available.
+            
+    </div>
+<?php } ?>

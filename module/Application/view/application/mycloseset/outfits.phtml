@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-12 top-heading-02">
+        <hr>
+        <h3>Outfit window</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="container">
+            <table id="outfit-table" style="width: 50%;" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><label>Search</label> <input type="text" name="search" id="search" class="pull-right"></td>
+                        <td><input type="button" value="Add New" href="<?php echo $this->basePath('service/add-outfit')?>" class="btn btn-primary btn-cta-blue fancybox fancybox.ajax" /></td>
+                    </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Outfit</th>
+                        <th colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->outfits as $index => $outfits) : ?>
+                    <tr>
+                        <td><?php echo $index + 1; ?></td>
+                        <td><?php echo $outfits['title'] ?></td>
+                        <td><a class="fancybox fancybox.ajax" href="<?php echo $this->basePath('service/add-outfit?id=').$outfits['outfit_id']?>">Edit</a>  / <a href="javascript:deleteOutfit(<?php echo $outfits['outfit_id'] ?>);">Remove</a></td>      
+                    </tr>
+                    <?php endforeach; ?>                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function deleteOutfit(id) {
+        if (confirm('Are you sure you want to remove this outfit?')) {
+            window.location.href = '<?php echo $this->basePath('service/remove-outfit?id=')?>'+id;
+        }
+    }
+    $(function(){
+        $('.fancybox').fancybox();
+    });
+    
+    $('#search').keyup(function(){
+       $('#outfit-table > tbody').html('<tr><td colspan="3" style="text-align: center;"><img src="/img/bx_loader.gif"></td></tr>'); 
+       $.ajax({
+           url : '<?php echo $this->basePath('service/outfits')?>',
+           type: 'post',
+           data : {searchkey:$(this).val()},
+           success : function(data) {
+               var response = JSON.parse(data);
+               var html = '';
+               if(response.total > 0) {
+                   var i = 1;
+                    for(x in response.result) {
+                        html += '<tr>';
+                            html += '<td>'+i+'</td>';
+                            html += '<td>'+response.result[x]['title']+'</td>';
+                            html += '<td><a class="fancybox fancybox.ajax" href="<?php echo $this->basePath('service/add-outfit?id=')?>'+response.result[x]['outfit_id']+'">Edit</a>  / <a href="javascript:deleteOutfit('+response.result[x]['outfit_id']+');">Remove</a></td>';      
+                        html += '</tr>';
+                        i++;
+                    }
+                    $('#outfit-table > tbody').html(html);
+               } else {
+                    $('#outfit-table > tbody').html('<tr><td colspan="3" style="text-align: center;">No match found</td></tr>'); 
+               }                   
+           }
+       });
+    });
+</script>

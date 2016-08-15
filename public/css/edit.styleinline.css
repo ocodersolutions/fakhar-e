@@ -1,0 +1,131 @@
+.attributesCol {
+    width: 80%;
+    float: left
+}
+
+.itemInfoCol {
+    width: 35%;
+    float: right;
+    padding-left: 10px;
+    background-image: url('<?=$this->item['imageurl']?>');
+    background-size: auto 200px;
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+
+.itemInfoCol .row {
+    clear: both;
+    width: 100%;
+    padding: 3px 0 3px 20px
+}
+
+.itemInfoCol .left {
+    width: 130px;
+    float: left;
+    font-weight: bold
+}
+
+.itemInfoCol .right {
+    width: 300px;
+    float: left
+}
+
+.attributes {
+    border-bottom: 1px solid #CCC
+}
+
+input[type="checkbox"] {
+    display: inline;
+}
+
+.activecolor {
+    border: 2px solid black;
+    background-image: url("<?php echo $this->basePath();?>/img/tick.png");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.btn-lv1 .nav-tabs>.active>a, .btn-lv1 .nav-tabs>.active>a:hover {
+    background-color: none;
+    border: 0;
+}
+
+.attributes {
+    border: 0;
+}
+
+.btn-lv1 .nav-tabs {
+    border: 0;
+}
+
+.btn-lv1 .nav-tabs li a {
+    border: 0;
+    padding: 0;
+    margin-right: 0;
+}
+
+.btn-lv1 button.btn.btn-default {
+    padding: 3px 15px;
+    border: 1px solid GREY;
+    font-size: 15px;
+    background-color: #e6e6e6;
+    color: #005580;
+}
+
+.level4 input[type="radio"] {
+    display: block;
+    margin-top: 0;
+}
+
+.list-attr {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.list-attr li {
+    display: inline-block;
+    width: 40%;
+}
+
+.list-attr li  input {
+    float: left;
+}
+
+li.color {
+    border-radius: 50px;
+    cursor: pointer;
+    float: left !important;
+    font-size: 37px;
+    height: 19px;
+    margin-bottom: 13px;
+    margin-right: 14px;
+    padding: 7px !important;
+    width: 19px !important;
+}
+
+ul.connected-list {
+    height: 171px !important;
+}
+
+.ui-multiselect {
+    width: inherit !important;
+}
+
+.ui-multiselect div.selected {
+    width: 49% !important;
+}
+
+.ui-multiselect div.available {
+    width: 50% !important;
+}
+
+input.search.empty.ui-widget-content.ui-corner-all {
+    padding-bottom: 3px;
+    font-size: 10px;
+}
+
+.level1.active .btn {
+    font-weight: bold;
+    color: red
+}

@@ -1,0 +1,108 @@
+<?php
+$page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
+$title = 'ELNove - '.$this->feedDataDetail['caption'];
+?>
+
+<div class="container grey_bg">
+    <div class="left_slider_box">
+        <div id="owl-demo9" class="owlnew">
+            <div class="item">
+            <?php if(file_exists('/feed/'.$this->feedDataDetail['feedId'].'/'.$this->feedDataDetail['img_local_name'])) { ?>
+            	<img src="<?php echo $this->basePath() . "/feed/{$this->feedDataDetail['feedId']}/{$this->feedDataDetail['img_local_name']}"; ?>" alt="Owl Image">
+				<?php } else { ?>
+					<img src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="Owl Image">
+				<?php } ?>            
+            </div>
+            <!--<div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>-->
+        </div>
+    </div>
+
+    <div class="center_img_box">
+        <img src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="Owl Image">
+    </div>
+
+    <div class="right_info_box">
+        <h1><?php echo $this->feedDataDetail['caption']; ?></h1>
+        <span><?php echo $this->feedDataDetail['price']; ?></span><span class="currency"><?php echo $this->feedDataDetail['currency'] ?></span>
+        <p><?php echo $this->feedDataDetail['description']; ?></p>
+        <div class="name_store">
+            <?php echo $this->feedDataDetail['brand']; ?>
+        </div>
+        <div class="save">
+            <img src="/img/thumb.png" alt="Owl Image">
+            <a href="javascript:void(0)" class="mycloseset" id="<?php echo base64_encode($this->feedDataDetail['id']); ?>">
+                SAVE TO MY CLOSET
+            </a>
+        </div>
+        <div class="link_list">
+            <ul>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+            </ul>
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <div class="clr"></div>
+</div>
+
+
+
+</div>
+
+<div class="continue">
+    <div class="container">
+        <div class="image-cross fl">
+            <a href="/service"><img src="/img/close.png">BACK</a>
+        </div>
+
+        <div class="btn-con1 fr">
+            <a target="_blank my_tooltip" title="Purchase article through our partner" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->feedDataDetail['id']))); ?>">BUY NOW</a>
+        </div>
+    </div><!--container-->
+</div><!-- continue-->
+
+<script src="js/owl.carousel.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#owl-demo9").owlCarousel({
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+            navigation: false,
+            items: 3,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [979, 3]
+        });
+        /*****************block for adding this product into my coloseset**************/
+        $('.mycloseset').on('click', function () {
+            var id = $(this).attr("id");
+            var url = "/service/likeclosset/";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {closesetId: id},
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == 'N') {
+                        alert(result.mgs);
+                    } else if (result.status == 'Y') {
+                        alert("Article was successfully added to your closet");
+                        //var likesd = result.count + ' likes';
+                        //$('#like_' + result.idf).html(likesd);
+                    } else {
+                        alert("Internal Server Error");
+                    }
+                }});
+        });
+        /*****************End block for adding this product into my coloseset**************/
+    });
+</script>

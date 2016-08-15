@@ -1,0 +1,338 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <div id="fb-root"></div>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript"> url = '<?php echo $this->basePath('');?>';</script>
+        <?php echo $this->headTitle("Find Your Stitch")->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+        <!-- Le styles -->
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/tie-ico.png'))
+                //->prependStylesheet($this->basePath() . '/css/theme-responsive.css')
+                ->prependStylesheet($this->basePath() . '/css/skins/blue.css')
+                ->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+                ->prependStylesheet($this->basePath() . '/css/custom.css')
+                ->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+                ->prependStylesheet($this->basePath() . '/css/theme-elements.css')
+                ->prependStylesheet($this->basePath() . '/css/theme.css')
+                ->prependStylesheet($this->basePath() . '/vendor/magnific-popup/magnific-popup.css')
+                ->prependStylesheet($this->basePath() . '/vendor/flexslider/flexslider.css')
+                ->prependStylesheet($this->basePath() . '/css/fonts/font-awesome/css/font-awesome.css')
+                //->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+                ->prependStylesheet($this->basePath() . '/vendor/magnific-popup/magnific-popup.css')
+                ->prependStylesheet($this->basePath() . '/vendor/flexslider/flexslider.css')
+                ->prependStylesheet($this->basePath() . '/css/fonts/font-awesome/css/font-awesome.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap_additional.css')
+                ->prependStylesheet($this->basePath() . '/css/bootstrap.css');
+        ?>
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()
+                ->prependFile($this->basePath() . '/vendor/modernizr.js')
+        ;
+        ?>
+
+        <!--[if IE]>
+                <link rel="stylesheet" href="/css/ie.css">
+        <![endif]-->
+
+        <!--[if lte IE 8]>
+                <script src="/vendor/respond.js"></script>
+        <![endif]-->
+        <style type="text/css">
+            /*.col-md-3 {
+                width: 20%;
+            }        
+            .col-md-9 {
+                width: 80%;
+            }*/
+            body.sticky-menu-active header{top: -40px}
+            .siteWideMessage{
+                width:100%; 
+                min-width: 1170px;
+                background-color:#fffa9c; 
+                text-transform:uppercase; 
+                text-align:center; 
+                position:fixed; 
+                top:0px; 
+                z-index:9999;
+                height:22px;
+
+            }
+
+            ul.header-links li.getstarted{ 
+                border: 2px solid #0083B5;
+                background-color: #006DCC;
+                background-image: linear-gradient(to bottom, #0083B5, #0083B5);
+                background-repeat: repeat-x;
+                color: #FFFFFF;
+            }
+            ul.header-links li.getstarted:hover{background-color: #0083b5; background-image: linear-gradient(to bottom, #038fc4, #038fc4);}
+        </style>	
+        <script type="text/javascript">url = '<?php echo $this->basePath('/')?>';</script>
+
+    </head>
+    <body <? if( isset($this->showSmallHeader) && $this->showSmallHeader == true ) { ?>class="sticky-menu-active" style="padding-top:70px"<? }?>>
+        <div class="body">
+            <header>
+                <div role="main" class="siteWideMessage">We are currently under development. webSite is for review purposes only.</div>
+
+                <div class="container">
+                    <h1 class="logo">
+                        <a href="/">
+                            <img alt="Porto" src="/img/logo.png">
+                        </a>
+                    </h1>
+                        <?php if (isset($this->showHeaderLinks)) { ?>
+                        <div class="search">
+                            <div class="input-group" style="float:right">
+                                <!--HAVE AN ACCOUNT? <a href="/service" style="color:#B50000">SIGN IN</a>-->
+                            </div>
+
+                            <!--<div class="header-links">						
+                                    <ul class="header-links">
+                                            <li class="howitworks"><a href="/info/how-it-works">HOW IT WORKS</a></li>
+                                            <li class="faq"><a href="#">FAQ</a></li>
+                                            <li class="getstarted"><a href="/profile">GET STARTED</a></li>
+                                    </ul>
+                            </div>-->
+
+                        </div>
+                        <?php } ?>
+                </div>
+
+                <div class="navbar-collapse nav-main-collapse collapse">
+                    <div class="container">
+                        <nav class="nav-main mega-menu">
+                            <ul class="nav nav-pills nav-main" id="mainMenu">
+
+                                <li class="howitworks"><a href="/info/how-it-works">HOW IT WORKS</a></li>
+                                <li class="faq"><a href="#">FAQ</a></li>
+
+                                <!--BEGIN SIGNIN-->
+
+                                <li class="dropdown mega-menu-item mega-menu-signin signin" id="headerAccount">
+                                    <a class="dropdown-toggle" href="#">
+                                        <i class="icon icon-user"></i> SIGN IN
+                                        <i class="icon icon-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="mega-menu-content">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+
+                                                        <div class="signin-form">
+
+                                                            <div class="mega-menu-sub-title">
+                                                                Sign In
+                                                                <br /><br />
+                                                                <div align="center">
+                                                                    <div id="fb-root"></div>
+                                                                    <div id="user-info"></div>
+                                                                    <a href="#" class="fb-login login">
+                                                                        <img id="fb-auth" alt="sign in with facebook" src="/img/fb-sign-in.png">
+                                                                    </a>
+                                                                    <img class="loading" style="display: none;" src="img/bx_loader.gif"/>
+                                                                    <br />
+                                                                    or
+                                                                </div>
+                                                            </div>
+
+                                                            <form action="/auth/authenticate" id="contactForm" method="post">
+                                                                <div class="row">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Username or E-mail Address</label>
+                                                                            <input type="text" value="" name="email" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <a class="pull-right" id="headerRecover" href="#">(Lost Password?)</a>
+                                                                            <label>Password</label>
+                                                                            <input type="password" value="" name="password" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <span class="remember-box checkbox">
+                                                                            <label for="rememberme">
+                                                                                <input type="checkbox" id="rememberme" name="rememberme">Remember Me
+                                                                            </label>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input type="submit" value="Login" class="btn btn-primary pull-right push-bottom btn-cta-blue" data-loading-text="Loading...">
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+                                                            <p class="sign-up-info">Don't have an account yet? <a href="/profile" id="headerSignUp">Sign Up!</a></p>
+
+                                                        </div>
+
+                                                        <div class="signup-form">
+                                                            <span class="mega-menu-sub-title">Create Account</span>
+
+                                                            <form action="" id="" type="post">
+                                                                <div class="row">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>E-mail Address</label>
+                                                                            <input type="text" value="" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-6">
+                                                                            <label>Password</label>
+                                                                            <input type="password" value="" class="form-control">
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label>Re-enter Password</label>
+                                                                            <input type="password" value="" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <input type="submit" value="Create Account" class="btn btn-primary pull-right push-bottom btn-cta-blue" data-loading-text="Loading...">
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+                                                            <p class="log-in-info">Already have an account? <a href="#" id="headerSignIn">Log In!</a></p>
+                                                        </div>
+
+                                                        <div class="recover-form">
+                                                            <span class="mega-menu-sub-title">Reset My Password</span>
+                                                            <p>Complete the form below to receive an email with the authorization code needed to reset your password.</p>
+
+                                                            <form action="" id="" type="post">
+                                                                <div class="row">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>E-mail Address</label>
+                                                                            <input type="text" value="" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <input type="submit" value="Submit" class="btn btn-primary pull-right push-bottom btn-cta-blue" data-loading-text="Loading...">
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+                                                            <p class="log-in-info">Already have an account? <a href="#" id="headerRecoverCancel">Log In!</a></p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!--END SIGNIN-->
+
+                                <li class="getstarted"><a href="/profile">GET STARTED</a></li>
+
+                            </ul>
+                        </nav/>
+                    </div>	
+                </div>
+
+            </header>
+
+
+            <?php echo $this->content; ?>
+
+
+
+            <footer class="maxWidth">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+
+                            <div class="col-md-4">
+                                <h5><a href="/info/how-it-works">HOW IT WORKS</a></h5>
+                                <h5><a href="/info/about-us">ABOUT US</a></h5>
+                                <h5><a href="#">BLOG</a></h5>
+                                <h5><a href="/info/frequently-asked-questions">FAQ</a></h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h5><a href="/info/shipping">SHIPING</a></h5>
+                                <h5><a href="/info/pricing">PRICING</a></h5>
+                                <h5><a href="#">PRIVACY &amp; POLICES</a></h5>
+                                <h5><a href="/info/exchange_and_return">EXCHANGES &amp; RETURNS</a></h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h5><a href="/info/contact-us">CONTACT US</a></h5>
+                                <h5><a href="#">CAREERS</a></h5>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <div align="center" style="margin-top:40px">
+                                    <!-- <h5><img src="/img/tie.png" /></h5>  -->
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div style="margin-top:40px">
+                                <div class="col-md-8">
+                                    <div align="right" style="margin-top:10px">
+                                        <h3><a href="/service" style="font-size:14px">SIGN IN</a></h3>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input class="btn btn-primary btn-lg btn-cta-blue" type="button" data-loading-text="Loading..." onclick="window.location = '/profile'" value="GET STARTED">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script type="text/javascript">
+            var showSmallHeader = <?= (( $this->layout()->showSmallHeader == true ) ? "true" : "false") ?>;
+        </script>
+
+        <!-- Libs -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="vendor/jquery.js"><\/script>')</script>
+        <script src="/js/plugins.js"></script>
+        <script src="/vendor/jquery.easing.js"></script>
+        <script src="/vendor/jquery.appear.js"></script>
+        <script src="/vendor/jquery.cookie.js"></script>
+        <script src="/vendor/bootstrap.js"></script>
+        <script src="/vendor/twitterjs/twitter.js"></script>
+        <script src="/vendor/flexslider/jquery.flexslider.js"></script>
+        <script src="/vendor/jflickrfeed/jflickrfeed.js"></script>
+        <script src="/vendor/magnific-popup/magnific-popup.js"></script>
+        <script src="/vendor/jquery.validate.js"></script>
+
+        <!-- Theme Initializer -->
+        <script src="/js/theme.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/custom.js"></script>          
+    </body>
+</html>

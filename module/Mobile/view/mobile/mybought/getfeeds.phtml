@@ -1,0 +1,96 @@
+<?php
+$likearray = $this->likearray;
+if (!empty($this->feedData)) {
+    foreach ($this->feedData as $prod) {
+            $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod['feeddataid'] . '/' . rand();
+            $title = 'ELNove - ' . $prod['caption'];
+        ?>
+               <div class="block-cart">
+                <div class="relative img-product display-block">
+              <!--   <a href="service/feeddatadetail/<?php echo $prod['feeddataid']; ?>/<?php echo rand();?>"> -->
+                <a href="#" data-toggle="modal" data-target="#myModal" class="show-moreinfo" data-value="<?php echo $prod['feeddataid']; ?>"> 
+                    <img class="img-responsive" src="<?php echo ($prod['feedId']==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod['feedimageurl']):$prod['feedimageurl']) ?>" alt="">
+                </a>
+
+
+                    <div class="top-left">
+                    <a href="javascript:void(0);" class="fl idUnBboughtArticle" data-articleid="<?php echo base64_encode($prod['feeddataid'])?>">
+                        <img class="img-responsive" src="/templates/mobile/images/usd.png" alt="">
+                        </a>
+                    </div>
+                    <?php if(isset($prod['feedId']) && $prod['onsale'] == 'Y') { ?>
+                    <div class="top-right">
+                        <div class="discount"><?php echo round(($prod['price']-$prod['saleprice'])/$prod['price']*100)?>%<br/>OFF</div>
+                    </div>
+                    <?php }//end if ?>
+
+                    <div class="row pull-child">
+                        <div class='col-xs-12'>    
+                            <div  class="opacity">
+                                <div>
+                                    <div class="col-xs-10 bottom-left">
+                                        <div class="product-name"><?php echo $this->string_helper($prod['caption']); ?></div>
+                                        <div class="price"><?php echo $prod['price']; ?><span class="currency"><?php echo $prod['currency'] ?></span></div>
+                                    </div>
+                                    <div class='col-xs-2 bottom-right'>
+                                          <a href="javascript:void(0);" class="likes check-like" id="<?php echo base64_encode($prod['feeddataid']); ?>">
+                                            <?php if(in_array($prod['feeddataid'], $likearray)) { ?>
+                                            <i id="like<?php echo $prod['feeddataid']; ?>" class="fa fa-thumbs-up"></i>  
+                                            <?php } else { ?>
+                                            <i id="like<?php echo $prod['feeddataid']; ?>" class="fa fa-thumbs-o-up"></i> 
+                                            <?php } ?>
+                                        </a>
+                                         
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+               
+
+                </div>
+                <div class="share-add-to-cart">
+                <a href="#" data-toggle="modal" data-target="#myModal_social" data-value="<?php echo $prod['feeddataid']; ?>" class="popup-share"> 
+                    <div class="share check-like">
+                        <i class="fa fa-share-alt"></i>
+                    </div>
+                    </a>
+                    <div class="add-to-cart">
+                        <div class="continue ">
+                           <?php 
+                                $disable ='';
+                                 $add ='add to cart';
+                                if(in_array($prod['feeddataid'],$this->listItemCart)) { 
+                                    $disable = 'disabled="disabled"';
+                                     $add ='added to cart';
+                                }
+                            ?>
+                            
+                            <button data-feedid="<?php echo $prod['feeddataid']; ?>" class="btn btn-default btn-submit btn-block btn-continue addCart" <?php echo $disable ?>><?php echo $add; ?></button>
+                        </div>
+                    </div>
+                     <ul class="clearfix" style="display:none">
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
+                        <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+                    </ul>
+                </div>
+            </div>
+    <?php } ?>
+
+<?php } else { ?>
+    <div class="col-md-3 noitem" style="text-align: center;width: 100%;">Oops No Record found.</div>
+<?php } ?>
+<script type="text/javascript">
+    $("[data-toggle=popover]").popover({
+    html: true, 
+    content: function() {
+        //$(".social_outfit").show();
+          return $(this).parents(".share-add-to-cart").find(".social_article").html();
+        }
+    });
+</script>

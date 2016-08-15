@@ -1,0 +1,79 @@
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myForm").validate({
+     rules: {
+         profilepic: {
+            required: true,
+             extension: "gif|jpg|jpeg|png"
+         }
+     },
+     messages: {
+         profilepic: {
+            required: 'Please upload your picture.',
+            extension: 'Please upload only gif, jpg, jpeg and png image files'
+         }
+     }
+  });
+});
+</script>
+
+<style type="text/css">
+    form label { width: 250px; }
+    form label.error {color: #FF0000; display: block; }
+</style>
+
+
+<div class="container">
+    <div class="e">
+        <div class="account-btn">
+            <a href="/profile/myaccount" class="btn-1">
+                ACCOUNT
+            </a>
+            <br>
+            <a href="/profile" class="btn-2">
+                EDIT MY STYLE QUESTIONS
+            </a>
+            <!--<br>
+            <a href="#" class="btn-3">
+                ORDERS
+            </a>-->
+        </div>
+
+        <form name="myForm" id="myForm" method="POST" enctype="multipart/form-data">
+        <input type="hidden" value="<?php echo $userdata['user_prp_pic']; ?>" id="oldpic" name="oldpic">
+            <div class="account-box">
+                <h1>Upload Profile Picture</h1>
+
+                <div class="red_box" id="errormsgblock">
+                    <div class="cross_img">
+                        <img src="/img/cross.png" >
+                    </div>
+                    <p id="errormsg"></p>
+                    <div class="cross_img1 fr"><img src="/img/cross.png" >
+                        <div class="clr"></div>
+                    </div>
+                </div>
+
+                <div class="profile-box">
+                    <div class="box-one">&nbsp;</div>
+
+                    <div class="box-two">
+                        <h2></h2>
+                        <input type="file" class="namefile" id="profilepic" name="profilepic">
+                        <h2>&nbsp;</h2>
+                        <div class="default1"></div>
+                        <div class="clr"></div>
+                        <div class="fr"><button class="contact_btn" id="submit">Submit</button></div>
+                    </div>
+
+                    <div class="box-three">&nbsp;</div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div><!--container-->

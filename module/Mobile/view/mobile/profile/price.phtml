@@ -1,0 +1,188 @@
+<?php
+echo $this->headLink()->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.skinHTML5.css')->appendStylesheet($this->basePath() . '/templates/mobile/css/style.css');
+?>
+
+<style type="text/css">
+    .question-criteria:last-child{
+        margin-bottom: 100px;
+    }
+</style>
+
+<div class="req2e-page">
+    <div class="wrap wrap-1">
+        <div class="container">
+            <section>
+                <div class="about">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="block find-stitch-block">
+                                    <h3 class="title lowcase title-find-stitch">How Much Would You Spend?</h3>
+                                    <div class="form-group">
+                                        <ul class="list-radio list-radio-find-stitch list-inline">
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio2" value="option1">
+                                                    <label for="radio2" class="radio-label"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio2" value="option1" >
+                                                    <label for="radio2" class="radio-label"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio2" value="option1" checked="">
+                                                    <label for="radio2" class="radio-label"></label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="radio radio-find-stitch">
+                                                    <input type="radio" disabled name="radio2" id="radio3" value="option1" >
+                                                    <label for="radio3" class="radio-label"></label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <?php for ($i = 0; $i < 5; $i++) { ?>
+                                    <div class="question-criteria">
+                                        <h4 class="question question-find-stitch capitalize"><?php echo  $this->price[$i]['title'] ?></h4>
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                $ <input type="text" class="lb" id="<?php echo  $this->price[$i]['name'] ?>Value">
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <div class="ranger" id="<?php echo  $this->price[$i]['name'] ?>">
+                                                    <input type="text" id="<?php echo  $this->price[$i]['name'] ?>range" value="" name="shirtrange" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <?php }//end for ?> 
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div><!-- /.container -->
+        <div class="continue">
+            <button type="button" class="btn btn-default btn-submit btn-block btn-continue fix-button" id="btnNextStep">Continue</button>
+        </div>
+    </div>
+
+    <form id="myForm" method="POST">
+        <?php foreach($this->price as $aBox) {?>
+            <input type="hidden" id="id<?php echo  $aBox['name'] ?>Input" name="<?php echo  $aBox['name'] ?>" value="<?php echo  $aBox['value'] ?>" />
+        <?php }//end foreach ?>
+    </form>
+</div>
+
+<script type="text/javascript">
+/*** Script for Close Popup alert ***/
+$(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+    $("button.my_btn_ok").click(function(){
+        $('a.close-reveal-modal').trigger('click');
+    });
+});
+
+/*** SETUP FOR ALL SLIDER ***/
+<?php foreach ($this->price as $aBox) { ?>
+    //Process when client scroll Slider
+    $("#<?php echo  $aBox['name'] ?>range").ionRangeSlider({
+        hide_min_max: true,
+        type: "single",
+        min: <?php echo  $aBox['minPrice'] ?>,
+        max: <?php echo  $aBox['maxPrice'] ?>,
+        from: <?php echo  $aBox['value'] ?>,
+        keyboard: true,
+        step: <?php echo  $aBox['step'] ?>,
+        hide_from_to:true,
+        onStart: function (value) {
+            if($("#id<?php echo  $aBox['name'] ?>Input").val() > 0) {
+                newValue = value.from >= <?php echo  $aBox['maxPrice'] ?> ? '<?php echo  $aBox['maxPrice'] ?>+' : value.from;
+                $("#<?php echo  $aBox['name'] ?>Value").val(newValue);
+                $("#id<?php echo  $aBox['name'] ?>Input").val(value.from); 
+            }
+        },
+        onChange:function(){
+            newValue = $('#<?php echo  $aBox['name'] ?>range').prop("value");
+            $("#<?php echo  $aBox['name'] ?>Value").val(newValue >= <?php echo  $aBox['maxPrice'] ?> ? '<?php echo  $aBox['maxPrice'] ?>+' : newValue);
+            $("#id<?php echo  $aBox['name'] ?>Input").val(newValue);
+        }
+    });
+    //Save slider instance to var for update
+    var <?php echo  $aBox['name'] ?>Slider = $("#<?php echo  $aBox['name'] ?>range").data("ionRangeSlider");
+    //Process when client input anything to textbox
+    $("#<?php echo  $aBox['name'] ?>Value").keyup(function(){
+        this.value = this.value.replace(/[^0-9]/g,'');
+        <?php echo  $aBox['name'] ?>Slider.update({
+            from: this.value > <?php echo $aBox['maxPrice'] ?> ? <?php echo $aBox['maxPrice'] ?> : this.value,
+        });
+        $( "#id<?php echo  $aBox['name'] ?>Input" ).val(this.value);
+    });
+    //Process when client move out textbox
+    $("#<?php echo  $aBox['name'] ?>Value").change(function(){
+        if(this.value < <?php echo  $aBox['minPrice'] ?>){
+            $( "#id<?php echo  $aBox['name'] ?>Input" ).val('');
+            myalert('alerterror<?php echo $aBox['name'] ?>','type_missing','Oops', 'Min value for <?php echo  $aBox['name'] ?> must be $'+<?php echo  $aBox['minPrice'] ?>,'');
+        }
+        if(this.value > <?php echo  $aBox['maxPrice'] ?>){
+            $("#<?php echo  $aBox['name'] ?>Value").val(<?php echo  $aBox['maxPrice'] ?>+'+');
+        }
+    });
+<?php }//end foreach ?>
+
+$(".thumb-info").on("click", function (e) {
+    e.preventDefault();
+    if ($(this).hasClass("lock")) {
+        $(this).removeClass("lock");
+        $(this).find('.checkmark').removeClass("check-one fa fa-check");
+        $(this).find('.checkmark').addClass("check-blank");
+    } else {
+        $(this).addClass("lock");
+        $(this).find('.checkmark').removeClass("check-blank");
+        $(this).find('.checkmark').addClass("check-one fa fa-check");
+    }
+    return false;
+});
+
+$("#btnNextStep").on("click", function (e) {
+    <?php foreach($this->price as $aBox) { ?>
+        if( $( "#id<?php echo  $aBox['name'] ?>Input" ).val() < 1 ) { 
+         
+            myalert('myalertid<?php echo  $aBox['name'] ?>Input','type_missing','Oops', 'Seems like you forgot to answer, How much would you spend <?php echo  $aBox['title'] ?>.','','',function(){
+                $('a.close-reveal-modal').trigger('click');
+            });   
+            $('html, body').animate({scrollTop: $("#<?php echo  $aBox['name'] ?>Value").offset().top - 200}, 500);          
+            return false;
+        }
+    <?php }//end foreach ?>
+    $("#myForm").submit();
+});
+
+$(window).load(function () {
+    var url = "/profile/profiletraking";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {page: 'price'},
+        dataType: 'json',
+        success: function (result) {}
+    });
+});
+</script>

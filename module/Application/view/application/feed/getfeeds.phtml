@@ -1,0 +1,41 @@
+
+<!-- <div style="text-align:center;color:#254F73">
+<h3 style="background-color: rgb(255, 255, 255);margin: 0px;padding: 25px 0px; border-bottom:2px solid #F6F6F4">
+<?php if (!empty($this->feedData)) echo number_format($this->feedCount)  ?> results was found</h3>
+</div> -->
+<input type="hidden" id="feedCountAjax" value="<?php echo $this->feedCount; ?>">
+<?php
+$likearray = $this->likearray;
+if (!empty($this->feedData)) {
+    foreach ($this->feedData as $prod) {
+        ?>
+        <div class="main_big1_product_box productsBox draggable-element">
+            <!--<div class="portfolio-item img-thumbnail productsBox">-->
+
+            <div class="main_big1_product_img_box">
+                <img src="<?php echo ($prod['feedId']==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod['feedimageurl']):$prod['feedimageurl']) ?>" id="img">
+                  <?php if($prod['icon'] == 'red') { ?>
+                    <i class="myfa myfa-red fa fa-lightbulb-o"></i>
+                    <?php } else if($prod['icon'] == 'green'){ ?>
+                     <i class="myfa myfa-green fa fa-lightbulb-o"></i>
+                    <?php } else {?>
+                    <i class="myfa myfa-orange fa fa-lightbulb-o"></i>
+                    <?php } ?>
+            </div>
+
+              <div class="box-block">
+                    <div class="pad">
+                        <a target="_blank" href="/feed/edit-article?pid=<?php echo $prod['feeddataid'];?>" class="gotourl">Edit</a>
+                        </br>
+             <!--            <a href="#" class="gotourl">Remove</a> -->
+                    </div>
+                </div>
+            </div>  
+
+            <!--</div>-->
+        </div>
+    <?php } ?>
+
+<?php } else { ?>
+    <div class="col-md-3" style="text-align: center;width: 100%;">Oops No Record found.</div>
+<?php } ?>

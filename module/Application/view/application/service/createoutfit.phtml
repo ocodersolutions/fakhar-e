@@ -1,0 +1,1514 @@
+<?php
+//$outfitsData = $this->outfits;
+$outfitsData = array();
+foreach($this->outfits as $key=>$value)
+{
+	$outfitsData[$value['feed_position']-1] = $value;
+}
+?>
+<!--<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/bootstrap-select/bootstrap-select.css">
+<link href="/css/edit.css" media="screen" rel="stylesheet" type="text/css">
+<link rel="stylesheet/less" type="text/css" href="/css/bootstrap-progressbar-3.0.0.less">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-progressbar-3.0.0.css">-->
+<script src="<?php echo $this->basePath(); ?>/vendor/bootstrap/bootstrap-select/bootstrap-select.js"></script>
+<link rel="stylesheet" href="<?php echo $this->basePath(); ?>/vendor/jqueryui/development-bundle/themes/base/jquery.ui.all.css">
+<link rel="stylesheet" href="<?php echo $this->basePath(); ?>/fa/css/build.css">
+<!--<link rel="stylesheet" href="/vendor/jqueryui/custom.css">-->
+<script src="<?php echo $this->basePath(); ?>/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
+<script src="<?php echo $this->basePath(); ?>/templates/mobile/js/bootstrap.min.js"></script>
+<script src="<?php echo $this->basePath(); ?>/js/showfeeddetail.js"></script>
+<script src="<?php echo $this->basePath(); ?>/simpleexpand/simple-expand.min.js"></script>
+
+<link type="text/css"  href="<?php echo $this->basePath(); ?>/css/onlymodal.css"  rel="stylesheet" />
+<link type="text/css"  href="<?php echo $this->basePath(); ?>/css/showfeeddetail.css"  rel="stylesheet" />
+<style>
+    <!--
+    .btn-default{	background-color:#16979d; color:#FFF; font-weight:bold;}
+    .btn-default:hover{ background-color:#16979d; color:#FFF; font-weight:bold; }
+    .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default { background-color:#16979d; color:#FFF; font-weight:bold; }
+
+    .optionsList{}
+    .optionsList td{padding-top:15px}
+
+    .topMediumBox .overlay{top:85px;}
+
+    .topSmallBox .overlay{top:45px;}
+
+    .topWorkingArea{}
+    .topWorkingArea .img-thumbnail{border-color:#FFF;}
+    .topWorkingArea .img-thumbnail:hover{border-color:#DDDDDD}
+    .topWorkingArea .actions .socialmedia{height:27px; width:27px; background:url('/img/service/socialmedia.jpg'); float:right; margin-left:5px;}
+    .topWorkingArea .actions .arrows{height:27px; width:27px; background:url('/img/service/arrows.jpg'); float:right; margin-left:5px;}
+    .topWorkingArea .actions .refresh{height:27px; width:35px; background:url('/img/service/refresh.jpg'); float:right; margin-left:5px;}
+    .topWorkingArea .actions .save{height:27px; width:27px; background:url('/img/service/save.jpg'); float:right; margin-left:5px;}
+
+    .bottomWorkingArea .img-thumbnail{border-color:#FFF; float:left;  width: 100%}
+    .bottomWorkingArea .img-thumbnail:hover{border-color:#DDDDDD}
+
+    .bottomWorkingArea .productsBox .overlay .open{float:left; width:30px;  margin-left:5px; height:43px; background-image:none}
+    .bottomWorkingArea .productsBox:hover .overlay .open{float:left; width:30px;  margin-left:5px; height:43px; background-image:url('/img/service/unlock.png')}
+
+     ul.scrollheight { height: 300px;overflow-y: auto;}
+    .activebrand{background-color: #CCCCCC;}
+    .activecolor{
+        border:2px solid black; background-image: url("/img/tick2.png"); background-size: 20px 15px; 
+    background-repeat: no-repeat; 
+    background-position: center center;
+    }
+    .activedeal {background:#e06;text-decoration:none;}
+
+    .form-control{height: 34px; padding:2px 2px 2px 6px; font-style:italic; font-size: 11px;}
+
+    .pageTitle { width:100%; text-align:center;}
+    .left { float:left;}
+    .center { display: inline-block; margin:0 auto; width:250px;}
+    .right { float:right; width:370px; margin-top:35px}
+    .right .input-group{ width: 200px; float:right }
+    .right .venueBox{float:right; width:120px; margin-left:5px}
+    .right .venueBox .dropdown-menu > li > a{text-align:left;} 
+
+    .btn-default .caret {
+        border-top-color: #FFFFFF;
+    }
+    -->
+    /*===========================contener-01=================*/
+    #contener-01{
+        width:100%;
+        height:100%;
+        display:none;
+        top:0;
+        left:0;
+        background:#fff;
+        position:fixed;
+        z-index:1212;'
+        overflow:hidden;
+        text-align:center;
+        }
+        .progress {
+        background-color: #5e5e5e;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+        height: 4px;
+        margin-bottom: 40px;
+        margin-top:35px;
+        overflow: hidden;
+        }
+
+        .progress-bar-danger{
+        background:#16979d;
+        }
+
+        .thumbnail-01{
+        border:none;
+        box-shadow:none;
+        background:none;
+        }
+        .progress .progress-bar.six-sec-ease-in-out {
+        -webkit-transition: width 1s ease-in-out;
+        -moz-transition: width 1s ease-in-out;
+        -ms-transition: width 1s ease-in-out;
+        -o-transition: width 1s ease-in-out;
+        transition: width 1s ease-in-out;
+        }
+        /*===========================contener-01=================*/
+        .remove-icon{ height: 16px; width: 16px; background:url('/img/service/remove.png') no-repeat; margin-left: 5px; margin-top: 4px; }
+		  .draggable { position: relative; }
+		  .draggable-element { position: relative; }	
+</style>
+<style>
+    .price-box {
+        background: none repeat scroll 0 0 #E9E9E9;
+        margin: 20px auto 0 7px;
+        width: 200px;
+    }
+    .form-pricing {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border-radius: 4px 4px 4px 4px;
+        padding: 5px;
+    }
+    .price-slider {
+        margin-bottom: 30px;
+    }
+    .col-sm-padding {
+        padding: 0;
+    }
+
+    .ui-corner-all {
+        border-radius: 4px 4px 4px 4px;
+    }
+    .ui-widget-content {
+        background: none repeat scroll 0 0 #DCF0F0;
+        border: 1px solid #AAAAAA;
+        color: #222222;
+        height: 8px;
+        margin-top: 0;
+    }
+    .ui-slider .ui-slider-handle {
+        cursor: pointer;
+    }
+    .ui-slider-horizontal .ui-slider-handle {
+        margin-left: -0.5em;
+    }
+    .ui-slider-horizontal .ui-slider-handle {
+        top: -0.9em;
+    }
+    .ui-slider .ui-slider-handle {
+        color: #FFFFFF;
+        cursor: default;
+        font-size: 15px;
+        height: 2em;
+        line-height: 30px;
+        margin: 0 -30px auto !important;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+        width: 3.4em;
+        z-index: 2;
+    }
+    .ui-slider a, .ui-slider a:focus {
+        cursor: pointer;
+        outline: medium none;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default {
+        /*background: none repeat scroll 0 0 #254F73 !important;*/
+        /*border: 1px solid #254F73 !important;*/
+        box-shadow: none;
+        height: 13px;
+        margin: 10px -5px auto !important;
+        width: 13px;
+    }
+    .ui-corner-all {
+        border-radius: 4px 4px 4px 4px;
+    }
+    .ui-state-default, .ui-widget-content .ui-state-default label {
+        color: #FFFFFF !important;
+    }
+    .ui-slider-handle.ui-state-default.ui-corner-all > label {
+        color: #5E5E5E !important;
+        left: -28px;
+        position: absolute;
+        top: -24px;
+    }
+    #slider > a:nth-child(even) > label:first-child {
+        left: -10px;
+        width: 35px;
+    }
+    #slider2 > a > label:first-child {
+        left: -22px;
+        width: 40px;
+    }
+    label {
+        margin-bottom: 7px;
+    }
+    .price-slider span {
+        color: #7F8C8D;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 200;
+    }
+    .price-min-max {
+        background-image: url("/img/step_bars.jpg");
+        height: 8px;
+        margin-top: -24px;
+        position: relative;
+        display: none;
+    }
+    .col-sm-padding {
+        padding: 0;
+    }
+    .ui-autocomplete { height: auto !important; }
+    .ui-menu .ui-menu-item a{ font-size: 13px !important; }
+    .sharepoup{
+        top: -110px;
+        cursor: pointer;
+    }
+    .outfitcheckbox{
+        cursor: pointer;
+    }
+    
+    #loading-div-background 
+    {
+        display:none;
+        position:fixed;
+        top:0;
+        left:0;
+        background:black;
+        width:100%;
+        height:100%;
+    	opacity: 0.6;
+    	z-index: 1000;
+     }
+    #loading-div
+    {
+         width: 300px;
+         height: 150px;
+         text-align:center;
+         position:absolute; 
+         left: 50%;
+         top: 50%;
+         margin-left:-150px;
+         margin-top: -100px;
+    	opacity: 1;
+     }    
+     .toggle.expander.expanded {
+            padding-left: 22px;
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-image: url('/img/down.png');
+        }
+    
+        .toggle.expander.collapsed {
+            padding-left: 22px;
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-image: url('/img/right.png');
+        } 
+        .cat h5{
+            cursor: pointer;
+        }
+        button.deal{
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+        #tree .aciTreeText{
+            font-family: 'Roboto' !important;
+        }
+
+        /* style for checkbox */
+
+        .brandslist .checkbox label::before{
+            border-radius: 0;
+            border-color: #acaeb5;
+        }
+        .brandslist .checkbox label::after{
+            background-color: #acaeb5;
+        }
+        .brandslist .checkbox input[type="checkbox"]:checked + label::after{
+            content: ' ';
+        }
+        .brandslist .checkbox label::before{
+            width: 14px;
+            height: 14px;
+        }
+        .brandslist .checkbox label::after {
+            width: 12px;
+            height: 14px;
+        }
+        #slider > a > label {
+            width:50px;
+        }
+        .round-color li{
+            font-size: 13px;
+            font-family: 'Roboto';
+        }
+        .round-color .fa-check{
+            color:#fff;
+        }
+        .round-color .fa-check:before {
+            margin-left: 3px;
+        }
+        .deals_box label{
+            margin-bottom: 0;
+        }
+        .deals_box .fa-circle-o:before {
+            font-size: 17px;
+        }
+        .left-box-check input[type="radio"]:checked + label .fa-circle,input[type="checkbox"]:checked + label .fa-square {
+            color: #fff;
+        }
+        
+        .input-filter{
+            width: 150px ;
+            height: 34px;
+            padding: 0 15px 0 15px;
+            border: 1px solid #e2e2e2;
+        }
+        .btn_filter{
+            padding: 6px 0 5px 4px;
+            border-radius: 4px;
+        }
+        .icon_search{
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        .continueFixAtBottom{
+            padding-top: 35px;
+        }
+        .image-cross{
+            padding: 0;
+        }
+        .btn-con1{
+            margin-top: 0;
+        }
+
+</style>
+
+    <!--============================================================contener-01=============-->
+    <script type="text/javascript">var feedsids = {};</script>
+    <!--============================================================contener-01 end =============-->
+
+<div class="full">
+<div class="container" style="background-color:#F6F6F4;">
+<div id="blue-btn-top"></div>
+
+
+<form method="post" action="<?php echo $this->basePath('service/update-outfit')?>">
+	<?php if($outfit = $this->params()->fromQuery('outfit')) :?>
+		<input type="hidden" name="outfit_id" value="<?php echo $outfit?>">
+	<?php endif;?>
+
+<div id="outfit-block">
+
+    <div class="big_box1">
+    <div class="img_box_main">
+
+        <div class="main_big_product_box1 dropable" data-uid="<?=(isset($outfitsData[0]['uid'])?$outfitsData[0]['uid']:"")?>">
+            <?php if(isset($outfitsData[0]) && $outfitsData[0]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($outfitsData[0]['price']-$outfitsData[0]['saleprice'])/$outfitsData[0]['price']*100)?>%<br/>OFF</div><?php }?>
+            <input type="hidden" name="feedid[1]" value="<?php if(isset($outfitsData[0]['uid'])){ echo $outfitsData[0]['uid'];}?>"/>
+            <?php if(isset($outfitsData[0]['uid'])):?>
+                <script type="text/javascript">feedsids['<?php echo $outfitsData[0]['uid']?>'] = true;</script>
+            <?php endif;?>
+                            
+            <div class="main_big_product_img_box thumb-info" box-size="big">
+                <img id="img" alt="Product Image" class="img-responsive" data-src="/img/big_img.jpg" src="<?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { echo $outfitsData[0]['imageurl']; } else { echo '/img/big_img.jpg'; } ?>">
+            </div>
+            <?php if(isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
+                <div class="main_big_product_tag_box">
+                    <? if($outfitsData[0]['item_count']==0) {?><span class="fa fa-warning" style="color: red"></span> <? }?>
+					<a class="fr remove-icon"></a>                    
+                </div>
+                <div class="box-block1">
+                    <?php
+                    // $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[0]['id'] . '/' . rand();
+                    $title = 'ELNove - ' . $outfitsData[0]['caption'];
+                    ?>                
+                    <div class="pad">
+                        <span class="like_<?= $outfitsData[0]['id']; ?>"><?= $outfitsData[0]['likesCount'] != 0 ? $outfitsData[0]['likesCount'] . ' likes' : ""; ?></span>
+                        <h4 class="articleName"><?php echo $this->string_helper($outfitsData[0]['caption']); ?></h4>
+                        <p><?=($outfitsData[0]['onsale']=='Y'?$outfitsData[0]['saleprice']:$outfitsData[0]['price'])?><span class="currency"><?php echo $outfitsData[0]['currency'] ?></span></p>
+                        <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[0]['id']))); ?>">buy now</a>
+                        <br>
+                        <a class="discover my_tooltip" title="Learn more about this article" href="javascript:void(0)" data-value="<?php echo $outfitsData[0]['id']; ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                    </div>
+                    <div class="social_box1">
+                        <ul>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            <?php } ?>
+            <!--<div class="clr"></div>-->
+        </div>
+
+        <div class="main_sm_product_box1 dropable" data-uid="<?=(isset($outfitsData[1]['uid'])?$outfitsData[1]['uid']:"")?>">
+            <?php if(isset($outfitsData[1]) && $outfitsData[1]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($outfitsData[1]['price']-$outfitsData[1]['saleprice'])/$outfitsData[1]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <input type="hidden" name="feedid[2]" value="<?php if(isset($outfitsData[1]['uid'])){ echo $outfitsData[1]['uid'];}?>"/>
+                            <?php if(isset($outfitsData[1]['uid'])):?>
+                                <script type="text/javascript">feedsids['<?php echo $outfitsData[1]['uid']?>'] = true;</script>
+                            <?php endif;?>
+                            
+            <div class="main_sm_product_img_box thumb-info" box-size="small">
+                <img id="img" alt="Product Image" class="img-responsive" data-src="/img/small_img2.jpg" src="<?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { echo $outfitsData[1]['imageurl']; } else { echo '/img/small_img2.jpg'; } ?>">
+            </div>
+
+            <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
+
+                <div class="main_sm_product_tag_box">
+                    <? if($outfitsData[1]['item_count']==0) {?><span class="fa fa-warning" style="color: red"></span> <? }?>
+					<a class="fr remove-icon"></a>                    
+                </div>               
+                <div class="box-block3 blok">
+                    <?php
+                    $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[1]['id'] . '/' . rand();
+                    $title = 'ELNove - ' . $outfitsData[1]['caption'];
+                    ?>                
+                    <div class="pad">
+                        <span class="like_<?= $outfitsData[1]['id']; ?>"><?= $outfitsData[1]['likesCount'] != 0 ? $outfitsData[1]['likesCount'] . ' likes' : ""; ?></span>
+                        <h4 class="articleName"><?php echo $this->string_helper($outfitsData[1]['caption']); ?></h4>
+                        <p><?=($outfitsData[1]['onsale']=='Y'?$outfitsData[1]['saleprice']:$outfitsData[1]['price'])?><span class="currency"><?php echo $outfitsData[1]['currency'] ?></span></p>
+                        <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[1]['id']))); ?>">buy now</a>
+                        <br>
+                        <a class="discover my_tooltip" title="Learn more about this article" href="javascript:void(0)" data-value="<?php echo $outfitsData[1]['id']; ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                    </div>
+                    <div class="social_box1">
+                        <ul>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+        </div>
+
+        <div class="main_sm_product_box1 dropable" data-uid="<?=(isset($outfitsData[2]['uid'])?$outfitsData[2]['uid']:"")?>">
+            <?php if(isset($outfitsData[2]) && $outfitsData[2]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($outfitsData[2]['price']-$outfitsData[2]['saleprice'])/$outfitsData[2]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <input type="hidden" name="feedid[3]" value="<?php if(isset($outfitsData[2]['uid'])){ echo $outfitsData[2]['uid'];}?>"/>
+                            <?php if(isset($outfitsData[2]['uid'])):?>
+                                <script type="text/javascript">feedsids['<?php echo $outfitsData[2]['uid']?>'] = true;</script>
+                            <?php endif;?>
+                            
+            <div class="main_sm_product_img_box thumb-info" box-size="small">
+                <img id="img" alt="Product Image" class="img-responsive" data-src="/img/small_img2.jpg" src="<?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { echo $outfitsData[2]['imageurl']; } else { echo '/img/small_img2.jpg'; } ?>">
+            </div>
+            <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>
+                <div class="main_sm_product_tag_box">
+                
+                    <? if($outfitsData[2]['item_count']==0) {?><span class="fa fa-warning" style="color: red"></span> <? }?>
+					<a class="fr remove-icon"></a>                    
+                </div>                
+                <div class="box-block3 blok">
+                        <?php
+                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[2]['id'] . '/' . rand();
+                        $title = 'ELNove - ' . $outfitsData[2]['caption'];
+                        ?>                
+                    <div class="pad">
+                        <span class="like_<?= $outfitsData[2]['id']; ?>"><?= $outfitsData[2]['likesCount'] != 0 ? $outfitsData[2]['likesCount'] . ' likes' : ""; ?></span>
+                        <h4 class="articleName"><?php echo $this->string_helper($outfitsData[2]['caption']); ?></h4>
+                        <p><?=($outfitsData[2]['onsale']=='Y'?$outfitsData[2]['saleprice']:$outfitsData[2]['price'])?><span class="currency"><?php echo $outfitsData[2]['currency'] ?></span></p>
+                        <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[2]['id']))); ?>">buy now</a>
+                        <br>
+                        <a class="discover my_tooltip" title="Learn more about this article" href="javascript:void(0)" data-value="<?php echo $outfitsData[2]['id']; ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                    </div>
+                    <div class="social_box1">
+                        <ul>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+
+    <div class="img_box_main left_m_space">
+
+        <div class="main_sm_product_box1 dropable" data-uid="<?=(isset($outfitsData[3]['uid'])?$outfitsData[3]['uid']:"")?>">
+            <?php if(isset($outfitsData[3]) && $outfitsData[3]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($outfitsData[3]['price']-$outfitsData[3]['saleprice'])/$outfitsData[3]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <input type="hidden" name="feedid[4]" value="<?php if(isset($outfitsData[3]['uid'])){ echo $outfitsData[3]['uid'];}?>"/>
+                            <?php if(isset($outfitsData[3]['uid'])):?>
+                                <script type="text/javascript">feedsids['<?php echo $outfitsData[3]['uid']?>'] = true;</script>
+                            <?php endif;?>
+                            
+            <div class="main_sm_product_img_box thumb-info" box-size="small">
+                <img id="img" alt="Product Image" class="img-responsive" data-src="/img/small_img2.jpg" src="<?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { echo $outfitsData[3]['imageurl']; } else { echo '/img/small_img2.jpg'; } ?>">
+            </div>
+            <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>
+                <!--<div class="orange_img fr"><p>6%</p></div>-->
+                <div class="main_sm_product_tag_box">
+                    <? if($outfitsData[3]['item_count']==0) {?><span class="fa fa-warning" style="color: red"></span> <? }?>
+					<a class="fr remove-icon"></a>                    
+                </div>
+                <div class="box-block3 blok">
+                        <?php
+                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[3]['id'] . '/' . rand();
+                        $title = 'ELNove - ' . $outfitsData[3]['caption'];
+                        ?>                
+                    <div class="pad">
+                        <span class="like_<?= $outfitsData[3]['id']; ?>"><?= $outfitsData[3]['likesCount'] != 0 ? $outfitsData[3]['likesCount'] . ' likes' : ""; ?></span>
+                        <h4 class="articleName"><?php echo $this->string_helper($outfitsData[3]['caption']); ?></h4>
+                        <p><?=($outfitsData[3]['onsale']=='Y'?$outfitsData[3]['saleprice']:$outfitsData[3]['price'])?><span class="currency"><?php echo $outfitsData[3]['currency'] ?></span></p>
+                        <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[3]['id']))); ?>">buy now</a>
+                        <br>
+                        <a class="discover my_tooltip" title="Learn more about this article" href="javascript:void(0)" data-value="<?php echo $outfitsData[3]['id']; ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                    </div>
+                    <div class="social_box1">
+                        <ul>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+
+        <div class="main_sm_product_box1 dropable" data-uid="<?=(isset($outfitsData[4]['uid'])?$outfitsData[4]['uid']:"")?>>">
+            <?php if(isset($outfitsData[4]) && $outfitsData[4]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($outfitsData[4]['price']-$outfitsData[4]['saleprice'])/$outfitsData[4]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <input type="hidden" name="feedid[5]" value="<?php if(isset($outfitsData[4]['uid'])){ echo $outfitsData[4]['uid'];}?>"/>
+                            <?php if(isset($outfitsData[4]['uid'])):?>
+                                <script type="text/javascript">feedsids['<?php echo $outfitsData[4]['uid']?>'] = true;</script>
+                            <?php endif;?>
+                            
+            <div class="main_sm_product_img_box thumb-info" box-size="small">
+                <img id="img" alt="Product Image" class="img-responsive" data-src="/img/small_img2.jpg" src="<?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { echo $outfitsData[4]['imageurl']; } else { echo '/img/small_img2.jpg'; } ?>">
+            </div>
+            <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>
+                <div class="main_sm_product_tag_box">
+                    <? if($outfitsData[4]['item_count']==0) {?><span class="fa fa-warning" style="color: red"></span> <? }?>
+					<a class="fr remove-icon"></a>                    
+                </div>               
+                <div class="box-block3 blok">
+                        <?php
+                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[4]['id'] . '/' . rand();
+                        $title = 'ELNove - ' . $outfitsData[4]['caption'];
+                        ?>                
+                    <div class="pad">
+                        <span class="like_<?= $outfitsData[4]['id']; ?>"><?= $outfitsData[4]['likesCount'] != 0 ? $outfitsData[4]['likesCount'] . ' likes' : ""; ?></span>
+                        <h4 class="articleName"><?php echo $this->string_helper($outfitsData[4]['caption']); ?></h4>
+                        <p><?=($outfitsData[4]['onsale']=='Y'?$outfitsData[4]['saleprice']:$outfitsData[4]['price'])?><span class="currency"><?php echo $outfitsData[4]['currency'] ?></span></p>
+                        <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[4]['id']))); ?>">buy now</a>
+                        <br>
+                        <a class="discover my_tooltip" title="Learn more about this article" href="javascript:void(0)" data-value="<?php echo $outfitsData[4]['id']; ?>" >DISCOVER <img src="/img/right1.png" id="im"></a>
+                    </div>
+                    <div class="social_box1">
+                        <ul>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+
+
+        <div class="main_big_product_box1 dropable" data-uid="<?=(isset($outfitsData[5]['uid'])?$outfitsData[5]['uid']:"")?>">
+            <?php if(isset($outfitsData[5]) && $outfitsData[5]['onsale'] == 'Y') {?><div class="salePrice"><?=round(($outfitsData[5]['price']-$outfitsData[5]['saleprice'])/$outfitsData[5]['price']*100)?>%<br/>OFF</div><?php }?>
+                            <input type="hidden" name="feedid[6]" value="<?php if(isset($outfitsData[5]['uid'])){ echo $outfitsData[5]['uid'];}?>"/>
+                            <?php if(isset($outfitsData[5]['uid'])):?>
+                                <script type="text/javascript">feedsids['<?php echo $outfitsData[5]['uid']?>'] = true;</script>
+                            <?php endif;?>
+                            
+            <div class="main_big_product_img_box thumb-info" box-size="big">
+                <img id="img" alt="Product Image" class="img-responsive" data-src="/img/big_img.jpg" src="<?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { echo $outfitsData[5]['imageurl']; } else { echo '/img/big_img.jpg'; } ?>">
+            </div>
+            <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
+                <div class="main_big_product_tag_box">
+                    <? if($outfitsData[5]['item_count']==0) {?><span class="fa fa-warning" style="color: red"></span> <? }?>
+					<a class="fr remove-icon"></a>                    
+                </div>                
+                <div class="box-block1">
+                        <?php
+                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[5]['id'] . '/' . rand();
+                        $title = 'ELNove - ' . $outfitsData[5]['caption'];
+                        ?>                
+                    <div class="pad">
+                        <span class="like_<?= $outfitsData[5]['id']; ?>"><?= $outfitsData[5]['likesCount'] != 0 ? $outfitsData[5]['likesCount'] . ' likes' : ""; ?></span>
+                        <h4 class="articleName"><?php echo $this->string_helper($outfitsData[5]['caption']); ?></h4>
+                        <p><?=($outfitsData[5]['onsale']=='Y'?$outfitsData[5]['saleprice']:$outfitsData[5]['price'])?><span class="currency"><?php echo $outfitsData[5]['currency'] ?></span></p>
+                        <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[5]['id']))); ?>">buy now</a>
+                        <br>
+                        <a class="discover my_tooltip" title="Learn more about this article" href="javascript:void(0)" data-value="<?php echo $outfitsData[5]['id']; ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
+                    </div>
+                    <div class="social_box1">
+                        <ul>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+
+    </div>
+    <div class="clr">&nbsp;</div>
+	 	<div style="float:right;">
+	 		<input type="submit" value="Save & Return" class="saveoutfit" name="save_return" />
+            <input type="submit" value="Save" class="saveoutfit" name="save"/>
+	 	</div>
+	 	<div class="clr"></div>     
+    </div>  <!-- big_box-->
+    
+    
+    
+</div>
+
+</form>
+
+
+<div id="article-block">
+<div class="left-link-box">
+    <?php 
+        include('refined.phtml'); 
+        //echo $this->partial('refined.phtml');
+    ?>
+</div><!-- left_link_box-->
+
+
+<div class="right-link-box">
+
+    <div class="clr"></div>
+
+    <div class="image-box bottomWorkingArea draggable" id="productlisting">
+
+        <?php
+        foreach ($this->feedData as $prod) {
+
+            $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand();
+            $title = 'ELNove - ' . $prod->caption;
+            ?>
+            <div class="main_big1_product_box productsBox draggable-element">
+                <div class="portfolio-item img-thumbnail productsBox">
+                
+                    <?php if($prod->onsale == 'Y') {?><div class="salePrice"><?=round(($prod->price-$prod->saleprice)/$prod->price*100)?>%<br/>OFF</div><?php }?>
+
+                    <div class="main_big1_product_img_box thumb-info">
+                        <img class="img-responsive" data-id="<?php echo $prod->uid; ?>" data-name="<?php echo $prod->caption; ?>" data-price="<?php echo $prod->price; ?>" src="<?php echo $prod->feedimageurl; ?>" id="img">
+                    </div>
+
+                    <div class="main_big1_product_tag_box">
+                  
+                    </div>
+
+                    <div class="box-block"> 
+                        <div class="pad">
+                            <span class="like_<?= $prod->feeddataid; ?>"><?= $prod->likesCount != 0 ? $prod->likesCount . ' likes' : "&nbsp;"; ?></span>
+                            <h4><?php echo $this->string_helper($prod->caption); ?></h4>
+                            <p><?=($prod->onsale=='Y'?$prod->saleprice:$prod->price)?><span class="currency"><?php echo $prod->currency ?></span></p>
+                            <a class="buy_now my_tooltip" title="Purchase article through our partner" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>">buy now</a>
+                            <br/>
+                            <a data-value="<?php echo $prod->feeddataid; ?>" href="javascript:void(0)" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
+                        </div>
+                        <div class="social_box">
+                            <ul>
+                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/f.png"></a></li>
+                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/p1.png"></a></li>
+                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/t.png"></a></li>
+                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/g.png"></a></li>
+                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/msg.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <?php } ?>
+
+    </div>
+
+    <div id='loading' style="text-align:center;padding-top:20px;display:none;" class="col-md-10">
+        <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>"/>
+    </div>
+    <div id='ajx_loader_div' style="display:none;z-index:999999;">
+        <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>" id="ajx_loader_image" />
+    </div>
+
+    <div class="clr"></div>
+</div>
+</div>
+<div class="clr"></div>
+</div><!--container-->
+</div>
+
+
+    <br /><br /><br /><br />
+
+    <script src="<?php echo $this->basePath('vendor/jqModal/jqModal.js')?>"></script>
+
+    <form id="productFilterDetail" name="productFilterDetail">
+        <input type="hidden" id="minamount" class="form-control" name="minamount">
+        <input type="hidden" id="maxamount" class="form-control" name="maxamount">
+        <input type="hidden" id="minduration" class="form-control" name="minduration">
+        <input type="hidden" id="maxduration" class="form-control" name="maxduration">
+        <input type="hidden" id="catids" class="form-control" name="catids">
+        <input type="hidden" id="brands" class="form-control" name="brands">
+        <input type="hidden" id="colors" class="form-control" name="colors">
+        <input type="hidden" id="stores" class="form-control" name="stores">
+        <input type="hidden" id="deals" class="form-control" name="deals">
+        <input type="hidden" id="onsale" class="form-control" name="onsale">
+        <input type="hidden" id="todaynew" class="form-control" name="todaynew">
+        <input type="hidden" id="newthisweek" class="form-control" name="newthisweek">
+        <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
+        <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
+        <input type="hidden" id="discountcode" class="form-control" name="discountcode">
+        <input type="hidden" id="page" class="form-control" name="page" value="2">
+        <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">  
+        <input type="hidden" id="filter" name="filter" value="">
+    </form>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:none">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content grey_bg">
+
+      <div class="modal-body append">
+        
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<div id="loading-div-background" style="display: none;">
+    <div id="loading-div" class="ui-corner-all">
+      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading..">
+      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+     </div>
+</div>
+
+
+
+    <!--=================script-by-designer=============-->
+        <script src="<?php echo $this->basePath(); ?>/js/showfeeddetail.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/clearfilter.js"></script>
+
+    <script type="text/javascript">
+        $(".btn_filter").click(function(){
+            var keyword = $("#keyword").val();
+            if(jQuery.trim(keyword) != '') {
+                $("#filter").val(keyword);
+            } else {
+                 $("#filter").val('');
+            }
+            loadProductData();
+
+            
+        });
+    </script>
+
+    <script type="text/javascript">
+         $(document).ready(function() {
+             /*expand filter*/
+                 $('.expander').simpleexpand();
+            $(document).on('click', '.overlay-01', function() {
+                reditectToBuyurl(this);
+            });
+            $('.overlay-01').click(function() {
+                reditectToBuyurl(this);
+            });
+            function reditectToBuyurl(obj) {
+                $("#contener-01").css("display", "block");
+                $('.progress-bar').progressbar();
+                $('#productbuyurl').attr('href', $(obj).attr('href'));
+                setTimeout(function(){
+                    jQuery('#productbuyurl')[0].click();
+                    $("#contener-01").css("display", "none");                    
+                }, 2000);
+            }
+        });
+        $(function() {
+            $(".btn-01").click(function() {
+                // remove classes from all
+                $(".btn-01").removeClass("active");
+                $(this).addClass("active");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $(".slider-01").click(function() {
+                // remove classes from all
+                $(".price-form-01").css("display", "block");
+                // add class to the one we clicked
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $(".price-01").click(function() {
+                // remove classes from all
+                $(".price-form-01").css("display", "none");
+                // add class to the one we clicked
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $(".slider-02").click(function() {
+                // remove classes from all
+                $(".price-form-02").css("display", "block");
+                // add class to the one we clicked
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $(".price-02").click(function() {
+                // remove classes from all
+                $(".price-form-02").css("display", "none");
+                // add class to the one we clicked
+            });
+        });
+    </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#slider").slider({
+                    range: true,
+                    min: 0,
+                    max: <?php echo $this->maxRangePrice; ?>,
+                    values: [0, <?php echo $this->maxRangePrice; ?>],
+                    slide: function (event, ui) {
+                        update(1, ui.values); //changed
+                    },
+                    stop: function (event, ui) {
+                        loadProductData();
+                    }
+                });
+                $("#slider2").slider({
+                    range: true,
+                    min: 0,
+                    max: 100,
+                    values: [0,100],
+                    step: 10,
+                    slide: function (event, ui) {
+                        update(2, ui.values); //changed
+                    },
+                    stop: function (event, ui) {
+                        loadProductData();
+                    }
+                });
+                //Added, set initial value.
+                $("#minamount").val($("#slider").slider("option", "min"));
+                $("#maxamount").val($("#slider").slider("option", "max"));
+
+ 
+                $("#minduration").val($("#slider2").slider("option", "min"));
+                $("#maxduration").val($("#slider2").slider("option", "max"));
+
+                //$("#duration").val($("#slider").slider("option", "min"));
+                //$("#amount-label").text(0);
+                //$("#duration-label").text(0);
+                update();
+            });
+
+            //changed. now with parameter
+            function update(slider, val) {
+                //changed. Now, directly take value from ui.value. if not set (initial, will use current value.)
+                var $minamount = slider == 1 ? val[0] : $("#minamount").val();
+                var $maxamount = slider == 1 ? val[1] : $("#maxamount").val();
+                //var $duration = slider == 2 ? val : $("#duration").val();
+
+                var minduration = slider == 2 ? val[0] : $("#minduration").val();
+                var maxduration = slider == 2 ? val[1] : $("#maxduration").val();
+
+                /* commented
+                 $amount = $( "#slider" ).slider( "value" );
+                 $duration = $( "#slider2" ).slider( "value" );
+                 */
+
+                //$total = "$" + ($amount * $duration);
+                $("#minamount").val($minamount);
+                $("#maxamount").val($maxamount);
+                //$("#amount-label").text($amount);
+                
+                /*my close*/
+                    // $("#duration").val($duration);
+                    // $("#duration-label").text($duration);
+                /*end*/
+
+                $("#minduration").val(minduration);
+                $("#maxduration").val(maxduration);
+
+                // $("#total").val($total);
+                //$("#total-label").text($total);
+                sliderLinks = $('#slider a');
+
+                $(sliderLinks[0]).html('<label >' + $minamount + ' </label>');
+              if($maxamount >= <?php echo $this->maxRangePrice;?>) {
+                $(sliderLinks[1]).html('<label ><?php echo $this->maxRangePrice;?>+' + ' </label>');
+                $("#maxamount").val(<?php echo $this->actualMaxRangePrice?>);
+              } else {
+                $(sliderLinks[1]).html('<label >' + $maxamount + ' </label>');
+              }
+             
+              
+
+                sliderLinks = $('#slider2 a');
+                $(sliderLinks[0]).html('<label>' + minduration +"<span>%</span>" + ' </label>');
+                $(sliderLinks[1]).html('<label >' + maxduration + "<span >%</span>" + ' </label>');
+                //$('#slider2 a').html('<label style="margin-left:15px;">' + $duration + '%</label>');
+            }
+        </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $(document).on('mouseenter', '.thumb-info', function() {
+                $(this).find(".overlay-02").css("display", "block");
+            }).on('mouseleave', '.thumb-info', function() {
+                $(this).find(".overlay-02").css("display", "none");
+            });
+        });
+
+        $(document).ready(function() {
+            $(document).on('click', '.aciTreeLi', function() {
+                var fontthis = this;
+                $(fontthis).siblings(".aciTreeLi").find(".aciTreeText").removeClass("font-bold");
+                $(fontthis).find(fontthis).addClass("font-bold");
+                //		$(fontthis).parents(".aciTreeText").addClass(".font-bold");
+            });
+        });        
+    </script>
+
+    <!--=================script-by-designer end portfolio-single-project.html====================-->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#idArticlesPerPageSelect").change(function() {
+                $("#ArticlesPerPageForm").submit()
+            });
+
+            $('.selectpicker').selectpicker({
+                //'selectedText': 'cat'
+                width: '120px'
+            });
+
+            var t = $('#dialog');
+
+            $('#dialog').jqm({
+                trigger: 'div.productdialogs',
+                ajax: '@href', /* Extract ajax URL from the 'href' attribute of triggering element */
+                target: t,
+                modal: true, /* FORCE FOCUS */
+            });
+
+            $('input.jqmdX')
+                    .hover(
+                            function() {
+                                $(this).addClass('jqmdXFocus');
+                            },
+                            function() {
+                                $(this).removeClass('jqmdXFocus');
+                            })
+                    .focus(
+                            function() {
+                                this.hideFocus = true;
+                                $(this).addClass('jqmdXFocus');
+                            })
+                    .blur(
+                            function() {
+                                $(this).removeClass('jqmdXFocus');
+                            });
+
+            $('input.jqmdX')
+                    .hover(
+                            function() {
+                                $(this).addClass('jqmdXFocus');
+                            },
+                            function() {
+                                $(this).removeClass('jqmdXFocus');
+                            })
+                    .focus(
+                            function() {
+                                this.hideFocus = true;
+                                $(this).addClass('jqmdXFocus');
+                            })
+                    .blur(
+                            function() {
+                                $(this).removeClass('jqmdXFocus');
+                            });
+
+            $('#dialog').css('padding-bottom', '0px');
+
+
+            /*$(".bottomWorkingArea .productsBox").on("click", function(e) {
+
+                if ($(this).find(".lock").length) {
+                    $(this).find(".lock").removeClass('lock').addClass('open')
+                }
+                else {
+                    $(this).find(".open").removeClass('open').addClass('lock')
+                }
+
+                return false;
+
+            });
+
+            $(".topWorkingArea .topBigBox,.topMediumBox,.topSmallBox").on("click", function(e) {
+
+                if ($(this).find(".open").length) {
+                    $(this).find(".open").removeClass('open')
+                    $(this).find(".plus").addClass('plusOpen')
+                    $(this).find(".minus").addClass('minusOpen')
+                }
+                else {
+                    $(this).find(".lock").addClass('open')
+                    $(this).find(".plus").removeClass('plusOpen')
+                    $(this).find(".minus").removeClass('minusOpen')
+                }
+                return false;
+            });*/
+        });
+
+    </script>
+
+    <script class="code" type="text/javascript">
+
+        $(function() {
+            // init the tree
+            $('#tree').aciTree({
+                ajax: {
+                    url: '/attributes/get-categories-json?mapped=true&ec=<?= $this->excludeCats ?>&levels=3&id='
+                },
+                checkbox: true
+            });
+
+            $('#tree').on('acitree', function(event, api, item, eventName, options) {
+                switch (eventName) {
+                    case 'checked':
+                        //alert('checked: ' + api.getId(item));
+                        //break;
+                    case 'unchecked':
+                        getAllCheckedElements(event, api, item, eventName, options);
+                        loadProductData();
+                        break;
+                    case 'init' :
+                        getAllCheckedElements(event, api, item, eventName, options);
+                        break;
+                }
+            });
+        });
+
+        function getAllCheckedElements(event, api, item, eventName, options)
+        {
+            var checkedElements = $("#tree .aciTreeLi .aciTreeLeaf");
+            checkedElementsArr = api.checkboxes(checkedElements, true);
+            var catIdStr = '';
+            checkedElementsArr.each(function(index, item) {
+                var $item = $(item);
+                catIdStr += api.getId($item) + ',';
+                //console.log(api.getId($item) + ": " + api.getLabel($item));
+            });
+            $("#catids").val(catIdStr);
+        }
+
+    </script>
+
+    <script type="text/javascript">
+            var loading = 0;
+            var endData = 0;
+            function loadProductData(isLazyLoading)
+            {
+                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                {
+                    showAjxLoadingDiv($("#productlisting"));
+                    $("#page").val(1);
+                    endData = 0;
+                }
+                else {
+                	showAjxLoadingDiv($("#productlisting"));
+                    //$("#loading").show();
+                }
+                loading = 1;
+                var url = "/service/getcofeeds?requestFrom=create_outfit&rand=" + Math.random();
+                var filterData = $("#productFilterDetail").serialize();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: filterData,
+                    dataType: 'html',
+                    success: function (result) {
+                        loading = 0;
+                        if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                        {
+                            $("#productlisting").html(result);
+                            hideAjxLoadingDiv();
+                            $("#page").val(2);
+                            enableDragg();
+                        }
+                        else
+                        {
+                            if (result.indexOf('No Record') > 0)
+                            {
+                                endData = 1;
+                            }
+                            else
+                            {
+                                $("#page").val(parseInt($("#page").val()) + 1);
+                                $("#productlisting").append(result);
+                                enableDragg();
+                            }
+                            //$("#loading").hide();
+                            hideAjxLoadingDiv();
+                        }
+                         $('.my_tooltip').tooltipster({
+                            position: 'top',
+                            theme: 'tooltipster-shadow',
+                            
+                        });
+
+                    }
+                });
+            }
+
+        $(function() {
+
+                $(".check_category").click(function () {
+                    if ($(this).is(':checked') == true) {
+                        var $infos = $(this).parent('.category');
+                        $infos.find("input[type=checkbox]").prop("checked", true);
+                    } else {
+                        var $infos = $(this).parent('.category');
+                        $infos.find("input[type=checkbox]").prop("checked", false);
+                    }
+                })
+
+                $(".check_subcategory").click(function () {
+                    if ($(this).is(':checked') == true) {
+                        //alert('Hello');
+                        var $infos = $(this).parents('.subcategory');
+                        $infos.find("input[type=checkbox]").prop("checked", true);
+                    } else {
+                        alert('Hey');
+                        var $infos = $(this).parents('.subcategory');
+                        $infos.find("input[type=checkbox]").prop("checked", false);
+                    }
+                })
+
+                $(".brandSelection").click(function () {
+                    $(this).toggleClass('activebrand');
+                    var brands = '';
+                    var allSelectedBrands = $(".brandSelection");
+                    $(allSelectedBrands).each(function () {
+                        if ($(this).hasClass('activebrand')) {
+                            brands += ($(this).attr('value')) + ',';
+                        }
+                    })
+                    $("#brands").val(brands);
+                    loadProductData();
+                })
+
+                $(".storeSelection").click(function () {
+                    //alert('hello');
+                    $(this).toggleClass('activebrand');
+                    var stores = '';
+                    var allSelectedStores = $(".storeSelection");
+                    $(allSelectedStores).each(function () {
+                        if ($(this).hasClass('activebrand')) {
+                            stores += ($(this).attr('value')) + ',';
+                        }
+                    })
+                    $("#stores").val(stores);
+                    loadProductData();
+                })
+
+            var availableBrandTags = <?php echo $this->jsonBrands; ?>;
+            $("#brandautocomplete").autocomplete({
+                source: availableBrandTags,
+                select: function(event, ui) {
+                    $("ul.brandSelection li[value=" + ui.item.id + "]").addClass('activebrand');
+                    $(".brandslist ul li input[value=" + ui.item.id + "]").addClass('activebrand').prop('checked',true);
+                    $("#brands").val($("#brands").val() + ui.item.id);
+                    loadProductData();
+                    return false;
+                }
+            });
+
+            var availableStoreTags = <?php echo $this->jsonStores; ?>;
+            $("#storeautocomplete").autocomplete({
+                source: availableStoreTags,
+                select: function(event, ui) {
+                    $("ul.storeSelection li[value=" + ui.item.id + "]").addClass('activebrand');
+                    $("#stores").val($("#stores").val() + ui.item.id);
+                    loadProductData();
+                    return false;
+                }
+            });
+
+            $(".colorselection").click(function() {
+                $(this).toggleClass('activecolor');
+                var colors = '';
+                var allSelectedColors = $(".colorselection.activecolor");
+                $(allSelectedColors).each(function() {
+                    colors += ($(this).attr('value')) + ',';
+                })
+                $("#colors").val(colors);
+                loadProductData();
+            });
+        })
+
+
+        function chooseDeals(currref, dealName)
+        {
+            $('.sale-option-checkbox', currref).toggleClass('activedeal');
+            if ($('.sale-option-checkbox', currref).hasClass('activedeal'))
+            {
+                $("#" + dealName).val(1);
+            }
+            else
+            {
+                $("#" + dealName).val('');
+            }
+            loadProductData();
+        }
+        $(document).ready(function() {
+            $(window).scroll(function () {
+                if ($("#loading-div-background").css('display') == 'block') 
+                {
+                    var windowheight = $(window).height();
+                    var scrolltop = $($("#productlisting")).scrollTop();
+                    var windowwidth = $(window).width();
+                    //showAjxLoadingDiv($("#productlisting"));
+                    // $("#ajx_loader_image").css({top: scrolltop + (windowheight / 2), left: windowwidth / 2, position: 'absolute'});
+                }
+
+                //if ($(window).scrollTop() + $(window).height() >= ($('#productlisting').offset().top + $("#productlisting").height()) + 10) {
+                if(  ($(document).height()-400)   <= $(window).scrollTop()+$(window).height() ){
+                    if (loading == 0 && endData == 0)
+                    {
+                        console.log('here 2');
+                        loadProductData(1);
+                    }
+                }
+            });
+            
+                /*****************block for handling likes product**************/
+                $('.likes').on('click', function () {
+                    var id = $(this).attr("id");
+                    var url = "/service/likeclosset/";
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {closesetId: id},
+                        dataType: 'json',
+                        success: function (result) {
+                            alert(result.mgs);
+                            if (result.status == 'N') {
+                                //alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                var likesd = result.count + ' likes';
+                                $('.like_' + result.idf).html(likesd);
+
+                                if($(this).find('#like'+result.idf))
+                                    $('#like'+result.idf).attr('src','/img/thumb.png');
+
+                            } else {
+                                //alert("Internal Server Error");
+                            }
+                        }
+                    });
+                });
+
+                $('body').on('click', '.likes', function () {
+                    var id = $(this).attr("id");
+                    var url = "/service/likeclosset/";
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {closesetId: id},
+                        dataType: 'json',
+                        success: function (result) {
+                            alert(result.mgs);
+                            if (result.status == 'N') {
+                                //alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                var likesd = result.count + ' likes';
+                                $('.like_' + result.idf).html(likesd);
+
+                                if($(this).find('#like'+result.idf))
+                                    $('#like'+result.idf).attr('src','/img/thumb.png');
+                            } else {
+                                //alert("Internal Server Error");
+                            }
+                        }
+                    });
+                });
+
+                $('body').on('click', '.likesout', function () {
+                    var id = $(this).attr("id");
+                    var url = "/service/likeclosset/";
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {closesetId: id},
+                        dataType: 'json',
+                        success: function (result) {
+                            alert(result.mgs);
+                            if (result.status == 'N') {
+                                //alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                var likesd = result.count + ' likes';
+                                $('.like_' + result.idf).html(likesd);
+
+                                if($(this).find('#likeout'+result.idf))
+                                    $('#likeout'+result.idf).attr('src','/img/thumb.png');
+                            } else {
+                                //alert("Internal Server Error");
+                            }
+                        }
+                    });
+                });
+
+                /*****************block for handling likes product**************/            
+            
+
+        });
+
+        function showAjxLoadingDiv(target) 
+        {
+            console.log('here');
+        	$("#loading-div-background").show();
+            //var target=$('#'+targetId);
+            /*var tarheight = $(target).height();
+            var tartop = $(target).offset().top;
+            var tarleft = $(target).offset().left;
+
+            var scrollheight = $(target).height();
+            var scrollwidth = $(target).width();
+            var windowheight = $(target).height();
+            var windowwidth = $(target).width();
+            $("#ajx_loader_div").css({height: scrollheight, width: scrollwidth, display: 'block', top: (tartop - (30)), left: tarleft, position: 'absolute'});
+            $("#ajx_loader_image").css({top: windowheight / 2, left: windowwidth / 2, position: 'absolute'});*/ 
+        }
+
+        function hideAjxLoadingDiv()
+        {
+        	$("#loading-div-background").hide();  
+            //$("#ajx_loader_div").css({display: 'none'});
+        }
+        
+        function toggleslide(obj) {
+            $('#outfit-window').toggle();
+            $('#article-window').toggle();
+            $('#productlisting').toggle();
+            $('#loading').hide();
+            if($(obj).html() == 'Show Outfit') {
+                $(obj).html('Show Articles');
+            } else {
+                $(obj).html('Show Outfit');
+            }
+        }
+
+
+    </script>
+    <?php if($this->designer):?>
+    <script type="text/javascript">
+        $(function() {
+
+            $(document).on('click', '.remove-icon', function(e) {
+                $obj = $(this).closest('.dropable');
+                //$(this).hide();
+                //$obj.find('.articleName').html('Product Name');
+                //$obj.find('.articlePrice').html('$0.00');
+                $obj.find('.thumb-info > .img-responsive').attr('src',$obj.find('.thumb-info > .img-responsive').attr('data-src'));
+                //feedsids.splice($obj.find('input').val(), 1);
+                delete feedsids[($obj.find('input').val())];
+                $obj.find('input').val('');
+                if($obj.find('.thumb-info').attr('box-size') == 'big')
+                {
+                    $obj.find('.box-block1').remove();
+                }
+                else
+                {
+                    $obj.find('.box-block3').remove();
+                }
+                $obj.find('.main_big_product_tag_box').remove();
+            });
+
+            // there's the gallery and the trash
+            $draggable = $(".draggable"),
+            $dropable = $(".dropable");
+            enableDragg();
+            $dropable.droppable({
+                accept: ".draggable > .draggable-element",
+                activeClass: "ui-state-highlight",
+                tolerance: 'pointer',
+                drop: function(event, ui) {
+                    var $obj = $(this);
+                    $item = ui.draggable;
+                    var id = ($item.find('.img-responsive').attr('data-id'));
+                    //alert(id);
+                    if (typeof feedsids[id] !== 'undefined' && feedsids[id] !== null) {
+                        setTimeout(function(){
+                            alert('Sorry! this product already exist in collection.');
+                        }, 200);
+                        return false;
+                    } else {
+                        console.log( $(this).data('uid') );
+                    	delete feedsids[$(this).data('uid')];
+                    	$(this).data('uid', id);
+                        feedsids[id] = true;
+                        $obj.find('input').val(id);
+                    }
+
+                    $draggable.find('.draggable-element').eq($item.index()).after($item);
+                    
+                    $(this).find('.thumb-info > .img-responsive').attr('src',$item.find('.img-responsive').attr('src'));                   
+
+                    if($(this).find('.thumb-info').attr('box-size') == 'big')
+                    {
+                        console.log('big');
+								if($(this).find('.box-block1').length)
+								{
+									console.log('box-block1');                        
+																		
+									$(this).find('.box-block1').remove();
+									$(this).find('.main_big_product_tag_box').remove();
+									$(this).append('<div class="main_big_product_tag_box"><a class="fr remove-icon"></a>'+ $item.find('.main_big1_product_tag_box').html() +'</div>');
+									$(this).append('<div class="box-block1">'+ $item.find('.box-block').html() +'</div>');
+									$(this).find('.social_box').addClass('social_box1').removeClass('social_box');
+									console.log( $item.find('.salePrice').length )
+								}
+								else
+								{
+									console.log('box-block3');
+									$(this).append('<div class="main_big_product_tag_box"><a class="fr remove-icon"></a>'+ $item.find('.main_big1_product_tag_box').html() +'</div>');                        	
+									$(this).append('<div class="box-block1">'+ $item.find('.box-block').html() +'</div>');
+								    $(this).find('.social_box').addClass('social_box1').removeClass('social_box');									
+								}                    
+                    }
+                    else
+                    {
+                    	console.log('small');
+								if($(this).find('.box-block3').length)
+								{   
+									console.log('box-block1');                     
+									$(this).find('.main_big_product_tag_box').remove();									
+									$(this).find('.box-block3').remove();
+									$(this).append('<div class="main_big_product_tag_box"><a class="fr remove-icon"></a>'+ $item.find('.main_big1_product_tag_box').html() +'</div>');
+									$(this).append('<div class="box-block3 blok">'+ $item.find('.box-block').html() +'</div>');
+									$(this).find('.social_box').addClass('social_box1').removeClass('social_box');
+								}
+								else
+								{   
+									console.log('box-block3');                     
+									$(this).append('<div class="main_big_product_tag_box"><a class="fr remove-icon"></a>'+ $item.find('.main_big1_product_tag_box').html() +'</div>');                        	
+									$(this).append('<div class="box-block3 blok">'+ $item.find('.box-block').html() +'</div>');
+									$(this).find('.social_box').addClass('social_box1').removeClass('social_box');
+							    }
+                    }
+
+					if( $item.find('.salePrice').length ) {
+						$(this).find('.salePrice').remove();
+						$(this).prepend('<div class="salePrice">'+ $item.find('.salePrice').html() +'<br/>OFF</div>');
+					}
+					                    
+
+                    //$(this).find('.articleName').html($item.find('.img-responsive').attr('data-name'));
+                    //$(this).find('.articlePrice').html('$'+$item.find('.img-responsive').attr('data-price'));
+                    enableDragg();
+                }
+            });
+        });
+
+        function enableDragg() {
+            $(".draggable-element", $draggable).draggable({
+                containment: "document",
+                helper: "clone",
+                cursor: "move",				
+                refreshPositions: false,
+                zIndex: 20000,
+                start : function(){											
+                    var $currentScroll = $(document).scrollTop();
+                    while($currentScroll > 200) {
+                        $currentScroll -= 30;
+                        $(document).scrollTop( $currentScroll);
+                    }
+                },
+            });
+        }
+    </script>
+    <?php endif;?>
+    <!--<script src="/vendor/jquery-ui.min.js"></script>-->
+    <!--<script type="text/javascript" src="/js/bootstrap-progressbar.js"></script>-->

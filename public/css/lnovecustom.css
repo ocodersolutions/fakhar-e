@@ -1,0 +1,15 @@
+.line-bar {
+    float: left;
+    margin-top: 20px;
+    width: 50%;
+}
+.nomargin {
+    margin: 0;
+}
+.signup {
+    color: #254F7D;
+    font-weight: bold;
+}
+#errormsgblock {
+    display: none;
+}

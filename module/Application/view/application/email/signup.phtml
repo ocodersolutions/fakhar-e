@@ -1,0 +1,106 @@
+<?php
+$baseUrl = 'http://'.$_SERVER['SERVER_NAME']; 
+$user_info = $this->user_info;
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Email Notification</title>
+</head>
+<body style="margin:0">
+    <div style="width:100%; background-color: #f9f9f7;" align="center">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 90%;">
+            <tr>
+                <td align="center" colspan="2" style="padding: 20px 0 10px;">
+                    <a href="<?php echo $baseUrl; ?>">
+                        <img src="<?php echo $baseUrl; ?>/img/lnove_logo.png">
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border:3px solid #dfe2e2; padding: 0px 30px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody>
+                            <tr style="color:#898697; font-size:15px;">
+                                <td style="padding: 23px 0 15px 0; border-bottom: 1px solid #dfe2e2;">
+                                    <?php if($user_info) {
+                                        echo 'Hi '.ucfirst($user_info['firstName']).' '.ucfirst($user_info['lastName']).',';
+                                    } else {
+                                        echo 'Hi Mr/Ms';
+                                    } ?>
+                                </td>
+                            </tr>
+                            <tr style="color:#254f73; font-size:20px; font-weight: bold;">
+                                <td style="padding: 20px 0; line-height: 1.2;">Welcome to El Nove.</td>
+                            </tr>
+                            <tr style="font-weight: bold; color:#898697; font-size:13px;">
+                                <td>You have just begun your journey on dressing to the nines. Scroll through our outfits designed just for you, or If you are more adventurous, discover the article section to build your own outfits.</td>
+                            </tr>
+                            <tr  style="font-family: 'Roboto'; font-weight: 400; color:#5d5c5a;font-size:10px;">
+                                <td>
+                                    <div align="center"><a href="<?php echo $baseUrl; ?>/service" style="background: #6b8ad1;color: #fefefe;width: 180px;height: 43px;font-size: 16px;text-decoration: none;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;text-align: center;line-height: 43px;display: block; margin: 30px 0;"><span>GET DRESSED NOW!</span></a> </div>
+                                </td>
+                            </tr >
+                            <tr style="font-weight: bold; color:#898697; font-size:13px;">
+                                <td style="padding-bottom: 20px">
+                                    If you have any other issues accessing your account, feel free to email our support team (support@elnove.com) with any questions you may have.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 10px;">
+                </td>
+            </tr>
+            <tr style="background: #dbdbdd; margin-top: 20px;">
+                <td style="color:#525058;font-size:11px; padding: 10px 0 10px 18px; width:15%;">
+                </td>
+                <td >
+                    <table align="center" style="width: 100%;background: #e5e5e5;margin: 14px 0;" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 3px 0;text-align: center">
+                                    <p><a target="_blank" style="text-decoration: none; color:#898697;font-size:13px;font-weight: bold;" href="<?php echo $baseUrl; ?>">www.ElNove.com</a></p>
+                                </td>
+                                <td style="text-align: center">
+                                    <span style="padding-right:5px;">
+                                        <a style="text-decoration: none;" href="https://twitter.com/elnovethe9s">
+                                            <img src="<?php echo $baseUrl; ?>/sendmail/image/twitter.png">
+                                        </a>
+                                    </span>
+                                    <span style="padding-right:5px;">
+                                        <a style="text-decoration: none;" href="https://facebook.com/ELNove-298882480296894">
+                                            <img src="<?php echo $baseUrl; ?>/sendmail/image/facebook.png">
+                                        </a>
+                                    </span>
+                                    <span style="padding-right:5px;">
+                                        <a style="text-decoration: none;" href="https://www.instagram.com/elnove/">
+                                            <img src="<?php echo $baseUrl; ?>/sendmail/image/instagram.png">
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <a style="text-decoration: none;" href="https://www.youtube.com/channel/UCpf1DXmAFx_Khiku7dQYQLw">
+                                            <img src="<?php echo $baseUrl; ?>/sendmail/image/youtube.png">
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>     
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; padding-bottom: 30px; font-size: 11px">
+                    <p>You can unsubscribe to these emails or change your notification settings.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+</body>
+</html>

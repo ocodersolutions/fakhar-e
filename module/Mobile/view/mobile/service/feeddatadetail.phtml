@@ -1,0 +1,144 @@
+    <link href="<?php echo $this->basePath(); ?>/templates/mobile/jquery.bxslider/jquery.bxslider.css" rel="stylesheet">
+ <script src="<?php echo  $this->basePath(); ?>/templates/mobile/jquery.bxslider/jquery.bxslider.min.js"></script>
+
+<style>
+	.req13-page .list-inline{
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.third .col-xs-6:nth-child(1){
+		padding-right: 0;
+	}
+	.third .col-xs-6:nth-child(2){
+		padding-left: 0;
+	}
+	.req13-page ul.list-inline{
+		line-height: 96px;
+	}
+    .bxslider li{
+        width: inherit !important;
+        position:relative !important;
+    }
+    .bxslider{
+        padding-left: 0;
+    }
+   .bx-wrapper .bx-viewport{
+        left: 0;
+        webkit-box-shadow:none;
+        box-shadow:none;
+   }
+   .req13-page section.third .check-like{
+    font-size: 21px;
+   }
+   .req13-page .save-closet{
+      font-size: 13px;
+   }
+   .req13-page .navigation{
+      padding: 18px 15px !important;
+   }
+</style>
+ <?php
+	$page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
+	$title = 'ELNove - '.$this->feedDataDetail['caption'];
+?>
+<div class="req13-page">
+	 <section id="main-content-wrap">
+            <div class="navigation">   
+                    <div class="row">   
+                        <div class="col-xs-4"> 
+                            <div class="back">  
+                                <a href="javascript:void(0)"><div class="icon">x</div><div class="back-text">back</div></a>
+                            </div> 
+                        </div>
+                        <div class="col-xs-8">  
+                            <div class="add-to-cart">
+                                <div class="continue ">
+                               <?php 
+                                  $disable='';
+                                  $add ='add to cart';
+                                  if(in_array($this->feedDataDetail['id'],$this->listItemCart)) {
+                                      $disable = 'disabled="disabled"';
+                                      $add ='added to cart';
+                                  } 
+                                ?> 
+                           
+                                    <button  data-feedid="<?php echo $this->feedDataDetail['id']; ?>" class="btn btn-default btn-submit btn-block btn-continue addCart" <?php echo $disable; ?>><?php echo $add ?></button>
+                              
+                                   <!--  <button onClick="addCart(<?php echo $this->feedDataDetail['id']; ?>)" class="btn btn-default btn-submit btn-block btn-continue" id="">add to cart</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+             <section class="my-cart">
+                <ul class="bxslider">
+                  <li><img class="img-responsive " src="<?php echo $this->feedDataDetail['imageurl']; ?>" /></li>
+                </ul>
+            </section>
+            <section class="cart-section first">   
+                <div class="product-name-price"> 
+                    <h4 class="cart-title"><?php echo $this->feedDataDetail['caption']; ?></h4>
+                    <div class="price"><?php echo $this->feedDataDetail['price']; ?><span class="currency"><?php echo $this->feedDataDetail['currency'] ?></span></div>
+                </div>
+                <p><?php echo $this->feedDataDetail['description']; ?></p>
+            </section>
+           
+            <section class="cart-section">   
+                <h4 class="cart-title"> <?php echo $this->feedDataDetail['brand']; ?></h4>
+            </section>
+            <section class="third">   
+                <div class="row">
+                    <div class="col-xs-6">  
+                        <div class="social">    
+                            <ul class="list-inline">
+				                <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="<?php echo $this->basePath(); ?>/img/f.png"></a></li>
+				                <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="<?php echo $this->basePath(); ?>/img/p1.png"></a></li>
+				                <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="<?php echo $this->basePath(); ?>/img/t.png"></a></li>
+				                <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="<?php echo $this->basePath(); ?>/img/g.png"></a></li>
+				                <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="<?php echo $this->basePath(); ?>/img/msg.png"></a></li>
+				            </ul>
+                        </div>
+                    </div>
+                  
+                    <div class="col-xs-6 middle96"> 
+                          <?php if(in_array($this->feedDataDetail['id'], $likearray)) { ?> 
+                              <a style="text-decoration: none" href="javascript:void(0)" class="mycloseset check-like checked" id="<?php echo base64_encode($this->feedDataDetail['id']); ?>">
+                              <i class="fa fa-thumbs-up like<?php echo $this->feedDataDetail['id']; ?>"></i> 
+                              <span class="save-closet">saved to my closet</span>
+                              </a>
+                          <?php } else { ?>
+                            <a style="text-decoration: none" href="javascript:void(0)" class="mycloseset check-like" id="<?php echo base64_encode($this->feedDataDetail['id']); ?>">
+                              <i class="fa fa-thumbs-o-up like<?php echo $this->feedDataDetail['id']; ?>"></i> 
+                              <span class="save-closet">save to my closet</span>
+                              </a>
+                          <?php } ?>
+
+                          
+                    </div>
+                   
+                </div>
+            </section>
+
+           <!--  <div class="top_page text-center">
+                <img src="<?php echo $this->basePath(); ?>/templates/mobile/images/arrow.png" class="click_to_top">
+                <p class="click_to_top">TOP OF PAGE</p>
+            </div> -->
+
+        </section> 
+</div>
+<script>
+$('.bxslider').bxSlider({
+         mode: 'fade',
+  		buildPager: function(slideIndex){
+   			switch(slideIndex){
+      			case 0: return '';
+      				<?php if(file_exists('/feed/'.$this->feedDataDetail['feedId'].'/'.$this->feedDataDetail['img_local_name'])) { ?>
+        			return '<img src="<?php echo $this->basePath() . "/feed/{$this->feedDataDetail['feedId']}/{$this->feedDataDetail['img_local_name']}"; ?>">';
+        			<?php } else { ?>
+					return '<img style="width:83px;height:109px;" src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="Owl Image">';
+					<?php } ?>
+   			}
+  		}
+});
+
+</script>

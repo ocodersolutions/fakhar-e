@@ -1,0 +1,171 @@
+ 
+ <div class="cart-page">
+ <section id="main-content-wrap">
+            <div class="navigation">   
+                    <div class="row">   
+                        <div class="col-xs-4"> 
+                            <div class="back">  
+                                <a href="javascript:history.back();">
+                                <div class="icon">x</div><div class="back-text">back</div>
+                                </a>
+                            </div> 
+                        </div>
+                        <div class="col-xs-8">  
+                            <div class="add-to-cart">
+                                <div class="continue ">
+                                    <a href="/service" style="text-decoration: none">
+                                   <button type="button" class="btn btn-default btn-submit btn-block btn-continue" id="">continue shopping</button>
+                                   </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <?php if(count($listItem) > 0) { ?>
+            <?php foreach ($listItem as $value) { ?>
+            <section class="block-cart">
+                <div class="row product">
+                    <div class="col-xs-3">
+                        <div class="thumb-product">
+                            <img class="img-responsive" src="<?php echo $value->imageurl ?>" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="info-product">
+                            <div class="name">
+                                <div class="name-text"><?php echo $value->name ?></div>
+                                <div data-value ="<?php echo $value->feed_id ?>" class="icon deleteFeed" style="cursor:pointer">x</div>
+                            </div>
+                            <div class="brand"><?php echo $value->brand ?></div>
+                            <div class="size-color">
+                                size / COLOR
+                            </div>
+                            <div class="price-store-name">
+                                <div class="price"><?php echo $value->price.' '.$value->currency?></div>
+                                <!-- <div class="store-name">STORE name</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($value->feed_id))); ?>">
+                    <button class="btn btn-default btn-submit btn-block btn-continue" id="">buy now</button>
+                </a>
+            </section>
+            <?php } ?>
+            <?php } ?>
+           <!--  <section class="block-cart">
+                <div class="row product">
+                    <div class="col-xs-3">
+                        <div class="thumb-product">
+                            <img class="img-responsive" src="images/thumb_product.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="info-product">
+                            <div class="name">
+                                <div class="name-text">Name of Product</div>
+                                <div class="icon">x</div>
+                            </div>
+                            <div class="brand">BRAND name</div>
+                            <div class="size-color">
+                                size / COLOR
+                            </div>
+                            <div class="price-store-name">
+                                <div class="price">$165.00</div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default btn-submit btn-block btn-continue" id="">buy now</button>
+            </section> -->
+
+            <div class="top_page text-center">
+                <img src="<?php echo $this->basePath() ?>/templates/mobile/images/arrow.png" class="click_to_top">
+                <p class="click_to_top">TOP OF PAGE</p>
+            </div>
+        </section>
+        </div>
+
+<script type="text/javascript">
+    function addCart(feed_id){
+        if(feed_id > 0 ){
+
+            $.ajax({
+                url: '/service/add-to-cart',
+                type: 'POST',
+                data: 'id='+ feed_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                    //var json = jQuery.parseJSON(result);
+                    $("#cart_number").text(result);
+                    //console.log(result);
+                    hideAjxLoadingDiv();
+
+                }
+            });
+        }
+    }
+
+    function getCartNumber(){
+        $.ajax({
+            url: '/service/get-cart-number',
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                $("#cart_number").text(result);
+            }
+        });
+    }
+
+    $(".deleteFeed").click(function(){
+        var current = $(this);
+        feed_id = $(this).data('value');
+           $.ajax({
+                url: '/service/delete-cart',
+                type: 'POST',
+                data: 'id='+ feed_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                    //console.log(result);
+                     hideAjxLoadingDiv();
+                    //var json = jQuery.parseJSON(result);
+                    if(result.valid == true) {
+                       current.parents('.block-cart').remove();
+                       getCartNumber();
+                    }
+                   
+
+                }
+            });
+    })
+    function deleteCart(feed_id){
+        //current = $(this);
+        if(feed_id > 0 ){
+            $.ajax({
+                url: '/service/delete-cart',
+                type: 'POST',
+                data: 'id='+ feed_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                     hideAjxLoadingDiv();
+                    //var json = jQuery.parseJSON(result);
+                    if(result.valid == true) {
+                        current.parents('.block-cart').remove();
+                    }
+                   
+
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,36 @@
+	    @font-face {
+		    font-family: 'Roboto-Light';
+		    font-weight: normal;
+		    font-style: normal;
+		    src: url('/sendmail/font/Roboto-Light.svg') format('svg'),
+		         url('/sendmail/font/Roboto-Light.eot?#iefix') format('embedded-opentype'),
+		         url('/sendmail/font/Roboto-Light.woff') format('woff'), 
+		         url('/sendmail/font/Roboto-Light.ttf')  format('truetype');
+	    }
+	    @font-face {
+		    font-family: 'Roboto-Regular';
+		    font-weight: normal;
+		    font-style: normal;
+		    src: url('/sendmail/font/Roboto-Regular_gdi.svg') format('svg'),
+		         url('/sendmail/font/Roboto-Regular_gdi.eot?#iefix') format('embedded-opentype'),
+		         url('/sendmail/font/Roboto-Regular_gdi.woff') format('woff'), 
+		         url('/sendmail/font/Roboto-Regular_gdi.ttf')  format('truetype');
+	    }
+	     @font-face {
+		    font-family: 'Helvetica';
+		    font-weight: normal;
+		    font-style: normal;
+		    src: url('/sendmail/font/Helvetica.svg') format('svg'),
+		         url('/sendmail/font/Helvetica.eot?#iefix') format('embedded-opentype'),
+		         url('/sendmail/font/Helvetica.woff') format('woff'), 
+		         url('/sendmail/font/Helvetica.ttf')  format('truetype');
+	    }
+	     @font-face {
+		    font-family: 'Helvetica-Bold';
+		    font-weight: normal;
+		    font-style: normal;
+		    src: url('/sendmail/font/HelveticaNeue-Bold.svg') format('svg'),
+		         url('/sendmail/font/HelveticaNeue-Bold.eot?#iefix') format('embedded-opentype'),
+		         url('/sendmail/font/HelveticaNeue-Bold.woff') format('woff'), 
+		         url('/sendmail/font/HelveticaNeue-Bold.ttf')  format('truetype');
+	    }

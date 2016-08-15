@@ -1,0 +1,105 @@
+<style>
+ 
+</style>
+<div class="index-page">
+            <div class="banner">
+                <img class="img-responsive center-block" src="<?php echo $this->basePath(); ?>/img/banner.jpg" alt="">
+                    
+                <div class="obsolute_block">
+                    <div class="heading">Whether for casual or business attire,<br>get choices tailored to you.</div>
+                    <div align="center">
+                    <?php if( $this->identity()) { ?>
+                        <a href="/service" class="btnHomeBanner"><span>GET DRESSED</span></a>
+
+                    <?php } else { ?>
+                    <a href="/profile" class="btnHomeBanner"><span>GET STARTED</span></a>
+                    <div class="signin_link"><a href="/auth/login">sign in</a></div>
+                    <?php } ?>
+                    
+                     </div>
+                </div>
+                    <div class="learn_more upcase">
+                        <a href="#learn_more" class="smooth_learn">learn more</a>
+                        <br>
+                        <a href="#learn_more" class="smooth_learn"><img src="/img/arrow_down.png" alt=""></a>
+                    </div>
+                
+            </div>
+            <div class="container" id="learn_more">
+                <section>
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="block">
+                                  <h3 class="title">DRESSED TO  THE NINES</h3>
+                                  <p class="description">Fashion isn't something that comes easily to most men. However, that doesn't mean that men don't want to look their best! 
+Simply tell us about yourself and we'll find clothes that will complement your look, your personality, your profession, and your lifestyle.
+At all venues, you'll be looking your best, and people will notice.</p>
+                                </div>
+                                <div class="block">
+                                    <img class="img-responsive center-block"src="<?php echo $this->basePath(); ?>/templates/mobile/images/round_male.png" alt="">
+                                    <h3 class="title custom-color">TELL US ABOUT YOU</h3>
+                                    <p>Getting inside of the clothes that you're meant to wear begins with you. Let us learn about you, so we can dress you to the nines.</p>
+                                </div>
+                                 <div class="block">
+                                    <img class="img-responsive center-block"src="<?php echo $this->basePath(); ?>/templates/mobile/images/round_shirt.png" alt="">
+                                    <h3 class="title custom-color">GET STYLED</h3>
+                                    <p>Our understanding of fashion and partnerships with leading brands allow us to find the perfect wardrobe for you.</p>
+                                </div>
+                                 <div class="block">
+                                    <img class="img-responsive center-block"src="<?php echo $this->basePath(); ?>/templates/mobile/images/round_shirt0ne.png" alt="">
+                                    <h3 class="title custom-color">GET DRESSED</h3>
+                                    <p>After your clothes have been located, we'll connect you with our partners. Check out the items and simply make the purchase!</p>
+                                </div>
+                                <!-- <div class="block">
+                                    <img class="img-responsive center-block"src="<?php echo $this->basePath(); ?>/templates/mobile/images/appstore.png" alt="">
+                                </div> -->
+                                <div class="block">
+                                    <div class="top_page">
+                                        <img src="<?php echo $this->basePath(); ?>/templates/mobile/images/arrow.png" class="click_to_top">
+                                        <p class="click_to_top">TOP OF PAGE</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div><!-- /.container -->
+</div>
+<script>
+    $(document).ready(function(){
+        if($( window ).width() < 960) { 
+            $(".banner > img").attr("src","/img/banner_960.png").css("width","100%");
+        } 
+        if($( window ).width() < 768) { 
+            $(".banner > img").attr("src","/img/banner_480.png").css("width","100%");
+        }  
+        if($( window ).width() < 360){
+            $(".banner > img").attr("src","/img/banner_360.png").css("width","100%");
+        } 
+        if($( window ).width() >= 960){ 
+            $(".banner > img").attr("src","/img/banner.jpg");
+        }
+    });
+       
+    $( window ).resize(function() {
+        if($( window ).width() < 960) { 
+            $(".banner > img").attr("src","/img/banner_960.png").css("width","100%");
+        }
+         if($( window ).width() < 768) { 
+            $(".banner > img").attr("src","/img/banner_480.png").css("width","100%");
+        }
+        if($( window ).width() < 360){
+            $(".banner > img").attr("src","/img/banner_360.png").css("width","100%");
+        }
+        if($( window ).width() >= 960){ 
+            $(".banner > img").attr("src","/img/banner.jpg");
+        }
+    });
+    $('.smooth_learn').click(function(){
+        $('html, body').animate({
+            scrollTop: $("#learn_more").offset().top
+        }, 800);
+        return false;
+    });
+</script>

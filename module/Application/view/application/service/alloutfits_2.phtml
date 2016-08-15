@@ -1,0 +1,252 @@
+<?php
+$outfitsData = $this->outfits;
+?>
+<div class="left-link-box">
+
+    <div class="radio-box">
+        <form>
+            <input type="radio" name="option" id="radio1" checked/>
+            <label for="radio1" class="outfit">
+                <span class="fa-stack ">
+                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                    <i class="fa fa-circle fa-stack-1x"></i>
+                </span>
+                OUTFIT
+            </label>
+            <input type="radio" name="option" id="radio2" />
+            <label for="radio2"  class="outfit">
+                <span class="fa-stack">
+                    <i class="fa fa-circle-o fa-stack-1x"></i>
+                    <i class="fa fa-circle fa-stack-1x"></i>
+                </span>
+                ARTICLES
+            </label>
+        </form>
+    </div>
+
+    <div class="refined">
+        <h1>REFINED BY</h1>
+        <div class="cat page_left_menu ">
+            <h5> <img  src="/img/down.png">  VENUES</h5>
+            <ul>
+                <li><input type="checkbox" name="option" id="check1" checked/>
+                    <label for="check1">
+                        <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-1x"></i>
+                            <i class="fa fa-square fa-stack-1x"></i>
+                        </span>
+                        All
+                    </label></li>
+
+                <li><input type="checkbox" name="option" id="check2" />
+                    <label for="check2">
+                        <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-1x"></i>
+                            <i class="fa fa-square fa-stack-1x"></i>
+                        </span>
+                        Work
+                    </label></li>
+                <li><input type="checkbox" name="option" id="check1" checked/>
+                    <label for="check1">
+                        <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-1x"></i>
+                            <i class="fa fa-square fa-stack-1x"></i>
+                        </span>
+                        Night Out
+                    </label></li>
+
+                <li><input type="checkbox" name="option" id="check2" />
+                    <label for="check2">
+                        <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-1x"></i>
+                            <i class="fa fa-square fa-stack-1x"></i>
+                        </span>
+                        Casual
+                    </label></li>
+
+            </ul>
+        </div>
+
+
+
+        <div class="clr"></div>
+
+    </div>
+
+
+</div><!-- left_link_box-->
+
+
+<div class="right-link-box">
+    <div class="clr"></div>
+    <div class="clr"></div>
+    <div class="big_box">
+        <div class="img_box_main">
+            <div class="main_big_product_box">
+                <div class="main_big_product_img_box">
+                    <?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
+                        <img src="/feed/<?php echo $outfitsData[0]['feedId']; ?>/<?php echo $outfitsData[0]['img_local_name']; ?>" id="img" alt="product">
+                    <?php } else { ?>
+                        <img src="/img/big_img.jpg" alt="product" />
+                    <?php } ?>
+
+                </div>
+                <div class="main_big_product_tag_box">
+                    <a href="javascript:void(0);" class="fl" title="<?php echo $outfitsData[0]['feedId'] != '' ? $outfitsData[0]['price'] : ''; ?>">
+                        <img src="/img/price.png" alt="price"/>
+                    </a>
+                    <a  href="#"  class="fr">
+                        <img src="/img/thumb.png" alt="like" />
+                    </a>
+                </div>
+            </div>
+            <div class="main_sm_product_box">
+                <div class="main_sm_product_img_box">
+                    <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
+                        <img src="/feed/<?php echo $outfitsData[1]['feedId']; ?>/<?php echo $outfitsData[1]['img_local_name']; ?>" id="img" alt="product">
+                    <?php } else { ?>
+                        <img src="/img/small_img2.jpg" alt="product" />
+                    <?php } ?>
+                </div>
+                <div class="main_sm_product_tag_box">
+                    <a href="javascript:void(0);" class="fl" title="<?php echo $outfitsData[1]['feedId'] != '' ? $outfitsData[1]['price'] : ''; ?>">
+                        <img src="/img/price.png" alt="price" />
+
+                    </a>
+                    <a  href="#"  class="fr">
+                        <img src="/img/thumb.png" alt="like" />
+                    </a>
+
+
+                </div>
+            </div>
+
+            <div class="main_sm_product_box">
+                <div class="main_sm_product_img_box">
+                    <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>
+                        <img src="/feed/<?php echo $outfitsData[2]['feedId']; ?>/<?php echo $outfitsData[2]['img_local_name']; ?>" id="img" alt="product">
+                    <?php } else { ?>
+                        <img src="/img/small_img2.jpg" alt="product" />
+                    <?php } ?>
+                </div>
+                <div class="main_sm_product_tag_box">
+                    <a href="javascript:void(0);" class="fl" title="<?php echo $outfitsData[2]['feedId'] != '' ? $outfitsData[2]['price'] : ''; ?>">
+                        <img src="/img/price.png" alt="price" />
+
+                    </a>
+                    <a  href="#"  class="fr">
+                        <img src="/img/thumb.png" alt="like" />
+                    </a>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="img_box_main">
+
+            <div class="main_sm_product_box">
+                <div class="main_sm_product_img_box">
+                    <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>
+                        <img src="/feed/<?php echo $outfitsData[3]['feedId']; ?>/<?php echo $outfitsData[3]['img_local_name']; ?>" id="img" alt="product">
+                    <?php } else { ?>
+                        <img src="/img/small_img2.jpg" alt="product" />
+                    <?php } ?>
+                </div>
+                <div class="main_sm_product_tag_box">
+                    <a href="javascript:void(0)" class="fl" title="<?php echo $outfitsData[3]['feedId'] != '' ? $outfitsData[3]['price'] : ''; ?>">
+                        <img src="/img/price.png" alt="price" />
+
+                    </a>
+                    <a  href="#"  class="fr">
+                        <img src="/img/thumb.png" alt="like" />
+                    </a>
+
+
+                </div>
+            </div>
+
+            <div class="main_sm_product_box">
+                <div class="main_sm_product_img_box">
+                    <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>
+                        <img src="/feed/<?php echo $outfitsData[4]['feedId']; ?>/<?php echo $outfitsData[4]['img_local_name']; ?>" id="img" alt="product">
+                    <?php } else { ?>
+                        <img src="/img/small_img2.jpg" alt="product" />
+                    <?php } ?>
+                </div>
+                <div class="main_sm_product_tag_box">
+                    <a href="javascript:void(0);" class="fl" title="<?php echo $outfitsData[4]['feedId'] != '' ? $outfitsData[4]['price'] : ''; ?>">
+                        <img src="/img/price.png" alt="price" />
+
+                    </a>
+                    <a  href="#"  class="fr">
+                        <img src="/img/thumb.png" alt="like" />
+                    </a>
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="main_big_product_box">
+                <div class="main_big_product_img_box">
+                    <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
+                        <img src="/feed/<?php echo $outfitsData[5]['feedId']; ?>/<?php echo $outfitsData[5]['img_local_name']; ?>" id="img" alt="product">
+                    <?php } else { ?>
+                        <img src="/img/big_img.jpg" alt="product" />
+                    <?php } ?>
+                </div>
+                <div class="main_big_product_tag_box">
+                    <a href="javascript:void(0)" class="fl" title="<?php echo $outfitsData[5]['feedId'] != '' ? $outfitsData[5]['price'] : ''; ?>">
+                        <img src="/img/price.png" alt="price" />
+                    </a>
+                    <a  href="#"  class="fr">
+                        <img src="/img/thumb.png" alt="like" />
+                    </a>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="black-box">
+            <div class="thumb">
+                <a href="">  <img src="/img/white-like.png" alt="image"> UNsave this outfit</a>
+            </div>
+
+            <div class="thumb">
+                <a href=""> <img src="/img/share.png" alt="image"> SHARE THIS OUTFIT</a>
+            </div>
+
+            <div class="thumb">
+                <p>bought entire outfit</p>
+            </div>
+
+
+            <a href=""> <img src="/img/white-like.png" alt="image"> <span>40</span></a>
+
+
+        </div>
+
+
+        <div class="clr"></div>
+    </div>  <!-- big_box-->
+
+
+
+
+</div>

@@ -1,0 +1,139 @@
+<div class="container topnavi">
+    <div class="brand-box">
+        <div class="outfit-designer-box">
+            <h1>Outfit window</h1>
+            <div class="clr"></div>
+            <form name="myForm" id="myForm" method="POST">
+                <lable>Search</lable> <br>
+                <input type="text" class="input_box" maxlength="100" name="search" id="search" value="<?php echo (isset($this->searchkey)?'id:'.$this->searchkey:'')?>">
+                <input type="hidden" name="userId" id="userId" value="<?php echo $this->userId;?>">
+                <br>
+                <input type="submit" id="btnNextStep" value="Add New" href="<?php echo $this->basePath('service/add-outfit')?>" class="signup fancybox fancybox.ajax" />
+            </form>
+        </div>
+
+        <div class="outfit-designer-box" style="padding-bottom: 135px;">
+            <table id="outfit-table" class="table table-bordered">
+                <thead>
+                <tr style="text-align:center">
+                    <th>ID</th>
+                    <th>Outfit</th>
+                    <th>Creator</th>
+                    <th>Style Bucket</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <?php foreach ($this->paginator as $index => $outfits) { ?>
+                    <tr>
+                        <td><?php echo $outfits->outfit_id; ?></td>
+                        <td><?php echo $outfits->title; ?><?php if($outfits->all_items_avail > 0) { ?> <span class="fa fa-warning" style="color: red"></span><?php } ?></td>
+                        <td><?php echo $outfits->firstName.' '.$outfits->lastName; ?></td>
+                        <td><?php echo str_replace('|', ' | ', $outfits->sub_venues); ?></td>
+                        <td><?php if($outfits->status == '0'){ echo 'Disable'; } else { echo 'Enable'; } ?></td>
+                        <td>
+                            <a class="fancybox fancybox.ajax" href="<?php echo $this->basePath('service/add-outfit?id=').$outfits->outfit_id; ?>">Edit</a>  | 
+                            <a href="javascript:deleteOutfit(<?php echo $outfits->outfit_id; ?>);">Remove</a> | 
+                            <a class="fancybox" href="<?php echo $this->basePath("feed/outfits/{$outfits->outfit_id}.jpg"); ?>">Preview</a> | 
+                            <a href="<?php echo $this->basePath('service/clone-outfit?id=').$outfits->outfit_id; ?>">Clone</a> 
+                        </td>
+                    </tr>                   
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>            
+
+<div class="outfit-designer-box" style="padding-bottom: 35px;">
+<?php
+$currentController = $this->layout()->controller;
+$currentURL = $this->cmsLinkAdmin(array('controller' => $currentController, 'action' => 'outfits','route' => 'service/outfits'));
+ // add at the end of the file after the table
+ echo $this->paginationControl(
+     // the paginator object
+     $this->paginator,
+     // the scrolling style
+     'sliding',
+     // the partial to use to render the control
+     'partial/paginator.phtml',
+     // the route to link to when a user clicks a control link
+     array(
+         'currentURL' => $currentURL 
+     )
+ );
+ ?>            
+</div>         
+
+    </div>
+    <div class="clr"></div>
+</div>
+
+<script type="text/javascript">
+    function deleteOutfit(id) {
+        if (confirm('Are you sure you want to remove this outfit?')) {
+            window.location.href = '<?php echo $this->basePath('service/remove-outfit?id=')?>'+id;
+        }
+    }
+    $(function(){
+        
+        $('.fancybox').fancybox({
+            minWidth: 900,
+            autoDimensions: false
+        });
+
+        $('#search').keyup(function(){
+          	 $('.pagination').hide();
+             $('#outfit-table > tbody').html('<tr><td colspan="5" style="text-align: center;"><img src="/img/bx_loader.gif"></td></tr>'); 
+             $.ajax({
+                 url : '<?php echo $this->basePath("service/outfits") ?>',
+                 type: 'post',
+                 data : {searchkey:$(this).val(),userId:$('#userId').val()},
+                 success : function(data) {
+                     var response = JSON.parse(data);
+                     var html = '';
+                     if(response.total > 0) {
+                         var i = 1;
+                          for(x in response.result) {
+                          
+      								if(response.result[x]['venue'] == 'NightOut') {
+      									response.result[x]['venue'] = 'Night Out';						   
+      							   }
+      							   
+      								if(response.result[x]['status'] == '0') {
+      									response.result[x]['status'] = 'Disable';						   
+      							   } else {
+      							   	response.result[x]['status'] = 'Enable';
+      							   } 							                    
+                          
+                              html += '<tr>';
+                                  html += '<td>'+response.result[x]['outfit_id']+'</td>';
+                                  html += '<td>'+response.result[x]['title']+'</td>';
+                                  html += '<td>'+response.result[x]['firstName']+response.result[x]['lastName']+'</td>';
+                                  html += '<td>'+response.result[x]['venue']+'</td>';
+                                  html += '<td>'+response.result[x]['status']+'</td>';
+                                  html += '<td>';
+                                  html += '<a class="fancybox fancybox.ajax" href="<?php echo $this->basePath('service/add-outfit?id=')?>'+response.result[x]['outfit_id']+'">Edit</a>  | ';
+                                  html += '<a href="javascript:deleteOutfit('+response.result[x]['outfit_id']+');">Remove</a> | ';
+                                  html += '<a class="fancybox" href="<?php echo $this->basePath('feed/outfits/')?>'+response.result[x]['outfit_id']+'.jpg">Preview</a>  | ';
+                                  html += '<a href="<?php echo $this->basePath('service/clone-outfit?id=')?>'+response.result[x]['outfit_id']+'">Clone</a>';
+                                  html += '</td>';      
+                              html += '</tr>';
+                              i++;
+                          }
+                          $('#outfit-table > tbody').html(html);
+                     } else {
+                          $('#outfit-table > tbody').html('<tr><td colspan="3" style="text-align: center;">No match found</td></tr>'); 
+                     }                   
+                 }
+             });
+          });
+
+        <?php if( isset($this->searchkey) ) { ?>
+        $('#search').keyup();
+        <?php } ?>
+        
+    });
+    
+
+</script>

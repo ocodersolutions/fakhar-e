@@ -1,0 +1,48 @@
+<?php
+if (!empty($this->feedData)) {
+    foreach ($this->feedData as $prod) {
+
+        $page_url = $this->serverUrl().'/service/feeddatadetail/'.$prod['feeddataid'].'/'.rand();
+        $title = 'ELNove - '.$prod['caption'];
+        ?>
+        <div class="main_big1_product_box productsBox draggable-element">
+            <!--<div class="portfolio-item img-thumbnail productsBox">-->
+
+            <div class="main_big1_product_img_box">
+                <img src="<?php echo $prod['feedimageurl']; ?>" id="img">
+            </div>
+            <div class="main_big1_product_tag_box">
+                <a href="javascript:void(0);" class="fl">
+                    <img src="img/price.png" alt="<?php echo $prod['price']; ?>" title="<?php echo $prod['price']; ?>" />
+                </a>
+                <a href="javascript:void(0);" class="fr likes" id="<?php echo base64_encode($prod['feeddataid']); ?>">
+                    <img src="img/thumb.png" alt="Like" />
+                </a>
+            </div>
+            <div class="box-block">
+                <div class="pad">
+                    <span id="like_<?= $prod['feeddataid']; ?>"><?= $prod['likesCount'] != 0 ? $prod['likesCount'] . ' likes' : ""; ?></span>
+                    <h4><?php echo $this->string_helper($prod['caption']); ?></h4>
+                    <p><?php echo $prod['price']; ?><span class="currency"><?php echo $prod['currency'] ?></span></p>
+                    <a class="buy_now gotourl" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod['feeddataid']))); ?>">buy now</a>
+                    <br/>
+                    <a href="service/feeddatadetail/<?php echo $prod['feeddataid']; ?>/<?php echo rand();?>">DISCOVER <img src="img/right1.png" id="im"></a>
+                </div>
+                <div class="social_box">
+                    <ul>
+                        <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/f.png"></a></li>
+                        <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/p1.png"></a></li>
+                        <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/t.png"></a></li>
+                        <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/g.png"></a></li>
+                        <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url;?>&title=<?php echo $title;?>" target="_blank"><img src="/img/msg.png"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--</div>-->
+        </div>
+    <?php } ?>
+
+<?php } else { ?>
+    <div class="col-md-3" style="text-align: center;width: 100%;">Oops No Record found.</div>
+<?php } ?>

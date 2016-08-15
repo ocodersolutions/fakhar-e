@@ -1,0 +1,837 @@
+<link rel="stylesheet" href="<?php echo $this->basePath()?>/vendor/jqueryui/development-bundle/themes/base/jquery.ui.all.css">
+<!-- <link rel="stylesheet" href="<?php echo $this->basePath()?>/css/jquery.gritter.css"> -->
+<link rel="stylesheet" type="text/css" href="<?php echo $this->basePath()?>/templates/mobile/aciTree/css/aciTree.css" media="all">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->basePath()?>/templates/mobile/css/style.css" media="all">
+<script type="text/javascript" src="<?php echo $this->basePath()?>/templates/mobile/aciTree/js/jquery.aciPlugin.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/templates/mobile/aciTree/js/jquery.aciTree.dom.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/templates/mobile/aciTree/js/jquery.aciTree.core.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/templates/mobile/aciTree/js/jquery.aciTree.selectable.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/templates/mobile/aciTree/js/jquery.aciTree.checkbox.js"></script>
+<script type="text/javascript" src="<?php echo $this->basePath()?>/templates/mobile/aciTree/js/jquery.aciTree.radio.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->basePath()?>/vendor/jquery-ui.min.js"></script>
+
+                
+<style type="text/css">
+    
+</style>
+<div class="req12-outfit-grid-page stick headroom"> 
+	<div class="top-select">
+        <div class="top-select-above">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-9">
+                            <ul class="list-radio list-inline lh25" style="display:none">
+                                <li>
+                                    <div class="radio">
+                                        <input type="radio" name="outart" id="outfit" value="outfit" checked="">
+                                        <label for="outfit" class="radio-label upcase">
+                                            outfit
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio">
+                                        <input type="radio" name="outart" id="articles" value="articles">
+                                        <label for="articles" class="radio-label upcase">
+                                            articles
+                                        </label>
+                                    </div>
+                                </li> 
+                            </ul>
+                      
+                    </div>
+                    <div class="col-xs-3">
+				        <div class="sb-toggle-right navbar-right" style="margin-right:0">
+				            <label class="refine radio-label upcase">
+                                refine
+                            </label>
+				        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="save-bought upcase outfit-section">
+            <div class="commonbgc save active">
+                <a href="#">saved</a>
+            </div>
+            <div class="commonbgc bought">
+                <a href="/mybought">bought</a>
+            </div>
+        </div>
+      <!--   <div class="date">
+            <div class="container">
+                12/01/15
+            </div>
+            
+        </div> -->
+	</div>
+</div>
+
+<div class="req12-outfit-grid-page mgt135" id="outfit-page" style="display:none"> 
+    <section id="main-content-wrap">
+            <div class="container">
+                <section class="grid">
+                <?php foreach ($outfit_details as $key => $outfitsData) {
+                ?>
+                    <a href="/mycloset/outfit-details/<?php echo $key; ?>" target="_top">
+                <?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
+                    <div class="row grid-row resize">
+                        <div class="col-xs-6">
+                            <div class="bigger">
+                            <?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
+                          
+
+                                     <img src="<?php echo $outfitsData[0]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[0]['caption'] ?>" class="resize_follow_big">
+                                
+
+
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" class="resize_follow_big"/>
+                                <?php } ?>
+                            </div>
+                            <div class="smaller">
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
+                                             <!-- <a target="_blank" href="/service/feeddatadetail/<?php echo $outfitsData[1]['id']; ?>/<?php echo rand(); ?>"> -->
+                                                
+                                <img src="<?php echo $outfitsData[1]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[1]['caption'] ?>" class="resize_follow_small">
+                              
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small" />
+                                <?php } ?>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>
+                                            
+                                <img class="resize_follow_small" src="<?php echo $outfitsData[2]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[2]['caption'] ?>">
+                             
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                                <?php } ?>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="smaller">
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>
+                                              
+                                <img src="<?php echo $outfitsData[3]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[3]['caption'] ?>" class="resize_follow_small">
+                               
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                                <?php } ?>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>
+                                               
+                                <img src="<?php echo $outfitsData[4]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[4]['caption'] ?>" class="resize_follow_small">
+                             
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                                <?php } ?>
+                                    </div>
+                            </div>
+                            <div class="bigger">
+                                <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
+                                   
+                                    <img src="<?php echo $outfitsData[5]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[5]['caption'] ?>" class="resize_follow_big">
+                                
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" class="resize_follow_big"/>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div> 
+
+        
+
+      
+                         <?php } ?>
+                </a>
+                 <?php } ?>
+				
+                </section>
+               
+            </div><!-- /.container -->
+     </section>
+                          
+</div>
+<!-- end outfit -->
+
+ <div class="req11-1perline-page mgt135" id="articles-page"> 
+        <section id="main-content-wrap">
+
+            <div class="container">
+                <section>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="block reset-margin-pading" id="productlisting">
+                                 <?php
+                                foreach ($this->feedData as $prod) {
+
+                                $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand();
+                                $title = 'ELNove - ' . $prod->caption;
+                                ?>
+                                    <div class="block-cart">
+                                        <div class="relative img-product display-block">
+                                       <!--      <a href="/service/feeddatadetail/<?php echo $prod->feeddataid; ?>/<?php echo rand(); ?>"> -->
+                                             <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" class="show-moreinfo" data-value="<?php echo $prod->feeddataid; ?>"> 
+                                                <img class="img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" alt="">
+                                             </a>
+                                            <div class="top-left">
+                                                <a href="javascript:void(0)" class="moveAarticleToBought" data-articleid="<?php echo base64_encode($prod->feeddataid); ?>">
+                                                    <img class="img-responsive " src="/templates/mobile/images/usd_black.png" alt="<?php echo $prod->price ?>" title="<?php echo $prod->price ?>">
+                                                </a>
+                                            </div>
+                                            <?php if(isset($prod->feedId) && $prod->onsale == 'Y') { ?>
+                                            <div class="top-right">
+                                                <div class="discount"><?php echo round(($prod->price-$prod->saleprice)/$prod->price*100)?>%<br/>OFF</div>
+                                            </div>
+                                            <?php }//end if ?>
+
+                                            <div class="row pull-child">
+                                                <div class='col-xs-12'>    
+                                                    <div  class="opacity">
+                                                        <div>
+                                                            <div class="col-xs-10 bottom-left">
+                                                                <div class="product-name"><?php echo $this->string_helper($prod->caption); ?></div>
+                                                                <div class="price"><?php echo $prod->price; ?><span class="currency"><?php echo $prod->currency ?></span></div>
+                                                            </div>
+                                                            <div class='col-xs-2 bottom-right'>
+                                                                <a href="javascript:void(0);" class="likes check-like checked" id="<?php echo base64_encode($prod->feeddataid); ?>">
+                                                                <i id="like<?php echo $prod->feeddataid; ?>" class="fa fa-thumbs-up"></i>  
+																</a>
+                                                             
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="opacity">
+                                                 <div class="bottom-left">
+                                                    <p class="product-name">Product Name</p>
+                                                    <p class="price">$400</p>
+                                                </div>
+                                                <div class="bottom-right check-like">
+                                                   <i class="fa fa-thumbs-up"></i>
+                                                </div>
+                                            </div> -->
+                                       
+
+                                        </div>
+                                        <div class="share-add-to-cart">
+                                            <div class="share check-like pointer" data-container="body" data-toggle="popover" data-placement="top">
+                                                <i class="fa fa-share-alt"></i>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <div class="continue ">
+                                                <?php 
+                                                    $disable='';
+                                                    $add ='add to cart';
+                                                    if(in_array($prod->feeddataid,$this->listItemCart)) { 
+                                                        $disable = 'disabled="disabled"';
+                                                        $add ='added to cart';
+                                                    }
+                                                ?>
+                                      
+                                                <button  data-feedid="<?php echo $prod->feeddataid; ?>" class="btn btn-default btn-submit btn-block btn-continue addCart" <?php echo $disable ?>><?php echo $add; ?></button>
+                                                </div>
+                                            </div> 
+                                            <div class="social_article" style="display:none">
+                                                <ul class="clearfix list-inline">
+                                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
+                                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+                                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
+                                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
+                                                    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <?php } ?>
+                                
+                        
+                                 
+                                </div>
+                             <!--    <div id='ajx_loader_div' style="display:none;z-index:999999; padding:30px 0; text-align:center">
+                                    <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>" id="ajx_loader_image" />
+                                </div> -->
+
+
+
+                            </div>
+                        </div>    
+                                  
+                    
+                </section>
+                
+            </div><!-- /.container -->
+
+        </section>
+ </div>
+  <div class="top_page" style="text-align:center">
+    <img src="<?php echo $this->basePath() ?>/templates/mobile/images/arrow.png" class="click_to_top">
+    <p class="click_to_top">TOP OF PAGE</p>
+</div> 
+
+   <form id="productFilterDetail" name="productFilterDetail">
+            <input type="hidden" id="minamount" class="form-control" name="minamount">
+            <input type="hidden" id="maxamount" class="form-control" name="maxamount">
+            <input type="hidden" id="duration" class="form-control" name="duration">
+            <input type="hidden" id="catids" class="form-control" name="catids">
+            <input type="hidden" id="brands" class="form-control" name="brands">
+            <input type="hidden" id="colors" class="form-control" name="colors">
+            <input type="hidden" id="stores" class="form-control" name="stores">
+            <input type="hidden" id="deals" class="form-control" name="deals">
+            <input type="hidden" id="onsale" class="form-control" name="onsale">
+            <input type="hidden" id="todaynew" class="form-control" name="todaynew">
+            <input type="hidden" id="newthisweek" class="form-control" name="newthisweek">
+            <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
+            <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
+            <input type="hidden" id="discountcode" class="form-control" name="discountcode">
+            <input type="hidden" id="page" class="form-control" name="page" value="2">
+            <input type="hidden" id="limit" class="form-control" name="limit" value="25">
+        </form>
+        <form id="outfitFilterDetail" name="outfitFilterDetail">
+            <input type="hidden" id="outfit_page" class="form-control" name="outfit_page" value="2">
+        </form>
+<!-- end article -->
+
+<script  type="text/javascript">
+    $( document ).ready(function() {
+        //$("#articles-page").css("display","none");
+        //$(".refine").css("display","none");
+
+        $('input[name="outart"]').change(
+            function(){
+            if($(this).is(':checked') && $(this).val() == 'outfit'){
+                $("#outfit-page").css("display","block");
+                $("#articles-page").css("display","none");
+                    $(".refine").css("display","none");
+                $(".save-bought").removeClass("article-section").addClass("outfit-section");
+            }
+            if($(this).is(':checked') && $(this).val() == 'articles') {
+                $("#outfit-page").css("display","none");
+                $("#articles-page").css("display","block");
+                $(".refine").css("display","block");
+                $(".save-bought").removeClass("outfit-section").addClass("article-section");
+            }
+
+        });
+    });
+
+    $(".commonbgc a").click(function(){
+        $(this).parents(".save-bought").find(".active").removeClass("active");
+        $(this).parents(".commonbgc").addClass("active");
+    });
+</script>
+<script type="text/javascript">
+
+    $(function () {
+
+        // init the tree
+        $('#tree').aciTree({
+            ajax: {
+                url: '/attributes/get-categories-json?mapped=true&ec=<?= $this->excludeCats ?>&levels=3&id='
+            },
+            checkbox: true
+        });
+
+        $('#tree').on('acitree', function (event, api, item, eventName, options) {
+            switch (eventName) {
+                case 'checked':
+                    //alert(item);
+                    //alert('checked: ' + api.getId(item));
+                    //break;
+                case 'unchecked':
+                    getAllCheckedElements(event, api, item, eventName, options);
+                    loadProductData();
+                    break;
+                case 'init' :
+                    getAllCheckedElements(event, api, item, eventName, options);
+                    break;
+            }
+        });
+
+    });
+
+    function getAllCheckedElements(event, api, item, eventName, options)
+    {
+        var checkedElements = $("#tree .aciTreeLi .aciTreeLeaf");
+        checkedElementsArr = api.checkboxes(checkedElements, true);
+        var catIdStr = '';
+        checkedElementsArr.each(function (index, item) {
+            var $item = $(item);
+            catIdStr += api.getId($item) + ',';
+            //console.log(api.getId($item) + ": " + api.getLabel($item));
+        });
+        $("#catids").val(catIdStr);
+    }
+
+</script>
+
+<script type="text/javascript">
+   $(document).ready(function () {
+        $(window).scroll(function () {
+         if( $('#outfit-page').css('display') == 'block' ) {
+            if ($("#loading-div-background").css('display') == 'block')
+            {
+                var windowheight = $(window).height();
+                var scrolltop = $($("#outfit-page .grid")).scrollTop();
+                var windowwidth = $(window).width();
+
+            }
+
+            if(  ($(document).height()-400)   <= $(window).scrollTop()+$(window).height() ){
+                if (loading_outfit == 0 && endData_outfit == 0)
+                {
+                    loadOutfitData(1);
+                }
+            }
+         }
+        });
+
+         $(window).scroll(function () {
+         if( $('#articles-page').css('display') == 'block' ) {
+            if ($("#loading-div-background").css('display') == 'block')
+            {
+                var windowheight = $(window).height();
+                var scrolltop = $($("#productlisting")).scrollTop();
+                var windowwidth = $(window).width();
+          
+            }
+            if(  ($(document).height()-400)   <= $(window).scrollTop()+$(window).height() ){
+                console.log(endData);
+                if (loading == 0 && endData == 0)
+                {
+                    loadProductData(1);
+                }
+            }
+         }
+        });
+
+    var loading_outfit = 0;
+    var endData_outfit = 0;
+    function loadOutfitData(isLazyLoading)
+    {
+        loading_outfit = 1;
+        var url = "/mycloset/getoutfits";
+        var filterData = $("#outfitFilterDetail").serialize();
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data:  filterData,
+            dataType: 'html',
+            beforeSend:function(){
+                showAjxLoadingDiv();
+            },
+            success: function (result) {
+                hideAjxLoadingDiv();
+                //var json = jQuery.parseJSON(result);
+                //console.log(result);
+                loading_outfit = 0;
+                if (result.indexOf('No Record') > 0)
+                {
+                    endData_outfit = 1;
+                }
+                else
+                {
+                    $("#outfit_page").val(parseInt($("#outfit_page").val()) + 1);
+                    $("#outfit-page .grid").append(result);
+                    var highestBox = 0;
+                    var highestBox1 = 0;
+                    $('.grid-row.resize').each(function(index,value){  
+                        if(index == 0) {
+                            highestBox = $(this).find(".bigger:first").height();
+                            highestBox1 = $(this).find(".smaller:first").height();
+                        }
+                  
+                        $(this).find(".resize_follow_big").each(function(){
+                            $(this).height(highestBox);
+                        });
+                   
+                        $(this).find(".resize_follow_small").each(function(){
+                            $(this).height(highestBox1);
+                        });
+                    });
+                }
+
+        }});
+    }
+
+    function saveArticle(){
+        var current = $(this);
+        if($(this).hasClass('checked')) {
+            class_name ='growl-missing';
+               jQuery.gritter.add({
+                            //title: result.mgs,
+                            title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + 'You have already added this article to your closet' +'</div></div><div class="my_close my_wrap_close">\
+            <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+            </div>',
+                            class_name: class_name,
+                            sticky: false,
+                            time: 3000
+                        })
+        } else {
+             var id = $(this).attr("id");
+            var url = "/service/likeclosset/";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {closesetId: id},
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == 'N') {
+                      class_name ='growl-missing';
+                    } else if (result.status == 'Y') {
+                        class_name ='growl-success';
+               
+                        var likesd = result.count + ' likes';
+                        $('.like_' + result.idf).html(likesd);
+
+                        if($(this).find('#like'+result.idf)) {
+                            $('#like'+result.idf).attr('class','fa fa-thumbs-up');
+                            current.addClass("checked");
+                        }
+
+                    } else {
+                        //alert("Internal Server Error");
+                    }
+                    jQuery.gritter.add({
+                            //title: result.mgs,
+                            title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+            <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+            </div>',
+                            class_name: class_name,
+                            sticky: false,
+                            time: 3000
+                        })
+                }
+            });
+        }
+    }
+    
+    $('body').on("click",".likes", saveArticle);
+       
+
+
+    });
+    var loading = 0;
+    var endData = 0;
+    function loadProductData(isLazyLoading)
+    {
+        if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+        {
+            showAjxLoadingDiv();
+            $("#page").val(1);
+        }
+        else {
+            showAjxLoadingDiv();
+            $("#loading").show();
+        }
+        loading = 1;
+        var url = "/mycloset/getfeeds";
+        var filterData = $("#productFilterDetail").serialize();
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data:  filterData,
+            dataType: 'html',
+            success: function (result) {
+                //var json = jQuery.parseJSON(result);
+                //console.log(result);
+                loading = 0;
+                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                {
+                    $("#productlisting").html(result); // show first page
+                    hideAjxLoadingDiv();
+                    $("#page").val(2); // set page = 2 for next loop
+                    //enableDragg();
+                }
+                else
+                {
+                    if (result.indexOf('No Record') > 0)
+                    {
+                        endData = 1;
+                    }
+                    else
+                    {
+                        $("#page").val(parseInt($("#page").val()) + 1);
+                        $("#productlisting").append(result);
+                    }
+                    $("#loading").hide();
+                    hideAjxLoadingDiv();
+                }
+            }
+        });
+    }
+
+    $(function () {
+
+        $(".check_category").click(function () {
+            if ($(this).is(':checked') == true) {
+                var $infos = $(this).parent('.category');
+                $infos.find("input[type=checkbox]").prop("checked", true);
+            } else {
+                var $infos = $(this).parent('.category');
+                $infos.find("input[type=checkbox]").prop("checked", false);
+            }
+        })
+
+        $(".check_subcategory").click(function () {
+            if ($(this).is(':checked') == true) {
+                //alert('Hello');
+                var $infos = $(this).parents('.subcategory');
+                $infos.find("input[type=checkbox]").prop("checked", true);
+            } else {
+                alert('Hey');
+                var $infos = $(this).parents('.subcategory');
+                $infos.find("input[type=checkbox]").prop("checked", false);
+            }
+        })
+
+        $(".brandSelection").click(function () {
+            $(this).toggleClass('activebrand');
+            var brands = '';
+            var allSelectedBrands = $(".brandSelection");
+            $(allSelectedBrands).each(function () {
+                if ($(this).hasClass('activebrand')) {
+                    brands += ($(this).attr('value')) + ',';
+                }
+            })
+            $("#brands").val(brands);
+            loadProductData();
+        })
+
+        $(".storeSelection").click(function () {
+            $(this).toggleClass('activebrand');
+            var stores = '';
+            var allSelectedStores = $(".storeSelection");
+            $(allSelectedStores).each(function () {
+                if ($(this).hasClass('activebrand')) {
+                    stores += ($(this).attr('value')) + ',';
+                }
+            })
+            $("#stores").val(stores);
+            loadProductData();
+        })
+
+
+        var availableBrandTags = <?php echo $this->jsonBrands; ?>;
+        $("#brandautocomplete").autocomplete({
+            source: availableBrandTags,
+            select: function (event, ui) {
+               $("ul.brandSelection li[value=" + ui.item.id + "]").addClass('activebrand');
+                $("#brands").val($("#brands").val() + ui.item.id + ',');
+                loadProductData();
+                return false;
+            }
+        });
+
+        var availableStoreTags = <?php echo $this->jsonStores; ?>;
+        $("#storeautocomplete").autocomplete({
+            source: availableStoreTags,
+            select: function (event, ui) {
+                $("ul.storeSelection li[value=" + ui.item.id + "]").addClass('activebrand');
+                $("#stores").val($("#stores").val() + ui.item.id + ',');
+                loadProductData();
+                return false;
+            }
+        });
+
+        $(".colorselection").click(function () {
+            $(this).toggleClass('activecolor');
+            var colors = '';
+            var allSelectedColors = $(".colorselection.activecolor");
+            $(allSelectedColors).each(function () {
+                colors += ($(this).attr('value')) + ',';
+            })
+            $("#colors").val(colors);
+            loadProductData();
+        });
+
+    });
+    function chooseDeals(currref, dealName)
+    {
+        $('.sale-option-checkbox', currref).toggleClass('activedeal');
+        if ($('.sale-option-checkbox', currref).hasClass('activedeal'))
+        {
+            $("#" + dealName).val(1);
+        }
+        else
+        {
+            $("#" + dealName).val('');
+        }
+        loadProductData();
+    }
+
+    // function addCart(feed_id){
+    //     if(feed_id > 0 ){
+            
+    //         $.ajax({
+    //             url: '/service/add-to-cart',
+    //             type: 'POST',
+    //             data: 'id='+ feed_id,
+    //             dataType: 'json',
+    //             beforeSend:function(){
+    //                 showAjxLoadingDiv();
+    //             },
+    //             success: function (result) {
+    //                 //var json = jQuery.parseJSON(result);
+    //                 $("#cart_number").text(result);
+    //                 //console.log(result);
+    //                 hideAjxLoadingDiv();
+                 
+    //             }
+    //         });
+    //     }
+    // }
+
+  
+
+</script>
+
+<script type="text/javascript">
+   equalheight = function(container){
+   var currentTallest = 0,
+    currentRowStart = 0,
+    rowDivs = new Array(),
+    $el,
+    topPosition = 0;
+    $(container).each(function() {
+
+      $el = $(this);
+      $($el).height('auto')
+      topPostion = $el.position().top;
+
+      if (currentRowStart != topPostion) {
+        for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+          rowDivs[currentDiv].height(currentTallest);
+        }
+        rowDivs.length = 0; // empty the array
+        currentRowStart = topPostion;
+        currentTallest = $el.height();
+        rowDivs.push($el);
+      } else {
+        rowDivs.push($el);
+        currentTallest = (currentTallest < $el.height()) ? ($el.height()) : (currentTallest);
+     }
+      for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
+        rowDivs[currentDiv].height(currentTallest);
+      }
+    });
+   }
+
+   $(window).load(function(){
+    $('.grid-row.resize').each(function(){  
+        var highestBox = 0;
+        $(this).find(".bigger").each(function(){
+            if($(this).height() > highestBox) {
+               highestBox = $(this).height();
+            }
+        }); 
+        
+        $(this).find(".resize_follow_big").each(function(){
+            $(this).height(highestBox);
+        });
+       
+        var highestBox1 = 0;
+         $(this).find(".smaller").each(function(){
+            if($(this).height() > highestBox1) {
+               highestBox1 = $(this).height();
+            }
+        });  
+     
+        $(this).find(".resize_follow_small").each(function(){
+            $(this).height(highestBox1);
+        });
+    });
+  }); 
+
+
+   
+    $("[data-toggle=popover]").popover({
+    html: true, 
+    content: function() {
+        //$(".social_outfit").show();
+          return $(this).parents(".share-add-to-cart").find(".social_article").html();
+        }
+    });
+
+    $(function () {
+
+                function moveAarticleToBoughtFunction() {
+                    var objThisRef = this; 
+                    myalert(
+                            'moveToBoughtAlert1', 'type_remove','Are you sure?','you want to move this article to bought items?',null,null,
+                            function(){
+                                $.ajax({
+                                    url: "/mybought/articlebought/",
+                                    type: 'POST',
+                                    data: {feeddataid: $(objThisRef).data("articleid")},
+                                    dataType: 'json',
+                                    success: function (result) {
+                                        if (result.status == 'Y') {
+                                            $('#moveToBoughtAlert1').foundation('reveal','close');
+                                             $(objThisRef).closest( ".block-cart" ).css( "display", "none" );
+                                             //myalert('moveToBoughtAlert2', 'type_success','Moved!',result.mgs);  
+                                             jQuery.gritter.add({title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                                                             <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                                                          </div>',
+                                                 class_name: 'growl-success',
+                                                 sticky: false,
+                                                 time: 3000
+                                             });                                               
+                                        } else {
+                                             myalert('moveToBoughtAlert3', 'type_remove','Internal Server Error', 'Please contact site administrator.');
+                                        }
+                                    }});                        
+                                      
+                            });                         
+                }
+                $('.moveAarticleToBought').click(moveAarticleToBoughtFunction);
+                $('body').on('click', '.moveAarticleToBought', moveAarticleToBoughtFunction);
+                
+            
+                $('body').on('click', '.clsBboughtEntireOutfit', function () {
+
+                    var objThisRef = this; 
+                    myalert(
+                            'outFitBoughtID', 'type_remove','Are you sure','you want to move this outfit to bought items?',null,null, 
+                            function(){
+
+                                 $.ajax({
+                                     url: "/mybought/outfitbought/",
+                                     type: 'POST',
+                                     data: {outfitId: $(objThisRef).data("outfitid")}, 
+                                     dataType: 'json',
+                                     success: function (result) {
+                                          if (result.status == 'Y') {
+                                              
+                                              $('#outFitBoughtID').foundation('reveal','close');
+
+                                              $(objThisRef).closest( "div.big_box" ).css( "display", "none" );
+                                              jQuery.gritter.add({title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                                                              <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                                                           </div>',
+                                                  class_name: 'growl-success',
+                                                  sticky: false,
+                                                  time: 3000
+                                              });                                                 
+                                                                          
+                                         } else {
+                                             myalert('outFitBoughtID3', 'type_remove','Internal Server Error', 'Please contact site administrator.');
+                                         }
+                                     }}); 
+                                 }
+                            );
+
+                });
+});
+
+   </script>

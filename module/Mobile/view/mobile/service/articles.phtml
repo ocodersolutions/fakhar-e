@@ -1,0 +1,164 @@
+ <div class="req12-articles-page"> 
+        <section id="main-content-wrap">
+               <div class="top-select">
+                <div class="top-select-above">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                    <ul class="list-radio list-inline lh25 ff-reset">
+                                        <li>
+                                            <div class="radio">
+                                                <input type="radio" name="radio1" id="radio1" value="option1" >
+                                                <label for="radio1" class="radio-label upcase">
+                                                    outfit
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="radio">
+                                                <input type="radio" name="radio1" id="radio2" value="option1" checked="">
+                                                <label for="radio2" class="radio-label upcase">
+                                                    articles
+                                                </label>
+                                            </div>
+                                        </li> 
+                                    </ul>
+                              
+                            </div>
+                            <div class="col-xs-3">
+                                <label class="refine radio-label upcase ff-reset">
+                                    refine
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="save-bought upcase">
+                <div class="row">
+                    <div class="col-xs-6 save font-active">
+                        <a href="">saved</a>
+                    </div>
+                    <div class="col-xs-6 bought font-not-active">
+                        <a href="">bought</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="container">
+                <section>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="reset-margin-pading">
+                                <?php
+                                    $arr = array();
+                                    foreach ($this->feedData as $prod) {
+                                        $arr[] = (array)$prod;
+                                    }
+                                    // echo '<pre style="color:blue">';
+                                    // var_dump($arr);
+                                    // echo '</pre>';    
+                                    // die(__FILE__);
+                                    for ($i=0; $i < 5; $i++) { 
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $arr[$i]['feeddataid'] . '/' . rand();
+                                        $title = 'ELNove - ' . $arr[$i]['caption'];
+                                ?>
+                                    <div class="block-cart">
+                                        <div class="relative img-product display-block">
+                                            <img class="img-responsive" src="<?php echo ($arr[$i]['feedId']==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $arr[$i]['feedimageurl']):$arr[$i]['feedimageurl']) ?>" alt="">
+                                            <div class="top-left">
+                                                <img class="img-responsive" src="images/usd_save.png" alt="">
+                                            </div>
+                                            <div class="row pull-child">
+                                                <div class='col-xs-12'>    
+                                                    <div  class="opacity">
+                                                        <div>
+                                                            <div class="col-xs-6 bottom-left">
+                                                                <div class="product-name">Product Name</div>
+                                                                <div class="price">$400</div>
+                                                            </div>
+                                                            <div class='col-xs-6 bottom-right check-like'>
+                                                                <i class="fa fa-thumbs-o-up"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                          
+                                       
+
+                                        </div>
+                                        <div class="share-add-to-cart">
+                                            <div class="share check-like">
+                                                <i class="fa fa-share-alt"></i>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <div class="continue ">
+                                                   <a href=""> <button type="button" class="btn btn-default btn-submit btn-block btn-continue" id="">add to cart</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                               
+                                </div>
+                            </div>
+                             <div class="col-xs-6">
+                                <div class="reset-margin-pading">
+                                <?php 
+                                    for ($i=5; $i < 10; $i++) { 
+                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $arr[$i]['feeddataid'] . '/' . rand();
+                                        $title = 'Lnove - ' . $arr[$i]['caption'];
+                                 ?>
+                                      <div class="block-cart">
+                                        <div class="relative img-product display-block">
+                                            <img class="img-responsive" src="<?php echo ($arr[$i]['feedId']==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $arr[$i]['feedimageurl']):$arr[$i]['feedimageurl']) ?>" alt="">
+                                            <div class="top-left">
+                                                <img class="img-responsive" src="images/usd_save.png" alt="">
+                                            </div>
+                                            <div class="row pull-child">
+                                                <div class='col-xs-12'>    
+                                                    <div  class="opacity">
+                                                        <div>
+                                                            <div class="col-xs-6 bottom-left">
+                                                                <div class="product-name">Product Name</div>
+                                                                <div class="price">$400</div>
+                                                            </div>
+                                                            <div class='col-xs-6 bottom-right check-like'>
+                                                                <i class="fa fa-thumbs-o-up"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                          
+                                       
+
+                                        </div>
+                                        <div class="share-add-to-cart">
+                                            <div class="share check-like">
+                                                <i class="fa fa-share-alt"></i>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <div class="continue ">
+                                                   <a href=""> <button type="button" class="btn btn-default btn-submit btn-block btn-continue" id="">add to cart</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <?php } ?>
+                             
+                                </div>
+                            </div>
+                        </div>                 
+                         <div class="top_page text-center">
+                            <img src="images/arrow.png" class="click_to_top">
+                            <p class="click_to_top">TOP OF PAGE</p>
+                        </div>
+                </section>
+                
+            </div><!-- /.container -->
+
+        </section>
+</div>

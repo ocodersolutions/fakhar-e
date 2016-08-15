@@ -1,0 +1,78 @@
+  <?php if(count($this->searchResult) > 0) { ?>
+<div class="outfit-designer-box" style="padding-bottom: 135px;">
+            <table id="outfit-table" class="table table-bordered">
+                <thead>
+                <tr style="text-align:center">
+                    <th>ID</th>
+                    <th>Outfit</th>
+                    <th>Creator</th>
+                    <th>Style Bucket</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+              
+                <?php foreach ($this->searchResult as $index => $outfits) { ?>
+                    <tr>
+                         <td><?php echo $outfits['outfit_id']; ?></td>
+                        <td><?php echo $outfits['title']; ?><?php if($outfits['all_items_avail'] > 0) { ?> <span class="fa fa-warning" style="color: red"></span><?php } ?></td>
+                        <td><?php echo $outfits['firstName'].' '.$outfits['lastName']; ?></td>
+                        <td><?php echo str_replace('|', ' | ', $outfits['sub_venues']); ?></td>
+                        <td><?php if($outfits['status'] == '0'){ echo 'Disable'; } else { echo 'Enable'; } ?></td>
+                        <td>
+                            <a class="fancybox fancybox.ajax" href="<?php echo $this->basePath('service/add-outfit?id=').$outfits['outfit_id']; ?>">Edit</a>  | 
+                            <a href="javascript:deleteOutfit(<?php echo $outfits['outfit_id']; ?>);">Remove</a> | 
+                            <a class="fancybox" href="<?php echo $this->basePath("feed/outfits/{$outfits['outfit_id']}.jpg"); ?>">Preview</a> | 
+                            <a href="<?php echo $this->basePath('service/clone-outfit?id=').$outfits['outfit_id']; ?>">Clone</a> 
+                        </td>
+                    </tr>                   
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>            
+
+      <div class="outfit-designer-box" style="padding-bottom: 35px;">
+      <?php
+      $currentController = $this->layout()->controller;
+        if(isset($this->searchkey) && ($this->searchkey!=''))  {
+         $temp_paginator = 'partial/paginator_search_outfits.phtml';
+      }  else {
+        $temp_paginator ='partial/paginator.phtml';
+      }
+      $currentURL = $this->cmsLinkAdmin(array('controller' => $currentController, 'action' => 'outfits','route' => 'service/outfits'));
+       // add at the end of the file after the table
+       echo $this->paginationControl(
+           // the paginator object
+           $this->paginator,
+           // the scrolling style
+           'sliding',
+           // the partial to use to render the control
+           $temp_paginator,
+           // the route to link to when a user clicks a control link
+           array(
+               'currentURL' => $currentURL,
+               'searchkey' => $this->searchkey
+           )
+       );
+       ?>            
+      </div> 
+    <?php  } else { ?>
+    <table id="outfit-table" class="table table-bordered">
+                <thead>
+                <tr style="text-align:center">
+                    <th>ID</th>
+                    <th>Outfit</th>
+                    <th>Creator</th>
+                    <th>Style Bucket</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center">
+                <td><h3>No match found</h3></td>
+                 
+                </tbody>
+                </table>
+   
+  <?php } ?>

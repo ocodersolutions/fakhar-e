@@ -1,0 +1,222 @@
+<br /><br />
+
+<style>
+<!--
+table {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:12px;
+	text-shadow: 1px 1px 0px #fff;
+	background:#eaebec;
+	margin:20px;
+	border:#ccc 1px solid;
+
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+
+	-moz-box-shadow: 0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 0 1px 2px #d1d1d1;
+	box-shadow: 0 1px 2px #d1d1d1;
+}
+table th {
+	padding:1px 5px 2px 5px;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
+
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+table th:first-child {
+	text-align: left;
+}
+table tr:first-child th:first-child {
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px;
+}
+table tr:first-child th:last-child {
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
+}
+table tr {
+	text-align: center;
+	padding-left:20px;
+}
+table td:first-child {
+	text-align: left;
+	padding-left:20px;
+	border-left: 0;
+}
+table td {
+	padding:5px;
+	border-top: 1px solid #ffffff;
+	border-bottom:1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+table tr.even td {
+	background: #f6f6f6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+table tr:last-child td {
+	border-bottom:0;
+}
+table tr:last-child td:first-child {
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px;
+}
+table tr:last-child td:last-child {
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-bottom-right-radius:3px;
+}
+table tr:hover td {
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
+}
+-->
+</style>
+
+<script>
+$(document).ready(function() { 
+	$(".pagging a").click(function(e) {
+        e.preventDefault();
+        $('#page').val( $(e.target).data('pageid') );
+        //$("#addInfo").submit();
+        $("#submitbutton").click();
+    });
+});
+</script>
+
+<?php 
+	$form = $this->form;
+	$form->setAttribute('action', '/feed/list'); 
+	$form->prepare();
+	echo $this->form()->openTag($form);
+?>
+<div style="clear: both;  padding-bottom: 30px">
+	<table>	
+		<tr>
+			<td align="left">
+				<?php echo $this->formLabel($form->get('infoStatus'));?><br />
+				<?php echo $this->formSelect($form->get('infoStatus'));?>
+			</td>
+			<td align="left">
+				<?php echo $this->formLabel($form->get('category'));?><br />
+				<?php echo $this->formSelect($form->get('category'));?>
+			</td>
+		</tr>
+		<tr>
+			<td align="left">
+				<?php echo $this->formLabel($form->get('start_date'));?><br />
+				<?php echo $this->formText($form->get('start_date'));?>
+			</td>
+			<td align="left">
+				<?php echo $this->formLabel($form->get('end_date'));?><br />
+				<?php echo $this->formText($form->get('end_date'));?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right">
+				<?php echo $this->formInput($form->get('page'));?>
+				<?php echo $this->formInput($form->get('submit'));?>
+			</td>
+		</tr>
+	</table>
+</div>
+<?php 
+	echo $this->form()->closeTag($form);
+?>
+
+<div class="pagging">
+<? if ($this->pages->pageCount): ?>
+
+	<? if (isset($this->pages->previous)): ?><a href="#" data-pageid="<?=$this->pages->previous?>">&lt; Previous</a> |
+	<? else: ?><span class="disabled">< Previous</span> | <? endif; ?>
+	
+	<? if (isset($this->pages->previous)): ?><a href="#" data-pageid="<?=$this->pages->first?>">First</a> |
+	<? else: ?><span class="disabled">First</span> | <? endif; ?>
+										
+	<? foreach ($this->pages->pagesInRange as $page): ?>
+	  <? if ($page != $this->pages->current): ?><a href="#" data-pageid="<? echo $page; ?>" ><? echo $page; ?></a> |
+	  <? else: echo $page; ?> | <? endif; ?>
+	<? endforeach; ?>
+	
+	<? if (isset($this->pages->next)): ?><a href="#" data-pageid="<?=$this->pages->last?>">Last</a>
+	<? else: ?><span class="disabled">Last</span><? endif; ?>
+										
+	<? if (isset($this->pages->next)): ?><a href="#" data-pageid="<?=$this->pages->next?>">Next &gt;</a>
+	<? else: ?><span class="disabled">Next &gt;</span><? endif; ?>
+	
+	(<?=$this->pages->firstItemNumber?> - <?=$this->pages->lastItemNumber?> of <?=$this->pages->totalItemCount?>)
+	
+<? endif; ?>	
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+  	  <th>ID</th>
+      <th>Program Name</th>
+      <th>SKU</th>
+      <th>Currency</th>
+      <th>Price</th>
+      <th>Advertiser Category</th>
+      <th>Buy URL</th>
+	  <th>Image URL</th>
+	  <th>Info Added</th>
+	  <th>Info Add Date</th>
+  </tr>
+<?php foreach ($this->feedData as $prod) {?>
+  <tr>
+  	  <td><a href="/feed/add-info?pid=<?=$prod->id?>" target="_blank"><?=$prod->id?></a></td>
+      <td><?=$prod->programname?></td>
+      <td><?=$prod->sku?></td>
+      <td><?=$prod->currency?></td>
+      <td><?=$prod->price?></td>
+      <td><?=$prod->advertisercategory?></td>
+      <td><a href="<?=$prod->buyurl?>" target="_blank">Buy URL</a></td>
+	  <td><a href="<?=$prod->imageurl?>" target="_blank">Image URL</a></td>
+	  <td><?=$prod->productInfoAdded?></td>
+	  <td><?=$prod->productInfoAddDate?></td>
+  </tr>
+<?php }?>
+</table>
+  
+
+<div class="pagging">
+<? if ($this->pages->pageCount): ?>
+
+	<? if (isset($this->pages->previous)): ?><a href="#" data-pageid="<?=$this->pages->previous?>">&lt; Previous</a> |
+	<? else: ?><span class="disabled">< Previous</span> | <? endif; ?>
+	
+	<? if (isset($this->pages->previous)): ?><a href="#" data-pageid="<?=$this->pages->first?>">First</a> |
+	<? else: ?><span class="disabled">First</span> | <? endif; ?>
+										
+	<? foreach ($this->pages->pagesInRange as $page): ?>
+	  <? if ($page != $this->pages->current): ?><a href="#" data-pageid="<? echo $page; ?>" ><? echo $page; ?></a> |
+	  <? else: echo $page; ?> | <? endif; ?>
+	<? endforeach; ?>
+	
+	<? if (isset($this->pages->next)): ?><a href="#" data-pageid="<?=$this->pages->last?>">Last</a>
+	<? else: ?><span class="disabled">Last</span><? endif; ?>
+										
+	<? if (isset($this->pages->next)): ?><a href="#" data-pageid="<?=$this->pages->next?>">Next &gt;</a>
+	<? else: ?><span class="disabled">Next &gt;</span><? endif; ?>
+	
+	(<?=$this->pages->firstItemNumber?> - <?=$this->pages->lastItemNumber?> of <?=$this->pages->totalItemCount?>)
+	
+<? endif; ?>	
+</div>			
+
+
+
+

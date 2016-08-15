@@ -1,0 +1,135 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <div id="fb-root"></div>
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle("ELNOVE")->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        	//->appendName('viewport', 'width=1190, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+        
+<link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/img/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/img/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/img/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/img/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/img/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/img/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff"> 
+        
+        <!-- Le styles -->
+        <?php echo $this->headLink()
+				        //->prependStylesheet($this->basePath() . '/css/theme-responsive.css')
+				        //->prependStylesheet($this->basePath() . '/css/skins/blue.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+				        //->prependStylesheet($this->basePath() . '/css/custom.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme-animate.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme-elements.css')
+				        //->prependStylesheet($this->basePath() . '/css/theme.css')
+				        //->prependStylesheet($this->basePath() . '/vendor/magnific-popup/magnific-popup.css')
+				        //->prependStylesheet($this->basePath() . '/vendor/flexslider/flexslider.css')
+				        //->prependStylesheet($this->basePath() . '/css/fonts/font-awesome/css/font-awesome.css')
+				        //->prependStylesheet($this->basePath() . '/css/bootstrap_additional.css')
+				        //->prependStylesheet($this->basePath() . '/css/bootstrap.css')
+                        //->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.css')
+                        //->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.structure.css')
+                        //->prependStylesheet($this->basePath() . '/css/autocomplete/jquery-ui.theme.css')
+                        ->prependStylesheet($this->basePath() . '/css/lnovecustom.css')
+                        ->prependStylesheet($this->basePath() . '/css/normalize.css')
+                        ->prependStylesheet($this->basePath() . '/css/owl.carousel.css')
+                        ->prependStylesheet($this->basePath() . '/fa/css/font-awesome.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+        ;
+        ?>
+		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\/script>')</script>-->
+
+        <!-- Scripts -->
+        <?php //echo $this->headScript()->prependFile($this->basePath() . '/vendor/modernizr.js')
+                                      //->prependFile($this->basePath() . '/js/jquery-ui.js');
+        ?>
+
+        <?php
+        echo $this->headScript()->prependFile($this->basePath() . '/js/jquery.gray.js')
+                                ->prependFile($this->basePath() . '/js/jquery.js');
+        ?>
+
+		<!--[if IE]>
+			<!--<link rel="stylesheet" href="/css/ie.css">-->
+		<![endif]-->
+
+		<!--[if lte IE 8]>
+			<!--<script src="/vendor/respond.js"></script>-->
+		<![endif]-->
+
+    </head>
+    <body>
+    
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5F6KJB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5F6KJB');</script>
+<!-- End Google Tag Manager -->  
+    
+    
+    
+    
+    <?php echo $this->content; ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Libs -->
+		<script src="/js/plugins.js"></script>
+		<script src="/vendor/jquery.easing.js"></script>
+		<script src="/vendor/jquery.appear.js"></script>
+		<script src="/vendor/jquery.cookie.js"></script>
+		<script src="/vendor/bootstrap.js"></script>
+		<script src="/vendor/twitterjs/twitter.js"></script>
+		<script src="/vendor/flexslider/jquery.flexslider.js"></script>
+		<script src="/vendor/jflickrfeed/jflickrfeed.js"></script>
+		<script src="/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="/vendor/jquery.validate.js"></script>
+		<script src="/vendor/bootstrap/bootstrap-lightbox/bootstrap-lightbox.min.js"></script>
+
+		<!-- Theme Initializer -->
+		<script src="/js/theme.js"></script>
+
+		<!-- Custom JS -->
+		<script src="/js/custom.js"></script>
+
+		
+
+    </body>
+</html>

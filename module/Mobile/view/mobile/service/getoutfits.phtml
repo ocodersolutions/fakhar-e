@@ -1,0 +1,97 @@
+<?php 
+foreach ($outfit_details as $key => $outfitsData) { 
+    $outfix_id = $outfitsData[0]['outfit_id'];
+?>
+<!-- <a href="/service/outfit-details/<?php echo $key; ?>" target="_top"> -->
+<a href="javascript:void(0)" class="outfixDetailLink" data-outfit_id="<?php echo $outfix_id ?>" id="outfix_<?php echo $outfix_id ?>">
+    <?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
+        <div class="row grid-row resize">
+            <div class="col-xs-6">
+                <div class="bigger">
+                    <?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
+                        <img src="<?php echo $outfitsData[0]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[0]['caption'] ?>" class="resize_follow_big">
+                    <?php } else { ?>
+                        <img src="/img/big_img.jpg" alt="product" class="resize_follow_big"/>
+                    <?php } //end if ?>
+                    <div class="top-right">
+                        <?php if(isset($outfitsData[0]['feedId']) && $outfitsData[0]['onsale'] == 'Y') { ?>
+                            <div class="discount"><?php echo round(($outfitsData[0]['price']-$outfitsData[0]['saleprice'])/$outfitsData[0]['price']*100)?>%<br/>OFF</div>
+                        <?php }//end if ?>
+                    </div>
+                </div>
+                <div class="smaller">
+                    <div class="col-xs-6">
+                        <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
+                            <!-- <a target="_blank" href="/service/feeddatadetail/<?php echo $outfitsData[1]['id']; ?>/<?php echo rand(); ?>"> -->             
+                            <img src="<?php echo $outfitsData[1]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[1]['caption'] ?>" class="resize_follow_small">
+                        <?php } else { ?>
+                            <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                        <?php } //end if ?>
+                        <div class="top-right">
+                            <?php if(isset($outfitsData[1]['feedId']) && $outfitsData[1]['onsale'] == 'Y') { ?>
+                                <div class="discount"><?php echo round(($outfitsData[1]['price']-$outfitsData[1]['saleprice'])/$outfitsData[1]['price']*100)?>%<br/>OFF</div>
+                            <?php }//end if ?>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>        
+                            <img src="<?php echo $outfitsData[2]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[2]['caption'] ?>" class="resize_follow_small">
+                        <?php } else { ?>
+                            <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                        <?php }//end if ?>
+                        <div class="top-right">
+                            <?php if(isset($outfitsData[2]['feedId']) && $outfitsData[2]['onsale'] == 'Y') { ?>
+                                <div class="discount"><?php echo round(($outfitsData[2]['price']-$outfitsData[2]['saleprice'])/$outfitsData[2]['price']*100)?>%<br/>OFF</div>
+                            <?php }//end if ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="smaller">
+                    <div class="col-xs-6">
+                        <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>          
+                            <img src="<?php echo $outfitsData[3]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[3]['caption'] ?>" class="resize_follow_small">
+                        <?php } else { ?>
+                            <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                        <?php } //end if ?>
+                        <div class="top-right">
+                            <?php if(isset($outfitsData[3]['feedId']) && $outfitsData[3]['onsale'] == 'Y') { ?>
+                                <div class="discount"><?php echo round(($outfitsData[3]['price']-$outfitsData[3]['saleprice'])/$outfitsData[3]['price']*100)?>%<br/>OFF</div>
+                            <?php }//end if ?>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>           
+                            <img src="<?php echo $outfitsData[4]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[4]['caption'] ?>" class="resize_follow_small">
+                        <?php } else { ?>
+                            <img src="/img/small_img2.jpg" alt="product" class="resize_follow_small"/>
+                        <?php } //end if ?>
+                        <div class="top-right">
+                            <?php if(isset($outfitsData[4]['feedId']) && $outfitsData[4]['onsale'] == 'Y') { ?>
+                                <div class="discount"><?php echo round(($outfitsData[4]['price']-$outfitsData[4]['saleprice'])/$outfitsData[4]['price']*100)?>%<br/>OFF</div>
+                            <?php }//end if ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="bigger">
+                    <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
+                        <img src="<?php echo $outfitsData[5]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[5]['caption'] ?>" class="resize_follow_big">
+                    <?php } else { ?>
+                        <img src="/img/big_img.jpg" alt="product" class="resize_follow_big"/>
+                    <?php } ?>
+                    <div class="top-right">
+                        <?php if(isset($outfitsData[5]['feedId']) && $outfitsData[5]['onsale'] == 'Y') { ?>
+                            <div class="discount"><?php echo round(($outfitsData[5]['price']-$outfitsData[5]['saleprice'])/$outfitsData[5]['price']*100)?>%<br/>OFF</div>
+                        <?php }//end if ?>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    <?php } //end if ?>
+</a>
+<?php }//end foreach ?>
+
+
+
+

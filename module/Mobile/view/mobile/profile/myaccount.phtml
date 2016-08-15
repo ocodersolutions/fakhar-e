@@ -1,0 +1,207 @@
+  <?php
+        echo $this->headLink()->prependStylesheet($this->basePath() . '/templates/mobile/bootstrap-toggle-master/css/bootstrap-toggle.min.css');
+    ?>
+    <?php
+
+  	  $birthday =$userdata['dob'];
+
+      
+
+        ?>
+<div class="profile-page bg-top">
+	 <div class="container">
+                <section id="main-content-wrap">
+                    <div class="about">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="button-list">
+                                    <button type="button" class="btn-block btn-account" id="">account</button>
+                                    <a href="/profile"><button type="button" class="btn-block btn-account btn-account-edit" id="">EDIT MY STYLE QUESTIONS</button></a>
+                                    <!-- <button type="button" class="btn-block btn-account btn-account-edit" id="">orders</button>  -->
+                                </div>
+
+                <?php if ($this->flashmessage) { ?>
+                    <div class="green_box"><p><?php echo $this->flashmessage; ?></p></div>
+                <?php } ?>
+                                <form name="myForm" id="myForm" method="POST" class="form" enctype="multipart/form-data">
+                                <div class="profile">
+                                   
+                                        <h3 class="title-profile text-center">Account</h3>
+                                        <div class="form-group">
+                                        	<?php 
+                                        	 	$basePath = $this->basePath('img/profilepic/'.$userdata['user_prp_pic']); 
+                                        	 	if (isset($userdata['user_prp_pic']) && !empty($userdata['user_prp_pic'])) {
+                                        	 ?>
+                                            <img class="img-responsive center-block profile_pic" src="<?php echo $basePath; ?>" alt="">
+                                            <?php } else {
+                                            ?>
+												
+											<img class="img-responsive center-block profile_pic" src="/img/profilepic/profile.png" alt="">
+                                           
+
+                                            <?php } ?>
+                                             <p class="text-center upload"><a id="upload_link" href="upload">Upload Picture</a></p>
+                                        </div>
+                                         <div class="form-group">
+                                            <label class="label-profile">First Name</label>
+                                            <input type="text" value="<?php echo $userdata['firstName']; ?>" placeholder="Dana" maxlength="100" class="form-control flat input-profile" name="firstName" id="firstName">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-profile">Last Name</label>
+                                            <input type="text" value="<?php echo $userdata['lastName'];?>" placeholder="Rocha" data-msg-required="" maxlength="100" class="form-control flat input-profile" name="lastName" id="lastName">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-profile">Email Address</label>
+                                            <input type="text" disabled value="<?php echo $userdata['email']; ?>" placeholder="dana@danarocha.com.br" class="form-control flat input-profile" name="email" id="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-profile">Birthday</label>
+                                            <input type="text" placeholder="" value="<?php echo $userdata['dob']; ?>" data-msg-required="" data-date-format="dd MM yyyy" class="form-control flat input-profile" name="dob" id="dob">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-profile">Password</label>
+                                            <input type="password" disabled value="" placeholder="*******" data-msg-required="" maxlength="100" class="form-control flat input-profile" name="password" id="password">
+                                            <a class="reset" href="/profile/resetpassword">Reset your password</a>
+                                        </div>
+                                           <div class="form-group">
+                                            <label class="label-profile">Your Default Value</label>
+                                            <ul class="list-radio list-inline">
+                                                <li><div class="radio">
+                                                    <input type="radio" name="defaultVenue" id="radio1" value="Work" <?php
+                            if ($userdata['defaultVenue'] == 'Work') {
+                                echo 'CHECKED';
+                            }
+                            ?>>
+                                                    <label for="radio1" class="radio-label">
+                                                        Work
+                                                    </label>
+                                                </div></li>
+                                                  <li><div class="radio">
+                                                    <input type="radio" name="defaultVenue" id="radio2" value="NightOut" <?php
+                            if ($userdata['defaultVenue'] == 'NightOut') {
+                                echo 'CHECKED';
+                            }
+                            ?>>
+                                                    <label for="radio2" class="radio-label">
+                                                        Night Out
+                                                    </label>
+                                                </div></li>
+                                                  <li><div class="radio">
+                                                    <input type="radio" name="defaultVenue" id="radio3" value="Casual" <?php
+                            if ($userdata['defaultVenue'] == 'Casual') {
+                                echo 'CHECKED';
+                            }
+                            ?>>
+                                                    <label for="radio3" class="radio-label">
+                                                        Casual
+                                                    </label>
+                                                </div></li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">             
+                                        <button type="button" class="btn-block btn-account btn-account-edit" id="submit1">save</button>
+                                        </div>
+                                          <div class="form-group">
+                                          <?php   if (isset($userdata['user_pp']) && !empty($userdata['user_pp']) && $userdata['user_pp']) { 
+                                          		$checked ='checked';
+                                          	}
+                                          	else $checked='';
+                                          	?>
+                                             <div class="onoff">
+                                             <input type="checkbox" <?php echo $checked; ?> data-toggle="toggle" name="profile-pp-val">
+                                              <label class="input-profile padlef">
+                                                Let my Closet Public
+                                              </label>
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                                 </form>
+                                <div class="block">
+                                    <div class="top_page">
+                                        <img src="<?php echo $this->basePath()?>/templates/mobile/images/arrow.png" class="click_to_top">
+                                        <p class="click_to_top">TOP OF PAGE</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div><!-- /.container -->
+</div>
+<script>
+$( document ).ready(function() {
+    var box = $('.green_box');
+
+    box.addClass('visuallyhidden');
+    
+    box.one('transitionend', function(e) {
+
+      box.addClass('hidden');
+
+    });
+    
+});
+
+
+	 $(function () {
+
+	        <?php if( $this->editSuccessfull ) {?>
+	        jQuery.gritter.add({
+	            //title: result.mgs,
+	            title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">Your style profile has been updated</div></div><div class="my_close my_wrap_close">\
+	                        <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+	                        </div>',
+	            class_name: 'growl-success',
+	            sticky: false,
+	            time: 3000
+	        })         
+	        <?php }?>		 
+
+	 	var d = new Date();
+
+	 	var month = d.getMonth()+1;
+	 	var day = d.getDate();
+
+	 	var output = d.getFullYear() + '-' +
+	 	((''+month).length<2 ? '0' : '') + month + '-' +
+	 	((''+day).length<2 ? '0' : '') + day;
+
+	 	$('#dob').datetimepicker({
+	 		weekStart: 1,
+	 		todayBtn:  1,
+	 		autoclose: 1,
+	 		todayHighlight: 1,
+	 		startView: 2,
+	 		minView: 2,
+	 		forceParse: 0
+
+
+		});
+		$('#dob').datetimepicker('setEndDate', output); 		
+
+    });
+
+	     $("#submit1").on("click", function (e) {
+            if (!($("#firstName").val().match(/^[a-zA-Z\ \.]+$/)))
+            {
+            	sweetAlert("Oops...", "Please enter valid First Name.", "error");
+             	return false;
+            }
+
+            if (!($("#lastName").val().match(/^[a-zA-Z\ \.]+$/)))
+            {
+                sweetAlert("Oops...", "Please enter valid Last Name'.", "error");
+                return false;
+            }
+
+
+            if ($("#radio1").is(':checked') != true && $("#radio2").is(':checked') != true && $("#radio3").is(':checked') != true)
+            {
+                sweetAlert("Oops...", "Please choose your default venue.'.", "error");
+                return false;
+            }
+            $("#myForm").submit();
+
+        });
+</script>

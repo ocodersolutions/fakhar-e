@@ -1,0 +1,192 @@
+<script src="<?php echo $this->basePath() ?>/showhidepassword/hideShowPassword.min.js"></script>
+<link rel="stylesheet" href="<?php echo $this->basePath() ?>/showhidepassword/css/example.wink.css">
+
+<?php //$loginUrl = $this->facebook->getLoginUrl(); ?>
+<div class="container topnavi" id="login-page">
+    <div class="register_box">
+        <ul class="register_page">
+            <li class="blue"><a href="" class="active "> LOGIN</a> </li>
+            <li ><a href="/profile"> REGISTER</a> </li>
+            <div class="clr"></div>
+        </ul>
+
+        <?php if(isset($_GET['status']) && $_GET['status']='-1'){ ?>
+        <script type="text/javascript">$(function() {
+           myalert('signupalert1','type_missing','Sorry your password and email don\'t match','','Reset Password');
+           $(".my_btn a").attr("href", "/profile/forgotpassword");
+        });</script>
+        <?php } ?>
+
+        <div class="clr"></div>
+        
+        <form action="/auth/authenticate" id="loginForm" method="post" class="form">
+            <label>EMAIL *</label><br>
+            <input type="text" value="<?=((isset($_COOKIE['emailcookie']) && $_COOKIE['emailcookie']!='')?$_COOKIE['emailcookie']:'')?>" data-msg-required="" maxlength="100" class="input-text1" name="email" id="email">
+            <label>PASSWORD*</label><br>
+            <input type="password" value="" data-msg-required="" maxlength="100" class="input-text1" name="password" id="password">
+            <div class="remember">
+                <input type="checkbox" value="1" class="brandSelection" id="1" name="option" <?=((isset($_COOKIE['emailcookie']) && $_COOKIE['emailcookie']!='')?'checked="checked"':'')?>>
+                <label for="1">
+                    <span class="fa-stack">
+                        <i class="fa fa-square-o fa-stack-1x"></i>
+                        <i class="fa fa-check-square fa-stack-1x"></i>
+                    </span>
+                    <span class="rememberLabel">Remember me</span>
+                </label>                
+            </div>
+            <div class="remember1 fr"><a href="/profile/forgotpassword">Forgot your Password?</a></div>
+            <div class="clr"></div>
+            <input type="submit" class="signup" id="btnNextStep" value="LOGIN">
+            <div class="fb">
+                <div><img src="/img/line.png"></div>
+                <p>or lOGIN with facebook</p>
+                <div><img src="/img/line.png"></div>
+            </div>
+            <div class="clr"></div>
+            <div class="facebook_btn" id="fb-auth" style="cursor:pointer"><i class="fa fa-facebook-square"></i>Facebook</div> 
+        </form>
+        <div class="clr"></div>
+    </div><!--register_box -->
+</div><!--container-->
+
+<div id="status">
+</div>
+
+<script>
+//Plugin Hide/Show Password
+$('#password').hidePassword(true);     
+
+// This is called with the results from from FB.getLoginStatus().
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+        // Logged into your app and Facebook.
+        //testAPI();
+    } else if (response.status === 'not_authorized') {
+        // The person is logged into Facebook, but not your app.
+        document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+    } else {
+        // The person is not logged into Facebook, so we're not sure if
+        // they are logged into this app or not.
+        document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+    }
+}
+
+// This function is called when someone finishes with the Login
+// Button.  See the onlogin handler attached to it in the sample
+// code below.
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+}
+
+// window.fbAsyncInit = function() {
+//    FB.init({
+//     appId      : '1238074509543418',
+//     xfbml      : true,
+//     cookie     : true,
+//     version    : 'v2.5'
+//   });
+
+// FB.getLoginStatus(function(response) {
+//   statusChangeCallback(response);
+// });
+
+//};
+
+// Load the SDK asynchronously
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// Here we run a very simple test of the Graph API after login is
+// successful.  See statusChangeCallback() for when this call is made.
+
+// Below we include the Login Button social plugin. This button uses
+// the JavaScript SDK to present a graphical Login button that triggers
+// the FB.login() function when clicked.
+$(window).on('load', function () {
+    //Script close popup
+    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+        $("button.my_btn_ok").click(function(){
+            $('a.close-reveal-modal').trigger('click');
+        });
+    });
+
+    $("#btnNextStep").on("click", function(e) {
+        if( !($("#email").val().match(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i)) ) {
+            myalert('signupalert2','type_missing','Oops', 'Please enter valid email address','');
+            $(".my_btn a").attr("href", "javascript:void(0)");
+            return false;
+        }
+        //Password validation
+        if( !($("#password").val().length > 0 ) ){
+            myalert('alertPassNotValid','type_missing','Oops', 'Please enter password.','');
+            $(".my_btn a").attr("href", "javascript:void(0)");
+            return false;
+        }
+        $( "#myForm" ).submit();
+    });
+
+});
+
+function checkPermission(){
+    FB.api('/me/permissions', function(perms_response) {
+        if(perms_response['data'][0].status =='granted' && perms_response['data'][1].status=='granted' && perms_response['data'][2].status=='granted') {
+            window.location.replace("/auth/fb-login");
+        } else {
+            myalert('myalertSignup1', 'type_missing','Oops', 'We were not able to pull all the required information, please provide the needed information and submit.','');
+            $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                $("button.my_btn_ok").click(function(){
+                    $('a.close-reveal-modal').trigger('click');
+                });
+            });     
+            return false;
+        }
+    });
+}
+  
+$("#fb-auth").click(function(){
+    FB.login(function(response) {
+        if (response.authResponse && response.status === 'connected') {
+            FB.api('/me', function(info) {
+                var accessToken = response.authResponse.accessToken;
+                var action_name = 'login_only';
+                var url='/';
+                $.ajax({
+                    url: url+'auth/fb-login',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {action: action_name},
+                    success: function(msg) { 
+                        if(msg.status == 'fail') {
+                            myalert('myalertSignup2', 'type_missing','Oops', 'Login Failed.','');
+                            $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                                $("button.my_btn_ok").click(function(){
+                                    $('a.close-reveal-modal').trigger('click');
+                                });
+                            });  
+                            return false;
+                        } else if(msg.status == 'success') {
+                            window.location.href=url+"service/";
+                            return false;
+                        }
+                    } 
+                }); 
+            });	   
+        } else {
+            //user cancelled login or did not grant authorization
+        }
+    }, {scope:'public_profile,email,user_birthday,read_stream', auth_type: 'reauthenticate'});
+});
+</script>

@@ -1,0 +1,72 @@
+<?php
+$buyUrl = $this->feedDataDetail['buyurl'];
+?>
+<style type="text/css">
+    progress {
+        width: 400px;
+        height: 14px;
+        margin: 50px auto;
+        display: block;
+        /* Important Thing */
+        -webkit-appearance: none;
+        border: none;
+    }
+
+
+    progress::-webkit-progress-bar {
+        background: black;
+        border-radius: 50px;
+        padding: 2px;
+        box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
+    }
+
+
+    progress::-webkit-progress-value {
+        border-radius: 50px;
+        box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+        background:
+            -webkit-linear-gradient(45deg, transparent, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%),
+            -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.2)),
+            -webkit-linear-gradient(left, #ba7448, #c4672d);
+
+
+        background-size: 25px 14px, 100% 100%, 100% 100%;
+        -webkit-animation: move 5s linear 0 infinite;
+    }
+
+    @-webkit-keyframes move {
+        0% {background-position: 0px 0px, 0 0, 0 0}
+        100% {background-position: -100px 0px, 0 0, 0 0}
+    }
+    
+    .ab_img{width:100%; margin-top:100px; clear:both}
+    .ab_msg{padding: 40px; color: #5e5c5c}
+    .ab_adv{font-size:30px; letter-spacing: 4px;}
+</style>
+<div>
+
+    <div style="" align="center">
+        <div class="ab_img"><img src="/img/lnove_logo_big.png" style="width:200px" /></div>
+        <div class="ab_msg">redirecting to our partner ...</div>
+        <div class="ab_adv"><?=$this->feedInfo['programname']?></div>
+    <div>
+    
+    <span><progress max="100" value="10" id ="progressbarVal"></progress></span>
+    
+
+    
+</div>
+<script>
+    $(document).ready(function () {
+        var tid = setInterval(mycode, 410);
+        function mycode() {
+            var result = $('#progressbarVal').val();
+            var percenr = result + 20;
+            $('#progressbarVal').val(percenr);
+        }
+        var href = "<?php echo $buyUrl; ?>";
+        setTimeout(function () {
+            window.location.href = href;
+        }, 501);
+    });
+</script>

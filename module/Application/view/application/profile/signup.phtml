@@ -1,0 +1,284 @@
+<script src="<?php echo $this->basePath() ?>/showhidepassword/hideShowPassword.min.js"></script>
+<link rel="stylesheet" href="<?php echo $this->basePath() ?>/showhidepassword/css/example.wink.css"/>
+
+<div id="signup-page" class="container topnavi">
+    <div class="brand-box">
+        <div class="menu-box <?php echo ($this->mode=='edit')?'menu-box-bigger':''?>">
+            <ul class="about">
+                <li>
+                    <a href="/profile">LOOK YOU&#39;D WEAR<div class="fa"><i class="fa fa-check green"></i></div></a>
+                </li>
+                <li>
+                    <a href="/profile/you">ABOUT YOU<div class="fa"><i class="fa fa-check green"></i></div></a>
+                </li>
+                <li>
+                    <a href="/profile/size">YOUR SIZE<div class="fa"><i class="fa fa-check green"></i></div></a>
+                </li>
+                <li>
+                    <a href="/profile/price">YOUR LOOK<div class="fa"><i class="fa fa-check green"></i></div></a>
+                </li>
+                
+                <li class="blue">
+                    <a href="javascript:void(0)" class="active">SIGN UP<div class="fa"></div></a>
+                </li>
+               
+            </ul>
+            <div class="clr"></div>
+        </div><!--menu-box -->
+    </div>
+    
+    <div class="register_box">
+        <ul class="register_page">
+            <li><a href="/auth/login">LOGIN</a></li>
+            <li class="blue"><a href="" class="active "> REGISTER</a> </li>
+            <div class="clr"></div>
+        </ul>
+        <div class="red_box" id="errormsgblock">
+            <div class="cross_img">
+                <img src="/img/cross.png" >
+            </div>
+            <p id="errormsg"></p>
+            <div class="cross_img1 fr"><img src="/img/cross.png" >
+                <div class="clr"></div>
+            </div>
+        </div>
+        <div class="clr"></div>
+        <form name="signup-form" id="signup-form" method="POST" class="form">
+            <div class="center-box">
+                <label>First Name*</label><br>
+                <input type="text" class="input-text fl"  value="" maxlength="100" name="firstName" id="firstName">
+            </div>
+
+            <div class="center-box">
+                <label>Last Name*</label><br>
+                <input type="text" class="input-text fr"  maxlength="100" name="lastName" id="lastName">
+            </div>
+
+            <div>
+                <label>Email Address*</label><br>
+                <input type="text" class="input-email " maxlength="100" name="email" id="email">
+                <input type="hidden" id="existEmail" name="existEmail" value="0" />
+            </div>
+
+            <div class="center-box password-left">
+                <label>Password*</label><br>
+                <input type="password" class="input-text"  maxlength="100" name="password" id="password">
+            </div>
+
+            <div class="center-box password-right">
+                <label>Re-Enter Password*</label><br>
+                <input type="password" class="input-text"  maxlength="100" name="repassword" id="repassword">
+            </div>
+
+            <div class="center-box">
+                <label>Birthday*</label><br>
+                <select name="month" class="select_opt fl" name="month" id="suMonth">
+                    <option value="">Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <select name="day" class="select_opt" id="suDay">
+                    <option value="">Day</option>
+                    <?php for($date='1'; $date <='31'; $date++) { ?>
+                        <option value="<?php echo $date; ?>"><?php echo $date; ?></option>
+                    <?php } ?>
+                </select>
+                <select name="year" class="select_opt fr" id="suYear">
+                    <option value="">Year</option>
+                    <?php 
+                    $currentYear = date("Y");
+                    for($year=$currentYear; $year >='1934'; $year--) { ?>
+                        <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                    <?php } 
+                    ?>
+                </select>                
+            </div>
+
+            <div class="center-box">
+                <label> Choose Your Default Venue</label><br/>
+                <div class="radio fl">
+                    <input type="radio" id="i1" name="defaultVenue" checked="checked" value="Work" />
+                    <label for="i1" class="outfit11">
+                    <span class="fa-stack ">
+                        <i class="fa fa-circle-o fa-stack-1x"></i>
+                        <i class="fa fa-circle fa-stack-1x"></i>
+                    </span>
+                    Work
+                    </label>
+                </div>
+                <div class="radio">
+                    <input type="radio" id="i2" name="defaultVenue" value="NightOut">
+                    <label for="i2" class="outfit11">
+                    <span class="fa-stack">
+                        <i class="fa fa-circle-o fa-stack-1x oo"></i>
+                        <i class="fa fa-circle fa-stack-1x"></i>
+                    </span>
+                    Night Out
+                    </label>
+                </div>
+                <div class="radio fr rt">
+                    <input type="radio" id="i3" name="defaultVenue" value="Casual">
+                    <label for="i3"  class="outfit11">
+                    <span class="fa-stack">
+                        <i class="fa fa-circle-o fa-stack-1x oo"></i>
+                        <i class="fa fa-circle fa-stack-1x"></i>
+                    </span>
+                    Casual
+                    </label>
+                </div>
+            </div>
+
+            <div class="clr"></div>
+
+            <input type="submit" class="signup" name="btnNextStep" id="btnNextStep" value="SIGN UP">
+
+            <div class="fb">
+                <div><img src="/img/line.png"></div>
+                <p>or register with facebook</p>
+                <div><img src="/img/line.png"></div>
+
+            </div> 
+
+            <div class="clr"></div>
+
+            <a href="#" class="fb-login"><div class="facebook_btn" id="fb-auth"><i class="fa fa-facebook-square"></i>Facebook</div></a>
+
+            <div class="clr"></div>
+        </form>
+        <div class="clr"></div>
+
+    </div><!--register_box -->
+    <div class="clr"></div>
+</div><!--container-->
+
+<script type="text/javascript">
+$(document).ready(function(){
+    //Script close popup
+    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+        $("button.my_btn_ok").click(function(){
+            $('a.close-reveal-modal').trigger('click');
+        });
+    });
+    //Plugin Hide/Show Password
+    $('#password').hidePassword(true);  
+    $('#repassword').hidePassword(true);
+
+    $("#btnNextStep").on("click", function(e) {
+        //First name
+        if( !$('#firstName').val().length > 0 || !($("#firstName").val().match(/^[a-zA-Z\ \.]+$/)) ) {   
+            myalert('alertErrorFirstName', 'type_missing','Oops', 'Please enter a valid first name. Don\'t worry, we are not going to sell or share your information and promise no spam.','');   
+            return false;
+        }
+        //Last name
+        if( !$('#lastName').val().length > 0 || !($("#lastName").val().match(/^[a-zA-Z\ \.]+$/)) ) {
+            myalert('alertErrorLastName', 'type_missing','Oops', 'Please enter a valid last name. Don\'t worry, we are not going to sell or share your information and promise no spam.','');
+            return false;
+        }
+        //Email
+        if( !$('#email').val().length > 0 || !($("#email").val().match(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i)) ) {
+            myalert('alertErrorEmail', 'type_missing','Oops', 'Please enter a valid email. Don\'t worry, we are not going to sell or share your information and promise no spam.','');  
+            return false;
+        }
+        //Check email exist
+        $.ajax({
+            type: "POST",
+            url: "/user/checkAccount",
+            data: { email: $("#email").val() },
+            async : false
+        }).done(function( data ) {
+            if( data == true ) {
+                $('#existEmail').val('1');
+            } else {
+                $('#existEmail').val('0');
+            }
+        });
+        //Password
+        var upperCase = new RegExp('[A-Z]');
+        var lowerCase = new RegExp('[a-z]');
+        var numbers = new RegExp('[0-9]');
+        if( !($("#password").val().length >= 8 ) || !$("#password").val().match(upperCase) || !$("#password").val().match(lowerCase) || !$("#password").val().match(numbers)) {
+            myalert('alertPassNotValid','type_missing','Oops', 'Password shouldn\'t be less than 8 characters. It must contain a mixture of upper and lower case letters, and at least one number.','');
+            return false;
+        } else if ( $("#password").val() !=  $("#repassword").val() ) {
+            myalert('alertErrorPassConfirm', 'type_missing','Oops', 'Confirm password doesn\'t match.','');
+            return false;
+        }
+        //Birthday
+        if( $("#suDay").val() == '' ) {
+            myalert('alertErrorDay', 'type_missing','Oops', 'Please choose day of birth.',''); 
+            return false;
+        }
+        if( $("#suMonth").val() == '' ) {
+            myalert('alertErrorMonth', 'type_missing','Oops', 'Please choose month of birth.',''); 
+            return false;
+        }
+        if( $("#suYear").val() == '' ) {
+            myalert('errorErrorYear', 'type_missing','Oops', 'Please choose Year of birth.',''); 
+            return false;
+        }
+        //Email Exist
+        if( $("#existEmail").val() == '1' ) {
+            myalert('alertErrorEmailExist', 'type_missing','Oops', 'Your entered email address is already in use','');
+           return false;
+        }
+
+        $( "#myForm" ).submit();
+    });
+});
+
+$('#suMonth').on('change', function() {
+    var day =  daysInMonth(this.value,2009);
+    option ='<option value="">Day</option>';
+    for (i = 1; i < day + 1; i++) { 
+        option+='<option value="'+ i +'">'+ i + '</option>';
+    }
+    $("#suDay").html(option);
+    
+});
+
+function daysInMonth(month,year) {
+    return new Date(year, month, 0).getDate();
+}
+        
+$(window).on('load', function () {
+
+    $('.checkbox').on("click", function(e) {
+        var callingElmId = this.id;
+        $( ".checkbox" ).each(function() {
+            if(this.id != callingElmId) {
+                $('#'+this.id).prop( "checked", false );
+                $('#'+this.id).checkbox('setChecked');
+            }
+        });
+    });
+
+    //$('.checkbox').checkbox('setChecked');
+
+    $(".cross_img1").on("click", function(e) {
+        $('#errormsgblock').hide();
+        $('#errormsg').html('');
+    });
+
+});
+
+$(window).load(function () {
+    var url = "/profile/profiletraking";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {page: 'signup'},
+        dataType: 'json',
+        success: function (result) { }
+    });
+});
+</script>

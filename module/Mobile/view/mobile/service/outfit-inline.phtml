@@ -1,0 +1,237 @@
+<style type="text/css">
+	.grid-row img{
+		width: 100%;
+	}
+	 .navigation{
+    padding: 0px 15px !important;
+ }
+ .top_page{
+    padding-bottom:80px; 
+ }
+  .my_row{
+    margin-right: 0px;
+    margin-left: 0px;
+ }
+ .popover-content ul li{
+    display: inline;
+    text-align: center;
+ }
+ .popover-content ul li a{
+    float: left;
+    width: 20%;
+ }
+  .popover-content ul {
+    padding-left: 0;
+    width: 150px;
+  }
+  .fixed-bottom{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+ }
+</style>
+<?php
+ $outfitsData = $this->outfits;
+ $page_url_outfit = $this->serverUrl() . '/service?outfit=' . $outfit_id;
+    $title_outfit = 'ELNove - ' . $this->outfits[0]['outfittitle'];
+ ?>
+<div class="req10-landscape-page">
+	 
+            <div class="container">
+            	<div class="navigation">   
+                    <div class="row">   
+                        <div class="col-xs-4"> 
+                            <div class="back">  
+                                <a href="/service">
+                                <div class="icon">x</div><div class="back-text">back</div>
+                                </a>
+                            </div> 
+                        </div>
+                        <div class="col-xs-8">  
+                        
+                        </div>
+                    </div>
+            </div>
+            </div>
+
+            <div class="container grid">
+             <?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
+                <a href="/service/outfit-details/<?php echo $outfit_id; ?>" target="_top">
+               
+                    <div class="row grid-row">
+                        <div class="col-xs-6">
+                            <div class="bigger">
+                            <?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
+                          
+
+                                     <img src="<?php echo $outfitsData[0]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[0]['caption'] ?>">
+                                
+
+
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+                            <div class="smaller">
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
+                                             <!-- <a target="_blank" href="/service/feeddatadetail/<?php echo $outfitsData[1]['id']; ?>/<?php echo rand(); ?>"> -->
+                                                
+                                <img src="<?php echo $outfitsData[1]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[1]['caption'] ?>">
+                              
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>
+                                            
+                                <img src="<?php echo $outfitsData[2]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[2]['caption'] ?>">
+                             
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="smaller">
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>
+                                              
+                                <img src="<?php echo $outfitsData[3]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[3]['caption'] ?>">
+                               
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>
+                                               
+                                <img src="<?php echo $outfitsData[4]['imageurl']; ?>" id="img" lt="<?php echo $outfitsData[4]['caption'] ?>">
+                             
+                                <?php } else { ?>
+                                    <img src="/img/small_img2.jpg" alt="product" />
+                                <?php } ?>
+                                    </div>
+                            </div>
+                            <div class="bigger">
+                                <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
+                                   
+                                    <img src="<?php echo $outfitsData[5]['imageurl']; ?>" id="img" alt="<?php echo $outfitsData[5]['caption'] ?>">
+                                
+                                <?php } else { ?>
+                                    <img src="/img/big_img.jpg" alt="product" />
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div> 
+
+        
+
+      
+                         
+                </a>
+                <?php } ?>
+            </div><!-- /.container -->
+            <div class="container">
+            <div class="bottom fixed-bottom">
+                <div class="save-share">
+                    <div class="container">
+                        <div class="row my_row">
+                            <div class="col-xs-6 text-left savecloseout pointer">
+                                <i class="fa fa-thumbs-o-up"></i>
+                                Save this Outfit
+                            </div>
+                             <div class="col-xs-6 text-right pointer" data-container="body" data-toggle="popover" data-placement="top">
+                                <i class="fa fa-share-alt"></i>
+                                Share this Outfit
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button onClick="addOutfitToCart(<?php echo $outfit_id ?>)" type="button" class="btn btn-default btn-submit btn-block btn-continue add-outfit-to-cart" id="">ADD OUTFIT TO CART</button>
+            </div>
+            </div>
+
+
+     
+               <div class="social_outfit" style="display:none">
+         <ul class="clearfix" >
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/f.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/t.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/g.png"></a></li>
+    <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url_outfit; ?>&title=<?php echo $title_outfit; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+</ul>
+</div>
+</div>
+<script type="text/javascript">
+	    //add outfit to cart
+     function addOutfitToCart(outfit_id){
+        if(outfit_id > 0 ){
+            $.ajax({
+                url: '/service/add-outfit-to-cart',
+                type: 'POST',
+                data: 'outfit_id='+ outfit_id,
+                dataType: 'json',
+                beforeSend:function(){
+                    showAjxLoadingDiv();
+                },
+                success: function (result) {
+                    console.log(result);
+                    //var json = jQuery.parseJSON(result);
+                    $("#cart_number").text(result);
+                    
+                    hideAjxLoadingDiv();
+
+                }
+            });
+        }
+    }
+
+    $("[data-toggle=popover]").popover({
+    html: true, 
+    content: function() {
+        //$(".social_outfit").show();
+          return $('.social_outfit').html();
+        }
+	});
+
+	   // save this outfit
+    $('.savecloseout').on('click', function () {
+        var id = $('#closesetId').val();
+        var url = "/service/outfitclosset/";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {closesetId: id},
+            dataType: 'json',
+            success: function (result) {
+                     var class_name ='growl-missing';
+                if(result.status =='Y') {
+                    class_name = 'growl-success';
+                } 
+                jQuery.gritter.add({
+                    //title: result.mgs,
+                    title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+    <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+    </div>',
+                    class_name: class_name,
+                    sticky: false,
+                    time: 3000,
+                });    
+
+                if (result.status == 'N') {
+                    //alert(result.mgs);
+                } else if (result.status == 'Y') {
+                     var likesd = result.count + ' likes';
+                    $('#like_' + result.idf).html(likesd);
+                } else {
+                    //alert("Internal Server Error");
+                }                        
+            }});
+    });
+
+</script>
