@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="favicon.ico">
+        <title>eLnove.com</title>
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <!-- FONT -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900' rel='stylesheet' type='text/css'>
+        <!-- Custom styles for this template -->
+        <link href="assets/css/custom.less" rel="stylesheet/less" type="text/css">
+        <link href="assets/css/custom_header.less" rel="stylesheet/less" type="text/css">
+        <link href="assets/css/custom_banner.less" rel="stylesheet/less" type="text/css">
+        <link href="assets/css/custom_product_list.less" rel="stylesheet/less" type="text/css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="body_content/body1.less" />
+        <link rel="stylesheet/less" type="text/css" href="bk/assets/css/quang.less" />
+        <script   src="assets/js/jquery-1.12.4.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
+        <script src="assets/js/jquery-ui.js"></script>
+        <script src="assets/js/jquery.fullscreen-popup.js"></script>
+
+    </head>
+
+    <body>
+<div id="header-container" class="container-fluid hidden-xs">
+    <div class="row">
+        <div class="header-top-navbar col-lg-12 ">
+            <div class="row top-bar">
+                <div class="left-side col-lg-4 col-md-4 col-sm-4 col-xs-12" id="show-hide-menu">MENU</div>
+                <div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="assets/images/logo.png" alt="" class="top-logo">
+                </div>
+                <div class="right-side col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="login_signup">
+                        <a href="#">LOGIN</a>
+                        /
+                        <a href="#">SIGN UP</a>
+                    </div>
+                    <a href="#" class="btn-st-blue">GET STYLED</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav id="menu" class="row">
+        <div class="col-lg-12 col-xs-12" id="row-top-navbar">
+            <div class="row">
+                <div class="col-lg-12 col-xs-12 text-center" id="top-nav" class="top-navbar">
+                    <ul>
+                        <li><a href="">HOW IT WORKS</a>
+                        </li>
+                        <li><a href="">ABOUT US</a>
+                        </li>
+                        <li><a href="">BLOG</a>
+                        </li>
+                        <li><a href="">FAQ</a>
+                        </li>
+                        <li><a href="">SHIPPING</a>
+                        </li>
+                        <li><a href="">PRICING</a>
+                        </li>
+                        <li><a href="">EXCHANGE & RETURNS</a>
+                        </li>
+                        <li><a href="">CAREERS</a>
+                        </li>
+                        <li><a href="">CONTACT US</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-xs-12" id="search">
+            <form class="searchbox">
+                <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" onkeyup="buttonUp();">
+                <button type="submit" class="searchbox-submit">
+                    <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
+                </button>
+            </form>
+        </div>
+
+    </nav>
+</div>
+<div id="mobile-header" class="container-fluid visible-xs">
+    <div class="row">
+        <div class="col-xs-12" id="mtop-bar">
+            <div class="uc_clean_accordion col-xs-6" id="mtop-left">
+                <div class="login_signup">
+                    <a href="#">LOGIN</a>
+                    /
+                    <a href="#">SIGN UP</a>
+                </div>
+            </div>
+            <div class="col-xs-6" id="mtop-right">
+                <a href="#" class="btn-st-blue">GET STYLED</a>
+            </div>
+        </div>
+    </div>
+            
+    <div class="row" id="menu-logo">
+        <div class="col-xs-12">
+            <span class="fa fa-plus" id="pop-menu" data-popup="#popup"></span>
+            <img src="assets/images/mobile-logo.png" alt="logo mobile" class="logo" />
+        </div>
+    </div>
+    
+    <div class="row" id="search-bar">
+        <form class="searchbox-mobile col-xs-12">
+            <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="m-search" class="m-searchbox-input">
+            <button type="submit" class="searchbox-submit">
+                <span class="m-searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="m-search_btn"></i></span>
+            </button>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-left" id="popup">
+            <div class="row">
+                <p class="m-title"> MENU</p>
+                <ul>
+                    <li><a href="">HOW IT WORKS</a>
+                    </li>
+                    <li><a href="">ABOUT US</a>
+                    </li>
+                    <li><a href="">BLOG</a>
+                    </li>
+                    <li><a href="">FAQ</a>
+                    </li>
+                    <li><a href="">SHIPPING</a>
+                    </li>
+                    <li><a href="">PRICING</a>
+                    </li>
+                    <li><a href="">EXCHANGE & RETURNS</a>
+                    </li>
+                    <li><a href="">CAREERS</a>
+                    </li>
+                    <li><a href="">CONTACT US</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="user-mhiden" id="user-mblock">
+            <p class="tit-head">WELCOM,JOHN <span class="fa fa-times" id="hid-userbox"></span></p>
+            <ul class="link-box-user">
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">Log out</a></li>
+            </ul>
+         </div>   
+        
+    </div>
+</div>
+<div id="banner" class="container-fluid">
+    <div class="col-lg-5 col-lg-offset-2 banner-content">
+        <h2>LOREM IPSUM TEXT</h2>
+        <p>Whether for casual or business attire, get choices tailored to you.</p>
+        <a href="#"><span class="btn btn-default">GET DRESSED</span></a>
+    </div>
+</div>
+<div id="filter-selected" class="container-fluid" >
+    
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-lg-2 col-sm-3 col-lg-offset-1 " id="refineseacrch-left">
+                <div class="row">
+                    <div class="box refine-search col-lg-12 hidden-xs" >
+                        <span>REFINE SEARCH</span>
+                    </div>
+                    <div class="box refine-search col-lg-12 visible-xs" id="refine-search-popup" data-popup="#rfs-content-popup">
+                        <span>REFINE SEARCH</span>
+                    </div>
+                    <div class="box popup-sort-item " id="sort-item-popup" data-popup="#sis-content-popup" >
+                        <span>SORT ITEMS</span>
+                    </div>
+                    <div class="box sort-list "><i class="fa fa-bars" aria-hidden="true"></i></div>
+                    <div class="box sort-grid "><i class="fa fa-th-large" aria-hidden="true"></i></div>
+                </div>
+             </div>
+            <div class="col-lg-8 col-sm-9 selected_right ">
+                <div class="option-filter">
+                    <input type="radio">
+                    <span>ALL</span>
+                    <input type="radio">
+                    <span>SALE</span>
+                    <input type="radio">
+                    <span>SAVE ITEMS</span>
+                </div>
+                <div class="option-selected">
+                    <div class="item"><span>Puma</span><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <div class="item"><span>Blue</span><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <div class="item"><span>Special Offer </span><i class="fa fa-times" aria-hidden="true"></i></div>
+                </div>
+                <div class="sort-item " id="accordion-select" >
+                    <span class="uc_head_line">
+                        <span class="icon_arrow fa fa-chevron-down"></span>
+                        <p class="uc_link_tittle sort-item-selected">Lowest price</p>
+                    </span>
+                    <div class="uc_line_content">
+                        <ul class="uc_des">
+                            <li class="sort-item-select">Relevance</li>
+                            <li class="sort-item-select">Lowest price</li>
+                            <li class="sort-item-select">Highest price</li>
+                            <li class="sort-item-select">Most Popular</li>
+                            <li class="sort-item-select">Favorites</li>
+                            <li class="sort-item-select">Newest</li>
+                        </ul>
+                    </div>
+                    <div class="sort-filter-contentpopup visible-xs" id="sis-content-popup">
+                        <p class="m-title">SORT ITEMS BY</p>
+                        <ul>
+                            <li><a href="">Relevance</a>
+                            </li>
+                            <li><a href="">Lowest price</a>
+                            </li>
+                            <li><a href="">Highest price</a>
+                            </li>
+                            <li><a href="">Most Popular</a>
+                            </li>
+                            <li><a href="">Favorites</a>
+                            </li>
+                            <li><a href="">Newest</a>
+                            </li>
+                        </ul>
+                    </div>                  
+                </div>
+
+            </div>
+            
+        </div>
+    </div>  
+    <script>
+    jQuery(document).ready(function($) {
+         $("#refine-search-popup,#pop-menu,#sort-item-popup,.uc_avatar.img-responsive").click(function(){
+            var w = jQuery(".fsp-content").width();
+            $("p.m-title").css('width',w);
+        });
+        $(window).resize(function(){
+            var width = jQuery(".fsp-content").width();
+            $("p.m-title").css('width',width);
+            $(".set-sale-alert").css("display","block");
+        });
+           
+    });
+        
+    </script>
+
+</div> 
+
+<div id="body-container" class="container-fluid">
+  <?php echo $this->content; ?>
+</div>
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+         $("#1 .slider-3 span:eq(0)").append("<p>250</p>");
+        $("#1 .slider-3 span:eq(1)").append("<p>1000+</p>");
+        $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
+        $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
+        
+        $('.refine .refine-colum  .list-size .size span, .refine .refine-colum .brand .list-brand ul li, .refine .refine-colum .footwear ul li, .refine .refine-colum .deals ul li, .refine .refine-colum .clothing ul li, .refine .refine-colum .accessories ul li').addClass('select');
+
+        $('.select').click(function() {
+            val_size = this.getAttribute("value");
+            val_color = this.getAttribute("value");
+            $('input[name="size"]').val(val_size);
+
+            if ($(this).hasClass("selected") == false) {
+                $(this).addClass('selected');
+            } else {
+                $(this).removeClass('selected');
+            }
+        });
+    });
+    $('.refine .refine-colum .list-color .color').click(function() {
+
+        if ($(this).hasClass("selected") == false) {
+            $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
+        } else {
+            $(this).removeClass('selected');
+            ($(this).find(".check")).remove();
+        }
+    });
+    $('.refine .refine-colum ul li').click(function() {
+
+        if ($(this).hasClass("change") == false) {
+            $(this).addClass('change');
+        } else {
+            $(this).removeClass('change');
+        }
+        var attrContent = getComputedStyle(this, ':after').content;
+        var currentId = $(this).attr('id');
+        $('.refine .refine-colum .' + currentId + ',.fsp-wrapper .refine-colum .' + currentId + '').animate({
+            left: "+=50",
+            height: "toggle"
+        }, 800, function() {});
+    });
+</script>
+
+<!-- javascript of product-item -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".sort-list").css({"opacity": "0.3", "cursor": "default"});
+
+    });
+    $(window).resize(function() {
+        $('.share_product').height(function(){
+            var height1 = $(this).parents(".product_item").find(".uc_contact").height();
+            var height2 = $(this).parents(".product_item").find(".show_item").height();
+            return height1 + height2;
+        });
+    });
+    
+
+    $(".sort-list").click(function(){
+        $(this).parents("body").find(".product.col-lg-3.col-sm-4").removeClass("col-xs-6");
+        $(this).css({"opacity": "0.3", "cursor": "default"});
+        $(this).parents(".row").find(".sort-grid").css({"opacity": "1", "cursor": "pointer"});
+
+    });
+
+    $(".sort-grid").click(function(){
+        $(this).parents("body").find(".product.col-lg-3.col-sm-4").addClass("col-xs-6");
+        $(this).css({"opacity": "0.3", "cursor": "default"});
+        $(this).parents(".row").find(".sort-list").css({"opacity": "1", "cursor": "pointer"});
+
+    });
+
+    $(".hide_item").click(function() {        
+        $(this).parents(".product_item").find(".share_product").hide();
+    });
+
+    $(".show_item").click(function() {
+        $(this).parents('.product_item').find('.share_product').show();
+        var height1 = $(this).height();
+        $(this).parents(".product_item").find(".share_product").height(function(){
+            var height2 = $(this).parents(".product_item").find(".uc_contact").height();
+            return height1 + height2;
+        });
+    });
+
+    $(".icon_like").click(function() {
+        var myClasses = this.classList;
+        if (myClasses.contains("active")) {
+            myClasses.remove("active");
+        } else {
+            myClasses.add("active");
+        }
+    });
+
+    $(".icon_alert").click(function() {
+        var myClasses = this.classList;
+        if (myClasses.contains("active")) {
+            myClasses.remove("active");
+        } else {
+            myClasses.add("active");
+        }
+    });        
+</script> 
+
+<!-- End javascript of product-item -->
+
+<!-- Javascript of selected_filter.php/sort-item -->
+
+<script type="text/javascript">
+    $(".sort-item").mouseenter(function(){
+        $(".icon_arrow").removeClass("fa-chevron-down");
+        $(".icon_arrow").addClass("fa-chevron-up");
+        $(".uc_line_content").slideDown();
+    });
+    $(".sort-item").mouseleave(function(){
+        $(".icon_arrow").removeClass("fa-chevron-up");
+        $(".icon_arrow").addClass("fa-chevron-down");
+        $(".uc_line_content").slideUp();
+    });
+
+    $(".sort-item-select").click(function(){
+        var content_sl = $(this).html();
+        $(this).parents(".sort-item").find(".sort-item-selected").html(content_sl);
+    });
+</script>
+
+<!-- End Javascript of selected_filter.php/sort-item -->
+<!-- Footer -->
+        <footer class="container-fluid">
+            <div class="row">
+                <div class="line-footer"></div>
+                    <div class="footer-above">
+                        <div class="menu-footer col-lg-6">
+                            <div class="list-menu">
+                                <ul>
+                                    <li>How it work</li>
+                                    <li>About Us</li>
+                                    <li>Blog</li>
+                                    <li>FAQ</li>
+                                    <li>Shipping</li>
+                                    <li>Pricing</li>
+                                    <li>Exchange & Return</li>
+                                    <li>Careers</li>
+                                    <li>Contact Us</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="newsletter col-lg-4">
+                            <div class="newsletter-wrap">
+                                <div class="newsletter-signup">
+                                    <span>Sign up for newsletter</span>
+                                </div>
+                                <div class="newsletter-input ">
+                                    <input placeholder="Your Email Address Here" >
+                                    <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer-social col-lg-2">
+                            <div class="social-block">
+                            <div class="social" ><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                            <div class="social" ><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                            <div class="social" ><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                            <div class="social" ><i class="fa fa-youtube" aria-hidden="true"></i></div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="copyright">
+                        <div class="copyright-wrap">
+                            <p class="copyright-text"> COPYRIGHT 2016 STITCH STYLE SOLUTIONS INC.<span> ALL RIGHTS RESERVED</span>
+                            </p>
+                        </div>
+                        <div class="terms">
+                            <div class="terms-wrap">
+                                <span>|</span>
+                                <p class="copyright-text"> TERMS &amp; CONDITIONS</p>
+                                <span>|</span>
+                                <p class="copyright-text"> PRIVACY &amp; POLICY</p>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        </footer>
+        <!-- End-Footer -->
+
+        <script>
+            //
+            $(document).ready(function(){
+                var submitIcon = $('.searchbox-icon');
+                var inputBox = $('.searchbox-input');
+                var searchBox = $('.searchbox');
+                var isOpen = false;
+                submitIcon.click(function(e){
+                    if(inputBox.val()==""){
+                        e.preventDefault();
+                    }
+                    if(isOpen == false){
+                        searchBox.addClass('searchbox-open');
+                        inputBox.focus();
+                        isOpen = true;
+                         $("#search").css("z-index","99")
+                        
+                    } else {
+                        searchBox.removeClass('searchbox-open');
+                        inputBox.focusout();
+                        isOpen = false;
+                        $("#search").removeAttr("style");
+                        //$("#show-hide-menu").click();
+                    }
+                     
+                });  
+                submitIcon.mouseup(function(){
+                        return false;
+                    });
+                searchBox.mouseup(function(){
+                        return false;
+                    });
+                $(document).mouseup(function(){
+                        if(isOpen == true){
+                            
+                            submitIcon.click();
+                        }
+                    });
+            });
+                function buttonUp(){
+                    var inputVal = $('.searchbox-input').val();
+                    inputVal = $.trim(inputVal).length;
+                    if( inputVal == 0){
+                         $('.searchbox-input').val('');
+                    } 
+                }
+                var flag = false;
+                $("#show-hide-menu").click(function(){
+                    $("#show-hide-menu").toggleClass("angleplus");
+                    if(flag == false){
+                        $('.searchbox-icon').click();
+                        flag = true;
+                    } else {
+                        flag = false;
+                    }
+                    
+                });
+            var icons = {
+            header: "ui-icon-circle-arrow-e",
+            activeHeader: "ui-icon-circle-arrow-s"
+            };
+            $( "#accordion" ).accordion({
+                icons: icons,
+                heightStyle:"content",
+                collapsible: true,
+                active: false
+            });
+            $( "#accordion-m" ).accordion({
+                icons: icons,
+                heightStyle:"content",
+                collapsible: true,
+                active: false
+            });
+            $("#pop-menu").fullScreenPopup({
+                bgColor: '#fff'
+            });
+            $("#refine-search-popup").fullScreenPopup({
+                bgColor: '#fff'
+            });
+            $("#sort-item-popup").fullScreenPopup({
+                bgColor: '#fff'
+            });
+            $("#m-show-userbox").click(function(event) {
+                $("#user-mblock").css('display','block');
+            });
+            $("#hid-userbox").click(function(){
+                $("#user-mblock").removeAttr("style");
+            })
+
+            // $("#banner").css("margin-top",function(){
+            //  return $(this).parent().find("#header-block").height();
+            // });
+            
+            $(window).scroll(function(){
+                if($(this).scrollTop() >= $("#header-block").height())
+                {
+                    $("#header-block").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
+                }
+                else 
+                {
+                    $("#header-block").css("position","static");
+                }
+            });
+            
+        </script>  
+
+    </body>
+</html>

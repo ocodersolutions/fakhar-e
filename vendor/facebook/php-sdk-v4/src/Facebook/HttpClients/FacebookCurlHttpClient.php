@@ -23,188 +23,325 @@
  */
 namespace Facebook\HttpClients;
 
-use Facebook\Http\GraphRawResponse;
-use Facebook\Exceptions\FacebookSDKException;
+use Facebook\FacebookSDKException;
 
 /**
  * Class FacebookCurlHttpClient
- *
  * @package Facebook
  */
-class FacebookCurlHttpClient implements FacebookHttpClientInterface
+class FacebookCurlHttpClient implements FacebookHttpable
 {
-    /**
-     * @var string The client error message
-     */
-    protected $curlErrorMessage = '';
 
-    /**
-     * @var int The curl client error code
-     */
-    protected $curlErrorCode = 0;
+  /**
+   * @var array The headers to be sent with the request
+   */
+  protected $requestHeaders = array();
 
-    /**
-     * @var string|boolean The raw response from the server
-     */
-    protected $rawResponse;
+  /**
+   * @var array The headers received from the response
+   */
+  protected $responseHeaders = array();
 
-    /**
-     * @var FacebookCurl Procedural curl as object
-     */
-    protected $facebookCurl;
+  /**
+   * @var int The HTTP status code returned from the server
+   */
+  protected $responseHttpStatusCode = 0;
 
-    /**
-     * @const Curl Version which is unaffected by the proxy header length error.
-     */
-    const CURL_PROXY_QUIRK_VER = 0x071E00;
+  /**
+   * @var string The client error message
+   */
+  protected $curlErrorMessage = '';
 
-    /**
-     * @const "Connection Established" header text
-     */
-    const CONNECTION_ESTABLISHED = "HTTP/1.0 200 Connection established\r\n\r\n";
+  /**
+   * @var int The curl client error code
+   */
+  protected $curlErrorCode = 0;
 
-    /**
-     * @param FacebookCurl|null Procedural curl as object
-     */
-    public function __construct(FacebookCurl $facebookCurl = null)
-    {
-        $this->facebookCurl = $facebookCurl ?: new FacebookCurl();
+  /**
+   * @var string|boolean The raw response from the server
+   */
+  protected $rawResponse;
+
+  /**
+   * @var FacebookCurl Procedural curl as object
+   */
+  protected $facebookCurl;
+
+  /**
+   * @var boolean If IPv6 should be disabled
+   */
+  protected static $disableIPv6;
+
+  /**
+   * @const Curl Version which is unaffected by the proxy header length error.
+   */
+  const CURL_PROXY_QUIRK_VER = 0x071E00;
+
+  /**
+   * @const "Connection Established" header text
+   */
+  const CONNECTION_ESTABLISHED = "HTTP/1.0 200 Connection established\r\n\r\n";
+
+  /**
+   * @param FacebookCurl|null Procedural curl as object
+   */
+  public function __construct(FacebookCurl $facebookCurl = null)
+  {
+    $this->facebookCurl = $facebookCurl ?: new FacebookCurl();
+    self::$disableIPv6 = self::$disableIPv6 ?: false;
+  }
+
+  /**
+   * Disable IPv6 resolution
+   */
+  public static function disableIPv6()
+  {
+    self::$disableIPv6 = true;
+  }
+
+  /**
+   * The headers we want to send with the request
+   *
+   * @param string $key
+   * @param string $value
+   */
+  public function addRequestHeader($key, $value)
+  {
+    $this->requestHeaders[$key] = $value;
+  }
+
+  /**
+   * The headers returned in the response
+   *
+   * @return array
+   */
+  public function getResponseHeaders()
+  {
+    return $this->responseHeaders;
+  }
+
+  /**
+   * The HTTP status response code
+   *
+   * @return int
+   */
+  public function getResponseHttpStatusCode()
+  {
+    return $this->responseHttpStatusCode;
+  }
+
+  /**
+   * Sends a request to the server
+   *
+   * @param string $url The endpoint to send the request to
+   * @param string $method The request method
+   * @param array  $parameters The key value pairs to be sent in the body
+   *
+   * @return string Raw response from the server
+   *
+   * @throws \Facebook\FacebookSDKException
+   */
+  public function send($url, $method = 'GET', $parameters = array())
+  {
+    $this->openConnection($url, $method, $parameters);
+    $this->tryToSendRequest();
+
+    if ($this->curlErrorCode) {
+      throw new FacebookSDKException($this->curlErrorMessage, $this->curlErrorCode);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function send($url, $method, $body, array $headers, $timeOut)
-    {
-        $this->openConnection($url, $method, $body, $headers, $timeOut);
-        $this->sendRequest();
+    // Separate the raw headers from the raw body
+    list($rawHeaders, $rawBody) = $this->extractResponseHeadersAndBody();
 
-        if ($curlErrorCode = $this->facebookCurl->errno()) {
-            throw new FacebookSDKException($this->facebookCurl->error(), $curlErrorCode);
-        }
+    $this->responseHeaders = self::headersToArray($rawHeaders);
 
-        // Separate the raw headers from the raw body
-        list($rawHeaders, $rawBody) = $this->extractResponseHeadersAndBody();
+    $this->closeConnection();
 
-        $this->closeConnection();
+    return $rawBody;
+  }
 
-        return new GraphRawResponse($rawHeaders, $rawBody);
+  /**
+   * Opens a new curl connection
+   *
+   * @param string $url The endpoint to send the request to
+   * @param string $method The request method
+   * @param array  $parameters The key value pairs to be sent in the body
+   */
+  public function openConnection($url, $method = 'GET', array $parameters = array())
+  {
+    $options = array(
+      CURLOPT_URL            => $url,
+      CURLOPT_CONNECTTIMEOUT => 10,
+      CURLOPT_TIMEOUT        => 60,
+      CURLOPT_RETURNTRANSFER => true, // Follow 301 redirects
+      CURLOPT_HEADER         => true, // Enable header processing
+      CURLOPT_SSL_VERIFYHOST => 2,
+      CURLOPT_SSL_VERIFYPEER => true,
+      CURLOPT_CAINFO         => __DIR__ . '/certs/DigiCertHighAssuranceEVRootCA.pem',
+    );
+
+    if ($method !== 'GET') {
+      $options[CURLOPT_POSTFIELDS] = !$this->paramsHaveFile($parameters) ? http_build_query($parameters, null, '&') : $parameters;
+    }
+    if ($method === 'DELETE' || $method === 'PUT') {
+      $options[CURLOPT_CUSTOMREQUEST] = $method;
     }
 
-    /**
-     * Opens a new curl connection.
-     *
-     * @param string $url     The endpoint to send the request to.
-     * @param string $method  The request method.
-     * @param string $body    The body of the request.
-     * @param array  $headers The request headers.
-     * @param int    $timeOut The timeout in seconds for the request.
-     */
-    public function openConnection($url, $method, $body, array $headers, $timeOut)
-    {
-        $options = [
-            CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_HTTPHEADER => $this->compileRequestHeaders($headers),
-            CURLOPT_URL => $url,
-            CURLOPT_CONNECTTIMEOUT => 10,
-            CURLOPT_TIMEOUT => $timeOut,
-            CURLOPT_RETURNTRANSFER => true, // Follow 301 redirects
-            CURLOPT_HEADER => true, // Enable header processing
-            CURLOPT_SSL_VERIFYHOST => 2,
-            CURLOPT_SSL_VERIFYPEER => true,
-            CURLOPT_CAINFO => __DIR__ . '/certs/DigiCertHighAssuranceEVRootCA.pem',
-        ];
-
-        if ($method !== "GET") {
-            $options[CURLOPT_POSTFIELDS] = $body;
-        }
-
-        $this->facebookCurl->init();
-        $this->facebookCurl->setoptArray($options);
+    if (count($this->requestHeaders) > 0) {
+      $options[CURLOPT_HTTPHEADER] = $this->compileRequestHeaders();
     }
 
-    /**
-     * Closes an existing curl connection
-     */
-    public function closeConnection()
-    {
-        $this->facebookCurl->close();
+    if (self::$disableIPv6) {
+      $options[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
     }
 
-    /**
-     * Send the request and get the raw response from curl
-     */
-    public function sendRequest()
-    {
-        $this->rawResponse = $this->facebookCurl->exec();
+    $this->facebookCurl->init();
+    $this->facebookCurl->setopt_array($options);
+  }
+
+  /**
+   * Closes an existing curl connection
+   */
+  public function closeConnection()
+  {
+    $this->facebookCurl->close();
+  }
+
+  /**
+   * Try to send the request
+   */
+  public function tryToSendRequest()
+  {
+    $this->sendRequest();
+    $this->curlErrorMessage = $this->facebookCurl->error();
+    $this->curlErrorCode = $this->facebookCurl->errno();
+    $this->responseHttpStatusCode = $this->facebookCurl->getinfo(CURLINFO_HTTP_CODE);
+  }
+
+  /**
+   * Send the request and get the raw response from curl
+   */
+  public function sendRequest()
+  {
+    $this->rawResponse = $this->facebookCurl->exec();
+  }
+
+  /**
+   * Compiles the request headers into a curl-friendly format
+   *
+   * @return array
+   */
+  public function compileRequestHeaders()
+  {
+    $return = array();
+
+    foreach ($this->requestHeaders as $key => $value) {
+      $return[] = $key . ': ' . $value;
     }
 
-    /**
-     * Compiles the request headers into a curl-friendly format.
-     *
-     * @param array $headers The request headers.
-     *
-     * @return array
-     */
-    public function compileRequestHeaders(array $headers)
-    {
-        $return = [];
+    return $return;
+  }
 
-        foreach ($headers as $key => $value) {
-            $return[] = $key . ': ' . $value;
-        }
+  /**
+   * Extracts the headers and the body into a two-part array
+   *
+   * @return array
+   */
+  public function extractResponseHeadersAndBody()
+  {
+    $headerSize = self::getHeaderSize();
 
-        return $return;
+    $rawHeaders = mb_substr($this->rawResponse, 0, $headerSize);
+    $rawBody = mb_substr($this->rawResponse, $headerSize);
+
+    return array(trim($rawHeaders), trim($rawBody));
+  }
+
+  /**
+   * Converts raw header responses into an array
+   *
+   * @param string $rawHeaders
+   *
+   * @return array
+   */
+  public static function headersToArray($rawHeaders)
+  {
+    $headers = array();
+
+    // Normalize line breaks
+    $rawHeaders = str_replace("\r\n", "\n", $rawHeaders);
+
+    // There will be multiple headers if a 301 was followed
+    // or a proxy was followed, etc
+    $headerCollection = explode("\n\n", trim($rawHeaders));
+    // We just want the last response (at the end)
+    $rawHeader = array_pop($headerCollection);
+
+    $headerComponents = explode("\n", $rawHeader);
+    foreach ($headerComponents as $line) {
+      if (strpos($line, ': ') === false) {
+        $headers['http_code'] = $line;
+      } else {
+        list ($key, $value) = explode(': ', $line);
+        $headers[$key] = $value;
+      }
     }
 
-    /**
-     * Extracts the headers and the body into a two-part array
-     *
-     * @return array
-     */
-    public function extractResponseHeadersAndBody()
-    {
-        $headerSize = $this->getHeaderSize();
+    return $headers;
+  }
 
-        $rawHeaders = mb_substr($this->rawResponse, 0, $headerSize);
-        $rawBody = mb_substr($this->rawResponse, $headerSize);
-
-        return [trim($rawHeaders), trim($rawBody)];
+  /**
+   * Return proper header size
+   *
+   * @return integer
+   */
+  private function getHeaderSize()
+  {
+    $headerSize = $this->facebookCurl->getinfo(CURLINFO_HEADER_SIZE);
+    // This corrects a Curl bug where header size does not account
+    // for additional Proxy headers.
+    if ( $this->needsCurlProxyFix() ) {
+      // Additional way to calculate the request body size.
+      if (preg_match('/Content-Length: (\d+)/', $this->rawResponse, $m)) {
+          $headerSize = mb_strlen($this->rawResponse) - $m[1];
+      } elseif (stripos($this->rawResponse, self::CONNECTION_ESTABLISHED) !== false) {
+          $headerSize += mb_strlen(self::CONNECTION_ESTABLISHED);
+      }
     }
 
-    /**
-     * Return proper header size
-     *
-     * @return integer
-     */
-    private function getHeaderSize()
-    {
-        $headerSize = $this->facebookCurl->getinfo(CURLINFO_HEADER_SIZE);
-        // This corrects a Curl bug where header size does not account
-        // for additional Proxy headers.
-        if ($this->needsCurlProxyFix()) {
-            // Additional way to calculate the request body size.
-            if (preg_match('/Content-Length: (\d+)/', $this->rawResponse, $m)) {
-                $headerSize = mb_strlen($this->rawResponse) - $m[1];
-            } elseif (stripos($this->rawResponse, self::CONNECTION_ESTABLISHED) !== false) {
-                $headerSize += mb_strlen(self::CONNECTION_ESTABLISHED);
-            }
-        }
+    return $headerSize;
+  }
 
-        return $headerSize;
+  /**
+   * Detect versions of Curl which report incorrect header lengths when
+   * using Proxies.
+   *
+   * @return boolean
+   */
+  private function needsCurlProxyFix()
+  {
+    $ver = $this->facebookCurl->version();
+    $version = $ver['version_number'];
+
+    return $version < self::CURL_PROXY_QUIRK_VER;
+  }
+
+  /**
+   * Detect if the params have a file to upload.
+   *
+   * @param array $params
+   *
+   * @return boolean
+   */
+  private function paramsHaveFile(array $params)
+  {
+    foreach ($params as $value) {
+      if ($value instanceof \CURLFile) {
+        return true;
+      }
     }
 
-    /**
-     * Detect versions of Curl which report incorrect header lengths when
-     * using Proxies.
-     *
-     * @return boolean
-     */
-    private function needsCurlProxyFix()
-    {
-        $ver = $this->facebookCurl->version();
-        $version = $ver['version_number'];
+    return false;
+  }
 
-        return $version < self::CURL_PROXY_QUIRK_VER;
-    }
 }

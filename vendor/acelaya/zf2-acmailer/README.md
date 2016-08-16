@@ -375,7 +375,7 @@ Each concrete service configuration can define these properties:
     - **connection_config**
         - *username*: Username to be used for authentication against the SMTP server. If none is provided the `message_options/from` option will be used for this purpose.
         - *smtp_password*: Password to be used for authentication against the SMTP server.
-        - *ssl*: Defines the type of connection encryption against the SMTP server. Values are 'ssl', 'tls' or `false` to disable encryption.
+        - *ssl*: Defines the type of connection encryption against the SMTP server. Values are 'ssl', 'tls' or `null` to disable encryption.
 - **file_options**: Wraps the files configuration that will be used when the mail adapter is a `Zend\Mail\Transport\File` instance
     - **path**: Directory where the email will be saved.
     - **callback**: Callback used to get the filename of the email.
@@ -420,6 +420,7 @@ $result->isValid(); // This will return true in this case
 
 * * *
 
-Thanks to [PhpStorm](https://www.jetbrains.com/phpstorm/) for their support, since they have provided me an OSS license to work on this project.
+Thanks to [JetBrains](https://www.jetbrains.com/) for their support to open source projects.
 
-![PhpStorm](https://www.jetbrains.com/phpstorm/documentation/docs/logo_phpstorm.png)
+![PhpStorm](http://static.alejandrocelaya.com/img/logo_PhpStorm.png)
+

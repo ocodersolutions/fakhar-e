@@ -55,16 +55,16 @@
         },
         {
             "name": "acelaya/zf2-acmailer",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acelaya/ZF2-AcMailer.git",
-                "reference": "7979b44594b409f9ede29a9514b57a52da7819cb"
+                "reference": "01eb7b671384f660f9b866d5f57ed841a8b1b52c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acelaya/ZF2-AcMailer/zipball/7979b44594b409f9ede29a9514b57a52da7819cb",
-                "reference": "7979b44594b409f9ede29a9514b57a52da7819cb",
+                "url": "https://api.github.com/repos/acelaya/ZF2-AcMailer/zipball/01eb7b671384f660f9b866d5f57ed841a8b1b52c",
+                "reference": "01eb7b671384f660f9b866d5f57ed841a8b1b52c",
                 "shasum": ""
             },
             "require": {
@@ -112,7 +112,7 @@
                 "zend",
                 "zf2"
             ],
-            "time": "2016-01-02 11:51:04"
+            "time": "2016-06-04 17:27:26"
         },
         {
             "name": "facebook/php-sdk-v4",
@@ -168,12 +168,12 @@
             "version": "2.2.10",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/zf2.git",
+                "url": "https://github.com/zendframework/zendframework.git",
                 "reference": "a8d56b4b7ef3f027fc531c34064e2bf0132feab2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/a8d56b4b7ef3f027fc531c34064e2bf0132feab2",
+                "url": "https://api.github.com/repos/zendframework/zendframework/zipball/a8d56b4b7ef3f027fc531c34064e2bf0132feab2",
                 "reference": "a8d56b4b7ef3f027fc531c34064e2bf0132feab2",
                 "shasum": ""
             },
