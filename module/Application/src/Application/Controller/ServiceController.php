@@ -53,182 +53,182 @@ class ServiceController extends BaseActionController {
 
         
 
-        // $__viewVariables = array();
-        // $aGetParams = $this->params()->fromQuery();
+        $__viewVariables = array();
+        $aGetParams = $this->params()->fromQuery();
 
-        // // var_dump($this->layout()); die;
+        // var_dump($this->layout()); die;
         
-        // $this->layout()->showSmallHeader = true;
-        // $this->layout()->hideFooter = true;
+        $this->layout()->showSmallHeader = true;
+        $this->layout()->hideFooter = true;
 
-        // $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        // $oAuth = $this->getServiceLocator()->get('AuthService');
+        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
+        $oAuth = $this->getServiceLocator()->get('AuthService');
 
-        // $userId = null;
-        // if ($oAuth->hasIdentity()) {
-        //     $this->layout()->showHeaderLinks = "LOGGED_IN";
-        //     $userInfo = $oAuth->getIdentity();
-        //     $userId = $userInfo->userId;
-        //     $this->layout()->firstName = $userInfo->firstName;
-        // } else {
-        //     if (isset($aGetParams['outfit']) && $aGetParams['outfit']) {
+        $userId = null;
+        if ($oAuth->hasIdentity()) {
+            $this->layout()->showHeaderLinks = "LOGGED_IN";
+            $userInfo = $oAuth->getIdentity();
+            $userId = $userInfo->userId;
+            $this->layout()->firstName = $userInfo->firstName;
+        } else {
+            if (isset($aGetParams['outfit']) && $aGetParams['outfit']) {
 
-        //         $__viewVariables['fromSocialMedia'] = true;
-        //         list($width, $height, $type, $attr) = getimagesize(PATH_APPLICATION."/public/feed/outfits/{$aGetParams['outfit']}.jpg"); 
-        //         $this->layout()->additionalMeta = '
-        //             <meta property="og:image" content="http://'.URL_APPLICATION."/feed/outfits/{$aGetParams['outfit']}.jpg".'" />
-        //             <meta property="og:title" content="Lnove" />
-        //             <meta property="og:site_name" content="Lnove"/>
-        //             <meta property="og:url" content="http://'.URL_APPLICATION.'/service?outfit='.$aGetParams['outfit'].'" />
-        //             <meta property="og:description" content="Lnove" />
-        //             <meta property="og:image:width" content="'.$width.'" />
-        //             <meta property="og:image:height" content="'.$height.'" />
-        //         ';
-        //         $__viewVariables['shareOutfitImage'] =  'http://'.URL_APPLICATION."/feed/outfits/{$aGetParams['outfit']}.jpg";   
-        //         return     $__viewVariables;           
-        //     }
-        //     else {
-        //         $this->redirect()->toRoute('auth');
-        //     }
-        // }
-        // $__viewVariables['userEmail'] = @$userInfo->email; 
+                $__viewVariables['fromSocialMedia'] = true;
+                list($width, $height, $type, $attr) = getimagesize(PATH_APPLICATION."/public/feed/outfits/{$aGetParams['outfit']}.jpg"); 
+                $this->layout()->additionalMeta = '
+                    <meta property="og:image" content="http://'.URL_APPLICATION."/feed/outfits/{$aGetParams['outfit']}.jpg".'" />
+                    <meta property="og:title" content="Lnove" />
+                    <meta property="og:site_name" content="Lnove"/>
+                    <meta property="og:url" content="http://'.URL_APPLICATION.'/service?outfit='.$aGetParams['outfit'].'" />
+                    <meta property="og:description" content="Lnove" />
+                    <meta property="og:image:width" content="'.$width.'" />
+                    <meta property="og:image:height" content="'.$height.'" />
+                ';
+                $__viewVariables['shareOutfitImage'] =  'http://'.URL_APPLICATION."/feed/outfits/{$aGetParams['outfit']}.jpg";   
+                return     $__viewVariables;           
+            }
+            else {
+                $this->redirect()->toRoute('auth');
+            }
+        }
+        $__viewVariables['userEmail'] = @$userInfo->email; 
 
-        // $oService = $this->getServiceLocator();
-        // $oFeedData = $oService->get('FeedDataTable');
+        $oService = $this->getServiceLocator();
+        $oFeedData = $oService->get('FeedDataTable');
 
-        // $oFeedMapping = $oService->get('FeedsMappingTable');
-        // $oAuth = $oService->get('AuthService');
+        $oFeedMapping = $oService->get('FeedsMappingTable');
+        $oAuth = $oService->get('AuthService');
 
-        // $oArticleCloseset = $oService->get('ArticleClosesetTable');
-        // $likedarticles = $oArticleCloseset->getLikedArticles($userId);
-        // $likearray = array();
-        // if(count($likedarticles)>0) {
-        //    foreach($likedarticles as $likedarticle) {
-        //         $likearray[] = $likedarticle['feeddataid'];
-        //     }
-        // }
-        // $__viewVariables['likearray'] = $likearray;
+        $oArticleCloseset = $oService->get('ArticleClosesetTable');
+        $likedarticles = $oArticleCloseset->getLikedArticles($userId);
+        $likearray = array();
+        if(count($likedarticles)>0) {
+           foreach($likedarticles as $likedarticle) {
+                $likearray[] = $likedarticle['feeddataid'];
+            }
+        }
+        $__viewVariables['likearray'] = $likearray;
 
-        // $aPostParams = $this->params()->fromPost();
-        // if (isset($aPostParams['ArticlesPerPage'])) {
-        //     $oAuth->getStorage()->set('service', array('ArticlesPerPage' => $aPostParams['ArticlesPerPage']));
-        // }
+        $aPostParams = $this->params()->fromPost();
+        if (isset($aPostParams['ArticlesPerPage'])) {
+            $oAuth->getStorage()->set('service', array('ArticlesPerPage' => $aPostParams['ArticlesPerPage']));
+        }
      
-        // $aServiceData = $oAuth->getStorage()->get('service');
+        $aServiceData = $oAuth->getStorage()->get('service');
 
-        // $__viewVariables['articlesPerPage'] = (isset($aServiceData['ArticlesPerPage']) ? $aServiceData['ArticlesPerPage'] : PRODUCTS_PER_PAGE);
+        $__viewVariables['articlesPerPage'] = (isset($aServiceData['ArticlesPerPage']) ? $aServiceData['ArticlesPerPage'] : PRODUCTS_PER_PAGE);
 
-        // $paginator = $oFeedData->getFeedData($aPostParams, true, $userId, null, true);
-        // $paginator->setCurrentPageNumber((isset($aGetParams['page']) ? $aGetParams['page'] : 1));
-        // $paginator->setItemCountPerPage($__viewVariables['articlesPerPage']);
+        $paginator = $oFeedData->getFeedData($aPostParams, true, $userId, null, true);
+        $paginator->setCurrentPageNumber((isset($aGetParams['page']) ? $aGetParams['page'] : 1));
+        $paginator->setItemCountPerPage($__viewVariables['articlesPerPage']);
 
-        // //print_r($paginator->getPages());
+        //print_r($paginator->getPages());
 
-        // $oAttributes = $oService->get('ProductAttributesTable');
-        // $__viewVariables['attributes'] = $oAttributes->getAttributesTree(1);
+        $oAttributes = $oService->get('ProductAttributesTable');
+        $__viewVariables['attributes'] = $oAttributes->getAttributesTree(1);
 
-        // $__viewVariables['feedData'] = $paginator;
+        $__viewVariables['feedData'] = $paginator;
 
-        // $__viewVariables['pages'] = $paginator->getPages();
-        // $__viewVariables['excludeCats'] = (isset($aGetParams['ec']) ? $aGetParams['ec'] : '');
-        // $aParams = array();
-        // $aParams['mappingType'] = 'brand';
-        // $allBrands = $oFeedMapping->getFeedMapping($aParams);
+        $__viewVariables['pages'] = $paginator->getPages();
+        $__viewVariables['excludeCats'] = (isset($aGetParams['ec']) ? $aGetParams['ec'] : '');
+        $aParams = array();
+        $aParams['mappingType'] = 'brand';
+        $allBrands = $oFeedMapping->getFeedMapping($aParams);
 
-        // $aParams = array();
-        // $aParams['mappingType'] = 'brand';
-        // $aParams['top'] = 1;
-        // $allTopBrands = $oFeedMapping->getFeedMapping($aParams);
+        $aParams = array();
+        $aParams['mappingType'] = 'brand';
+        $aParams['top'] = 1;
+        $allTopBrands = $oFeedMapping->getFeedMapping($aParams);
 
-        // $aParams = array();
-        // $aParams['mappingType'] = 'store - remove stores';
-        // $allStores = $oFeedMapping->getFeedMapping($aParams);
+        $aParams = array();
+        $aParams['mappingType'] = 'store - remove stores';
+        $allStores = $oFeedMapping->getFeedMapping($aParams);
 
-        // $aParams = array();
-        // $aParams['mappingType'] = 'store';
-        // $aParams['top'] = 1;
-        // $allTopStores = $oFeedMapping->getFeedMapping($aParams);
+        $aParams = array();
+        $aParams['mappingType'] = 'store';
+        $aParams['top'] = 1;
+        $allTopStores = $oFeedMapping->getFeedMapping($aParams);
 
-        // $__viewVariables['allBrands'] = $allBrands;
-        // $__viewVariables['allTopBrands'] = $allTopBrands;
-        // $__viewVariables['allStores'] = $allStores;
-        // $__viewVariables['allTopStores'] = $allTopStores;
-        // $jsonBrandArr = array();
-        // if (!empty($allBrands)) {
-        //     foreach ($allBrands as $brand) {
-        //         $jsonBrandArr[] = array('id' => $brand['id'], 'value' => $brand['title']);
-        //     }
-        // }
-        // $jsonBrands = json_encode($jsonBrandArr);
-        // $__viewVariables['jsonBrands'] = $jsonBrands;
-        // $jsonStoreArr = array();
-        // if (!empty($allStores)) {
-        //     foreach ($allStores as $store) {
-        //         $jsonStoreArr[] = array('id' => $store['id'], 'value' => $store['title']);
-        //     }
-        // }
-        // $jsonBrands = json_encode($jsonStoreArr);
+        $__viewVariables['allBrands'] = $allBrands;
+        $__viewVariables['allTopBrands'] = $allTopBrands;
+        $__viewVariables['allStores'] = $allStores;
+        $__viewVariables['allTopStores'] = $allTopStores;
+        $jsonBrandArr = array();
+        if (!empty($allBrands)) {
+            foreach ($allBrands as $brand) {
+                $jsonBrandArr[] = array('id' => $brand['id'], 'value' => $brand['title']);
+            }
+        }
+        $jsonBrands = json_encode($jsonBrandArr);
+        $__viewVariables['jsonBrands'] = $jsonBrands;
+        $jsonStoreArr = array();
+        if (!empty($allStores)) {
+            foreach ($allStores as $store) {
+                $jsonStoreArr[] = array('id' => $store['id'], 'value' => $store['title']);
+            }
+        }
+        $jsonBrands = json_encode($jsonStoreArr);
 
-        // $__viewVariables['jsonStores'] = $jsonBrands;
+        $__viewVariables['jsonStores'] = $jsonBrands;
 
-        // $allColors = $oFeedMapping->getDistinctColor();
+        $allColors = $oFeedMapping->getDistinctColor();
 
-        // $__viewVariables['actualMaxRangePrice'] = $oFeedData->getMaxRangePrice();
-        // $__viewVariables['maxRangePrice'] = 1000;
-        // $__viewVariables['allColors'] = $allColors;
-        // $oFeedMapping = $oService->get('OutfitsFeedsMappingTable');
-        // $__viewVariables['defaultVenue'] = array();
-        // if (isset($aGetParams['outfit']) && $aGetParams['outfit']) {
+        $__viewVariables['actualMaxRangePrice'] = $oFeedData->getMaxRangePrice();
+        $__viewVariables['maxRangePrice'] = 1000;
+        $__viewVariables['allColors'] = $allColors;
+        $oFeedMapping = $oService->get('OutfitsFeedsMappingTable');
+        $__viewVariables['defaultVenue'] = array();
+        if (isset($aGetParams['outfit']) && $aGetParams['outfit']) {
            
-        //     $outfitDetails_main = $oFeedMapping->getOutfitsMapping(array('outfit_id' => $aGetParams['outfit']), true);
-        //     //$__viewVariables['outfits'] = $outfitDetails;
-        //     $__viewVariables['designer'] = true;
+            $outfitDetails_main = $oFeedMapping->getOutfitsMapping(array('outfit_id' => $aGetParams['outfit']), true);
+            //$__viewVariables['outfits'] = $outfitDetails;
+            $__viewVariables['designer'] = true;
 
-        //     $oProductsTable = $oService->get('OutfitsProductsTable');
+            $oProductsTable = $oService->get('OutfitsProductsTable');
             
-        //     if( !empty($oAuth->getIdentity()->defaultVenue) ) {
-        //         $__viewVariables['defaultVenue'][] = $oAuth->getIdentity()->defaultVenue;
-        //     }
+            if( !empty($oAuth->getIdentity()->defaultVenue) ) {
+                $__viewVariables['defaultVenue'][] = $oAuth->getIdentity()->defaultVenue;
+            }
 
-        //     list($outfitProducts, $__viewVariables['outfits_count'], $__viewVariables['outfits_offset']) = $oProductsTable->getOutfitsProducts(array(), null, 0, $__viewVariables['defaultVenue'], array('returnCount'=>true, 'outfit_id'=>$aGetParams['outfit']));
-        //     if ($outfitProducts) {
-        //         $__viewVariables['outfitsData'] = $outfitProducts; 
-        //         $i = 0;
-        //         foreach($outfitProducts as $outfitProductsTable) {
-        //             if($i == 1) {
-        //                 $__viewVariables['outfits'][] = $outfitDetails_main;
-        //             }
-        //             $outfitDetails = $oFeedMapping->getOutfitsMapping(array('outfit_id' => $outfitProductsTable['outfit_id']), true);
-        //             $__viewVariables['outfits'][] = $outfitDetails;
-        //             $i++;
-        //         }
-        //     }
-        // } else {
-        //     $oProductsTable = $oService->get('OutfitsProductsTable');
+            list($outfitProducts, $__viewVariables['outfits_count'], $__viewVariables['outfits_offset']) = $oProductsTable->getOutfitsProducts(array(), null, 0, $__viewVariables['defaultVenue'], array('returnCount'=>true, 'outfit_id'=>$aGetParams['outfit']));
+            if ($outfitProducts) {
+                $__viewVariables['outfitsData'] = $outfitProducts; 
+                $i = 0;
+                foreach($outfitProducts as $outfitProductsTable) {
+                    if($i == 1) {
+                        $__viewVariables['outfits'][] = $outfitDetails_main;
+                    }
+                    $outfitDetails = $oFeedMapping->getOutfitsMapping(array('outfit_id' => $outfitProductsTable['outfit_id']), true);
+                    $__viewVariables['outfits'][] = $outfitDetails;
+                    $i++;
+                }
+            }
+        } else {
+            $oProductsTable = $oService->get('OutfitsProductsTable');
             
-        //     if( !empty($oAuth->getIdentity()->defaultVenue) ) {
-        //         $__viewVariables['defaultVenue'][] = $oAuth->getIdentity()->defaultVenue;
-        //     }
+            if( !empty($oAuth->getIdentity()->defaultVenue) ) {
+                $__viewVariables['defaultVenue'][] = $oAuth->getIdentity()->defaultVenue;
+            }
 
-        //     list($outfitProducts, $__viewVariables['outfits_count'], $__viewVariables['outfits_offset']) = $oProductsTable->getOutfitsProducts(array(), null, 0, $__viewVariables['defaultVenue'], array('returnCount'=>true));
-        //     if ($outfitProducts) {
-        //         $__viewVariables['outfitsData'] = $outfitProducts; 
-        //         foreach($outfitProducts as $outfitProductsTable) {
-        //             $outfitDetails = $oFeedMapping->getOutfitsMapping(array('outfit_id' => $outfitProductsTable['outfit_id']), true);
-        //             $__viewVariables['outfits'][] = $outfitDetails;
-        //         }
-        //     }
-        // }
-        // $request = $this->getRequest();
-        // if ($request->isXmlHttpRequest()) {
-        //     $viewModel = new ViewModel();
-        //     $viewModel->setTerminal(true);
-        // }
+            list($outfitProducts, $__viewVariables['outfits_count'], $__viewVariables['outfits_offset']) = $oProductsTable->getOutfitsProducts(array(), null, 0, $__viewVariables['defaultVenue'], array('returnCount'=>true));
+            if ($outfitProducts) {
+                $__viewVariables['outfitsData'] = $outfitProducts; 
+                foreach($outfitProducts as $outfitProductsTable) {
+                    $outfitDetails = $oFeedMapping->getOutfitsMapping(array('outfit_id' => $outfitProductsTable['outfit_id']), true);
+                    $__viewVariables['outfits'][] = $outfitDetails;
+                }
+            }
+        }
+        $request = $this->getRequest();
+        if ($request->isXmlHttpRequest()) {
+            $viewModel = new ViewModel();
+            $viewModel->setTerminal(true);
+        }
 
  
-        // $__viewVariables['defaultView'] = isset($aGetParams['dv']) && !empty($aGetParams['dv']) ? 'article' : 'outfit';
+        $__viewVariables['defaultView'] = isset($aGetParams['dv']) && !empty($aGetParams['dv']) ? 'article' : 'outfit';
         
-        // return $__viewVariables;
+        return $__viewVariables;
     }
     
     public function shareOutfitAction() {

@@ -1,1941 +1,558 @@
 <div class="row">
-        <div class="refine col-lg-2 col-lg-offset-1 col-sm-3">
-            <div class="refine-colum hidden-xs">
-    <ul>
-        <li id="category" class="">CATEGORIES</li>
-        <div class="category" style="display: none; left: 100px;">
+    <div class="refine col-lg-2 col-lg-offset-1 col-sm-3">
+        <div class="refine-colum hidden-xs">
             <ul>
-                <li id="clothing" class="change">CLOTHING</li>
-                <div class="clothing" style="display: block; left: 50px;">
+                <li id="category" class="">CATEGORIES</li>
+                <div class="category" style="display: none; left: 100px;">
                     <ul>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
+                        <li id="clothing" class="change">CLOTHING</li>
+                        <div class="clothing" style="display: block; left: 50px;">
+                            <ul>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                            </ul>
+                        </div>
+                    </ul>
+                    <ul>
+                        <li id="footwear">FOOTWEAR</li>
+                        <div class="footwear">
+                            <ul>
+                                <li class="select">Sneakers</li>
+                                <li class="select">Sandals</li>
+                                <li class="select">Dress</li>
+                                <li class="select">Casual</li>
+                                <li class="select">Boots</li>
+                            </ul>
+                        </div>
+                    </ul>
+                    <ul>
+                        <li id="accessories">ACCESSORIES</li>
+                        <div class="accessories">
+                            <ul>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                                <li class="select">Filter</li>
+                            </ul>
+                        </div>
                     </ul>
                 </div>
-            </ul>
-            <ul>
-                <li id="footwear">FOOTWEAR</li>
-                <div class="footwear">
-                    <ul>
-                        <li class="select">Sneakers</li>
-                        <li class="select">Sandals</li>
-                        <li class="select">Dress</li>
-                        <li class="select">Casual</li>
-                        <li class="select">Boots</li>
-                    </ul>
+                <li id="brands">BRANDS</li>
+                <div class="brands">
+                    <div class="brand">
+                        <input class="label-brand" placeholder="Search Brands">
+                        <div class="list-brand">
+                            <ul>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </ul>
-            <ul>
-                <li id="accessories">ACCESSORIES</li>
-                <div class="accessories">
-                    <ul>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                    </ul>
-                </div>
-            </ul>
-        </div>        <li id="brands">BRANDS</li>
-    <div class="brands"> 
-        <div class="brand">
-            <input class="label-brand" placeholder="Search Brands">
-            <div class="list-brand">
-                <ul>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                </ul>
-            </div>
-        </div>
-    </div>        <div id="1">
-            <li id="prices">PRICE</li>
-    <div class="price prices">
-        <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span></div>
-    </div>
-    <script>
-        $(function() {
-        $(".slider-3").slider({
-            range: true,
-            min: 0,
-            max: 1000,
-            values: [250, 1000],
-            slide: function(event, ui) {
-                minprice = (ui.values[0]);
-                maxprice = (ui.values[1]);
-                $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
-                $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
-                $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
-                $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
-            }
-        });
-        $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-        $("#max-price").val("$" + $(".slider-3").slider("values", 1));
-        
-    });
-    </script>        </div>
-        
-        <li id="colors">COLOR</li>
-    <div class="colors">
-        <div class="list-color">
-            <div class="color" style="background: #000"></div>
-            <div class="color special" style="background: #F5F5DC"></div>
-            <div class="color" style="background: #0000FF"></div>
-            <div class="color" style="background: #A52A2A"></div>
-            <div class="color" style="background: #008000"></div>
-            <div class="color" style="background: #808080"></div>
-            <div class="color" style="background: #FFA500"></div>
-            <div class="color" style="background: #FFC0CB"></div>
-            <div class="color" style="background: #800080"></div>
-            <div class="color" style="background: #FF0000"></div>
-            <div class="color special" style="background: #FFFFFF"></div>
-            <div class="color special" style="background: #FFFF00"></div>
-        </div>
-    </div>
-        <li id="deals">DEALS</li>
-    <div class="deals">
-        <ul>
-            <li class="select">All item on sale</li>
-            <li class="select">New today</li>
-            <li class="select">New this week</li>
-            <li class="select">Free shipping</li>
-            <li class="select">Special offer</li>
-            <li class="select">Discount</li>
-        </ul>
-    </div>        <li id="sizes">SIZE</li>
-    <div class="sizes">
-        <div class="list-size">
-            <div class="size"><span value="xs" class="select">XS</span>
-            </div>
-            <div class="size"><span value="s" class="select">S</span>
-            </div>
-            <div class="size"><span value="m" class="select">M</span>
-            </div>
-            <div class="size"><span value="l" class="select">L</span>
-            </div>
-            <div class="size"><span value="xl" class="select">XL</span>
-            </div>
-            <div class="size"><span value="xxl" class="select">XXL</span>
-            </div>
-            <div class="size"><span value="xxxl" class="select">XXXL</span>
-            </div>
-        </div>
-    </div>        <li id="stores">STORE</li>
-    <div class="stores">
-        <div class="brand">
-            <input class="label-brand" placeholder="Search Stores">
-            <div class="list-brand">
-                <ul>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                </ul>
-            </div>
-        </div>
-    </div>       
-    </ul>
-     <button id="submit" type="submit" form="form1" value="Submit">CLEAR FILTER</button>
-</div>
-<!-- popup-->
-<div class="refine" style="display: none;">
-<div class="refine-colum" id="rfs-content-popup">
-    <p class="m-title"> REFINE SEARCH</p>
-    <div class="option-filter">
-        <div class="option-filter-row">
-            <label><span>ALL</span></label>
-            <input type="radio">
-        </div>
-            <div class="option-filter-row">
-            <label><span>SALE</span></label>
-            <input type="radio">
-        </div>
-       
-        <div class="option-filter-row">
-        <label><span>SAVE ITEMS</span></label>
-        <input type="radio">
-        </div>
-    </div>
-    <ul>
-        <li id="category">CATEGORIES</li>
-        <div class="category" style="display: none; left: 100px;">
-            <ul>
-                <li id="clothing">CLOTHING</li>
-                <div class="clothing" style="display: block; left: 50px;">
-                    <ul>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                    </ul>
-                </div>
-            </ul>
-            <ul>
-                <li id="footwear">FOOTWEAR</li>
-                <div class="footwear">
-                    <ul>
-                        <li class="select">Sneakers</li>
-                        <li class="select">Sandals</li>
-                        <li class="select">Dress</li>
-                        <li class="select">Casual</li>
-                        <li class="select">Boots</li>
-                    </ul>
-                </div>
-            </ul>
-            <ul>
-                <li id="accessories">ACCESSORIES</li>
-                <div class="accessories">
-                    <ul>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                        <li class="select">Filter</li>
-                    </ul>
-                </div>
-            </ul>
-        </div>        <li id="brands">BRANDS</li>
-    <div class="brands"> 
-        <div class="brand">
-            <input class="label-brand" placeholder="Search Brands">
-            <div class="list-brand">
-                <ul>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                </ul>
-            </div>
-        </div>
-    </div>        <div id="2"><li id="prices">PRICE</li>
-    <div class="price prices">
-        <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span></div>
-    </div>
-    <script>
-        $(function() {
-        $(".slider-3").slider({
-            range: true,
-            min: 0,
-            max: 1000,
-            values: [250, 1000],
-            slide: function(event, ui) {
-                minprice = (ui.values[0]);
-                maxprice = (ui.values[1]);
-                $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
-                $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
-                $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
-                $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
-            }
-        });
-        $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-        $("#max-price").val("$" + $(".slider-3").slider("values", 1));
-        
-    });
-    </script></div>
-        
-    <li id="colors">COLOR</li>
-    <div class="colors">
-        <div class="list-color">
-            <div class="color" style="background: #000"></div>
-            <div class="color special" style="background: #F5F5DC"></div>
-            <div class="color" style="background: #0000FF"></div>
-            <div class="color" style="background: #A52A2A"></div>
-            <div class="color" style="background: #008000"></div>
-            <div class="color" style="background: #808080"></div>
-            <div class="color" style="background: #FFA500"></div>
-            <div class="color" style="background: #FFC0CB"></div>
-            <div class="color" style="background: #800080"></div>
-            <div class="color" style="background: #FF0000"></div>
-            <div class="color special" style="background: #FFFFFF"></div>
-            <div class="color special" style="background: #FFFF00"></div>
-        </div>
-    </div>
-        <li id="deals">DEALS</li>
-    <div class="deals">
-        <ul>
-            <li class="select">All item on sale</li>
-            <li class="select">New today</li>
-            <li class="select">New this week</li>
-            <li class="select">Free shipping</li>
-            <li class="select">Special offer</li>
-            <li class="select">Discount</li>
-        </ul>
-    </div>        <li id="sizes">SIZE</li>
-    <div class="sizes">
-        <div class="list-size">
-            <div class="size"><span value="xs" class="select">XS</span>
-            </div>
-            <div class="size"><span value="s" class="select">S</span>
-            </div>
-            <div class="size"><span value="m" class="select">M</span>
-            </div>
-            <div class="size"><span value="l" class="select">L</span>
-            </div>
-            <div class="size"><span value="xl" class="select">XL</span>
-            </div>
-            <div class="size"><span value="xxl" class="select">XXL</span>
-            </div>
-            <div class="size"><span value="xxxl" class="select">XXXL</span>
-            </div>
-        </div>
-    </div>        
-    <li id="stores">STORE</li>
-    <div class="stores">
-        <div class="brand">
-            <input class="label-brand" placeholder="Search Stores">
-            <div class="list-brand">
-                <ul>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                    <li class="select">Brand Name</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-      
-        <div class="m-button-foot col-xs-12">
-            <div class="col-xs-6 btn-refine">
-                <button type="submit" id="clear-submit" form="form1" value="Submit" name="clear-filter">CLEAR FILTER</button>
-            </div>
-            <div class="col-xs-6 btn-refine">
-                <button type="submit" id="apply-submit" form="form1" value="Submit" name="apply">APPLY</button>
-            </div>
-        </div>
-    </ul>
-</div>
-</div>        
-</div>
+                <div id="1">
+                    <li id="prices">PRICE</li>
+                    <div class="price prices">
+                        <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span>
+                        </div>
+                    </div>
+                    <script>
+                        $(function() {
+                            $(".slider-3").slider({
+                                range: true,
+                                min: 0,
+                                max: 1000,
+                                values: [250, 1000],
+                                slide: function(event, ui) {
+                                    minprice = (ui.values[0]);
+                                    maxprice = (ui.values[1]);
+                                    $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
+                                    $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
+                                    $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
+                                    $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
+                                }
+                            });
+                            $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+                            $("#max-price").val("$" + $(".slider-3").slider("values", 1));
 
-        <div class="col-lg-8 col-sm-9">
-            <div class="row">
-    <div id="body-main-sideright" class="col-lg-12">
-       
-        <div class="row ">
-            <div class="product col-lg-3 col-sm-4">
-                
-                <!-- start of team member               Member 01-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg" data-popup="#detail-popup">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
+                        });
+                    </script>
+                </div>
+
+                <li id="colors">COLOR</li>
+                <div class="colors">
+                    <div class="list-color">
+                        <div class="color" style="background: #000"></div>
+                        <div class="color special" style="background: #F5F5DC"></div>
+                        <div class="color" style="background: #0000FF"></div>
+                        <div class="color" style="background: #A52A2A"></div>
+                        <div class="color" style="background: #008000"></div>
+                        <div class="color" style="background: #808080"></div>
+                        <div class="color" style="background: #FFA500"></div>
+                        <div class="color" style="background: #FFC0CB"></div>
+                        <div class="color" style="background: #800080"></div>
+                        <div class="color" style="background: #FF0000"></div>
+                        <div class="color special" style="background: #FFFFFF"></div>
+                        <div class="color special" style="background: #FFFF00"></div>
+                    </div>
+                </div>
+                <li id="deals">DEALS</li>
+                <div class="deals">
+                    <ul>
+                        <li class="select">All item on sale</li>
+                        <li class="select">New today</li>
+                        <li class="select">New this week</li>
+                        <li class="select">Free shipping</li>
+                        <li class="select">Special offer</li>
+                        <li class="select">Discount</li>
+                    </ul>
+                </div>
+                <li id="sizes">SIZE</li>
+                <div class="sizes">
+                    <div class="list-size">
+                        <div class="size"><span value="xs" class="select">XS</span>
+                        </div>
+                        <div class="size"><span value="s" class="select">S</span>
+                        </div>
+                        <div class="size"><span value="m" class="select">M</span>
+                        </div>
+                        <div class="size"><span value="l" class="select">L</span>
+                        </div>
+                        <div class="size"><span value="xl" class="select">XL</span>
+                        </div>
+                        <div class="size"><span value="xxl" class="select">XXL</span>
+                        </div>
+                        <div class="size"><span value="xxxl" class="select">XXXL</span>
+                        </div>
+                    </div>
+                </div>
+                <li id="stores">STORE</li>
+                <div class="stores">
+                    <div class="brand">
+                        <input class="label-brand" placeholder="Search Stores">
+                        <div class="list-brand">
+                            <ul>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                                <li class="select">Brand Name</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+            <button id="submit" type="submit" form="form1" value="Submit">CLEAR FILTER</button>
+        </div>
+        <!-- popup-->
+        <div class="refine" style="display: none;">
+            <div class="refine-colum" id="rfs-content-popup">
+                <p class="m-title"> REFINE SEARCH</p>
+                <div class="option-filter">
+                    <div class="option-filter-row">
+                        <label><span>ALL</span>
+                        </label>
+                        <input type="radio">
+                    </div>
+                    <div class="option-filter-row">
+                        <label><span>SALE</span>
+                        </label>
+                        <input type="radio">
+                    </div>
+
+                    <div class="option-filter-row">
+                        <label><span>SAVE ITEMS</span>
+                        </label>
+                        <input type="radio">
+                    </div>
+                </div>
+                <ul>
+                    <li id="category">CATEGORIES</li>
+                    <div class="category" style="display: none; left: 100px;">
+                        <ul>
+                            <li id="clothing">CLOTHING</li>
+                            <div class="clothing" style="display: block; left: 50px;">
+                                <ul>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                </ul>
+                            </div>
+                        </ul>
+                        <ul>
+                            <li id="footwear">FOOTWEAR</li>
+                            <div class="footwear">
+                                <ul>
+                                    <li class="select">Sneakers</li>
+                                    <li class="select">Sandals</li>
+                                    <li class="select">Dress</li>
+                                    <li class="select">Casual</li>
+                                    <li class="select">Boots</li>
+                                </ul>
+                            </div>
+                        </ul>
+                        <ul>
+                            <li id="accessories">ACCESSORIES</li>
+                            <div class="accessories">
+                                <ul>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                    <li class="select">Filter</li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </div>
+                    <li id="brands">BRANDS</li>
+                    <div class="brands">
+                        <div class="brand">
+                            <input class="label-brand" placeholder="Search Brands">
+                            <div class="list-brand">
+                                <ul>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="2">
+                        <li id="prices">PRICE</li>
+                        <div class="price prices">
+                            <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span>
+                            </div>
+                        </div>
+                        <script>
+                            $(function() {
+                                $(".slider-3").slider({
+                                    range: true,
+                                    min: 0,
+                                    max: 1000,
+                                    values: [250, 1000],
+                                    slide: function(event, ui) {
+                                        minprice = (ui.values[0]);
+                                        maxprice = (ui.values[1]);
+                                        $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
+                                        $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
+                                        $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
+                                        $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
+                                    }
+                                });
+                                $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+                                $("#max-price").val("$" + $(".slider-3").slider("values", 1));
+
+                            });
+                        </script>
+                    </div>
+
+                    <li id="colors">COLOR</li>
+                    <div class="colors">
+                        <div class="list-color">
+                            <div class="color" style="background: #000"></div>
+                            <div class="color special" style="background: #F5F5DC"></div>
+                            <div class="color" style="background: #0000FF"></div>
+                            <div class="color" style="background: #A52A2A"></div>
+                            <div class="color" style="background: #008000"></div>
+                            <div class="color" style="background: #808080"></div>
+                            <div class="color" style="background: #FFA500"></div>
+                            <div class="color" style="background: #FFC0CB"></div>
+                            <div class="color" style="background: #800080"></div>
+                            <div class="color" style="background: #FF0000"></div>
+                            <div class="color special" style="background: #FFFFFF"></div>
+                            <div class="color special" style="background: #FFFF00"></div>
+                        </div>
+                    </div>
+                    <li id="deals">DEALS</li>
+                    <div class="deals">
+                        <ul>
+                            <li class="select">All item on sale</li>
+                            <li class="select">New today</li>
+                            <li class="select">New this week</li>
+                            <li class="select">Free shipping</li>
+                            <li class="select">Special offer</li>
+                            <li class="select">Discount</li>
+                        </ul>
+                    </div>
+                    <li id="sizes">SIZE</li>
+                    <div class="sizes">
+                        <div class="list-size">
+                            <div class="size"><span value="xs" class="select">XS</span>
+                            </div>
+                            <div class="size"><span value="s" class="select">S</span>
+                            </div>
+                            <div class="size"><span value="m" class="select">M</span>
+                            </div>
+                            <div class="size"><span value="l" class="select">L</span>
+                            </div>
+                            <div class="size"><span value="xl" class="select">XL</span>
+                            </div>
+                            <div class="size"><span value="xxl" class="select">XXL</span>
+                            </div>
+                            <div class="size"><span value="xxxl" class="select">XXXL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <li id="stores">STORE</li>
+                    <div class="stores">
+                        <div class="brand">
+                            <input class="label-brand" placeholder="Search Stores">
+                            <div class="list-brand">
+                                <ul>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                    <li class="select">Brand Name</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-button-foot col-xs-12">
+                        <div class="col-xs-6 btn-refine">
+                            <button type="submit" id="clear-submit" form="form1" value="Submit" name="clear-filter">CLEAR FILTER</button>
+                        </div>
+                        <div class="col-xs-6 btn-refine">
+                            <button type="submit" id="apply-submit" form="form1" value="Submit" name="apply">APPLY</button>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-sm-9">
+        <div class="row">
+            <div id="body-main-sideright" class="col-lg-12">
+
+                <div class="row ">
+
+                    <?php foreach ($this->feedData as $prod) { $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
+
+                    <div class="product col-lg-3 col-sm-4">
+                        <div class="product_item">
+                            <div class="uc_contact">
+                                <img class="uc_avatar img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" data-popup="#detail-popup">
+                                <div class="uc_link">
+                                    <span class="uc_icon icon_like" id="<?php echo  base64_encode($prod->feeddataid); ?>">
                                 <i class="fa fa-heart-o" aria-hidden="true"></i>
                             </span>
 
-                            <span class="uc_icon show_item">
+                                    <span class="uc_icon show_item">
                                 <i class="fa fa-share-alt" aria-hidden="true"></i>
                             </span>
 
-                            <span class="uc_icon icon_alert">
+                                    <span class="uc_icon icon_alert">
                                 <i class="fa fa-bell-o" aria-hidden="true"></i>
                             </span>
 
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product  -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                    <div class="product_item_detail text-center" id="detail-popup">
-                        <div class="box-detail-header">
-                            <div class="item_detail_img">
-                                <img src="assets/images/product_item_detail-mobile.jpg" alt="image details">
-                            </div>
-                            <h3 class="product-name">Puma Number One Active Hoodie</h3>
-                            <p class="product-brand">PUMA</p>
-                            <span class="product-price">39.00 CAD</span>
-                        </div>
-                        <div class="box-detail-footer">
-                            <div class="buy-like">
-                                <a href="" class="btn-st-blue">BUY</a>
-                            </div>
-                            <div class="footer-detail">
-                                <p class="detail-tit">DETAILS</p>
-                                <span class="note-details">A classic sweater with line hood</span>
-                                <span class="note-details">Hooded</span>
-                                <span class="note-details">Long sleeves</span>
-                                <span class="note-details">Front pouch pocket</span>
-                                <span class="note-details">Cotton/polyester</span>
-                                <span class="note-details">Machine wash</span>
-                                <span class="note-details">Imported</span>
-                            </div>
-                            <div class="footer-detail-social">
-                                <i class="fa fa-facebook"></i>
-                                <i class="fa fa-pinterest-p"></i>
-                                <i class="fa fa-tumblr"></i>
-                                <i class="fa fa-google-plus"></i>
-                                <i class="fa fa-envelope-o"></i>
-                            </div>
-                            <div class="footer-detail-alert">
-                                <i class="fa fa-bell-o"></i>Get Sell Alert
-                            </div>
-                            <div class="set-sale-alert" style="display: block;">
-                                <div class="sale-alert-head">
-                                    <p>Waiting for this item to go on sale?</p>
-                                    <p>We'll send an email when the price drops.</p>
+                                    <a href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>" title="Purchase article through our partner"> <span class="buy_product uc_icon">BUY</span>
+                                    </a>
                                 </div>
-                                <form action="" class="set-alert-form">
-                                    <input type="text" name="email-alert" placeholder="Youre Email Address" class="input-email-alert">
-                                    <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
-                                </form>
-                                <div class="foot-set-alert">
-                                    <span>By submiting this request,I confirm I agree with the Terms &amp; Conditions</span>
-                               </div>
+                            </div>
+                            <!-- End .product_item -->
+
+                            <div class="clear_float"></div>
+
+                            <div class="share_product" style="height: 279px;">
+                                <i class="fa fa-times hide_item" aria-hidden="true"></i>
+                                <h2>SHARE VIA</h2>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
+                                        <span>Pinterest</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
+                                        <span>Google +</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
+                                        <span>Email</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- End .share_product  -->
+
+                            <div class="clear_float"></div>
+
+                            <div class="uc_info">
+                                <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;
+                                    <?php echo ($prod->onsale=='Y'?$prod->saleprice:$prod->price)?> CAD</p>
+                                <p>
+                                    <?php echo $this->string_helper($prod->caption); ?></p>
+                            </div>
+                            <div class="product_item_detail text-center" id="detail-popup">
+                                <div class="box-detail-header">
+                                    <div class="item_detail_img">
+                                        <img src="assets/images/product_item_detail-mobile.jpg" alt="image details">
+                                    </div>
+                                    <h3 class="product-name">Puma Number One Active Hoodie</h3>
+                                    <p class="product-brand">PUMA</p>
+                                    <span class="product-price">39.00 CAD</span>
+                                </div>
+                                <div class="box-detail-footer">
+                                    <div class="buy-like">
+                                        <a href="" class="btn-st-blue">BUY</a>
+                                    </div>
+                                    <div class="footer-detail">
+                                        <p class="detail-tit">DETAILS</p>
+                                        <span class="note-details">A classic sweater with line hood</span>
+                                        <span class="note-details">Hooded</span>
+                                        <span class="note-details">Long sleeves</span>
+                                        <span class="note-details">Front pouch pocket</span>
+                                        <span class="note-details">Cotton/polyester</span>
+                                        <span class="note-details">Machine wash</span>
+                                        <span class="note-details">Imported</span>
+                                    </div>
+                                    <div class="footer-detail-social">
+                                        <i class="fa fa-facebook"></i>
+                                        <i class="fa fa-pinterest-p"></i>
+                                        <i class="fa fa-tumblr"></i>
+                                        <i class="fa fa-google-plus"></i>
+                                        <i class="fa fa-envelope-o"></i>
+                                    </div>
+                                    <div class="footer-detail-alert">
+                                        <i class="fa fa-bell-o"></i>Get Sell Alert
+                                    </div>
+                                    <div class="set-sale-alert" style="display: block;">
+                                        <div class="sale-alert-head">
+                                            <p>Waiting for this item to go on sale?</p>
+                                            <p>We'll send an email when the price drops.</p>
+                                        </div>
+                                        <form action="" class="set-alert-form">
+                                            <input type="text" name="email-alert" placeholder="Youre Email Address" class="input-email-alert">
+                                            <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
+                                        </form>
+                                        <div class="foot-set-alert">
+                                            <span>By submiting this request,I confirm I agree with the Terms &amp; Conditions</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <?php } ?>
+
+
                 </div>
-                <!-- end of team member                 Member 01-->
-            </div>
-
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 02-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg" data-popup="#detail-popup">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
+                <div id="load-more" class="row text-center">
+                    <button class="btn-st-silver">Load more</button>
                 </div>
-                <!-- end of team member                 Member 02-->
             </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member           Member 03-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 03-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 04-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 04-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 05-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 05-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 06-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 06-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 07-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 07-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 08-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 08-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 09-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 09-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 10-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 10-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 11-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 11-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 12-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 12-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 13-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 13-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 14-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 14-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 15-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 15-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 16-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 16-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 17-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 17-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 18-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 18-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 19-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 19-->
-            </div>
-            <div class="product col-lg-3 col-sm-4">
-                <!-- start of team member               Member 20-->
-                <div class="product_item">
-                    <div class="uc_contact">
-                        <img class="uc_avatar img-responsive" src="assets/images/product_item_mobile.jpg">
-                        <div class="uc_link">
-                            <span class="uc_icon icon_like">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
-
-                            <span class="buy_product uc_icon">BUY</span>
-                        </div>
-                    </div>
-                    <!-- End .product_item -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="share_product" style="height: 279px;">
-                        <i class="fa fa-times hide_item" aria-hidden="true"></i>
-                        <h2>SHARE VIA</h2>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
-                                <span>Facebook</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
-                                <span>Pinterest</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
-                                <span>Twitter</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
-                                <span>Google +</span>
-                            </a>
-                        </div>
-                        <div class="clear_float"></div>
-                        <div class="share_page">
-                            <a href="#">
-                                <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End .share_product -->
-
-                    <div class="clear_float"></div>
-
-                    <div class="uc_info">
-                        <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;48.00 CAD</p>
-                        <p>Puma Football Windbreaker</p>
-                    </div>
-                </div>
-                <!-- end of team member                 Member 20-->
-            </div>
-
         </div>
-        <div id="load-more" class="row text-center">
-            <button class="btn-st-silver">Load more</button>
-        </div>
+        <script>
+            $(document).ready(function($) {
+
+                $(".uc_avatar.img-responsive").click(function(e) {
+                    if ($(window).width() < 751) {
+                        $(".uc_avatar.img-responsive").fullScreenPopup({
+                            bgColor: '#fff'
+                        });
+
+                    } else {
+
+                        e.preventDefault();
+                    }
+
+                });
+                $(".footer-detail-alert").click(function(event) {
+                    wd = $(".fsp-content").width();
+                    $(".footer-detail-alert").prependTo($(".box-detail-header"));
+
+                    $(".footer-detail-alert").css("width", wd);
+                    $(".item_detail_img").css("margin-top", '70px');
+                    $(".set-sale-alert").css("display", "block");
+                    $(".footer-detail-alert").html('<i class="fa fa-bell-o"></i>Create Sale Alert');
+                });
+
+            });
+        </script>
     </div>
 </div>
-<script>
-    $(document).ready(function($) {
-       
-         $(".uc_avatar.img-responsive").click(function(e){
-           if ($(window).width() < 751) {
-                $(".uc_avatar.img-responsive").fullScreenPopup({
-                bgColor: '#fff'
-            });
-              
-            } else {
-                  
-                e.preventDefault();
-            }
-            
-         });
-        $(".footer-detail-alert").click(function(event) {
-             wd = $(".fsp-content").width();
-            $(".footer-detail-alert").prependTo( $(".box-detail-header"));
-            
-            $(".footer-detail-alert").css("width",wd);
-            $(".item_detail_img").css("margin-top",'70px');
-            $(".set-sale-alert").css("display","block");
-             $(".footer-detail-alert").html('<i class="fa fa-bell-o"></i>Create Sale Alert');
-        });
-       
-    });
-</script>        </div>
-    </div>
