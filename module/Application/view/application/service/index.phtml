@@ -9,10 +9,48 @@
     <div class="refine col-lg-2 col-lg-offset-1 col-sm-3">
         <div class="refine-colum hidden-xs">
             <ul> 
+
+
+           
                 <li id="category" class="">CATEGORIES</li>
-                <div id="category-tree" class="category aciTree" style="display: none; left: 100px;">
-                
+                <div  class="category" style="display: none; left: 100px;">
+                    <ul>
+                    
+                    <?php foreach ($this->aJson as $aJson) { ?>
+                          <li id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> </li>
+                            <div class="<?php  echo strtolower($aJson['label']); ?>">
+                                <ul>
+                                    <?php 
+                                    if(isset($aJson['branch'])) :
+                                    foreach ($aJson['branch'] as $aJson1) { ?>
+                                        <li id="<?php $search = array(' ', '&');
+ echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?></li>
+                                        <div class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
+                                            <ul>
+                                            <?php if(isset($aJson1['branch'])) :
+                                            foreach ($aJson1['branch'] as $aJson2) { ?>
+                                            
+                                                    <li style=""><?php  echo ($aJson2['label']); ?></li>
+                                                
+                                            <?php }  endif; ?>
+                                            </ul>
+                                        </div>
+                                    <?php }  endif; ?>
+                                </ul>
+                            </div>
+                    <?php } ?>
+                    </ul>
                 </div>
+
+                   <!--  <?php if(isset($aJson1['branch'])) :
+                                            foreach ($aJson1['branch'] as $aJson2) { ?>
+                                            <div class=""></div>
+                                            <ul>
+                                                <li></li>
+                                            </ul>
+                                            <?php }  endif; ?> -->
+
+
                 <li id="brands">BRANDS</li>
                 <div class="brands">
                     <div class="brand">
@@ -499,23 +537,6 @@
     </div>
 </div>
 
-
-        <script class="code" type="text/javascript">
-
-            $(function () {
-
-                // init the tree
-
-              $('#category-tree').aciTree({
-                    ajax: {
-                        url: '/attributes/get-categories-json?mapped=true&ec=<?php echo  $this->excludeCats ?>&levels=3&id='
-                    },
-                    checkbox: true
-                });
-            });
-
-   
-        </script>
 
     <script src="js/jquery.filtertable.js"></script>
     <script>
