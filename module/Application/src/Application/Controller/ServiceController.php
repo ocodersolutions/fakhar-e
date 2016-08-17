@@ -95,7 +95,7 @@ class ServiceController extends BaseActionController {
 
         $oService = $this->getServiceLocator();
         $oFeedData = $oService->get('FeedDataTable');
-
+        
         $oFeedMapping = $oService->get('FeedsMappingTable');
         $oAuth = $oService->get('AuthService');
 
