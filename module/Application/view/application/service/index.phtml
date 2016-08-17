@@ -564,13 +564,13 @@
         $('table').filterTable({ignoreClass: 'no-filter'});
         $('p.filter-table').prependTo('.brands .brand');
 
-        // Click button loadmore 
-        // $("#load-more>.btn-st-silver").click(){
-        //    if (loading == 0 && endData == 0)
-        //     {
-        //         loadProductData(1);
-        //     }
-        // }
+        //Click button loadmore 
+        $("#load-more>.btn-st-silver").click(function(){
+           if (loading == 0 && endData == 0)
+            {
+                loadProductData(1);
+            }
+        });
     });
 
     </script>
