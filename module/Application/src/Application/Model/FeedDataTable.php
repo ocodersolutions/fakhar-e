@@ -636,7 +636,7 @@ class FeedDataTable extends BasicTableAdapter {
         $results = $sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
         $resultSet->initialize($results);
-        $resultSet = $resultSet->toArray();
+        // $resultSet = $resultSet->toArray();
         return $resultSet;
     }
     public function countFilterFeedData($aPostParams = array(), $paginated = false, $userId = null, $bought = null,$service = null) {
