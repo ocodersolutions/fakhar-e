@@ -552,7 +552,12 @@
       
     </div>
 </div>
-
+<div id="loading-div-background">
+    <div id="loading-div" class="ui-corner-all" >
+      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading.."/>
+      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+     </div>
+</div> 
 
     <script src="js/jquery.filtertable.js"></script>
     <script>
@@ -570,4 +575,90 @@
         });
     });
 
+
     </script>
+    <script type="text/javascript">
+          
+            var loading = 0;
+            var endData = 0;
+            function loadProductData(isLazyLoading){
+                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                {
+                    showAjxLoadingDiv($("#productlisting"));
+                    $("#page").val(1);
+                    endData = 0;
+                }
+                else {
+                    showAjxLoadingDiv($("#productlisting"));
+                    //$("#loading").show();
+                }
+                loading = 1;
+                var url = "/service/getfeeds/" + Math.random();
+                var filterData = $("#productFilterDetail").serialize();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: filterData,
+                    dataType: 'html',
+                    success: function (result) {
+                        loading = 0;
+                        if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                        {
+                            $("#load-product-list").html(result);
+                            hideAjxLoadingDiv();
+                            $("#page").val(2);
+                            //enableDragg();
+                        }
+                        else
+                        {
+                            if (result.indexOf('No Record') > 0)
+                            {
+                                endData = 1;
+                            }
+                            else
+                            {
+                                $("#page").val(parseInt($("#page").val()) + 1); 
+                                $("#load-product-list").append(result);
+                                //enableDragg();
+                            }
+                            // $("#loading").hide();
+                            hideAjxLoadingDiv();
+                        }
+                        $('.my_tooltip').tooltipster({
+                            position: 'top',
+                            theme: 'tooltipster-shadow',
+                        });
+                    }
+                });
+            };
+            function showAjxLoadingDiv(target)
+            {
+                $("#loading-div-background").show();
+            }
+            function hideAjxLoadingDiv()
+            {
+                $("#loading-div-background").hide();
+            };
+
+        $(function () {
+            $(window).scroll(function() {
+                if($(window).scrollTop() == $(document).height() - $(window).height()) {
+                    // ajax call get data from server and append to the div
+                    if (loading == 0 && endData == 0){
+                        loadProductData(1);
+                    }
+                }
+            });
+                
+            });
+             $("#load-more>.btn-st-silver").click(function(){
+              
+               if (loading == 0 && endData == 0)
+                {
+                    //showAjxLoadingDiv();
+                    loadProductData(1);
+                }
+            });
+
+</script>
+
