@@ -419,7 +419,12 @@
       
     </div>
 </div>
-
+<div id="loading-div-background">
+    <div id="loading-div" class="ui-corner-all" >
+      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading.."/>
+      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+     </div>
+</div> 
 
     <script src="js/jquery.filtertable.js"></script>
     <script>
@@ -437,16 +442,16 @@
             var loading = 0;
             var endData = 0;
             function loadProductData(isLazyLoading){
-                // if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
-                // {
-                //     showAjxLoadingDiv($("#productlisting"));
-                //     $("#page").val(1);
-                //     endData = 0;
-                // }
-                // else {
-                //     showAjxLoadingDiv($("#productlisting"));
-                //     $("#loading").show();
-                // }
+                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                {
+                    showAjxLoadingDiv($("#productlisting"));
+                    $("#page").val(1);
+                    endData = 0;
+                }
+                else {
+                    showAjxLoadingDiv($("#productlisting"));
+                    //$("#loading").show();
+                }
                 loading = 1;
                 var url = "/service/getfeeds/" + Math.random();
                 var filterData = $("#productFilterDetail").serialize();
@@ -460,7 +465,7 @@
                         if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
                         {
                             $("#load-product-list").html(result);
-                            // hideAjxLoadingDiv();
+                            hideAjxLoadingDiv();
                             $("#page").val(2);
                             //enableDragg();
                         }
@@ -476,8 +481,8 @@
                                 $("#load-product-list").append(result);
                                 //enableDragg();
                             }
-                            $("#loading").hide();
-                            // hideAjxLoadingDiv();
+                            // $("#loading").hide();
+                            hideAjxLoadingDiv();
                         }
                         $('.my_tooltip').tooltipster({
                             position: 'top',
@@ -485,6 +490,14 @@
                         });
                     }
                 });
+            };
+            function showAjxLoadingDiv(target)
+            {
+                $("#loading-div-background").show();
+            }
+            function hideAjxLoadingDiv()
+            {
+                $("#loading-div-background").hide();
             };
 
         $(function () {
@@ -495,6 +508,7 @@
               
                if (loading == 0 && endData == 0)
                 {
+                    //showAjxLoadingDiv();
                     loadProductData(1);
                 }
             });
