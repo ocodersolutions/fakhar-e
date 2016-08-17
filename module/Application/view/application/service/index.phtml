@@ -365,22 +365,29 @@
                     <div class="product col-lg-3 col-sm-4">
                         <div class="product_item">
                             <div class="uc_contact">
-                                <img class="uc_avatar img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" data-popup="#detail-popup">
+                                <div class="product_item_popup">
+                                    <img class="uc_avatar img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" data-popup="#detail-popup">
+                                    <a href="#" target="_blank" class="popup_item"></a>
+                                </div>
                                 <div class="uc_link">
                                     <span class="uc_icon icon_like" id="<?php echo  base64_encode($prod->feeddataid); ?>">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </span>
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
 
                                     <span class="uc_icon show_item">
-                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                            </span>
+                                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                                    </span>
 
                                     <span class="uc_icon icon_alert">
-                                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            </span>
+                                        <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                    </span>
 
                                     <a href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>" title="Purchase article through our partner"> <span class="buy_product uc_icon">BUY</span>
                                     </a>
+
+                                    <div class="quick_view_v2" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                        <span>QUICK VIEW</span>
+                                    </div>
                                 </div>
                             </div>
                             <!-- End .product_item -->
