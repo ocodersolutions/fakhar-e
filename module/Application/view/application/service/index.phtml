@@ -352,13 +352,33 @@
                 </ul>
             </div>
         </div>
+        <form id="productFilterDetail" name="productFilterDetail">
+            <input type="hidden" id="minamount" class="form-control" name="minamount">
+            <input type="hidden" id="maxamount" class="form-control" name="maxamount">
+            <input type="hidden" id="minduration" class="form-control" name="minduration">
+            <input type="hidden" id="maxduration" class="form-control" name="maxduration">
+            <input type="hidden" id="catids" class="form-control" name="catids">
+            <input type="hidden" id="brands" class="form-control" name="brands">
+            <input type="hidden" id="colors" class="form-control" name="colors">
+            <input type="hidden" id="stores" class="form-control" name="stores">
+            <input type="hidden" id="deals" class="form-control" name="deals">
+            <input type="hidden" id="onsale" class="form-control" name="onsale">
+            <input type="hidden" id="todaynew" class="form-control" name="todaynew">
+            <input type="hidden" id="newthisweek" class="form-control" name="newthisweek">
+            <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
+            <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
+            <input type="hidden" id="discountcode" class="form-control" name="discountcode">
+            <input type="hidden" id="page" class="form-control" name="page" value="2">
+            <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
+            <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
+        </form>
     </div>
 
     <div class="col-lg-8 col-sm-9">
         <div class="row">
             <div id="body-main-sideright" class="col-lg-12">
 
-                <div class="row ">
+                <div class="row">
 
                     <?php foreach ($this->feedData as $prod) { $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
 
