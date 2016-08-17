@@ -31,29 +31,99 @@
     </head>
 
     <body>
-<div id="header-container" class="container-fluid hidden-xs">
-    <div class="row">
-        <div class="header-top-navbar col-lg-12 ">
-            <div class="row top-bar">
-                <div class="left-side col-lg-4 col-md-4 col-sm-4 col-xs-12" id="show-hide-menu">MENU</div>
-                <div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="assets/images/logo.png" alt="" class="top-logo">
+<div id="header-block">
+    <div id="header-container" class="container-fluid hidden-xs">
+        <div class="row">
+            <div class="header-top-navbar col-lg-12 ">
+                <div class="row top-bar">
+                    <div class="left-side col-lg-4 col-md-4 col-sm-4 col-xs-12" id="show-hide-menu">MENU</div>
+                    <div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="assets/images/logo1.jpg" alt="" class="top-logo">
+                    </div>
+                    <div class="right-side col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="login_signup">
+                            <a href="#">LOGIN</a>
+                            /
+                            <a href="#">SIGN UP</a>
+                        </div>
+                        <a href="#" class="btn-st-blue">GET STYLED</a>
+                    </div>
                 </div>
-                <div class="right-side col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            </div>
+        </div>
+
+        <nav id="menu" class="row">
+            <div class="col-lg-12 col-xs-12" id="row-top-navbar">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12 text-center" id="top-nav" class="top-navbar">
+                        <ul>
+                            <li><a href="">HOW IT WORKS</a>
+                            </li>
+                            <li><a href="">ABOUT US</a>
+                            </li>
+                            <li><a href="">BLOG</a>
+                            </li>
+                            <li><a href="">FAQ</a>
+                            </li>
+                            <li><a href="">SHIPPING</a>
+                            </li>
+                            <li><a href="">PRICING</a>
+                            </li>
+                            <li><a href="">EXCHANGE & RETURNS</a>
+                            </li>
+                            <li><a href="">CAREERS</a>
+                            </li>
+                            <li><a href="">CONTACT US</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 col-lg-offseet-1 col-xs-10 col-xs-offset-1" id="search">
+                <form class="searchbox">
+                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" onkeyup="buttonUp();">
+                    <button type="submit" class="searchbox-submit">
+                        <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
+                    </button>
+                </form>
+            </div>
+
+        </nav>
+    </div>
+    <div id="mobile-header" class="container-fluid visible-xs">
+        <div class="row">
+            <div class="col-xs-12" id="mtop-bar">
+                <div class="uc_clean_accordion col-xs-6" id="mtop-left">
                     <div class="login_signup">
                         <a href="#">LOGIN</a>
                         /
                         <a href="#">SIGN UP</a>
                     </div>
+                </div>
+                <div class="col-xs-6" id="mtop-right">
                     <a href="#" class="btn-st-blue">GET STYLED</a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <nav id="menu" class="row">
-        <div class="col-lg-12 col-xs-12" id="row-top-navbar">
-            <div class="row">
-                <div class="col-lg-12 col-xs-12 text-center" id="top-nav" class="top-navbar">
+                
+        <div class="row" id="menu-logo">
+            <div class="col-xs-12">
+                <span class="fa fa-plus" id="pop-menu" data-popup="#popup"></span>
+                <img src="assets/images/mobile-logo.png" alt="logo mobile" class="logo" />
+            </div>
+        </div>
+        
+        <div class="row" id="search-bar">
+            <form class="searchbox-mobile col-xs-12">
+                <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="m-search" class="m-searchbox-input">
+                <button type="submit" class="searchbox-submit">
+                    <span class="m-searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="m-search_btn"></i></span>
+                </button>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-left" id="popup">
+                <div class="row">
+                    <p class="m-title"> MENU</p>
                     <ul>
                         <li><a href="">HOW IT WORKS</a>
                         </li>
@@ -77,92 +147,32 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-xs-12" id="search">
-            <form class="searchbox">
-                <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" onkeyup="buttonUp();">
-                <button type="submit" class="searchbox-submit">
-                    <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
-                </button>
-            </form>
-        </div>
-
-    </nav>
-</div>
-<div id="mobile-header" class="container-fluid visible-xs">
-    <div class="row">
-        <div class="col-xs-12" id="mtop-bar">
-            <div class="uc_clean_accordion col-xs-6" id="mtop-left">
-                <div class="login_signup">
-                    <a href="#">LOGIN</a>
-                    /
-                    <a href="#">SIGN UP</a>
-                </div>
-            </div>
-            <div class="col-xs-6" id="mtop-right">
-                <a href="#" class="btn-st-blue">GET STYLED</a>
-            </div>
-        </div>
-    </div>
-            
-    <div class="row" id="menu-logo">
-        <div class="col-xs-12">
-            <span class="fa fa-plus" id="pop-menu" data-popup="#popup"></span>
-            <img src="assets/images/mobile-logo.png" alt="logo mobile" class="logo" />
-        </div>
-    </div>
-    
-    <div class="row" id="search-bar">
-        <form class="searchbox-mobile col-xs-12">
-            <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="m-search" class="m-searchbox-input">
-            <button type="submit" class="searchbox-submit">
-                <span class="m-searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="m-search_btn"></i></span>
-            </button>
-        </form>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 text-left" id="popup">
-            <div class="row">
-                <p class="m-title"> MENU</p>
-                <ul>
-                    <li><a href="">HOW IT WORKS</a>
-                    </li>
-                    <li><a href="">ABOUT US</a>
-                    </li>
-                    <li><a href="">BLOG</a>
-                    </li>
-                    <li><a href="">FAQ</a>
-                    </li>
-                    <li><a href="">SHIPPING</a>
-                    </li>
-                    <li><a href="">PRICING</a>
-                    </li>
-                    <li><a href="">EXCHANGE & RETURNS</a>
-                    </li>
-                    <li><a href="">CAREERS</a>
-                    </li>
-                    <li><a href="">CONTACT US</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="user-mhiden" id="user-mblock">
-            <p class="tit-head">WELCOM,JOHN <span class="fa fa-times" id="hid-userbox"></span></p>
-            <ul class="link-box-user">
-                <li><a href="#">My Profile</a></li>
-                <li><a href="#">Log out</a></li>
-            </ul>
-         </div>   
         
+        <div class="row">
+            <div class="user-mhiden" id="user-mblock">
+                <p class="tit-head">WELCOM,JOHN <span class="fa fa-times" id="hid-userbox"></span></p>
+                <ul class="link-box-user">
+                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#">Log out</a></li>
+                </ul>
+             </div>   
+            
+        </div>
     </div>
 </div>
 <div id="banner" class="container-fluid">
-    <div class="col-lg-5 col-lg-offset-2 banner-content">
-        <h2>LOREM IPSUM TEXT</h2>
-        <p>Whether for casual or business attire, get choices tailored to you.</p>
-        <a href="#"><span class="btn btn-default">GET DRESSED</span></a>
+    <div class="col-lg-10 col-lg-offset-1 banner-content">
+        <h1>LOREM IPSUM TEXT</h1>
+        <h3>Whether for casual or business attire, get choices tailored to you.</h3>
+        <!-- <a href="#"><span class="btn btn-default">GET DRESSED</span></a> -->
+                   
+        <form class="form_search">
+            <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="search_input">
+            <button type="submit" class="search_submit">
+                <i class="fa fa-search" aria-hidden="true" id="search_icon"></i>
+            </button>
+        </form>
+        
     </div>
 </div>
 <div id="filter-selected" class="container-fluid" >
@@ -311,6 +321,20 @@
     $(document).ready(function(){
         $(".sort-list").css({"opacity": "0.3", "cursor": "default"});
 
+        $("#search").hide();
+
+        if(screen.width >= 992)
+        {
+            $(".product_item_popup").mouseenter(function(){
+                $(this).parent().find(".popup_item, .quick_view_v2").show();
+                var height1 = $(this).parent().find(".icon_like").height();
+                // console.log(height1);
+                $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
+            });
+            $(".uc_contact").mouseleave(function(){
+                $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
+            });
+        }
     });
     $(window).resize(function() {
         $('.share_product').height(function(){
@@ -372,20 +396,36 @@
 <!-- Javascript of selected_filter.php/sort-item -->
 
 <script type="text/javascript">
-    $(".sort-item").mouseenter(function(){
-        $(".icon_arrow").removeClass("fa-chevron-down");
-        $(".icon_arrow").addClass("fa-chevron-up");
-        $(".uc_line_content").slideDown();
+    $(".sort-item").click(function(){
+        var myClasses = this.classList;
+        if(myClasses.contains("active"))
+        {
+            myClasses.remove("active");
+            $(".icon_arrow").removeClass("fa-chevron-up");
+            $(".icon_arrow").addClass("fa-chevron-down");
+            $(".uc_line_content").slideUp();
+        }
+        else
+        {
+            myClasses.add("active");
+            $(".icon_arrow").removeClass("fa-chevron-down");
+            $(".icon_arrow").addClass("fa-chevron-up");
+            $(".uc_line_content").slideDown();
+        }
+        // $(".icon_arrow").removeClass("fa-chevron-down");
+        // $(".icon_arrow").addClass("fa-chevron-up");
+        // $(".uc_line_content").slideDown();
     });
-    $(".sort-item").mouseleave(function(){
-        $(".icon_arrow").removeClass("fa-chevron-up");
-        $(".icon_arrow").addClass("fa-chevron-down");
-        $(".uc_line_content").slideUp();
-    });
+    // $(".sort-item").click(function(){
+    //     $(".icon_arrow").removeClass("fa-chevron-up");
+    //     $(".icon_arrow").addClass("fa-chevron-down");
+    //     $(".uc_line_content").slideUp();
+    // });
 
     $(".sort-item-select").click(function(){
         var content_sl = $(this).html();
         $(this).parents(".sort-item").find(".sort-item-selected").html(content_sl);
+        $(this).parents(".uc_line_content").slideUp();
     });
 </script>
 
@@ -525,6 +565,30 @@
                 collapsible: true,
                 active: false
             });
+
+            $(window).scroll(function(){
+                if($(this).scrollTop() >= $("#header-block").height())
+                {
+                    $("#header-block").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
+                    $("#search").show();
+                    $(".form_search").hide();
+                    $("#search-bar").show();
+                    $("#header-container").find(".row").addClass("wrap-header-top-navbar");
+                    $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+                }
+                else 
+                {
+                    $("#header-block").css("position","static");
+                    $("#search").hide();
+                    $(".form_search").show();
+                    $("#search-bar").hide();
+                    $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
+                    $(".searchbox").removeClass("searchbox-open");
+                }
+            });
+
+
+
             $("#pop-menu").fullScreenPopup({
                 bgColor: '#fff'
             });
@@ -539,22 +603,23 @@
             });
             $("#hid-userbox").click(function(){
                 $("#user-mblock").removeAttr("style");
-            })
+            });
 
             // $("#banner").css("margin-top",function(){
             //  return $(this).parent().find("#header-block").height();
             // });
             
-            $(window).scroll(function(){
-                if($(this).scrollTop() >= $("#header-block").height())
-                {
-                    $("#header-block").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
-                }
-                else 
-                {
-                    $("#header-block").css("position","static");
-                }
-            });
+            // $(window).scroll(function(){
+            //     alert("true");
+            //     if($(this).scrollTop() >= $("#header-block").height())
+            //     {
+            //         $("#header-block").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
+            //     }
+            //     else 
+            //     {
+            //         $("#header-block").css("position","static");
+            //     }
+            // });
             
         </script>  
 
