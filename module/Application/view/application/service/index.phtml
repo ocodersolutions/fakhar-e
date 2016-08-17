@@ -550,6 +550,14 @@
         // apply filterTable to all tables on this page but don't filter content with the no-filter class
         $('table').filterTable({ignoreClass: 'no-filter'});
         $('p.filter-table').prependTo('.brands .brand');
+
+        // Click button loadmore 
+        $("#load-more>.btn-st-silver").click{
+           if (loading == 0 && endData == 0)
+            {
+                loadProductData(1);
+            }
+        }
     });
 
     </script>
