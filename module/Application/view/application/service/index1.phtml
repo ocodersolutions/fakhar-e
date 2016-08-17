@@ -1,27 +1,28 @@
 <?php
 $outfitsData = $this->outfits;
 ?>
-<!--<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/bootstrap-select/bootstrap-select.css">-->
-<!--<link href="/css/edit.css" media="screen" rel="stylesheet" type="text/css">-->
-<!--<link rel="stylesheet/less" type="text/css" href="/css/bootstrap-progressbar-3.0.0.less">
-<link rel="stylesheet" type="text/css" href="/css/bootstrap-progressbar-3.0.0.css">-->
-<script src="/vendor/bootstrap/bootstrap-select/bootstrap-select.js"></script>
+<link type="text/css"  href="<?php echo $this->basePath(); ?>/css/onlymodal.css"   rel="stylesheet" />
+<link type="text/css"  href="<?php echo $this->basePath(); ?>/css/showfeeddetail.css"   rel="stylesheet" />
+<script src="<?php echo $this->basePath(); ?>/vendor/bootstrap/bootstrap-select/bootstrap-select.js"></script>
+<link rel="stylesheet" href="<?php echo $this->basePath(); ?>/vendor/jqueryui/development-bundle/themes/base/jquery.ui.all.css">
 
-
-<link rel="stylesheet" href="/vendor/jqueryui/development-bundle/themes/base/jquery.ui.all.css">
+<link rel="stylesheet" href="<?php echo $this->basePath(); ?>/fa/css/build.css">
 <!--<link rel="stylesheet" href="/vendor/jqueryui/custom.css">-->
+<script src="<?php echo $this->basePath(); ?>/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
 
+<script src="<?php echo $this->basePath(); ?>/simpleexpand/simple-expand.min.js"></script>
+<script src="<?php echo $this->basePath(); ?>/templates/mobile/js/bootstrap.min.js"></script>
 
-<script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
-
-<style>
+<style> 
     .productsBox .overlay{margin-left:70px; top:90px; }
     .productsBox .overlay .plus{background-image:none}
     .productsBox .overlay .minus{background-image:none}
 
     ul.scrollheight { height: 300px;overflow-y: auto;}
     .activebrand{background-color: #CCCCCC;}
-    .activecolor{border:2px solid black;}
+    .activecolor{border:2px solid black; background-image: url("/img/tick2.png"); background-size: 20px 15px; 
+    background-repeat: no-repeat; 
+    background-position: center center;} 
     .activedeal {background:#e06;text-decoration:none;}
 
     .form-control{height: 34px; padding:2px 2px 2px 6px; font-style:italic; font-size: 11px;}
@@ -36,7 +37,7 @@ $outfitsData = $this->outfits;
     }
     section.toggle label { border:none; color: #000; padding: 3px 20px 3px 10px }
     section.toggle.active {
-        background-color: #fbfcfb;
+        /*background-color: #fbfcfb;*/
         border-color: #fbfcfb;
     }
     section.toggle.active > label {
@@ -129,8 +130,8 @@ $outfitsData = $this->outfits;
         outline: medium none;
     }
     .ui-state-default, .ui-widget-content .ui-state-default {
-        background: none repeat scroll 0 0 #254F73 !important;
-        border: 1px solid #254F73 !important;
+        /*background: none repeat scroll 0 0 #254F73 !important;*/
+        /*border: 1px solid #254F73 !important;*/
         box-shadow: none;
         height: 13px;
         margin: 10px -5px auto !important;
@@ -139,7 +140,7 @@ $outfitsData = $this->outfits;
     .ui-corner-all {
         border-radius: 4px 4px 4px 4px;
     }
-    .ui-state-default, .ui-widget-content .ui-state-default lable {
+    .ui-state-default, .ui-widget-content .ui-state-default label {
         color: #FFFFFF !important;
     }
     .ui-slider-handle.ui-state-default.ui-corner-all > label {
@@ -154,7 +155,7 @@ $outfitsData = $this->outfits;
     }
     #slider2 > a > label:first-child {
         left: -22px;
-        width: 35px;
+        width: 40px;
     }
     label {
         margin-bottom: 7px;
@@ -184,25 +185,159 @@ $outfitsData = $this->outfits;
     .outfitcheckbox{
         cursor: pointer;
     }
+    
+    
+    
+    
+    #loading-div-background 
+    {
+        display:none;
+        position:fixed;
+        top:0;
+        left:0;
+        background:black;
+        width:100%;
+        height:100%;
+        opacity: 0.6;
+        z-index: 1000;
+     }
+    #loading-div
+    {
+         width: 300px;
+         height: 150px;
+         text-align:center;
+         position:absolute; 
+         left: 50%;
+         top: 50%;
+         margin-left:-150px;
+         margin-top: -100px;
+        opacity: 1;
+     }
+     
+        .toggle.expander.expanded {
+            padding-left: 22px;
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-image: url('/img/down.png');
+        }
+    
+        .toggle.expander.collapsed {
+            padding-left: 22px;
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-image: url('/img/right.png');
+        } 
+        .cat h5{
+            cursor: pointer;
+        }
+        button.deal{
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+        #tree .aciTreeText{
+            font-family: 'Roboto' !important;
+        }
+
+        /* style for checkbox */
+
+        .brandslist .checkbox label::before{
+            border-radius: 0;
+            border-color: #acaeb5;
+        }
+        .brandslist .checkbox label::after{
+            background-color: #acaeb5;
+        }
+        .brandslist .checkbox input[type="checkbox"]:checked + label::after{
+            content: ' ';
+        }
+        .brandslist .checkbox label::before{
+            width: 14px;
+            height: 14px;
+        }
+        .brandslist .checkbox label::after {
+            width: 12px;
+            height: 14px;
+        }
+        #slider > a > label {
+            width:50px;
+        }
+        .round-color li{
+            font-size: 13px;
+            font-family: 'Roboto';
+        }
+        .round-color .fa-check{
+            color:#fff;
+        }
+        .round-color .fa-check:before {
+            margin-left: 3px;
+        }
+        .deals_box label{
+            margin-bottom: 0;
+        }
+        .deals_box .fa-circle-o:before {
+            font-size: 17px;
+        }
+        .left-box-check input[type="radio"]:checked + label .fa-circle,input[type="checkbox"]:checked + label .fa-square {
+            color: #fff;
+        }
+        .continueFixAtBottom{
+            padding-top: 35px;
+        }
+        .image-cross{
+            padding: 0;
+        }
+        .btn-con1{
+            margin-top: 0;
+        }
+       
 </style>
 <!--============================================================contener-01=============-->
 <script type="text/javascript">var feedsids = {};</script>
 <!--============================================================contener-01 end =============-->
-<div class="full">
-    <div class="container" style="background-color:#F6F6F4;">
-        <div id="blue-btn-top">
-            <div id="div">
-                <div class="blue-btn1  ">
-                    <a href=""><img src="/img/circle-close.png"></a>
-                    <div class="square1 on">on</div>
+<?php if(isset($this->shareOutfitImage)) { ?>
+    <div align="center">
+        <img src="<?php echo $this->shareOutfitImage?>"  /> <br /><br />
+         To see details of this outfit, please login to <a href="/auth">ELNOVE</a>.
+    </div>
+   
+<?php } ?>
+<div id="service-page" class="full" <?php echo (isset($this->fromSocialMedia)?'style="display:none"':'');?>>
+    <div class="container outerBoxContainer" style="background-color:#F6F6F4;">
+        <div id="blue-btn-top" <?php echo (isset($this->fromSocialMedia)?'style="display:none"':'');?>>
+            <!-- <div id="div">
+                <div class="blue-btn1 my_tooltip" title="Switch between outfits and articles">
+                    <a href="#" class="square1_tick"><img src="/img/circle-ok.png" id="panel"></a>
+                    <div class="square1 on" style="font-size:0px;">on</div>
                 </div>
+             
                 <div class="clr"></div>
-                <p class="head1">Outfit Shopping </p>
+                <p class="head1">Outfit View </p>
+            </div> -->
+            <div class="switch" style="display:none">
+                <ul class="list-radio">
+                    <li>
+                        <div class="radio">
+                            <input type="radio" name="outart" id="outfit" value="outfit" checked="">
+                            <label for="outfit" class="radio-label upcase">
+                                outfits
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="radio">
+                            <input type="radio" name="outart" id="articles" value="articles">
+                            <label for="articles" class="radio-label upcase">
+                                articles
+                            </label>
+                        </div>
+                    </li> 
+                </ul>
             </div>
 
-            <div id="leftaction">
+            <div id="leftaction" style="display:none">
 
-                <ul class="left-box-check">
+                <ul class="left-box-check my_tooltip" title="Which venue are you dressing for?">
                     <li><input type="checkbox" name="all" id="check1" value="All"/>
                         <label for="check1">
                             <span class="fa-stack outfitcheckbox">
@@ -212,7 +347,7 @@ $outfitsData = $this->outfits;
                             All
                         </label></li>
 
-                    <li><input type="checkbox" name="outfit[]" id="check2" value="Work"/>
+                    <li><input type="checkbox" name="outfit[]" id="check2" <?php echo (in_array('Work', $this->defaultVenue)?'checked':'')?> value="Work"/>
                         <label for="check2">
                             <span class="fa-stack outfitcheckbox">
                                 <i class="fa fa-square-o fa-stack-1x"></i>
@@ -220,7 +355,7 @@ $outfitsData = $this->outfits;
                             </span>
                             Work
                         </label></li>
-                    <li><input type="checkbox" name="outfit[]" id="check3" value="Night Out"/>
+                    <li><input type="checkbox" name="outfit[]" id="check3" <?php echo (in_array('NightOut', $this->defaultVenue)?'checked':'')?> value="Night Out"/>
                         <label for="check3">
                             <span class="fa-stack outfitcheckbox">
                                 <i class="fa fa-square-o fa-stack-1x"></i>
@@ -229,7 +364,7 @@ $outfitsData = $this->outfits;
                             Night Out
                         </label></li>
 
-                    <li><input type="checkbox" name="outfit[]" id="check4" value="Casual"/>
+                    <li><input type="checkbox" name="outfit[]" id="check4" <?php echo (in_array('Casual', $this->defaultVenue)?'checked':'')?> value="Casual"/>
                         <label for="check4">
                             <span class="fa-stack outfitcheckbox">
                                 <i class="fa fa-square-o fa-stack-1x"></i>
@@ -239,440 +374,238 @@ $outfitsData = $this->outfits;
                         </label></li>
                 </ul>
 
-                <div class="refresh refreshout">
-                    <a href="javascript:void(0);"><img src="/img/refresh.png">Refresh Outfit </a>
-                </div>
 
-
-                <div class="refresh savecloseout">
-                    <a href="javascript:void(0);"><img src="/img/blank.png">Save this Outfit </a>
-                </div>
-
-                <div class="share1 shclose">
-                    <a href="javascript:void(0);"><img src="/img/white-share.png">Share this outfit </a>
-                </div>
             </div>
         </div>
-        <div id="outfit-block">
-            <div id="slideout">
-                <a class="link-settings-colors sharepoup"><img src="img/switch.png" /></a>
+        <div id="outfit-block" style="display:none">
+        
+            <input type="hidden" id="outfits_offset" value="0"  />
+            <input type="hidden" id="outfits_count" value="<?=$this->outfits_count?>"  />
+        
+        
+            <div id="slideout" style="right:-65px;">
+                <a class="link-settings-colors sharepoup"><img src="/img/switch.png" /></a>
                 <div id="slideout_inner">
                     <form id="switchform">
                         <ul>
                             <?php
-                            $page_url = $this->serverUrl() . '/service?outfitd=' . $outfitsData[0]['outfit_id'];
-                            $title = 'Lnove - ' . $outfitsData[0]['outfittitle'];
+                            $page_url = $this->serverUrl() . '/service?outfit=' . $outfitsData[1][0]['outfit_id'];
+                            $title = 'ELNove - ' . $outfitsData[1][0]['outfittitle'];
                             ?>
-                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="img/white_fb.png"></a></li>
-                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="img/white_p.png"></a></li>
-                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="img/white-t.png"></a></li>
-                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="img/white_google.png"></a></li>
-                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="img/white_msg.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_fb.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_p.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white-t.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_google.png"></a></li>
+                            <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_msg.png"></a></li>
                         </ul>
 
                     </form>
                 </div>
             </div>
             <?php if (isset($outfitsData) && !empty($outfitsData)) { ?>
-                <div class="big_box1">
-                    <div class="img_box_main">
-                        <div class="main_big_product_box1">
-                            <input type="hidden" id="closesetId" name="closesetId" value="<?php echo base64_encode($outfitsData[0]['outfit_id']); ?>"/>
-                            <div class="main_big_product_img_box">
-                                <?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
-                                <img src="<?php echo $outfitsData[0]['imageurl']; ?>" id="img" height="494px">
-                                <!--<img src="/feed/<?php //echo $outfitsData[0]['feedId']; ?>/<?php //echo $outfitsData[0]['img_local_name']; ?>" id="img" alt="product">-->
-                                <?php } else { ?>
-                                    <img src="/img/big_img.jpg" alt="product" />
-                                <?php } ?>
-                            </div>
-                            <?php if (isset($outfitsData[0]['feedId']) && !empty($outfitsData[0]['feedId'])) { ?>
-                                <div class="main_big_product_tag_box">
-                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?= base64_encode($outfitsData[0]['id']); ?>">
-                                        <img src="/img/thumb.png" alt="like" />
-                                    </a>
-                                </div>
-
-                                <div class="box-block1">
-                                    <div class="pad">
-                                        <span class="like_<?= $outfitsData[0]['id']; ?>"><?= $outfitsData[0]['likesCount'] != 0 ? $outfitsData[0]['likesCount'] . ' likes' : ""; ?></span>
-                                        <h4><?php echo $outfitsData[0]['caption'] != '' ? $outfitsData[0]['caption'] : ''; ?></h4>
-                                        <p><?php echo $outfitsData[0]['price'] != '' ? '$' . $outfitsData[0]['price'] : ''; ?></p>
-                                        <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[0]['id']))); ?>">buy now</a>
-                                        <br>
-                                        <a target="_blank" href="service/feeddatadetail/<?php echo $outfitsData[0]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
-                                    </div>
-                                    <div class="social_box1">
-                                        <?php
-                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[0]['id'] . '/' . rand();
-                                        $title = 'Lnove - ' . $outfitsData[0]['caption'];
-                                        ?>
-                                        <ul>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <?php } ?> 
-                            <div class="clr"></div>
-                        </div>
-
-
-
-                        <div class="main_sm_product_box1">
-                            <div class="main_sm_product_img_box">
-                                <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
-                                <img src="<?php echo $outfitsData[1]['imageurl']; ?>" id="img" height="335px">
-                                <!--<img src="/feed/<?php //echo $outfitsData[1]['feedId']; ?>/<?php //echo $outfitsData[1]['img_local_name']; ?>" id="img" alt="product">-->
-                                <?php } else { ?>
-                                    <img src="/img/small_img2.jpg" alt="product" />
-                                <?php } ?>
-                            </div>
-
-                            <?php if (isset($outfitsData[1]['feedId']) && !empty($outfitsData[1]['feedId'])) { ?>
-
-                                <div class="main_sm_product_tag_box">
-                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?= base64_encode($outfitsData[1]['id']); ?>">
-                                        <img src="/img/thumb.png" alt="like" />
-                                    </a>
-                                </div>
-
-                                <div class="box-block3 blok">
-                                    <div class="pad">
-                                        <span class="like_<?= $outfitsData[1]['id']; ?>"><?= $outfitsData[1]['likesCount'] != 0 ? $outfitsData[1]['likesCount'] . ' likes' : ""; ?></span>
-                                        <h4><?php echo $outfitsData[1]['caption'] != '' ? $outfitsData[1]['caption'] : ''; ?></h4>
-                                        <p><?php echo $outfitsData[1]['price'] != '' ? '$' . $outfitsData[1]['price'] : ''; ?></p>
-                                        <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[1]['id']))); ?>">buy now</a>
-                                        <br>
-                                        <a  target="_blank" href="service/feeddatadetail/<?php echo $outfitsData[1]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
-                                    </div>
-                                    <div class="social_box1">
-                                        <?php
-                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[1]['id'] . '/' . rand();
-                                        $title = 'Lnove - ' . $outfitsData[1]['caption'];
-                                        ?>
-                                        <ul>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-
-                        <div class="main_sm_product_box1">
-                            <div class="main_sm_product_img_box">
-                                <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>
-                                <img src="<?php echo $outfitsData[2]['imageurl']; ?>" id="img" height="335px">
-                                <!--<img src="/feed/<?php //echo $outfitsData[2]['feedId']; ?>/<?php //echo $outfitsData[2]['img_local_name']; ?>" id="img" alt="product">-->
-                                <?php } else { ?>
-                                    <img src="/img/small_img2.jpg" alt="product" />
-                                <?php } ?>
-                            </div>
-                            <?php if (isset($outfitsData[2]['feedId']) && !empty($outfitsData[2]['feedId'])) { ?>
-                                <div class="main_sm_product_tag_box">
-                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?= base64_encode($outfitsData[2]['id']); ?>">
-                                        <img src="/img/thumb.png" alt="like" />
-                                    </a>
-                                </div>
-
-                                <div class="box-block3 blok">
-                                    <div class="pad">
-                                        <span class="like_<?= $outfitsData[2]['id']; ?>"><?= $outfitsData[2]['likesCount'] != 0 ? $outfitsData[2]['likesCount'] . ' likes' : ""; ?></span>
-                                        <h4><?php echo $outfitsData[2]['caption'] != '' ? $outfitsData[2]['caption'] : ''; ?></h4>
-                                        <p><?php echo $outfitsData[2]['price'] != '' ? '$' . $outfitsData[2]['price'] : ''; ?></p>
-                                        <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[2]['id']))); ?>">buy now</a>
-                                        <br>
-                                        <a  target="_blank" href="service/feeddatadetail/<?php echo $outfitsData[2]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
-                                    </div>
-                                    <div class="social_box1">
-                                        <?php
-                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[2]['id'] . '/' . rand();
-                                        $title = 'Lnove - ' . $outfitsData[2]['caption'];
-                                        ?>
-                                        <ul>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <?php } ?> 
-                        </div>
-
+                <div class="big_box1_outer">
+                    <div class="prevOutfit">
+                        <?php echo $this->partial('service_outfits', array('data'=>$outfitsData[0], 'likesArray'=>$likearray, 'float'=>'right', 'id'=>'left'));?>
+                        <div class="overlay"><img src="/img/grey_arrow_left.png"  class="my_tooltip" title="Previous outfit" /></div>
                     </div>
-
-
-                    <div class="img_box_main">
-
-                        <div class="main_sm_product_box1">
-                            <div class="main_sm_product_img_box">
-                                <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>
-                                <img src="<?php echo $outfitsData[3]['imageurl']; ?>" id="img" height="335px">
-                                <!--<img src="/feed/<?php //echo $outfitsData[3]['feedId']; ?>/<?php //echo $outfitsData[3]['img_local_name']; ?>" id="img" alt="product">-->
-                                <?php } else { ?>
-                                    <img src="/img/small_img2.jpg" alt="product" />
-                                <?php } ?>
-                            </div>
-                            <?php if (isset($outfitsData[3]['feedId']) && !empty($outfitsData[3]['feedId'])) { ?>
-                                <!--<div class="orange_img fr"><p>6%</p></div>-->
-                                <div class="main_sm_product_tag_box">
-                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?= base64_encode($outfitsData[3]['id']); ?>">
-                                        <img src="/img/thumb.png" alt="like" />
-                                    </a>
-                                </div>
-
-                                <div class="box-block3 blok">
-                                    <div class="pad">
-                                        <span class="like_<?= $outfitsData[3]['id']; ?>"><?= $outfitsData[3]['likesCount'] != 0 ? $outfitsData[3]['likesCount'] . ' likes' : ""; ?></span>
-
-                                        <h4><?php echo $outfitsData[3]['caption'] != '' ? $outfitsData[3]['caption'] : ''; ?></h4>
-                                        <p><?php echo $outfitsData[3]['price'] != '' ? '$' . $outfitsData[3]['price'] : ''; ?></p>
-                                        <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[3]['id']))); ?>">buy now</a>
-                                        <br>
-                                        <a target="_blank" href="service/feeddatadetail/<?php echo $outfitsData[3]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
-                                    </div>
-                                    <div class="social_box1">
-                                        <?php
-                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[3]['id'] . '/' . rand();
-                                        $title = 'Lnove - ' . $outfitsData[3]['caption'];
-                                        ?>
-                                        <ul>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/msg.png"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <?php } ?>     
-                        </div>
-
-                        <div class="main_sm_product_box1">
-                            <div class="main_sm_product_img_box">
-                                <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>
-                                <img src="<?php echo $outfitsData[4]['imageurl']; ?>" id="img" height="335px">
-                                <!--<img src="/feed/<?php //echo $outfitsData[4]['feedId']; ?>/<?php //echo $outfitsData[4]['img_local_name']; ?>" id="img" alt="product">-->
-                                <?php } else { ?>
-                                    <img src="/img/small_img2.jpg" alt="product" />
-                                <?php } ?>
-                            </div>
-                            <?php if (isset($outfitsData[4]['feedId']) && !empty($outfitsData[4]['feedId'])) { ?>
-                                <div class="main_sm_product_tag_box">
-                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?= base64_encode($outfitsData[4]['id']); ?>">
-                                        <img src="/img/thumb.png" alt="like" />
-                                    </a>
-                                </div>
-                                <div class="box-block3 blok">
-                                    <div class="pad">
-                                        <span class="like_<?= $outfitsData[4]['id']; ?>"><?= $outfitsData[4]['likesCount'] != 0 ? $outfitsData[4]['likesCount'] . ' likes' : ""; ?></span>
-                                        <h4><?php echo $outfitsData[4]['caption'] != '' ? $outfitsData[4]['caption'] : ''; ?></h4>
-                                        <p><?php echo $outfitsData[4]['price'] != '' ? '$' . $outfitsData[4]['price'] : ''; ?></p>
-                                        <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[4]['id']))); ?>">buy now</a>
-                                        <br>
-                                        <a target="_blank" href="service/feeddatadetail/<?php echo $outfitsData[4]['id']; ?>/<?php echo rand(); ?>" >DISCOVER <img src="/img/right1.png" id="im"></a>
-                                    </div>
-                                    <div class="social_box1">
-                                        <?php
-                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[4]['id'] . '/' . rand();
-                                        $title = 'Lnove - ' . $outfitsData[4]['caption'];
-                                        ?>
-                                        <ul>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/f.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/p1.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/t.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/g.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <?php } ?> 
-                        </div>
-
-
-
-
-                        <div class="main_big_product_box1">
-                            <div class="main_big_product_img_box">
-                                <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
-                                <img src="<?php echo $outfitsData[5]['imageurl']; ?>" id="img" height="494px">
-                                <!--<img src="/feed/<?php //echo $outfitsData[5]['feedId']; ?>/<?php //echo $outfitsData[5]['img_local_name']; ?>" id="img" alt="product">-->
-                                <?php } else { ?>
-                                    <img src="/img/big_img.jpg" alt="product" />
-                                <?php } ?>
-                            </div>
-                            <?php if (isset($outfitsData[5]['feedId']) && !empty($outfitsData[5]['feedId'])) { ?>
-                                <div class="main_big_product_tag_box">
-                                    <a  href="javascript:void(0)"  class="fr likesout" id="<?= base64_encode($outfitsData[5]['id']); ?>">
-                                        <img src="/img/thumb.png" alt="like" />
-                                    </a>
-                                </div>
-
-                                <div class="box-block1">
-                                    <div class="pad">
-                                        <span class="like_<?= $outfitsData[5]['id']; ?>"><?= $outfitsData[5]['likesCount'] != 0 ? $outfitsData[5]['likesCount'] . ' likes' : ""; ?></span>
-
-                                        <h4><?php echo $outfitsData[5]['caption'] != '' ? $outfitsData[5]['caption'] : ''; ?></h4>
-                                        <p><?php echo $outfitsData[5]['price'] != '' ? '$' . $outfitsData[5]['price'] : ''; ?></p>
-                                        <a class="buy_now" target="_blank" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($outfitsData[5]['id']))); ?>">buy now</a>
-                                        <br>
-                                        <a  target="_blank" href="service/feeddatadetail/<?php echo $outfitsData[5]['id']; ?>/<?php echo rand(); ?>">DISCOVER <img src="/img/right1.png" id="im"></a>
-                                    </div>
-
-                                    <div class="social_box1">
-                                        <?php
-                                        $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $outfitsData[5]['id'] . '/' . rand();
-                                        $title = 'Lnove - ' . $outfitsData[5]['caption'];
-                                        ?>
-                                        <ul>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
-                                            <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-
+                    <?php echo $this->partial('service_outfits', array('data'=>$outfitsData[1], 'likesArray'=>$likearray, 'id'=>''));?>
+                    <div class="nextOutfit">
+                        <?php echo $this->partial('service_outfits', array('data'=>$outfitsData[2], 'likesArray'=>$likearray, 'float'=>'left', 'id'=>'right'));?>
+                        <div class="overlay"><img src="/img/grey_arrow_right.png" class="my_tooltip" title="Next outfit" /></div> 
                     </div>
-                    <div class="clr"></div>
-                </div>  <!-- big_box-->
+                </div>
+                
+                <div class="clr"></div>
+                
+                <div align="right"><a class="iFeelLucky my_tooltip" href="#" title="Show new outfit"><span>I FEEL LUCKY</span></a> </div> 
+                                
+                <div class="outfit_desc_block">
+                    <div class="profileImg" style="background-image:url(/img/profilepic/<?=$this->outfitsData[1]['user_prp_pic']?>);"></div>
+                    <div class="profileCreator">
+                        <div class="createdBy">CREATED BY</div> 
+                        <?=$this->outfitsData[1]['firstName']?> <?=$this->outfitsData[1]['lastName']?>
+                    </div>
+                    <div class="outFitDesc"> 
+                        <div class="createdBy">VENUE: <?=str_replace('|', ', ', $this->outfitsData[1]['venue'])?></div> 
+                        <div class="outfitDescription"><?=$this->outfitsData[1]['description']?></div> 
+                    </div>  
+                     <div class="outFitSharing"> 
+                        <div class="refresh savecloseout my_tooltip" title="Save outfit to your closet">
+                            <a href="javascript:void(0);"><div class="saveoutfit"></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save this Outfit </a>
+                        </div>
+        
+                        <div id="idSharethisOutfit" class="share1 shclose">
+                            <a href="javascript:void(0);"><div class="shareoutfit"></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Share this outfit </a>
+
+                              <div class='arrow_box' id="shareThisOutfitPopup" style="display:none">
+                                <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_fb.png"></a>
+                                <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_p.png"></a>
+                                <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white-t.png"></a>
+                                <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_google.png"></a>
+                                <a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" ><img src="/img/white_msg.png"></a>
+                              </div>                            
+                            
+                            </div>     
+                        
+                        <div class="outfitlikes">
+                            <img alt="" src="<?=($this->outfitsData[1]['outfitLikesCount']>0?'/img/thumb.png':'/img/blank-2.png')?>"> <span><?=$this->outfitsData[1]['outfitLikesCount']?><span>
+                        </div>
+                                        
+                    </div>  
+                </div>
+                
+                
+                
             <?php } else { ?>
-                <div class="outfitsnot">
+                <div class="outfitsnot" style="font-size: 20px; line-height: 40px; text-align: center; margin: 25px; ">
                     Outfits not available.
-
                 </div>
             <?php } ?>
         </div>
 
-        <div id="article-block" style="display: none;">
-            <div class="left-link-box">
-                <!--<div class="radio-box">
-                    <form>
-                        <input type="radio" name="option" id="radio1" />
-                        <label for="radio1" class="outfit">
-                            <span class="fa-stack ">
-                                <i class="fa fa-circle-o fa-stack-1x"></i>
-                                <i class="fa fa-circle fa-stack-1x"></i>
-                            </span>
-                            OUTFIT
-                        </label>
-                        <input type="radio" name="option" id="radio2" checked/>
-                        <label for="radio2"  class="outfit">
-                            <span class="fa-stack">
-                                <i class="fa fa-circle-o fa-stack-1x"></i>
-                                <i class="fa fa-circle fa-stack-1x"></i>
-                            </span>
-                            ARTICLES
-                        </label>
-                    </form>
-                </div>-->
+        <div id="article-block" style="display: block;">
+        
+            <? if(!isset($this->shareOutfitImage)) {?> 
+        
+            <div class="left-link-box" id="leftLinkBoxID">
 
                 <div class="refined">
                     <h1>REFINED BY</h1>
                     <div class="cat page_left_menu ">
                         <section class="toggle active">
-                            <h5> <img  src="img/down.png">  categories</h5>
-                            <div class="toggle-content">
-                                <div id="tree" class="aciTree"><div>
-                                    </div>
-                                    </section>
+                            <h5 class="expander toggle collapsed"> categories</h5>
+                            <div class="content">
+                                <div id="catBtnDiv" class="toggle-content">
+                                    <div id="tree" class="aciTree"></div>
                                 </div>
+                            </div>
+                        </section>
+                    </div>
 
                                 <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
 
                                     <div class="cat page_left_menu brandslist">
-                                        <h5> <img  src="img/down.png"> BRANDS</h5>
-                                        <input type="text" class="form-control form-control-01 brand" name="brandautocomplete" id="brandautocomplete" placeholder="Search more brands">
+                                        <h5 class="expander toggle collapsed"> BRANDS</h5>
+                                        <div class="content">
+                                            <input type="text" class="form-control form-control-01 brand" name="brandautocomplete" id="brandautocomplete" placeholder="Search more brands">
                                         <ul>
                                             <?php if (!empty($this->allTopBrands)) { ?>
                                                 <?php foreach ($this->allTopBrands as $brand) { ?>
-                                                    <li><input type="checkbox" name="option" id="<?php echo $brand['id']; ?>" class="brandSelection" value="<?php echo $brand['id']; ?>" />
+                                                    <li>
+
+                                                  <!--   <input type="checkbox" name="option" id="<?php echo $brand['id']; ?>" class="brandSelection" value="<?php echo $brand['id']; ?>" />
                                                         <label for="<?php echo $brand['id']; ?>">
                                                             <span class="fa-stack">
                                                                 <i class="fa fa-square-o fa-stack-1x"></i>
                                                                 <i class="fa fa-square fa-stack-1x"></i>
                                                             </span>
                                                             <?php echo $brand['title']; ?>
-                                                        </label>
+                                                        </label> -->
                                                     </li>
                                                 <?php } ?>
                                             <?php } ?>
 
                                             <?php if (!empty($this->allBrands)) { ?>
-                                                <?php foreach ($this->allBrands as $brand) { ?>
-                                                    <li><input type="checkbox" name="option" id="<?php echo $brand['id']; ?>" class="brandSelection" value="<?php echo $brand['id']; ?>" />
+                                                <?php 
+                                                $i = 1;
+                                                foreach ($this->allBrands as $brand) { ?>
+                                                    <li>
+                                                    <div class="checkbox">
+                                                    <input id="<?php echo $brand['id']; ?>" class="brandSelection styled" type="checkbox" name="option" value="<?php echo $brand['id']; ?>">
+                                                    <label for="<?php echo $brand['id']; ?>">
+                                                        <?php  echo $brand['title']; ?>
+                                                    </label>
+                                                </div>
+                                     
+                                                    <!-- <input type="checkbox" name="option" id="<?php echo $brand['id']; ?>" class="brandSelection" value="<?php echo $brand['id']; ?>" />
                                                         <label for="<?php echo $brand['id']; ?>">
                                                             <span class="fa-stack">
                                                                 <i class="fa fa-square-o fa-stack-1x"></i>
                                                                 <i class="fa fa-square fa-stack-1x"></i>
                                                             </span>
                                                             <?php echo $brand['title']; ?>
-                                                        </label>
+                                                        </label> -->
                                                     </li>
-                                                <?php } ?>
+                                                <?php $i++; } ?>
                                             <?php } ?>
                                         </ul>
+                                        </div>
+                                        
                                     </div>
 
                                 <?php } ?>
 
                                 <div class="cat page_left_menu ">
-                                    <h5> <img  src="img/down.png">PRICE</h5>
-                                    <div class="price-box">
-                                        <form class="form-horizontal form-pricing" role="form">
-                                            <div class="price-slider">
-                                                <div class="col-sm-12 col-sm-padding">
-                                                    <div id="slider" class="slider-01"></div>
+                                    <h5 class="expander toggle collapsed">PRICE</h5>
+                                    <div class="content">
+                                        <div id="priceboxglobalOverlay" style="width:95%; height: 48px; margin-top:-10px; z-index: 1000; display:block; position:absolute; background-image:url(/img/spacer.gif)"></div> 
+                                        <div class="price-box" id="priceboxglobal" style="display:block; opacity: 0.2">
+                                            <form class="form-horizontal form-pricing" role="form">
+                                                
+                                                <div class="price-slider">
+                                                    <div class="col-sm-12 col-sm-padding">
+                                                        <div id="slider" class="slider-01"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="price-min-max">
-                                                <div class="col-lg-6 col-sm-padding" style="text-align:left; margin-top:5px;color:#aaaaaa;">
-                                                    <span>0</span>
+                                                <div class="price-min-max">
+                                                    <div class="col-lg-6 col-sm-padding" style="text-align:left; margin-top:5px;color:#aaaaaa;">
+                                                        <span>0</span>
+                                                    </div>
+                                                    <div class="col-lg-6 col-sm-padding" style="text-align:right;margin-top:5px;color:#aaaaaa;">
+                                                        <span><?php echo $this->maxRangePrice; ?></span>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-6 col-sm-padding" style="text-align:right;margin-top:5px;color:#aaaaaa;">
-                                                    <span><?php echo $this->maxRangePrice; ?></span>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
+                                        
+                                        
+                                    
+                                          <div class="remember" style="margin-bottom:15px">
+                                                <input type="checkbox"  id="profilePrices" class="profilePrices" checked="checked" >
+                                                <label for="profilePrices">
+                                                    <span class="fa-stack"> 
+                                                        <i class="fa fa-square-o fa-stack-1x"></i>
+                                                        <i class="fa fa-check-square fa-stack-1x"></i>
+                                                    </span>
+                                                    <span class="rememberLabel">Show MY PRICES only</span>
+                                                </label>                
+                                          </div>
+                                          
+                                          <div style="clear:both; padding-bottom:15px"></div>     
+                                                                                
                                     </div>
+                                   
                                 </div>
 
                                 <?php if (!empty($this->allColors)) { ?>
 
                                     <div class="cat page_left_menu ">
-                                        <h5> <img  src="img/down.png">COLOR</h5>
-                                        <ul class="round-color">
+                                        <h5 class="expander toggle collapsed">COLOR</h5>
+                                        <div class="content">
+                                            <ul class="round-color">
                                             <?php
                                             if (!empty($this->allColors)) {
                                                 foreach ($this->allColors as $color) {
                                                     if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
                                                     ?>
-                                                    <li class="btn-01 btn-coloer-01 colorselection" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></li>
+                                                    <li class="fa btn-01 btn-coloer-01 colorselection" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></li>
                                                     <?php
                                                 }
                                             }
                                             ?>
                                         </ul>
+                                        </div>
+                                        
                                     </div>
 
                                 <?php } ?>
-
+                                
+                            
                                 <?php if (!empty($this->allStores) || !empty($this->allTopStores)) { ?>
 
                                     <div class="cat page_left_menu ">
-                                        <h5> <img  src="img/down.png">STORE</h5>
+                                        <h5 class="expander toggle collapsed">STORE</h5>
+                                        <div class="content">
                                         <input type="text" class="form-control form-control-01 brand" id="storeautocomplete" name="storeautocomplete" placeholder="Search more stores">
                                         <ul>
 
@@ -705,12 +638,16 @@ $outfitsData = $this->outfits;
                                             <?php } ?>
 
                                         </ul>
+                                        </div>
                                     </div>
                                 <?php } ?>
+                              
 
-                                <div class="cat page_left_menu ">
-                                    <h5> <img  src="img/down.png">DEALS</h5>
-                                    <ul>
+
+                                <div class="cat page_left_menu deals_box">
+                                    <h5 class="expander toggle collapsed">DEALS</h5>
+                                    <div class="content">
+                                        <ul>
                                         <li><input type="radio" name="option" id="deal1" onclick="chooseDeals(this, 'onsale');" />
                                             <label for="deal1"  class="outfit">
                                                 <span class="fa-stack sale-option-checkbox">
@@ -760,6 +697,8 @@ $outfitsData = $this->outfits;
                                             </label>
                                         </li>
                                     </ul>
+                                    
+                          
 
                                     <div class="cat page_left_menu ">
                                         <div class="price-box">
@@ -781,10 +720,14 @@ $outfitsData = $this->outfits;
                                         </div>
                                     </div>
 
+                                    
+                                    </div>
+                                    
+                                    
                                     <div class="clr"></div>
-                                    <button class="deal">FILTER</button>
-                                    <div class="clr"></div>
-                                    <a href="" class="clear">Clear filter</a>
+                                    <button class="deal">CLEAR FILTER</button>
+                                  <!--   <div class="clr"></div>
+                                    <a href="/service?dv=article" class="clear">Clear filter</a> -->
                                 </div>
 
                                 <div class="clr"></div>
@@ -803,48 +746,54 @@ $outfitsData = $this->outfits;
                             foreach ($this->feedData as $prod) {
 
                                 $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand();
-                                $title = 'Lnove - ' . $prod->caption;
+                                $title = 'ELNove - ' . $prod->caption;
                                 ?>
-                                <div class="main_big1_product_box productsBox draggable-element">
+                                <div class="main_big1_product_box productsBox draggable-element" data-pid="<?=$prod->feeddataid?>">
                                     <!--<div class="portfolio-item img-thumbnail productsBox">-->
 
                                     <div class="main_big1_product_img_box">
-                                        <img src="<?php echo $prod->feedimageurl; ?>" id="img">
-                                        <!--<img src="/feed/<?//= $prod->feedId; ?>/<?//= $prod->img_local_name; ?>" id="img">-->
+                                        <img onerror="imageError(this)" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" id="img">
                                     </div>
+                                    <?php if($prod->onsale == 'Y') {?><div class="salePrice"><?php echo round(($prod->price-$prod->saleprice)/$prod->price*100)?>%<br/>OFF</div><?php }?>
                                     <div class="main_big1_product_tag_box">
-                                        <a href="javascript:void(0);"  class="fr likes" id="<?= base64_encode($prod->feeddataid); ?>">
-                                            <img src="img/thumb.png" alt="Like" />
+                                        <a href="javascript:void(0);" class="fr likes" id="<?php echo  base64_encode($prod->feeddataid); ?>">
+                                            <?php if(in_array($prod->feeddataid,$likearray)) { ?>
+                                                <img data-status="<?php echo $prod->feeddataid?>" src="/img/thumb.png" alt="Like" id="like<?php echo $prod->feeddataid;?>" />
+                                            <?php } else { ?>
+                                                <img data-status="<?php echo $prod->feeddataid?>" class ="my_tooltip" title="Save article to your closet" src="/img/blank_like.png" alt="Like" id="like<?php echo $prod->feeddataid;?>" />
+                                            <?php } ?>
                                         </a>
                                     </div>
                                     <div class="box-block">
                                         <div class="pad">
-                                            <span class="like_<?= $prod->feeddataid; ?>"><?= $prod->likesCount != 0 ? $prod->likesCount . ' likes' : ""; ?></span>
-                                            <h4><?php echo $prod->caption; ?></h4>
-                                            <p><?php echo $prod->price; ?><span class="currency"><?php echo $prod->currency; ?></span></p>
-                                            <a class="buy_now gotourl" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>">buy now</a>
+                                            <span class="like_<?php echo  $prod->feeddataid; ?>"><?php echo  $prod->likesCount != 0 ? $prod->likesCount . ' likes' : "&nbsp;"; ?></span>
+                                            <h4><?php echo $this->string_helper($prod->caption); ?></h4>
+                                            <p><?php echo ($prod->onsale=='Y'?$prod->saleprice:$prod->price)?><span class="currency"><?php echo $prod->currency ?></span></p>
+                                            <a class="buy_now gotourl my_tooltip" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>"  title="Purchase article through our partner">buy now</a>
                                             <br/>
-                                            <a href="service/feeddatadetail/<?php echo $prod->feeddataid; ?>/<?php echo rand(); ?>" class="gotourl">DISCOVER <img src="img/right1.png" id="im"></a>
+                                           
+
+                                            <a data-value="<?php echo $prod->feeddataid; ?>" href="javascript:void(0)" class="discover my_tooltip" title="Learn more about this article">DISCOVER <img src="/img/right1.png" id="im"></a>
                                         </div>
                                         <div class="social_box">
                                             <ul>
-                                                <li><a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/f.png"></a></li>
-                                                <li><a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/p1.png"></a></li>
-                                                <li><a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/t.png"></a></li>
-                                                <li><a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/g.png"></a></li>
-                                                <li><a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/msg.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/f.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/p1.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/t.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/g.png"></a></li>
+                                                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank" class="gotourl"><img src="/img/msg.png"></a></li>
                                             </ul>
                                         </div>
                                     </div>
 
                                     <!--</div>-->
-                                </div>	
+                                </div>  
                             <?php } ?>
 
                         </div>
 
-                        <div id='loading' style="text-align:center;padding-top:20px;display:none;" class="col-md-10">
-                            <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>"/>
+                        <div id='loading' style="text-align:center;padding-top:50px;padding-bottom:50px;display:none;" class="col-md-10">
+                            <!-- <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>"/> -->
                         </div>
                         <div id='ajx_loader_div' style="display:none;z-index:999999;">
                             <img src="<?php echo $this->basePath('img/bx_loader.gif') ?>" id="ajx_loader_image" />
@@ -852,6 +801,8 @@ $outfitsData = $this->outfits;
 
                         <div class="clr"></div>
                     </div>
+                    <? }?>
+                    
                 </div>
                 <div class="clr"></div>
             </div><!--container-->
@@ -864,7 +815,8 @@ $outfitsData = $this->outfits;
         <form id="productFilterDetail" name="productFilterDetail">
             <input type="hidden" id="minamount" class="form-control" name="minamount">
             <input type="hidden" id="maxamount" class="form-control" name="maxamount">
-            <input type="hidden" id="duration" class="form-control" name="duration">
+            <input type="hidden" id="minduration" class="form-control" name="minduration">
+            <input type="hidden" id="maxduration" class="form-control" name="maxduration">
             <input type="hidden" id="catids" class="form-control" name="catids">
             <input type="hidden" id="brands" class="form-control" name="brands">
             <input type="hidden" id="colors" class="form-control" name="colors">
@@ -877,38 +829,109 @@ $outfitsData = $this->outfits;
             <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
             <input type="hidden" id="discountcode" class="form-control" name="discountcode">
             <input type="hidden" id="page" class="form-control" name="page" value="2">
-            <input type="hidden" id="limit" class="form-control" name="limit" value="8">
+            <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
+            <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
         </form>
 
-        <!--=================script-by-designer=============-->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:none">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content grey_bg">
+      <div class="modal-body append">
+        
+      </div>
+  
+    </div>
+  </div>
+</div>
 
+<div id="loading-div-background" style="display: none;">
+    <div id="loading-div" class="ui-corner-all">
+      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading..">
+      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+     </div>
+</div>
+
+        <!--=================script-by-designer=============-->
+        <script src="<?php echo $this->basePath(); ?>/js/showfeeddetail.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/js/clearfilter.js"></script>
+        
         <script type="text/javascript">
-                                            $(document).ready(function () {
-                                                $(document).on('click', '.overlay-01', function () {
-                                                    reditectToBuyurl(this);
-                                                });
-                                                $('.overlay-01').click(function () {
-                                                    reditectToBuyurl(this);
-                                                });
-                                                function reditectToBuyurl(obj) {
-                                                    $("#contener-01").css("display", "block");
-                                                    $('.progress-bar').progressbar();
-                                                    $('#productbuyurl').attr('href', $(obj).attr('href'));
-                                                    setTimeout(function () {
-                                                        jQuery('#productbuyurl')[0].click();
-                                                        $("#contener-01").css("display", "none");
-                                                    }, 2000);
-                                                }
-                                            });
-                                            $(function () {
-                                                $(".btn-01").click(function () {
-                                                    // remove classes from all
-                                                    $(".btn-01").removeClass("active");
-                                                    $(this).addClass("active");
-                                                });
-                                            });
+        //$(document).foundation();
+     
+            $(document).ready(function () {
+             <?php 
+                $session = new \Zend\Session\Container('alert');
+                if(isset($session->alert) && $session->alert ==true ) 
+                {
+              ?>
+               // start show alert overlay
+                myalert('type_thankyou_id1','type_thankyou','Thank You!','','Agree','You have just begun your journey to dressing to the nines.',
+                        function(){
+                            if( $('#type_thankyou_id1 .receive_alert_bx').prop("checked")){
+                                $.ajax({
+                                    url: "/index/newsletter",
+                                    type: 'POST',
+                                    data: {newsLetterInput: '<?php echo $this->userEmail?>', from: 'ServicePage'},
+                                    dataType: 'json',
+                                    success: function (result) {
+                                        console.log(result); 
+                                        console.log(result.status); 
+                                    }});        
+                              }            
+                              $('#type_thankyou_id1').foundation('reveal','close'); 
+                        }
+                ); 
+
+                setTimeout(function(){
+                  $("#type_thankyou_id1").foundation('reveal', 'close');
+                }, 100000);
+
+                /*end show alert overlay*/
+                
+              <?php unset($session->alert); } ?>
+               
+                /*expand filter*/
+                 $('.expander').simpleexpand();
+
+              
+
+
+
+            
+                $(document).on('click', '.overlay-01', function () {
+                    reditectToBuyurl(this);
+                });
+                $('.overlay-01').click(function () {
+                    reditectToBuyurl(this);
+                });
+                function reditectToBuyurl(obj) {
+                    $("#contener-01").css("display", "block");
+                    $('.progress-bar').progressbar();
+                    $('#productbuyurl').attr('href', $(obj).attr('href'));
+                    setTimeout(function () {
+                        jQuery('#productbuyurl')[0].click();
+                        $("#contener-01").css("display", "none");
+                    }, 3000);
+                }
+            });
+            
+            /* my close */
+            // $(function () {
+            //     $(".btn-01").click(function () {
+            //         // remove classes from all
+            //         $(".btn-01").removeClass("active");
+            //         $(this).addClass("active");
+            //     });
+            // });
+
         </script>
         <script type="text/javascript">
+        function imageError(obj) {
+            $(obj).closest( ".productsBox" ).remove();
+            //obj.src = 'http://dev.elnove.com/img/nophoto.png';
+            console.log('here:'+$(obj).closest( ".productsBox" ).data('pid'));
+        }        
             $(function () {
                 $(".slider-01").click(function () {
                     // remove classes from all
@@ -943,7 +966,6 @@ $outfitsData = $this->outfits;
                     // add class to the one we clicked
                 });
             });
-
         </script>
         <script type="text/javascript">
             $(document).ready(function () {
@@ -960,27 +982,29 @@ $outfitsData = $this->outfits;
                     }
                 });
                 $("#slider2").slider({
-                    animate: true,
-                    value: 0,
+                    range: true,
                     min: 0,
                     max: 100,
+                    values: [0,100],
                     step: 10,
                     slide: function (event, ui) {
-                        update(2, ui.value); //changed
+                        update(2, ui.values); //changed
                     },
                     stop: function (event, ui) {
                         loadProductData();
                     }
                 });
-
-
                 //Added, set initial value.
                 $("#minamount").val($("#slider").slider("option", "min"));
                 $("#maxamount").val($("#slider").slider("option", "max"));
-                $("#duration").val($("#slider").slider("option", "min"));
+
+ 
+                $("#minduration").val($("#slider2").slider("option", "min"));
+                $("#maxduration").val($("#slider2").slider("option", "max"));
+
+                //$("#duration").val($("#slider").slider("option", "min"));
                 //$("#amount-label").text(0);
                 //$("#duration-label").text(0);
-
                 update();
             });
 
@@ -989,7 +1013,10 @@ $outfitsData = $this->outfits;
                 //changed. Now, directly take value from ui.value. if not set (initial, will use current value.)
                 var $minamount = slider == 1 ? val[0] : $("#minamount").val();
                 var $maxamount = slider == 1 ? val[1] : $("#maxamount").val();
-                var $duration = slider == 2 ? val : $("#duration").val();
+                //var $duration = slider == 2 ? val : $("#duration").val();
+
+                var minduration = slider == 2 ? val[0] : $("#minduration").val();
+                var maxduration = slider == 2 ? val[1] : $("#maxduration").val();
 
                 /* commented
                  $amount = $( "#slider" ).slider( "value" );
@@ -1000,14 +1027,33 @@ $outfitsData = $this->outfits;
                 $("#minamount").val($minamount);
                 $("#maxamount").val($maxamount);
                 //$("#amount-label").text($amount);
-                $("#duration").val($duration);
-                $("#duration-label").text($duration);
+                
+                /*my close*/
+                    // $("#duration").val($duration);
+                    // $("#duration-label").text($duration);
+                /*end*/
+
+                $("#minduration").val(minduration);
+                $("#maxduration").val(maxduration);
+
                 // $("#total").val($total);
                 //$("#total-label").text($total);
                 sliderLinks = $('#slider a');
+
                 $(sliderLinks[0]).html('<label >' + $minamount + ' </label>');
+              if($maxamount >= <?php echo $this->maxRangePrice;?>) {
+                $(sliderLinks[1]).html('<label ><?php echo $this->maxRangePrice;?>+' + ' </label>');
+                $("#maxamount").val(<?php echo $this->actualMaxRangePrice?>);
+              } else {
                 $(sliderLinks[1]).html('<label >' + $maxamount + ' </label>');
-                $('#slider2 a').html('<label style="margin-left:15px;">' + $duration + '%</label>');
+              }
+             
+              
+
+                sliderLinks = $('#slider2 a');
+                $(sliderLinks[0]).html('<label>' + minduration +"<span>%</span>" + ' </label>');
+                $(sliderLinks[1]).html('<label >' + maxduration + "<span >%</span>" + ' </label>');
+                //$('#slider2 a').html('<label style="margin-left:15px;">' + $duration + '%</label>');
             }
         </script>
         <script type="text/javascript">
@@ -1020,7 +1066,7 @@ $outfitsData = $this->outfits;
              },function(){
              $(hover-one).css("display","none");
              });
-             });	*/
+             });    */
 
             $(document).ready(function () {
                 $(document).on('mouseenter', '.thumb-info', function () {
@@ -1035,7 +1081,7 @@ $outfitsData = $this->outfits;
                     var fontthis = this;
                     $(fontthis).siblings(".aciTreeLi").find(".aciTreeText").removeClass("font-bold");
                     $(fontthis).find(fontthis).addClass("font-bold");
-                    //		$(fontthis).parents(".aciTreeText").addClass(".font-bold");
+                    //      $(fontthis).parents(".aciTreeText").addClass(".font-bold");
                 });
             });
         </script>
@@ -1138,7 +1184,7 @@ $outfitsData = $this->outfits;
                 // init the tree
                 $('#tree').aciTree({
                     ajax: {
-                        url: '/attributes/get-categories-json?ec=<?= $this->excludeCats ?>&levels=3&id='
+                        url: '/attributes/get-categories-json?mapped=true&ec=<?php echo  $this->excludeCats ?>&levels=3&id='
                     },
                     checkbox: true
                 });
@@ -1163,13 +1209,13 @@ $outfitsData = $this->outfits;
 
             function getAllCheckedElements(event, api, item, eventName, options)
             {
-                var checkedElements = $("#tree .aciTreeLi .aciTreeInode");
+                var checkedElements = $("#tree .aciTreeLi .aciTreeLeaf");
                 checkedElementsArr = api.checkboxes(checkedElements, true);
                 var catIdStr = '';
                 checkedElementsArr.each(function (index, item) {
                     var $item = $(item);
                     catIdStr += api.getId($item) + ',';
-                    //console.log(api.getId($item) + ": " + api.getLabel($item));
+                    console.log(api.getId($item) + ": " + api.getLabel($item));
                 });
                 $("#catids").val(catIdStr);
             }
@@ -1177,6 +1223,7 @@ $outfitsData = $this->outfits;
         </script>
 
         <script type="text/javascript">
+          
             var loading = 0;
             var endData = 0;
             function loadProductData(isLazyLoading)
@@ -1185,8 +1232,10 @@ $outfitsData = $this->outfits;
                 {
                     showAjxLoadingDiv($("#productlisting"));
                     $("#page").val(1);
+                    endData = 0;
                 }
                 else {
+                    showAjxLoadingDiv($("#productlisting"));
                     $("#loading").show();
                 }
                 loading = 1;
@@ -1204,7 +1253,7 @@ $outfitsData = $this->outfits;
                             $("#productlisting").html(result);
                             hideAjxLoadingDiv();
                             $("#page").val(2);
-                            enableDragg();
+                            //enableDragg();
                         }
                         else
                         {
@@ -1214,16 +1263,27 @@ $outfitsData = $this->outfits;
                             }
                             else
                             {
-                                $("#page").val(parseInt($("#page").val()) + 1);
+                                $("#page").val(parseInt($("#page").val()) + 1); 
                                 $("#productlisting").append(result);
-                                enableDragg();
+                                //enableDragg();
                             }
                             $("#loading").hide();
+                            hideAjxLoadingDiv();
                         }
-                    }});
+                        $('.my_tooltip').tooltipster({
+                            position: 'top',
+                            theme: 'tooltipster-shadow',
+                        });
+
+                    }
+
+                });
+
+
             }
 
             $(function () {
+
 
                 $(".check_category").click(function () {
                     if ($(this).is(':checked') == true) {
@@ -1260,6 +1320,21 @@ $outfitsData = $this->outfits;
                     loadProductData();
                 })
 
+
+                $(".profilePrices").change(function () {
+                    if($(this).prop('checked')) {
+                        $('#priceboxglobal').css('opacity', 0.2);
+                        $('#profileBasePrices').val(1); 
+                        $("#priceboxglobalOverlay").show();
+                    }
+                    else {
+                        $('#priceboxglobal').css('opacity', 1);
+                        $('#profileBasePrices').val(0);
+                        $("#priceboxglobalOverlay").hide();
+                    }
+                    loadProductData(); 
+                })                
+
                 $(".storeSelection").click(function () {
                     //alert('hello');
                     $(this).toggleClass('activebrand');
@@ -1279,8 +1354,10 @@ $outfitsData = $this->outfits;
                 $("#brandautocomplete").autocomplete({
                     source: availableBrandTags,
                     select: function (event, ui) {
-                        $("ul.brandSelection li[value=" + ui.item.id + "]").addClass('activebrand');
-                        $("#brands").val($("#brands").val() + ui.item.id);
+                        $(".brandslist ul li input[value=" + ui.item.id + "]").addClass('activebrand').prop('checked',true);
+                       
+                        $("#brands").val($("#brands").val() + ui.item.id +',');
+             
                         loadProductData();
                         return false;
                     }
@@ -1291,7 +1368,7 @@ $outfitsData = $this->outfits;
                     source: availableStoreTags,
                     select: function (event, ui) {
                         $("ul.storeSelection li[value=" + ui.item.id + "]").addClass('activebrand');
-                        $("#stores").val($("#stores").val() + ui.item.id);
+                        $("#stores").val($("#stores").val() + ui.item.id + ',');
                         loadProductData();
                         return false;
                     }
@@ -1312,39 +1389,67 @@ $outfitsData = $this->outfits;
 
             function chooseDeals(currref, dealName)
             {
-                $('.sale-option-checkbox', currref).toggleClass('activedeal');
-                if ($('.sale-option-checkbox', currref).hasClass('activedeal'))
-                {
-                    $("#" + dealName).val(1);
-                }
-                else
-                {
-                    $("#" + dealName).val('');
-                }
+//                 $(currref).closest( "li" ).find()
+//                 console.log(dealName)
+//                 $('.sale-option-checkbox', currref).toggleClass('activedeal');
+//                 if ($('.sale-option-checkbox', currref).hasClass('activedeal'))
+//                 {
+//                     $("#" + dealName).val(1);
+//                 }
+//                 else
+//                 {
+//                     $("#" + dealName).val('');
+//                 }
+
+               
+                $('#onsale').val('');
+                $('#todaynew').val('');
+                $('#newthisweek').val('');
+                $('#freeshipping').val('');
+                $('#specialoffer').val('');
+                $('#discountcode').val('');
+                $('#'+dealName).val(1);
+                
                 loadProductData();
             }
             $(document).ready(function () {
-                $(window).scroll(function () {
-                    if ($("#ajx_loader_image").css('display') == 'block')
-                    {
-                        var windowheight = $(window).height();
-                        var scrolltop = $($("#productlisting")).scrollTop();
-                        var windowwidth = $(window).width();
-                        //showAjxLoadingDiv($("#productlisting"));
-                        // $("#ajx_loader_image").css({top: scrolltop + (windowheight / 2), left: windowwidth / 2, position: 'absolute'});
-                    }
 
+//              var element = $('.left-link-box'),
+//                 originalY = 121;
+//                 var topMargin = 80;
+//                 element.css('position', 'relative'); 
 
-
-                    if ($(window).scrollTop() + $(window).height() >= ($('#productlisting').offset().top + $("#productlisting").height()) + 10) {
-                        if (loading == 0 && endData == 0)
+                $('#leftLinkBoxID').hcSticky({stickTo:document, top:80, bottom:10});   
+            
+                $(window).scroll(function (event) {
+                     if( $('#article-block').css('display') == 'block' ) {
+                         
+                        if ($("#loading-div-background").css('display') == 'block')
                         {
-                            loadProductData(1);
+                            var windowheight = $(window).height();
+                            var scrolltop = $($("#productlisting")).scrollTop();
+                            var windowwidth = $(window).width();
+                            //showAjxLoadingDiv($("#productlisting"));
+                            // $("#ajx_loader_image").css({top: scrolltop + (windowheight / 2), left: windowwidth / 2, position: 'absolute'});
                         }
-                    }
+    
+                        //if ($(window).scrollTop() + $(window).height() >= ($('#productlisting').offset().top + $("#productlisting").height()) + 10) {
+                        if(  ($(document).height()-400)   <= $(window).scrollTop()+$(window).height() ){
+                            if (loading == 0 && endData == 0)
+                            {
+                                loadProductData(1);
+                            }
+                        }
+
+//                         var sTop = $(window).scrollTop();
+//                         $(".left-link-box").css({ top: (sTop < (originalY-80) ? 0 : sTop - originalY + topMargin) });                       
+                        
+                     }
                 });
 
                 /*****************block for handling likes product**************/
+           
+
                 $('.likes').on('click', function () {
                     var id = $(this).attr("id");
                     var url = "/service/likeclosset/";
@@ -1354,16 +1459,38 @@ $outfitsData = $this->outfits;
                         data: {closesetId: id},
                         dataType: 'json',
                         success: function (result) {
+                                  var class_name ='growl-missing';
+                            if(result.status =='Y') {
+                                class_name = 'growl-success';
+                            } 
+
+
+                            //alert(result.mgs);
+                            //$("#gritter-notice-wrapper").addClass('type_success');
+                            jQuery.gritter.add({
+                                //title: result.mgs,
+                                title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                </div>',
+                                class_name: class_name,
+                                sticky: false,
+                                time: 3000
+                            })                             
                             if (result.status == 'N') {
-                                alert(result.mgs);
+                                //alert(result.mgs);
                             } else if (result.status == 'Y') {
                                 var likesd = result.count + ' likes';
                                 $('.like_' + result.idf).html(likesd);
+
+                                if($(this).find('#like'+result.idf))
+                                    $('#like'+result.idf).attr('src','/img/thumb.png');
                             } else {
-                                alert("Internal Server Error");
+                                //alert("Internal Server Error");
                             }
-                        }});
+                        }
+                    });
                 });
+
                 $('body').on('click', '.likes', function () {
                     var id = $(this).attr("id");
                     var url = "/service/likeclosset/";
@@ -1373,15 +1500,44 @@ $outfitsData = $this->outfits;
                         data: {closesetId: id},
                         dataType: 'json',
                         success: function (result) {
+                                      var class_name ='growl-missing';
+                            if(result.status =='Y') {
+                                class_name = 'growl-success';
+                            } 
+
+
+                            //alert(result.mgs);
+                            //$("#gritter-notice-wrapper").addClass('type_success');
+                            jQuery.gritter.add({
+                                //title: result.mgs,
+                                title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                </div>',
+                                class_name: class_name,
+                                sticky: false,
+                                time: 3000
+                            })                             
                             if (result.status == 'N') {
-                                alert(result.mgs);
+                                //alert(result.mgs);
                             } else if (result.status == 'Y') {
                                 var likesd = result.count + ' likes';
                                 $('.like_' + result.idf).html(likesd);
+
+                                if($(this).find('#like'+result.idf))
+                                    $('#like'+result.idf).attr('src','/img/thumb.png');
                             } else {
-                                alert("Internal Server Error");
+                                //alert("Internal Server Error");
                             }
-                        }});
+
+                        }
+                    });
+                });
+                
+
+               
+
+                $('body').on('click', '.type_close', function () {
+                    $('.gritter-close').trigger('click');
                 });
 
                 $('body').on('click', '.likesout', function () {
@@ -1393,15 +1549,36 @@ $outfitsData = $this->outfits;
                         data: {closesetId: id},
                         dataType: 'json',
                         success: function (result) {
+                            var class_name ='growl-missing';
+                            if(result.status =='Y') {
+                                class_name = 'growl-success';
+                            } 
+
+
+                            //alert(result.mgs);
+                            //$("#gritter-notice-wrapper").addClass('type_success');
+                            jQuery.gritter.add({
+                                //title: result.mgs,
+                                title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                </div>',
+                                class_name: class_name,
+                                sticky: false,
+                                time: 3000
+                            })                             
                             if (result.status == 'N') {
-                                alert(result.mgs);
+                                //alert(result.mgs);
                             } else if (result.status == 'Y') {
                                 var likesd = result.count + ' likes';
                                 $('.like_' + result.idf).html(likesd);
+
+                                if($(this).find('#likeout'+result.idf))
+                                    $('#likeout'+result.idf).attr('src','/img/thumb.png');
                             } else {
-                                alert("Internal Server Error");
+                                //alert("Internal Server Error");
                             }
-                        }});
+                        }
+                    });
                 });
 
                 /*****************block for handling likes product**************/
@@ -1411,22 +1588,24 @@ $outfitsData = $this->outfits;
 
             function showAjxLoadingDiv(target)
             {
-                //var target=$('#'+targetId);
-                var tarheight = $(target).height();
-                var tartop = $(target).offset().top;
-                var tarleft = $(target).offset().left;
+                $("#loading-div-background").show();
+//                 //var target=$('#'+targetId);
+//                 var tarheight = $(target).height();
+//                 var tartop = $(target).offset().top;
+//                 var tarleft = $(target).offset().left;
 
-                var scrollheight = $(target).height();
-                var scrollwidth = $(target).width();
-                var windowheight = $(target).height();
-                var windowwidth = $(target).width();
-                $("#ajx_loader_div").css({height: scrollheight, width: scrollwidth, display: 'block', top: (tartop - (30)), left: tarleft, position: 'absolute'});
-                $("#ajx_loader_image").css({top: windowheight / 2, left: windowwidth / 2, position: 'absolute'});
+//                 var scrollheight = $(target).height();
+//                 var scrollwidth = $(target).width();
+//                 var windowheight = $(target).height();
+//                 var windowwidth = $(target).width();
+//                 $("#ajx_loader_div").css({height: scrollheight, width: scrollwidth, display: 'block', top: (tartop + (60)), left: tarleft, position: 'absolute'});
+//                 $("#ajx_loader_image").css({top: windowheight / 2, left: windowwidth / 2, position: 'absolute'});
             }
 
             function hideAjxLoadingDiv()
             {
-                $("#ajx_loader_div").css({display: 'none'});
+                //$("#ajx_loader_div").css({display: 'none'});
+                $("#loading-div-background").hide();
             }
 
             function toggleslide(obj) {
@@ -1441,67 +1620,185 @@ $outfitsData = $this->outfits;
                 }
             }
             $(document).on('click', '.refresh', function (e) {
+
                 $.ajax({
                     url: '<?php echo $this->basePath('service') ?>',
                     success: function (data) {
-                        $('#outfit-window').html($(data).find("#outfit-window").html());
+                        $('#outfit-window').html($(data).find("#outfit-window").html()); 
                     }
                 });
             });
 
-            $('.gotourl').on('click', function () {
-                //window.parent.location = $(this).attr('href');
-                window.open($(this).attr('href'), '_blank');
-            });
+            function adjustNewOutfitLayout() {
+                for(var i=0; i<10; i++) {
+                    $('.big_box1_outer').css('width', $(document).width()+'px')
+                    var w = ($(document).width() - $('.container').width()) / 2;
+                    $('.big_box1_outer .prevOutfit').width(w)
+                    $('.big_box1_outer').css('margin-left', -(w))
+                    $('.big_box1_outer .nextOutfit').width(w)
+                }                
+            }
+
             $(window).load(function () {
-                $('.square1').on('click', function () {
-                    var valueD = $(this).html();
+
+            //  $( ".square1_tick" ).on( "click", function(event) {
+            //        event.preventDefault();
+                //       $( ".square1" ).trigger( "click" );
+                // });
+
+
+                // $('.square1').on('click', function () {
+                //     var valueD = $(this).html();
+                //     if (valueD == 'on') {
+                //         $(this).html('off');
+                //         $('#panel').attr('src','/img/circle-close.png');
+                //         $(this).removeClass('on');
+                //         $(this).addClass('off');
+                //         $('#article-block').show();
+                //         $('#outfit-block').hide();
+                //         $('.outfitrefresh').hide();
+                //         $('#leftaction').hide();
+                //         $("footer").hide();
+                //         $(".last-foot").hide();
+                //         $(".square1").css('float', 'left');
+                //         $(".square1").css('margin-left', '5px');
+                //         $(".head1").text("Article Shopping");
+                //     } else {
+                //         $(this).html('on');
+                //         $('#panel').attr('src','/img/circle-ok.png');
+                //         $(this).removeClass('off');
+                //         $(this).addClass('on');
+                //         $('#article-block').hide();
+                //         $('#outfit-block').show();
+                //         $('.outfitrefresh').show();
+                //         $('#leftaction').show();
+                //         $("footer").show();
+                //         $(".last-foot").show();
+                //         $(".square1").css('float', 'right');
+                //         $(".square1").css('margin-left', '0px');
+                //         $(".head1").text("Outfit Shopping");
+                //     }
+                // });
+                // 
+                $('input[name="outart"]').change(
+                    function(){
+                        if($(this).is(':checked') && $(this).val() == 'outfit'){
+                            $('#outfit-block').show();
+                            $('#article-block').hide();
+                            $('.outfitrefresh').show();
+                            $('#leftaction').show();
+                            $("footer").show();
+                            $(".last-foot").show();
+                        }
+                        if($(this).is(':checked') && $(this).val() == 'articles') {
+                            $('#outfit-block').hide();
+                            $('#article-block').show();
+                            $('.outfitrefresh').hide();
+                            $('#leftaction').hide();
+                            $("footer").hide();
+                            $(".last-foot").hide();
+                        }
+                });
+                $('.blue-btn1').on('click', function () {
+                    var currentSelector = ".square1";
+                    var valueD = $(currentSelector).html();
                     if (valueD == 'on') {
-                        $(this).html('off');
-                        $(this).removeClass('on');
-                        $(this).addClass('off');
+                        $(currentSelector).html('off');
+                        $('#panel').attr('src','/img/circle-close.png');
+                        $(currentSelector).removeClass('on');
+                        $(currentSelector).addClass('off');
                         $('#article-block').show();
                         $('#outfit-block').hide();
                         $('.outfitrefresh').hide();
                         $('#leftaction').hide();
+                        $("footer").hide();
+                        $(".last-foot").hide();
+                        $(".square1").css('float', 'left');
+                        $(".square1").css('margin-left', '5px');
+                        $(".head1").text("Article View");
                     } else {
-                        $(this).html('on');
-                        $(this).removeClass('off');
-                        $(this).addClass('on');
+                        $(currentSelector).html('on');
+                        $('#panel').attr('src','/img/circle-ok.png');
+                        $(currentSelector).removeClass('off');
+                        $(currentSelector).addClass('on');
                         $('#article-block').hide();
                         $('#outfit-block').show();
                         $('.outfitrefresh').show();
                         $('#leftaction').show();
+                        $("footer").show();
+                        $(".last-foot").show();
+                        $(".square1").css('float', 'right');
+                        $(".square1").css('margin-left', '0px');
+                        $(".head1").text("Outfit View");
                     }
                 });
-                $('.refreshout').on('click', function () {
-                    getOutfit();
+
+                $('body').on('click', '.iFeelLucky', function (event) {
+                    event.preventDefault();
+                    var iRandom; 
+                    do{
+                        iRandom = Math.floor(Math.random() * ($('#outfits_count').val() - 0 + 1)) + 0;
+                    } while( $('#outfits_offset').val() != iRandom );
+                    $('#outfits_offset').val( iRandom ); 
+                    getOutfit(1);
                 });
+
+
+
+                $(document).keydown(function (event){
+
+                    if(event.ctrlKey && event.keyCode == 39) {
+                     getOutfit(1);
+                    }
+                    if(event.ctrlKey && event.keyCode == 37) {
+                         getOutfit(-1);
+                    }                   
+                    
+                  });                
+
+                
+                $('body').on('click', '.nextOutfit', function () {
+                    getOutfit(1);
+                });
+
+                $('body').on('click', '.prevOutfit', function () {
+                    getOutfit(-1);
+                });
+                                
                 $('body').on('click', '.sharepoup', function () {
                     $('#slideout_inner').css('right', '-165px');
-                    $('#slideout').css('right', '0px');
+                    $('#slideout').css('right', '-65px');
                     $(this).removeClass('shopen');
                     $(this).addClass('shclose');
+                    $('#idSharethisOutfit').removeClass('shopen');
+                    $('#idSharethisOutfit').addClass('shclose');                    
 
                 });
-                $('.share1').on('click', function () {
-                    var clases = $(this).attr('class');
-                    var classesA = clases.split(" ");
-                    if (classesA[1] == 'shclose') {
-                        $('#slideout_inner').css('right', '0');
-                        $('#slideout').css('right', '90px');
-                        $(this).removeClass('shclose');
-                        $(this).addClass('shopen');
+//                 $('body').on('click', '.share1', function () {
+//                     var clases = $(this).attr('class');
+//                     var classesA = clases.split(" ");
+//                     if (classesA[1] == 'shclose') {
+//                         $('#slideout_inner').css('right', '0');
+//                         $('#slideout').css('right', '90px');
+//                         $(this).removeClass('shclose');
+//                         $(this).addClass('shopen');
+//                     } else {
+//                         $('#slideout_inner').css('right', '-165px');
+//                         $('#slideout').css('right', '-65px');
+//                         $(this).removeClass('shopen');
+//                         $(this).addClass('shclose');
+//                     }
+//                 })
+                $('body').on('click', '.share1', function () {
+                    if ( $('#shareThisOutfitPopup').css('display') == 'none' ) {
+                        $('#shareThisOutfitPopup').show()
                     } else {
-                        $('#slideout_inner').css('right', '-165px');
-                        $('#slideout').css('right', '0px');
-                        $(this).removeClass('shopen');
-                        $(this).addClass('shclose');
+                        $('#shareThisOutfitPopup').hide()
                     }
                 })
-
+                
                 /*****************block for adding this product into my coloseset**************/
-                $('.savecloseout').on('click', function () {
+                $('body').on('click', '.savecloseout', function () {
                     var id = $('#closesetId').val();
                     var url = "/service/outfitclosset/";
                     $.ajax({
@@ -1510,15 +1807,50 @@ $outfitsData = $this->outfits;
                         data: {closesetId: id},
                         dataType: 'json',
                         success: function (result) {
-                            if (result.status == 'N') {
-                                alert(result.mgs);
-                            } else if (result.status == 'Y') {
-                                alert("This Outfit Successfully added into your closet");
-                                //var likesd = result.count + ' likes';
-                                //$('#like_' + result.idf).html(likesd);
-                            } else {
-                                alert("Internal Server Error");
+                                 var class_name ='growl-missing';
+                            if(result.status =='Y') {
+                                class_name = 'growl-success';
+                                $('.outfitlikes img').attr('src', '/img/thumb.png');
+                                $('.outfitlikes span').html( parseInt($('.outfitlikes span').html()) + 1 );
+                            } 
+
+
+                            //alert(result.mgs);
+                            //$("#gritter-notice-wrapper").addClass('type_success');
+                            if(!$("#gritter-notice-wrapper ." + class_name).length) {
+                                jQuery.gritter.add({
+                                //title: result.mgs,
+                                title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">' + result.mgs +'</div></div><div class="my_close my_wrap_close">\
+                                    <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                    </div>',
+                                        class_name: class_name,
+                                        sticky: false,
+                                        time: 3000,
+                                });
                             }
+                                
+
+                            if (result.status == 'N') {
+                                //alert(result.mgs);
+                            } else if (result.status == 'Y') {
+                                 var likesd = result.count + ' likes';
+                                $('#like_' + result.idf).html(likesd);
+                            } else {
+                                //alert("Internal Server Error");
+                            }                        
+              
+
+
+
+                            // if (result.status == 'N') {
+                            //     swal("Oops!", result.mgs)
+                            // } else if (result.status == 'Y') {
+                            //     swal("Outfit Saved!", "You can find this Outfit in Saved Section.", "success")
+                            //     //var likesd = result.count + ' likes';
+                            //     //$('#like_' + result.idf).html(likesd);
+                            // } else {
+                            //     sweetAlert("Oops...", "Internal Server Error", "error");
+                            // }
                         }});
                 });
                 /*****************End block for adding this product into my coloseset**************/
@@ -1543,29 +1875,92 @@ $outfitsData = $this->outfits;
                     getOutfit();
                 });
 
-                var getOutfit = function () {
-                    var val1 = [];
-                    var result = {};
-                    $("input[name='outfit[]']:checked").each(function (i) {
+                adjustNewOutfitLayout();
+
+                function getOutfit (direction) {
+
+                    if( direction == undefined ) direction = 0;
+                    
+                  console.log(direction);
+                  var val1 = [];
+                  var result = {};
+                  $("input[name='outfit[]']:checked").each(function (i) {
                         val1[i] = $(this).val();
                         result['outfit'] = val1;
-                    });
+                  });
+
+                  if(result['outfit'] == undefined || result['outfit'].length == 0) {
+                    result['outfit'] = ['Work','Night Out','Casual'];
+                  }
+                  //console.log( result['outfit']);
+               
+                  if( direction === 1 ) {
+                         $('#outfits_offset').val( parseInt($('#outfits_offset').val()) + 1 ); 
+                  }
+                  else if( direction === -1 ) {
+                        $('#outfits_offset').val( parseInt($('#outfits_offset').val()) - 1 );
+                  }
+
+    
+                  if( parseInt($('#outfits_offset').val()) < 0 ) {
+                      $('#outfits_offset').val( parseInt($('#outfits_count').val()) - 1 );
+                  }
+                                            
+                    result['outfits_offset'] = $("#outfits_offset").val();
+                    console.log(result);
+                    //result.push({'outfits_offset':$("#outfits_offset").val()});
                     $.ajax({
                         url: '/service/alloutfits',
                         type: 'POST',
                         data: {filterArg: result},
                         success: function (data) {
-                            $('#outfit-block').html(data);
+                            //console.log(data);
+                            // if(data.indexOf('not available') > 0) {
+                            //     $('#outfits_offset').val(0);
+                            //     getOutfit(1);
+                            // } else {
+                                  $('#outfit-block').html(data);
+                                adjustNewOutfitLayout();
+                                
+                                //show tooltip
+                                $('.my_tooltip').tooltipster({
+                                    position: 'top',
+                                    theme: 'tooltipster-shadow',
+                                    
+                                });
+                           // }
+                          
+                     
+                            
                         }
                     });
                 }
 
                 /*******************End block for filter jquery *********/
-            });
 
+                <?php if( isset($this->defaultView) && $this->defaultView=='article' ) {?>
+                $( ".square1" ).trigger( "click" );
+                <?php }?>
+
+
+                
+            });
+            $( window ).resize(function() {
+                adjustNewOutfitLayout();
+            });
 
 
         </script>
 
+
         <!--<script src="/vendor/jquery-ui.min.js"></script>-->
         <!--<script type="text/javascript" src="/js/bootstrap-progressbar.js"></script>-->
+
+        
+
+<div id="loading-div-background">
+    <div id="loading-div" class="ui-corner-all" >
+      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading.."/>
+      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+     </div>
+</div>       
