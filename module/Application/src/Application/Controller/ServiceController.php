@@ -24,17 +24,17 @@ class ServiceController extends BaseActionController {
 
     public function indexAction() {
         $this->layout('layout/layout_elnove.phtml');
-        // $oAuth = $this->getServiceLocator()->get('AuthService');
-        // $oHelper = $this->getServiceLocator()->get('viewhelpermanager');
-        // $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciPlugin.min.js');
-        // $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.dom.js');
-        // $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.core.js');
-        // $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.selectable.js');
-        // $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.checkbox.js');
-        // $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.radio.js');
-        // $oHelper->get('HeadScript')->appendFile('/vendor/jquery-ui.min.js');
-        // $oHelper->get('HeadScript')->appendFile('/js/jquery.hc-sticky.min.js');
-        // $oHelper->get('headLink')->appendStylesheet('/vendor/aciTree/css/aciTree.css');
+        $oAuth = $this->getServiceLocator()->get('AuthService');
+        $oHelper = $this->getServiceLocator()->get('viewhelpermanager');
+        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciPlugin.min.js');
+        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.dom.js');
+        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.core.js');
+        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.selectable.js');
+        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.checkbox.js');
+        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.radio.js');
+        $oHelper->get('HeadScript')->appendFile('/vendor/jquery-ui.min.js');
+        $oHelper->get('HeadScript')->appendFile('/js/jquery.hc-sticky.min.js');
+        $oHelper->get('headLink')->appendStylesheet('/vendor/aciTree/css/aciTree.css');
         // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciPlugin.min.js');
         // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciTree.dom.js');
         // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciTree.core.js');

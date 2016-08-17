@@ -1,74 +1,41 @@
+    <?php
+        echo $this->headScript()->prependFile($this->basePath() . '/js/jquery.gray.js')
+                                ->prependFile($this->basePath() . '/js/jquery.js')
+                                 ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
+                                ;
+        ?>
+
 <div class="row">
     <div class="refine col-lg-2 col-lg-offset-1 col-sm-3">
         <div class="refine-colum hidden-xs">
-            <ul>
+            <ul> 
                 <li id="category" class="">CATEGORIES</li>
-                <div class="category" style="display: none; left: 100px;">
-                    <ul>
-                        <li id="clothing" class="change">CLOTHING</li>
-                        <div class="clothing" style="display: block; left: 50px;">
-                            <ul>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                            </ul>
-                        </div>
-                    </ul>
-                    <ul>
-                        <li id="footwear">FOOTWEAR</li>
-                        <div class="footwear">
-                            <ul>
-                                <li class="select">Sneakers</li>
-                                <li class="select">Sandals</li>
-                                <li class="select">Dress</li>
-                                <li class="select">Casual</li>
-                                <li class="select">Boots</li>
-                            </ul>
-                        </div>
-                    </ul>
-                    <ul>
-                        <li id="accessories">ACCESSORIES</li>
-                        <div class="accessories">
-                            <ul>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                                <li class="select">Filter</li>
-                            </ul>
-                        </div>
-                    </ul>
+                <div id="category-tree" class="category aciTree" style="display: none; left: 100px;">
+                
                 </div>
                 <li id="brands">BRANDS</li>
                 <div class="brands">
                     <div class="brand">
-                        <input class="label-brand" placeholder="Search Brands">
+                        <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
                         <div class="list-brand">
                             <ul>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
-                                <li class="select">Brand Name</li>
+                            <table>
+                            <tbody>
+
+                                <?php if (!empty($this->allBrands)) { 
+                                        foreach ($this->allBrands as $brand) { ?>
+                                <tr><td><li><?php echo $brand[ 'title']; ?></li></td></tr>
+                                <?php } } ?>
+
+                            </tbody>
+                            </table>
+
                             </ul>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
+
                 <div id="1">
                     <li id="prices">PRICE</li>
                     <div class="price prices">
@@ -99,21 +66,22 @@
                     </script>
                 </div>
 
-                <li id="colors">COLOR</li>
+                <li id="colors">COLOR</li>                  
+                                        
                 <div class="colors">
                     <div class="list-color">
-                        <div class="color" style="background: #000"></div>
-                        <div class="color special" style="background: #F5F5DC"></div>
-                        <div class="color" style="background: #0000FF"></div>
-                        <div class="color" style="background: #A52A2A"></div>
-                        <div class="color" style="background: #008000"></div>
-                        <div class="color" style="background: #808080"></div>
-                        <div class="color" style="background: #FFA500"></div>
-                        <div class="color" style="background: #FFC0CB"></div>
-                        <div class="color" style="background: #800080"></div>
-                        <div class="color" style="background: #FF0000"></div>
-                        <div class="color special" style="background: #FFFFFF"></div>
-                        <div class="color special" style="background: #FFFF00"></div>
+
+                    <?php
+                    if (!empty($this->allColors)) {
+                        foreach ($this->allColors as $color) {
+                            if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
+                            ?>
+                            <div class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
+                            <?php
+                        }
+                    }
+                    ?>
+
                     </div>
                 </div>
                 <li id="deals">DEALS</li>
@@ -527,32 +495,34 @@
                 </div>
             </div>
         </div>
-        <script>
-            $(document).ready(function($) {
-
-                $(".uc_avatar.img-responsive").click(function(e) {
-                    if ($(window).width() < 751) {
-                        $(".uc_avatar.img-responsive").fullScreenPopup({
-                            bgColor: '#fff'
-                        });
-
-                    } else {
-
-                        e.preventDefault();
-                    }
-
-                });
-                $(".footer-detail-alert").click(function(event) {
-                    wd = $(".fsp-content").width();
-                    $(".footer-detail-alert").prependTo($(".box-detail-header"));
-
-                    $(".footer-detail-alert").css("width", wd);
-                    $(".item_detail_img").css("margin-top", '70px');
-                    $(".set-sale-alert").css("display", "block");
-                    $(".footer-detail-alert").html('<i class="fa fa-bell-o"></i>Create Sale Alert');
-                });
-
-            });
-        </script>
+      
     </div>
 </div>
+
+
+        <script class="code" type="text/javascript">
+
+            $(function () {
+
+                // init the tree
+
+              $('#category-tree').aciTree({
+                    ajax: {
+                        url: '/attributes/get-categories-json?mapped=true&ec=<?php echo  $this->excludeCats ?>&levels=3&id='
+                    },
+                    checkbox: true
+                });
+            });
+
+   
+        </script>
+
+    <script src="js/jquery.filtertable.js"></script>
+    <script>
+    $(document).ready(function() {
+        // apply filterTable to all tables on this page but don't filter content with the no-filter class
+        $('table').filterTable({ignoreClass: 'no-filter'});
+        $('p.filter-table').prependTo('.brands .brand');
+    });
+
+    </script>
