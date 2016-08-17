@@ -9,10 +9,40 @@
     <div class="refine col-lg-2 col-lg-offset-1 col-sm-3">
         <div class="refine-colum hidden-xs">
             <ul> 
+
+
+           
                 <li id="category" class="">CATEGORIES</li>
-                <div id="category-tree" class="category aciTree" style="display: none; left: 100px;">
-                
+                <div  class="category" style="display: none; left: 100px;">
+                    <ul>
+                    
+                    <?php foreach ($this->aJson as $aJson) { ?>
+                          <li id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> </li>
+                            <div class="<?php  echo strtolower($aJson['label']); ?>">
+                                <ul>
+                                    <?php 
+                                    if(isset($aJson['branch'])) :
+                                    foreach ($aJson['branch'] as $aJson1) { ?>
+                                        <li id="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?></li>
+                                        <div style="display: none; left: 100px;" class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
+                                            <ul>
+                                            <?php if(isset($aJson1['branch'])) :
+                                            foreach ($aJson1['branch'] as $aJson2) { ?>
+                                            
+                                                    <li style=""><?php  echo ($aJson2['label']); ?></li>
+                                                
+                                            <?php }  endif; ?>
+                                            </ul>
+                                        </div>
+                                    <?php }  endif; ?>
+                                </ul>
+                            </div>
+                    <?php } ?>
+                    </ul>
                 </div>
+
+
                 <li id="brands">BRANDS</li>
                 <div class="brands">
                     <div class="brand">
@@ -378,7 +408,143 @@
         <div class="row">
             <div id="body-main-sideright" class="col-lg-12">
 
-                <div class="row" id="load-product-list">
+                <div class="row">
+
+                    <?php foreach ($this->feedData as $prod) { $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
+
+                    <div class="product col-lg-3 col-sm-4">
+                        <div class="product_item">
+                            <div class="uc_contact">
+                                <div class="product_item_popup">
+                                    <img class="uc_avatar img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" data-popup="#detail-popup">
+                                    <a href="#" target="_blank" class="popup_item"></a>
+                                </div>
+                                <div class="uc_link">
+                                    <span class="uc_icon icon_like" id="<?php echo  base64_encode($prod->feeddataid); ?>">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
+
+                                    <span class="uc_icon show_item">
+                                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                                    </span>
+
+                                    <span class="uc_icon icon_alert">
+                                        <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                    </span>
+
+                                    <a href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>" title="Purchase article through our partner"> <span class="buy_product uc_icon">BUY</span>
+                                    </a>
+
+                                    <div class="quick_view_v2" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                        <span>QUICK VIEW</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End .product_item -->
+
+                            <div class="clear_float"></div>
+
+                            <div class="share_product" style="height: 279px;">
+                                <i class="fa fa-times hide_item" aria-hidden="true"></i>
+                                <h2>SHARE VIA</h2>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-facebook fa-2x " aria-hidden="true"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-pinterest-p fa-2x " aria-hidden="true"></i>
+                                        <span>Pinterest</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-tumblr fa-2x " aria-hidden="true"></i>
+                                        <span>Twitter</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-google-plus fa-2x " aria-hidden="true"></i>
+                                        <span>Google +</span>
+                                    </a>
+                                </div>
+                                <div class="clear_float"></div>
+                                <div class="share_page">
+                                    <a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>">
+                                        <i class="fa fa-envelope-o fa-2x " aria-hidden="true"></i>
+                                        <span>Email</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- End .share_product  -->
+
+                            <div class="clear_float"></div>
+
+                            <div class="uc_info">
+                                <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;
+                                    <?php echo ($prod->onsale=='Y'?$prod->saleprice:$prod->price)?> CAD</p>
+                                <p>
+                                    <?php echo $this->string_helper($prod->caption); ?></p>
+                            </div>
+                            <div class="product_item_detail text-center" id="detail-popup">
+                                <div class="box-detail-header">
+                                    <div class="item_detail_img">
+                                        <img src="assets/images/product_item_detail-mobile.jpg" alt="image details">
+                                    </div>
+                                    <h3 class="product-name">Puma Number One Active Hoodie</h3>
+                                    <p class="product-brand">PUMA</p>
+                                    <span class="product-price">39.00 CAD</span>
+                                </div>
+                                <div class="box-detail-footer">
+                                    <div class="buy-like">
+                                        <a href="" class="btn-st-blue">BUY</a>
+                                    </div>
+                                    <div class="footer-detail">
+                                        <p class="detail-tit">DETAILS</p>
+                                        <span class="note-details">A classic sweater with line hood</span>
+                                        <span class="note-details">Hooded</span>
+                                        <span class="note-details">Long sleeves</span>
+                                        <span class="note-details">Front pouch pocket</span>
+                                        <span class="note-details">Cotton/polyester</span>
+                                        <span class="note-details">Machine wash</span>
+                                        <span class="note-details">Imported</span>
+                                    </div>
+                                    <div class="footer-detail-social">
+                                        <i class="fa fa-facebook"></i>
+                                        <i class="fa fa-pinterest-p"></i>
+                                        <i class="fa fa-tumblr"></i>
+                                        <i class="fa fa-google-plus"></i>
+                                        <i class="fa fa-envelope-o"></i>
+                                    </div>
+                                    <div class="footer-detail-alert">
+                                        <i class="fa fa-bell-o"></i>Get Sell Alert
+                                    </div>
+                                    <div class="set-sale-alert" style="display: block;">
+                                        <div class="sale-alert-head">
+                                            <p>Waiting for this item to go on sale?</p>
+                                            <p>We'll send an email when the price drops.</p>
+                                        </div>
+                                        <form action="" class="set-alert-form">
+                                            <input type="text" name="email-alert" placeholder="Youre Email Address" class="input-email-alert">
+                                            <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
+                                        </form>
+                                        <div class="foot-set-alert">
+                                            <span>By submiting this request,I confirm I agree with the Terms &amp; Conditions</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php } ?>
+
 
                 </div>
                 <div id="load-more" class="row text-center">
@@ -391,108 +557,20 @@
 </div>
 
 
-        <script class="code" type="text/javascript">
-
-            $(function () {
-
-                // init the tree
-
-              $('#category-tree').aciTree({
-                    ajax: {
-                        url: '/attributes/get-categories-json?mapped=true&ec=<?php echo  $this->excludeCats ?>&levels=3&id='
-                    },
-                    checkbox: true
-                });
-            });
-
-   
-        </script>
-
     <script src="js/jquery.filtertable.js"></script>
     <script>
     $(document).ready(function() {
-
         // apply filterTable to all tables on this page but don't filter content with the no-filter class
         $('table').filterTable({ignoreClass: 'no-filter'});
         $('p.filter-table').prependTo('.brands .brand');
 
-
+        //Click button loadmore 
+        $("#load-more>.btn-st-silver").click(function(){
+           if (loading == 0 && endData == 0)
+            {
+                loadProductData(1);
+            }
+        });
     });
 
     </script>
-
-
-
-    <script type="text/javascript">
-          
-            var loading = 0;
-            var endData = 0;
-            function loadProductData(isLazyLoading)
-            {
-                // if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
-                // {
-                //     showAjxLoadingDiv($("#productlisting"));
-                //     $("#page").val(1);
-                //     endData = 0;
-                // }
-                // else {
-                //     showAjxLoadingDiv($("#productlisting"));
-                //     $("#loading").show();
-                // }
-                loading = 1;
-                var url = "/service/getfeeds/" + Math.random();
-                var filterData = $("#productFilterDetail").serialize();
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: filterData,
-                    dataType: 'html',
-                    success: function (result) {
-                        loading = 0;
-                        if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
-                        {
-                            $("#load-product-list").html(result);
-                            // hideAjxLoadingDiv();
-                            $("#page").val(2);
-                            //enableDragg();
-                        }
-                        else
-                        {
-                            if (result.indexOf('No Record') > 0)
-                            {
-                                endData = 1;
-                            }
-                            else
-                            {
-                                $("#page").val(parseInt($("#page").val()) + 1); 
-                                $("#load-product-list").append(result);
-                                //enableDragg();
-                            }
-                            $("#loading").hide();
-                            // hideAjxLoadingDiv();
-                        }
-                        $('.my_tooltip').tooltipster({
-                            position: 'top',
-                            theme: 'tooltipster-shadow',
-                        });
-
-                    }
-
-                });
-
-
-            }
-
-            $(function () {
-                loadProductData();
-                
-            });
-             $("#load-more>.btn-st-silver").click(function(){
-               
-               if (loading == 0 && endData == 0)
-                {
-                    loadProductData(1);
-                }
-            });
-
-</script>
