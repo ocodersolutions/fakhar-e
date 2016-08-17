@@ -24,8 +24,8 @@
                                     if(isset($aJson['branch'])) :
                                     foreach ($aJson['branch'] as $aJson1) { ?>
                                         <li id="<?php $search = array(' ', '&');
- echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?></li>
-                                        <div class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
+                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?></li>
+                                        <div style="display: none; left: 100px;" class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
                                             <ul>
                                             <?php if(isset($aJson1['branch'])) :
                                             foreach ($aJson1['branch'] as $aJson2) { ?>
@@ -41,14 +41,6 @@
                     <?php } ?>
                     </ul>
                 </div>
-
-                   <!--  <?php if(isset($aJson1['branch'])) :
-                                            foreach ($aJson1['branch'] as $aJson2) { ?>
-                                            <div class=""></div>
-                                            <ul>
-                                                <li></li>
-                                            </ul>
-                                            <?php }  endif; ?> -->
 
 
                 <li id="brands">BRANDS</li>
@@ -573,12 +565,12 @@
         $('p.filter-table').prependTo('.brands .brand');
 
         // Click button loadmore 
-        $("#load-more>.btn-st-silver").click{
-           if (loading == 0 && endData == 0)
-            {
-                loadProductData(1);
-            }
-        }
+        // $("#load-more>.btn-st-silver").click(){
+        //    if (loading == 0 && endData == 0)
+        //     {
+        //         loadProductData(1);
+        //     }
+        // }
     });
 
     </script>
