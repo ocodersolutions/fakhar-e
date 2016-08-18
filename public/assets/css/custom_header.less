@@ -348,6 +348,7 @@ a{
     transition: width 0.3s;
 }
 .searchbox-input{
+    float: left;
     font-family: Roboto;
     font-size: 14px;
     top:0;
@@ -355,13 +356,21 @@ a{
     border:0;
     outline:0;
     z-index: 1;
-    //background:#F0F4F7;
-    width:100%;
+    display: inline-block;
+    width:50%;
     height:40px;
     margin:0;
     padding:0px 55px 0px 20px;
     color:#85A2BB;
+    &:first-child{
+        border-right: 2px double #33648D;
+        padding-left: 30px;
+        padding-right: 5px;
+
+    }
+
 }
+
 .searchbox-input::-webkit-input-placeholder {
     color: #85A2BB;
 }
