@@ -328,17 +328,16 @@
     });
 
     // send to form input
-    var x = new Array();
+    var y = 'x';
     $('.brands .list-brand li').click(function(){
-
-        $("input[name='brands']").val($(this)[0].textContent);
+        var id_brand = ($(this)[0].attributes[0].nodeValue);
+        // if($.isArray(y)) {
+        //     alert('array');
+        // }
+        $("input[name='brands']").val(id_brand);
         
     });
     // send to form input
-
-
-
-
 </script>
 
 <!-- javascript of product-item -->
