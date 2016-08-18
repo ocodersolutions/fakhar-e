@@ -26,10 +26,16 @@
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
         <script src="/assets/js/jquery-ui.js"></script>
-        
+        <script src="/assets/js/jquery.fullscreen-popup.js"></script>
 
     </head>
-
+     <script>
+            $(function() {
+                $(".login_signup").fullScreenPopup({
+                    bgColor: '#fff'
+                });
+            });
+        </script>
     <body>
 <div id="header-block">
     <div id="header-container" class="container-fluid hidden-xs">
@@ -49,6 +55,10 @@
                     </div>
                 </div>
             </div>
+            <div id="popup-test" style="display: none; width: 640px">
+                    <h1>Popup #2</h1>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                </div>
         </div>
 
         <nav id="menu" class="row">
@@ -80,11 +90,7 @@
             </div>
             <div class="col-lg-10 col-lg-offseet-1 col-xs-10 col-xs-offset-1" id="search">
                 <form class="searchbox">
-                <div class="row">
-                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search1" class="searchbox-input " id="input1" onkeyup="buttonUp();"/>
-                    <input type="search2" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" id="input2" onkeyup="buttonUp();"/>
-                </div>
-                    
+                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" onkeyup="buttonUp();">
                     <button type="submit" class="searchbox-submit">
                         <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
                     </button>
@@ -370,7 +376,7 @@
         $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
         $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
         
-        $('.refine .refine-colum  .list-size .size span, .refine .refine-colum .brand .list-brand ul li, .refine .refine-colum .footwear ul li, .refine .refine-colum .deals ul li, .refine .refine-colum .clothing ul li, .refine .refine-colum .accessories ul li').addClass('select');
+        // $('.refine .refine-colum  .list-size .size span, .refine .refine-colum .brand .list-brand ul li, .refine .refine-colum .footwear ul li, .refine .refine-colum .deals ul li, .refine .refine-colum .clothing ul li, .refine .refine-colum .accessories ul li').addClass('select');
 
         $('.select').click(function() {
             val_size = this.getAttribute("value");
@@ -420,23 +426,42 @@
     });
 
     // send to form input
-    var y = [];
+    
     $('.brands .list-brand li').click(function(){
-        var id_brand = ($(this)[0].attributes[0].nodeValue);
-        
-        if($.isArray(y)) {
-            y.push(id_brand);
-            var uniqueNames = [];
-            $.each(y, function(i, el){
-                if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-            });           
-            console.log(uniqueNames);
-        }else{
-            alert('ko phai array');
-        }
-        $("input[name='brands']").val(uniqueNames);
-        
+        array_brand = $('.item.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_brand.length ; i++) {
+            var a1 = (array_brand[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='brands']").val(a2);
+        var a2 = [];
     });
+
+    $('.colors .list-color .color').click(function(){
+        array_color = $('.color.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_color.length ; i++) {
+            var a1 = (array_color[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='colors']").val(a2);
+        var a2 = [];
+    });
+
+    $('.deals .item').click(function(){
+            name_deal = $(this)[0].attributes[0].nodeValue;
+            x = $("input[name='"+name_deal+"']").val();
+            if(x == 1){
+                $("input[name='"+name_deal+"']").val('');
+            }else{
+                $("input[name='"+name_deal+"']").val('1');
+            }         
+    });
+
+
+
+
     // send to form input
 </script>
 
@@ -793,7 +818,9 @@
             //     }
             // });
             
-        </script>  
+        </script> 
 
+
+        
     </body>
 </html>

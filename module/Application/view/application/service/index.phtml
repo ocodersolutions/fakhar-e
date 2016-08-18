@@ -2,7 +2,7 @@
         echo $this->headScript()->prependFile($this->basePath() . '/js/jquery.gray.js')
                                 ->prependFile($this->basePath() . '/js/jquery.js')
                                  ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
-                                ;
+                                 ;
         ?>
 
 <div class="row">
@@ -54,7 +54,7 @@
 
                                 <?php if (!empty($this->allBrands)) { 
                                         foreach ($this->allBrands as $brand) { ?>
-                                <tr><td><li data-brand='<?php echo $brand[ 'id']; ?>'><?php echo $brand[ 'title']; ?></li></td></tr>
+                                <tr><td><li data-brand='<?php echo $brand[ 'id']; ?>' class='item'><?php echo $brand[ 'title']; ?></li></td></tr>
                                 <?php } } ?>
 
                             </tbody>
@@ -70,7 +70,7 @@
                     <li id="prices">PRICE</li>
                     <div class="price prices stage0">
                         <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span>
+                            <div class="ui-slider-range ui-widget-header ui-corner-all" style=" left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
                         </div>
                     </div>
                     <script>
@@ -87,6 +87,8 @@
                                     $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
                                     $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
                                     $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
+                                    $("input[name='minamount']").val(minprice);
+                                    $("input[name='maxamount']").val(maxprice);
                                 }
                             });
                             $("#min-price").val("$" + $(".slider-3").slider("values", 0));
@@ -106,7 +108,7 @@
                         foreach ($this->allColors as $color) {
                             if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
                             ?>
-                            <div class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
+                            <div data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
                             <?php
                         }
                     }
@@ -117,12 +119,12 @@
                 <li id="deals">DEALS</li>
                 <div class="deals stage0">
                     <ul>
-                        <li class="select">All item on sale</li>
-                        <li class="select">New today</li>
-                        <li class="select">New this week</li>
-                        <li class="select">Free shipping</li>
-                        <li class="select">Special offer</li>
-                        <li class="select">Discount</li>
+                        <li data-deal="onsale" class="item">All item on sale</li>
+                        <li data-deal="todaynew" class="item">New today</li>
+                        <li data-deal="newthisweek" class="item">New this week</li>
+                        <li data-deal="freeshipping" class="item">Free shipping</li>
+                        <li data-deal="specialoffer" class="item">Special offer</li>
+                        <li data-deal="discountcode" class="item">Discount</li>
                     </ul>
                 </div>
                 <li id="sizes">SIZE</li>
@@ -269,29 +271,29 @@
                         <li id="prices">PRICE</li>
                         <div class="price prices">
                             <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span>
+                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
                             </div>
                         </div>
                         <script>
-                            $(function() {
-                                $(".slider-3").slider({
-                                    range: true,
-                                    min: 0,
-                                    max: 1000,
-                                    values: [250, 1000],
-                                    slide: function(event, ui) {
-                                        minprice = (ui.values[0]);
-                                        maxprice = (ui.values[1]);
-                                        $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
-                                        $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
-                                        $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
-                                        $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
-                                    }
-                                });
-                                $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-                                $("#max-price").val("$" + $(".slider-3").slider("values", 1));
+                            // $(function() {
+                            //     $(".slider-3").slider({
+                            //         range: true,
+                            //         min: 0,
+                            //         max: 1000,
+                            //         values: [250, 1000],
+                            //         slide: function(event, ui) {
+                            //             minprice = (ui.values[0]);
+                            //             maxprice = (ui.values[1]);
+                            //             $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
+                            //             $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
+                            //             $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
+                            //             $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
+                            //         }
+                            //     });
+                            //     $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+                            //     $("#max-price").val("$" + $(".slider-3").slider("values", 1));
 
-                            });
+                            // });
                         </script>
                     </div>
 
@@ -414,7 +416,9 @@
                 </div>
                 <div id="load-more" class="row text-center">
                     <button class="btn-st-silver">Load more</button>
+                    <a class="open-popup-test" href="" data-popup="#popup-test">Open popup</a>
                 </div>
+                                          
             </div>
         </div>
       
@@ -512,8 +516,7 @@
             $(window).scroll(function() {
 
                 var offset = ($(document).height() - $(window).height() )-2200;
-                  console.log("window scrollTop :"+ $(window).scrollTop() + ",document height :" + $(document).height() + ", window height"+ offset);
-                if($(window).scrollTop() >= offset) {
+                  if($(window).scrollTop() >= offset) {
                    
                      // ajax call get data from server and append to the div
                     if (loading == 0 && endData == 0){
@@ -538,18 +541,4 @@
 
 </script>
 <!-- <script src="/assets/js/jquery.fullscreen-popup.js"></script> -->
-<script>
-    $(function() {
-        $("#pop-menu").fullScreenPopup({
-            bgColor: '#fff'
-        });
-        $("#refine-search-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
-        $("#sort-item-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
-    });
 
-</script>
-<script src="/assets/js/jquery.fullscreen-popup.js"></script>
