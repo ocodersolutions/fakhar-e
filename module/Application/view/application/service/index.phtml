@@ -17,20 +17,20 @@
                     <ul>
                     
                     <?php foreach ($this->aJson as $aJson) { ?>
-                          <li id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> </li>
+                        <li class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> </li>
                             <div class="<?php  echo strtolower($aJson['label']); ?>">
                                 <ul>
                                     <?php 
                                     if(isset($aJson['branch'])) :
                                     foreach ($aJson['branch'] as $aJson1) { ?>
-                                        <li id="<?php $search = array(' ', '&');
+                                        <li class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
                                         echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?></li>
                                         <div style="display: none; left: 100px;" class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
                                             <ul>
                                             <?php if(isset($aJson1['branch'])) :
                                             foreach ($aJson1['branch'] as $aJson2) { ?>
                                             
-                                                    <li style=""><?php  echo ($aJson2['label']); ?></li>
+                                                    <li class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?></li>
                                                 
                                             <?php }  endif; ?>
                                             </ul>
@@ -408,9 +408,9 @@
         <div class="row">
             <div id="body-main-sideright" class="col-lg-12">
 
-                <div class="row" id="load-product-list">
-                    <?php foreach ($this->feedData as $prod) { 
-                    $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
+                <div class="row">
+
+                    <?php foreach ($this->feedData as $prod) { $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
 
                     <div class="product col-lg-3 col-sm-4">
                         <div class="product_item">
@@ -542,7 +542,6 @@
                             </div>
                         </div>
                     </div>
-
                     <?php } ?>
                 </div>
                 <div id="load-more" class="row text-center">
@@ -567,8 +566,15 @@
         $('table').filterTable({ignoreClass: 'no-filter'});
         $('p.filter-table').prependTo('.brands .brand');
 
-        
+        //Click button loadmore 
+        $("#load-more>.btn-st-silver").click(function(){
+           if (loading == 0 && endData == 0)
+            {
+                loadProductData(1);
+            }
+        });
     });
+
 
     </script>
     <script type="text/javascript">
@@ -576,17 +582,16 @@
             var loading = 0;
             var endData = 0;
             function loadProductData(isLazyLoading){
-                
-                // if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
-                // {
-                //     showAjxLoadingDiv($("#productlisting"));
-                //     $("#page").val(1);
-                //     endData = 0;
-                // }
-                // else {
-                //     showAjxLoadingDiv($("#productlisting"));
-                //     //$("#loading").show();
-                // }
+                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                {
+                    showAjxLoadingDiv($("#productlisting"));
+                    $("#page").val(1);
+                    endData = 0;
+                }
+                else {
+                    showAjxLoadingDiv($("#productlisting"));
+                    //$("#loading").show();
+                }
                 loading = 1;
                 var url = "/service/getfeeds/" + Math.random();
                 var filterData = $("#productFilterDetail").serialize();
@@ -637,18 +642,11 @@
 
         $(function () {
             $(window).scroll(function() {
-                var offset = $(document).height() - $(window).height() - 800;
-                  console.log("window scrollTop :"+ $(window).scrollTop() + ",document height :" + $(document).height() + ", window height"+ offset);
-                if($(window).scrollTop() >= offset) {
-                   
-                     // ajax call get data from server and append to the div
+                if($(window).scrollTop() == $(document).height() - $(window).height()) {
+                    // ajax call get data from server and append to the div
                     if (loading == 0 && endData == 0){
-                        console.log("loading");
                         loadProductData(1);
                     }
-                }
-                if($(window).scrollTop()  == $(document).height() - $(window).height())  {
-                    showAjxLoadingDiv();
                 }
             });
                 
@@ -657,9 +655,10 @@
               
                if (loading == 0 && endData == 0)
                 {
+                    //showAjxLoadingDiv();
                     loadProductData(1);
-                    showAjxLoadingDiv();
                 }
             });
 
 </script>
+

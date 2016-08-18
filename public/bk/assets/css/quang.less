@@ -236,13 +236,15 @@ p.m-title{
 	font-family: @font;
 	font-size: 13px;
 	.refine-colum{
-		
 			.category{
 				display: none;
+				.has-child-selected{
+					background: #F0F1F2;
+				}
+				.selected{
+					background: #F0F1F2;
+				}
 				ul{
-					.change:after{
-						content: "\f106";
-					}
 					li:after{
 						content: "\f107";
 						font: normal normal normal 13px/1 FontAwesome;
@@ -271,13 +273,7 @@ p.m-title{
 							line-height: 25px;
 						}
 					}
-			}
-
-
-			}
-			.change:after{
-				
-			content: "\f106";
+				}
 			}
 			
 			ul{
@@ -376,12 +372,12 @@ p.m-title{
 						color: #333;
 					}
 					li:after{
-						content: "\f106";
+						content: "\f107";
 					    font: normal normal normal 13px/1 FontAwesome;
 					    line-height: 25px;
 					}
 					.selected:after{
-						content: "\f107";
+						content: "\f106";
 						font: normal normal normal 13px/1 FontAwesome;
 						line-height: 25px;
 					}

@@ -301,13 +301,24 @@
             ($(this).find(".check")).remove();
         }
     });
+    $('.has-child').click(function() {
+            if ($(this).hasClass("has-child-selected") == false) {
+                $(this).addClass('has-child-selected');
+            } else {
+                $(this).removeClass('has-child-selected');
+            }
+    });
     $('.refine .refine-colum ul li').click(function() {
+        x = $(this).parents('.category');
+        if(x.length == 0){
 
-        if ($(this).hasClass("change") == false) {
-            $(this).addClass('change');
-        } else {
-            $(this).removeClass('change');
+            if ($(this).hasClass("change") == false) {
+                $(this).addClass('change selected');
+            } else {
+                $(this).removeClass('change selected');
+            }
         }
+
         var attrContent = getComputedStyle(this, ':after').content;
         var currentId = $(this).attr('id');
         $('.refine .refine-colum .' + currentId + ',.fsp-wrapper .refine-colum .' + currentId + '').animate({
