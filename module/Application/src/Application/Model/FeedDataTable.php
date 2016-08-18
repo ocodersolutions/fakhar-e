@@ -483,7 +483,7 @@ class FeedDataTable extends BasicTableAdapter {
         $sql->prepareStatementForSqlObject($update)->execute();
     }
 
-    public function getFilterFeedData($aPostParams = array(), $paginated = false, $userId = null, $bought = null,$service = null) {
+    public function getFilterFeedData($aPostParams = array(), $paginated = false, $userId = null, $bought = null,$service = null, $returnArr = true) {
         $feedmapbrandJoin = false;
         $prodattJoin = false;
 
@@ -636,7 +636,9 @@ class FeedDataTable extends BasicTableAdapter {
         $results = $sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
         $resultSet->initialize($results);
-        $resultSet = $resultSet->toArray();
+        if($returnArr == true) {
+          $resultSet = $resultSet->toArray();
+        }
         return $resultSet;
     }
     public function countFilterFeedData($aPostParams = array(), $paginated = false, $userId = null, $bought = null,$service = null) {

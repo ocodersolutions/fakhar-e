@@ -15,18 +15,18 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900' rel='stylesheet' type='text/css'>
         <!-- Custom styles for this template -->
-        <link href="assets/css/custom.less" rel="stylesheet/less" type="text/css">
-        <link href="assets/css/custom_header.less" rel="stylesheet/less" type="text/css">
-        <link href="assets/css/custom_banner.less" rel="stylesheet/less" type="text/css">
-        <link href="assets/css/custom_product_list.less" rel="stylesheet/less" type="text/css">
+        <link href="/assets/css/custom.less" rel="stylesheet/less" type="text/css">
+        <link href="/assets/css/custom_header.less" rel="stylesheet/less" type="text/css">
+        <link href="/assets/css/custom_banner.less" rel="stylesheet/less" type="text/css">
+        <link href="/assets/css/custom_product_list.less" rel="stylesheet/less" type="text/css">
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
         <link rel="stylesheet/less" type="text/css" href="body_content/body1.less" />
         <link rel="stylesheet/less" type="text/css" href="bk/assets/css/quang.less" />
         <script   src="assets/js/jquery-1.12.4.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
-        <script src="assets/js/jquery-ui.js"></script>
-        <script src="assets/js/jquery.fullscreen-popup.js"></script>
+        <script src="/assets/js/jquery-ui.js"></script>
+        
 
     </head>
 
@@ -80,10 +80,11 @@
             </div>
             <div class="col-lg-10 col-lg-offseet-1 col-xs-10 col-xs-offset-1" id="search">
                 <form class="searchbox">
-                    <div class="row">
-                        <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search1" class="searchbox-input " id="input1" onkeyup="buttonUp();"/>
-                        <input type="search2" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" id="input2" onkeyup="buttonUp();"/>
-                    </div>
+                <div class="row">
+                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search1" class="searchbox-input " id="input1" onkeyup="buttonUp();"/>
+                    <input type="search2" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" id="input2" onkeyup="buttonUp();"/>
+                </div>
+                    
                     <button type="submit" class="searchbox-submit">
                         <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
                     </button>
@@ -304,20 +305,51 @@
             ($(this).find(".check")).remove();
         }
     });
+    $('.has-child').click(function() {
+            if ($(this).hasClass("has-child-selected") == false) {
+                $(this).addClass('has-child-selected');
+            } else {
+                $(this).removeClass('has-child-selected');
+            }
+    });
     $('.refine .refine-colum ul li').click(function() {
+        x = $(this).parents('.category');
+        if(x.length == 0){
 
-        if ($(this).hasClass("change") == false) {
-            $(this).addClass('change');
-        } else {
-            $(this).removeClass('change');
+            if ($(this).hasClass("change") == false) {
+                $(this).addClass('change selected');
+            } else {
+                $(this).removeClass('change selected');
+            }
         }
+
         var attrContent = getComputedStyle(this, ':after').content;
         var currentId = $(this).attr('id');
-        $('.refine .refine-colum .' + currentId + ',.fsp-wrapper .refine-colum .' + currentId + '').animate({
+        $('.refine .refine-colum .stage0.' + currentId + ',.fsp-wrapper .refine-colum .' + currentId + '').animate({
             left: "+=50",
             height: "toggle"
         }, 800, function() {});
     });
+
+    // send to form input
+    var y = [];
+    $('.brands .list-brand li').click(function(){
+        var id_brand = ($(this)[0].attributes[0].nodeValue);
+        
+        if($.isArray(y)) {
+            y.push(id_brand);
+            var uniqueNames = [];
+            $.each(y, function(i, el){
+                if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+            });           
+            console.log(uniqueNames);
+        }else{
+            alert('ko phai array');
+        }
+        $("input[name='brands']").val(uniqueNames);
+        
+    });
+    // send to form input
 </script>
 
 <!-- javascript of product-item -->
@@ -386,14 +418,14 @@
         }
     });
 
-    // $(".icon_alert").click(function() {
-    //     var myClasses = this.classList;
-    //     if (myClasses.contains("active")) {
-    //         myClasses.remove("active");
-    //     } else {
-    //         myClasses.add("active");
-    //     }
-    // });        
+    $(".icon_alert").click(function() {
+        var myClasses = this.classList;
+        if (myClasses.contains("active")) {
+            myClasses.remove("active");
+        } else {
+            myClasses.add("active");
+        }
+    });        
 </script> 
 
 <!-- End javascript of product-item -->
@@ -535,6 +567,7 @@
                             submitIcon.click();
                         }
                     });
+                
             });
                 function buttonUp(){
                     var inputVal = $('.searchbox-input').val();
@@ -594,15 +627,15 @@
 
 
 
-            $("#pop-menu").fullScreenPopup({
-                bgColor: '#fff'
-            });
-            $("#refine-search-popup").fullScreenPopup({
-                bgColor: '#fff'
-            });
-            $("#sort-item-popup").fullScreenPopup({
-                bgColor: '#fff'
-            });
+            // $("#pop-menu").fullScreenPopup({
+            //     bgColor: '#fff'
+            // });
+            // $("#refine-search-popup").fullScreenPopup({
+            //     bgColor: '#fff'
+            // });
+            // $("#sort-item-popup").fullScreenPopup({
+            //     bgColor: '#fff'
+            // });
             $("#m-show-userbox").click(function(event) {
                 $("#user-mblock").css('display','block');
             });
