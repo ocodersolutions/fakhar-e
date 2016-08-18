@@ -26,10 +26,16 @@
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
         <script src="/assets/js/jquery-ui.js"></script>
-       
+        <script src="/assets/js/jquery.fullscreen-popup.js"></script>
 
     </head>
-
+     <script>
+            $(function() {
+                $(".login_signup").fullScreenPopup({
+                    bgColor: '#fff'
+                });
+            });
+        </script>
     <body>
 <div id="header-block">
     <div id="header-container" class="container-fluid hidden-xs">
@@ -49,6 +55,10 @@
                     </div>
                 </div>
             </div>
+            <div id="popup-test" style="display: none; width: 640px">
+                    <h1>Popup #2</h1>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                </div>
         </div>
 
         <nav id="menu" class="row">
@@ -650,20 +660,8 @@
             // });
             
         </script> 
-        <script>
-    $(function() {
-        $("#pop-menu").fullScreenPopup({
-            bgColor: '#fff'
-        });
-        $("#refine-search-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
-        $("#sort-item-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
-    });
 
-</script> 
-     <script src="/assets/js/jquery.fullscreen-popup.js"></script>
+
+        
     </body>
 </html>
