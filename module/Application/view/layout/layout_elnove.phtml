@@ -80,11 +80,7 @@
             </div>
             <div class="col-lg-10 col-lg-offseet-1 col-xs-10 col-xs-offset-1" id="search">
                 <form class="searchbox">
-                <div class="row">
-                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search1" class="searchbox-input " id="input1" onkeyup="buttonUp();"/>
-                    <input type="search2" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" id="input2" onkeyup="buttonUp();"/>
-                </div>
-                    
+                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" onkeyup="buttonUp();">
                     <button type="submit" class="searchbox-submit">
                         <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
                     </button>
@@ -282,7 +278,7 @@
         $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
         $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
         
-        $('.refine .refine-colum  .list-size .size span, .refine .refine-colum .brand .list-brand ul li, .refine .refine-colum .footwear ul li, .refine .refine-colum .deals ul li, .refine .refine-colum .clothing ul li, .refine .refine-colum .accessories ul li').addClass('select');
+        // $('.refine .refine-colum  .list-size .size span, .refine .refine-colum .brand .list-brand ul li, .refine .refine-colum .footwear ul li, .refine .refine-colum .deals ul li, .refine .refine-colum .clothing ul li, .refine .refine-colum .accessories ul li').addClass('select');
 
         $('.select').click(function() {
             val_size = this.getAttribute("value");
@@ -334,20 +330,14 @@
     // send to form input
     var y = [];
     $('.brands .list-brand li').click(function(){
-        var id_brand = ($(this)[0].attributes[0].nodeValue);
-        
-        if($.isArray(y)) {
-            y.push(id_brand);
-            var uniqueNames = [];
-            $.each(y, function(i, el){
-                if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-            });           
-            console.log(uniqueNames);
-        }else{
-            alert('ko phai array');
-        }
-        $("input[name='brands']").val(uniqueNames);
-        
+            array_x = $('.item.selected').toArray();
+            var a2 =  [];
+            for (i = 0; i < array_x.length ; i++) {
+                var a1 = (array_x[i].attributes[0].nodeValue);
+                a2.push(a1);
+            };
+            $("input[name='brands']").val(a2);
+            var a2 = [];
     });
     // send to form input
 </script>
