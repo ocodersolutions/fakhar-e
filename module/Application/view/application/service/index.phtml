@@ -408,7 +408,7 @@
         <div class="row">
             <div id="body-main-sideright" class="col-lg-12">
 
-                <div class="row">
+                <div class="row"  id="load-product-list">
 
                     <?php foreach ($this->feedData as $prod) { $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
 
@@ -577,21 +577,22 @@
 
 
     </script>
-    <script type="text/javascript">
+     <script type="text/javascript">
           
             var loading = 0;
             var endData = 0;
             function loadProductData(isLazyLoading){
-                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
-                {
-                    showAjxLoadingDiv($("#productlisting"));
-                    $("#page").val(1);
-                    endData = 0;
-                }
-                else {
-                    showAjxLoadingDiv($("#productlisting"));
-                    //$("#loading").show();
-                }
+                
+                // if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
+                // {
+                //     showAjxLoadingDiv($("#productlisting"));
+                //     $("#page").val(1);
+                //     endData = 0;
+                // }
+                // else {
+                //     showAjxLoadingDiv($("#productlisting"));
+                //     //$("#loading").show();
+                // }
                 loading = 1;
                 var url = "/service/getfeeds/" + Math.random();
                 var filterData = $("#productFilterDetail").serialize();
@@ -642,11 +643,18 @@
 
         $(function () {
             $(window).scroll(function() {
-                if($(window).scrollTop() == $(document).height() - $(window).height()) {
-                    // ajax call get data from server and append to the div
+                var offset = $(document).height() - $(window).height() - 800;
+                  console.log("window scrollTop :"+ $(window).scrollTop() + ",document height :" + $(document).height() + ", window height"+ offset);
+                if($(window).scrollTop() >= offset) {
+                   
+                     // ajax call get data from server and append to the div
                     if (loading == 0 && endData == 0){
+                        console.log("loading");
                         loadProductData(1);
                     }
+                }
+                if($(window).scrollTop()  == $(document).height() - $(window).height())  {
+                    showAjxLoadingDiv();
                 }
             });
                 
@@ -655,8 +663,8 @@
               
                if (loading == 0 && endData == 0)
                 {
-                    //showAjxLoadingDiv();
                     loadProductData(1);
+                    showAjxLoadingDiv();
                 }
             });
 
