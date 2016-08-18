@@ -108,7 +108,7 @@
                         foreach ($this->allColors as $color) {
                             if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
                             ?>
-                            <div class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
+                            <div data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
                             <?php
                         }
                     }
