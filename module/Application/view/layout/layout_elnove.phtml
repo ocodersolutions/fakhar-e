@@ -338,17 +338,42 @@
     });
 
     // send to form input
-    var y = [];
+    
     $('.brands .list-brand li').click(function(){
-            array_x = $('.item.selected').toArray();
-            var a2 =  [];
-            for (i = 0; i < array_x.length ; i++) {
-                var a1 = (array_x[i].attributes[0].nodeValue);
-                a2.push(a1);
-            };
-            $("input[name='brands']").val(a2);
-            var a2 = [];
+        array_brand = $('.item.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_brand.length ; i++) {
+            var a1 = (array_brand[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='brands']").val(a2);
+        var a2 = [];
     });
+
+    $('.colors .list-color .color').click(function(){
+        array_color = $('.color.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_color.length ; i++) {
+            var a1 = (array_color[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='colors']").val(a2);
+        var a2 = [];
+    });
+
+    $('.deals .item').click(function(){
+            name_deal = $(this)[0].attributes[0].nodeValue;
+            x = $("input[name='"+name_deal+"']").val();
+            if(x == 1){
+                $("input[name='"+name_deal+"']").val('');
+            }else{
+                $("input[name='"+name_deal+"']").val('1');
+            }         
+    });
+
+
+
+
     // send to form input
 </script>
 
