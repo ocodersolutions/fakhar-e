@@ -332,13 +332,21 @@
     });
 
     // send to form input
-    var y = 'x';
+    var y = [];
     $('.brands .list-brand li').click(function(){
         var id_brand = ($(this)[0].attributes[0].nodeValue);
-        // if($.isArray(y)) {
-        //     alert('array');
-        // }
-        $("input[name='brands']").val(id_brand);
+        
+        if($.isArray(y)) {
+            y.push(id_brand);
+            var uniqueNames = [];
+            $.each(y, function(i, el){
+                if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+            });           
+            console.log(uniqueNames);
+        }else{
+            alert('ko phai array');
+        }
+        $("input[name='brands']").val(uniqueNames);
         
     });
     // send to form input
