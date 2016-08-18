@@ -1,7 +1,6 @@
     <?php
         echo $this->headScript()->prependFile($this->basePath() . '/js/jquery.gray.js')
                                 ->prependFile($this->basePath() . '/js/jquery.js')
-                                ->prependFile($this->basePath() . '/assets/js/jquery.fullscreen-popup.js')
                                  ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
                                 ;
         ?>
@@ -443,15 +442,7 @@
                 loadProductData(1);
             }
         });
-        $("#pop-menu").fullScreenPopup({
-                bgColor: '#fff'
-        });
-        $("#refine-search-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
-        $("#sort-item-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
+        
     });
 
 
@@ -546,4 +537,19 @@
             });
 
 </script>
+<!-- <script src="/assets/js/jquery.fullscreen-popup.js"></script> -->
+<script>
+    $(function() {
+        $("#pop-menu").fullScreenPopup({
+            bgColor: '#fff'
+        });
+        $("#refine-search-popup").fullScreenPopup({
+            bgColor: '#fff'
+        });
+        $("#sort-item-popup").fullScreenPopup({
+            bgColor: '#fff'
+        });
+    });
 
+</script>
+<script src="/assets/js/jquery.fullscreen-popup.js"></script>
