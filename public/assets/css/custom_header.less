@@ -311,106 +311,104 @@ a{
     position: relative;
     #row-top-navbar{
        border-bottom: 1px solid #eee; 
-    #top-nav{
-        z-index: 9;
-        font-family: roboto;
-        font-size: 13px;
-        font-weight: 400;
-        color: #444444; 
-        ul{
-            li{
-                padding:23px 9px 23px 20px;
-                display: inline-block;
+        #top-nav{
+            z-index: 9;
+            font-family: roboto;
+            font-size: 13px;
+            font-weight: 400;
+            color: #444444; 
+            ul{
+                li{
+                    padding:23px 9px 23px 20px;
+                    display: inline-block;
+                }
             }
         }
     }
-}
     #search{
-        // display: none;
         top: 12px;
         position: absolute;
-        #formsearch{
-        // padding: 20px 0;
-                
-    }
-    .searchbox{
-    position:relative;
-    min-width:50px;
-    width:0%;
-    height:40px;
-    float:right;
-    overflow:hidden;
-    
-    -webkit-transition: width 0.3s;
-    -moz-transition: width 0.3s;
-    -ms-transition: width 0.3s;
-    -o-transition: width 0.3s;
-    transition: width 0.3s;
-}
-.searchbox-input{
-    float: left;
-    font-family: Roboto;
-    font-size: 14px;
-    top:0;
-    right:0;
-    border:0;
-    outline:0;
-    z-index: 1;
-    display: inline-block;
-    width:50%;
-    height:40px;
-    margin:0;
-    padding:0px 55px 0px 20px;
-    color:#85A2BB;
-    &:first-child{
-        border-right: 2px double #33648D;
-        padding-left: 30px;
-        padding-right: 5px;
+        .searchbox{
+            position:relative;
+            min-width:50px;
+            width:0%;
+            height:40px;
+            float:right;
+            overflow:hidden;
+            -webkit-transition: width 0.3s;
+            -moz-transition: width 0.3s;
+            -ms-transition: width 0.3s;
+            -o-transition: width 0.3s;
+            transition: width 0.3s;
+            .searchbox-input{
+                float: left;
+                font-family: Roboto;
+                font-size: 14px;
+                top:0;
+                right:0;
+                border:0;
+                outline:0;
+                z-index: 1;
+                display: inline-block;
+                width:50%;
+                height:40px;
+                margin:0;
+                padding:0px 55px 0px 20px;
+                color:#85A2BB;
+                &:first-child{
+                    padding-left: 30px;
+                    padding-right: 5px;
+                }
+            }
+        }
+        .searchbox-open {
+            .searchbox-input {
+                &:first-child{
+                    border-right: 2px double #33648D;
+                }
+            }
+        }
 
-    }
+        .searchbox-input::-webkit-input-placeholder {
+            color: #85A2BB;
+        }
+        .searchbox-input:-moz-placeholder {
+            color: #85A2BB;
+        }
+        .searchbox-input::-moz-placeholder {
+            color: #85A2BB;
+        }
+        .searchbox-input:-ms-input-placeholder {
+            color: #85A2BB;
+        }
 
-}
-
-.searchbox-input::-webkit-input-placeholder {
-    color: #85A2BB;
-}
-.searchbox-input:-moz-placeholder {
-    color: #85A2BB;
-}
-.searchbox-input::-moz-placeholder {
-    color: #85A2BB;
-}
-.searchbox-input:-ms-input-placeholder {
-    color: #85A2BB;
-}
-
-.searchbox-icon,
-.searchbox-submit{
-    z-index: 99;
-    font-size: 23px;
-    display: block;
-    position: absolute;
-    top: -3px;
-    right: 6px;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    outline: 0;
-    line-height: 50px;
-    text-align: center;
-    cursor: pointer;
-    color: #33648D;
-   }
-
+        .searchbox-icon,
+        .searchbox-submit{
+            z-index: 99;
+            font-size: 23px;
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 6px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            outline: 0;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            color: #33648D;
+           }
 
 
-.searchbox-open{
-    width:100%;
-    .searchbox-input{
-        background-color: #F0F4F7;
-        z-index: 99;
-    }
-    }
+
+        .searchbox-open{
+            width:100%;
+            .searchbox-input{
+                background-color: #F0F4F7;
+                z-index: 99;
+            }
+        }
     }
     
 }
