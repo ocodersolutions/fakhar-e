@@ -321,11 +321,24 @@
 
         var attrContent = getComputedStyle(this, ':after').content;
         var currentId = $(this).attr('id');
-        $('.refine .refine-colum .' + currentId + ',.fsp-wrapper .refine-colum .' + currentId + '').animate({
+        $('.refine .refine-colum .stage0.' + currentId + ',.fsp-wrapper .refine-colum .' + currentId + '').animate({
             left: "+=50",
             height: "toggle"
         }, 800, function() {});
     });
+
+    // send to form input
+    var x = new Array();
+    $('.brands .list-brand li').click(function(){
+
+        $("input[name='brands']").val($(this)[0].textContent);
+        
+    });
+    // send to form input
+
+
+
+
 </script>
 
 <!-- javascript of product-item -->

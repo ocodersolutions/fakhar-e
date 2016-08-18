@@ -12,8 +12,8 @@
 
 
            
-                <li id="category" class="">CATEGORIES</li>
-                <div  class="category" style="display: none; left: 100px;">
+                <li id="category">CATEGORIES</li>
+                <div  class="category stage0" style="display: none; left: 100px;">
                     <ul>
                     
                     <?php foreach ($this->aJson as $aJson) { ?>
@@ -43,8 +43,8 @@
                 </div>
 
 
-                <li id="brands">BRANDS</li>
-                <div class="brands">
+                <li id="brands" >BRANDS</li>
+                <div class="brands stage0">
                     <div class="brand">
                         <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
                         <div class="list-brand">
@@ -68,7 +68,7 @@
 
                 <div id="1">
                     <li id="prices">PRICE</li>
-                    <div class="price prices">
+                    <div class="price prices stage0">
                         <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
                             <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span>
                         </div>
@@ -98,7 +98,7 @@
 
                 <li id="colors">COLOR</li>                  
                                         
-                <div class="colors">
+                <div class="colors stage0">
                     <div class="list-color">
 
                     <?php
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <li id="deals">DEALS</li>
-                <div class="deals">
+                <div class="deals stage0">
                     <ul>
                         <li class="select">All item on sale</li>
                         <li class="select">New today</li>
@@ -126,7 +126,7 @@
                     </ul>
                 </div>
                 <li id="sizes">SIZE</li>
-                <div class="sizes">
+                <div class="sizes stage0">
                     <div class="list-size">
                         <div class="size"><span value="xs" class="select">XS</span>
                         </div>
@@ -145,7 +145,7 @@
                     </div>
                 </div>
                 <li id="stores">STORE</li>
-                <div class="stores">
+                <div class="stores stage0">
                     <div class="brand">
                         <input class="label-brand" placeholder="Search Stores">
                         <div class="list-brand">
@@ -296,7 +296,7 @@
                     </div>
 
                     <li id="colors">COLOR</li>
-                    <div class="colors">
+                    <div class="colors ">
                         <div class="list-color">
                             <div class="color" style="background: #000"></div>
                             <div class="color special" style="background: #F5F5DC"></div>
