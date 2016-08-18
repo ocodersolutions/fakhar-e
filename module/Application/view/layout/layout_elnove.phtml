@@ -351,6 +351,17 @@
         var a2 = [];
     });
 
+    $('.deals .item').click(function(){
+            name_deal = $(this)[0].attributes[0].nodeValue;
+            x = $("input[name='"+name_deal+"']").val();
+            if(x == 1){
+                $("input[name='"+name_deal+"']").val('');
+            }else{
+                $("input[name='"+name_deal+"']").val('1');
+            }         
+    });
+
+
 
 
     // send to form input
