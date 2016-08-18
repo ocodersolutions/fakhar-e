@@ -63,10 +63,7 @@
                 ->appendStylesheet($this->basePath() . '/css/mystyle.css')
                 ->appendStylesheet($this->basePath() . '/myalert/css/reveal.css')
                 ->prependStylesheet($this->basePath() . '/myalert/css/foundation.css')
-                ->appendStylesheet($this->basePath() . '/myalert/css/style.css')   
-                ->appendStylesheet($this->basePath() . '/tooltipster/css/tooltipster.css')
-                         ->appendStylesheet($this->basePath() . '/tooltipster/css/themes/tooltipster-shadow.css')     
-                         ;
+                ->appendStylesheet($this->basePath() . '/myalert/css/style.css');
         ?>
         <!-- Scripts -->
         <?php
@@ -76,7 +73,6 @@
                                 ->prependFile($this->basePath() . '/myalert/js/foundation.min.js') 
                                 ->prependFile($this->basePath() . '/js/jquery.gray.js')
                                 ->prependFile($this->basePath() . '/js/jquery.js')
-                                ->appendFile($this->basePath() . '/tooltipster/js/jquery.tooltipster.min.js')
                                 ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
 ;
         ?>
@@ -532,33 +528,7 @@ header{
         }
     </script>
 
-     <script type="text/javascript">
-        $(document).ready(function() {
-
-            $('.my_tooltip').tooltipster({
-                position: 'top',
-                theme: 'tooltipster-shadow',
-                
-            });
-
-
-            $('.right_tooltip').tooltipster({
-                position: 'right',
-                theme: 'tooltipster-shadow',
-                
-            });
-            $('.bottom_tooltip').tooltipster({
-                position: 'bottom',
-                theme: 'tooltipster-shadow',
-                
-            });
-            $('.left_tooltip').tooltipster({
-                position: 'left',
-                theme: 'tooltipster-shadow', 
-            });
-
-        });
-    </script>
+    
     <script type="text/javascript">
         $('#idNewsLetterInput').placeholder();
         $("#demo9").mouseenter(function(){
