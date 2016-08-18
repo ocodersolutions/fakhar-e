@@ -643,7 +643,7 @@
 
         $(function () {
             $(window).scroll(function() {
-                var offset = ($(document).height() - $(window).height() )*80/100;
+                var offset = ($(document).height() - $(window).height() )-2200;
                   console.log("window scrollTop :"+ $(window).scrollTop() + ",document height :" + $(document).height() + ", window height"+ offset);
                 if($(window).scrollTop() >= offset) {
                    
@@ -653,7 +653,7 @@
                         loadProductData(1);
                     }
                 }
-                if($(window).scrollTop()  >= $(document).height() - $(window).height()-200)  {
+                if($(window).scrollTop()  >= $(document).height() - $(window).height()-300)  {
                     showAjxLoadingDiv();
                 }
             });
