@@ -12,8 +12,8 @@
 
 
            
-                <li id="category" class="">CATEGORIES</li>
-                <div  class="category" style="display: none; left: 100px;">
+                <li id="category">CATEGORIES</li>
+                <div  class="category stage0" style="display: none; left: 100px;">
                     <ul>
                     
                     <?php foreach ($this->aJson as $aJson) { ?>
@@ -43,8 +43,8 @@
                 </div>
 
 
-                <li id="brands">BRANDS</li>
-                <div class="brands">
+                <li id="brands" >BRANDS</li>
+                <div class="brands stage0">
                     <div class="brand">
                         <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
                         <div class="list-brand">
