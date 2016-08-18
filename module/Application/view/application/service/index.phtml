@@ -70,7 +70,7 @@
                     <li id="prices">PRICE</li>
                     <div class="price prices stage0">
                         <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span>
+                            <div class="ui-slider-range ui-widget-header ui-corner-all" style=" left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
                         </div>
                     </div>
                     <script>
@@ -87,6 +87,8 @@
                                     $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
                                     $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
                                     $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
+                                    $("input[name='minamount']").val(minprice);
+                                    $("input[name='maxamount']").val(maxprice);
                                 }
                             });
                             $("#min-price").val("$" + $(".slider-3").slider("values", 0));
@@ -269,29 +271,29 @@
                         <li id="prices">PRICE</li>
                         <div class="price prices">
                             <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"><p>250</p></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"><p>1000+</p></span>
+                                <div class="ui-slider-range ui-widget-header ui-corner-all" style="width: 75%; left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
                             </div>
                         </div>
                         <script>
-                            $(function() {
-                                $(".slider-3").slider({
-                                    range: true,
-                                    min: 0,
-                                    max: 1000,
-                                    values: [250, 1000],
-                                    slide: function(event, ui) {
-                                        minprice = (ui.values[0]);
-                                        maxprice = (ui.values[1]);
-                                        $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
-                                        $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
-                                        $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
-                                        $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
-                                    }
-                                });
-                                $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-                                $("#max-price").val("$" + $(".slider-3").slider("values", 1));
+                            // $(function() {
+                            //     $(".slider-3").slider({
+                            //         range: true,
+                            //         min: 0,
+                            //         max: 1000,
+                            //         values: [250, 1000],
+                            //         slide: function(event, ui) {
+                            //             minprice = (ui.values[0]);
+                            //             maxprice = (ui.values[1]);
+                            //             $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
+                            //             $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
+                            //             $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
+                            //             $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
+                            //         }
+                            //     });
+                            //     $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+                            //     $("#max-price").val("$" + $(".slider-3").slider("values", 1));
 
-                            });
+                            // });
                         </script>
                     </div>
 
