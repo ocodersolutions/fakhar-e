@@ -29,6 +29,7 @@
         <script src="/assets/js/jquery.fullscreen-popup.js"></script>
 
     </head>
+
      <script>
             $(function() {
                 $(".login_signup").fullScreenPopup({
@@ -282,10 +283,10 @@
   <?php echo $this->content; ?>
         <!-- Modal -->
         
-        <div id="modal_total">
+        <!-- <div id="modal_total"> -->
 
         <!-- Modal of Popup Quick-view-product-item -->
-            <div class="modal fade bs-example-modal-lg modal_quick_view" id="modal_QV" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <!-- <div class="modal fade bs-example-modal-lg modal_quick_view" id="modal_QV" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -331,12 +332,12 @@
                     </div>
                 </div>
             </div>
-
+ -->
 
         <!-- End Modal of Popup Quick-view-product-item -->
                 
         <!-- Modal of Popup icon_alert -->
-            <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <!-- <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">                              
                     <div class="modal-content modal_alert">
                         <div class="modal-header">
@@ -363,9 +364,9 @@
                         </div>
                     </div>                                   
                 </div>
-            </div>
+            </div> -->
                 <!-- End Modal of Popup icon_alert -->
-        </div>
+        <!-- </div> -->
 
         <!-- End Modal -->
 </div>
@@ -397,27 +398,33 @@
             $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
         } else {
             $(this).removeClass('selected');
-            ($(this).find(".check")).remove();
+            $(this).find(".check")).remove();
         }
     });
-    // $(document).on("click",".refine .refine-colum ul li:after", function(){ 
-    //     alert("Goodbye!"); 
-    // });
-
-    $('.refine .refine-colum ul li').click(function() {
-        x = $(this).parents('.category');
-        if(x.length == 0){
-
-            if ($(this).hasClass("change") == false) {
-                $(this).addClass('change selected');
-            } else {
-                $(this).removeClass('change selected');
-            }
+  $('.fa-angle-down').click(function(){
+    console.log(this);
+        if ($(this).hasClass("selected") == false) {
+            $(this).addClass('selected');
+        }else{
+            $(this).removeClass('selected');
         }
+  });
+    $('.refine .refine-colum ul .fa-angle-down').click(function() {
+        
+        //console.log($(this));
+        // x = $(this).parents('.category');
+        // if(x.length == 0){
 
-        var attrContent = getComputedStyle(this, ':after').content;
-        var currentId = $(this).attr('id');
-        $('.refine .refine-colum .' + currentId +',.fsp-wrapper .refine-colum .' + currentId + '').animate({
+        //     if ($(this).hasClass("change") == false) {
+        //         $(this).addClass('change selected');
+        //     } else {
+        //         $(this).removeClass('change selected');
+        //     }
+        // }
+
+        //var attrContent = getComputedStyle(this, ':after').content;
+        var currentId = $(this)[0].attributes[0].nodeValue;
+        $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum .' + currentId + '').animate({
             left: "+=50",
             height: "toggle"
         }, 800, function() {});

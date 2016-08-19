@@ -13,24 +13,44 @@
 
            
                 <li id="category">CATEGORIES</li>
-                <div  class="category stage0" style="display: none; left: 100px;">
+                <i data-class="category" class="fa fa-angle-down" aria-hidden="true"></i>
+                <div class="category stage0" style="display: none; left: 100px;">
                     <ul>
                     
                     <?php foreach ($this->aJson as $aJson) { ?>
-                        <li class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> </li>
+                        <li class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
+                        </li>
+                        <?php if(isset($aJson['branch'])){ ?>
+                             <i data-class="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
+                       <?php } ?>
+
+                        
                             <div class="<?php  echo strtolower($aJson['label']); ?>">
                                 <ul>
                                     <?php 
                                     if(isset($aJson['branch'])) :
                                     foreach ($aJson['branch'] as $aJson1) { ?>
                                         <li class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?></li>
+                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?>
+                                        </li>
+                                        <?php if(isset($aJson1['branch'])){ ?>
+                                            <i data-class="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
+                                        <?php } ?>
+                                        
                                         <div style="display: none; left: 100px;" class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
                                             <ul>
                                             <?php if(isset($aJson1['branch'])) :
                                             foreach ($aJson1['branch'] as $aJson2) { ?>
                                             
-                                                    <li class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?></li>
+                                                    <li class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
+                                                    </li>
+                                                    <?php if(isset($aJson2['branch'])){ ?>
+                                                         <i data-class="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson2['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
+                                                    <?php } ?>
+                                                    
                                                 
                                             <?php }  endif; ?>
                                             </ul>
@@ -44,6 +64,7 @@
 
 
                 <li id="brands" >BRANDS</li>
+                <i data-class="brands" class="fa fa-angle-down" aria-hidden="true"></i>
                 <div class="brands stage0">
                     <div class="brand">
                         <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
@@ -68,6 +89,7 @@
 
                 <div id="1">
                     <li id="prices">PRICE</li>
+                    <i data-class="prices" class="fa fa-angle-down" aria-hidden="true"></i>
                     <div class="price prices stage0">
                         <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
                             <div class="ui-slider-range ui-widget-header ui-corner-all" style=" left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
@@ -99,7 +121,7 @@
                 </div>
 
                 <li id="colors">COLOR</li>                  
-                                        
+                <i data-class="colors" class="fa fa-angle-down" aria-hidden="true"></i>
                 <div class="colors stage0">
                     <div class="list-color">
 
@@ -117,6 +139,7 @@
                     </div>
                 </div>
                 <li id="deals">DEALS</li>
+                <i data-class="deals" class="fa fa-angle-down" aria-hidden="true"></i>
                 <div class="deals stage0">
                     <ul>
                         <li data-deal="onsale" class="item">All item on sale</li>
@@ -405,6 +428,93 @@
             <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
             <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
         </form>
+        <!-- Modal -->
+        <div id="modal_total">
+
+        <!-- Modal of Popup Quick-view-product-item -->
+            <div class="modal fade bs-example-modal-lg modal_quick_view" id="modal_QV" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row" id="append_modal">
+                                    <!-- <div class="col-lg-6 modal_body_left">
+                                        <img src="../assets/images/product_item_mobile.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-6 modal_body_right">
+                                        <p class="modal_name_item">Puma Number One Active Hoodie</p>
+                                        <p class="modal_brand_item">PUMA</p>
+                                        <p class="modal_price_item">39.00 CAD</p>
+                                        <div class="modal_buy_product">
+                                            <span class="btn-st-blue">BUY</span>
+                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="modal_alert_detail">DETAILS</p>
+                                        <p class="modal_alert_detail_atb">A classic branded sweater with lined hood</p>
+                                        <p class="modal_alert_detail_atb">Hooded</p>
+                                        <p class="modal_alert_detail_atb">Long sleeves</p>
+                                        <p class="modal_alert_detail_atb">Front pouch pocket</p>
+                                        <p class="modal_alert_detail_atb">Cotton/polyester</p>
+                                        <p class="modal_alert_detail_atb">Machine wash</p>
+                                        <p class="modal_alert_detail_atb">Imported</p>
+                                        <div class="modal_body_icon_link">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                            <a href="#"><i class="fa fa-tumblr"></i></a>
+                                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            <a href="#"><i class="fa fa-envelope-o fa_final"></i></a>
+                                        </div>
+                                        <div class="modal_body_footer">
+                                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                            <span>Get Sale Alert</span>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>                  
+                    </div>
+                </div>
+            </div>
+
+
+        <!-- End Modal of Popup Quick-view-product-item -->
+                
+        <!-- Modal of Popup icon_alert -->
+            <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">                              
+                    <div class="modal-content modal_alert">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                            <h2 class="popup_alert_title">CREATE SALE ALERT</h2>
+                        </div>
+                        <div class="modal-body">
+                            <img src="../assets/images/product_item_detail-mobile.jpg" alt="">
+                            <p class="modal_name_item">Botazzo Textural Derby Sneakers</p>
+                            <p class="modal_brand_item">PEGABO</p>
+                            <p class="modal_price_item">59.50 CAD</p>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="modal_footer_p1">Waiting for this item to go on sale?</p>
+                            <p class="modal_footer_p2">We'll send an email when the price drops.</p>
+                            <form action="" class="modal_form_alert">
+                                <input type="text" name="email-alert" placeholder="Youre Email Address">
+                                <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
+                            </form>
+                            <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
+                        </div>
+                    </div>                                   
+                </div>
+            </div>
+                <!-- End Modal of Popup icon_alert -->
+        </div>
+
+        <!-- End Modal -->
     </div>
 
     <div class="col-lg-8 col-sm-9">
@@ -543,3 +653,47 @@
 </script>
 <!-- <script src="/assets/js/jquery.fullscreen-popup.js"></script> -->
 
+<script>
+    $(document).ready(function($) {
+        
+         $(document).on('click','.quick_view_v2',function(){
+            feeddataid = $(this).data('article-id');
+            url = '/service/getfeeddetail';
+              $.ajax({
+                url: url,
+                type: 'POST',
+                data:  {
+                    feeddataid:feeddataid
+                },
+                dataType:'html',
+                  // beforeSend: function() {
+                  //     $("#loading-div-background").show(); 
+                  //  },
+                success: function (result) {
+                   //console.log(result);
+                   $("#append_modal").html(result);
+                   // var h=$(".modal_body_left").height();
+                   // $(".modal-body").css("height",h);
+                   $("#loading-div-background").hide();
+                   // $('#myModal').modal('show');
+                   // console.log( $(".modal").width() );
+                   // console.log( $(".container").width() );
+                   // $('.continueFixAtBottom').css({
+                   //        top: $(".modal").scrollTop()+$(".modal").height()-170,
+                   //          //left:  ($(".modal").width()-$('.container').width()-18)/2,
+                   //          left: 0,
+                   //    });
+                   // $('.my_tooltip').tooltipster({
+                   //      position: 'top',
+                   //      theme: 'tooltipster-shadow',
+                   //  });
+                },
+                 error: function (request, error) {
+                    console.log(request);
+                    console.log(error);
+                },
+            });
+        });
+   
+});  
+</script>
