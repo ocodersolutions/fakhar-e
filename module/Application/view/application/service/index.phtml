@@ -693,10 +693,8 @@
                 },
             });
         });
-   $(document).on('click','.icon_alert',function(){
-        alert("clicked");
-        alertdataid = $(this).data('alert-id');
-        console.log("id:"+ alertdataid);
+        function loadAjaxForAlert(){
+            alertdataid = $(this).data('alert-id');
         url = '/service/getfeedalert';
           $.ajax({
             url: url,
@@ -730,8 +728,9 @@
                 console.log(error);
             },
         });
-   });
-
+        }
+   $(document).on('click','.icon_alert',loadAjaxForAlert);
+  
 
 
 });  
