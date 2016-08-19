@@ -29,7 +29,7 @@
                     <a href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>" title="Purchase article through our partner"> <span class="buy_product uc_icon">BUY</span>
                     </a>
 
-                    <div class="quick_view_v2" data-toggle="modal" data-target=".modal_quick_view">
+                    <div class="quick_view_v2" data-article-id="<?php echo $prod->feeddataid ?>" data-toggle="modal" data-target=".modal_quick_view">
                         <span>QUICK VIEW</span>
                     </div>
                 </div>
