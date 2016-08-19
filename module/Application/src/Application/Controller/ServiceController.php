@@ -861,6 +861,74 @@ class ServiceController extends BaseActionController {
         }
     }
 
+ //Function is used to show alert of feed data
+    public function getfeedalertAction(){
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $oService = $this->getServiceLocator();
+            $oFeedData = $oService->get('FeedDataTable');
+            $oFeedMapping = $oService->get('FeedsMappingTable');
+            $feedDataId = $this->getRequest()->getPost()['feeddataid'];
+            //$feedDataId = $this->params()->fromRoute('feeddataid');
+            $feedDataDetail = $oFeedData->getItem($feedDataId);
+            /*         * ***********block for inserting data into table when user view this article********** */
+            $oArticleDetail = $oService->get('ArticleDetailTable');
+            $articleId = $feedDataDetail['id'];
+            $articleDetailData['feeddataid'] = $articleId;
+
+            $userId = null;
+               $oAuth = $this->getServiceLocator()->get('AuthService');
+            if ($oAuth->hasIdentity()) {
+                $this->layout()->showHeaderLinks = "LOGGED_IN";
+                $userInfo = $oAuth->getIdentity();
+                $userId = $userInfo->userId;
+                $this->layout()->firstName = $userInfo->firstName;
+            } else {
+                $this->redirect()->toRoute('auth');
+            }
+
+            $result = $oArticleDetail->getArticleDetailInfo($articleId, $userId);
+            if (isset($result) && empty($result)) {
+                $oArticleDetail->saveArticleDetailInfo($articleDetailData);
+            }
+            /**         * **********block for inserting data into table when user view this article********** */
+            $aParams = array();
+            $aParams['mappingType'] = 'store';
+            $aParams['feedId'] = $feedDataDetail['feedId'];
+            $storeDetail = $oFeedMapping->getFeedMapping($aParams);
+            $__viewVariables = array();
+            $__viewVariables['feedDataDetail'] = $feedDataDetail;
+            $__viewVariables['feedMappingDetail'] = $storeDetail;
+            
+            $oArticleClosetData = $oService->get('ArticleClosesetTable');
+            $articleLikes = $oArticleClosetData->getArticleLikes($articleId, $userId);
+            if (isset($articleLikes) && !empty($articleLikes)) {
+                 $__viewVariables['articlecloset'] = 'Y';
+            } else {
+                    $__viewVariables['articlecloset'] = 'N';
+            }
+
+            $oAttributes = $oService->get('ProductAttributesTable');
+            $aParams = array();
+            $aParams['type'] = 'size';
+            $aParams['productUID'] = $feedDataDetail['uid'];
+            $__viewVariables['feedDataSizes'] = $oAttributes->getFeedDataSizes($aParams);
+            
+            $oArticleCloseset = $oService->get('ArticleClosesetTable');
+            $likedarticles = $oArticleCloseset->getLikedArticles($userId);
+            $likearray = array();
+            if(count($likedarticles)>0) {
+               foreach($likedarticles as $likedarticle) {
+                    $likearray[] = $likedarticle['feeddataid'];
+                }
+            }
+            $__viewVariables['likearray'] = $likearray;
+
+            $viewModel = new ViewModel($__viewVariables);
+            $viewModel->setTerminal(true);
+            return  $viewModel;
+        }
+    }
+
     public function outfitsAction() {
         $oHelper = $this->getServiceLocator()->get('viewhelpermanager');
         $oHelper->get('HeadScript')->appendFile('/fancybox/source/jquery.fancybox.js');
@@ -1330,6 +1398,5 @@ class ServiceController extends BaseActionController {
             // return $this->response;
         }
     }    
-
-
+    
 }

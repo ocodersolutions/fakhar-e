@@ -1,0 +1,27 @@
+<?php
+
+$page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
+$title = 'ELNove - '.$this->feedDataDetail['caption'];
+?>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <i class="fa fa-bell-o" aria-hidden="true"></i>
+    <h2 class="popup_alert_title">CREATE SALE ALERT</h2>
+</div>
+<div class="modal-body">
+    <img src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="product images"/>
+    <p class="modal_name_item"><?php echo $this->feedDataDetail['caption']; ?></p>
+    <p class="modal_brand_item"><?php echo $this->feedDataDetail['brand']; ?></p>
+    <p class="modal_price_item"><span><?php echo ($this->feedDataDetail['onsale']=='Y'?$this->feedDataDetail['saleprice']:$this->feedDataDetail['price'])?></span><?php echo $this->feedDataDetail['currency'] ?></p>
+</div>
+<div class="modal-footer">
+    <p class="modal_footer_p1">Waiting for this item to go on sale?</p>
+    <p class="modal_footer_p2">We'll send an email when the price drops.</p>
+    <form action="" class="modal_form_alert">
+        <input type="text" name="email-alert" placeholder="Youre Email Address">
+        <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
+    </form>
+    <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
+</div>
