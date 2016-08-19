@@ -269,8 +269,18 @@ p.m-title{
 					background: #F0F1F2;
 				}
 				ul{
+					li.has-child:after{
+						content: "\f107";
+					    font: normal normal normal 13px/1 FontAwesome;
+					    float: right;
+					    line-height: 25px;
+					    margin-right: 13px;
+					}
+					li.li-up:after{
+						content: "\f106";
+					}
 					.fa-angle-down:before{
-						content: "";
+						color: rgba(0, 0, 255, 0);
 					}
 				}
 

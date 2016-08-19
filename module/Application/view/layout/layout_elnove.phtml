@@ -402,21 +402,13 @@
         }
     });
   $('.fa-angle-down').click(function(){
-    
+        var x = $(this)[0].attributes[0].nodeValue;
         if ($(this).hasClass("fa-selected") == false) {
             $(this).addClass('fa-selected');
-
-
-  $('.fa-angle-down:before').animate({
-            left: "+=50",
-            height: "toggle"
-        }, 800, function() {});
-
-
-
-
+            $('li#'+x).addClass('li-up');
         }else{
             $(this).removeClass('fa-selected');
+            $('li#'+x).removeClass('li-up');
         }
   });
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
