@@ -29,6 +29,14 @@
         <script src="/assets/js/jquery.fullscreen-popup.js"></script>
 
     </head>
+
+     <script>
+            // $(function() {
+            //     $(".login_signup").fullScreenPopup({
+            //         bgColor: '#fff'
+            //     });
+            // });
+        </script>
     <body>
 <div id="header-block">
     <div id="header-container" class="container-fluid hidden-xs">
@@ -390,27 +398,35 @@
             $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
         } else {
             $(this).removeClass('selected');
-            ($(this).find(".check")).remove();
+            ($(this).find(".check").remove());
         }
     });
-    // $(document).on("click",".refine .refine-colum ul li:after", function(){ 
-    //     alert("Goodbye!"); 
-    // });
-
-    $('.refine .refine-colum ul li').click(function() {
-        x = $(this).parents('.category');
-        if(x.length == 0){
-
-            if ($(this).hasClass("change") == false) {
-                $(this).addClass('change selected');
-            } else {
-                $(this).removeClass('change selected');
-            }
+  $('.fa-angle-down').click(function(){
+        var x = $(this)[0].attributes[0].nodeValue;
+        if ($(this).hasClass("fa-selected") == false) {
+            $(this).addClass('fa-selected');
+            $('li#'+x).addClass('li-up');
+        }else{
+            $(this).removeClass('fa-selected');
+            $('li#'+x).removeClass('li-up');
         }
+  });
+    $('.refine .refine-colum ul .fa-angle-down').click(function() {
+        
+        //console.log($(this));
+        // x = $(this).parents('.category');
+        // if(x.length == 0){
 
-        var attrContent = getComputedStyle(this, ':after').content;
-        var currentId = $(this).attr('id');
-        $('.refine .refine-colum .' + currentId +',.fsp-wrapper .refine-colum .' + currentId + '').animate({
+        //     if ($(this).hasClass("change") == false) {
+        //         $(this).addClass('change selected');
+        //     } else {
+        //         $(this).removeClass('change selected');
+        //     }
+        // }
+
+        //var attrContent = getComputedStyle(this, ':after').content;
+        var currentId = $(this)[0].attributes[0].nodeValue;
+        $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum .' + currentId + '').animate({
             left: "+=50",
             height: "toggle"
         }, 800, function() {});
@@ -425,22 +441,50 @@
                 $('.desktop .'+category_id).find('.item').addClass('selected')
             } else {
                 $(this).removeClass('has-child-selected');
+                category_id = $(this).attr('id');
                 $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
                 $('.desktop .'+category_id).find('.item').removeClass('selected')
             }
-            //console.log($('.desktop .'+category_id).find('.item').addClass('selected'));
+
+        array_category = $('.category .item.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_category.length ; i++) {
+            var a1 = (array_category[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='catids']").val(a2);
+        var a2 = [];
+        loadProductData();
+            
     });
 
     $('.category .item').click(function(){
-        console.log($(this));
+        
         if($(this).hasClass('selected')){
             $(this).removeClass('selected');
         }else{
             $(this).addClass('selected');
         }
+
+        array_category = $('.category .item.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_category.length ; i++) {
+            var a1 = (array_category[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='catids']").val(a2);
+        var a2 = [];
+        loadProductData();
+
     });
 
     $('.brands .list-brand li').click(function(){
+        if($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+        }else{
+            $(this).addClass('selected');
+        }
+
         array_brand = $('.brands .item.selected').toArray();
         var a2 =  [];
         for (i = 0; i < array_brand.length ; i++) {
@@ -449,9 +493,8 @@
         };
         $("input[name='brands']").val(a2);
         var a2 = [];
-        alert('start');
         loadProductData();
-        alert('done');
+        
     });
 
     $('.colors .list-color .color').click(function(){
@@ -466,12 +509,15 @@
     });
 
     $('.deals .item').click(function(){
+        console.log($(this));
             name_deal = $(this)[0].attributes[0].nodeValue;
             x = $("input[name='"+name_deal+"']").val();
             if(x == 1){
                 $("input[name='"+name_deal+"']").val('');
+                $(this).removeClass('selected');
             }else{
                 $("input[name='"+name_deal+"']").val('1');
+                $(this).addClass('selected');
             }         
     });
 
@@ -520,8 +566,27 @@
             // $(".uc_contact").mouseleave(function(){
             //     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
             // });
+            
+            $(document).on({
+                mouseout: function () {
+                    $("body").css("overflow", "auto");
+                }
+            }, '#modal_QV, #modal_alert');
+            $(document).on({
+                mouseover: function () {
+                    $("body").css("overflow", "hidden");
+                }
+            }, '#modal_QV, #modal_alert');
         }
     });
+
+    $('body').on('click', '.modal_body_footer', function (){
+        jQuery.noConflict();
+        $("#modal_QV").modal("hide");
+        $("#modal_alert").modal("show");
+        $('#modal_alert').css("overflow", "auto");
+    });  
+
     $(window).resize(function() {
         $('.share_product').height(function(){
             var height1 = $(this).parents(".product_item").find(".uc_contact").height();

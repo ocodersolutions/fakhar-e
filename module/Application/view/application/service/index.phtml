@@ -13,24 +13,45 @@
 
            
                 <li id="category">CATEGORIES</li>
-                <div  class="category stage0" style="display: none; left: 100px;">
+                <i data-class="category" class="fa fa-angle-down" aria-hidden="true"></i>
+                <div class="category stage0" style="display: none; left: 100px;">
                     <ul>
                     
+                    
                     <?php foreach ($this->aJson as $aJson) { ?>
-                        <li class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> </li>
+                        <li <?php if(!isset($aJson['branch'])){echo 'data-catids="'.$aJson['id'].'"';} ?> class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
+                        </li>
+                        <?php if(isset($aJson['branch'])){ ?>
+                             <i data-class="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
+                       <?php } ?>
+
+                        
                             <div class="<?php  echo strtolower($aJson['label']); ?>">
                                 <ul>
                                     <?php 
                                     if(isset($aJson['branch'])) :
                                     foreach ($aJson['branch'] as $aJson1) { ?>
-                                        <li class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?></li>
+                                        <li <?php if(!isset($aJson1['branch'])){echo 'data-catids="'.$aJson1['id'].'"';} ?> class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?>
+                                        </li>
+                                        <?php if(isset($aJson1['branch'])){ ?>
+                                            <i data-class="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
+                                        <?php } ?>
+                                        
                                         <div style="display: none; left: 100px;" class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
                                             <ul>
                                             <?php if(isset($aJson1['branch'])) :
                                             foreach ($aJson1['branch'] as $aJson2) { ?>
                                             
-                                                    <li class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?></li>
+                                                    <li <?php if(!isset($aJson2['branch'])){echo 'data-catids="'.$aJson2['id'].'"';} ?> class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
+                                                    </li>
+                                                    <?php if(isset($aJson2['branch'])){ ?>
+                                                         <i data-class="<?php $search = array(' ', '&');
+                                        echo strtolower (str_replace($search,'',$aJson2['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
+                                                    <?php } ?>
+                                                    
                                                 
                                             <?php }  endif; ?>
                                             </ul>
@@ -44,6 +65,7 @@
 
 
                 <li id="brands" >BRANDS</li>
+                <i data-class="brands" class="fa fa-angle-down" aria-hidden="true"></i>
                 <div class="brands stage0">
                     <div class="brand">
                         <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
@@ -68,6 +90,7 @@
 
                 <div id="1">
                     <li id="prices">PRICE</li>
+                    <i data-class="prices" class="fa fa-angle-down" aria-hidden="true"></i>
                     <div class="price prices stage0">
                         <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
                             <div class="ui-slider-range ui-widget-header ui-corner-all" style=" left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
@@ -99,7 +122,7 @@
                 </div>
 
                 <li id="colors">COLOR</li>                  
-                                        
+                <i data-class="colors" class="fa fa-angle-down" aria-hidden="true"></i>
                 <div class="colors stage0">
                     <div class="list-color">
 
@@ -117,6 +140,7 @@
                     </div>
                 </div>
                 <li id="deals">DEALS</li>
+                <i data-class="deals" class="fa fa-angle-down" aria-hidden="true"></i>
                 <div class="deals stage0">
                     <ul>
                         <li data-deal="onsale" class="item">All item on sale</li>
@@ -127,7 +151,7 @@
                         <li data-deal="discountcode" class="item">Discount</li>
                     </ul>
                 </div>
-                <<!-- li id="sizes">SIZE</li>
+                <!-- <li id="sizes">SIZE</li>
                 <div class="sizes stage0">
                     <div class="list-size">
                         <div class="size"><span value="xs" class="select">XS</span>
@@ -325,7 +349,8 @@
                             <li class="select">Discount</li>
                         </ul>
                     </div>
-              <!--       <li id="sizes">SIZE</li>
+                    <!--       
+                    <li id="sizes">SIZE</li>
                     <div class="sizes">
                         <div class="list-size">
                             <div class="size"><span value="xs" class="select">XS</span>
@@ -343,8 +368,8 @@
                             <div class="size"><span value="xxxl" class="select">XXXL</span>
                             </div>
                         </div>
-                    </div> -->
-             <!--        <li id="stores">STORE</li>
+                    </div>
+                    <li id="stores">STORE</li>
                     <div class="stores">
                         <div class="brand">
                             <input class="label-brand" placeholder="Search Stores">

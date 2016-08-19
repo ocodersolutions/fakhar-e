@@ -238,9 +238,30 @@ p.m-title{
 .refine{
 	font-family: @font;
 	font-size: 13px;
-	.refine-colum{
+	.refine-colum.desktop{
+			.fa-angle-down{
+			    position: absolute;
+			    margin-top: -33px;
+			    width: 30px;
+			    right: 0px;
+			    margin-right: 18px;
+			    line-height: 30px;
+			    text-align: center;
+			    cursor: pointer;
+			}
+			.fa-angle-down.fa-selected:before{
+				content: "\f106";
+			}
 			.category{
 				display: none;
+				
+				.item.selected:after{
+					content: "\f00c";
+					font: normal normal normal 9px/1 FontAwesome;
+					line-height: 25px;
+					float: right;
+    				margin-right: 10px;
+				}
 				.has-child-selected{
 					background: #F0F1F2;
 				}
@@ -248,10 +269,18 @@ p.m-title{
 					background: #F0F1F2;
 				}
 				ul{
-					li:after{
+					li.has-child:after{
 						content: "\f107";
-						font: normal normal normal 13px/1 FontAwesome;
-						line-height: 25px;
+					    font: normal normal normal 13px/1 FontAwesome;
+					    float: right;
+					    line-height: 25px;
+					    margin-right: 13px;
+					}
+					li.li-up:after{
+						content: "\f106";
+					}
+					.fa-angle-down:before{
+						color: rgba(0, 0, 255, 0);
 					}
 				}
 
@@ -271,9 +300,6 @@ p.m-title{
 							color: #000;
 						}
 						.selected:after{
-							content: "\f00c";
-							font: normal normal normal 9px/1 FontAwesome;
-							line-height: 25px;
 						}
 					}
 				}
@@ -289,7 +315,7 @@ p.m-title{
 						border: 1px solid #F0F1F2;
 					}
 					li:after{
-						content:"";
+						
 					}
 				}
 				li{
@@ -304,11 +330,7 @@ p.m-title{
 				}
 				
 				li:after{
-					content: "\f107";
-					font: normal normal normal 13px/1 FontAwesome;
-					float: right;
-					padding-right: 15px;
-					line-height: @height-refine;
+					
 
 				}
 			}
@@ -330,6 +352,8 @@ p.m-title{
 						content: "\f00c";
 						font: normal normal normal 9px/1 FontAwesome;
 						line-height: 25px;
+						float: right;
+						margin-right: 14px;
 					}
 				}
 		}
@@ -346,6 +370,11 @@ p.m-title{
 		}
 		.brands{
 			display: none;
+			.list-brand{
+				li:after{
+
+				}
+			}
 		}
 		.clothing{
 			display: none;
@@ -364,9 +393,6 @@ p.m-title{
 							    color: #000;
 						}
 						.selected:after{
-							content: "\f00c";
-							font: normal normal normal 9px/1 FontAwesome;
-							line-height: 25px;
 						}
 					
 					}
@@ -375,9 +401,7 @@ p.m-title{
 						color: #333;
 					}
 					li:after{
-						content: "\f107";
-					    font: normal normal normal 13px/1 FontAwesome;
-					    line-height: 25px;
+						
 					}
 					.selected:after{
 						content: "\f106";
@@ -401,9 +425,7 @@ p.m-title{
 						color: #000;
 					}
 					.selected:after{
-						content: "\f00c";
-						font: normal normal normal 9px/1 FontAwesome;
-						line-height: 25px;
+						
 					}
 				}
 		}
@@ -520,6 +542,9 @@ p.m-title{
 						content: "\f00c";
 						color: #444444;
 						font: normal normal normal 9px/1 FontAwesome;
+						float: right;
+					    line-height: 25px;
+					    margin-right: 12px;
 					}
 				}
 			}
