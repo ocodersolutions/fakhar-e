@@ -434,6 +434,7 @@
 
     // send to form input
     $('.category .has-child').click(function() {
+
             if ($(this).hasClass("has-child-selected") == false) {
                 $(this).addClass('has-child-selected');
                 category_id = $(this).attr('id');
@@ -457,6 +458,22 @@
         loadProductData();
             
     });
+    //clear filter
+    $('#clear-filter').click(function(){
+        $('.item.selected').removeClass('selected');
+        $('.has-child-selected').removeClass('has-child-selected');
+        $('.color.selected').removeClass('selected');
+        $('i.check.fa.fa-check').remove();
+        x = $('#productFilterDetail input[type="hidden"]');
+       // console.log(x);
+        
+        for (i = 0; i < x.length ; i++) {
+            y = x[i].attributes[3].nodeValue ;
+            console.log("input[name="+y+"]");
+            $("input[name="+y+"]").val("");
+        };
+    });
+    //clear filter
 
     $('.category .item').click(function(){
         
