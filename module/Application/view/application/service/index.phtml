@@ -2,7 +2,7 @@
         echo $this->headScript()->prependFile($this->basePath() . '/js/jquery.gray.js')
                                 ->prependFile($this->basePath() . '/js/jquery.js')
                                  ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
-                                ;
+                                 ;
         ?>
 
 <div class="row">
@@ -416,7 +416,9 @@
                 </div>
                 <div id="load-more" class="row text-center">
                     <button class="btn-st-silver">Load more</button>
+                    <a class="open-popup-test" href="" data-popup="#popup-test">Open popup</a>
                 </div>
+                                          
             </div>
         </div>
       
@@ -514,8 +516,7 @@
             $(window).scroll(function() {
 
                 var offset = ($(document).height() - $(window).height() )-2200;
-                  console.log("window scrollTop :"+ $(window).scrollTop() + ",document height :" + $(document).height() + ", window height"+ offset);
-                if($(window).scrollTop() >= offset) {
+                  if($(window).scrollTop() >= offset) {
                    
                      // ajax call get data from server and append to the div
                     if (loading == 0 && endData == 0){
@@ -540,18 +541,4 @@
 
 </script>
 <!-- <script src="/assets/js/jquery.fullscreen-popup.js"></script> -->
-<script>
-    $(function() {
-        $("#pop-menu").fullScreenPopup({
-            bgColor: '#fff'
-        });
-        $("#refine-search-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
-        $("#sort-item-popup").fullScreenPopup({
-            bgColor: '#fff'
-        });
-    });
 
-</script>
-<script src="/assets/js/jquery.fullscreen-popup.js"></script>

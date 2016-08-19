@@ -90,13 +90,13 @@
         });
         this.contentWrapper = $("<div/>", {
           "class": "" + this.options.contentWrapperClass,
-          "style": "width:100% ; height:100%;  position: absolute; top: 0; left: 0 "
+          "style": "width: " + this.targetSizes.width + "px; height: " + this.targetSizes.height + "px;  position: absolute; top: 50%; left: 50%; margin-left: -" + (this.targetSizes.width / 2) + "px; margin-top: -" + (this.targetSizes.height / 2) + "px"
         }).appendTo(this.mainWrapper);
         return this.close = $("<a/>", {
           href: "#",
-          html: "<span class='fa fa-times'></span>",
+          html: "&times;",
           "class": "" + this.options.closePopupClass,
-          "style": this.options.inlineStyles ? "position: absolute; right: 1.56em; top: 1.56em;" : void 0
+          "style": this.options.inlineStyles ? "position: absolute; right: 2em; top: 2em;" : void 0
         }).appendTo(this.mainWrapper);
       };
 

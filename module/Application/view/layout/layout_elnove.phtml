@@ -26,10 +26,16 @@
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
         <script src="/assets/js/jquery-ui.js"></script>
-        
+        <script src="/assets/js/jquery.fullscreen-popup.js"></script>
 
     </head>
-
+     <script>
+            $(function() {
+                $(".login_signup").fullScreenPopup({
+                    bgColor: '#fff'
+                });
+            });
+        </script>
     <body>
 <div id="header-block">
     <div id="header-container" class="container-fluid hidden-xs">
@@ -49,6 +55,10 @@
                     </div>
                 </div>
             </div>
+            <div id="popup-test" style="display: none; width: 640px">
+                    <h1>Popup #2</h1>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                </div>
         </div>
 
         <nav id="menu" class="row">
@@ -80,7 +90,8 @@
             </div>
             <div class="col-lg-10 col-lg-offseet-1 col-xs-10 col-xs-offset-1" id="search">
                 <form class="searchbox">
-                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search" class="searchbox-input" onkeyup="buttonUp();">
+                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search1" class="searchbox-input" onkeyup="buttonUp();">
+                    <input type="search" placeholder="Search lorem ipsum dolor sit amet consectur..." name="search2" class="searchbox-input" onkeyup="buttonUp();">
                     <button type="submit" class="searchbox-submit">
                         <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
                     </button>
@@ -269,6 +280,94 @@
 
 <div id="body-container" class="container-fluid">
   <?php echo $this->content; ?>
+        <!-- Modal -->
+        
+        <div id="modal_total">
+
+        <!-- Modal of Popup Quick-view-product-item -->
+            <div class="modal fade bs-example-modal-lg modal_quick_view" id="modal_QV" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-6 modal_body_left">
+                                        <img src="../assets/images/product_item_mobile.jpg" alt="">
+                                    </div>
+                                    <div class="col-lg-6 modal_body_right">
+                                        <p class="modal_name_item">Puma Number One Active Hoodie</p>
+                                        <p class="modal_brand_item">PUMA</p>
+                                        <p class="modal_price_item">39.00 CAD</p>
+                                        <div class="modal_buy_product">
+                                            <span class="btn-st-blue">BUY</span>
+                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="modal_alert_detail">DETAILS</p>
+                                        <p class="modal_alert_detail_atb">A classic branded sweater with lined hood</p>
+                                        <p class="modal_alert_detail_atb">Hooded</p>
+                                        <p class="modal_alert_detail_atb">Long sleeves</p>
+                                        <p class="modal_alert_detail_atb">Front pouch pocket</p>
+                                        <p class="modal_alert_detail_atb">Cotton/polyester</p>
+                                        <p class="modal_alert_detail_atb">Machine wash</p>
+                                        <p class="modal_alert_detail_atb">Imported</p>
+                                        <div class="modal_body_icon_link">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                            <a href="#"><i class="fa fa-tumblr"></i></a>
+                                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            <a href="#"><i class="fa fa-envelope-o fa_final"></i></a>
+                                        </div>
+                                        <div class="modal_body_footer">
+                                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                            <span>Get Sale Alert</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                  
+                    </div>
+                </div>
+            </div>
+
+
+        <!-- End Modal of Popup Quick-view-product-item -->
+                
+        <!-- Modal of Popup icon_alert -->
+            <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">                              
+                    <div class="modal-content modal_alert">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                            <h2 class="popup_alert_title">CREATE SALE ALERT</h2>
+                        </div>
+                        <div class="modal-body">
+                            <img src="../assets/images/product_item_detail-mobile.jpg" alt="">
+                            <p class="modal_name_item">Botazzo Textural Derby Sneakers</p>
+                            <p class="modal_brand_item">PEGABO</p>
+                            <p class="modal_price_item">59.50 CAD</p>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="modal_footer_p1">Waiting for this item to go on sale?</p>
+                            <p class="modal_footer_p2">We'll send an email when the price drops.</p>
+                            <form action="" class="modal_form_alert">
+                                <input type="text" name="email-alert" placeholder="Youre Email Address">
+                                <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
+                            </form>
+                            <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
+                        </div>
+                    </div>                                   
+                </div>
+            </div>
+                <!-- End Modal of Popup icon_alert -->
+        </div>
+
+        <!-- End Modal -->
 </div>
 <script type="text/javascript">
     
@@ -399,15 +498,35 @@
 
         if(screen.width >= 992)
         {
-            $(".product_item_popup").mouseenter(function(){
-                $(this).parent().find(".popup_item, .quick_view_v2").show();
-                var height1 = $(this).parent().find(".icon_like").height();
-                // console.log(height1);
-                $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
-            });
-            $(".uc_contact").mouseleave(function(){
-                $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
-            });
+            $(document).on({
+                mouseenter: function () {
+                    $(this).parent().find(".popup_item, .quick_view_v2").show();
+                    var height1 = $(this).parent().find(".icon_like").height();
+                    $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
+                }
+                // mouseleave: function () {
+                //     $(this).find('.btn-group').fadeOut();
+                // }
+            }, '.product_item_popup');
+            $(document).on({
+                // mouseenter: function () {
+                //     $(this).parent().find(".popup_item, .quick_view_v2").show();
+                //     var height1 = $(this).parent().find(".icon_like").height();
+                //     $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
+                // },
+                mouseleave: function () {
+                    $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
+                }
+            }, '.uc_contact');
+
+            // $(".product_item_popup").mouseenter(function(){
+            //     $(this).parent().find(".popup_item, .quick_view_v2").show();
+            //     var height1 = $(this).parent().find(".icon_like").height();
+            //     $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
+            // });
+            // $(".uc_contact").mouseleave(function(){
+            //     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
+            // });
         }
     });
     $(window).resize(function() {
@@ -433,11 +552,15 @@
 
     });
 
-    $(".hide_item").click(function() {        
+    $('body').on('click', '.hide_item', function (){
         $(this).parents(".product_item").find(".share_product").hide();
     });
 
-    $(".show_item").click(function() {
+    // $(".hide_item").click(function() {        
+    //     $(this).parents(".product_item").find(".share_product").hide();
+    // });
+
+    $('body').on('click', '.show_item', function (){
         $(this).parents('.product_item').find('.share_product').show();
         var height1 = $(this).height();
         $(this).parents(".product_item").find(".share_product").height(function(){
@@ -446,7 +569,16 @@
         });
     });
 
-    $(".icon_like").click(function() {
+    // $(".show_item").click(function() {
+    //     $(this).parents('.product_item').find('.share_product').show();
+    //     var height1 = $(this).height();
+    //     $(this).parents(".product_item").find(".share_product").height(function(){
+    //         var height2 = $(this).parents(".product_item").find(".uc_contact").height();
+    //         return height1 + height2;
+    //     });
+    // });
+
+    $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
         if (myClasses.contains("active")) {
             myClasses.remove("active");
@@ -455,14 +587,27 @@
         }
     });
 
-    $(".icon_alert").click(function() {
-        var myClasses = this.classList;
-        if (myClasses.contains("active")) {
-            myClasses.remove("active");
-        } else {
-            myClasses.add("active");
-        }
-    });        
+    // $(".icon_like").click(function() {
+    //     var myClasses = this.classList;
+    //     if (myClasses.contains("active")) {
+    //         myClasses.remove("active");
+    //     } else {
+    //         myClasses.add("active");
+    //     }
+    // });
+
+    // $(".icon_alert").click(function() {
+    //     var myClasses = this.classList;
+    //     if (myClasses.contains("active")) {
+    //         myClasses.remove("active");
+    //     } else {
+    //         myClasses.add("active");
+    //     }
+    // });   
+    
+    // $(".modal_body_icon_link").width(function(){
+    //     return $(this).find(".fa-facebook").width() + $(this).find(".fa_final");
+    // })  ;        
 </script> 
 
 <!-- End javascript of product-item -->
@@ -696,7 +841,9 @@
             //     }
             // });
             
-        </script>  
+        </script> 
 
+
+        
     </body>
 </html>
