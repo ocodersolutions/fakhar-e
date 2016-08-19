@@ -398,7 +398,7 @@
             $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
         } else {
             $(this).removeClass('selected');
-            $(this).find(".check")).remove();
+            $(this).find(".check").remove();
         }
     });
   $('.fa-angle-down').click(function(){
@@ -534,6 +534,19 @@
             // $(".uc_contact").mouseleave(function(){
             //     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
             // });
+            
+            $(document).on({
+                mouseout: function () {
+                    $("body").css("overflow", "auto");
+                }
+            }, '#modal_QV, #modal_alert');
+            $(document).on({
+                mouseover: function () {
+                    $("body").css("overflow", "hidden");
+                }
+            }, '#modal_QV, #modal_alert');
+
+
         }
     });
     $(window).resize(function() {
@@ -612,9 +625,12 @@
     //     }
     // });   
     
-    // $(".modal_body_icon_link").width(function(){
-    //     return $(this).find(".fa-facebook").width() + $(this).find(".fa_final");
-    // })  ;        
+    $("body").on("click", ".modal_body_footer", function() {
+        $("#modal_QV").modal("hide");
+        $("#modal_alert").modal("show");
+        $('#modal_alert').css("overflow", "auto");
+    });
+
 </script> 
 
 <!-- End javascript of product-item -->
