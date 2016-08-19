@@ -17,8 +17,9 @@
                 <div class="category stage0" style="display: none; left: 100px;">
                     <ul>
                     
+                    
                     <?php foreach ($this->aJson as $aJson) { ?>
-                        <li class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
+                        <li <?php if(!isset($aJson['branch'])){echo 'data-catids="'.$aJson['id'].'"';} ?> class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
                         </li>
                         <?php if(isset($aJson['branch'])){ ?>
                              <i data-class="<?php $search = array(' ', '&');
@@ -31,7 +32,7 @@
                                     <?php 
                                     if(isset($aJson['branch'])) :
                                     foreach ($aJson['branch'] as $aJson1) { ?>
-                                        <li class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
+                                        <li <?php if(!isset($aJson1['branch'])){echo 'data-catids="'.$aJson1['id'].'"';} ?> class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
                                         echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?>
                                         </li>
                                         <?php if(isset($aJson1['branch'])){ ?>
@@ -44,7 +45,7 @@
                                             <?php if(isset($aJson1['branch'])) :
                                             foreach ($aJson1['branch'] as $aJson2) { ?>
                                             
-                                                    <li class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
+                                                    <li <?php if(!isset($aJson2['branch'])){echo 'data-catids="'.$aJson2['id'].'"';} ?> class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
                                                     </li>
                                                     <?php if(isset($aJson2['branch'])){ ?>
                                                          <i data-class="<?php $search = array(' ', '&');

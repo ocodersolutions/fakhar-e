@@ -398,7 +398,7 @@
             $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
         } else {
             $(this).removeClass('selected');
-            ($(this).find(".check").remove();
+            ($(this).find(".check").remove());
         }
     });
   $('.fa-angle-down').click(function(){
@@ -441,22 +441,50 @@
                 $('.desktop .'+category_id).find('.item').addClass('selected')
             } else {
                 $(this).removeClass('has-child-selected');
+                category_id = $(this).attr('id');
                 $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
                 $('.desktop .'+category_id).find('.item').removeClass('selected')
             }
-            //console.log($('.desktop .'+category_id).find('.item').addClass('selected'));
+
+        array_category = $('.category .item.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_category.length ; i++) {
+            var a1 = (array_category[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='catids']").val(a2);
+        var a2 = [];
+        loadProductData();
+            
     });
 
     $('.category .item').click(function(){
-        console.log($(this));
+        
         if($(this).hasClass('selected')){
             $(this).removeClass('selected');
         }else{
             $(this).addClass('selected');
         }
+
+        array_category = $('.category .item.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_category.length ; i++) {
+            var a1 = (array_category[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='catids']").val(a2);
+        var a2 = [];
+        loadProductData();
+
     });
 
     $('.brands .list-brand li').click(function(){
+        if($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+        }else{
+            $(this).addClass('selected');
+        }
+
         array_brand = $('.brands .item.selected').toArray();
         var a2 =  [];
         for (i = 0; i < array_brand.length ; i++) {
@@ -465,9 +493,8 @@
         };
         $("input[name='brands']").val(a2);
         var a2 = [];
-        alert('start');
         loadProductData();
-        alert('done');
+        
     });
 
     $('.colors .list-color .color').click(function(){
@@ -482,12 +509,15 @@
     });
 
     $('.deals .item').click(function(){
+        console.log($(this));
             name_deal = $(this)[0].attributes[0].nodeValue;
             x = $("input[name='"+name_deal+"']").val();
             if(x == 1){
                 $("input[name='"+name_deal+"']").val('');
+                $(this).removeClass('selected');
             }else{
                 $("input[name='"+name_deal+"']").val('1');
+                $(this).addClass('selected');
             }         
     });
 
