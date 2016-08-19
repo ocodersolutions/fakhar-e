@@ -1,0 +1,138 @@
+<?php
+
+$page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
+$title = 'ELNove - '.$this->feedDataDetail['caption'];
+?>
+
+<div class="container grey_bg" style="margin-bottom:60px">
+    <div class="left_slider_box">
+        <div id="owl-demo9" class="owlnew">
+            <div class="item">
+            <?php if(file_exists('/feed/'.$this->feedDataDetail['feedId'].'/'.$this->feedDataDetail['img_local_name'])) { ?>
+            	<img src="<?php echo $this->basePath() . "/feed/{$this->feedDataDetail['feedId']}/{$this->feedDataDetail['img_local_name']}"; ?>" alt="Owl Image">
+				<?php } else { ?>
+					<img src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="Owl Image">
+				<?php } ?>            
+            </div>
+            <!--<div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>
+            <div class="item"><img src="/img/small_slider_img3.jpg" alt="Owl Image"></div>-->
+        </div>
+    </div>
+
+    <div class="center_img_box">
+        <img src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="Owl Image">
+    </div>
+
+    <div class="right_info_box">
+        <h1><?php echo $this->feedDataDetail['caption']; ?></h1>
+        <span><?php echo ($this->feedDataDetail['onsale']=='Y'?$this->feedDataDetail['saleprice']:$this->feedDataDetail['price'])?></span><span class="currency"><?php echo $this->feedDataDetail['currency'] ?></span>
+        <p><?php echo $this->feedDataDetail['description']; ?></p>
+        <div class="name_store">
+            <?php echo $this->feedDataDetail['brand']; ?>
+        </div>
+        <div class="save">
+            <?php if(in_array($this->feedDataDetail['id'],$this->likearray)) { ?>
+                <img id="myclosesetImg" data-id="<?php echo base64_encode($this->feedDataDetail['id']); ?>" src="/img/thumb.png" alt="Owl Image" data-status="<?php echo $this->feedDataDetail['id']?>">
+                <a href="javascript:void(0)" class="mycloseset" data-id="<?php echo base64_encode($this->feedDataDetail['id']); ?>">
+                    SAVED TO MY CLOSET
+                </a>
+            <?php } else { ?>
+                <img id="myclosesetImg" data-id="<?php echo base64_encode($this->feedDataDetail['id']); ?>" src="/img/blank_like.png" alt="Owl Image" data-status="<?php echo $this->feedDataDetail['id']?>">
+                <a href="javascript:void(0)" class="mycloseset" data-id="<?php echo base64_encode($this->feedDataDetail['id']); ?>">
+                    SAVE TO MY CLOSET
+                </a>
+             <?php } ?>
+        </div>
+        <div class="link_list">
+            <ul>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/f.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/p1.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/t.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/g.png"></a></li>
+                <li><a class="sharethis" href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>" target="_blank"><img src="/img/msg.png"></a></li>
+            </ul>
+            <div class="clr"></div>
+        </div>
+    </div>
+
+    <div class="clr"></div>
+</div>
+
+
+
+</div>
+
+<div class="continue continueFixAtBottom">
+    <div class="container">
+        <div class="image-cross fl">
+            <a class="backButtonHideModel" href="#"><img src="/img/close.png">BACK</a>
+        </div>
+
+        <div class="btn-con1 fr">
+            <a target="_blank" class="gotourl my_tooltip" title="Purchase article through our partner" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->feedDataDetail['id']))); ?>">BUY NOW</a>
+        </div>
+    </div><!--container-->
+</div><!-- continue-->
+
+<br /><br /><br /><br /><br /><br />
+<img src="<?php echo $this->feedDataDetail['impressionurl']; ?>" style="display:none">
+<script src="<?php echo $this->basePath(); ?>/js/owl.carousel.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#owl-demo9").owlCarousel({
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+            navigation: false,
+            items: 3,
+            itemsDesktop: [1199, 3],
+            itemsDesktopSmall: [979, 3]
+        });
+        /*****************block for adding this product into my coloseset**************/
+        $('.mycloseset,#myclosesetImg').on('click', function () {
+        	
+            var id = $(this).data('id');
+            var url = "<?php echo $this->basePath(); ?>/service/likeclosset/";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {closesetId: id},
+                dataType: 'json',
+                success: function (result) {
+                    if (result.status == 'N') {
+                        jQuery.gritter.add({ 
+                            //title: result.mgs,
+                            title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">'+result.mgs+'</div></div><div class="my_close my_wrap_close">\
+                                    <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                    </div>',
+                            class_name: 'growl-missing',
+                            sticky: false,
+                            time: 3000
+                        }); 
+                        
+                    } else if (result.status == 'Y') {
+                        jQuery.gritter.add({
+                            //title: result.mgs,
+                            title: '<div class="wrap_ion_mgs"><div class="icon_gritter"></div><div class="dary_message">Article was successfully added to your closet</div></div><div class="my_close my_wrap_close">\
+                                    <a href="javascript:void(0)"  class="close-reveal-modal x_close type_close"><span>X</span></a>\
+                                    </div>',
+                            class_name: 'growl-success',
+                            sticky: false,
+                            time: 3000
+                        }); 
+                        $("[data-status="+ result.idf +"]").attr('src','/img/thumb.png');
+                        $(".mycloseset").text("SAVED TO MY CLOSET");
+                        //var likesd = result.count + ' likes';
+                        //$('#like_' + result.idf).html(likesd);
+                    } else {
+                        myalert('moveFromBoughtAlert3', 'type_remove', 'Internal Server Error', 'Please contact site administrator.');
+                    }
+                }});
+        });
+        /*****************End block for adding this product into my coloseset**************/
+    });
+</script>
