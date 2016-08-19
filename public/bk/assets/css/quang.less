@@ -241,13 +241,15 @@ p.m-title{
 	.refine-colum.desktop{
 			.fa-angle-down{
 			    position: absolute;
-			    margin-left: 165px;
-			    margin-top: -25px;
+			    margin-top: -33px;
 			    width: 30px;
+			    right: 0px;
+			    margin-right: 18px;
+			    line-height: 30px;
 			    text-align: center;
 			    cursor: pointer;
 			}
-			.fa-angle-down.selected:before{
+			.fa-angle-down.fa-selected:before{
 				content: "\f106";
 			}
 			.category{
@@ -267,8 +269,8 @@ p.m-title{
 					background: #F0F1F2;
 				}
 				ul{
-					li:after{
-					
+					.fa-angle-down:before{
+						content: "";
 					}
 				}
 
@@ -303,7 +305,7 @@ p.m-title{
 						border: 1px solid #F0F1F2;
 					}
 					li:after{
-						content:"";
+						
 					}
 				}
 				li{

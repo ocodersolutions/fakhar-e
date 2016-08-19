@@ -398,15 +398,25 @@
             $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
         } else {
             $(this).removeClass('selected');
-            $(this).find(".check")).remove();
+            ($(this).find(".check")).remove();
         }
     });
   $('.fa-angle-down').click(function(){
-    console.log(this);
-        if ($(this).hasClass("selected") == false) {
-            $(this).addClass('selected');
+    
+        if ($(this).hasClass("fa-selected") == false) {
+            $(this).addClass('fa-selected');
+
+
+  $('.fa-angle-down:before').animate({
+            left: "+=50",
+            height: "toggle"
+        }, 800, function() {});
+
+
+
+
         }else{
-            $(this).removeClass('selected');
+            $(this).removeClass('fa-selected');
         }
   });
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
