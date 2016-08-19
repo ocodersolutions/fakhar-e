@@ -31,11 +31,11 @@
     </head>
 
      <script>
-            $(function() {
-                $(".login_signup").fullScreenPopup({
-                    bgColor: '#fff'
-                });
-            });
+            // $(function() {
+            //     $(".login_signup").fullScreenPopup({
+            //         bgColor: '#fff'
+            //     });
+            // });
         </script>
     <body>
 <div id="header-block">
@@ -566,8 +566,27 @@
             // $(".uc_contact").mouseleave(function(){
             //     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
             // });
+            
+            $(document).on({
+                mouseout: function () {
+                    $("body").css("overflow", "auto");
+                }
+            }, '#modal_QV, #modal_alert');
+            $(document).on({
+                mouseover: function () {
+                    $("body").css("overflow", "hidden");
+                }
+            }, '#modal_QV, #modal_alert');
         }
     });
+
+    $('body').on('click', '.modal_body_footer', function (){
+        jQuery.noConflict();
+        $("#modal_QV").modal("hide");
+        $("#modal_alert").modal("show");
+        $('#modal_alert').css("overflow", "auto");
+    });  
+
     $(window).resize(function() {
         $('.share_product').height(function(){
             var height1 = $(this).parents(".product_item").find(".uc_contact").height();
