@@ -350,23 +350,39 @@ a{
                 outline:0;
                 z-index: 1;
                 display: inline-block;
-                width:50%;
+                width: 30%;
                 height:40px;
                 margin:0;
-                padding:0px 55px 0px 20px;
+                padding:0px 55px 0px 5px;
                 color:#85A2BB;
                 &:first-child{
+                    width:60%;
                     padding-left: 30px;
                     padding-right: 5px;
                 }
             }
-        }
-        .searchbox-open {
-            .searchbox-input {
-                &:first-child{
-                    border-right: 2px double #33648D;
+            .charater-center{
+                display: none;
+                text-align: right;
+                width: 10%;
+                height: 40px;
+                float: left;
+                background-color: #F0F4F7;
+                &:before{
+                    line-height: 40px;
+                    content: "\f1fa";
+                    font-family: FontAwesome;
+                    font-size: 16px;
+                    color: #ADC1D1;
                 }
             }
+        }
+        .searchbox-open {
+            
+                .charater-center{
+                    display: block;
+                }
+           
         }
 
         .searchbox-input::-webkit-input-placeholder {
