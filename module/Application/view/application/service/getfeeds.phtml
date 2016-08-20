@@ -81,8 +81,10 @@
             <div class="clear_float"></div>
 
             <div class="uc_info">
-                <p class="uc_job"><span>65.00 CAD</span>&nbsp;&nbsp;
-                    <?php echo ($prod->onsale=='Y'?$prod->saleprice:$prod->price)?> CAD</p>
+                <p class="uc_job">
+                    <?php 
+                    echo ($prod->onsale=='Y' ? "<span>".$prod->price." ".$prod->currency."</span>" : "") ?>&nbsp;&nbsp;
+                    <?php echo ($prod->onsale=='Y'?$prod->saleprice:$prod->price)?> <?php echo $prod->currency ?></p>
                 <p>
                     <?php echo $this->string_helper($prod->caption); ?></p>
             </div>
