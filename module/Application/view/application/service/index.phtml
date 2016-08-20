@@ -17,8 +17,9 @@
                 <div class="category stage0" style="display: none; left: 100px;">
                     <ul>
                     
+                    
                     <?php foreach ($this->aJson as $aJson) { ?>
-                        <li class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
+                        <li <?php if(!isset($aJson['branch'])){echo 'data-catids="'.$aJson['id'].'"';} ?> class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
                         </li>
                         <?php if(isset($aJson['branch'])){ ?>
                              <i data-class="<?php $search = array(' ', '&');
@@ -31,7 +32,7 @@
                                     <?php 
                                     if(isset($aJson['branch'])) :
                                     foreach ($aJson['branch'] as $aJson1) { ?>
-                                        <li class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
+                                        <li <?php if(!isset($aJson1['branch'])){echo 'data-catids="'.$aJson1['id'].'"';} ?> class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
                                         echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?>
                                         </li>
                                         <?php if(isset($aJson1['branch'])){ ?>
@@ -44,7 +45,7 @@
                                             <?php if(isset($aJson1['branch'])) :
                                             foreach ($aJson1['branch'] as $aJson2) { ?>
                                             
-                                                    <li class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
+                                                    <li <?php if(!isset($aJson2['branch'])){echo 'data-catids="'.$aJson2['id'].'"';} ?> class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
                                                     </li>
                                                     <?php if(isset($aJson2['branch'])){ ?>
                                                          <i data-class="<?php $search = array(' ', '&');
@@ -198,7 +199,7 @@
                     </div>
                 </div> -->
             </ul>
-            <button id="submit" type="submit" form="form1" value="Submit">CLEAR FILTER</button>
+            <button id="clear-filter" type="submit" >CLEAR FILTER</button>
         </div>
         <!-- popup-->
         <div class="refine " style="display: none;">
@@ -485,8 +486,8 @@
         <!-- Modal of Popup icon_alert -->
             <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">                              
-                    <div class="modal-content modal_alert">
-                        <div class="modal-header">
+                    <div class="modal-content modal_alert" id="alert-content">
+                        <!-- <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -507,7 +508,7 @@
                                 <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
                             </form>
                             <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
-                        </div>
+                        </div> -->
                     </div>                                   
                 </div>
             </div>
@@ -672,8 +673,6 @@
                 success: function (result) {
                    //console.log(result);
                    $("#append_modal").html(result);
-                   // var h=$(".modal_body_left").height();
-                   // $(".modal-body").css("height",h);
                    $("#loading-div-background").hide();
                    // $('#myModal').modal('show');
                    // console.log( $(".modal").width() );
@@ -694,6 +693,45 @@
                 },
             });
         });
-   
+        function loadAjaxForAlert(){
+            alertdataid = $(this).data('alert-id');
+        url = '/service/getfeedalert';
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data:  {
+                feeddataid:alertdataid
+            },
+            dataType:'html',
+              // beforeSend: function() {
+              //     $("#loading-div-background").show(); 
+              //  },
+            success: function (result) {
+               console.log(result);
+               $("#alert-content").html(result);
+               $("#loading-div-background").hide();
+               // $('#myModal').modal('show');
+               // console.log( $(".modal").width() );
+               // console.log( $(".container").width() );
+               // $('.continueFixAtBottom').css({
+               //        top: $(".modal").scrollTop()+$(".modal").height()-170,
+               //          //left:  ($(".modal").width()-$('.container').width()-18)/2,
+               //          left: 0,
+               //    });
+               // $('.my_tooltip').tooltipster({
+               //      position: 'top',
+               //      theme: 'tooltipster-shadow',
+               //  });
+            },
+             error: function (request, error) {
+                console.log(request);
+                console.log(error);
+            },
+        });
+        }
+   $(document).on('click','.icon_alert',loadAjaxForAlert);
+  
+
+
 });  
 </script>

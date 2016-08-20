@@ -269,8 +269,18 @@ p.m-title{
 					background: #F0F1F2;
 				}
 				ul{
+					li.has-child:after{
+						content: "\f107";
+					    font: normal normal normal 13px/1 FontAwesome;
+					    float: right;
+					    line-height: 25px;
+					    margin-right: 13px;
+					}
+					li.li-up:after{
+						content: "\f106";
+					}
 					.fa-angle-down:before{
-						content: "";
+						color: rgba(0, 0, 255, 0);
 					}
 				}
 
@@ -342,6 +352,8 @@ p.m-title{
 						content: "\f00c";
 						font: normal normal normal 9px/1 FontAwesome;
 						line-height: 25px;
+						float: right;
+						margin-right: 14px;
 					}
 				}
 		}
@@ -358,6 +370,11 @@ p.m-title{
 		}
 		.brands{
 			display: none;
+			.list-brand{
+				li:after{
+
+				}
+			}
 		}
 		.clothing{
 			display: none;
@@ -525,6 +542,9 @@ p.m-title{
 						content: "\f00c";
 						color: #444444;
 						font: normal normal normal 9px/1 FontAwesome;
+						float: right;
+					    line-height: 25px;
+					    margin-right: 12px;
 					}
 				}
 			}

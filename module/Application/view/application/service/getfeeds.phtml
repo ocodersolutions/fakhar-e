@@ -22,8 +22,8 @@
                         <i class="fa fa-share-alt" aria-hidden="true"></i>
                     </span>
 
-                    <span class="uc_icon icon_alert" data-toggle="modal" data-target=".modal_icon_alert">
-                        <i class="fa fa-bell-o" aria-hidden="true"></i>
+                    <span class="uc_icon icon_alert" data-toggle="modal" data-target=".modal_icon_alert" data-alert-id="<?php echo  $prod->feeddataid; ?>">
+                        <i class="fa fa-bell-o" aria-hidden="true" ></i>
                     </span>
 
                     <a href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($prod->feeddataid))); ?>" title="Purchase article through our partner"> <span class="buy_product uc_icon">BUY</span>
