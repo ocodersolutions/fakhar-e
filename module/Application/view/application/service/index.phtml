@@ -425,7 +425,6 @@
             <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
             <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
             <input type="hidden" id="discountcode" class="form-control" name="discountcode">
-            <input type="hidden" id="orderby" class="form-control" name="orderby">
             <input type="hidden" id="page" class="form-control" name="page" value="2">
             <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
             <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
@@ -657,15 +656,6 @@
 
 <script>
     $(document).ready(function($) {
-
-        $('body').on('click', '.modal_body_footer', function (){
-        jQuery.noConflict();
-        // $("#modal_QV").modal("hide");
-        // $("#modal_alert").modal("show");
-        // alert(id);
-        $('.icon_alert').trigger('click');
-        $('#modal_alert').css("overflow", "auto");
-    });  
         
          $(document).on('click','.quick_view_v2',function(){
             feeddataid = $(this).data('article-id');
@@ -704,43 +694,11 @@
             });
         });
         
-   $(document).on('click','.icon_alert','.modal_body_footer',function(){
-    alert('clicked');
+   $(document).on('click','.icon_alert',function(){
         alertdataid = $(this).data('alert-id');
-        url = '/service/getfeedalert';
-          $.ajax({
-            url: url,
-            type: 'POST',
-            data:  {
-                feeddataid:alertdataid
-            },
-            dataType:'html',
-              // beforeSend: function() {
-              //     $("#loading-div-background").show(); 
-              //  },
-            success: function (result) {
-               $("#alert-content").html(result);
-               $("#loading-div-background").hide();
-               // $('#myModal').modal('show');
-               // console.log( $(".modal").width() );
-               // console.log( $(".container").width() );
-               // $('.continueFixAtBottom').css({
-               //        top: $(".modal").scrollTop()+$(".modal").height()-170,
-               //          //left:  ($(".modal").width()-$('.container').width()-18)/2,
-               //          left: 0,
-               //    });
-               // $('.my_tooltip').tooltipster({
-               //      position: 'top',
-               //      theme: 'tooltipster-shadow',
-               //  });
-            },
-             error: function (request, error) {
-                console.log(request);
-                console.log(error);
-            },
-        });
+        loadAjaxForAlert(alertdataid);
    });
-  
+        
 
 
 });  
