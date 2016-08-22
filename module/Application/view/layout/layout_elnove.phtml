@@ -317,7 +317,7 @@
     </div>  
     <script>
     jQuery(document).ready(function($) {
-         $("#refine-search-popup,#pop-menu,#sort-item-popup,.uc_avatar.img-responsive").click(function(){
+         $("#refine-search-popup,#pop-menu,.uc_avatar.img-responsive").click(function(){
             var w = jQuery(".fsp-content").width();
             $("p.m-title").css('width',w);
         });
@@ -638,19 +638,28 @@
             //     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
             // });
             
-            $(document).on({
-                mouseout: function () {
-                    $("body").css({"overflow": "auto", "padding-right": "0px"});
-                }
-            }, '#modal_QV, #modal_alert');
-            $(document).on({
-                mouseover: function () {
-                    $("body").css("overflow", "hidden");
-                }
-            }, '#modal_QV, #modal_alert');
+            // $(document).on({
+            //     mouseout: function () {
+            //         $("body").css({"overflow": "auto", "padding-right": "0px"});
+            //     }
+            // }, '#modal_QV, #modal_alert');
+            // $(document).on({
+            //     mouseover: function () {
+            //         $("body").css("overflow", "hidden");
+            //     }
+            // }, '#modal_QV, #modal_alert');
         }
 
-        
+        $(document).on({
+            mouseout: function () {
+                $("body").css({"overflow": "auto", "padding-right": "0px"});
+            }
+        }, '#modal_QV, #modal_alert');
+        $(document).on({
+            mouseover: function () {
+                $("body").css("overflow", "hidden");
+            }
+        }, '#modal_QV, #modal_alert');        
 
     });
     function loadAjaxForAlert(alertdataid){

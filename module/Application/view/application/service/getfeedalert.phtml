@@ -11,7 +11,7 @@ $title = 'ELNove - '.$this->feedDataDetail['caption'];
     <h2 class="popup_alert_title">CREATE SALE ALERT</h2>
 </div>
 <div class="modal-body">
-    <img src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="product images"/>
+    <img class="img-responsive" src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="product images"/>
     <p class="modal_name_item"><?php echo $this->feedDataDetail['caption']; ?></p>
     <p class="modal_brand_item"><?php echo $this->feedDataDetail['brand']; ?></p>
     <p class="modal_price_item"><span><?php echo ($this->feedDataDetail['onsale']=='Y'?$this->feedDataDetail['saleprice']:$this->feedDataDetail['price'])?></span><?php echo $this->feedDataDetail['currency'] ?></p>

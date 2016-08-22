@@ -656,7 +656,7 @@
 <script>
     $(document).ready(function($) {
         
-         $(document).on('click','.quick_view_v2',function(){
+        $(document).on('click','.quick_view_v2, .uc_avatar',function(){
             feeddataid = $(this).data('article-id');
             url = '/service/getfeeddetail';
               $.ajax({
@@ -693,6 +693,8 @@
                 },
             });
         });
+
+        
         
    $(document).on('click','.icon_alert',function(){
         alertdataid = $(this).data('alert-id');
