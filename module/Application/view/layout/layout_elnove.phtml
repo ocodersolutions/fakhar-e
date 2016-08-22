@@ -59,12 +59,56 @@
                     <div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="assets/images/logo1.jpg" alt="" class="top-logo">
                     </div>
                     <div class="right-side col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <?php if( isset($this->showHeaderLinks) && $this->showHeaderLinks=='LOGGED_IN' ) { ?>
+                            <div class="uc_clean_accordion">
+                                <div class="uc_clean_accordion_wrap">
+                                    <div id="accordion" class="uc_clean_accorder_content">
+                                        <h3 class="uc_head_line">
+                                            <a class="uc_link_tittle">WELCOME,<?php echo $this->firstName; ?></a>
+                                        </h3>
+                                        <div class="uc_line_content">
+                                            <ul class="uc_des">
+                                                <li><a href="/profile/myaccount">My Profile</a>
+                                                </li>
+                                                <li><a href="/auth/logout">Logout</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <?php } else { ?>
                         <div class="login_signup">
-                            <a href="#">LOGIN</a>
+                            <a href="/auth/login">LOGIN</a>
                             /
-                            <a href="#">SIGN UP</a>
+                            <a href="/profile">SIGN UP</a>
                         </div>
-                        <a href="#" class="btn-st-blue">GET STYLED</a>
+                    <?php }?>
+                        <?php
+                            $step = 0;
+                            $request_uri = $_SERVER['REQUEST_URI'];
+                            if($request_uri == '/profile') {
+                                $step = 1;
+                            } else if($request_uri == '/profile/you') {
+                                $step = 2;
+                            } else if($request_uri == '/profile/size') {
+                                $step = 3;
+                            } else if($request_uri == '/profile/brands') {
+                                $step = 4;
+                            } else if($request_uri == '/profile/price') {
+                                $step = 5;
+                            } else if($request_uri == '/profile/signup') {
+                                $step = 6;
+                            }
+                            ?>
+                            <?php if($step != 0) { ?>
+                                <a  href="javascript:void(0);" class="btn-st-blue">Step <?php echo $step; ?> of 6</a>
+                            <?php } else { ?>
+                                <a href="/profile" class="btn-st-blue">GET STARTED</a>
+                            <?php } ?>
+                        <!-- <a href="#" class="btn-st-blue">GET STYLED</a> -->
                     </div>
                 </div>
             </div>
@@ -76,23 +120,23 @@
                 <div class="row">
                     <div class="col-lg-12 col-xs-12 text-center" id="top-nav" class="top-navbar">
                         <ul>
-                            <li><a href="">HOW IT WORKS</a>
+                            <li><a href="/info/how-it-works">HOW IT WORKS</a>
                             </li>
-                            <li><a href="">ABOUT US</a>
+                            <li><a href="/info/about-us">ABOUT US</a>
                             </li>
-                            <li><a href="">BLOG</a>
+                            <li><a href="http://<?=URL_BLOG?>">BLOG</a>
                             </li>
-                            <li><a href="">FAQ</a>
+                            <li><a href="/info/frequently-asked-questions">FAQ</a>
                             </li>
-                            <li><a href="">SHIPPING</a>
+                            <li><a href="/info/frequently-asked-questions?tag=shipping">SHIPPING</a>
                             </li>
-                            <li><a href="">PRICING</a>
+                            <li><a href="/info/frequently-asked-questions?tag=pricing"">PRICING</a>
                             </li>
-                            <li><a href="">EXCHANGE & RETURNS</a>
+                            <li><a href="/info/frequently-asked-questions?tag=shipping">EXCHANGE & RETURNS</a>
                             </li>
-                            <li><a href="">CAREERS</a>
+                            <li><a href="/info/careers">CAREERS</a>
                             </li>
-                            <li><a href="">CONTACT US</a>
+                            <li><a href="/info/contact-us">CONTACT US</a>
                             </li>
                         </ul>
                     </div>
@@ -147,23 +191,23 @@
                 <div class="row">
                     <p class="m-title"> MENU</p>
                     <ul>
-                        <li><a href="">HOW IT WORKS</a>
+                        <li><a href="/info/how-it-works">HOW IT WORKS</a>
                         </li>
-                        <li><a href="">ABOUT US</a>
+                        <li><a href="/info/about-us">ABOUT US</a>
                         </li>
-                        <li><a href="">BLOG</a>
+                        <li><a href="http://<?=URL_BLOG?>">BLOG</a>
                         </li>
-                        <li><a href="">FAQ</a>
+                        <li><a href="/info/frequently-asked-questions">FAQ</a>
                         </li>
-                        <li><a href="">SHIPPING</a>
+                        <li><a href="/info/frequently-asked-questions?tag=shipping">SHIPPING</a>
                         </li>
-                        <li><a href="">PRICING</a>
+                        <li><a href="/info/frequently-asked-questions?tag=pricing"">PRICING</a>
                         </li>
-                        <li><a href="">EXCHANGE & RETURNS</a>
+                        <li><a href="/info/frequently-asked-questions?tag=shipping">EXCHANGE & RETURNS</a>
                         </li>
-                        <li><a href="">CAREERS</a>
+                        <li><a href="/info/careers">CAREERS</a>
                         </li>
-                        <li><a href="">CONTACT US</a>
+                        <li><a href="/info/contact-us">CONTACT US</a>
                         </li>
                     </ul>
                 </div>
