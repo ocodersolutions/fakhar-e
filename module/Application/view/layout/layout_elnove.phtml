@@ -547,7 +547,7 @@
 <!-- javascript of product-item -->
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    jQuery(document).ready(function($){
         $(".sort-list").css({"opacity": "0.3", "cursor": "default"});
 
         $("#search").hide();
@@ -595,14 +595,12 @@
                 }
             }, '#modal_QV, #modal_alert');
         }
+
+        
+
     });
 
-    $('body').on('click', '.modal_body_footer', function (){
-        jQuery.noConflict();
-        $("#modal_QV").modal("hide");
-        $("#modal_alert").modal("show");
-        $('#modal_alert').css("overflow", "auto");
-    });  
+    
 
     $(window).resize(function() {
         $('.share_product').height(function(){
