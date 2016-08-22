@@ -16,12 +16,12 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900' rel='stylesheet' type='text/css'>
         <!-- Custom styles for this template -->
         <link href="/assets/css/custom.less" rel="stylesheet/less" type="text/css">
-        <link href="/assets/css/custom_header.less" rel="stylesheet/less" type="text/css">
-        <link href="/assets/css/custom_banner.less" rel="stylesheet/less" type="text/css">
-        <link href="/assets/css/custom_product_list.less" rel="stylesheet/less" type="text/css">
+        <!-- <link href="/assets/css/custom_header.less" rel="stylesheet/less" type="text/css"> -->
+        <!-- <link href="/assets/css/custom_banner.less" rel="stylesheet/less" type="text/css"> -->
+        <!-- <link href="/assets/css/custom_product_list.less" rel="stylesheet/less" type="text/css"> -->
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
-        <link rel="stylesheet/less" type="text/css" href="body_content/body1.less" />
-        <link rel="stylesheet/less" type="text/css" href="bk/assets/css/quang.less" />
+        <!-- <link rel="stylesheet/less" type="text/css" href="body_content/body1.less" /> -->
+        <!-- <link rel="stylesheet/less" type="text/css" href="bk/assets/css/quang.less" /> -->
         <script   src="assets/js/jquery-1.12.4.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
@@ -561,7 +561,7 @@
 
         $("#search").hide();
 
-        if(screen.width >= 992)
+        if(window.innerWidth >= 992)
         {
             $(document).on({
                 mouseenter: function () {
@@ -874,20 +874,32 @@
                 if($(this).scrollTop() >= $("#header-block").height())
                 {
                     $("#header-block").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
-                    $("#search").show();
-                    $(".form_search").hide();
-                    $("#search-bar").show();
-                    $("#header-container").find(".row").addClass("wrap-header-top-navbar");
-                    $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+                    if(window.innerWidth >= 768) 
+                    {                       
+                        $("#search").show();
+                        $(".form_search").hide();
+                        $("#header-container").find(".row").addClass("wrap-header-top-navbar");
+                        $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+                    }
+                    else 
+                    {
+                        $(".form_search").hide();
+                    }
                 }
                 else 
                 {
                     $("#header-block").css("position","static");
-                    $("#search").hide();
-                    $(".form_search").show();
-                    $("#search-bar").hide();
-                    $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
-                    $(".searchbox").removeClass("searchbox-open");
+                    if(window.innerWidth >= 768) 
+                    {                       
+                        $("#search").hide();
+                        $(".form_search").show();
+                        $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
+                        $(".searchbox").removeClass("searchbox-open");
+                    }
+                    else
+                    {
+                        $(".form_search").hide();
+                    }
                 }
             });
 
