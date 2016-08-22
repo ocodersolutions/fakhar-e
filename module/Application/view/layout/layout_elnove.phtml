@@ -229,13 +229,13 @@
                         <p class="uc_link_tittle sort-item-selected">Lowest price</p>
                     </span>
                     <div class="uc_line_content">
-                        <ul class="uc_des">
-                            <li class="sort-item-select">Relevance</li>
-                            <li class="sort-item-select">Lowest price</li>
-                            <li class="sort-item-select">Highest price</li>
-                            <li class="sort-item-select">Most Popular</li>
-                            <li class="sort-item-select">Favorites</li>
-                            <li class="sort-item-select">Newest</li>
+                        <ul class="uc_des" id="order-by">
+                            <li class="sort-item-select" value="relevance">Relevance</li>
+                            <li class="sort-item-select" value="lowest">Lowest price</li>
+                            <li class="sort-item-select" value="highest">Highest price</li>
+                            <li class="sort-item-select" value="mostpopular">Most Popular</li>
+                            <li class="sort-item-select" value="favorites">Favorites</li>
+                            <li class="sort-item-select" value="newest">Newest</li>
                         </ul>
                     </div>
                     <div class="sort-filter-contentpopup visible-xs" id="sis-content-popup">
@@ -262,6 +262,15 @@
         </div>
     </div>  
     <script>
+    // order by send to input hidden
+    $('#order-by li').click(function(){
+        val_order = $(this)[0].attributes[1].nodeValue;
+        $('input[name="orderby"]').val(val_order);
+    });
+    // order by send to input hidden
+
+
+
     jQuery(document).ready(function($) {
          $("#refine-search-popup,#pop-menu,#sort-item-popup,.uc_avatar.img-responsive").click(function(){
             var w = jQuery(".fsp-content").width();
