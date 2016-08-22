@@ -528,7 +528,6 @@
                 </div>
                 <div id="load-more" class="row text-center">
                     <button class="btn-st-silver">Load more</button>
-                    <a class="open-popup-test" href="" data-popup="#popup-test">Open popup</a>
                 </div>
                                           
             </div>
@@ -571,14 +570,14 @@
                 
                 if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
                 {
-                    //showAjxLoadingDiv($("#productlisting"));
+                    showAjxLoadingDiv();
                     $("#page").val(1);
                     endData = 0;
                 }
-                // else {
-                //     //showAjxLoadingDiv($("#productlisting"));
-                //     //$("#loading").show();
-                // }
+                else {
+                    //showAjxLoadingDiv();
+                    //$("#loading").show();
+                }
                 loading = 1;
                 var url = "/service/getfeeds/" + Math.random();
                 var filterData = $("#productFilterDetail").serialize();
@@ -667,9 +666,10 @@
                     feeddataid:feeddataid
                 },
                 dataType:'html',
-                  // beforeSend: function() {
-                  //     $("#loading-div-background").show(); 
-                  //  },
+                  beforeSend: function() {
+                      $("#loading-div-background").show(); 
+                      $("#append_modal").html();
+                   },
                 success: function (result) {
                    //console.log(result);
                    $("#append_modal").html(result);

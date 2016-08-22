@@ -33,11 +33,21 @@
      <script>
      
     
-            // $(function() {
-            //     $(".login_signup").fullScreenPopup({
-            //         bgColor: '#fff'
-            //     });
-            // });
+            jQuery(function($) {
+                $(".login_signup").fullScreenPopup({
+                    bgColor: '#fff'
+                });
+                $("#pop-menu").fullScreenPopup({
+                    bgColor: '#fff'
+                });
+                $("#refine-search-popup").fullScreenPopup({
+                    bgColor: '#fff'
+                });
+                $("#sort-item-popup").fullScreenPopup({
+                    bgColor: '#fff'
+                });
+                
+            });
         </script>
     <body>
 <div id="header-block">
@@ -610,9 +620,10 @@
                     feeddataid:alertdataid
                 },
                 dataType:'html',
-                  // beforeSend: function() {
-                  //     $("#loading-div-background").show(); 
-                  //  },
+                  beforeSend: function() {
+                      $("#loading-div-background").show(); 
+                      $("#alert-content").html();
+                   },
                 success: function (result) {
                    $("#alert-content").html(result);
                    $("#loading-div-background").hide();
