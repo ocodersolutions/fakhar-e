@@ -130,7 +130,7 @@
                             </li>
                             <li><a href="/info/frequently-asked-questions?tag=shipping">SHIPPING</a>
                             </li>
-                            <li><a href="/info/frequently-asked-questions?tag=pricing"">PRICING</a>
+                            <li><a href="/info/frequently-asked-questions?tag=pricing">PRICING</a>
                             </li>
                             <li><a href="/info/frequently-asked-questions?tag=shipping">EXCHANGE & RETURNS</a>
                             </li>
@@ -201,7 +201,7 @@
                         </li>
                         <li><a href="/info/frequently-asked-questions?tag=shipping">SHIPPING</a>
                         </li>
-                        <li><a href="/info/frequently-asked-questions?tag=pricing"">PRICING</a>
+                        <li><a href="/info/frequently-asked-questions?tag=pricing">PRICING</a>
                         </li>
                         <li><a href="/info/frequently-asked-questions?tag=shipping">EXCHANGE & RETURNS</a>
                         </li>
@@ -465,8 +465,9 @@
             $('li#'+x).removeClass('li-up');
         }
   });
+
+
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
-        
         //console.log($(this));
         // x = $(this).parents('.category');
         // if(x.length == 0){
@@ -486,8 +487,8 @@
         }, 800, function() {});
     });
 
-    // send to form input
-    $('.category .has-child').click(function() {
+    // send catefory to form input
+    $('.desktop  .category .has-child').click(function() {
 
             if ($(this).hasClass("has-child-selected") == false) {
                 $(this).addClass('has-child-selected');
@@ -512,8 +513,31 @@
         loadProductData();
             
     });
+   $('.mobile .category .has-child').click(function() {
+
+            if ($(this).hasClass("has-child-selected") == false) {
+                $(this).addClass('has-child-selected');
+                category_id = $(this).attr('id');
+                $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
+                $('.mobile .'+category_id).find('.item').addClass('selected')
+            } else {
+                $(this).removeClass('has-child-selected');
+                category_id = $(this).attr('id');
+                $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
+                $('.mobile .'+category_id).find('.item').removeClass('selected')
+            }
+        array_category = $('.category .item.selected').toArray();
+        var a2 =  [];
+        for (i = 0; i < array_category.length ; i++) {
+            var a1 = (array_category[i].attributes[0].nodeValue);
+            a2.push(a1);
+        };
+        $("input[name='catids']").val(a2);
+        var a2 = [];
+        loadProductData();
+    });
     //clear filter
-    $('#clear-filter').click(function(){
+    $('.clear-filter').click(function(){
         $('.item.selected').removeClass('selected');
         $('.has-child-selected').removeClass('has-child-selected');
         $('.color.selected').removeClass('selected');
@@ -889,7 +913,14 @@
         </div>
         </footer>
         <!-- End-Footer -->
+        <script type="text/javascript">
+            // $('.uc_icon.icon_like').click(function(){
+            //     alert(123);
+            // });
 
+
+
+        </script>
         <script>
             //
             $(document).ready(function(){
