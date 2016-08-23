@@ -117,7 +117,6 @@ class ServiceController extends BaseActionController {
         $aServiceData = $oAuth->getStorage()->get('service');
 
         $__viewVariables['articlesPerPage'] = (isset($aServiceData['ArticlesPerPage']) ? $aServiceData['ArticlesPerPage'] : PRODUCTS_PER_PAGE);
-
         $paginator = $oFeedData->getFeedData($aPostParams, true, $userId, null, true);
         $paginator->setCurrentPageNumber((isset($aGetParams['page']) ? $aGetParams['page'] : 1));
         $paginator->setItemCountPerPage($__viewVariables['articlesPerPage']);
@@ -128,18 +127,15 @@ class ServiceController extends BaseActionController {
         $__viewVariables['attributes'] = $oAttributes->getAttributesTree(1);
 
         $__viewVariables['feedData'] = $paginator;
-
         $__viewVariables['pages'] = $paginator->getPages();
         $__viewVariables['excludeCats'] = (isset($aGetParams['ec']) ? $aGetParams['ec'] : '');
         $aParams = array();
         $aParams['mappingType'] = 'brand';
         $allBrands = $oFeedMapping->getFeedMapping($aParams);
-
         $aParams = array();
         $aParams['mappingType'] = 'brand';
         $aParams['top'] = 1;
         $allTopBrands = $oFeedMapping->getFeedMapping($aParams);
-
         $aParams = array();
         $aParams['mappingType'] = 'store - remove stores';
         $allStores = $oFeedMapping->getFeedMapping($aParams);
@@ -365,7 +361,6 @@ class ServiceController extends BaseActionController {
       
         return $__viewVariables; 
     }
-
     public function checkoutAction() {
         $this->layout()->showSmallHeader = true;
         $this->layout()->showHeaderLinks = "LOGGED_IN";
@@ -662,7 +657,6 @@ class ServiceController extends BaseActionController {
         $userInfo = $oAuth->getIdentity();
         $userId = $userInfo->userId;
         $aQueryParams = $this->params()->fromQuery();
-         
         if ($request->isXmlHttpRequest() || (isset($aQueryParams['test']) && $aQueryParams['test']=='yes') ) { 
             $oService = $this->getServiceLocator();
             $oFeedData = $oService->get('FeedDataTable');

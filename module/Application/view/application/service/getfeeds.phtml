@@ -1,8 +1,6 @@
 <?php
-//$likearray = $this->likearray;
-?>
-<?php if (!empty($this->feedData)) { ?>
-
+$likearray = $this->likearray;
+ if (!empty($this->feedData)) { ?>
 <?php foreach ($this->feedData as $prod) { 
     $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
 
@@ -14,7 +12,7 @@
                     <a href="#" target="_blank" class="popup_item"></a>
                 </div>
                 <div class="uc_link">
-                    <span class="uc_icon icon_like" id="<?php echo  base64_encode($prod->feeddataid); ?>">
+                    <span class="uc_icon icon_like  <?php if (in_array($prod->feeddataid, $likearray)) { echo 'active';} ?>" id="<?php echo  base64_encode($prod->feeddataid); ?>">
                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                     </span>
 
