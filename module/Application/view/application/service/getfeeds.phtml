@@ -1,7 +1,6 @@
 <?php
 $likearray = $this->likearray;
  if (!empty($this->feedData)) { ?>
-<pre>
 <?php foreach ($this->feedData as $prod) { 
     $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
 
