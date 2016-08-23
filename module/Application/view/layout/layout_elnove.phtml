@@ -32,7 +32,7 @@
 
      <script>
      
-    
+    //show popup full screen when click in object
             jQuery(function($) {
                 $(".login_signup").fullScreenPopup({
                     bgColor: '#fff'
@@ -316,11 +316,14 @@
         </div>
     </div>  
     <script>
+
     jQuery(document).ready(function($) {
+            //assigned width of ".fsp-content" to "p.m-title" when clicking on the object "#refine-search-popup,#pop-menu,.uc_avatar.img-responsive"
          $("#refine-search-popup,#pop-menu,.uc_avatar.img-responsive").click(function(){
             var w = jQuery(".fsp-content").width();
             $("p.m-title").css('width',w);
         });
+            //when the width of the window changes, the assigned width of ".fsp-content" to "p.m-title" and change the display properties of ".set-sale-alert"
         $(window).resize(function(){
             var width = jQuery(".fsp-content").width();
             $("p.m-title").css('width',width);
@@ -427,13 +430,14 @@
 <script type="text/javascript">
     
     $(document).ready(function() {
+        //add tags "p" in objects "#1 .slider-3 span:eq(0)" with the index 0 and 1
          $("#1 .slider-3 span:eq(0)").append("<p>250</p>");
         $("#1 .slider-3 span:eq(1)").append("<p>1000+</p>");
         $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
         $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
         
         // $('.refine .refine-colum  .list-size .size span, .refine .refine-colum .brand .list-brand ul li, .refine .refine-colum .footwear ul li, .refine .refine-colum .deals ul li, .refine .refine-colum .clothing ul li, .refine .refine-colum .accessories ul li').addClass('select');
-
+            //when click in object ".select" then take size and color of object assign to 'input[name="size"]', check class of object if exist "selected" then remove class "selected" else add class "selected".
         $('.select').click(function() {
             val_size = this.getAttribute("value");
             val_color = this.getAttribute("value");
@@ -446,6 +450,7 @@
             }
         });
     });
+        //when click in object '.refine .refine-colum .list-color .color' then check class of object exist "selected", if not then add class "selected" and append tag " <i class='check fa fa-check' aria-hidden='true'></i>" else remove class "select" and remove class ".check" of object.
     $('.refine .refine-colum .list-color .color').click(function() {
 
         if ($(this).hasClass("selected") == false) {
@@ -455,6 +460,7 @@
             ($(this).find(".check").remove());
         }
     });
+    //when click in object '.fa-angle-down' then check if object do not exist class "fa-selected" then add class 'fa-selected' for object and add class 'li-up' for "'li#'+x", else then remove class 'fa-selected' and class 'li-up'.
   $('.fa-angle-down').click(function(){
         var x = $(this)[0].attributes[0].nodeValue;
         if ($(this).hasClass("fa-selected") == false) {
@@ -465,6 +471,7 @@
             $('li#'+x).removeClass('li-up');
         }
   });
+        //initialization effect animate for ofject '.refine .refine-colum ul .fa-angle-down'
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
         
         //console.log($(this));
@@ -485,7 +492,7 @@
             height: "toggle"
         }, 800, function() {});
     });
-
+        //when click '.category .has-child' then check if objects do not exist class "has-child-selected" then add class "has-child-selected", add class 'has-child-selected' for class '.desktop .'+category_id+' .has-child' and add class 'selected' for class ".item"; else then remove class.
     // send to form input
     $('.category .has-child').click(function() {
 
@@ -500,7 +507,7 @@
                 $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
                 $('.desktop .'+category_id).find('.item').removeClass('selected')
             }
-
+    //convert '.category .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='catids']", final call function loadProductData().
         array_category = $('.category .item.selected').toArray();
         var a2 =  [];
         for (i = 0; i < array_category.length ; i++) {
@@ -513,6 +520,7 @@
             
     });
     //clear filter
+    //when you click '#clear-filter' , then clear filter selected
     $('#clear-filter').click(function(){
         $('.item.selected').removeClass('selected');
         $('.has-child-selected').removeClass('has-child-selected');
@@ -528,7 +536,7 @@
         };
     });
     //clear filter
-
+        // when click '.category .item' then check if it has class "selected" then remove class "selected" else add class "selected", and convert '.category .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='catids']", final call function loadProductData().
     $('.category .item').click(function(){
         
         if($(this).hasClass('selected')){
@@ -548,7 +556,7 @@
         loadProductData();
 
     });
-
+        // when click '.brands .list-brand li' then check if it has class "selected" then remove class "selected" else add class "selected", and convert '.brands .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='brands']", final call function loadProductData(). 
     $('.brands .list-brand li').click(function(){
         if($(this).hasClass('selected')){
             $(this).removeClass('selected');
@@ -567,7 +575,7 @@
         loadProductData();
         
     });
-
+        //when click '.colors .list-color .color' then convert '.color.selected' to array, ssign value of array for new array after assign value of new array for "input[name='colors']". 
     $('.colors .list-color .color').click(function(){
         array_color = $('.color.selected').toArray();
         var a2 =  [];
@@ -578,7 +586,7 @@
         $("input[name='colors']").val(a2);
         var a2 = [];
     });
-
+        //when click '.deals .item' then assign value its for "name_deal", check x = 1 then remove class "selected" and change value of  "input[name='"+name_deal+"']" is empty, else add class "selected" and change value of "input[name='"+name_deal+"']" is 1.
     $('.deals .item').click(function(){
         console.log($(this));
             name_deal = $(this)[0].attributes[0].nodeValue;
@@ -602,12 +610,14 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function($){
+        // set css default of ".sort-list" when document ready
         $(".sort-list").css({"opacity": "0.3", "cursor": "default"});
-
+            // hide "#search" when document ready
         $("#search").hide();
-
+            //check if width of window >=992 then
         if(window.innerWidth >= 992)
-        {
+        {      
+                //when mouse move in '.product_item_popup' then show ".popup_item, .quick_view_v2" and assign height of ".quick_view_v2" and line hieght of tag "span" equal height of ".icon_like"
             $(document).on({
                 mouseenter: function () {
                     $(this).parent().find(".popup_item, .quick_view_v2").show();
@@ -618,6 +628,7 @@
                 //     $(this).find('.btn-group').fadeOut();
                 // }
             }, '.product_item_popup');
+                //when mouse leave '.uc_contact' then hide ".popup_item, .quick_view_v2"
             $(document).on({
                 // mouseenter: function () {
                 //     $(this).parent().find(".popup_item, .quick_view_v2").show();
@@ -649,12 +660,13 @@
             //     }
             // }, '#modal_QV, #modal_alert');
         }
-
+            //when mouse leave '#modal_QV, #modal_alert' then change attribute css of body"
         $(document).on({
             mouseout: function () {
                 $("body").css({"overflow": "auto", "padding-right": "0px"});
             }
         }, '#modal_QV, #modal_alert');
+            //when mouse move in '#modal_QV, #modal_alert' then change attribute css of body"
         $(document).on({
             mouseover: function () {
                 $("body").css("overflow", "hidden");
@@ -662,6 +674,7 @@
         }, '#modal_QV, #modal_alert');        
 
     });
+        // send "alertdataid" to '/service/getfeedalert', get content form '/service/getfeedalert' assign for "#alert-content"
     function loadAjaxForAlert(alertdataid){
             
             console.log(alertdataid);
@@ -699,6 +712,7 @@
                 },
             });
         }
+        //when click '.modal_body_footer' then hide "#modal_QV", show "#modal_alert", call function  loadAjaxForAlert(alertdataid), change attribute css of '#modal_alert'.
     $('body').on('click', '.modal_body_footer', function (){
         jQuery.noConflict();
         $("#modal_QV").modal("hide");
@@ -707,7 +721,7 @@
         loadAjaxForAlert(alertdataid);
         $('#modal_alert').css("overflow", "auto");
     });  
-
+        // when change width of window then height of '.share_product' equal sum height of ".uc_contact" and ".show_item"
     $(window).resize(function() {
         $('.share_product').height(function(){
             var height1 = $(this).parents(".product_item").find(".uc_contact").height();
@@ -716,21 +730,21 @@
         });
     });
     
-
+        //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-grid"
     $(".sort-list").click(function(){
         $(this).parents("body").find(".product.col-lg-3.col-sm-4").removeClass("col-xs-6");
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-grid").css({"opacity": "1", "cursor": "pointer"});
 
     });
-
+        //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-list"
     $(".sort-grid").click(function(){
         $(this).parents("body").find(".product.col-lg-3.col-sm-4").addClass("col-xs-6");
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-list").css({"opacity": "1", "cursor": "pointer"});
 
     });
-
+        //when click '.hide_item' then hide ".share_product"
     $('body').on('click', '.hide_item', function (){
         $(this).parents(".product_item").find(".share_product").hide();
     });
@@ -738,7 +752,7 @@
     // $(".hide_item").click(function() {        
     //     $(this).parents(".product_item").find(".share_product").hide();
     // });
-
+        //when click '.show_item' then show and change hieght of '.share_product'
     $('body').on('click', '.show_item', function (){
         $(this).parents('.product_item').find('.share_product').show();
         var height1 = $(this).height();
@@ -756,7 +770,7 @@
     //         return height1 + height2;
     //     });
     // });
-
+        //when click '.icon_like' then remove or add class "active"
     $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
         if (myClasses.contains("active")) {
@@ -794,6 +808,7 @@
 <!-- Javascript of selected_filter.php/sort-item -->
 
 <script type="text/javascript">
+        //when click ".sort-item" then check if its exist class "active" then remove class "active", ".icon_arrow" add class "fa-chevron-down" and remove class "fa-chevron-up", ".sort-item >.uc_line_content" close slide; else add class "active", ".icon_arrow" remove class "fa-chevron-down" and add class "fa-chevron-up", ".sort-item >.uc_line_content" open slide.
     $(".sort-item").click(function(){
         var myClasses = this.classList;
         if(myClasses.contains("active"))
@@ -819,7 +834,7 @@
     //     $(".icon_arrow").addClass("fa-chevron-down");
     //     $(".uc_line_content").slideUp();
     // });
-
+        //when click ".sort-item-select" then assign content of it for ".sort-item-selected" and ".uc_line_content" close slide.
     $(".sort-item-select").click(function(){
         var content_sl = $(this).html();
         $(this).parents(".sort-item").find(".sort-item-selected").html(content_sl);
@@ -897,6 +912,7 @@
                 var inputBox = $('.searchbox-input');
                 var searchBox = $('.searchbox');
                 var isOpen = false;
+                // when click '.searchbox-icon' then check if '.searchbox-input' is empty then event default, if "isOpen" equal "false" then '.searchbox' add class 'searchbox-open' and focus '.searchbox-input' and value of "isOpen" is true and change attribute of "#search", else then counterwork
                 submitIcon.click(function(e){
                     if(inputBox.val()==""){
                         e.preventDefault();
@@ -916,6 +932,7 @@
                     }
                      
                 });  
+
                 submitIcon.mouseup(function(){
                         return false;
                     });
@@ -930,6 +947,7 @@
                     });
                 
             });
+                    // change value of '.searchbox-input' khi input value form keyboard
                 function buttonUp(){
                     var inputVal = $('.searchbox-input').val();
                     inputVal = $.trim(inputVal).length;
@@ -938,6 +956,7 @@
                     } 
                 }
                 var flag = false;
+                    //show or hide '.searchbox-icon' when click "#show-hide-menu" or '.searchbox-icon'
                 $("#show-hide-menu").click(function(){
                     $("#show-hide-menu").toggleClass("angleplus");
                     if(flag == false){
@@ -952,6 +971,7 @@
             header: "ui-icon-circle-arrow-e",
             activeHeader: "ui-icon-circle-arrow-s"
             };
+            // show menu khi click "#accordion", "#accordion-m"
             $( "#accordion" ).accordion({
                 icons: icons,
                 heightStyle:"content",
@@ -964,7 +984,7 @@
                 collapsible: true,
                 active: false
             });
-
+                // change attribute of "#header-block" and "#search" when scroll window
             $(window).scroll(function(){
                 if($(this).scrollTop() >= $("#header-block").height())
                 {
