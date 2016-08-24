@@ -39,7 +39,48 @@ var Product = {
 
 $(document).ready(function() {
     Product.loadProductListAjax();
+
+    
 });
+
+$(document).on('click','.quick_view_v2, .uc_avatar',function(){
+    feeddataid = $(this).data('article-id');
+    url = '/service/getfeeddetail';
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data:  {
+            feeddataid:feeddataid
+        },
+        dataType:'html',
+            beforeSend: function() {
+                $("#loading-div-background").show(); 
+                $("#append_modal").html();
+            },
+        success: function (result) {
+            $("#append_modal").html(result);
+            $("#loading-div-background").hide();
+        },
+        error: function (request, error) {
+            console.log(request);
+            console.log(error);
+        },
+    });
+});
+
+    
+$(document).on('click','.icon_alert',function(){
+    alertdataid = $(this).data('alert-id');
+    loadAjaxForAlert(alertdataid);
+});
+
+$('body').on('click', '.modal_body_footer', function (){
+    $("#modal_QV").modal("hide");
+    $("#modal_alert").modal("show");
+    alertdataid = $(this).data('alert-id');
+    loadAjaxForAlert(alertdataid);
+    $('#modal_alert').css("overflow", "auto");
+});  
         
 $(window).scroll(function() {
     var offset = ($(document).height() - $(window).height() )-2200;

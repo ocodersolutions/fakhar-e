@@ -717,14 +717,7 @@
             });
         }
         //when click '.modal_body_footer' then hide "#modal_QV", show "#modal_alert", call function  loadAjaxForAlert(alertdataid), change attribute css of '#modal_alert'.
-    $('body').on('click', '.modal_body_footer', function (){
-        jQuery.noConflict();
-        $("#modal_QV").modal("hide");
-        $("#modal_alert").modal("show");
-        alertdataid = $(this).data('alert-id');
-        loadAjaxForAlert(alertdataid);
-        $('#modal_alert').css("overflow", "auto");
-    });  
+    
         // when change width of window then height of '.share_product' equal sum height of ".uc_contact" and ".show_item"
     $(window).resize(function() {
         $('.share_product').height(function(){
