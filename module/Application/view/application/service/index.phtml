@@ -527,12 +527,12 @@
             };
             $( document ).ajaxComplete(function() {
                 countpro = $("#count_loaded_pro").val();
-                alert (countpro);
+                //alert (countpro);
               if (countpro == 50){
-                alert ("true");
+               // alert ("true");
                 loadAjaxByScroll();
               }else{
-                alert("false");
+               // alert("false");
               }
             });
             function showAjxLoadingDiv(target)
@@ -631,3 +631,4 @@
 
 });  
 </script>
+<script src="/assets/js/refine.js"></script>
