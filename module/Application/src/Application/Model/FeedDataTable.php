@@ -361,7 +361,7 @@ class FeedDataTable extends BasicTableAdapter {
         //$limit = (isset($aPostParams['limit'])) ? intval($aPostParams['limit']) : PRODUCTS_PER_PAGE;
         
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('feed' => $this->table));
+        $select = $sql->select(array('feed' => $this->table)); 
         $select->columns(array('feeddataid' => 'id', 'feedId', 'uid', 'caption' => 'caption', 'color' => 'color', 'name' => 'name', 'sku' => 'sku', 'currency', 'price', 'buyurl', 'impressionurl', 'onsale', 'saleprice', 'img_local_name', 'feedimageurl' => 'imageurl','productInfoAdded'));
         if( isset($service) && !empty($service) ) {
             $oEngine->styleBasedProductsQuery( $select );
@@ -405,7 +405,6 @@ class FeedDataTable extends BasicTableAdapter {
             $paginator = new Paginator($paginatorAdapter);
             
         
-           
             return $paginator;
         }
         $resultSet = $this->tableGateway->select();
