@@ -796,12 +796,36 @@
         //when click '.icon_like' then remove or add class "active"
     $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
+        id = $(this).attr('id');
         if (myClasses.contains("active")) {
             myClasses.remove("active");
+            ajax_unlike(id);
         } else {
+            ajax_like(id);
             myClasses.add("active");
         }
     });
+    function ajax_like(id){
+        $.ajax({
+            url : "/service/likeclosset",
+            type : "post",
+            dataType:"text",
+            data : {
+                'closesetId' : id,
+            },
+        });
+    }
+     function ajax_unlike(id){
+        $.ajax({
+            url : "/service/unlikeclosset",
+            type : "post",
+            dataType:"text",
+            data : {
+                'closesetId' : id,
+            },
+        });
+    }
+
 
     // $(".icon_like").click(function() {
     //     var myClasses = this.classList;
