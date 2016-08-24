@@ -1,7 +1,5 @@
 <?php
-//$likearray = $this->likearray;
-?>
-<?php
+$likearray = $this->likearray;
 if (count($this->feedData) > 0) {?>
 
 <?php 
@@ -16,7 +14,7 @@ foreach ($this->feedData as $prod) {
                     <a href="#" target="_blank" class="popup_item"></a>
                 </div>
                 <div class="uc_link">
-                    <span class="uc_icon icon_like" id="<?php echo  base64_encode($prod->feeddataid); ?>">
+                    <span class="uc_icon icon_like <?php if (in_array($prod->feeddataid, $likearray)) { echo 'active';} ?>" id="<?php echo  base64_encode($prod->feeddataid); ?>">
                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                     </span>
 
