@@ -28,6 +28,7 @@
         <script src="/assets/js/jquery-ui.js"></script>
         <script src="/assets/js/jquery.fullscreen-popup.js"></script>
 
+
     </head>
 
      <script>
@@ -429,199 +430,175 @@
 </div>
 <script type="text/javascript">
     
-    $(document).ready(function() {
-        //add tags "p" in objects "#1 .slider-3 span:eq(0)" with the index 0 and 1
-         $("#1 .slider-3 span:eq(0)").append("<p>250</p>");
-        $("#1 .slider-3 span:eq(1)").append("<p>1000+</p>");
-        $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
-        $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
-        
-        // $('.refine .refine-colum  .list-size .size span, .refine .refine-colum .brand .list-brand ul li, .refine .refine-colum .footwear ul li, .refine .refine-colum .deals ul li, .refine .refine-colum .clothing ul li, .refine .refine-colum .accessories ul li').addClass('select');
-            //when click in object ".select" then take size and color of object assign to 'input[name="size"]', check class of object if exist "selected" then remove class "selected" else add class "selected".
-        $('.select').click(function() {
-            val_size = this.getAttribute("value");
-            val_color = this.getAttribute("value");
-            $('input[name="size"]').val(val_size);
-
-            if ($(this).hasClass("selected") == false) {
-                $(this).addClass('selected');
-            } else {
-                $(this).removeClass('selected');
-            }
-        });
-    });
+    
         //when click in object '.refine .refine-colum .list-color .color' then check class of object exist "selected", if not then add class "selected" and append tag " <i class='check fa fa-check' aria-hidden='true'></i>" else remove class "select" and remove class ".check" of object.
-    $('.refine .refine-colum .list-color .color').click(function() {
+    // $('.refine .refine-colum .list-color .color').click(function() {
 
-        if ($(this).hasClass("selected") == false) {
-            $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
-        } else {
-            $(this).removeClass('selected');
-            ($(this).find(".check").remove());
-        }
-    });
+    //     if ($(this).hasClass("selected") == false) {
+    //         $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
+    //     } else {
+    //         $(this).removeClass('selected');
+    //         ($(this).find(".check").remove());
+    //     }
+    // });
     //when click in object '.fa-angle-down' then check if object do not exist class "fa-selected" then add class 'fa-selected' for object and add class 'li-up' for "'li#'+x", else then remove class 'fa-selected' and class 'li-up'.
-  $('.fa-angle-down').click(function(){
-        var x = $(this)[0].attributes[0].nodeValue;
-        if ($(this).hasClass("fa-selected") == false) {
-            $(this).addClass('fa-selected');
-            $('li#'+x).addClass('li-up');
-        }else{
-            $(this).removeClass('fa-selected');
-            $('li#'+x).removeClass('li-up');
-        }
-  });
+  // $('.fa-angle-down').click(function(){
+  //       var x = $(this)[0].attributes[0].nodeValue;
+  //       if ($(this).hasClass("fa-selected") == false) {
+  //           $(this).addClass('fa-selected');
+  //           $('li#'+x).addClass('li-up');
+  //       }else{
+  //           $(this).removeClass('fa-selected');
+  //           $('li#'+x).removeClass('li-up');
+  //       }
+  // });
 
-    $('.refine .refine-colum ul .fa-angle-down').click(function() {
-        //console.log($(this));
-        // x = $(this).parents('.category');
-        // if(x.length == 0){
-
-        //     if ($(this).hasClass("change") == false) {
-        //         $(this).addClass('change selected');
-        //     } else {
-        //         $(this).removeClass('change selected');
-        //     }
-        // }
-
-        //var attrContent = getComputedStyle(this, ':after').content;
-        var currentId = $(this)[0].attributes[0].nodeValue;
-        $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum .' + currentId + '').animate({
-            left: "+=50",
-            height: "toggle"
-        }, 800, function() {});
-    });
+    // $('.refine .refine-colum ul .fa-angle-down').click(function() {
+    //     x = $(this).parents('.category');
+    //     if(x.length == 0){
+    //         if ($(this).hasClass("change") == false) {
+    //             $(this).addClass('change selected');
+    //         } else {
+    //             $(this).removeClass('change selected');
+    //         }
+    //     }
+    //     var attrContent = getComputedStyle(this, ':after').content;
+    //     var currentId = $(this)[0].attributes[0].nodeValue;
+    //     $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum .' + currentId + '').animate({
+    //         left: "+=50",
+    //         height: "toggle"
+    //     }, 800, function() {});
+    // });
 
     // send catefory to form input
-    $('.desktop  .category .has-child').click(function() {
+   //  $('.desktop  .category .has-child').click(function() {
 
 
-            if ($(this).hasClass("has-child-selected") == false) {
-                $(this).addClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
-                $('.desktop .'+category_id).find('.item').addClass('selected')
-            } else {
-                $(this).removeClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
-                $('.desktop .'+category_id).find('.item').removeClass('selected')
-            }
-    //convert '.category .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='catids']", final call function loadProductData().
-        array_category = $('.category .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='catids']").val(a2);
-        var a2 = [];
-        loadProductData();
+   //          if ($(this).hasClass("has-child-selected") == false) {
+   //              $(this).addClass('has-child-selected');
+   //              category_id = $(this).attr('id');
+   //              $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
+   //              $('.desktop .'+category_id).find('.item').addClass('selected')
+   //          } else {
+   //              $(this).removeClass('has-child-selected');
+   //              category_id = $(this).attr('id');
+   //              $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
+   //              $('.desktop .'+category_id).find('.item').removeClass('selected')
+   //          }
+   //      array_category = $('.category .item.selected').toArray();
+   //      var a2 =  [];
+   //      for (i = 0; i < array_category.length ; i++) {
+   //          var a1 = (array_category[i].attributes[0].nodeValue);
+   //          a2.push(a1);
+   //      };
+   //      $("input[name='catids']").val(a2);
+   //      var a2 = [];
+   //      loadProductData();
             
-    });
-   $('.mobile .category .has-child').click(function() {
+   //  });
+   // $('.mobile .category .has-child').click(function() {
 
-            if ($(this).hasClass("has-child-selected") == false) {
-                $(this).addClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
-                $('.mobile .'+category_id).find('.item').addClass('selected')
-            } else {
-                $(this).removeClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
-                $('.mobile .'+category_id).find('.item').removeClass('selected')
-            }
-        array_category = $('.category .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='catids']").val(a2);
-        var a2 = [];
-        loadProductData();
-    });
+   //          if ($(this).hasClass("has-child-selected") == false) {
+   //              $(this).addClass('has-child-selected');
+   //              category_id = $(this).attr('id');
+   //              $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
+   //              $('.mobile .'+category_id).find('.item').addClass('selected')
+   //          } else {
+   //              $(this).removeClass('has-child-selected');
+   //              category_id = $(this).attr('id');
+   //              $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
+   //              $('.mobile .'+category_id).find('.item').removeClass('selected')
+   //          }
+   //      array_category = $('.category .item.selected').toArray();
+   //      var a2 =  [];
+   //      for (i = 0; i < array_category.length ; i++) {
+   //          var a1 = (array_category[i].attributes[0].nodeValue);
+   //          a2.push(a1);
+   //      };
+   //      $("input[name='catids']").val(a2);
+   //      var a2 = [];
+   //      loadProductData();
+   //  });
     //clear filter
-    $('.clear-filter').click(function(){
+    // $('.clear-filter').click(function(){
 
-        $('.item.selected').removeClass('selected');
-        $('.has-child-selected').removeClass('has-child-selected');
-        $('.color.selected').removeClass('selected');
-        $('i.check.fa.fa-check').remove();
-        x = $('#productFilterDetail input[type="hidden"]');
-       // console.log(x);
+    //     $('.item.selected').removeClass('selected');
+    //     $('.has-child-selected').removeClass('has-child-selected');
+    //     $('.color.selected').removeClass('selected');
+    //     $('i.check.fa.fa-check').remove();
+    //     x = $('#productFilterDetail input[type="hidden"]');
+    //    // console.log(x);
         
-        for (i = 0; i < x.length ; i++) {
-            y = x[i].attributes[3].nodeValue ;
-            console.log("input[name="+y+"]");
-            $("input[name="+y+"]").val("");
-        };
-    });
+    //     for (i = 0; i < x.length ; i++) {
+    //         y = x[i].attributes[3].nodeValue ;
+    //         console.log("input[name="+y+"]");
+    //         $("input[name="+y+"]").val("");
+    //     };
+    // });
     //clear filter
         // when click '.category .item' then check if it has class "selected" then remove class "selected" else add class "selected", and convert '.category .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='catids']", final call function loadProductData().
-    $('.category .item').click(function(){
+    // $('.category .item').click(function(){
         
-        if($(this).hasClass('selected')){
-            $(this).removeClass('selected');
-        }else{
-            $(this).addClass('selected');
-        }
+    //     if($(this).hasClass('selected')){
+    //         $(this).removeClass('selected');
+    //     }else{
+    //         $(this).addClass('selected');
+    //     }
 
-        array_category = $('.category .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='catids']").val(a2);
-        var a2 = [];
-        loadProductData();
+    //     array_category = $('.category .item.selected').toArray();
+    //     var a2 =  [];
+    //     for (i = 0; i < array_category.length ; i++) {
+    //         var a1 = (array_category[i].attributes[0].nodeValue);
+    //         a2.push(a1);
+    //     };
+    //     $("input[name='catids']").val(a2);
+    //     var a2 = [];
+    //     loadProductData();
 
-    });
+    // });
         // when click '.brands .list-brand li' then check if it has class "selected" then remove class "selected" else add class "selected", and convert '.brands .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='brands']", final call function loadProductData(). 
-    $('.brands .list-brand li').click(function(){
-        if($(this).hasClass('selected')){
-            $(this).removeClass('selected');
-        }else{
-            $(this).addClass('selected');
-        }
+    // $('.brands .list-brand li').click(function(){
+    //     if($(this).hasClass('selected')){
+    //         $(this).removeClass('selected');
+    //     }else{
+    //         $(this).addClass('selected');
+    //     }
 
-        array_brand = $('.brands .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_brand.length ; i++) {
-            var a1 = (array_brand[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='brands']").val(a2);
-        var a2 = [];
-        loadProductData();
+    //     array_brand = $('.brands .item.selected').toArray();
+    //     var a2 =  [];
+    //     for (i = 0; i < array_brand.length ; i++) {
+    //         var a1 = (array_brand[i].attributes[0].nodeValue);
+    //         a2.push(a1);
+    //     };
+    //     $("input[name='brands']").val(a2);
+    //     var a2 = [];
+    //     loadProductData();
         
-    });
+    // });
         //when click '.colors .list-color .color' then convert '.color.selected' to array, ssign value of array for new array after assign value of new array for "input[name='colors']". 
-    $('.colors .list-color .color').click(function(){
-        array_color = $('.color.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_color.length ; i++) {
-            var a1 = (array_color[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='colors']").val(a2);
-        var a2 = [];
-    });
+    // $('.colors .list-color .color').click(function(){
+    //     array_color = $('.color.selected').toArray();
+    //     var a2 =  [];
+    //     for (i = 0; i < array_color.length ; i++) {
+    //         var a1 = (array_color[i].attributes[0].nodeValue);
+    //         a2.push(a1);
+    //     };
+    //     $("input[name='colors']").val(a2);
+    //     var a2 = [];
+    // });
         //when click '.deals .item' then assign value its for "name_deal", check x = 1 then remove class "selected" and change value of  "input[name='"+name_deal+"']" is empty, else add class "selected" and change value of "input[name='"+name_deal+"']" is 1.
-    $('.deals .item').click(function(){
-        console.log($(this));
-            name_deal = $(this)[0].attributes[0].nodeValue;
-            x = $("input[name='"+name_deal+"']").val();
-            if(x == 1){
-                $("input[name='"+name_deal+"']").val('');
-                $(this).removeClass('selected');
-            }else{
-                $("input[name='"+name_deal+"']").val('1');
-                $(this).addClass('selected');
-            }         
-    });
+    // $('.deals .item').click(function(){
+    //     console.log($(this));
+    //         name_deal = $(this)[0].attributes[0].nodeValue;
+    //         x = $("input[name='"+name_deal+"']").val();
+    //         if(x == 1){
+    //             $("input[name='"+name_deal+"']").val('');
+    //             $(this).removeClass('selected');
+    //         }else{
+    //             $("input[name='"+name_deal+"']").val('1');
+    //             $(this).addClass('selected');
+    //         }         
+    // });
 
 
 
@@ -794,37 +771,7 @@
     //     });
     // });
         //when click '.icon_like' then remove or add class "active"
-    $('body').on('click', '.icon_like', function (){
-        var myClasses = this.classList;
-        id = $(this).attr('id');
-        if (myClasses.contains("active")) {
-            myClasses.remove("active");
-            ajax_unlike(id);
-        } else {
-            ajax_like(id);
-            myClasses.add("active");
-        }
-    });
-    function ajax_like(id){
-        $.ajax({
-            url : "/service/likeclosset",
-            type : "post",
-            dataType:"text",
-            data : {
-                'closesetId' : id,
-            },
-        });
-    }
-     function ajax_unlike(id){
-        $.ajax({
-            url : "/service/unlikeclosset",
-            type : "post",
-            dataType:"text",
-            data : {
-                'closesetId' : id,
-            },
-        });
-    }
+
 
 
     // $(".icon_like").click(function() {
@@ -1101,6 +1048,6 @@
         </script> 
 
 
-        
+        <script src="/js/refine.js"></script>
     </body>
 </html>
