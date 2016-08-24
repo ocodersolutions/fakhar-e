@@ -1,380 +1,89 @@
 <div class="row">
     <div class="refine col-lg-2 col-lg-offset-1 col-sm-3">
-        <div class="refine-colum desktop hidden-xs">
-            <ul> 
-                <li id="category">CATEGORIES</li>
-                <i data-class="category" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="category stage0" style="display: none; left: 100px;">
-                    <ul> 
-                    <?php foreach ($this->aJson as $aJson) { ?>
-                        <li <?php if(!isset($aJson['branch'])){echo 'data-catids="'.$aJson['id'].'"';} ?> class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
-                        </li>
-                        <?php if(isset($aJson['branch'])){ ?>
-                             <i data-class="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
-                       <?php } ?>
-
-                        
-                            <div class="<?php  echo strtolower($aJson['label']); ?>">
-                                <ul>
-                                    <?php 
-                                    if(isset($aJson['branch'])) :
-                                    foreach ($aJson['branch'] as $aJson1) { ?>
-                                        <li <?php if(!isset($aJson1['branch'])){echo 'data-catids="'.$aJson1['id'].'"';} ?> class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?>
-                                        </li>
-                                        <?php if(isset($aJson1['branch'])){ ?>
-                                            <i data-class="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
-                                        <?php } ?>
-                                        
-                                        <div style="display: none; left: 100px;" class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
-                                            <ul>
-                                            <?php if(isset($aJson1['branch'])) :
-                                            foreach ($aJson1['branch'] as $aJson2) { ?>
-                                            
-                                                    <li <?php if(!isset($aJson2['branch'])){echo 'data-catids="'.$aJson2['id'].'"';} ?> class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
-                                                    </li>
-                                                    <?php if(isset($aJson2['branch'])){ ?>
-                                                         <i data-class="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson2['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
-                                                    <?php } ?>
-                                                    
-                                                
-                                            <?php }  endif; ?>
-                                            </ul>
-                                        </div>
-                                    <?php }  endif; ?>
-                                </ul>
-                            </div>
-                    <?php } ?>
-                    </ul>
-                </div>
-
-
-                <li id="brands" >BRANDS</li>
-                <i data-class="brands" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="brands stage0">
-                    <div class="brand">
-                        <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
-                        <div class="list-brand">
-                            <ul>
-                            <table>
-                            <tbody>
-
-                                <?php if (!empty($this->allBrands)) { 
-                                        foreach ($this->allBrands as $brand) { ?>
-                                <tr><td><li data-brand='<?php echo $brand[ 'id']; ?>' class='item'><?php echo $brand[ 'title']; ?></li></td></tr>
-                                <?php } } ?>
-
-                            </tbody>
-                            </table>
-
-                            </ul>
-                        </div>
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <div id="1">
-                    <li id="prices">PRICE</li>
-                    <i data-class="prices" class="fa fa-angle-down" aria-hidden="true"></i>
-                    <div class="price prices stage0">
-                        <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style=" left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
-                        </div>
-                    </div>
-                    <script>
-                        $(function() {
-                            $(".slider-3").slider({
-                                range: true,
-                                min: 0,
-                                max: 1000,
-                                values: [250, 1000],
-                                slide: function(event, ui) {
-                                    minprice = (ui.values[0]);
-                                    maxprice = (ui.values[1]);
-                                    $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
-                                    $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
-                                    $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
-                                    $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
-                                    $("input[name='minamount']").val(minprice);
-                                    $("input[name='maxamount']").val(maxprice);
-                                }
-                            });
-                            $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-                            $("#max-price").val("$" + $(".slider-3").slider("values", 1));
-
-                        });
-                    </script>
-                </div>
-
-                <li id="colors">COLOR</li>                  
-                <i data-class="colors" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="colors stage0">
-                    <div class="list-color">
-
-                    <?php
-                    if (!empty($this->allColors)) {
-                        foreach ($this->allColors as $color) {
-                            if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
-                            ?>
-                            <div data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
-                            <?php
-                        }
-                    }
-                    ?>
-
-                    </div>
-                </div>
-                <li id="deals">DEALS</li>
-                <i data-class="deals" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="deals stage0">
-                    <ul>
-                        <li data-deal="onsale" class="item">All item on sale</li>
-                        <li data-deal="todaynew" class="item">New today</li>
-                        <li data-deal="newthisweek" class="item">New this week</li>
-                        <li data-deal="freeshipping" class="item">Free shipping</li>
-                        <li data-deal="specialoffer" class="item">Special offer</li>
-                        <li data-deal="discountcode" class="item">Discount</li>
-                    </ul>
-                </div>
-            </ul>
-            <button class="clear-filter" type="submit" >CLEAR FILTER</button>
-        </div>
-        <!-- popup-->
-        <div class="refine " style="display: none;">
-            <div class="refine-colum mobile" id="rfs-content-popup">
-                <p class="m-title"> REFINE SEARCH</p>
-                <div class="option-filter">
-                    <div class="option-filter-row">
-                        <label><span>ALL</span>
-                        </label>
-                        <input type="radio">
-                    </div>
-                    <div class="option-filter-row">
-                        <label><span>SALE</span>
-                        </label>
-                        <input type="radio">
-                    </div>
-
-                    <div class="option-filter-row">
-                        <label><span>SAVE ITEMS</span>
-                        </label>
-                        <input type="radio">
-                    </div>
-                </div>
-                <ul> 
-                <li id="category">CATEGORIES</li>
-                <i data-class="category" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="category stage0" style="display: none; left: 100px;">
-                    <ul>
-                    <?php foreach ($this->aJson as $aJson) { ?>
-                        <li <?php if(!isset($aJson['branch'])){echo 'data-catids="'.$aJson['id'].'"';} ?> class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
-                        </li>
-                        <?php if(isset($aJson['branch'])){ ?>
-                             <i data-class="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
-                       <?php } ?>
-                            <div class="<?php  echo strtolower($aJson['label']); ?>">
-                                <ul>
-                                    <?php 
-                                    if(isset($aJson['branch'])) :
-                                    foreach ($aJson['branch'] as $aJson1) { ?>
-                                        <li <?php if(!isset($aJson1['branch'])){echo 'data-catids="'.$aJson1['id'].'"';} ?> class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?>
-                                        </li>
-                                        <?php if(isset($aJson1['branch'])){ ?>
-                                            <i data-class="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson1['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
-                                        <?php } ?>
-                                        
-                                        <div style="display: none; left: 100px;" class="<?php  echo strtolower (str_replace($search,'',$aJson1['label'])); ?>">
-                                            <ul>
-                                            <?php if(isset($aJson1['branch'])) :
-                                            foreach ($aJson1['branch'] as $aJson2) { ?>
-                                            
-                                                    <li <?php if(!isset($aJson2['branch'])){echo 'data-catids="'.$aJson2['id'].'"';} ?> class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
-                                                    </li>
-                                                    <?php if(isset($aJson2['branch'])){ ?>
-                                                         <i data-class="<?php $search = array(' ', '&');
-                                        echo strtolower (str_replace($search,'',$aJson2['label'])); ?>" class="fa fa-angle-down" aria-hidden="true"></i>
-                                                    <?php } ?>
-                                            <?php }  endif; ?>
-                                            </ul>
-                                        </div>
-                                    <?php }  endif; ?>
-                                </ul>
-                            </div>
-                    <?php } ?>
-                    </ul>
-                </div>
-                <li id="brands" >BRANDS</li>
-                <i data-class="brands" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="brands stage0">
-                    <div class="brand">
-                        <?php if (!empty($this->allBrands) || !empty($this->allTopBrands)) { ?>
-                        <div class="list-brand">
-                            <ul>
-                            <table>
-                            <tbody>
-
-                                <?php if (!empty($this->allBrands)) { 
-                                        foreach ($this->allBrands as $brand) { ?>
-                                <tr><td><li data-brand='<?php echo $brand[ 'id']; ?>' class='item'><?php echo $brand[ 'title']; ?></li></td></tr>
-                                <?php } } ?>
-
-                            </tbody>
-                            </table>
-
-                            </ul>
-                        </div>
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <div id="2">
-                    <li id="prices">PRICE</li>
-                    <i data-class="prices" class="fa fa-angle-down" aria-hidden="true"></i>
-                    <div class="price prices stage0">
-                        <div class="slider-3 ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                            <div class="ui-slider-range ui-widget-header ui-corner-all" style=" left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <li id="colors">COLOR</li>                  
-                <i data-class="colors" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="colors stage0">
-                    <div class="list-color">
-
-                    <?php
-                    if (!empty($this->allColors)) {
-                        foreach ($this->allColors as $color) {
-                            if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
-                            ?>
-                            <div data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
-                            <?php
-                        }
-                    }
-                    ?>
-
-                    </div>
-                </div>
-                <li id="deals">DEALS</li>
-                <i data-class="deals" class="fa fa-angle-down" aria-hidden="true"></i>
-                <div class="deals stage0">
-                    <ul>
-                        <li data-deal="onsale" class="item">All item on sale</li>
-                        <li data-deal="todaynew" class="item">New today</li>
-                        <li data-deal="newthisweek" class="item">New this week</li>
-                        <li data-deal="freeshipping" class="item">Free shipping</li>
-                        <li data-deal="specialoffer" class="item">Special offer</li>
-                        <li data-deal="discountcode" class="item">Discount</li>
-                    </ul>
-                </div>
-            </ul>
-                    <div class="m-button-foot col-xs-12">
-                        <div class="col-xs-6 btn-refine">
-                            <button type="submit" class="clear-filter" form="form1" value="Submit" name="clear-filter">CLEAR FILTER</button>
-                        </div>
-                        <div class="col-xs-6 btn-refine">
-                            <button type="submit" id="apply-submit" form="form1" value="Submit" name="apply">APPLY</button>
-                        </div>
-                    </div>
-                </ul> 
-            </div>
-        </div>
-        <form id="productFilterDetail" name="productFilterDetail">
-            <input type="hidden" id="minamount" class="form-control" name="minamount">
-            <input type="hidden" id="maxamount" class="form-control" name="maxamount">
-            <input type="hidden" id="minduration" class="form-control" name="minduration">
-            <input type="hidden" id="maxduration" class="form-control" name="maxduration">
-            <input type="hidden" id="catids" class="form-control" name="catids">
-            <input type="hidden" id="brands" class="form-control" name="brands">
-            <input type="hidden" id="colors" class="form-control" name="colors">
-            <input type="hidden" id="stores" class="form-control" name="stores">
-            <input type="hidden" id="deals" class="form-control" name="deals">
-            <input type="hidden" id="onsale" class="form-control" name="onsale">
-            <input type="hidden" id="todaynew" class="form-control" name="todaynew">
-            <input type="hidden" id="newthisweek" class="form-control" name="newthisweek">
-            <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
-            <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
-            <input type="hidden" id="discountcode" class="form-control" name="discountcode">
-            <input type="hidden" id="page" class="form-control" name="page" value="2">
-            <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
-            <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
-        </form>
-        <!-- Modal -->
-        <div id="modal_total">
-
-        <!-- Modal of Popup Quick-view-product-item -->
-            <div class="modal fade bs-example-modal-lg modal_quick_view" id="modal_QV" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row" id="append_modal">
-                                </div>
-                            </div>
-                        </div>                  
-                    </div>
-                </div>
-            </div>
-
-
-        <!-- End Modal of Popup Quick-view-product-item -->
-                
-        <!-- Modal of Popup icon_alert -->
-            <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">                              
-                    <div class="modal-content modal_alert" id="alert-content">
-                    </div>                                   
-                </div>
-            </div>
-                <!-- End Modal of Popup icon_alert -->
-        </div>
-
-        <!-- End Modal -->
+        <?php echo $this->partial('application/service/index_refine.phtml'); ?> 
     </div>
 
     <div class="col-lg-8 col-sm-9">
         <div class="row">
             <div id="body-main-sideright" class="col-lg-12">
-
                 <div class="row"  id="load-product-list">
-
+                    <!-- Possition for load products from Ajax -->
                 </div>
-                <!-- <div id="load-more" class="row text-center">
-                    <button class="btn-st-silver">Load more</button>
-                </div>
-                           -->                
             </div>
         </div>
-      
     </div>
 </div>
+
+<!-- Form for REFINE SEARCH -->
+<form id="productFilterDetail" name="productFilterDetail">
+    <input type="hidden" id="minamount" class="form-control" name="minamount">
+    <input type="hidden" id="maxamount" class="form-control" name="maxamount">
+    <input type="hidden" id="minduration" class="form-control" name="minduration">
+    <input type="hidden" id="maxduration" class="form-control" name="maxduration">
+    <input type="hidden" id="catids" class="form-control" name="catids">
+    <input type="hidden" id="brands" class="form-control" name="brands">
+    <input type="hidden" id="colors" class="form-control" name="colors">
+    <input type="hidden" id="stores" class="form-control" name="stores">
+    <input type="hidden" id="deals" class="form-control" name="deals">
+    <input type="hidden" id="onsale" class="form-control" name="onsale">
+    <input type="hidden" id="todaynew" class="form-control" name="todaynew">
+    <input type="hidden" id="newthisweek" class="form-control" name="newthisweek">
+    <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
+    <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
+    <input type="hidden" id="discountcode" class="form-control" name="discountcode">
+    <input type="hidden" id="page" class="form-control" name="page" value="2">
+    <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
+    <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
+</form>
+
+<!-- Modal -->
+<div id="modal_total">
+    <!-- Modal of Popup Quick-view-product-item -->
+    <div class="modal fade bs-example-modal-lg modal_quick_view" id="modal_QV" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row" id="append_modal">
+                        </div>
+                    </div>
+                </div>                  
+            </div>
+        </div>
+    </div>
+    <!-- End Modal of Popup Quick-view-product-item -->
+        
+    <!-- Modal of Popup icon_alert -->
+    <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">                              
+            <div class="modal-content modal_alert" id="alert-content">
+            </div>                                   
+        </div>
+    </div>
+    <!-- End Modal of Popup icon_alert -->
+</div>
+<!-- End Modal -->
+
+<!-- Background Loading -->
 <div id="loading-div-background">
     <div id="loading-div" class="ui-corner-all" >
-      <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading.."/>
-      <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
-     </div>
+        <img style="margin-top:20px; height: 50px" src="/img/loading7_light_blue.gif" alt="Loading.."/>
+        <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
+    </div>
 </div> 
 
-    <script src="js/jquery.filtertable.js"></script>
-    <script>
-    $(document).ready(function() {
-        // apply filterTable to all tables on this page but don't filter content with the no-filter class
-        $('table').filterTable({ignoreClass: 'no-filter'});
-        $('.desktop p.filter-table').prependTo('.desktop .brands .brand');
-        $('.mobile p.filter-table').prependTo('.mobile .brands .brand');
-        
-    });
-
-
-    </script>
+<script src="js/jquery.filtertable.js"></script>
 <script src="/assets/js/product.js"></script>
 <script src="/assets/js/refine.js"></script>
+<script>
+$(document).ready(function() {
+    // apply filterTable to all tables on this page but don't filter content with the no-filter class
+    $('table').filterTable({ignoreClass: 'no-filter'});
+    $('.desktop p.filter-table').prependTo('.desktop .brands .brand');
+    $('.mobile p.filter-table').prependTo('.mobile .brands .brand');
+    
+});
+</script>
