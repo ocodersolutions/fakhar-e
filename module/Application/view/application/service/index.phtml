@@ -450,9 +450,9 @@
 </div> 
 
     <script src="js/jquery.filtertable.js"></script>
+    <script src="assets/js/product.js"></script>
     <script>
     $(document).ready(function() {
-        loadProductData();
         // apply filterTable to all tables on this page but don't filter content with the no-filter class
         $('table').filterTable({ignoreClass: 'no-filter'});
         $('.desktop p.filter-table').prependTo('.desktop .brands .brand');
@@ -470,99 +470,9 @@
 
     </script>
      <script type="text/javascript">
-          
-            var loading = 0;
-            var endData = 0;
-            function loadProductData(isLazyLoading){
-                
-                if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
-                {
-                    showAjxLoadingDiv();
-                    $("#page").val(1);
-                    endData = 0;
-  
-                }
-                else {
-                    //loadAjaxByScroll();
-                    //showAjxLoadingDiv();
-                    //$("#loading").show();
-                }
-                loading = 1;
-                var url = "/service/getfeeds/" + Math.random();
-                var filterData = $("#productFilterDetail").serialize();
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: filterData,
-                    dataType: 'html',
-                    success: function (result) {
-                        loading = 0;
-                        
-                        if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
-                        {
-                            $("#load-product-list").html(result);
-                            hideAjxLoadingDiv();
-                            $("#page").val(2);
-                        }
-                        else
-                        {
-                            if (result.indexOf('No Record') > 0)
-                            {
-                                endData = 1;
-                            }
-                            else
-                            {
-                                $("#page").val(parseInt($("#page").val()) + 1); 
-                                $("#load-product-list").append(result);
-                                   
-                            }
-                            
-                            // $("#loading").hide();
-                            hideAjxLoadingDiv();
-                        }
-                        
-                    }
-                });
-
-            };
-            $( document ).ajaxComplete(function() {
-                countpro = $("#count_loaded_pro").val();
-                alert (countpro);
-              if (countpro == 50){
-                alert ("true");
-                loadAjaxByScroll();
-              }else{
-                alert("false");
-              }
-            });
-            function showAjxLoadingDiv(target)
-            {
-                $("#loading-div-background").show();
-            }
-            function hideAjxLoadingDiv()
-            {
-                $("#loading-div-background").hide();
-            };
 
         //$(function () {
-            function loadAjaxByScroll(){
-
             
-                $(window).scroll(function() {
-                var offset = ($(document).height() - $(window).height() )-2200;
-                  if($(window).scrollTop() >= offset) {
-                   
-                     // ajax call get data from server and append to the div
-                    if (loading == 0 && endData == 0){
-                       console.log("loading...."); 
-                       loadProductData(1);
-                    }
-                }
-                if(($(window).scrollTop()  >= $(document).height() - $(window).height()-300) && endData == 0 ){
-                    showAjxLoadingDiv();
-                }
-            });
-        }
            // });
             
                 
