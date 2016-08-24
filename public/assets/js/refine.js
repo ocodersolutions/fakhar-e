@@ -3,26 +3,23 @@ $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
         id = $(this).attr('id');
         if (myClasses.contains("active")) {
+            action = 'unlike';
+            ajax_like(id,action);
             myClasses.remove("active");
-            ajax_unlike(id);
         } else {
-            ajax_like(id);
+            action = 'like';
+            ajax_like(id,action);
             myClasses.add("active");
         }
     });
-    function ajax_like(id){
+    function ajax_like(id,action){
+        if(action == 'like'){
+            url_like = "/service/likeclosset";
+        }else{
+            url_like = "/service/unlikeclosset";
+        }
         $.ajax({
-            url : "/service/likeclosset",
-            type : "post",
-            dataType:"text",
-            data : {
-                'closesetId' : id,
-            },
-        });
-    }
-     function ajax_unlike(id){
-        $.ajax({
-            url : "/service/unlikeclosset",
+            url : url_like,
             type : "post",
             dataType:"text",
             data : {
@@ -71,10 +68,11 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='brands']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
     });
     //category
     $('.category .item').click(function(){
+      
         if($(this).hasClass('selected')){
             $(this).removeClass('selected');
         }else{
@@ -88,7 +86,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='catids']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
     });
     //clear filter
      $('.clear-filter').click(function(){
@@ -105,6 +103,10 @@ $('body').on('click', '.icon_like', function (){
     });
     // select childs category
     $('.desktop  .category .has-child').click(function() {
+
+        id = $(this).attr('id');
+        console.log($('.desktop .category .'+id+' .item').length);
+        console.log($('.desktop .category .'+id+' .item.selected').length);
 
 
             if ($(this).hasClass("has-child-selected") == false) {
@@ -126,7 +128,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='catids']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
             
     });
    $('.mobile .category .has-child').click(function() {
@@ -150,7 +152,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='catids']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
     });
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
