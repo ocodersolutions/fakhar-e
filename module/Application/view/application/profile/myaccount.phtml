@@ -22,7 +22,7 @@ textarea{
 
 <div class="container" id="profile_myaccount">
     <div class="row">
-        <div class="account-btn col-lg-3">
+        <div class="account-btn col-lg-3 col-md-3 col-sm-4">
             <a href="/profile/myaccount" class="btn-1 myaccount">
                 ACCOUNT
             </a>
@@ -51,7 +51,7 @@ textarea{
                 $userPPV = 'No';
             }
         ?>
-        <div class="col-lg-9">
+        <div class="col-lg-9 col-md-9 col-sm-12">
             <form name="myForm" id="myForm" method="POST">
                 <input type="hidden" value="<?php echo $userdata['user_pp']; ?>" id="profile-pp-val" name="profile-pp-val">
                 <div class="account-box">
@@ -72,7 +72,7 @@ textarea{
                     <?php } ?>
 
                     <div class="profile-box row">
-                        <div class="box-one col-lg-3">
+                        <div class="box-one col-lg-3 col-md-3 col-sm-3">
                             <?php
                             $basePath = $this->basePath('img/profilepic/'.$userdata['user_prp_pic']);
                             if (isset($userdata['user_prp_pic']) && !empty($userdata['user_prp_pic'])) {
@@ -88,31 +88,30 @@ textarea{
 
                         </div>
 
-                        <div class="box-two col-lg-9">
+                        <div class="box-two col-lg-9 col-md-9 col-sm-12">
                             <div class="row">
-                                <div class="first_name_mpf col-lg-5">
+                                <div class="first_name_mpf col-lg-5 col-md-6 col-sm-5">
                                     <h2>First Name</h2>
                                     <input type="text" class="name" id="firstName" name="firstName" value="<?php echo $userdata['firstName']; ?>">
                                 </div>
-                                <div class="last_name_mpf col-lg-7">
+                                <div class="last_name_mpf col-lg-7 col-md-6 col-sm-5">
                                     <h2>Last Name</h2>
                                     <input type="text" class="name" id="lastName" name="lastName" value="<?php echo $userdata['lastName']; ?>">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="email_address_mpf col-lg-5">
+                                <div class="email_address_mpf col-lg-5 col-md-6 col-sm-5">
                                     <h2>Email Address</h2>
                                     <div class="bdrnone"><?php echo $userdata['email']; ?></div>
                                 </div>
-                                <div class="password_mpf col-lg-7">
+                                <div class="password_mpf col-lg-7 col-md-6 col-sm-5">
                                     <h2>Password</h2>
-                                    <div class="simplepwd">********</div>
-                                
-                                <a href="/profile/resetpassword" class="reset">Reset your password</a>
+                                    <div class="simplepwd">********</div>                                
+                                    <a href="/profile/resetpassword" class="reset">Reset your password</a>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="default1 col-lg-5">
+                                <div class="default1 col-lg-5 col-md-6 col-sm-5">
                                     <h2>Birthday</h2>
                                     <select name="month" class="fr" name="month" id="suMonth">
                                         <option value="">Month</option>
@@ -201,7 +200,7 @@ textarea{
 
                                 </div>
                                                                                                                          
-                                <div class="default col-lg-7">
+                                <div class="default col-lg-7 col-md-6 col-sm-5">
                                     <h2>Your Default Venue</h2>
                                     <input type="radio" name="defaultVenue" id="radio1" value="Work" <?php
                                     if ($userdata['defaultVenue'] == 'Work') {
@@ -232,7 +231,7 @@ textarea{
                                         echo 'CHECKED';
                                     }
                                     ?> />
-                                    <label for="radio3"  class="outfit1">
+                                    <label for="radio3"  class="outfit1 last_label">
                                         <!-- <span class="fa-stack">
                                             <i class="fa fa-circle-o fa-stack-1x"></i>
                                             <i class="fa fa-circle fa-stack-1x"></i>
