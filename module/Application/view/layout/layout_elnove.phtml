@@ -7,10 +7,34 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
+            
+        <?php if( isset($this->additionalMeta) ) { echo $this->additionalMeta; }?>        
+        
+        <!-- Le styles -->
+        <?php echo $this->headLink()
+
+                        ->prependStylesheet($this->basePath() . '/css/jquery.gritter.css')
+                        ->prependStylesheet($this->basePath() . '/css/lnovecustom.css')
+                        ->prependStylesheet($this->basePath() . '/css/normalize.css')
+                        ->prependStylesheet($this->basePath() . '/css/owl.carousel.css')
+                        ->prependStylesheet($this->basePath() . '/fa/css/font-awesome.css')
+                        // ->prependStylesheet($this->basePath() . '/css/style.css')
+                        // ->prependStylesheet($this->basePath() . '/css/profile_myaccount.less')
+                        ->prependStylesheet($this->basePath() . '/js/sweetalert-master/dist/sweetalert.css')
+                      
+                        ->appendStylesheet($this->basePath() . '/css/mystyle.css')
+                        ->appendStylesheet($this->basePath() . '/myalert/css/reveal.css')
+                        ->prependStylesheet($this->basePath() . '/myalert/css/foundation.css')
+                        ->appendStylesheet($this->basePath() . '/myalert/css/style.css')
+                        ->appendStylesheet($this->basePath() . '/tooltipster/css/tooltipster.css')
+                        ->appendStylesheet($this->basePath() . '/tooltipster/css/themes/tooltipster-shadow.css')
+                      ;
+        ?>
+
         <link rel="icon" href="favicon.ico">
         <title>eLnove.com</title>
         <!-- Bootstrap core CSS -->
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
         <!-- FONT -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900' rel='stylesheet' type='text/css'>
@@ -22,7 +46,7 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
         <!-- <link rel="stylesheet/less" type="text/css" href="body_content/body1.less" /> -->
         <!-- <link rel="stylesheet/less" type="text/css" href="bk/assets/css/quang.less" /> -->
-        <script   src="assets/js/jquery-1.12.4.min.js"></script>
+        <script   src="/assets/js/jquery-1.12.4.min.js"></script>
         <script src="/assets/js/bootstrap.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
         <script src="/assets/js/jquery-ui.js"></script>
@@ -56,7 +80,7 @@
             <div class="header-top-navbar col-lg-12 ">
                 <div class="row top-bar">
                     <div class="left-side col-lg-4 col-md-4 col-sm-4 col-xs-12" id="show-hide-menu">MENU</div>
-                    <div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="assets/images/logo1.jpg" alt="" class="top-logo">
+                    <div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12"><img src="/assets/images/logo1.jpg" alt="" class="top-logo">
                     </div>
                     <div class="right-side col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <?php if( isset($this->showHeaderLinks) && $this->showHeaderLinks=='LOGGED_IN' ) { ?>
@@ -174,7 +198,7 @@
         <div class="row" id="menu-logo">
             <div class="col-xs-12">
                 <span class="fa fa-plus" id="pop-menu" data-popup="#popup"></span>
-                <img src="assets/images/mobile-logo.png" alt="logo mobile" class="logo" />
+                <img src="/assets/images/mobile-logo.png" alt="logo mobile" class="logo" />
             </div>
         </div>
         
