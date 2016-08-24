@@ -743,52 +743,9 @@
 
     });
         // send "alertdataid" to '/service/getfeedalert', get content form '/service/getfeedalert' assign for "#alert-content"
-    function loadAjaxForAlert(alertdataid){
-            
-            console.log(alertdataid);
-            url = '/service/getfeedalert';
-              $.ajax({
-                url: url,
-                type: 'POST',
-                data:  {
-                    feeddataid:alertdataid
-                },
-                dataType:'html',
-                  beforeSend: function() {
-                      $("#loading-div-background").show(); 
-                      $("#alert-content").html();
-                   },
-                success: function (result) {
-                   $("#alert-content").html(result);
-                   $("#loading-div-background").hide();
-                   // $('#myModal').modal('show');
-                   // console.log( $(".modal").width() );
-                   // console.log( $(".container").width() );
-                   // $('.continueFixAtBottom').css({
-                   //        top: $(".modal").scrollTop()+$(".modal").height()-170,
-                   //          //left:  ($(".modal").width()-$('.container').width()-18)/2,
-                   //          left: 0,
-                   //    });
-                   // $('.my_tooltip').tooltipster({
-                   //      position: 'top',
-                   //      theme: 'tooltipster-shadow',
-                   //  });
-                },
-                 error: function (request, error) {
-                    console.log(request);
-                    console.log(error);
-                },
-            });
-        }
+    
         //when click '.modal_body_footer' then hide "#modal_QV", show "#modal_alert", call function  loadAjaxForAlert(alertdataid), change attribute css of '#modal_alert'.
-    $('body').on('click', '.modal_body_footer', function (){
-        jQuery.noConflict();
-        $("#modal_QV").modal("hide");
-        $("#modal_alert").modal("show");
-        alertdataid = $(this).data('alert-id');
-        loadAjaxForAlert(alertdataid);
-        $('#modal_alert').css("overflow", "auto");
-    });  
+    
         // when change width of window then height of '.share_product' equal sum height of ".uc_contact" and ".show_item"
     $(window).resize(function() {
         $('.share_product').height(function(){
