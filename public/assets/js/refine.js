@@ -92,10 +92,10 @@ $('body').on('click', '.icon_like', function (){
     });
   
     // select childs category
-    function check_parent_category(id){
+    function check_parent_category(id,parent){
         if($('.has-child#'+id).length > 0){
-            alert('.has-child#'+id);
-             console.log($('.has-child#'+id).parent('div'));
+            alert('#'+parent);
+          console.log($('#'+parent).removeClass(''));
         }
     }
     $('.desktop  .category .has-child').click(function() {
@@ -112,13 +112,15 @@ $('body').on('click', '.icon_like', function (){
                 $('.desktop .'+category_id).find('.item').removeClass('selected')
             }
         id = $(this).attr('id');
+        parent = $(this).closest('div').attr('class');
+        //console.log(parent);
         // total_item = $('.desktop .category .'+id+' .item').length;
         // selected_item = $('.desktop .category .'+id+' .item.selected').length;
         // current_item = total_item - selected_item;
         // if (current_item > 0 ) {
         //     console.log($(this));
         // };
-        check_parent_category(id);
+        check_parent_category(id,parent);
 
 
         array_category = $('.category .item.selected').toArray();
@@ -212,6 +214,18 @@ $('body').on('click', '.icon_like', function (){
         $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
         $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
     });
+    //select fileter
 
+    // order by send to input hidden
+    $('#order-by li').click(function(){
+        val_order = $(this)[0].attributes[1].nodeValue;
+        $('input[name="order-by"]').val(val_order);
+    });
+    // order by send to input hidden
 
-//select fileter
+    //filter TypeMain
+    $('.option-filter input[type="radio"]').click(function(){
+        x = $(this).attr('value');
+        $('input[name="filterTypeMain"]').val(x);
+    });
+    //filter TypeMain
