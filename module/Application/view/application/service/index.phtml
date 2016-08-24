@@ -241,29 +241,6 @@
                             <div class="ui-slider-range ui-widget-header ui-corner-all" style=" left: 25%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 25%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
                         </div>
                     </div>
-                    <script>
-                        // $(function() {
-                        //     $(".slider-3").slider({
-                        //         range: true,
-                        //         min: 0,
-                        //         max: 1000,
-                        //         values: [250, 1000],
-                        //         slide: function(event, ui) {
-                        //             minprice = (ui.values[0]);
-                        //             maxprice = (ui.values[1]);
-                        //             $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
-                        //             $('#1 .slider-3 span:eq(1) p').empty().append(maxprice);
-                        //             $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
-                        //             $('#2 .slider-3 span:eq(1) p').empty().append(maxprice);
-                        //             $("input[name='minamount']").val(minprice);
-                        //             $("input[name='maxamount']").val(maxprice);
-                        //         }
-                        //     });
-                        //     $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-                        //     $("#max-price").val("$" + $(".slider-3").slider("values", 1));
-
-                        // });
-                    </script>
                 </div>
 
                 <li id="colors">COLOR</li>                  
@@ -341,37 +318,6 @@
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="row" id="append_modal">
-                                    <!-- <div class="col-lg-6 modal_body_left">
-                                        <img src="../assets/images/product_item_mobile.jpg" alt="">
-                                    </div>
-                                    <div class="col-lg-6 modal_body_right">
-                                        <p class="modal_name_item">Puma Number One Active Hoodie</p>
-                                        <p class="modal_brand_item">PUMA</p>
-                                        <p class="modal_price_item">39.00 CAD</p>
-                                        <div class="modal_buy_product">
-                                            <span class="btn-st-blue">BUY</span>
-                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        </div>
-                                        <p class="modal_alert_detail">DETAILS</p>
-                                        <p class="modal_alert_detail_atb">A classic branded sweater with lined hood</p>
-                                        <p class="modal_alert_detail_atb">Hooded</p>
-                                        <p class="modal_alert_detail_atb">Long sleeves</p>
-                                        <p class="modal_alert_detail_atb">Front pouch pocket</p>
-                                        <p class="modal_alert_detail_atb">Cotton/polyester</p>
-                                        <p class="modal_alert_detail_atb">Machine wash</p>
-                                        <p class="modal_alert_detail_atb">Imported</p>
-                                        <div class="modal_body_icon_link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                                            <a href="#"><i class="fa fa-tumblr"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-envelope-o fa_final"></i></a>
-                                        </div>
-                                        <div class="modal_body_footer">
-                                            <i class="fa fa-bell-o" aria-hidden="true"></i>
-                                            <span>Get Sale Alert</span>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>                  
@@ -386,28 +332,6 @@
             <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                 <div class="modal-dialog modal-lg" role="document">                              
                     <div class="modal-content modal_alert" id="alert-content">
-                        <!-- <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            <h2 class="popup_alert_title">CREATE SALE ALERT</h2>
-                        </div>
-                        <div class="modal-body">
-                            <img src="../assets/images/product_item_detail-mobile.jpg" alt="">
-                            <p class="modal_name_item">Botazzo Textural Derby Sneakers</p>
-                            <p class="modal_brand_item">PEGABO</p>
-                            <p class="modal_price_item">59.50 CAD</p>
-                        </div>
-                        <div class="modal-footer">
-                            <p class="modal_footer_p1">Waiting for this item to go on sale?</p>
-                            <p class="modal_footer_p2">We'll send an email when the price drops.</p>
-                            <form action="" class="modal_form_alert">
-                                <input type="text" name="email-alert" placeholder="Youre Email Address">
-                                <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
-                            </form>
-                            <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
-                        </div> -->
                     </div>                                   
                 </div>
             </div>
@@ -452,59 +376,5 @@
 
 
     </script>
-<!-- <script src="/assets/js/jquery.fullscreen-popup.js"></script> -->
-
-<script>
-    $(document).ready(function($) {
-        
-        $(document).on('click','.quick_view_v2, .uc_avatar',function(){
-            feeddataid = $(this).data('article-id');
-            url = '/service/getfeeddetail';
-              $.ajax({
-                url: url,
-                type: 'POST',
-                data:  {
-                    feeddataid:feeddataid
-                },
-                dataType:'html',
-                  beforeSend: function() {
-                      $("#loading-div-background").show(); 
-                      $("#append_modal").html();
-                   },
-                success: function (result) {
-                   //console.log(result);
-                   $("#append_modal").html(result);
-                   $("#loading-div-background").hide();
-                   // $('#myModal').modal('show');
-                   // console.log( $(".modal").width() );
-                   // console.log( $(".container").width() );
-                   // $('.continueFixAtBottom').css({
-                   //        top: $(".modal").scrollTop()+$(".modal").height()-170,
-                   //          //left:  ($(".modal").width()-$('.container').width()-18)/2,
-                   //          left: 0,
-                   //    });
-                   // $('.my_tooltip').tooltipster({
-                   //      position: 'top',
-                   //      theme: 'tooltipster-shadow',
-                   //  });
-                },
-                 error: function (request, error) {
-                    console.log(request);
-                    console.log(error);
-                },
-            });
-        });
-
-        
-        
-   $(document).on('click','.icon_alert',function(){
-        alertdataid = $(this).data('alert-id');
-        loadAjaxForAlert(alertdataid);
-   });
-        
-
-
-});  
-</script>
 <script src="/assets/js/product.js"></script>
 <script src="/assets/js/refine.js"></script>

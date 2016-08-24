@@ -18,9 +18,7 @@ use Zend\Session\Container;
 use \Zend\Db\Sql\Where;
 use Ocoder\Base\BaseActionController;
 
-
 class ServiceController extends BaseActionController {
-
 
     public function indexAction() {
         $this->layout('layout/layout_elnove.phtml');
@@ -361,6 +359,7 @@ class ServiceController extends BaseActionController {
       
         return $__viewVariables; 
     }
+
     public function checkoutAction() {
         $this->layout()->showSmallHeader = true;
         $this->layout()->showHeaderLinks = "LOGGED_IN";
