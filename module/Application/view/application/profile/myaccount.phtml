@@ -20,7 +20,7 @@ textarea{
 }*/
 </style>
 
-<div class="container">
+<div class="container" id="profile_myaccount">
     <div class="row">
         <div class="account-btn col-lg-3">
             <a href="/profile/myaccount" class="btn-1 myaccount">
@@ -77,12 +77,12 @@ textarea{
                             $basePath = $this->basePath('img/profilepic/'.$userdata['user_prp_pic']);
                             if (isset($userdata['user_prp_pic']) && !empty($userdata['user_prp_pic'])) {
                                 ?>
-                                <img src="<?php echo $basePath; ?>" height="125" width="135">
+                                <img src="<?php echo $basePath; ?>">
                                 <p><a href="/profile/upload">Change Picture</a></p>
                                 <?php
                             } else {
                                 ?>
-                                <img src="<?php echo $this->basePath('img/profile.png'); ?>" height="125" width="135">
+                                <img src="<?php echo $this->basePath('img/profile.png'); ?>">
                                 <p><a href="/profile/upload">Upload Picture</a></p>
                             <?php } ?>
 
@@ -239,19 +239,19 @@ textarea{
                                         </span>  -->
                                         Casual
                                     </label>
-
+                                    <div class="clr"></div>
                                     <div class="blue-btn" id="profile-pp">
                                         <i class="fa <?php echo $classUpp; ?> fa-lg white "></i>
-                                        <div class="square" style="font-size:0px;"><?php echo $userPPV; ?></div>
+                                        <div class="square"><?php echo $userPPV; ?></div>
                                     </div>
 
-                                    <div class="clr"></div>
+                                    
                                     <p class="head">Let my Closet Public</p>
                                 </div>
                             </div>
                             <div class="des">
                                 <h2>Description</h2>
-                                <textarea name="description" class="name" rows="3" style="width:100%;"><?php echo trim($userdata['description']); ?></textarea>
+                                <textarea name="description" class="name" rows="3"><?php echo trim($userdata['description']); ?></textarea>
                             </div>  
                             <div class="fr"><button class="contact_btn" id="submit">Submit</button></div>
                         </div>
@@ -262,6 +262,7 @@ textarea{
         </div>
     </div>
 </div><!--container-->
+</div>
 
 <script>
     $(window).on('load', function () {
