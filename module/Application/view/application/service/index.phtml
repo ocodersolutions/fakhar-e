@@ -474,19 +474,14 @@
             var loading = 0;
             var endData = 0;
             function loadProductData(isLazyLoading){
-                
                 if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
                 {
                     showAjxLoadingDiv();
                     $("#page").val(1);
                     endData = 0;
-  
+                    //alert(countpro);
                 }
-                else {
-                    //loadAjaxByScroll();
-                    //showAjxLoadingDiv();
-                    //$("#loading").show();
-                }
+                
                 loading = 1;
                 var url = "/service/getfeeds/" + Math.random();
                 var filterData = $("#productFilterDetail").serialize();
@@ -503,10 +498,11 @@
                             $("#load-product-list").html(result);
                             hideAjxLoadingDiv();
                             $("#page").val(2);
+                            countpro = $("#count_loaded_pro").val();
                         }
                         else
                         {
-                            if (result.indexOf('No Record') > 0)
+                            if (result.indexOf('No Record') > 0 || countpro < 50)
                             {
                                 endData = 1;
                             }
@@ -514,7 +510,7 @@
                             {
                                 $("#page").val(parseInt($("#page").val()) + 1); 
                                 $("#load-product-list").append(result);
-                                   
+                                 loadAjaxByScroll();  
                             }
                             
                             // $("#loading").hide();
@@ -523,16 +519,13 @@
                         
                     }
                 });
-
+                
             };
             $( document ).ajaxComplete(function() {
-                countpro = $("#count_loaded_pro").val();
+                //countpro = $("#count_loaded_pro").val();
                 alert (countpro);
-              if (countpro == 50){
-                alert ("true");
+              if (countpro == 50 && endData== 0){
                 loadAjaxByScroll();
-              }else{
-                alert("false");
               }
             });
             function showAjxLoadingDiv(target)
