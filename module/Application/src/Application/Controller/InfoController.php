@@ -106,7 +106,7 @@ class InfoController extends AbstractActionController
             $this->redirect()->toUrl('/info/careers?success=1');
         }        
 
-        $this->layout('layout/home_layout.phtml');
+       $this->layout('layout/layout_elnove.phtml');
 
         return $__viewVariables;
     }
