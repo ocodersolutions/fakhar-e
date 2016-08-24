@@ -1,18 +1,22 @@
 <?php
-$likearray = $this->likearray;
- if (!empty($this->feedData)) { ?>
-<?php foreach ($this->feedData as $prod) { 
+//$likearray = $this->likearray;
+?>
+<?php
+if (count($this->feedData) > 0) {?>
+
+<?php 
+foreach ($this->feedData as $prod) {
     $page_url = $this->serverUrl() . '/service/feeddatadetail/' . $prod->feeddataid . '/' . rand(); $title = 'ELNove - ' . $prod->caption; ?>
 
     <div class="product col-lg-3 col-sm-4">
         <div class="product_item">
             <div class="uc_contact">
                 <div class="product_item_popup">
-                    <img class="uc_avatar img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" data-article-id="<?php echo $prod->feeddataid ?>" data-toggle="modal" data-target=".modal_quick_view">
+                    <img class="uc_avatar img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" data-article-id="<?php echo $prod->feeddataid ?>" data-toggle="modal" data-target=".modal_quick_view"/>
                     <a href="#" target="_blank" class="popup_item"></a>
                 </div>
                 <div class="uc_link">
-                    <span class="uc_icon icon_like  <?php if (in_array($prod->feeddataid, $likearray)) { echo 'active';} ?>" id="<?php echo  base64_encode($prod->feeddataid); ?>">
+                    <span class="uc_icon icon_like" id="<?php echo  base64_encode($prod->feeddataid); ?>">
                         <i class="fa fa-heart-o" aria-hidden="true"></i>
                     </span>
 
@@ -20,7 +24,7 @@ $likearray = $this->likearray;
                         <i class="fa fa-share-alt" aria-hidden="true"></i>
                     </span>
 
-                    <span class="uc_icon icon_alert" data-toggle="modal" data-target=".modal_icon_alert" data-alert-id="<?php echo  $prod->feeddataid; ?>">
+                    <span class="uc_icon icon_alert" data-toggle="modal" data-target=".modal_icon_alert" data-alert-id="<?php echo $prod->feeddataid ;?>">
                         <i class="fa fa-bell-o" aria-hidden="true" ></i>
                     </span>
 
@@ -86,62 +90,15 @@ $likearray = $this->likearray;
                 <p>
                     <?php echo $this->string_helper($prod->caption); ?></p>
             </div>
-            <div class="product_item_detail text-center" id="detail-popup">
-                <div class="box-detail-header">
-                    <div class="item_detail_img">
-                        <img src="assets/images/product_item_detail-mobile.jpg" alt="image details">
-                    </div>
-                    <h3 class="product-name">Puma Number One Active Hoodie</h3>
-                    <p class="product-brand">PUMA</p>
-                    <span class="product-price">39.00 CAD</span>
-                </div>
-                <div class="box-detail-footer">
-                    <div class="buy-like">
-                        <a href="" class="btn-st-blue">BUY</a>
-                    </div>
-                    <div class="footer-detail">
-                        <p class="detail-tit">DETAILS</p>
-                        <span class="note-details">A classic sweater with line hood</span>
-                        <span class="note-details">Hooded</span>
-                        <span class="note-details">Long sleeves</span>
-                        <span class="note-details">Front pouch pocket</span>
-                        <span class="note-details">Cotton/polyester</span>
-                        <span class="note-details">Machine wash</span>
-                        <span class="note-details">Imported</span>
-                    </div>
-                    <div class="footer-detail-social">
-                        <i class="fa fa-facebook"></i>
-                        <i class="fa fa-pinterest-p"></i>
-                        <i class="fa fa-tumblr"></i>
-                        <i class="fa fa-google-plus"></i>
-                        <i class="fa fa-envelope-o"></i>
-                    </div>
-                    <div class="footer-detail-alert">
-                        <i class="fa fa-bell-o"></i>Get Sell Alert
-                    </div>
-                    <div class="set-sale-alert" style="display: block;">
-                        <div class="sale-alert-head">
-                            <p>Waiting for this item to go on sale?</p>
-                            <p>We'll send an email when the price drops.</p>
-                        </div>
-                        <form action="" class="set-alert-form">
-                            <input type="text" name="email-alert" placeholder="Youre Email Address" class="input-email-alert">
-                            <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
-                        </form>
-                        <div class="foot-set-alert">
-                            <span>By submiting this request,I confirm I agree with the Terms &amp; Conditions</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 
     <?php } ?>
-
+    
 <?php } else { ?>
-    <div class="row text-center">   
+    <div class="text-center" style="width:100%">   
         <p>Oops! No Record found.</p>
     </div>
 <?php } ?>
-            
+<input type="hidden" id="count_loaded_pro" class="form-control" name="count_pro" value="<?php echo count($this->feedData);?>">            

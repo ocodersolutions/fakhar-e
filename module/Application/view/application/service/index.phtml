@@ -432,12 +432,11 @@
 
                 <div class="row"  id="load-product-list">
 
-                    
                 </div>
-                <div id="load-more" class="row text-center">
+                <!-- <div id="load-more" class="row text-center">
                     <button class="btn-st-silver">Load more</button>
                 </div>
-                                          
+                           -->                
             </div>
         </div>
       
@@ -459,12 +458,12 @@
         $('.desktop p.filter-table').prependTo('.desktop .brands .brand');
         $('.mobile p.filter-table').prependTo('.mobile .brands .brand');
         //Click button loadmore 
-        $("#load-more>.btn-st-silver").click(function(){
-           if (loading == 0 && endData == 0)
-            {
-                loadProductData(1);
-            }
-        });
+        // $("#load-more>.btn-st-silver").click(function(){
+        //    if (loading == 0 && endData == 0)
+        //     {
+        //         loadProductData(1);
+        //     }
+        // });
         
     });
 
@@ -481,8 +480,10 @@
                     showAjxLoadingDiv();
                     $("#page").val(1);
                     endData = 0;
+  
                 }
                 else {
+                    //loadAjaxByScroll();
                     //showAjxLoadingDiv();
                     //$("#loading").show();
                 }
@@ -496,12 +497,12 @@
                     dataType: 'html',
                     success: function (result) {
                         loading = 0;
+                        
                         if (typeof isLazyLoading == 'undefined' || isLazyLoading == '')
                         {
                             $("#load-product-list").html(result);
                             hideAjxLoadingDiv();
                             $("#page").val(2);
-                            //enableDragg();
                         }
                         else
                         {
@@ -513,15 +514,27 @@
                             {
                                 $("#page").val(parseInt($("#page").val()) + 1); 
                                 $("#load-product-list").append(result);
-                                //enableDragg();
+                                   
                             }
+                            
                             // $("#loading").hide();
                             hideAjxLoadingDiv();
                         }
                         
                     }
                 });
+
             };
+            $( document ).ajaxComplete(function() {
+                countpro = $("#count_loaded_pro").val();
+                alert (countpro);
+              if (countpro == 50){
+                alert ("true");
+                loadAjaxByScroll();
+              }else{
+                alert("false");
+              }
+            });
             function showAjxLoadingDiv(target)
             {
                 $("#loading-div-background").show();
@@ -531,32 +544,37 @@
                 $("#loading-div-background").hide();
             };
 
-        $(function () {
-            $(window).scroll(function() {
+        //$(function () {
+            function loadAjaxByScroll(){
 
+            
+                $(window).scroll(function() {
                 var offset = ($(document).height() - $(window).height() )-2200;
                   if($(window).scrollTop() >= offset) {
                    
                      // ajax call get data from server and append to the div
                     if (loading == 0 && endData == 0){
-                        console.log("loading");
-                        loadProductData(1);
+                       console.log("loading...."); 
+                       loadProductData(1);
                     }
                 }
-                if($(window).scrollTop()  >= $(document).height() - $(window).height()-300)  {
+                if(($(window).scrollTop()  >= $(document).height() - $(window).height()-300) && endData == 0 ){
                     showAjxLoadingDiv();
                 }
             });
+        }
+           // });
+            
                 
-            });
-             $("#load-more>.btn-st-silver").click(function(){
+           //  });
+            //  $("#load-more>.btn-st-silver").click(function(){
               
-               if (loading == 0 && endData == 0)
-                {
-                    loadProductData(1);
-                    showAjxLoadingDiv();
-                }
-            });
+            //    if (loading == 0 && endData == 0)
+            //     {
+            //         loadProductData(1);
+                   
+            //     }
+            // });
 
 </script>
 <!-- <script src="/assets/js/jquery.fullscreen-popup.js"></script> -->
