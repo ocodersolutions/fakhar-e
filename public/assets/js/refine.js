@@ -68,7 +68,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='brands']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
     });
     //category
     $('.category .item').click(function(){
@@ -88,7 +88,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='catids']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
     });
   
     // select childs category
@@ -129,7 +129,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='catids']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
             
     });
    $('.mobile .category .has-child').click(function() {
@@ -153,7 +153,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='catids']").val(a2);
         var a2 = [];
-        loadProductData();
+        Product.loadProductListAjax();
     });
     //clear filter
     $('.clear-filter').click(function(){

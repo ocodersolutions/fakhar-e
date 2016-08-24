@@ -529,6 +529,7 @@ class ProfileController extends AbstractActionController {
 
     public function myaccountAction() {
 
+        $this->layout("layout/layout_elnove.phtml");
         $aQueryParams = $this->params()->fromQuery();
         
         $__viewVariables = array();
