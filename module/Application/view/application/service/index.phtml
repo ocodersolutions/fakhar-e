@@ -33,11 +33,11 @@
          </div>
         <div class="col-lg-8 col-sm-9 selected_right ">
             <div class="option-filter">
-                <input type="radio">
+                <input type="radio" value="all">
                 <span>ALL</span>
-                <input type="radio">
+                <input type="radio" value="sale">
                 <span>SALE</span>
-                <input type="radio">
+                <input type="radio" value="saveitem">
                 <span>SAVE ITEMS</span>
             </div>
             <div class="option-selected">
@@ -51,13 +51,13 @@
                     <p class="uc_link_tittle sort-item-selected">Lowest price</p>
                 </span>
                 <div class="uc_line_content">
-                    <ul class="uc_des">
-                        <li class="sort-item-select">Relevance</li>
-                        <li class="sort-item-select">Lowest price</li>
-                        <li class="sort-item-select">Highest price</li>
-                        <li class="sort-item-select">Most Popular</li>
-                        <li class="sort-item-select">Favorites</li>
-                        <li class="sort-item-select">Newest</li>
+                    <ul class="uc_des" id="order-by">
+                        <li class="sort-item-select" value="relevance">Relevance</li>
+                        <li class="sort-item-select" value="lowest">Lowest price</li>
+                        <li class="sort-item-select" value="highest">Highest price</li>
+                        <li class="sort-item-select" value="mostpopular">Most Popular</li>
+                        <li class="sort-item-select" value="favorites">Favorites</li>
+                        <li class="sort-item-select" value="newest">Newest</li>
                     </ul>
                 </div>
                 <div class="sort-filter-contentpopup visible-xs" id="sis-content-popup">
@@ -118,6 +118,8 @@
     <input type="hidden" id="page" class="form-control" name="page" value="2">
     <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
     <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
+    <input type="hidden" id="filterTypeMain" name="filterTypeMain">
+    <input type="hidden" id="order-by" class="form-control" name="order-by">
 </form>
 
 <!-- Modal -->
