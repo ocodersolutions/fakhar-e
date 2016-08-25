@@ -31,7 +31,7 @@ $('body').on('click', '.icon_like', function (){
 
 //select fileter    
     //deal
-   $('.deals .item, .colors .list-color .color, .brands .list-brand li').click(function(){
+   $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter').click(function(){
         parent = $(this)[0].attributes[0].nodeValue;
         switch (parent){
             // when click item deal
@@ -52,7 +52,7 @@ $('body').on('click', '.icon_like', function (){
                     $("input[name='"+name_deal+"']").val('1');
                     $(this).addClass('selected');
                 }
-                Product.loadProductListAjax();  
+               
             break;
             // when click item color
             case "colors":
@@ -70,7 +70,7 @@ $('body').on('click', '.icon_like', function (){
                 };
                 $("input[name='colors']").val(a2);
                 a2 = [];
-                Product.loadProductListAjax();  
+               
             break;
             // when click item brand
             case "brands":
@@ -87,28 +87,73 @@ $('body').on('click', '.icon_like', function (){
                 };
                 $("input[name='brands']").val(a2);
                 var a2 = [];
-                Product.loadProductListAjax();
+               
+            break;
+            // when click item category
+            case "category":
+                
+                // if click category parent
+                if($(this).hasClass('has-child')){
+                    if ($(this).hasClass("has-child-selected") == false) {
+                        $(this).addClass('has-child-selected');
+                        category_id = $(this).attr('id');
+                        $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
+                        $('.desktop .'+category_id).find('.item').addClass('selected')
+                    } else {
+                        $(this).removeClass('has-child-selected');
+                        category_id = $(this).attr('id');
+                        $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
+                        $('.desktop .'+category_id).find('.item').removeClass('selected')
+                    }
+                    id = $(this).attr('id');
+                    parent = $(this).closest('div').attr('class');
+                    check_parent_category(id,parent);
+
+
+                    array_category = $('.category .item.selected').toArray();
+                    var a2 =  [];
+                    for (i = 0; i < array_category.length ; i++) {
+                        var a1 = (array_category[i].attributes[1].nodeValue);
+                        a2.push(a1);
+                    };
+                    $("input[name='catids']").val(a2);
+                    var a2 = [];
+                   
+                }else{
+                // if click item
+                    if($(this).hasClass('selected')){
+                        $(this).removeClass('selected');
+                    }else{
+                        $(this).addClass('selected');
+                    }
+                    id = $(this).attr('id');
+                    check_parent_category(id);
+                    array_category = $('.category .item.selected').toArray();
+                    var a2 =  [];
+                    for (i = 0; i < array_category.length ; i++) {
+                        var a1 = (array_category[i].attributes[1].nodeValue);
+                        a2.push(a1);
+                    };
+                    $("input[name='catids']").val(a2);
+                    var a2 = [];
+                }
+               
+            break;
+            case "clear":
+                $('.item.selected').removeClass('selected');
+                $('.has-child-selected').removeClass('has-child-selected');
+                $('.color.selected').removeClass('selected');
+                $('i.check.fa.fa-check').remove();
+                x = $('#productFilterDetail input[type="hidden"]');
+                console.log(x);
+                for (i = 0; i < x.length ; i++) {
+                    y = x[i].attributes[2].nodeValue ;
+                    console.log("input[name="+y+"]");
+                    $("input[name="+y+"]").val("");
+                };
             break;
        }
-    });
-    //category
-    $('.category .item').click(function(){
-        if($(this).hasClass('selected')){
-            $(this).removeClass('selected');
-        }else{
-            $(this).addClass('selected');
-        }
-        id = $(this).attr('id');
-        check_parent_category(id);
-        array_category = $('.category .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='catids']").val(a2);
-        var a2 = [];
-        Product.loadProductListAjax();
+    Product.loadProductListAjax(); 
     });
   
     // select childs category
@@ -117,58 +162,23 @@ $('body').on('click', '.icon_like', function (){
           $('#'+parent).removeClass('has-child-selected');
         }
     }
-    $('.desktop  .category .has-child').click(function() {
+   $('.mobile .category .has-child').click(function() {
+
         if ($(this).hasClass("has-child-selected") == false) {
             $(this).addClass('has-child-selected');
             category_id = $(this).attr('id');
-            $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
-            $('.desktop .'+category_id).find('.item').addClass('selected')
+            $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
+            $('.mobile .'+category_id).find('.item').addClass('selected')
         } else {
             $(this).removeClass('has-child-selected');
             category_id = $(this).attr('id');
-            $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
-            $('.desktop .'+category_id).find('.item').removeClass('selected')
+            $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
+            $('.mobile .'+category_id).find('.item').removeClass('selected')
         }
-        id = $(this).attr('id');
-        parent = $(this).closest('div').attr('class');
-        //console.log(parent);
-        // total_item = $('.desktop .category .'+id+' .item').length;
-        // selected_item = $('.desktop .category .'+id+' .item.selected').length;
-        // current_item = total_item - selected_item;
-        // if (current_item > 0 ) {
-        //     console.log($(this));
-        // };
-        check_parent_category(id,parent);
-
-
         array_category = $('.category .item.selected').toArray();
         var a2 =  [];
         for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='catids']").val(a2);
-        var a2 = [];
-        Product.loadProductListAjax();
-            
-    });
-   $('.mobile .category .has-child').click(function() {
-
-            if ($(this).hasClass("has-child-selected") == false) {
-                $(this).addClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
-                $('.mobile .'+category_id).find('.item').addClass('selected')
-            } else {
-                $(this).removeClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
-                $('.mobile .'+category_id).find('.item').removeClass('selected')
-            }
-        array_category = $('.category .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
+            var a1 = (array_category[i].attributes[1].nodeValue);
             a2.push(a1);
         };
         $("input[name='catids']").val(a2);
@@ -176,19 +186,7 @@ $('body').on('click', '.icon_like', function (){
         Product.loadProductListAjax();
     });
     //clear filter
-    $('.clear-filter').click(function(){
-        $('.item.selected').removeClass('selected');
-        $('.has-child-selected').removeClass('has-child-selected');
-        $('.color.selected').removeClass('selected');
-        $('i.check.fa.fa-check').remove();
-        x = $('#productFilterDetail input[type="hidden"]');
-        for (i = 0; i < x.length ; i++) {
-            y = x[i].attributes[3].nodeValue ;
-            console.log("input[name="+y+"]");
-            $("input[name="+y+"]").val("");
-        };
-        Product.loadProductListAjax(); 
-    });
+ 
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
         x = $(this).parents('.category');
