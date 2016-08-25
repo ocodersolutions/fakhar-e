@@ -169,6 +169,7 @@ $('body').on('click', '.icon_like', function (){
             console.log("input[name="+y+"]");
             $("input[name="+y+"]").val("");
         };
+        Product.loadProductListAjax(); 
     });
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {

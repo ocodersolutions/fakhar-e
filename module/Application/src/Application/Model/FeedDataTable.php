@@ -390,11 +390,25 @@ class FeedDataTable extends BasicTableAdapter {
             $select->join(array("feedmapstore" => 'FeedsMapping'), new Expression("(feedmapstore.value=feed.feedId AND feedmapstore.mappingType='store')"), array());
         }
         if (isset($userId) && !empty($userId) && empty($bought) && empty($service)) {
-
             $select->where(array('Al.userId' => $userId));
         }
-        
-        $select->order('feed.sortOrder desc');
+
+        $orderBy = 'feed.sortOrder desc';
+        if (!empty($aPostParams['orderBy'])) {
+          switch ($aPostParams['orderBy']) {
+            case 'lowest':
+              $orderBy = 'feed.saleprice asc';
+              break;
+            case 'highest':
+              $orderBy = 'feed.saleprice desc';
+              break;
+            case 'newest':
+              $orderBy = 'feed.id desc';
+              break;
+          }
+        }
+        $select->order('feed.id asc');
+
             //$paginator = $sql->prepareStatementForSqlObject($select)->execute();
             //echo $sql->getSqlStringForSqlObject($select); die; 
             $resultSetPrototype = new ResultSet();
