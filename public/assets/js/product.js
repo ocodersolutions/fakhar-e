@@ -11,7 +11,7 @@ var Product = {
             $("#page").val(1);
             Product.endData = 0;
         }
-
+        console.log($("#productFilterDetail").serialize());
         $.ajax({
             url: "/service/getfeeds/" + Math.random(),
             type: 'POST',

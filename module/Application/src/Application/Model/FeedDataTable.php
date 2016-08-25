@@ -314,16 +314,16 @@ class FeedDataTable extends BasicTableAdapter {
             $prodattJoin = true; 
         }
 
-        if( !isset($aPostParams['profileBasePrices']) || $aPostParams['profileBasePrices'] != 1 ) {
+        // if( !isset($aPostParams['profileBasePrices']) || $aPostParams['profileBasePrices'] != 1 ) {
             if( isset($aPostParams['minamount']) && $aPostParams['minamount'] > 0 ) {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) > {$aPostParams['minamount']} ";
             } else {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) > 0 ";
             }
-            if( isset($aPostParams['maxamount']) && $aPostParams['maxamount'] < 1000 ) {
+            if( isset($aPostParams['maxamount']) && $aPostParams['maxamount'] < 1000 && $aPostParams['maxamount'] > 0 ) {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) < {$aPostParams['maxamount']} ";
             }
-        }
+        // }
 
         if (!empty($aPostParams['duration'])) {
             
@@ -548,16 +548,16 @@ class FeedDataTable extends BasicTableAdapter {
             $prodattJoin = true; 
         }
 
-        if( !isset($aPostParams['profileBasePrices']) || $aPostParams['profileBasePrices'] != 1 ) {
+        // if( !isset($aPostParams['profileBasePrices']) || $aPostParams['profileBasePrices'] != 1 ) {
             if( isset($aPostParams['minamount']) && $aPostParams['minamount'] > 0 ) {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) > {$aPostParams['minamount']} ";
             } else {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) > 0 ";
             }
-            if( isset($aPostParams['maxamount']) && $aPostParams['maxamount'] < 1000 ) {
+            if( isset($aPostParams['maxamount']) && $aPostParams['maxamount'] < 1000 && $aPostParams['maxamount'] > 0 ) {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) < {$aPostParams['maxamount']} ";
             }
-        }
+        // }
 
         if (!empty($aPostParams['duration'])) {
             
@@ -707,16 +707,16 @@ class FeedDataTable extends BasicTableAdapter {
             $prodattJoin = true; 
         }
 
-        if( !isset($aPostParams['profileBasePrices']) || $aPostParams['profileBasePrices'] != 1 ) {
+        // if( !isset($aPostParams['profileBasePrices']) || $aPostParams['profileBasePrices'] != 1 ) {
             if( isset($aPostParams['minamount']) && $aPostParams['minamount'] > 0 ) {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) > {$aPostParams['minamount']} ";
             } else {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) > 0 ";
             }
-            if( isset($aPostParams['maxamount']) && $aPostParams['maxamount'] < 1000 ) {
+            if( isset($aPostParams['maxamount']) && $aPostParams['maxamount'] < 1000 && $aPostParams['maxamount'] > 0 ) {
                 $sWhere .= " AND IF(feed.onsale='Y',feed.saleprice,feed.price) < {$aPostParams['maxamount']} ";
             }
-        }
+        // }
 
         if (!empty($aPostParams['duration'])) {
             
