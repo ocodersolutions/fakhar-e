@@ -50,15 +50,15 @@
             <div class="sort-item " id="accordion-select" >
                 <span class="uc_head_line">
                     <span class="icon_arrow fa fa-chevron-down"></span>
-                    <p class="uc_link_tittle sort-item-selected">Lowest price</p>
+                    <p class="uc_link_tittle sort-item-selected">Sort By</p>
                 </span>
                 <div class="uc_line_content">
                     <ul class="uc_des" id="orderBy">
-                        <li class="sort-item-select" value="relevance">Relevance</li>
+                        <!-- <li class="sort-item-select" value="relevance">Relevance</li> -->
                         <li class="sort-item-select" value="lowest">Lowest price</li>
                         <li class="sort-item-select" value="highest">Highest price</li>
-                        <li class="sort-item-select" value="mostpopular">Most Popular</li>
-                        <li class="sort-item-select" value="favorites">Favorites</li>
+                        <!-- <li class="sort-item-select" value="mostpopular">Most Popular</li> -->
+                        <!-- <li class="sort-item-select" value="favorites">Favorites</li> -->
                         <li class="sort-item-select" value="newest">Newest</li>
                     </ul>
                 </div>
@@ -85,10 +85,11 @@
 </div> 
 
 <div class="row">
+    <!-- REFINE SEARCH Block -->
     <div class="refine col-lg-2 col-lg-offset-1 col-sm-3">
         <?php echo $this->partial('application/service/index_refine.phtml'); ?> 
     </div>
-
+    <!-- Products List Block -->
     <div class="col-lg-8 col-sm-9">
         <div class="row">
             <div id="body-main-sideright" class="col-lg-12">
@@ -102,26 +103,26 @@
 
 <!-- Form for REFINE SEARCH -->
 <form id="productFilterDetail" name="productFilterDetail">
-    <input type="hidden" id="minamount" class="form-control" name="minamount">
-    <input type="hidden" id="maxamount" class="form-control" name="maxamount">
-    <input type="hidden" id="minduration" class="form-control" name="minduration">
-    <input type="hidden" id="maxduration" class="form-control" name="maxduration">
-    <input type="hidden" id="catids" class="form-control" name="catids">
-    <input type="hidden" id="brands" class="form-control" name="brands">
-    <input type="hidden" id="colors" class="form-control" name="colors">
-    <input type="hidden" id="stores" class="form-control" name="stores">
-    <input type="hidden" id="deals" class="form-control" name="deals">
-    <input type="hidden" id="onsale" class="form-control" name="onsale">
-    <input type="hidden" id="todaynew" class="form-control" name="todaynew">
-    <input type="hidden" id="newthisweek" class="form-control" name="newthisweek">
-    <input type="hidden" id="freeshipping" class="form-control" name="freeshipping">
-    <input type="hidden" id="specialoffer" class="form-control" name="specialoffer">
-    <input type="hidden" id="discountcode" class="form-control" name="discountcode">
-    <input type="hidden" id="page" class="form-control" name="page" value="2">
-    <input type="hidden" id="limit" class="form-control" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
-    <input type="hidden" id="profileBasePrices" class="form-control" name="profileBasePrices" value="1">
+    <input type="hidden" id="minamount" name="minamount">
+    <input type="hidden" id="maxamount" name="maxamount">
+    <input type="hidden" id="minduration" name="minduration">
+    <input type="hidden" id="maxduration" name="maxduration">
+    <input type="hidden" id="catids" name="catids">
+    <input type="hidden" id="brands" name="brands">
+    <input type="hidden" id="colors" name="colors">
+    <input type="hidden" id="stores" name="stores">
+    <input type="hidden" id="deals" name="deals">
+    <input type="hidden" id="onsale" name="onsale">
+    <input type="hidden" id="todaynew" name="todaynew">
+    <input type="hidden" id="newthisweek" name="newthisweek">
+    <input type="hidden" id="freeshipping" name="freeshipping">
+    <input type="hidden" id="specialoffer" name="specialoffer">
+    <input type="hidden" id="discountcode" name="discountcode">
+    <input type="hidden" id="page" name="page" value="2">
+    <input type="hidden" id="limit" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
+    <input type="hidden" id="profileBasePrices" name="profileBasePrices" value="1">
     <input type="hidden" id="filterTypeMain" name="filterTypeMain">
-    <input type="hidden" id="orderBy" class="form-control" name="orderBy">
+    <input type="hidden" id="orderBy" name="orderBy">
 </form>
 
 <!-- Modal -->
