@@ -1,4 +1,4 @@
-#careers_page{
+#careers_page,#contact_us{
 	display: block;
 	clear: both;
 
@@ -129,10 +129,52 @@
 			.clr {
 			    clear: both;
 			}
+			.top_page{
+				p{
+					cursor: pointer;
+					color: #45403c;
+					&:hover,&:active{
+					    color: #898697;
+	    				text-decoration: underline;
+					}
+				}
+			}
 	    }
 	    .top_page {
 		    padding-top: 70px;
 		    text-align: center;
+		}
+	}
+}
+/*=========== contact_us page ================*/
+
+#contact_us{
+	// display: block;
+	// clear: both;
+	// position: relative;
+	// text-align: center;
+	.banner2 {
+	    background: url('../../img/banner2.jpg') no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+	    height: 562px;
+	    border-top: 2px solid #5c5e5f;
+	    text-align: center;
+	}
+	.skeleton{
+		.office{
+		    font-size: 22px;
+		    color: #45403c;
+		    margin-bottom: 40px;
+		    text-align: center;
+		}
+		p{
+			.hlink{
+				cursor: pointer;
+				color: #9aadde;
+				&:hover,&:active{
+				    color: #898697;
+    				text-decoration: underline;
+				}
+			}
 		}
 	}
 }
