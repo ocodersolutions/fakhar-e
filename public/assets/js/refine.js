@@ -187,6 +187,7 @@ $('body').on('click', '.icon_like', function (){
             console.log("input[name="+y+"]");
             $("input[name="+y+"]").val("");
         };
+        Product.loadProductListAjax(); 
     });
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
@@ -219,9 +220,9 @@ $('body').on('click', '.icon_like', function (){
    
     //add element for price filter
     $(document).ready(function() {
-        $("#1 .slider-3 span:eq(0)").append("<p>250</p>");
+        $("#1 .slider-3 span:eq(0)").append("<p>0</p>");
         $("#1 .slider-3 span:eq(1)").append("<p>1000+</p>");
-        $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
+        $("#2 .slider-3 span:eq(0)").append("<p>0</p>");
         $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
     });
     //select fileter
@@ -241,3 +242,26 @@ $('body').on('click', '.icon_like', function (){
         Product.loadProductListAjax();
     });
     //filter TypeMain
+
+
+$(function() {
+    $(".slider-3").slider({
+        range: true,
+        min: 0,
+        max: 1000,
+        values: [0, 1000],
+        change: function(event, ui) {
+            minprice = (ui.values[0]);
+            maxprice = (ui.values[1]);
+            $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
+            $('#1 .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+            $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
+            $('#2 .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+            $("input[name='minamount']").val(minprice);
+            $("input[name='maxamount']").val(maxprice);
+            Product.loadProductListAjax();
+        }
+    });
+    $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+    $("#max-price").val("$" + $(".slider-3").slider("values", 1));
+});
