@@ -62,7 +62,7 @@
 
                         <?php if (!empty($this->allBrands)) { 
                                 foreach ($this->allBrands as $brand) { ?>
-                        <tr><td><li data-brand='<?php echo $brand[ 'id']; ?>' class='item'><?php echo $brand[ 'title']; ?></li></td></tr>
+                        <tr><td><li data-parent="brands" data-brand='<?php echo $brand[ 'id']; ?>' class='item'><?php echo $brand[ 'title']; ?></li></td></tr>
                         <?php } } ?>
 
                     </tbody>
@@ -117,7 +117,7 @@
                 foreach ($this->allColors as $color) {
                     if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
                     ?>
-                    <div data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
+                    <div data-parent="colors" data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
                     <?php
                 }
             }
@@ -129,12 +129,12 @@
         <i data-class="deals" class="fa fa-angle-down" aria-hidden="true"></i>
         <div class="deals stage0">
             <ul>
-                <li data-deal="onsale" class="item">All item on sale</li>
-                <li data-deal="todaynew" class="item">New today</li>
-                <li data-deal="newthisweek" class="item">New this week</li>
-                <li data-deal="freeshipping" class="item">Free shipping</li>
-                <li data-deal="specialoffer" class="item">Special offer</li>
-                <li data-deal="discountcode" class="item">Discount</li>
+                <li data-parent="deals" data-deal="onsale"  class="item">All item on sale</li>
+                <li data-parent="deals" data-deal="todaynew"  class="item">New today</li>
+                <li data-parent="deals" data-deal="newthisweek"  class="item">New this week</li>
+                <li data-parent="deals" data-deal="freeshipping"  class="item">Free shipping</li>
+                <li data-parent="deals" data-deal="specialoffer"  class="item">Special offer</li>
+                <li data-parent="deals" data-deal="discountcode"  class="item">Discount</li>
             </ul>
         </div>
     </ul>

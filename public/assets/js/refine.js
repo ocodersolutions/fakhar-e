@@ -31,48 +31,68 @@ $('body').on('click', '.icon_like', function (){
 
 //select fileter    
     //deal
-   $('.deals .item').click(function(){
-        name_deal = $(this)[0].attributes[0].nodeValue;
-        x = $("input[name='"+name_deal+"']").val();
-        if(x == 1){
-            $("input[name='"+name_deal+"']").val('');
-            $(this).removeClass('selected');
-        }else{
-            $("input[name='"+name_deal+"']").val('1');
-            $(this).addClass('selected');
-        }         
-    });
-    //colors
-    $('.colors .list-color .color').click(function(){
-        array_color = $('.color.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_color.length ; i++) {
-            var a1 = (array_color[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='colors']").val(a2);
-        var a2 = [];
-    });
-    //brands
-    $('.brands .list-brand li').click(function(){
-        if($(this).hasClass('selected')){
-            $(this).removeClass('selected');
-        }else{
-            $(this).addClass('selected');
-        }
-        array_brand = $('.brands .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_brand.length ; i++) {
-            var a1 = (array_brand[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='brands']").val(a2);
-        var a2 = [];
-        Product.loadProductListAjax();
+   $('.deals .item, .colors .list-color .color, .brands .list-brand li').click(function(){
+        parent = $(this)[0].attributes[0].nodeValue;
+        switch (parent){
+            // when click item deal
+            case "deals":
+                name_deal = $(this)[0].attributes[1].nodeValue;
+                x = $("input[name='"+name_deal+"']").val();
+
+                if(x == 1){
+                    $("input[name='"+name_deal+"']").val('');
+                    $(this).removeClass('selected');
+                }else{
+                    $('.desktop .deals .item.selected').removeClass('selected');
+                    a = $('.desktop .deals .item');
+                    for (i = 0; i < a.length; i++) {
+                        var a1 = a[i].attributes[1].nodeValue;
+                        $("input[name='"+a1+"']").val('');
+                    };
+                    $("input[name='"+name_deal+"']").val('1');
+                    $(this).addClass('selected');
+                }
+                Product.loadProductListAjax();  
+            break;
+            // when click item color
+            case "colors":
+                if ($(this).hasClass("selected") == false) {
+                    $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
+                } else {
+                    $(this).removeClass('selected');
+                    ($(this).find(".check").remove());
+                }
+                array_color = $('.desktop .colors .selected').toArray();
+                var a2 =  [];
+                for (i = 0; i < array_color.length ; i++) {
+                    var a1 = (array_color[i].attributes[1].nodeValue);
+                    a2.push(a1);
+                };
+                $("input[name='colors']").val(a2);
+                a2 = [];
+                Product.loadProductListAjax();  
+            break;
+            // when click item brand
+            case "brands":
+               if($(this).hasClass('selected')){
+                $(this).removeClass('selected');
+                }else{
+                    $(this).addClass('selected');
+                }
+                array_brand = $('.brands .item.selected').toArray();
+                var a2 =  [];
+                for (i = 0; i < array_brand.length ; i++) {
+                    var a1 = (array_brand[i].attributes[1].nodeValue);
+                    a2.push(a1);
+                };
+                $("input[name='brands']").val(a2);
+                var a2 = [];
+                Product.loadProductListAjax();
+            break;
+       }
     });
     //category
     $('.category .item').click(function(){
-      
         if($(this).hasClass('selected')){
             $(this).removeClass('selected');
         }else{
@@ -196,15 +216,7 @@ $('body').on('click', '.icon_like', function (){
             $('li#'+x).removeClass('li-up');
         }
     });
-    //change icon color
-    $('.refine .refine-colum .list-color .color').click(function() {
-        if ($(this).hasClass("selected") == false) {
-            $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
-        } else {
-            $(this).removeClass('selected');
-            ($(this).find(".check").remove());
-        }
-    });
+   
     //add element for price filter
     $(document).ready(function() {
         $("#1 .slider-3 span:eq(0)").append("<p>250</p>");
