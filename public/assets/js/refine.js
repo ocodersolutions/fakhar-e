@@ -31,7 +31,7 @@ $('body').on('click', '.icon_like', function (){
 
 //select fileter    
     //deal
-   $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter').click(function(){
+   $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter, #orderBy li').click(function(){
         parent = $(this)[0].attributes[0].nodeValue;
         switch (parent){
             // when click item deal
@@ -137,8 +137,8 @@ $('body').on('click', '.icon_like', function (){
                     $("input[name='catids']").val(a2);
                     var a2 = [];
                 }
-               
             break;
+
             case "clear":
                 $('.item.selected').removeClass('selected');
                 $('.has-child-selected').removeClass('has-child-selected');
@@ -151,6 +151,12 @@ $('body').on('click', '.icon_like', function (){
                     console.log("input[name="+y+"]");
                     $("input[name="+y+"]").val("");
                 };
+            break;
+
+            case "orderBy":
+                console.log($(this));
+                val_order = $(this)[0].attributes[2].nodeValue;
+                $('input[name="orderBy"]').val(val_order);
             break;
        }
     Product.loadProductListAjax(); 
@@ -223,15 +229,7 @@ $('body').on('click', '.icon_like', function (){
         $("#2 .slider-3 span:eq(0)").append("<p>0</p>");
         $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
     });
-    //select fileter
-
-    // order by send to input hidden
-    $('#orderBy li').click(function(){
-        val_order = $(this)[0].attributes[1].nodeValue;
-        $('input[name="orderBy"]').val(val_order);
-        Product.loadProductListAjax();
-    });
-    // order by send to input hidden
+    //end-select filter
 
     //filter TypeMain
     $('.option-filter input[type="radio"]').click(function(){
