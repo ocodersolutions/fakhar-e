@@ -23,38 +23,9 @@ class ServiceController extends BaseActionController {
     public function indexAction() {
         $this->layout('layout/layout_elnove.phtml');
         $oAuth = $this->getServiceLocator()->get('AuthService');
-        $oHelper = $this->getServiceLocator()->get('viewhelpermanager');
-        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciPlugin.min.js');
-        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.dom.js');
-        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.core.js');
-        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.selectable.js');
-        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.checkbox.js');
-        $oHelper->get('HeadScript')->appendFile('/vendor/aciTree/js/jquery.aciTree.radio.js');
-        $oHelper->get('HeadScript')->appendFile('/vendor/jquery-ui.min.js');
-        $oHelper->get('HeadScript')->appendFile('/js/jquery.hc-sticky.min.js');
-        $oHelper->get('headLink')->appendStylesheet('/vendor/aciTree/css/aciTree.css');
-        // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciPlugin.min.js');
-        // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciTree.dom.js');
-        // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciTree.core.js');
-        // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciTree.selectable.js');
-        // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciTree.checkbox.js');
-        // $oHelper->get('HeadScript')->appendFile('/public/vendor/aciTree/js/jquery.aciTree.radio.js');
-        // $oHelper->get('HeadScript')->appendFile('/public/vendor/jquery-ui.min.js');
-        // $oHelper->get('HeadScript')->appendFile('/public/js/jquery.hc-sticky.min.js');
-        // $oHelper->get('headLink')->appendStylesheet('/public/vendor/aciTree/css/aciTree.css');
-
-        //$oHelper->get('HeadScript')->appendFile('/js/ui/jquery.ui.core.js');
-        //$oHelper->get('HeadScript')->appendFile('/js/ui/jquery.ui.widget.js');
-        //$oHelper->get('HeadScript')->appendFile('/js/ui/jquery.ui.mouse.js');
-        //$oHelper->get('HeadScript')->appendFile('/js/ui/jquery.ui.draggable.js');
-        //$oHelper->get('HeadScript')->appendFile('/js/ui/jquery.ui.droppable.js');
-
-        
 
         $__viewVariables = array();
         $aGetParams = $this->params()->fromQuery();
-
-        // var_dump($this->layout()); die;
         
         $this->layout()->showSmallHeader = true;
         $this->layout()->hideFooter = true;
@@ -86,7 +57,8 @@ class ServiceController extends BaseActionController {
                 return     $__viewVariables;           
             }
             else {
-                $this->redirect()->toRoute('auth');
+                // $this->redirect()->toRoute('auth');
+                $userId = 0;
             }
         }
         $__viewVariables['userEmail'] = @$userInfo->email; 
@@ -654,7 +626,7 @@ class ServiceController extends BaseActionController {
         $request = $this->getRequest();
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
-        $userId = $userInfo->userId;
+        $userId = 0;
         $aQueryParams = $this->params()->fromQuery();
         if ($request->isXmlHttpRequest() || (isset($aQueryParams['test']) && $aQueryParams['test']=='yes') ) { 
             $oService = $this->getServiceLocator();
