@@ -94,23 +94,21 @@ $('body').on('click', '.icon_like', function (){
     // select childs category
     function check_parent_category(id,parent){
         if($('.has-child#'+id).length > 0){
-            alert('#'+parent);
-          console.log($('#'+parent).removeClass(''));
+          $('#'+parent).removeClass('has-child-selected');
         }
     }
     $('.desktop  .category .has-child').click(function() {
-
-            if ($(this).hasClass("has-child-selected") == false) {
-                $(this).addClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
-                $('.desktop .'+category_id).find('.item').addClass('selected')
-            } else {
-                $(this).removeClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
-                $('.desktop .'+category_id).find('.item').removeClass('selected')
-            }
+        if ($(this).hasClass("has-child-selected") == false) {
+            $(this).addClass('has-child-selected');
+            category_id = $(this).attr('id');
+            $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
+            $('.desktop .'+category_id).find('.item').addClass('selected')
+        } else {
+            $(this).removeClass('has-child-selected');
+            category_id = $(this).attr('id');
+            $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
+            $('.desktop .'+category_id).find('.item').removeClass('selected')
+        }
         id = $(this).attr('id');
         parent = $(this).closest('div').attr('class');
         //console.log(parent);
@@ -217,9 +215,9 @@ $('body').on('click', '.icon_like', function (){
     //select fileter
 
     // order by send to input hidden
-    $('#order-by li').click(function(){
+    $('#orderBy li').click(function(){
         val_order = $(this)[0].attributes[1].nodeValue;
-        $('input[name="order-by"]').val(val_order);
+        $('input[name="orderBy"]').val(val_order);
     });
     // order by send to input hidden
 
