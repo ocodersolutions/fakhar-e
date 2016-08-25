@@ -218,6 +218,7 @@ $('body').on('click', '.icon_like', function (){
     $('#orderBy li').click(function(){
         val_order = $(this)[0].attributes[1].nodeValue;
         $('input[name="orderBy"]').val(val_order);
+        Product.loadProductListAjax();
     });
     // order by send to input hidden
 
@@ -225,5 +226,6 @@ $('body').on('click', '.icon_like', function (){
     $('.option-filter input[type="radio"]').click(function(){
         x = $(this).attr('value');
         $('input[name="filterTypeMain"]').val(x);
+        Product.loadProductListAjax();
     });
     //filter TypeMain
