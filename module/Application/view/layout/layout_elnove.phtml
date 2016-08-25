@@ -69,7 +69,7 @@
      <script>
      
     //show popup full screen when click in object
-            jQuery(function($) {
+            jQuery(document).ready(function($) {
                 
                 $("#pop-menu").fullScreenPopup({
                     bgColor: '#fff'
@@ -80,7 +80,14 @@
                 $("#sort-item-popup").fullScreenPopup({
                     bgColor: '#fff'
                 });
-                
+                // before popup set width fore tittle tag and set margin
+                $("#refine-search-popup,#pop-menu,#sort-item-popup").click(function(){
+                    
+                    $("#popup ul").css("margin-top","70px");
+                    var w = jQuery(".fsp-content").width();
+                    $("p.m-title").css('width',w);
+
+                });
             });
         </script>
     <body>
@@ -831,6 +838,8 @@
 
 
         </script>
+        <script src="/assets/js/common.js"></script>
+
         <script>
             //
             $(document).ready(function(){
