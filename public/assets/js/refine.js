@@ -41,6 +41,7 @@ $('body').on('click', '.icon_like', function (){
             $("input[name='"+name_deal+"']").val('1');
             $(this).addClass('selected');
         }         
+        Product.loadProductListAjax();
     });
     //colors
     $('.colors .list-color .color').click(function(){
@@ -52,6 +53,7 @@ $('body').on('click', '.icon_like', function (){
         };
         $("input[name='colors']").val(a2);
         var a2 = [];
+        Product.loadProductListAjax();
     });
     //brands
     $('.brands .list-brand li').click(function(){
