@@ -12,14 +12,12 @@
         
         <!-- Le styles -->
         <?php echo $this->headLink()
-
+                // -------------------profile/myaccount--------------------------------//
                         ->prependStylesheet($this->basePath() . '/css/jquery.gritter.css')
                         ->prependStylesheet($this->basePath() . '/css/lnovecustom.css')
                         ->prependStylesheet($this->basePath() . '/css/normalize.css')
                         ->prependStylesheet($this->basePath() . '/css/owl.carousel.css')
                         ->prependStylesheet($this->basePath() . '/fa/css/font-awesome.css')
-                        // ->prependStylesheet($this->basePath() . '/css/style.css')
-                        // ->prependStylesheet($this->basePath() . '/css/profile_myaccount.less')
                         ->prependStylesheet($this->basePath() . '/js/sweetalert-master/dist/sweetalert.css')
                         ->appendStylesheet($this->basePath() . '/css/hoang_careers.less')
                         ->appendStylesheet($this->basePath() . '/css/mystyle.css')
@@ -28,7 +26,21 @@
                         ->appendStylesheet($this->basePath() . '/myalert/css/style.css')
                         ->appendStylesheet($this->basePath() . '/tooltipster/css/tooltipster.css')
                         ->appendStylesheet($this->basePath() . '/tooltipster/css/themes/tooltipster-shadow.css')
-                      ;
+                // -------------------End profile/myaccount--------------------------------//     
+                    ;
+        ?>
+        <?php
+        //-------------------------info/how-it-works---------------------------------------//
+        
+        //echo $this->headScript()->prependFile($this->basePath() . '/vendor/modernizr.js');
+        echo $this->headScript()->prependFile($this->basePath() . '/myalert/js/my_alert.js')
+                                ->prependFile($this->basePath() . '/myalert/js/foundation.reveal.js')
+                                ->prependFile($this->basePath() . '/myalert/js/foundation.min.js') 
+                                ->prependFile($this->basePath() . '/js/jquery.gray.js')
+                                ->prependFile($this->basePath() . '/js/jquery.js')
+                                ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
+        //-------------------------info/how-it-works---------------------------------------//
+                    ;
         ?>
 
         <link rel="icon" href="favicon.ico">
