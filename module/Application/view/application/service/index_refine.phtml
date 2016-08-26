@@ -122,22 +122,24 @@
     <div class="refine-colum mobile" id="rfs-content-popup">
         <p class="m-title"> REFINE SEARCH</p>
         <div class="option-filter">
+            <form>     
             <div class="option-filter-row">
                 <label><span>ALL</span>
                 </label>
-                <input type="radio">
+                <input type="radio" name="filter" value="all" checked="checked">
             </div>
             <div class="option-filter-row">
                 <label><span>SALE</span>
                 </label>
-                <input type="radio">
+                <input type="radio" name="filter" value="sale">
             </div>
 
             <div class="option-filter-row">
                 <label><span>SAVE ITEMS</span>
                 </label>
-                <input type="radio">
+                <input type="radio" name="filter" value="saveitem">
             </div>
+            </form>
         </div>
         <ul> 
         <li id="category">CATEGORIES</li>
@@ -145,7 +147,7 @@
         <div class="category stage0" style="display: none; left: 100px;">
             <ul>
             <?php foreach ($this->aJson as $aJson) { ?>
-                <li <?php if(!isset($aJson['branch'])){echo 'data-catids="'.$aJson['id'].'"';} ?> class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
+                <li data-parent="category" <?php if(!isset($aJson['branch'])){echo 'data-catids="'.$aJson['id'].'"';} ?> class="stage1 <?php if(isset($aJson['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php  echo strtolower($aJson['label']); ?>"> <?php  echo $aJson['label']; ?> 
                 </li>
                 <?php if(isset($aJson['branch'])){ ?>
                      <i data-class="<?php $search = array(' ', '&');
@@ -156,7 +158,7 @@
                             <?php 
                             if(isset($aJson['branch'])) :
                             foreach ($aJson['branch'] as $aJson1) { ?>
-                                <li <?php if(!isset($aJson1['branch'])){echo 'data-catids="'.$aJson1['id'].'"';} ?> class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
+                                <li data-parent="category" <?php if(!isset($aJson1['branch'])){echo 'data-catids="'.$aJson1['id'].'"';} ?> class="stage2 <?php if(isset($aJson1['branch'])){echo 'has-child';}else{echo 'item';} ?>" id="<?php $search = array(' ', '&');
                                 echo strtolower (str_replace($search,'',$aJson1['label'])); ?>"><?php echo $aJson1['label']; ?>
                                 </li>
                                 <?php if(isset($aJson1['branch'])){ ?>
@@ -169,7 +171,7 @@
                                     <?php if(isset($aJson1['branch'])) :
                                     foreach ($aJson1['branch'] as $aJson2) { ?>
                                     
-                                            <li <?php if(!isset($aJson2['branch'])){echo 'data-catids="'.$aJson2['id'].'"';} ?> class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
+                                            <li data-parent="category" <?php if(!isset($aJson2['branch'])){echo 'data-catids="'.$aJson2['id'].'"';} ?> class="stage3 <?php if(isset($aJson2['branch'])){echo 'has-child';}else{echo 'item';} ?>"><?php  echo ($aJson2['label']); ?>
                                             </li>
                                             <?php if(isset($aJson2['branch'])){ ?>
                                                  <i data-class="<?php $search = array(' ', '&');
@@ -196,7 +198,7 @@
 
                         <?php if (!empty($this->allBrands)) { 
                                 foreach ($this->allBrands as $brand) { ?>
-                        <tr><td><li data-brand='<?php echo $brand[ 'id']; ?>' class='item'><?php echo $brand[ 'title']; ?></li></td></tr>
+                        <tr><td><li data-parent="brands" data-brand='<?php echo $brand[ 'id']; ?>' class='item'><?php echo $brand[ 'title']; ?></li></td></tr>
                         <?php } } ?>
 
                     </tbody>
@@ -228,7 +230,7 @@
                 foreach ($this->allColors as $color) {
                     if($color['value'] == 'WHITE') { $bdrcolor = '#CCCCCC'; } else { $bdrcolor = $color['value']; }
                     ?>
-                    <div data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
+                    <div data-parent="colors" data-color="<?php echo $color['value']; ?>" class="color <?php if($color['value'] == 'BEIGE' || $color['value'] == 'WHITE' || $color['value'] == 'YELLOW' ){ echo 'special'; } ?>" style="background-color:<?php echo $color['value']; ?>;border:solid 1px <?php echo $bdrcolor; ?>;" value="<?php echo $color['value']; ?>" title="<?php echo $color['value']; ?>"></div>
                     <?php
                 }
             }
@@ -251,7 +253,7 @@
     </ul>
             <div class="m-button-foot col-xs-12">
                 <div class="col-xs-6 btn-refine">
-                    <button type="submit" class="clear-filter" form="form1" value="Submit" name="clear-filter">CLEAR FILTER</button>
+                    <button data-parent="clear" type="submit" class="clear-filter" form="form1" value="Submit" name="clear-filter">CLEAR FILTER</button>
                 </div>
                 <div class="col-xs-6 btn-refine">
                     <button type="submit" id="apply-submit" form="form1" value="Submit" name="apply">APPLY</button>

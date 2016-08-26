@@ -3709,9 +3709,24 @@ footer{
     font-family: roboto;
 }
 #profile_myaccount {
-    margin-top: 30px;
-    padding-bottom: 100px;
+    margin: 0;
+    padding: 0;
+    .banner2 {
+        
+        background: url('../../img/banner2.jpg') no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+        height: 562px;
+        border-top: 2px solid #5c5e5f;
+        text-align: center;
+        width: 100%;
+    }
+    .myaccount_content {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: -522px;
+        background: white;
+    }
     .account-btn {
+        padding: 0;
         a {
             font-weight: bold;
             display: inline-block;
@@ -3770,7 +3785,7 @@ footer{
                 .default1 {
                     select {
                         height: 40px;
-                        font-size: 16px;
+                        font-size: 15px;
                     }
                 }
                 .email_address_mpf {
@@ -3797,8 +3812,8 @@ footer{
                         cursor: pointer;
                         position: relative;
                         padding-left: 25px;
-                        margin-right: 10px;
-                        font-size: 14px;
+                        margin-right: 6px;
+                        font-size: 13px;
                         color: #959595;
                         font-weight: 300;
                         &:before {
@@ -3862,7 +3877,7 @@ footer{
                     .head {
                         float: left;
                         margin-top: 45px;
-                        margin-left: 30px;
+                        margin-left: 18px;
                         font-size: 15px;
                         color: #898697;
                         font-weight: 300;
@@ -3883,6 +3898,7 @@ footer{
                 div.fr {
                     margin-left: 50%;
                     margin-top: 10px;
+                    margin-bottom: 100px;
                     .contact_btn {
                         background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
                         border: 2px solid #BCC5C0;
@@ -3903,6 +3919,34 @@ footer{
 }
 .clr {
     clear: both;
+}
+@media (min-width: 992px)and(max-width: 1300px) {
+    #profile_myaccount  {
+        .account-box {
+            .profile-box {
+                .box-two {
+                    .default1 {
+                        select {
+                            font-size: 12px;
+                        }
+                    }
+                    .default {
+                        .outfit1 {
+                            padding-left: 19px;
+                            font-size: 12px;
+                        }
+                        h2 {
+                            font-size: 22px;
+                        }
+                        .head {
+                            margin-left: 8px;
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 /***** ----------------------------------End style for profile/myaccount-------------------------------------*****/
