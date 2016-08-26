@@ -35,15 +35,18 @@ $('body').on('click', '.icon_like', function (){
         mobile = $(this).closest('.mobile').length;
         desktop = $(this).closest('.desktop').length;
         parent = $(this)[0].attributes[0].nodeValue;
+        // parent_category = $(this).closest('div').attr('class');
+        // id = $(this).attr('id');
+        test = $(this);
         if (desktop == 1){
-            alert('desktop');
+            
             switch (parent){
                 // when click item category
                 case "category":
-                    alert('desktop->category');
+                    
                     // if click category parent
                     if($(this).hasClass('has-child')){
-                        alert('desktop->category->parent');
+                        
                         if ($(this).hasClass("has-child-selected") == false) {
                             $(this).addClass('has-child-selected');
                             category_id = $(this).attr('id');
@@ -55,11 +58,7 @@ $('body').on('click', '.icon_like', function (){
                             $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
                             $('.desktop .'+category_id).find('.item').removeClass('selected')
                         }
-                        id = $(this).attr('id');
-                        parent = $(this).closest('div').attr('class');
-                        check_parent_category(id,parent);
-
-
+                        check_parent_category(test);
                         array_category = $('.category .item.selected').toArray();
                         var a2 =  [];
                         for (i = 0; i < array_category.length ; i++) {
@@ -71,14 +70,13 @@ $('body').on('click', '.icon_like', function (){
                        
                     }else if($(this).hasClass('item')){
                     // if click item
-                        alert('desktop->category->item');
+                        
                         if($(this).hasClass('selected')){
                             $(this).removeClass('selected');
                         }else{
                             $(this).addClass('selected');
                         }
-                        id = $(this).attr('id');
-                        check_parent_category(id);
+                        check_parent_category(test);
                         array_category = $('.category .item.selected').toArray();
                         var a2 =  [];
                         for (i = 0; i < array_category.length ; i++) {
@@ -92,14 +90,14 @@ $('body').on('click', '.icon_like', function (){
 
             }
         }else if(mobile == 1){
-            alert('mobile');
+            
 
             switch(parent){
                 case "category":
-                    alert('mobile->category');
+                    
                 if($(this).hasClass('has-child')){
                     // if click category parent
-                    alert('mobile->category->parent');
+                    
                     if ($(this).hasClass("has-child-selected") == false) {
                         $(this).addClass('has-child-selected');
                         category_id = $(this).attr('id');
@@ -121,14 +119,13 @@ $('body').on('click', '.icon_like', function (){
                     var a2 = [];
                 }else if($(this).hasClass('item')){
                     // if click item
-                    alert('mobile->category->item');
+                    
                     if($(this).hasClass('selected')){
                         $(this).removeClass('selected');
                     }else{
                         $(this).addClass('selected');
                     }
-                    id = $(this).attr('id');
-                    check_parent_category(id);
+                    check_parent_category(test);
                     array_category = $('.category .item.selected').toArray();
                     var a2 =  [];
                     for (i = 0; i < array_category.length ; i++) {
@@ -141,6 +138,7 @@ $('body').on('click', '.icon_like', function (){
                 break;
             }
         }
+
         //              PUBLIC
         //  filer public for desktop & mobile
 
@@ -148,7 +146,7 @@ $('body').on('click', '.icon_like', function (){
                 
             //star - when click item brand
                 case "brands":
-                    alert('public->brand');
+                    
                    if($(this).hasClass('selected')){
                     $(this).removeClass('selected');
                     }else{
@@ -166,7 +164,7 @@ $('body').on('click', '.icon_like', function (){
             //end -  when click item brand
             //start - when click item color
                 case "colors":
-                alert('public->color');
+                
                     if ($(this).hasClass("selected") == false) {
                         $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
                     } else {
@@ -185,7 +183,7 @@ $('body').on('click', '.icon_like', function (){
             //end - when click item color
             //start - when click item deal
                 case "deals":
-                alert('public->deals');
+                
                     name_deal = $(this)[0].attributes[1].nodeValue;
                     x = $("input[name='"+name_deal+"']").val();
 
@@ -206,14 +204,14 @@ $('body').on('click', '.icon_like', function (){
             //end - when click item deal
             //start - when click sort item
                 case "orderBy":
-                    alert('public->orderBy');
+                    
                     val_order = $(this)[0].attributes[1].nodeValue;
                     $('input[name="orderBy"]').val(val_order);
                 break;
             //end - when click sort item
             //start - when click typemain
                 case "filterTypeMain":
-                    alert('public->filterTypeMain');
+                    
                     console.log($(this));
                     val_order = $(this)[0].attributes[3].nodeValue;
                     $('input[name="filterTypeMain"]').val(val_order);
@@ -222,18 +220,18 @@ $('body').on('click', '.icon_like', function (){
 
 
                 case "clear":
-                    alert('public->clear');
+                    
                     $('.item.selected').removeClass('selected');
                     $('.has-child-selected').removeClass('has-child-selected');
                     $('.color.selected').removeClass('selected');
                     $('i.check.fa.fa-check').remove();
                     x = $('#productFilterDetail input[type="hidden"]');
-                    console.log(x);
                     for (i = 0; i < x.length ; i++) {
-                        y = x[i].attributes[2].nodeValue ;
+                        y = x[i].attributes[2].nodeValue;
                         console.log("input[name="+y+"]");
                         $("input[name="+y+"]").val("");
                     };
+                    $("input[name='limit']").val("50");
                 break;
 
         }
@@ -242,16 +240,33 @@ $('body').on('click', '.icon_like', function (){
     });
   
     // select childs category
-    function check_parent_category(id,parent){
-        if($('.has-child#'+id).length > 0){
-          $('#'+parent).removeClass('has-child-selected');
-        }
+    function check_parent_category(test){
+        x = $('.desktop .has-child');
+       
+       var x2 =  [];
+        for (i = 0; i < x.length ; i++) {
+            var x1 = x[i].attributes[2].nodeValue;
+            console.log(x1);
+            total = $('.desktop .'+x1+' .item').length;
+            current = $('.desktop .'+x1+' .item.selected').length;
+            if(total - current == 0){
+                $('.desktop #'+x1).addClass('has-child-selected');
+            }else if(total - current > 0){
+                $('.desktop #'+x1).removeClass('has-child-selected');
+            }
+        };
+
+        x2 =  [];
     }
     //clear filter
  
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
+        
         x = $(this).parents('.category');
+        var attrContent = getComputedStyle(this, ':after').content;
+        var currentId = $(this)[0].attributes[0].nodeValue;
+        var y = $(this)[0].attributes[0].nodeValue;
         if(x.length == 0){
             if ($(this).hasClass("change") == false) {
                 $(this).addClass('change selected');
@@ -259,22 +274,16 @@ $('body').on('click', '.icon_like', function (){
                 $(this).removeClass('change selected');
             }
         }
-        var attrContent = getComputedStyle(this, ':after').content;
-        var currentId = $(this)[0].attributes[0].nodeValue;
         $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum .' + currentId + '').animate({
             left: "+=50",
             height: "toggle"
         }, 800, function() {});
-    });
-    //change icon dropdown
-    $('.fa-angle-down').click(function(){
-        var x = $(this)[0].attributes[0].nodeValue;
         if ($(this).hasClass("fa-selected") == false) {
             $(this).addClass('fa-selected');
-            $('li#'+x).addClass('li-up');
+            $('li#'+y).addClass('li-up');
         }else{
             $(this).removeClass('fa-selected');
-            $('li#'+x).removeClass('li-up');
+            $('li#'+y).removeClass('li-up');
         }
     });
    
