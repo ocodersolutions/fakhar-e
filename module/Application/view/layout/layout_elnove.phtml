@@ -666,17 +666,14 @@
     
         //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-grid"
     $(".sort-list").click(function(){
-        $(this).parents("body").find(".product.col-lg-3.col-sm-4").removeClass("col-xs-6");
-        // $(this).parents("body").find(".product.col-lg-3.col-sm-4").css({"width": "100%", "margin-left": "auto", "margin-right": "auto", "float": "none"});
+        $(this).parents("body").find("#load-product-list").removeClass("grid-view");
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-grid").css({"opacity": "1", "cursor": "pointer"});
 
     });
         //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-list"
     $(".sort-grid").click(function(){
-        // $(this).parents("body").find(".product.col-lg-3.col-sm-4").addClass("col-xs-6");
         $(this).parents("body").find("#load-product-list").addClass("grid-view");
-        // $(this).parents("body").find(".product.col-lg-3.col-sm-4").css({"width": "50%", "margin-left": "0", "margin-right": "0", "float": "left"});
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-list").css({"opacity": "1", "cursor": "pointer"});
 
@@ -955,7 +952,14 @@
                     //     $(".form_search").hide();
                     // }
                 }
-                $("#mobile-header").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#f6f6f4", "z-index": "99"});
+                if($(this).scrollTop() > 0)
+                {
+                    $("#mobile-header").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#f6f6f4", "z-index": "99"});
+                }
+                else
+                {
+                    $("#mobile-header").css("position","static");
+                }                
             });
 
 
