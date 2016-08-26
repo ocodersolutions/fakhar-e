@@ -627,6 +627,15 @@ class FeedDataTable extends BasicTableAdapter {
             $select->join(array("Ab" => 'ArticleBought'), new Expression("(Ab.feeddataid = feed.id)"), array(), 'left');
             $select->where(array('Ab.userId' => $userId));
         }
+        if(isset($aPostParams['filterTypeMain']) && $aPostParams['filterTypeMain'] == 'saveitem'){
+            $select->join(array("Ab" => 'ArticleCloseset'), new Expression("(Ab.feeddataid = feed.id)"), array(), 'left');
+            $select->where(array('Ab.userId' => $userId)); 
+        }
+        if(isset($aPostParams['filterTypeMain']) && $aPostParams['filterTypeMain'] == 'sale'){
+            $select->join(array("Ab" => 'ArticleBought'), new Expression("(Ab.feeddataid = feed.id)"), array(), 'left');
+            $select->where(array('Ab.userId' => $userId)); 
+        }
+        
         if ($prodattJoin) {
             $select->join(array("prodatt" => 'ProductAttributes'), new Expression("(feed.uid=prodatt.productUID) and `attribute_count` > 0")) 
                    ->group('prodatt.productUID');
@@ -642,7 +651,22 @@ class FeedDataTable extends BasicTableAdapter {
             $select->where(array('Al.userId' => $userId));
         }
         
-        $select->order('feed.sortOrder desc');
+        // $select->order('feed.sortOrder desc');
+        $orderBy = 'feed.sortOrder desc';
+        if (!empty($aPostParams['orderBy'])) {
+          switch ($aPostParams['orderBy']) {
+            case 'lowest':
+              $orderBy = 'feed.saleprice asc';
+              break;
+            case 'highest':
+              $orderBy = 'feed.saleprice desc';
+              break;
+            case 'newest':
+              $orderBy = 'feed.id desc';
+              break;
+          }
+        }
+        $select->order($orderBy);
         
         $resultSet = array();
         //echo $sql->getSqlStringForSqlObject($select); die;

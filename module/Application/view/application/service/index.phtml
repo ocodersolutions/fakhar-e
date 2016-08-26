@@ -34,7 +34,7 @@
         <div class="col-lg-8 col-sm-9 selected_right ">
             <div class="option-filter">
                 <form>                    
-                    <input type="radio" name="filter" value="all">
+                    <input type="radio" name="filter" value="all" checked="checked">
                     <span>ALL</span>
                     <input type="radio" name="filter" value="sale">
                     <span>SALE</span>
@@ -54,12 +54,12 @@
                 </span>
                 <div class="uc_line_content">
                     <ul class="uc_des" id="orderBy">
-                        <!-- <li class="sort-item-select" value="relevance">Relevance</li> -->
-                        <li class="sort-item-select" value="lowest">Lowest price</li>
-                        <li class="sort-item-select" value="highest">Highest price</li>
-                        <!-- <li class="sort-item-select" value="mostpopular">Most Popular</li> -->
-                        <!-- <li class="sort-item-select" value="favorites">Favorites</li> -->
-                        <li class="sort-item-select" value="newest">Newest</li>
+                        <!-- <li data-parent="orderBy" class="sort-item-select" value="relevance">Relevance</li> -->
+                        <li data-parent="orderBy" class="sort-item-select" value="lowest">Lowest price</li>
+                        <li data-parent="orderBy" class="sort-item-select" value="highest">Highest price</li>
+                        <!-- <li data-parent="orderBy" class="sort-item-select" value="mostpopular">Most Popular</li> -->
+                        <!-- <li data-parent="orderBy" class="sort-item-select" value="favorites">Favorites</li> -->
+                        <li data-parent="orderBy" class="sort-item-select" value="newest">Newest</li>
                     </ul>
                 </div>
                 <div class="sort-filter-contentpopup visible-xs" id="sis-content-popup">
@@ -121,7 +121,7 @@
     <input type="hidden" id="page" name="page" value="2">
     <input type="hidden" id="limit" name="limit" value="<?php echo PRODUCTS_PER_PAGE;?>">
     <input type="hidden" id="profileBasePrices" name="profileBasePrices" value="1">
-    <input type="hidden" id="filterTypeMain" name="filterTypeMain">
+    <input type="hidden" id="filterTypeMain" name="filterTypeMain" value="all">
     <input type="hidden" id="orderBy" name="orderBy">
 </form>
 
