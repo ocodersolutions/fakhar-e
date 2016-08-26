@@ -443,14 +443,32 @@
 					    }
 					}
 				}
-				.form-group{
-					ul{
-						text-align: center;
-						li{
-							width: 25px;
-							border: 0;
+				
+			}
+			.form-group{
+				.list-inline {
+					text-align: center;
+				    padding-left: 0;
+				    margin-left: -5px;
+				    list-style: none;
+				    li{
+				    	float: none;
+				    	width: auto;
+				    	border-bottom: 0;
+						display: inline-block;
+						padding-right: 5px;
+						padding-left: 5px;
+						.radio-find-stitch {
+						    margin-top: 0;
+						    .radio input[type="radio"] {
+							    opacity: 0;
+							    z-index: 1;
+							}
 						}
-					}
+						.radio {
+						    padding-left: 10px;
+						}
+				    }
 				}
 			}
 		}
@@ -465,6 +483,9 @@
 		.right_look{
 			padding-left: 30px;
 			padding-right: 0;
+		}
+		.form-group{
+			display: none;
 		}
 	}
 }
@@ -488,5 +509,6 @@
 			.menu-box {
 				display: none;
 			}
+			
 		}
 }
