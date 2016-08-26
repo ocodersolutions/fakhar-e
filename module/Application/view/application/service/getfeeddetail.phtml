@@ -11,17 +11,17 @@ $title = 'ELNove - '.$this->feedDataDetail['caption'];
     <p class="modal_brand_item"> <?php echo $this->feedDataDetail['brand']; ?></p>
     <p class="modal_price_item"><span><?php echo ($this->feedDataDetail['onsale']=='Y'?$this->feedDataDetail['saleprice']:$this->feedDataDetail['price'])?></span><?php echo $this->feedDataDetail['currency'] ?></p>
     <div class="modal_buy_product">
-        <span class="btn-st-blue">BUY</span>
+        <a href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->feedDataDetail['id']))); ?>" target="_blank"><span class="btn-st-blue">BUY</span></a>
         <i class="fa fa-heart-o" aria-hidden="true"></i>
     </div>
     <p class="modal_alert_detail">DETAILS</p>
     <p><?php echo $this->feedDataDetail['description']; ?></p>
     <div class="modal_body_icon_link">
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        <a href="#"><i class="fa fa-tumblr"></i></a>
-        <a href="#"><i class="fa fa-google-plus"></i></a>
-        <a href="#"><i class="fa fa-envelope-o fa_final"></i></a>
+        <a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>"><i class="fa fa-facebook"></i></a>
+        <a href="https://api.addthis.com/oexchange/0.8/forward/pinterest/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>"><i class="fa fa-pinterest-p"></i></a>
+        <a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>"><i class="fa fa-tumblr"></i></a>
+        <a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>"><i class="fa fa-google-plus"></i></a>
+        <a href="https://api.addthis.com/oexchange/0.8/forward/email/offer?url=<?php echo $page_url; ?>&title=<?php echo $title; ?>"><i class="fa fa-envelope-o fa_final"></i></a>
     </div>
     <div class="modal_body_footer" data-alert-id="<?php echo $this->feedDataDetail['id']; ?>">
         <i class="fa fa-bell-o" aria-hidden="true"></i>

@@ -11,7 +11,7 @@ var Product = {
             $("#page").val(1);
             Product.endData = 0;
         }
-
+        console.log($("#productFilterDetail").serialize());
         $.ajax({
             url: "/service/getfeeds/" + Math.random(),
             type: 'POST',
@@ -110,7 +110,6 @@ $('body').on('click', '.modal_body_footer', function (){
 $(window).scroll(function() {
     var offset = ($(document).height() - $(window).height() )-2200;
     if($(window).scrollTop() >= offset) {
-        console.log(Product);
         // ajax call get data from server and append to the div
         if (Product.loading == 0 && Product.endData == 0){
             Product.loadProductListAjax(1);

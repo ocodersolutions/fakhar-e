@@ -3,9 +3,12 @@
 
 <script>
 $(document).ready(function(){
+
     $.validator.addMethod("regexname", function(value,element, regexp) {          
-        return regexp.test(value);
-    }, 'Please enter a valid name.');
+            return regexp.test(value);
+        }, 'Please enter a valid name.'); 
+
+
    $("#contactForm").validate({
         errorPlacement: function(error, element) {
 
@@ -27,11 +30,14 @@ $(document).ready(function(){
             required: true,
             minlength:4,
             maxlength:20,
-            regexname:/^[a-zA-Z\ \.]+$/,
+            regexname:/^[a-zA-Z\ \.]+$/
         },
         email: {
             required: true,
             email: true
+        },
+        subject: {
+            required: true
         },
         message: {
             required: true
@@ -47,6 +53,9 @@ $(document).ready(function(){
             required: 'Please enter your email address.',
             email: 'Please enter a valid email address.'
         },
+        subject: {
+            required: 'Please enter subject of your message.'
+        },
         message: {
             required: 'Please enter your message.'
         }
@@ -59,45 +68,46 @@ $(document).ready(function(){
     form label { width: 250px; }
     form label.error {color: #FF0000; }
 </style>
-<div id="careers_page" class="content-page row">
-    <div class="banner-carrer"></div>
 
-    <div class="col-lg-10 col-lg-offset-1" id="content-wrap">
-        <section class="row">
-            <div class="skeleton col-lg-8 col-lg-offset-2" >
+<div class="banner2"></div>
 
-                <h1 class="title">CAREERS</h1>
-                <p class="p">
-                At El Nove we are constantly looking for Stylists to help create outfits for all occasions. We are looking for all levels of professionals- new and aspiring Stylists to seasoned Professionals. If you are interested in being part of this rapidly growing venture, please fill out the form below.<br>
-                </p>
+<div class="container">
+    <section>
+        <div class="skeleton" style="margin: -480px auto 0;">
 
-                <?php if(isset($_GET['success']) && $_GET['success']='1'){ ?>
-                <div class="green_box">
-                    <p>Your message has been successfully sent.</p>
-                </div>
-                <?php } ?>
-                <div class="row"> 
-                <form action="/info/careers" id="contactForm" method="post" enctype="multipart/form-data" class="col-lg-12">
-                <input type="text" placeholder="Name" class="label" id="name" name="name"><br/><br/><br/>
-                <input type="text" placeholder="Email" class="label" id="email" name="email"><br/><br/><br/>
-                <input type="file" placeholder="Subject" class="label" id="subject" name="subject"><br/><br/><br/>
-                <span class="label" style="color:#a2a1a5 !important">Description</span><br/> 
-                <textarea class="textarea" id="message" name="message"></textarea>
-                <div class="fr"><button class="contact_btn">Send</button></div>
-                </form>
-                </div>  
-                <div class="clr"></div>
+            <h1 class="title">DRESS TO THE NINES</h1>
+            <p class="">The Office</p>
+            <p class="p">Address: 97 Ecclesfield Drive, Toronto, Ontario, M1W 2Y3 <br>
+                Email: <span class="hlink">support@elnove.com</span>
+            </p>
 
-                <div class="top_page">
-                    <img src="/img/arrow.png" id="click_to_top">
-                    <p>TOP OF PAGE</p>
-                </div>
-
+            <?php if(isset($_GET['success']) && $_GET['success']='1'){ ?>
+            <div class="green_box">
+                <p>Your message has been successfully sent.</p>
             </div>
+            <?php } ?>
+
+            <form action="<?=isset($this->postURL)?$this->postURL:'/info/contactUs'?>" id="contactForm" method="post">
+            <input type="text" placeholder="Name" class="label" id="name" name="name"><br/><br/><br/>
+            <input type="text" placeholder="Email" class="label" id="email" name="email"><br/><br/><br/>
+            <input type="text" placeholder="Subject" class="label" id="subject" name="subject"><br/><br/><br/>
+            <span class="label">Your Message</span><br/>
+            <textarea class="textarea" id="message" name="message"></textarea>
+            <div class="fr"><button type="submit" class="contact_btn">Send</button></div>
+            </form>
+
             <div class="clr"></div>
-        </section>
-    </div>
+
+            <div class="top_page">
+                <img src="/img/arrow.png" id="click_to_top">
+                <p>TOP OF PAGE</p>
+            </div>
+
+        </div>
+        <div class="clr"></div>
+    </section>
 </div>
+
 <script type="text/javascript">
     $('.top_page').click(function(){
         $('html, body').animate({scrollTop : 0},800);

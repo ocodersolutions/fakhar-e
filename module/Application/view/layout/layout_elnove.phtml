@@ -19,7 +19,6 @@
                         ->prependStylesheet($this->basePath() . '/css/owl.carousel.css')
                         ->prependStylesheet($this->basePath() . '/fa/css/font-awesome.css')
                         ->prependStylesheet($this->basePath() . '/js/sweetalert-master/dist/sweetalert.css')
-                        ->appendStylesheet($this->basePath() . '/css/hoang_careers.less')
                         ->appendStylesheet($this->basePath() . '/css/mystyle.css')
                         ->appendStylesheet($this->basePath() . '/myalert/css/reveal.css')
                         ->prependStylesheet($this->basePath() . '/myalert/css/foundation.css')
@@ -70,7 +69,7 @@
      <script>
      
     //show popup full screen when click in object
-            jQuery(function($) {
+            jQuery(document).ready(function($) {
                 
                 $("#pop-menu").fullScreenPopup({
                     bgColor: '#fff'
@@ -81,7 +80,14 @@
                 $("#sort-item-popup").fullScreenPopup({
                     bgColor: '#fff'
                 });
-                
+                // before popup set width fore tittle tag and set margin
+                $("#refine-search-popup,#pop-menu,#sort-item-popup").click(function(){
+                    
+                    $("#popup ul,#sis-content-popup ul").css("margin-top","70px");
+                    var w = jQuery(".fsp-content").width();
+                    $("p.m-title").css('width',w);
+
+                });
             });
         </script>
     <body>
@@ -832,6 +838,8 @@
 
 
         </script>
+        <script src="/assets/js/common.js"></script>
+
         <script>
             //
             $(document).ready(function(){

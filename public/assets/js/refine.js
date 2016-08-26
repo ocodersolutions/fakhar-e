@@ -31,126 +31,160 @@ $('body').on('click', '.icon_like', function (){
 
 //select fileter    
     //deal
-   $('.deals .item').click(function(){
-        name_deal = $(this)[0].attributes[0].nodeValue;
-        x = $("input[name='"+name_deal+"']").val();
-        if(x == 1){
-            $("input[name='"+name_deal+"']").val('');
-            $(this).removeClass('selected');
-        }else{
-            $("input[name='"+name_deal+"']").val('1');
-            $(this).addClass('selected');
-        }         
-    });
-    //colors
-    $('.colors .list-color .color').click(function(){
-        array_color = $('.color.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_color.length ; i++) {
-            var a1 = (array_color[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='colors']").val(a2);
-        var a2 = [];
-    });
-    //brands
-    $('.brands .list-brand li').click(function(){
-        if($(this).hasClass('selected')){
-            $(this).removeClass('selected');
-        }else{
-            $(this).addClass('selected');
-        }
-        array_brand = $('.brands .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_brand.length ; i++) {
-            var a1 = (array_brand[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='brands']").val(a2);
-        var a2 = [];
-        Product.loadProductListAjax();
-    });
-    //category
-    $('.category .item').click(function(){
-      
-        if($(this).hasClass('selected')){
-            $(this).removeClass('selected');
-        }else{
-            $(this).addClass('selected');
-        }
-        id = $(this).attr('id');
-        check_parent_category(id);
-        array_category = $('.category .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='catids']").val(a2);
-        var a2 = [];
-        Product.loadProductListAjax();
+   $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter, #orderBy li').click(function(){
+        parent = $(this)[0].attributes[0].nodeValue;
+        switch (parent){
+            // when click item deal
+            case "deals":
+                name_deal = $(this)[0].attributes[1].nodeValue;
+                x = $("input[name='"+name_deal+"']").val();
+
+                if(x == 1){
+                    $("input[name='"+name_deal+"']").val('');
+                    $(this).removeClass('selected');
+                }else{
+                    $('.desktop .deals .item.selected').removeClass('selected');
+                    a = $('.desktop .deals .item');
+                    for (i = 0; i < a.length; i++) {
+                        var a1 = a[i].attributes[1].nodeValue;
+                        $("input[name='"+a1+"']").val('');
+                    };
+                    $("input[name='"+name_deal+"']").val('1');
+                    $(this).addClass('selected');
+                }
+               
+            break;
+            // when click item color
+            case "colors":
+                if ($(this).hasClass("selected") == false) {
+                    $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
+                } else {
+                    $(this).removeClass('selected');
+                    ($(this).find(".check").remove());
+                }
+                array_color = $('.desktop .colors .selected').toArray();
+                var a2 =  [];
+                for (i = 0; i < array_color.length ; i++) {
+                    var a1 = (array_color[i].attributes[1].nodeValue);
+                    a2.push(a1);
+                };
+                $("input[name='colors']").val(a2);
+                a2 = [];
+               
+            break;
+            // when click item brand
+            case "brands":
+               if($(this).hasClass('selected')){
+                $(this).removeClass('selected');
+                }else{
+                    $(this).addClass('selected');
+                }
+                array_brand = $('.brands .item.selected').toArray();
+                var a2 =  [];
+                for (i = 0; i < array_brand.length ; i++) {
+                    var a1 = (array_brand[i].attributes[1].nodeValue);
+                    a2.push(a1);
+                };
+                $("input[name='brands']").val(a2);
+                var a2 = [];
+               
+            break;
+            // when click item category
+            case "category":
+                
+                // if click category parent
+                if($(this).hasClass('has-child')){
+                    if ($(this).hasClass("has-child-selected") == false) {
+                        $(this).addClass('has-child-selected');
+                        category_id = $(this).attr('id');
+                        $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
+                        $('.desktop .'+category_id).find('.item').addClass('selected')
+                    } else {
+                        $(this).removeClass('has-child-selected');
+                        category_id = $(this).attr('id');
+                        $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
+                        $('.desktop .'+category_id).find('.item').removeClass('selected')
+                    }
+                    id = $(this).attr('id');
+                    parent = $(this).closest('div').attr('class');
+                    check_parent_category(id,parent);
+
+
+                    array_category = $('.category .item.selected').toArray();
+                    var a2 =  [];
+                    for (i = 0; i < array_category.length ; i++) {
+                        var a1 = (array_category[i].attributes[1].nodeValue);
+                        a2.push(a1);
+                    };
+                    $("input[name='catids']").val(a2);
+                    var a2 = [];
+                   
+                }else{
+                // if click item
+                    if($(this).hasClass('selected')){
+                        $(this).removeClass('selected');
+                    }else{
+                        $(this).addClass('selected');
+                    }
+                    id = $(this).attr('id');
+                    check_parent_category(id);
+                    array_category = $('.category .item.selected').toArray();
+                    var a2 =  [];
+                    for (i = 0; i < array_category.length ; i++) {
+                        var a1 = (array_category[i].attributes[1].nodeValue);
+                        a2.push(a1);
+                    };
+                    $("input[name='catids']").val(a2);
+                    var a2 = [];
+                }
+            break;
+
+            case "clear":
+                $('.item.selected').removeClass('selected');
+                $('.has-child-selected').removeClass('has-child-selected');
+                $('.color.selected').removeClass('selected');
+                $('i.check.fa.fa-check').remove();
+                x = $('#productFilterDetail input[type="hidden"]');
+                console.log(x);
+                for (i = 0; i < x.length ; i++) {
+                    y = x[i].attributes[2].nodeValue ;
+                    console.log("input[name="+y+"]");
+                    $("input[name="+y+"]").val("");
+                };
+            break;
+
+            case "orderBy":
+                console.log($(this));
+                val_order = $(this)[0].attributes[2].nodeValue;
+                $('input[name="orderBy"]').val(val_order);
+            break;
+       }
+    Product.loadProductListAjax(); 
     });
   
     // select childs category
     function check_parent_category(id,parent){
         if($('.has-child#'+id).length > 0){
-            alert('#'+parent);
-          console.log($('#'+parent).removeClass(''));
+          $('#'+parent).removeClass('has-child-selected');
         }
     }
-    $('.desktop  .category .has-child').click(function() {
-
-            if ($(this).hasClass("has-child-selected") == false) {
-                $(this).addClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
-                $('.desktop .'+category_id).find('.item').addClass('selected')
-            } else {
-                $(this).removeClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
-                $('.desktop .'+category_id).find('.item').removeClass('selected')
-            }
-        id = $(this).attr('id');
-        parent = $(this).closest('div').attr('class');
-        //console.log(parent);
-        // total_item = $('.desktop .category .'+id+' .item').length;
-        // selected_item = $('.desktop .category .'+id+' .item.selected').length;
-        // current_item = total_item - selected_item;
-        // if (current_item > 0 ) {
-        //     console.log($(this));
-        // };
-        check_parent_category(id,parent);
-
-
-        array_category = $('.category .item.selected').toArray();
-        var a2 =  [];
-        for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
-            a2.push(a1);
-        };
-        $("input[name='catids']").val(a2);
-        var a2 = [];
-        Product.loadProductListAjax();
-            
-    });
    $('.mobile .category .has-child').click(function() {
 
-            if ($(this).hasClass("has-child-selected") == false) {
-                $(this).addClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
-                $('.mobile .'+category_id).find('.item').addClass('selected')
-            } else {
-                $(this).removeClass('has-child-selected');
-                category_id = $(this).attr('id');
-                $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
-                $('.mobile .'+category_id).find('.item').removeClass('selected')
-            }
+        if ($(this).hasClass("has-child-selected") == false) {
+            $(this).addClass('has-child-selected');
+            category_id = $(this).attr('id');
+            $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
+            $('.mobile .'+category_id).find('.item').addClass('selected')
+        } else {
+            $(this).removeClass('has-child-selected');
+            category_id = $(this).attr('id');
+            $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
+            $('.mobile .'+category_id).find('.item').removeClass('selected')
+        }
         array_category = $('.category .item.selected').toArray();
         var a2 =  [];
         for (i = 0; i < array_category.length ; i++) {
-            var a1 = (array_category[i].attributes[0].nodeValue);
+            var a1 = (array_category[i].attributes[1].nodeValue);
             a2.push(a1);
         };
         $("input[name='catids']").val(a2);
@@ -158,18 +192,7 @@ $('body').on('click', '.icon_like', function (){
         Product.loadProductListAjax();
     });
     //clear filter
-    $('.clear-filter').click(function(){
-        $('.item.selected').removeClass('selected');
-        $('.has-child-selected').removeClass('has-child-selected');
-        $('.color.selected').removeClass('selected');
-        $('i.check.fa.fa-check').remove();
-        x = $('#productFilterDetail input[type="hidden"]');
-        for (i = 0; i < x.length ; i++) {
-            y = x[i].attributes[3].nodeValue ;
-            console.log("input[name="+y+"]");
-            $("input[name="+y+"]").val("");
-        };
-    });
+ 
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
         x = $(this).parents('.category');
@@ -198,34 +221,43 @@ $('body').on('click', '.icon_like', function (){
             $('li#'+x).removeClass('li-up');
         }
     });
-    //change icon color
-    $('.refine .refine-colum .list-color .color').click(function() {
-        if ($(this).hasClass("selected") == false) {
-            $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
-        } else {
-            $(this).removeClass('selected');
-            ($(this).find(".check").remove());
-        }
-    });
+   
     //add element for price filter
     $(document).ready(function() {
-        $("#1 .slider-3 span:eq(0)").append("<p>250</p>");
+        $("#1 .slider-3 span:eq(0)").append("<p>0</p>");
         $("#1 .slider-3 span:eq(1)").append("<p>1000+</p>");
-        $("#2 .slider-3 span:eq(0)").append("<p>250</p>");
+        $("#2 .slider-3 span:eq(0)").append("<p>0</p>");
         $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
     });
-    //select fileter
-
-    // order by send to input hidden
-    $('#order-by li').click(function(){
-        val_order = $(this)[0].attributes[1].nodeValue;
-        $('input[name="order-by"]').val(val_order);
-    });
-    // order by send to input hidden
+    //end-select filter
 
     //filter TypeMain
     $('.option-filter input[type="radio"]').click(function(){
         x = $(this).attr('value');
         $('input[name="filterTypeMain"]').val(x);
+        Product.loadProductListAjax();
     });
     //filter TypeMain
+
+
+$(function() {
+    $(".slider-3").slider({
+        range: true,
+        min: 0,
+        max: 1000,
+        values: [0, 1000],
+        change: function(event, ui) {
+            minprice = (ui.values[0]);
+            maxprice = (ui.values[1]);
+            $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
+            $('#1 .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+            $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
+            $('#2 .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+            $("input[name='minamount']").val(minprice);
+            $("input[name='maxamount']").val(maxprice);
+            Product.loadProductListAjax();
+        }
+    });
+    $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+    $("#max-price").val("$" + $(".slider-3").slider("values", 1));
+});
