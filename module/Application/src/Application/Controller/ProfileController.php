@@ -129,6 +129,7 @@ class ProfileController extends AbstractActionController {
         
         $__viewVariables['mode'] = $oAuth->hasIdentity() ? 'edit' : 'new';
         $__viewVariables = array_merge($__viewVariables, $aStyles);
+        $this->layout('layout/layout_elnove.phtml');
         return $__viewVariables;
     }
 
