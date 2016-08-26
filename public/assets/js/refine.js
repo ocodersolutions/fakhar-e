@@ -31,8 +31,7 @@ $('body').on('click', '.icon_like', function (){
 
 //select fileter    
     //deal
-   $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter, #orderBy li').click(function(){
-    
+   $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter, .orderBy li, .filterTypeMain input[name="filter"]').click(function(){
         mobile = $(this).closest('.mobile').length;
         desktop = $(this).closest('.desktop').length;
         parent = $(this)[0].attributes[0].nodeValue;
@@ -91,13 +90,6 @@ $('body').on('click', '.icon_like', function (){
                     }
                 break;
 
-                
-
-                case "orderBy":
-                    console.log($(this));
-                    val_order = $(this)[0].attributes[2].nodeValue;
-                    $('input[name="orderBy"]').val(val_order);
-                break;
             }
         }else if(mobile == 1){
             alert('mobile');
@@ -149,8 +141,8 @@ $('body').on('click', '.icon_like', function (){
                 break;
             }
         }
-
-        // filer public for desktop & mobile
+        //              PUBLIC
+        //  filer public for desktop & mobile
 
         switch(parent){
                 
@@ -212,6 +204,23 @@ $('body').on('click', '.icon_like', function (){
                     }
                 break;
             //end - when click item deal
+            //start - when click sort item
+                case "orderBy":
+                    alert('public->orderBy');
+                    val_order = $(this)[0].attributes[1].nodeValue;
+                    $('input[name="orderBy"]').val(val_order);
+                break;
+            //end - when click sort item
+            //start - when click typemain
+                case "filterTypeMain":
+                    alert('public->filterTypeMain');
+                    console.log($(this));
+                    val_order = $(this)[0].attributes[3].nodeValue;
+                    $('input[name="filterTypeMain"]').val(val_order);
+                break;
+            //end - when click typemain
+
+
                 case "clear":
                     alert('public->clear');
                     $('.item.selected').removeClass('selected');
@@ -226,6 +235,7 @@ $('body').on('click', '.icon_like', function (){
                         $("input[name="+y+"]").val("");
                     };
                 break;
+
         }
 
     Product.loadProductListAjax(); 
@@ -277,15 +287,7 @@ $('body').on('click', '.icon_like', function (){
     });
     //end-select filter
 
-    //filter TypeMain
-    $('.option-filter input[type="radio"]').click(function(){
-        x = $(this).attr('value');
-        $('input[name="filterTypeMain"]').val(x);
-        Product.loadProductListAjax();
-    });
-    //filter TypeMain
-
-
+// select filter price
 $(function() {
     $(".slider-3").slider({
         range: true,
