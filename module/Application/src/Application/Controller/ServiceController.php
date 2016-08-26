@@ -624,6 +624,7 @@ class ServiceController extends BaseActionController {
     //Function is used to get products on filter basis
     public function getfeedsAction() {
         $request = $this->getRequest();
+
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
         $userId = 0;
@@ -651,18 +652,19 @@ class ServiceController extends BaseActionController {
             $aPostParams['colors'] = rtrim($aPostParams['colors'], ',');
             $aPostParams['stores'] = rtrim($aPostParams['stores'], ',');
             $aPostParams['deals'] = rtrim($aPostParams['deals'], ',');
+            $aPostParams['filterTypeMain'] = rtrim($aPostParams['filterTypeMain'], ',');
+            $aPostParams['orderBy'] = rtrim($aPostParams['orderBy'], ',');
             if (!empty($aPostParams['page'])) {
                 $limit = $aPostParams['limit'];
                 $offset = $aPostParams['limit'] * ($aPostParams['page'] - 1);
                 $aPostParams['offset'] = $offset;
             }
-            $paginator = $oFeedData->getFilterFeedData($aPostParams, true,$userId,null,'service', $returnArr = false);
-
+            $paginator = $oFeedData->getFilterFeedData($aPostParams, true,$userId,null,'service', $returnArr = false); 
             $oAttributes = $oService->get('ProductAttributesTable');
             $__viewVariables['attributes'] = $oAttributes->getAttributesTree(1);
 
             $__viewVariables['feedData'] = $paginator;
-
+            // var_dump($paginator); exit;
             $viewModel = new ViewModel($__viewVariables);
             $viewModel->setTerminal(true);
 
