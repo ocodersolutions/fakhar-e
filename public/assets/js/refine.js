@@ -289,16 +289,22 @@ $('body').on('click', '.icon_like', function (){
    
     //add element for price filter
     $(document).ready(function() {
-        $("#1 .slider-3 span:eq(0)").append("<p>0</p>");
-        $("#1 .slider-3 span:eq(1)").append("<p>1000+</p>");
-        $("#2 .slider-3 span:eq(0)").append("<p>0</p>");
-        $("#2 .slider-3 span:eq(1)").append("<p>1000+</p>");
+        //price
+        $(".desktop .slider-3 span:eq(0)").append("<p>0</p>");
+        $(".desktop .slider-3 span:eq(1)").append("<p>1000+</p>");
+        $(".mobile .slider-3 span:eq(0)").append("<p>0</p>");
+        $(".mobile .slider-3 span:eq(1)").append("<p>1000+</p>");
+        //deals
+        $(".desktop .deals .slider-3 span:eq(0)").append("<p>0%</p>");
+        $(".desktop .deals .slider-3 span:eq(1)").append("<p>100%</p>");
+        $(".mobile .deals .slider-3 span:eq(0)").append("<p>0%</p>");
+        $(".mobile .deals .slider-3 span:eq(1)").append("<p>100%</p>");
     });
     //end-select filter
 
 // select filter price
 $(function() {
-    $(".slider-3").slider({
+    $(".prices .slider-3").slider({
         range: true,
         min: 0,
         max: 1000,
@@ -306,15 +312,38 @@ $(function() {
         change: function(event, ui) {
             minprice = (ui.values[0]);
             maxprice = (ui.values[1]);
-            $('#1 .slider-3 span:eq(0) p').empty().append(minprice);
-            $('#1 .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
-            $('#2 .slider-3 span:eq(0) p').empty().append(minprice);
-            $('#2 .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+            $('.desktop .slider-3 span:eq(0) p').empty().append(minprice);
+            $('.desktop .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+            $('.mobile .slider-3 span:eq(0) p').empty().append(minprice);
+            $('.mobile .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
             $("input[name='minamount']").val(minprice);
             $("input[name='maxamount']").val(maxprice);
             Product.loadProductListAjax();
         }
     });
-    $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-    $("#max-price").val("$" + $(".slider-3").slider("values", 1));
+    // $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+    // $("#max-price").val("$" + $(".slider-3").slider("values", 1));
+});
+
+$(function() {
+    $(".deals .slider-3").slider({
+        range: true,
+        min: 0,
+        max: 100,
+        values: [0, 100],
+        change: function(event, ui) {
+            minprice = (ui.values[0]);
+            maxprice = (ui.values[1]);
+            $('.desktop .deals .slider-3 span:eq(0) p').empty().append(minprice+'%');
+            $('.desktop .deals .slider-3 span:eq(1) p').empty().append(maxprice+'%');
+            $('.mobile .deals .slider-3 span:eq(0) p').empty().append(minprice+'%');
+            $('.mobile .deals .slider-3 span:eq(1) p').empty().append(maxprice+'%');
+           
+            $("input[name='minduration']").val(minprice);
+            $("input[name='maxduration']").val(maxprice);
+            Product.loadProductListAjax();
+        }
+    });
+    // $("#min-price").val("$" + $(".slider-3").slider("values", 0));
+    // $("#max-price").val("$" + $(".slider-3").slider("values", 1));
 });
