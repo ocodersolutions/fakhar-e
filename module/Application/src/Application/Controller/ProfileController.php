@@ -401,6 +401,7 @@ class ProfileController extends AbstractActionController {
     }
 
     public function signupAction() {
+        $this->layout("layout/layout_elnove");
 		ini_set('max_execution_time', 0);
         $__viewVariables = array();
 
