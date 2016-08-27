@@ -1868,6 +1868,7 @@ ul {
             margin: 0;
             .modal-content {
                 border-radius: 0;
+                border:none;
             }
         }
     }
@@ -2026,6 +2027,7 @@ ul {
             margin: 0;
             .modal-content {
                 border-radius: 0;
+                border: none;
             }
         }
     }
@@ -2674,11 +2676,9 @@ p.m-title{
 		.brands{
 			display: none;
 			.list-brand{
-                ul{
-                    tabble{
-                        width: 100%;
-                    }
-                }
+				li:after{
+
+				}
 			}
 		}
 		.clothing{
@@ -4540,10 +4540,15 @@ footer{
         }
         .register_box {
             margin-bottom: 70px;
+            label {
+                font-size: 16px;
+            }
+            .col-lg-12, .col-lg-6 {
+                padding-left: 0;
+                padding-right: 0;
+            }
             .register_page {
                 li {
-                    float: left;
-                    width: 50%;
                     text-align: center;
                     border-bottom: 2px solid #d5d8da;
                     padding-top: 50px;
@@ -4584,6 +4589,33 @@ footer{
                 }
                 .fr {
                     float: right !important;
+                }
+            }
+            .form {
+                text-align: center;
+                padding-bottom: 80px;
+                .center-box {
+                    .input-text {
+                        width: 97%;
+                        height: 48px;
+                        border: 1px solid #e2e2e2;
+                        margin-top: 19px;
+                        margin-bottom: 29px;
+                    }
+                    .fl {
+                        float: left; 
+                    }
+                    .fr {
+                        float: right;
+                    }
+                }
+                .input-email {
+                    width: 100%;
+                    padding: 0 ;
+                    border: 1px solid #e2e2e2;
+                    height: 48px;
+                    margin-bottom: 29px;
+                    margin-top: 19px;
                 }
             }
         }
