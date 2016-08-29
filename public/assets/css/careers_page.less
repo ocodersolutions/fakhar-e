@@ -64,6 +64,52 @@
 	    }
 	}
 }
+.brand-box {
+	ul {
+		    list-style-type: none;
+		    margin: 0;
+		    padding: 0;
+		    li{
+		    	text-align: center;
+		    	float: left;
+			    padding: 50px 0px 18px 0px;
+			    border-bottom: 2px solid #d5d8da;
+			    a{
+			    	color: #c4c8ca;
+					font-size: 14px;
+					&:active{
+
+					}
+					.green {
+					    color: #24aa98;
+					    margin-left: 10px;
+					}
+			    }
+			    .active{
+			    	color: #254f73;
+			    }
+		    }
+		    .blue {
+			    border-bottom: 2px solid #254f73;
+			}
+		}
+	.menu-box {
+		ul{
+			li{
+				width: 20%;
+			}
+		}
+	}
+	.menu-box-bigger{
+		ul{
+			li{
+				width: 25%;
+			}
+		}
+	}
+}
+
+/*========== end style chung =====*/ 
 #careers_page,#contact_us,#term-conditions{
 	display: block;
 	clear: both;
@@ -315,25 +361,6 @@
 
 #profile{
 	.profile_wear_page{
-		ul {
-		    list-style-type: none;
-		    margin: 0;
-		    padding: 0;
-		    li{
-		    	width: 20%;
-		    	text-align: center;
-		    	float: left;
-			    padding: 50px 0px 18px 0px;
-			    border-bottom: 2px solid #d5d8da;
-			    a{
-			    	color: #c4c8ca;
-    				font-size: 14px;
-    				&:active{
-
-    				}
-			    }
-		    }
-		}
 		.brand-box{
 			background: #fff;
 			.menu-box {
@@ -408,7 +435,6 @@
 						    .image_left{
 						    	width: 100%;
 						    	background: none repeat scroll 0 0 #f1f1f1;
-							    border-radius: 5px;
 							    float: left;
 							    padding: 3px;
 							    img {
@@ -419,7 +445,6 @@
 							.check-blank {
 							    background: #fff;
 							    border: 2px solid #a2a1a6;
-							    border-radius: 5px;
 							    width: 19px;
 							    height: 19px;
 							    position: absolute;
@@ -429,7 +454,6 @@
 							}
 							.check-one {
 							    background: none repeat scroll 0 0 #6b8ad1;
-							    border-radius: 5px;
 							    color: #fff;
 							    height: 19px !important;
 							    line-height: 19px !important;
@@ -484,38 +508,38 @@
 #profile-you-page{
 	background: #ffffff;
 	.brand-box{
-		.menu-box {
+		// .menu-box {
 
-				ul {
-				    list-style-type: none;
-				    margin: 0;
-				    padding: 0;
-				    li{
-				    	width: 20%;
-				    	text-align: center;
-				    	float: left;
-					    padding: 50px 0px 18px 0px;
-					    border-bottom: 2px solid #d5d8da;
-					    a{
-					    	color: #c4c8ca;
-		    				font-size: 14px;
-		    				&:active{
+		// 		ul {
+		// 		    list-style-type: none;
+		// 		    margin: 0;
+		// 		    padding: 0;
+		// 		    li{
+		// 		    	width: 20%;
+		// 		    	text-align: center;
+		// 		    	float: left;
+		// 			    padding: 50px 0px 18px 0px;
+		// 			    border-bottom: 2px solid #d5d8da;
+		// 			    a{
+		// 			    	color: #c4c8ca;
+		//     				font-size: 14px;
+		//     				&:active{
 
-		    				}
-		    				.green {
-							    color: #24aa98;
-							    margin-left: 10px;
-							}
-					    }
-					    .active{
-					    	color: #254f73;
-					    }
-				    }
-				.blue {
-				    border-bottom: 2px solid #254f73;
-				}
-			}
-		}
+		//     				}
+		//     				.green {
+		// 					    color: #24aa98;
+		// 					    margin-left: 10px;
+		// 					}
+		// 			    }
+		// 			    .active{
+		// 			    	color: #254f73;
+		// 			    }
+		// 		    }
+		// 		.blue {
+		// 		    border-bottom: 2px solid #254f73;
+		// 		}
+		// 	}
+		// }
 		.page_one-box{
 			h1 {
 			    color: #254f73;
@@ -548,32 +572,48 @@
 			    font-size: 14px;
 			    width: 30px;
 			}
-			.left_sb{
-				border: 1px solid red;
-			}
+			
 			.right_sb{
 				padding-left: 0;
-				border: 1px solid red;
 			}
 		}
 		.line-bar {
 		    float: left;
 		    margin-top: 20px;
-		    width: 83%;
+		    width: 80%;
 		    .content {
 			    width: 100%;
 			    padding: 30px;
+			    .ui-slider{
+		    	    position: relative;
+    				text-align: left;
+			    }
 			    .ui-slider-horizontal {
-				    height: .2em;
+				    height: .3em;
 				    background: #6B8AD1 !important;
+				    .ui-state-default {
+					    border: 1px solid #254F73/*{borderColorDefault}*/ !important;
+					    background: #254F73 !important;
+					    font-weight: normal/*{fwDefault}*/;
+					    color: #555555/*{fcDefault}*/;
+					    border-radius: 25px !important;
+					}
+				    .ui-slider-handle {
+					    cursor: default;
+					    height: 0.6em;
+					    position: absolute;
+					    width: 0.6em;
+					    z-index: 2;
+					}
+					.ui-slider-handle {
+					    margin-left: -0.6em;
+					    top: -0.17em;
+					}
 				}
 			}
 		}
 		.body_shape{
 			.about_img {
-			    -webkit-border-radius: 5px;
-			    -moz-border-radius: 5px;
-			    border-radius: 5px;
 			    width:33.3333%;
 			    float: left;
 			    margin-top: 10px;
@@ -587,7 +627,6 @@
 			}
 			.checkbox_wrap {
 			    border: 1px solid #e6e8eb;
-			    border-radius: 5px;
 			    padding: 5px 0px;
 			    position: relative;
 			    .body_shape_name {
@@ -610,9 +649,6 @@
 		}
 		.skin_tone {
 			.about_img {
-			    -webkit-border-radius: 5px;
-			    -moz-border-radius: 5px;
-			    border-radius: 5px;
 			    float: left;
 			    margin-top: 10px;
 			    padding: 2px;
@@ -633,7 +669,6 @@
 	.check-blank1 {
 	    background: #fff;
 	    border: 2px solid #a2a1a6;
-	    border-radius: 5px;
 	    height: 19px;
 	   	bottom: 6px;
     	right: 8px;
@@ -643,7 +678,6 @@
 	}
 	.check-one1 {
 	    background: none repeat scroll 0 0 #6b8ad1;
-	    border-radius: 5px;
 	    left: 8px;
 	    bottom: 6px;
 	    padding: 2px;
@@ -657,9 +691,6 @@
 	    line-height: 36px;
 	    background: #fff;
 	    border: 2px solid #c6ccd2;
-	    -webkit-border-radius: 5px;
-	    -moz-border-radius: 5px;
-	    border-radius: 5px;
 	    float: left;
 	    font-size: 14px;
 	    color: #383737;
@@ -740,6 +771,15 @@
 		.about_box{
 			.about_block{
 				padding:15px;
+				.right_sb{
+					padding-right: 0;
+					.line-bar{
+						width: 68%;
+						.content{
+							padding:30px 0;
+						}
+					}
+				}
 			}
 		}
 		#listBODYSHAPE{
@@ -767,4 +807,18 @@
 		}
 		
 	}
+	#profile-you-page{
+		.about_box{
+			
+				.right_sb{
+					padding-right: 0;
+					.line-bar{
+						width: 54% !important;
+						.content{
+							padding:30px 0;
+						}
+					}
+				}
+			}
+		}
 }
