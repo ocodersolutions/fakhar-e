@@ -2,14 +2,20 @@
 $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
         id = $(this).attr('id');
-        if (myClasses.contains("active")) {
-            action = 'unlike';
-            ajax_like(id,action);
-            myClasses.remove("active");
-        } else {
-            action = 'like';
-            ajax_like(id,action);
-            myClasses.add("active");
+        check_login = $('#status-login').attr('data-login');
+        if(check_login == 1){
+            if (myClasses.contains("active")) {
+                action = 'unlike';
+                ajax_like(id,action);
+                myClasses.remove("active");
+            } else {
+                action = 'like';
+                ajax_like(id,action);
+                myClasses.add("active");
+            }
+        }else if(check_login == 0){
+            
+
         }
     });
     function ajax_like(id,action){
