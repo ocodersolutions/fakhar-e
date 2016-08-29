@@ -1,8 +1,6 @@
 
 <?php    echo $this->headScript()
-     ->appendFile($this->basePath() . '../js/jquery.ddslick.js') 
-      ?>
-
+     ->appendFile($this->basePath() . '/js/jquery.ddslick.js')  ?>
 <style id="css-ddslick" type="text/css">
                 .dd-select{ border-radius:2px; border:solid 1px #ccc; position:relative; cursor:pointer;}
                 .dd-desc { color:#aaa; display:block; overflow: hidden; font-weight:normal; line-height: 1.4em; }
@@ -28,7 +26,7 @@
                 
                 
                 
-<div class="container topnavi" id="size_profile">
+<div class="container topnavi">
     <div class="brand-box">
         <div class="menu-box <?=($this->mode=='edit')?'menu-box-bigger':''?>">
             <ul class="about">
@@ -129,7 +127,7 @@
         </div><!--size_box-->
         
         
-            <div id="next"><a href="javascript:void(0);" class="next fr btn-st-blue" id="btnNextStep">NEXT ></a>
+            <div id="next"><a href="javascript:void(0);" class="next fr " id="btnNextStep">NEXT ></a>
                 <div class="clr"></div>
                 <div class="clr"></div>
                 <a href="javascript:void(0)" id="clearFilters" class="italic-box fr hlink"> <i>Clear filters</i></a>
@@ -143,6 +141,7 @@
 </div>
 <script type="text/javascript">
     $(window).on('load', function () {
+
         function valueChanged( data ) {
             $('#' + data.original.attr('id') + 'Hidden').val( data.selectedData.value );
             
