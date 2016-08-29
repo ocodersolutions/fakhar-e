@@ -22,10 +22,6 @@ $('body').on('click', '.icon_like', function (){
                     $('a.close-reveal-modal').trigger('click'); // will close modal
                 });
             });
-            // $('html, body').animate({
-            //      scrollTop: $("#listNIGHTOUT").offset().top - 100
-            // }, 500);                  
-            // return false;
         }
     });
 
