@@ -3,7 +3,8 @@ $weightSliderDefault = $this->weight['value'];
 $heightSliderDefault = $this->height['value'];   
 ?>
 
-
+<link rel="stylesheet" href="/vendor/jqueryui/development-bundle/themes/base/jquery.ui.all.css">
+<link rel="stylesheet" href="/vendor/jqueryui/custom.css">
 
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.core.js"></script>
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.widget.js"></script>
@@ -16,8 +17,8 @@ $heightSliderDefault = $this->height['value'];
 -->
 </style>
 
-<div id="profile-you-page" class="col-lg-10 col-lg-offset-1 topnavi">
-    <div class="brand-box row">
+<div id="profile-you-page" class="container topnavi">
+    <div class="brand-box">
         <div class="menu-box <?=($this->mode=='edit')?'menu-box-bigger':''?>">
             <ul class="about">
                 <li>
@@ -42,103 +43,49 @@ $heightSliderDefault = $this->height['value'];
         </div><!--menu-box -->
 
         <div class="clr"></div>
-        <div class="form-group">
-                <ul class="list-radio list-radio-find-stitch list-inline">
-                    <li><div class="radio radio-find-stitch">
-                        <input type="radio" disabled name="radio4" id="radio1" value="option1" checked="" >
-                        <label for="radio1" class="radio-label">
-                        </label>
-                    </div>
-                    </li>
-                    <li>
-                        <div class="radio radio-find-stitch">
-                            <input type="radio" disabled name="radio4" id="radio2" value="option1" >
-                            <label for="radio2" class="radio-label">
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="radio radio-find-stitch">
-                            <input type="radio" disabled name="radio4" id="radio3" value="option1" >
-                            <label for="radio3" class="radio-label">
-                            </label>
-                        </div>
-                    </li>
-                         <li><div class="radio radio-find-stitch">
-                        <input type="radio" disabled name="radio4" id="radio4" value="option1" >
-                        <label for="radio4" class="radio-label">
-                        </label>
-                    </div>
-                    </li>
-                    <li>
-                        <div class="radio radio-find-stitch">
-                            <input type="radio" disabled name="radio4" id="radio5" value="option1" >
-                            <label for="radio5" class="radio-label">
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="radio radio-find-stitch">
-                            <input type="radio" disabled name="radio6" id="radio6" value="option1" >
-                            <label for="radio6" class="radio-label">
-                            </label>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+
         <div class="page_one-box">
             <h1>Tell us About You </h1>
         </div> <!--page_one-box -->
     </div><!--brand-box -->
-
     <div class="clr"></div>
 
-    <div class="about_box row">
+    <div class="about_box">
         <div class="about_block" >
-            <div class="col-lg-3 col-xs-12 left_sb">
-                <h2>How Much Do You Weight?</h2>
-            </div>
-            <div class="col-lg-9 col-xs-12 right_sb">    
-                <input type="text" class="lb" id="weightSliderValue"/>
-                <span class="lb_unit">lbs</span>
-                <div class="line-bar">
-                    <div class="content">
-                        <div id="weightSlider"></div>
-                        <div class="sliderSteps"></div>
-                    </div>
+            <h2>How Much Do You Weight?</h2>
+            <input type="text" class="lb" id="weightSliderValue"/>
+            <span class="lb_unit">lbs</span>
+            <div class="line-bar">
+                <div class="content">
+                    <div id="weightSlider"></div>
+                    <div class="sliderSteps"></div>
                 </div>
             </div>
         </div>
         <div class="about_block">
-            <div class="col-lg-3 col-xs-12 left_sb">
-                <h2>How Tall Are You?</h2>
-            </div>
-            <div class="col-lg-9 col-xs-12 right_sb">
-                <input type="text" class="lb" id="heightSliderValue" /> 
-                <span class="point-char">.</span> 
-                <input type="text" class="lb" id="heightSliderValueInch" />
-                <span class="lb_unit">feet</span>
-                <div class="line-bar">
-                    <div class="content">
-                        <div id="heightSlider"></div>
-                        <div class="sliderSteps"></div>
-                    </div>
+            <h2>How Tall Are You?</h2>
+            <input type="text" class="lb" id="heightSliderValue" /> 
+            <span class="point-char">.</span> 
+            <input type="text" class="lb" id="heightSliderValueInch" />
+            <span class="lb_unit">feet</span>
+            <div class="line-bar">
+                <div class="content">
+                    <div id="heightSlider"></div>
+                    <div class="sliderSteps"></div>
                 </div>
             </div>
         </div>
         <div class="body_shape about_block">
             <div id="listBODYSHAPE">
-                <div class="col-lg-3 col-xs-12 left_sb">
-                    <h2>What Is Your Body Shape?</h2>
-                </div>    
-                <div class="col-lg-9 col-xs-12 right_sb">
+                <h2>What Is Your Body Shape?</h2>
+                <div style="float: left; width: 720px;">
                     <?php 
                     foreach($this->body_shape as $aBox) { 
                         $classes = $aBox['value'] ? 'check-one1 fa fa-check' : 'check-blank1';
                     ?>
                         <a href="#" id="id<?php echo $aBox['name']?>" class="thumb-info body-shape <?php echo ($aBox['value']?'lock':'')?>">
-                            <div class="about_img ">
-                                <img src="/img/profile/<?php echo $aBox['img']?>" class="img-reposive" alt="image" />
+                            <div class="about_img">
+                                <img src="/img/profile/<?php echo $aBox['img']?>" alt="image" />
                                 <div class="checkbox_wrap clr">
                                     <p class="body_shape_name"><?php echo str_replace("_"," ",$aBox['name'])?></p>
                                     <div class="checkmark <?php echo $classes;?>"></div>
@@ -151,29 +98,25 @@ $heightSliderDefault = $this->height['value'];
         </div>
         <div class="skin_tone about_block">
             <div id="listSKINTONE">
-                <div class="col-lg-3 col-xs-12 left_sb">
-                    <h2>What is Your Skin Tone?</h2>
-                </div>
-                <div class="col-lg-9 col-xs-12 right_sb">
-                <?php foreach($this->skin_tone as $aBox) { 
-                    $classes = $aBox['value'] ? 'check-one1 fa fa-check' : 'check-blank1';
-                    ?>
-                <a href="#" id="id<?php echo $aBox['name']?>" class="thumb-info skin-tone <?php echo ($aBox['value']?'lock':'')?>">
-                <div class="about_img ">
-                    <img src="/img/profile/<?php echo $aBox['img']?>" alt="image" />
-                    <div class="clr"></div>
-                    <div class="checkmark <?php echo $classes;?>"></div>
-                </div>
-                </a>
-                <?php } ?>
-                </div>
+            <h2>What is Your Skin Tone?</h2>
+            <?php foreach($this->skin_tone as $aBox) { 
+                $classes = $aBox['value'] ? 'check-one1 fa fa-check' : 'check-blank1';
+                ?>
+            <a href="#" id="id<?php echo $aBox['name']?>" class="thumb-info skin-tone <?php echo ($aBox['value']?'lock':'')?>">
+            <div class="about_img">
+                <img src="/img/profile/<?php echo $aBox['img']?>" alt="image" />
+                <div class="clr"></div>
+                <div class="checkmark <?php echo $classes;?>"></div>
+            </div>
+            </a>
+            <?php } ?>
             </div>
         </div>
         <div class="clr"></div>
     </div><!--about-box-->
 
     <div class="brand-box">
-        <a href="javascript:void(0);" class="next fr btn-st-blue" id="btnNextStep">NEXT ></a>
+        <a href="javascript:void(0);" class="next fr" id="btnNextStep">NEXT ></a>
         <div class="clr"></div>
         <a href="javascript:void(0)" id="clearFilters" class="italic-box fr hlink"> <i>Clear filters</i></a>
         <div class="clr"></div>

@@ -1,127 +1,173 @@
-<div class="profile_wear_page container topnavi">
-    <div class="brand-box ">
-        <div class="menu-box <?=($this->mode=='edit')?'menu-box-bigger':''?>">
-            <ul class="about">
-                <li class="blue">
-                    <a href="javascript:void(0)" class="active">LOOK YOU&#39;D WEAR<div class="fa"></div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/profile/you">ABOUT YOU<div class="fa"></div></a>
-                </li>
-                <li>
-                    <a href="/profile/size">YOUR SIZE<div class="fa"></div></a>
-                </li>
-                <!-- <li>
-                    <a>FAVOURITE BRAND<div class="fa"></div></a>
-                </li> -->
-                <li>
-                    <a href="/profile/price">YOUR LOOK<div class="fa"></div></a>
-                </li>
-                <?php if( $this->mode == 'new' ) { ?>
-                <li>
-                    <a href="/profile/signup">SIGN UP<div class="fa"></div></a>
-                </li>
-                <?php }?>
-            </ul>
+<div class="row" id="profile">
+    <div class="profile_wear_page col-lg-10 col-lg-offset-1 topnavi">
+        <div class="brand-box ">
+            <div class="menu-box <?=($this->mode=='edit')?'menu-box-bigger':''?>">
+                <ul class="about">
+                    <li class="blue">
+                        <a href="javascript:void(0)" class="active">LOOK YOU&#39;D WEAR<div class="fa"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/profile/you">ABOUT YOU<div class="fa"></div></a>
+                    </li>
+                    <li>
+                        <a href="/profile/size">YOUR SIZE<div class="fa"></div></a>
+                    </li>
+                    <!-- <li>
+                        <a>FAVOURITE BRAND<div class="fa"></div></a>
+                    </li> -->
+                    <li>
+                        <a href="/profile/price">YOUR LOOK<div class="fa"></div></a>
+                    </li>
+                    <?php if( $this->mode == 'new' ) { ?>
+                    <li>
+                        <a href="/profile/signup">SIGN UP<div class="fa"></div></a>
+                    </li>
+                    <?php }?>
+                </ul>
+                <div class="clr"></div>
+            </div><!--menu-box -->
+            <div class="form-group">
+                <ul class="list-radio list-radio-find-stitch list-inline">
+                    <li><div class="radio radio-find-stitch">
+                        <input type="radio" disabled name="radio4" id="radio4" value="option1" checked="" >
+                        <label for="radio4" class="radio-label">
+                        </label>
+                    </div>
+                    </li>
+                    <li>
+                        <div class="radio radio-find-stitch">
+                            <input type="radio" disabled name="radio4" id="radio2" value="option1" >
+                            <label for="radio2" class="radio-label">
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="radio radio-find-stitch">
+                            <input type="radio" disabled name="radio4" id="radio3" value="option1" >
+                            <label for="radio3" class="radio-label">
+                            </label>
+                        </div>
+                    </li>
+                         <li><div class="radio radio-find-stitch">
+                        <input type="radio" disabled name="radio4" id="radio4" value="option1" >
+                        <label for="radio4" class="radio-label">
+                        </label>
+                    </div>
+                    </li>
+                    <li>
+                        <div class="radio radio-find-stitch">
+                            <input type="radio" disabled name="radio4" id="radio2" value="option1" >
+                            <label for="radio2" class="radio-label">
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="radio radio-find-stitch">
+                            <input type="radio" disabled name="radio4" id="radio3" value="option1" >
+                            <label for="radio3" class="radio-label">
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div class="clr"></div>
-        </div><!--menu-box -->
-        <div class="clr"></div>
 
-        <div class="page_one-box">
-            <h1 class="title-page">Choose the Look You Would Wear</h1>
-            <div class="select-all">Select All That Apply</div>
-            <div class="look_box " id="ChoosetheLookYouWouldWear">
-                <div class="left_look fl">
-                    <h1>What Would You Wear To Work?</h1>
-                    <div class="row" id="listWork">
-                        <?php
-                        foreach ($this->work as $aBox) {
-                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
-                        ?>
-                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>" >
-                                <div class="box">
-                                    <div class="image_left">
-                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+            <div class="page_one-box">
+                <h1 class="title-page">Choose the Look You Would Wear</h1>
+                <div class="select-all">Select All That Apply</div>
+                
+                <div class="look_box " id="ChoosetheLookYouWouldWear">
+                    <div class="left_look col-lg-6 col-sm-6">
+                        <h1>What Would You Wear To Work?</h1>
+                        <div class="row" id="listWork">
+                            <?php
+                            foreach ($this->work as $aBox) {
+                                $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+                            ?>
+                                <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>" >
+                                    <div class="box box-leftside col-lg-6 col-sm-6 col-xs-6">
+                                        <div class="image_left">
+                                            <img src="/img/profile/<?php echo $aBox['img'] ?>" class="img-responsive">
+                                        </div>
+                                        <div class="clr"></div>
+                                        <div class="checkmark <?php echo $classes; ?>"></div>
                                     </div>
-                                    <div class="clr"></div>
-                                    <div class="checkmark <?php echo $classes; ?>"></div>
-                                </div>
-                            </a>
-                        <?php } ?>
-                    </div><!--row-->
+                                </a>
+                            <?php } ?>
+                        </div><!--row-->
 
-                    <h1>What Would You Wear Casually? </h1>
-                    <div class="row" id="listCASUAL">
-                        <?php
-                        foreach ($this->casual as $aBox) {
-                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
-                        ?>
-                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
-                                <div class="box">
-                                    <div class="image_left">
-                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+                        <h1>What Would You Wear Casually? </h1>
+                        <div class="row" id="listCASUAL">
+                            <?php
+                            foreach ($this->casual as $aBox) {
+                                $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+                            ?>
+                                <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
+                                    <div class="box box-leftside col-lg-6 col-sm-6 col-xs-6">
+                                        <div class="image_left">
+                                            <img src="/img/profile/<?php echo $aBox['img'] ?>" class="img-responsive">
+                                        </div>
+                                        <div class="clr"></div>
+                                        <div class="checkmark <?php echo $classes; ?>"> </div>
                                     </div>
-                                    <div class="clr"></div>
-                                    <div class="checkmark <?php echo $classes; ?>"> </div>
-                                </div>
-                            </a>
-                        <?php } ?>
-                    </div><!--row-->
-                </div><!-- left_look -->
+                                </a>
+                            <?php } ?>
+                        </div><!--row-->
+                    </div><!-- left_look -->
 
-                <!-- ------------------ right-look box start ----------- -->
-                <div class="left_look fr">
-                    <h1>What Would You Wear On A Night Out?</h1>
-                    <div class="row" id="listNIGHTOUT">
-                        <?php
-                        foreach ($this->night_out as $aBox) {
-                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank ';
-                        ?>
-                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
-                                <div class="box">
-                                    <div class="image_left">
-                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+                    <!-- ------------------ right-look box start ----------- -->
+                    <div class="right_look col-lg-6 col-sm-6">
+                        <h1>What Would You Wear On A Night Out?</h1>
+                        <div class="row" id="listNIGHTOUT">
+                            <?php
+                            foreach ($this->night_out as $aBox) {
+                                $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank ';
+                            ?>
+                                <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
+                                    <div class="box box-rightside col-lg-6 col-sm-6 col-xs-6">
+                                        <div class="image_left">
+                                            <img src="/img/profile/<?php echo $aBox['img'] ?>" align="right" class="img-responsive">
+                                        </div>
+                                        <div class="clr"></div>
+                                        <div class="checkmark <?php echo $classes; ?>"> </div>
                                     </div>
-                                    <div class="clr"></div>
-                                    <div class="checkmark <?php echo $classes; ?>"> </div>
-                                </div>
-                            </a>
-                        <?php } ?>
-                    </div><!--row-->
+                                </a>
+                            <?php } ?>
+                        </div><!--row-->
 
-                    <h1>What Would You Never Wear?</h1>
-                    <div class="row" id="listNEVERWEAR">
-                        <?php
-                        foreach ($this->never_wear as $aBox) {
-                            $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
-                        ?>
-                            <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
-                                <div class="box">
-                                    <div class="image_left">
-                                        <img src="/img/profile/<?php echo $aBox['img'] ?>">
+                        <h1>What Would You Never Wear?</h1>
+                        <div class="row" id="listNEVERWEAR">
+                            <?php
+                            foreach ($this->never_wear as $aBox) {
+                                $classes = $aBox['value'] ? 'check-one fa fa-check' : 'check-blank';
+                            ?>
+                                <a href="#" id="id<?php echo $aBox['name'] ?>" class="thumb-info <?php echo ($aBox['value'] ? 'lock' : '') ?>">
+                                    <div class="box box-rightside col-lg-6 col-sm-6 col-xs-6">
+                                        <div class="image_left">
+                                            <img align="right" src="/img/profile/<?php echo $aBox['img'] ?>" class="img-responsive">
+                                        </div>
+                                        <div class="clr"></div>
+                                        <div class="checkmark <?php echo $classes; ?>"> </div>
                                     </div>
-                                    <div class="clr"></div>
-                                    <div class="checkmark <?php echo $classes; ?>"> </div>
-                                </div>
-                            </a>
-                        <?php } ?>
-                    </div><!--row-->
-                </div><!-- left_look -->
-                <div class="clr"></div>
+                                </a>
+                            <?php } ?>
+                        </div><!--row-->
+                    </div><!-- left_look -->
+                    <div class="clr"></div>
 
-                <div class="next fr mynext" id="btnNextStep">
-                    <a href="javascript:void(0);" style="color:#fff">NEXT ></a>
-                </div>
-                <div class="clr"></div>
+                    <div class="next fr  btn-st-blue" id="btnNextStep">
+                        <a href="javascript:void(0);" >NEXT ></a>
+                    </div>
+                    <div class="clr"></div>
 
-                <a href="javascript:void(0)" id="clearFilters" class="italic-box fr hlink"> <i>Clear filters</i></a>
-            </div><!-- look_box -->
-        </div><!--page_one-box-->
-        <div class="clr"></div>
-    </div><!--brand-box -->
-</div><!--container-->
-
+                    <a href="javascript:void(0)" id="clearFilters" class="italic-box fr hlink"> <i>Clear filters</i></a>
+                </div><!-- look_box -->
+            </div><!--page_one-box-->
+            <div class="clr"></div>
+        </div><!--brand-box -->
+    </div><!--container-->
+</div>
 <form id="myForm" method="POST">
     <?php foreach($this->work as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name'] ?>Input" name="<?php echo $aBox['name'] ?>" style="display:none" /><?php }?>
     <?php foreach($this->night_out as $aBox) {?><input type="checkbox" id="id<?php echo $aBox['name'] ?>Input" name="<?php echo $aBox['name'] ?>" style="display:none" /><?php }?>
@@ -131,7 +177,7 @@
 </form>
 
 <script>
-(function () {
+jQuery(function ($) {
     $(".thumb-info").on("click", function (e) {
         e.preventDefault();
         if ($(this).hasClass("lock")) {
@@ -199,8 +245,8 @@
         $("#myForm").submit();
     });
 
-})();
-$(window).load(function () {
+});
+jQuery(window).load(function () {
     var url = "/profile/profiletraking";
     $.ajax({
         url: url,
@@ -213,7 +259,7 @@ $(window).load(function () {
     });
 });
 
-$("#clearFilters").click(function(){
+jQuery("#clearFilters").click(function($){
     $(".thumb-info").each(function (index, element) {
         if ($(element).hasClass("lock")) {
             $("#" + element.id + "Input").prop("checked", false);

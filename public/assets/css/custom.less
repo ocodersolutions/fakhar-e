@@ -724,6 +724,9 @@ ul {
         }
         ul{
             li{
+                line-height: 65px;
+                text-transform: uppercase;
+                font-size: 13px;
                 position: relative;
                 padding: 0 34px;
                 border-bottom: 1px solid #eee;
@@ -1859,6 +1862,16 @@ ul {
         }
     }
 }
+@media (max-width: 767px) {
+    #modal_alert {
+        .modal-dialog {
+            margin: 0;
+            .modal-content {
+                border-radius: 0;
+            }
+        }
+    }
+}
 /***** ------------------------------------End style POPUP of icon_alert------------------------------------ *****/
 
 /***** --------------------------------------style POPUP of product-item version 2----------------------------- *****/
@@ -2003,6 +2016,16 @@ ul {
                         width: 30%;
                     }
                 }
+            }
+        }
+    }
+}
+@media (max-width: 767px) {
+    .modal_quick_view {
+        .modal-dialog {
+            margin: 0;
+            .modal-content {
+                border-radius: 0;
             }
         }
     }
@@ -2620,6 +2643,13 @@ p.m-title{
 		.deals{
 			display: none;
 				ul{
+                    .price{
+                        display: block;
+                        height: 30px;
+                        .ui-widget-content{
+                            margin-top: 25px;
+                        }
+                    }
 					li{
 						border:0px;
 						color: rgba(68, 68, 68, 0.7);
@@ -2651,9 +2681,11 @@ p.m-title{
 		.brands{
 			display: none;
 			.list-brand{
-				li:after{
-
-				}
+                ul{
+                    table{
+                        width: 100%;
+                    }
+                }
 			}
 		}
 		.clothing{
@@ -3055,6 +3087,10 @@ footer{
 
 /* responsive */
 @media only screen and (max-width : 767px) {
+.grid-view .product {
+    width: 50%;
+    float: left;
+}
 #filter-selected{
 	padding: 11px 15px;
 	border-bottom: 2px solid #D5D8DA;
@@ -3239,6 +3275,11 @@ footer{
 	.category,.brands,.colors,.deals,.sizes,.stores {
 	    display: none;
 	}
+    .deals{
+        .price{
+            display: block;
+        }
+    }
 	.option-filter{
 		position: relative;
 		top: 70px;
@@ -3709,9 +3750,24 @@ footer{
     font-family: roboto;
 }
 #profile_myaccount {
-    margin-top: 30px;
-    padding-bottom: 100px;
+    margin: 0;
+    padding: 0;
+    .banner2 {
+        
+        background: url('../../img/banner2.jpg') no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+        height: 562px;
+        border-top: 2px solid #5c5e5f;
+        text-align: center;
+        width: 100%;
+    }
+    .myaccount_content {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: -522px;
+        background: white;
+    }
     .account-btn {
+        padding: 0;
         a {
             font-weight: bold;
             display: inline-block;
@@ -3770,7 +3826,7 @@ footer{
                 .default1 {
                     select {
                         height: 40px;
-                        font-size: 16px;
+                        font-size: 15px;
                     }
                 }
                 .email_address_mpf {
@@ -3797,8 +3853,8 @@ footer{
                         cursor: pointer;
                         position: relative;
                         padding-left: 25px;
-                        margin-right: 10px;
-                        font-size: 14px;
+                        margin-right: 6px;
+                        font-size: 13px;
                         color: #959595;
                         font-weight: 300;
                         &:before {
@@ -3862,7 +3918,7 @@ footer{
                     .head {
                         float: left;
                         margin-top: 45px;
-                        margin-left: 30px;
+                        margin-left: 18px;
                         font-size: 15px;
                         color: #898697;
                         font-weight: 300;
@@ -3883,6 +3939,7 @@ footer{
                 div.fr {
                     margin-left: 50%;
                     margin-top: 10px;
+                    margin-bottom: 100px;
                     .contact_btn {
                         background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
                         border: 2px solid #BCC5C0;
@@ -3903,6 +3960,34 @@ footer{
 }
 .clr {
     clear: both;
+}
+@media (min-width: 992px)and(max-width: 1300px) {
+    #profile_myaccount  {
+        .account-box {
+            .profile-box {
+                .box-two {
+                    .default1 {
+                        select {
+                            font-size: 12px;
+                        }
+                    }
+                    .default {
+                        .outfit1 {
+                            padding-left: 19px;
+                            font-size: 12px;
+                        }
+                        h2 {
+                            font-size: 22px;
+                        }
+                        .head {
+                            margin-left: 8px;
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 /***** ----------------------------------End style for profile/myaccount-------------------------------------*****/
@@ -4416,3 +4501,204 @@ footer{
     }
 }
 /***** ----------------------------------End style for info/how-it-work-------------------------------------*****/
+
+/***** ----------------------------------style for profile/signup-------------------------------------*****/
+
+#profile_signup {
+    * {
+        font-weight: 300;
+    }
+    .blue {
+        border-bottom: 2px solid #254f73 !important;
+    }
+    .active {
+        color: #254f73 !important;
+    }
+    .banner2 {        
+        background: url('../../img/banner2.jpg') no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+        height: 562px;
+        border-top: 2px solid #5c5e5f;
+        text-align: center;
+        width: 100%;
+    }
+    #signup-page {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: -522px;
+        background: #fff;
+        label {
+            font-size: 16px;
+        }
+        .brand-box {
+            .menu-box {
+                .about {
+                    li {
+                        float: left;
+                        border-bottom: 2px solid #d5d8da;
+                        width: 20%;
+                        padding-top: 50px;
+                        padding-bottom: 18px;
+                        text-align: center;
+                        a {
+                            color: #c4c8ca;
+                            font-size: 14px;
+                            .fa {
+                                .green {
+                                    color: #24aa98;
+                                    margin-left: 10px;
+                                }
+                            }
+                        }
+                    }                    
+                }
+            }
+        }
+        .register_box {
+            margin-bottom: 70px;
+            .fl {
+                float: left;
+            }
+            .fr {
+                float: right !important;
+            }
+            .register_page {
+                li {
+                    float: left;
+                    width: 50%;
+                    text-align: center;
+                    border-bottom: 2px solid #d5d8da;
+                    padding-top: 50px;
+                    padding-bottom: 18px;
+                    margin-bottom: 38px;
+                    a {
+                        color: #959595;
+                    }                    
+                }
+            }
+            #errormsgblock {
+                display: none;
+            }
+            .red_box {
+                background-color: #fee0e0;
+                border-bottom: 3px solid #fa8279;
+                padding: 18px 12px 18px 19px;
+                margin-bottom: 55px;
+                .cross_img {
+                    border: 3px solid #bc7f79;
+                    height: 37px;
+                    width: 37px;
+                    display: table-cell;
+                    text-align: center;
+                    vertical-align: middle;
+                    margin-top: 18px;
+                    margin-left: 19px;
+                }
+                p {
+                    color: #525058;
+                    font-size: 15px;
+                    margin-left: 63px;
+                    margin-top: -31px;
+                    float: left;
+                }
+                .cross_img1 {
+                    margin-top: -53px;
+                }                
+            }
+            .form {
+                text-align: center;
+                .center-box {
+                    padding: 0;
+                    .input-text {
+                        width: 98%;
+                        height: 48px;
+                        border: 1px solid #e2e2e2;
+                        margin-top: 19px;
+                        margin-bottom: 29px;
+                    }
+                }
+                .col-lg-12 {
+                    padding: 0;
+                    .input-email {
+                        width: 100%;
+                        height: 48px;
+                        border: 1px solid #e2e2e2;
+                        margin-top: 19px;
+                        margin-bottom: 29px;
+                    }
+                }
+                .password-left {
+                    .hideShowPassword-wrapper {
+                        text-align: left;
+                        width: 100% !important;
+                        button {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+                .password-right {
+                    .hideShowPassword-wrapper {
+                        text-align: right;
+                        width: 100% !important;
+                    }
+                }
+                .birth_day {
+                    #suMonth {
+                        width: 40%;
+                        height: 40px;
+                        // padding: 0 10px;
+                        // float: left !important;
+                        margin-right: 10px;
+                    }
+                    #suDay {
+                        width: 20%;
+                        height: 40px;
+                        // padding: 0 10px;
+                        margin-right: 10px;
+                        // float: left !important;
+                    }
+                    #suYear {
+                        width: 30%;
+                        height: 40px;
+                        // padding: 0 10px;
+                        margin-right: 8px;
+                        // float: left !important;
+                    }
+                    .select_opt {
+                        margin-top: 19px;
+                        margin-bottom: 29px;
+                        font-size: 16px;
+                    }
+                }
+                .default_venue {
+                    .radio {
+                        margin-top: 19px;
+                        margin-bottom: 45px;
+                        float: left;
+                        width: 100px;
+                        input[type="radio"] {
+                            display: none;
+                            margin-right: 5px;
+                            height: 17px;
+                            width: 16px;
+                            margin-top: 15px;
+                        }
+                        .outfit11 {
+                            input[type="radio"]:checked + label .fa-circle-o {
+                                display: none;
+                            }
+                            span i {
+                                color: #acaeb5;
+                            }
+                            input[type="radio"]:checked + label .fa-circle {
+                                display: block;
+                                color: #acaeb5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/***** ----------------------------------style for profile/signup-------------------------------------*****/

@@ -42,7 +42,7 @@
         //-------------------------info/how-it-works---------------------------------------//
                     ;
         ?>
-
+        
         <link rel="icon" href="favicon.ico">
         <title>eLnove.com</title>
         <!-- Bootstrap core CSS -->
@@ -65,7 +65,11 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
         <script src="/assets/js/jquery-ui.js"></script>
         <script src="/assets/js/jquery.fullscreen-popup.js"></script>
-
+        
+        <!-- link of signup.phtml -->
+        <script src="<?php echo $this->basePath() ?>/showhidepassword/hideShowPassword.min.js"></script>
+        <link rel="stylesheet" href="<?php echo $this->basePath() ?>/showhidepassword/css/example.wink.css"/>
+        <!-- End link of signup.phtml -->
 
     </head>
 
@@ -667,14 +671,14 @@
     
         //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-grid"
     $(".sort-list").click(function(){
-        $(this).parents("body").find(".product.col-lg-3.col-sm-4").removeClass("col-xs-6");
+        $(this).parents("body").find("#load-product-list").removeClass("grid-view");
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-grid").css({"opacity": "1", "cursor": "pointer"});
 
     });
         //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-list"
     $(".sort-grid").click(function(){
-        $(this).parents("body").find(".product.col-lg-3.col-sm-4").addClass("col-xs-6");
+        $(this).parents("body").find("#load-product-list").addClass("grid-view");
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-list").css({"opacity": "1", "cursor": "pointer"});
 
@@ -841,8 +845,6 @@
 
 
         </script>
-        <script src="/assets/js/common.js"></script>
-
         <script>
             //
             $(document).ready(function(){
@@ -924,9 +926,10 @@
             });
                 // change attribute of "#header-block" and "#search" when scroll window
             $(window).scroll(function(){
-                if($(this).scrollTop() >= $("#header-block").height())
+                // if($(this).scrollTop() >= $("#header-block").height())
+                if($(this).scrollTop() >= 20)
                 {
-                    $("#header-block").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
+                    $("#header-container").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#f6f6f4", "z-index": "99"});
                     if(window.innerWidth >= 768) 
                     {                       
                         $("#search").show();
@@ -934,14 +937,14 @@
                         $("#header-container").find(".row").addClass("wrap-header-top-navbar");
                         $(".searchbox").addClass("searchbox-open").css("z-index", "99");
                     }
-                    else 
-                    {
-                        $(".form_search").hide();
-                    }
+                    // else 
+                    // {
+                    //     $(".form_search").hide();
+                    // }
                 }
                 else 
                 {
-                    $("#header-block").css("position","static");
+                    $("#header-container").css("position","static");
                     if(window.innerWidth >= 768) 
                     {                       
                         $("#search").hide();
@@ -949,11 +952,19 @@
                         $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
                         $(".searchbox").removeClass("searchbox-open");
                     }
-                    else
-                    {
-                        $(".form_search").hide();
-                    }
+                    // else
+                    // {
+                    //     $(".form_search").hide();
+                    // }
                 }
+                if($(this).scrollTop() > 0)
+                {
+                    $("#mobile-header").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#f6f6f4", "z-index": "99"});
+                }
+                else
+                {
+                    $("#mobile-header").css("position","static");
+                }                
             });
 
 
