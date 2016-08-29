@@ -125,8 +125,8 @@ class InfoController extends AbstractActionController
 
         $__viewVariables = array();
 
-        $this->layout('layout/home_layout.phtml');
-
+       // $this->layout('layout/home_layout.phtml');
+        $this->layout('layout/layout_elnove.phtml');
         return $__viewVariables;
     }
 	
