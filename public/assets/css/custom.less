@@ -4561,6 +4561,7 @@ footer{
         }
         .register_box {
             margin-bottom: 70px;
+            padding: 0;
             .fl {
                 float: left;
             }
@@ -4568,6 +4569,7 @@ footer{
                 float: right !important;
             }
             .register_page {
+                padding: 0;
                 li {
                     float: left;
                     width: 50%;
@@ -4612,6 +4614,7 @@ footer{
             }
             .form {
                 text-align: center;
+                padding: 0;
                 .center-box {
                     padding: 0;
                     .input-text {
@@ -4680,7 +4683,10 @@ footer{
                         margin-top: 19px;
                         margin-bottom: 45px;
                         float: left;
-                        width: 100px;
+                        text-align: right;
+                        label {
+                            padding-left: 0;
+                        }
                         input[type="radio"] {
                             display: none;
                             margin-right: 5px;
@@ -4688,17 +4694,197 @@ footer{
                             width: 16px;
                             margin-top: 15px;
                         }
-                        .outfit11 {
-                            input[type="radio"]:checked + label .fa-circle-o {
-                                display: none;
-                            }
+                        .outfit11 {                            
                             span i {
                                 color: #acaeb5;
+                            }                                                   
+                        }
+                        input[type="radio"]:checked + label .fa-circle-o {
+                            display: none;
+                        }
+                        input[type="radio"]:checked + label .fa-circle {
+                            display: block;
+                            color: #acaeb5;
+                        }
+                        input[type="radio"] + label .fa-circle {
+                            display: none;
+                            font-size: 16px;
+                        }
+                    }
+                    .radio1 {
+                        width: 25%;
+                    }
+                    .radio2 {
+                        width: 40%;
+                    }
+                    .radio3 {
+                        width: 35%;
+                    }
+                }
+                .signup {
+                    border: 2px solid #bcc5c0;
+                    margin: 38px auto 63px;
+                    width: 73%;
+                    line-height: 41px;
+                    text-transform: uppercase;
+                    background: none;
+                    padding: 10px;
+                    color: #254f73;
+                    font-size: 17px;
+                    font-weight: bold;
+                    &:hover {
+                        background-color: #f0f3f1;
+                    }
+                }
+                .fb {
+                    width: 73%;
+                    margin: 0 auto;
+                    div {
+                        background: url("../../img/line.png");
+                        height: 2px;
+                        display: inline-block;
+                        width: 23%;
+                    }
+                    p {
+                        text-transform: uppercase;
+                        font-size: 14px;
+                        color: #898697;
+                        display: inline-block;
+                        margin: 0px 10px;
+                    }
+                }
+                .fb-login {
+                    .facebook_btn {
+                        background: none repeat scroll 0 0 #f2f3f4;
+                        border: medium none;
+                        color: #415b97;
+                        line-height: 43px;
+                        margin: 38px auto 0;
+                        width: 73%;
+                        font-size: 16px;
+                        &:hover {
+                            background-color: #e4e6e8;
+                        }
+                        i {
+                            color: #415b97;
+                            font-size: 25px;
+                            margin-right: 20px;
+                            margin-top: 10px;
+                            vertical-align: sub;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: 768px) {
+    #profile_signup {
+        #signup-page {
+            .brand-box {
+                padding: 0;
+            }
+        }
+    }
+}
+@media (min-width: 768px)and(max-width: 991px) {
+    #profile_signup {
+       #signup-page {
+        padding-left: 15px;
+        padding-right: 15px;
+            .brand-box {
+                padding: 0;
+                .menu-box {
+                    display: block;
+                    .about {
+                        li {
+                            a {
+                                font-size: 13px;
                             }
-                            input[type="radio"]:checked + label .fa-circle {
-                                display: block;
-                                color: #acaeb5;
+                        }
+                    }
+                }
+            }
+            .register_box {
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+                .form {
+                    .first_name_su {
+                        width: 50%;
+                        float: left;
+                    }
+                    .last_name_su {
+                        width: 50%;
+                        float: right;
+                    }
+                    .password-left {
+                        width: 50%;
+                        float: left;
+                    }
+                    .password-right {
+                        width: 50%;
+                        float: right;
+                    }
+                    .birth_day {
+                        width: 50%;
+                        float: left;
+                    }
+                    .default_venue {
+                        width: 50%;
+                        float: right;
+                    }
+                }
+            }
+       } 
+    }
+    
+}
+@media (min-width: 992px)and(max-width: 1199px) {
+    #profile_signup {
+        #signup-page {
+            .brand-box {
+                padding: 0;
+                .menu-box {
+                    .about {
+                        li {
+                            a {
+                                font-size: 13px;
                             }
+                        }
+                        li:nth-child(1) {
+                            width: 21%;
+                        }
+                        li:nth-child(2) {
+                            width: 19%;
+                        }
+                    }
+                }
+            }
+            .register_box {
+                .form {
+                    .default_venue  {
+                        .radio1 {
+                            width: 28%;
+                        }
+                        .radio3 {
+                            width: 32%;
+                        }
+                    }
+                    .birth_day {
+                        #suMonth {
+                            margin-right: 5px;
+                        }
+                        #suDay {
+                            margin-right: 5px;
+                        }
+                    }
+                    .fb {
+                        div {
+                            width: 22%;
+                        }
+                        p {
+                            font-size: 13px;
                         }
                     }
                 }
