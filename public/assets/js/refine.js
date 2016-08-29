@@ -35,7 +35,7 @@ $('body').on('click', '.icon_like', function (){
     
         mobile = $(this).closest('.mobile').length;
         desktop = $(this).closest('.desktop').length;
-        parent = $(this)[0].attributes[0].nodeValue;
+        parent = $(this).attr("data-parent");
         
         // parent_category = $(this).closest('div').attr('class');
         // id = $(this).attr('id');
@@ -61,10 +61,10 @@ $('body').on('click', '.icon_like', function (){
                             $('.desktop .'+category_id).find('.item').removeClass('selected')
                         }
                         check_parent_category(test);
-                        array_category = $('.category .item.selected').toArray();
+                        array_category = $('.category .item.selected');
                         var a2 =  [];
                         for (i = 0; i < array_category.length ; i++) {
-                            var a1 = (array_category[i].attributes[1].nodeValue);
+                            var a1 = $(array_category[i]).attr('data-catids');
                             a2.push(a1);
                         };
                         $("input[name='catids']").val(a2);
@@ -79,10 +79,10 @@ $('body').on('click', '.icon_like', function (){
                             $(this).addClass('selected');
                         }
                         check_parent_category(test);
-                        array_category = $('.category .item.selected').toArray();
+                        array_category = $('.category .item.selected');
                         var a2 =  [];
                         for (i = 0; i < array_category.length ; i++) {
-                            var a1 = (array_category[i].attributes[1].nodeValue);
+                            var a1 = $(array_category[i]).attr('data-catids');
                             a2.push(a1);
                         };
                         $("input[name='catids']").val(a2);
@@ -115,7 +115,7 @@ $('body').on('click', '.icon_like', function (){
                     array_category = $('.category .item.selected').toArray();
                     var a2 =  [];
                     for (i = 0; i < array_category.length ; i++) {
-                        var a1 = (array_category[i].attributes[1].nodeValue);
+                        var a1 = $(array_category[i]).attr('data-catids');
                         a2.push(a1);
                     };
                     $("input[name='catids']").val(a2);
@@ -132,7 +132,7 @@ $('body').on('click', '.icon_like', function (){
                     array_category = $('.category .item.selected').toArray();
                     var a2 =  [];
                     for (i = 0; i < array_category.length ; i++) {
-                        var a1 = (array_category[i].attributes[1].nodeValue);
+                        var a1 = $(array_category[i]).attr('data-catids');
                         a2.push(a1);
                     };
                     $("input[name='catids']").val(a2);
@@ -155,10 +155,10 @@ $('body').on('click', '.icon_like', function (){
                     }else{
                         $(this).addClass('selected');
                     }
-                    array_brand = $('.brands .item.selected').toArray();
+                    array_brand = $('.brands .item.selected');
                     var a2 =  [];
                     for (i = 0; i < array_brand.length ; i++) {
-                        var a1 = (array_brand[i].attributes[1].nodeValue);
+                        var a1 = $(array_brand[i]).attr('data-brand');
                         a2.push(a1);
                     };
                     $("input[name='brands']").val(a2);
@@ -174,10 +174,10 @@ $('body').on('click', '.icon_like', function (){
                         $(this).removeClass('selected');
                         ($(this).find(".check").remove());
                     }
-                    array_color = $('.colors .selected').toArray();
+                    array_color = $('.colors .selected');
                     var a2 =  [];
                     for (i = 0; i < array_color.length ; i++) {
-                        var a1 = (array_color[i].attributes[1].nodeValue);
+                        var a1 = $(array_color[i]).attr('data-color');
                         a2.push(a1);
                     };
                     $("input[name='colors']").val(a2);
@@ -186,7 +186,7 @@ $('body').on('click', '.icon_like', function (){
             //end - when click item color
             //start - when click item deal
                 case "deals":
-                    name_deal = $(this)[0].attributes[1].nodeValue;
+                    name_deal = $(this).attr('data-deal');
                     x = $("input[name='"+name_deal+"']").val();
 
                     if(x == 1){
@@ -196,7 +196,7 @@ $('body').on('click', '.icon_like', function (){
                         $('.deals .item.selected').removeClass('selected');
                         a = $('.desktop .deals .item');
                         for (i = 0; i < a.length; i++) {
-                            var a1 = a[i].attributes[1].nodeValue;
+                            var a1 = $(a[i]).attr('data-deal');
                             $("input[name='"+a1+"']").val('');
                         };
                         $("input[name='"+name_deal+"']").val('1');
@@ -207,15 +207,13 @@ $('body').on('click', '.icon_like', function (){
             //start - when click sort item
                 case "orderBy":
                     
-                    val_order = $(this)[0].attributes[1].nodeValue;
+                    val_order = $(this).attr('value');
                     $('input[name="orderBy"]').val(val_order);
                 break;
             //end - when click sort item
             //start - when click typemain
                 case "filterTypeMain":
-                    
-                    console.log($(this));
-                    val_order = $(this)[0].attributes[3].nodeValue;
+                    val_order = $(this).attr('value');
                     $('input[name="filterTypeMain"]').val(val_order);
                 break;
             //end - when click typemain
@@ -229,8 +227,7 @@ $('body').on('click', '.icon_like', function (){
                     $('i.check.fa.fa-check').remove();
                     x = $('#productFilterDetail input[type="hidden"]');
                     for (i = 0; i < x.length ; i++) {
-                        y = x[i].attributes[2].nodeValue;
-                        console.log("input[name="+y+"]");
+                        y = $(x[i]).attr('name');
                         $("input[name="+y+"]").val("");
                     };
                     $("input[name='limit']").val("50");
@@ -246,13 +243,11 @@ $('body').on('click', '.icon_like', function (){
         
         desktop =test.closest('.desktop').length;
         mobile =test.closest('.mobile').length;
-        
         if (desktop == 1) {
-            
-            x = $('.desktop .has-child');
-            var x2 =  [];
+            var x = $('.desktop .has-child');
+            var x2 =  []; 
             for (i = 0; i < x.length ; i++) {
-                var x1 = x[i].attributes[2].nodeValue;
+                var x1 = $(x[i]).attr('id');
                 total = $('.desktop .'+x1+' .item').length;
                 current = $('.desktop .'+x1+' .item.selected').length;
                 if(total - current == 0){
@@ -267,7 +262,7 @@ $('body').on('click', '.icon_like', function (){
             x = $('.mobile .has-child');
             var x2 =  [];
             for (i = 0; i < x.length ; i++) {
-                var x1 = x[i].attributes[2].nodeValue;
+                var x1 = $(x[i]).attr('id');;
                 total = $('.mobile .'+x1+' .item').length;
                 current = $('.mobile .'+x1+' .item.selected').length;
                 if(total - current == 0){
@@ -283,11 +278,12 @@ $('body').on('click', '.icon_like', function (){
  
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
+         
         
         x = $(this).parents('.category');
         var attrContent = getComputedStyle(this, ':after').content;
-        var currentId = $(this)[0].attributes[0].nodeValue;
-        var y = $(this)[0].attributes[0].nodeValue;
+        var currentId = $(this).attr("data-class");
+        var y = $(this).attr('data-class');
         if(x.length == 0){
             if ($(this).hasClass("change") == false) {
                 $(this).addClass('change selected');

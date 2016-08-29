@@ -34,12 +34,14 @@
         <div class="col-lg-8 col-sm-9 selected_right ">
             <div class="option-filter">
                 <form class="filterTypeMain">                    
-                    <input data-parent="filterTypeMain" type="radio" name="filter" value="all" checked="checked">
-                    <span>ALL</span>
-                    <input data-parent="filterTypeMain" type="radio" name="filter" value="sale">
-                    <span>SALE</span>
-                    <input data-parent="filterTypeMain" type="radio" name="filter" value="saveitem">
-                    <span>SAVE ITEMS</span>
+                    <input data-parent="filterTypeMain" type="radio" name="filter" id="all" value="all" checked="checked">
+                    <span ><label for="all">ALL</label></span>
+
+                    <input data-parent="filterTypeMain" type="radio" name="filter" id="sale" value="sale">
+                    <span ><label for="sale">SALE</label></span>
+
+                    <input data-parent="filterTypeMain" type="radio" name="filter" id="saveitem" value="saveitem">
+                    <span ><label for="saveitem">SAVE ITEMS</label></span>
                 </form>
             </div>
             <div class="option-selected">
@@ -90,6 +92,9 @@
             <div id="body-main-sideright" class="col-lg-12">
                 <div class="row "  id="load-product-list">
                     <!-- Possition for load products from Ajax -->
+                </div>
+                <div id="load-more" class="row text-center">
+                    <button class="btn-st-silver">Load more</button>
                 </div>
             </div>
         </div>

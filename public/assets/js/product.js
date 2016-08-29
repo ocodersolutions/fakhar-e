@@ -105,19 +105,21 @@ $('body').on('click', '.modal_body_footer', function (){
     $('#modal_alert').css("overflow", "auto");
 });  
 
-
-// Auto load more product when user scroll     
-$(window).scroll(function() {
-    var offset = ($(document).height() - $(window).height() )-2200;
-    if($(window).scrollTop() >= offset) {
-        // ajax call get data from server and append to the div
-        if (Product.loading == 0 && Product.endData == 0){
-            Product.loadProductListAjax(1);
-        }
+//Click button loadmore 
+$("#load-more>.btn-st-silver").click(function(){
+   if (Product.loading == 0 && Product.endData == 0)
+    {
+        Product.loadProductListAjax(1);
     }
 });
 
-
-
-
-
+// // Auto load more product when user scroll     
+// $(window).scroll(function() {
+//     var offset = ($(document).height() - $(window).height() )-2200;
+//     if($(window).scrollTop() >= offset) {
+//         // ajax call get data from server and append to the div
+//         if (Product.loading == 0 && Product.endData == 0){
+//             Product.loadProductListAjax(1);
+//         }
+//     }
+// });
