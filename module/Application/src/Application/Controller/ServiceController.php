@@ -57,8 +57,8 @@ class ServiceController extends BaseActionController {
                 return     $__viewVariables;           
             }
             else {
-                $this->redirect()->toRoute('auth');
-                // $userId = 0;
+                //$this->redirect()->toRoute('auth');
+                $userId = 0;
             }
         }
         $__viewVariables['userEmail'] = @$userInfo->email; 
@@ -627,8 +627,14 @@ class ServiceController extends BaseActionController {
 
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
-        $userId = $userInfo->userId;
-        // $userId = 0;
+        if ( $userInfo == null){
+            $userId = 0;
+            $status = 0;
+        }else{
+            $userId = $userInfo->userId;
+            $status = 1;
+        }
+
         $aQueryParams = $this->params()->fromQuery();
         if ($request->isXmlHttpRequest() || (isset($aQueryParams['test']) && $aQueryParams['test']=='yes') ) { 
             $oService = $this->getServiceLocator();

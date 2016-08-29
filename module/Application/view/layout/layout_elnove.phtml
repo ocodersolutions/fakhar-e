@@ -112,6 +112,7 @@
                                 <div class="uc_clean_accordion_wrap">
                                     <div id="accordion" class="uc_clean_accorder_content">
                                         <h3 class="uc_head_line">
+                                            <div id="status-login" data-login="1"></div>
                                             <a class="uc_link_tittle">WELCOME, <?php echo $this->firstName; ?></a>
                                         </h3>
                                         <div class="uc_line_content_header">
@@ -128,6 +129,7 @@
                             </div>
                         
                         <?php } else { ?>
+                        <div id="status-login" data-login="0"></div>
                         <div class="login_signup">
                             <a href="/auth/login">LOGIN</a>
                             /
