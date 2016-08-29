@@ -32,9 +32,11 @@ $('body').on('click', '.icon_like', function (){
 //select fileter    
     //deal
    $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter, .orderBy li, .filterTypeMain input[name="filter"]').click(function(){
+    
         mobile = $(this).closest('.mobile').length;
         desktop = $(this).closest('.desktop').length;
         parent = $(this)[0].attributes[0].nodeValue;
+        
         // parent_category = $(this).closest('div').attr('class');
         // id = $(this).attr('id');
         test = $(this);
@@ -109,6 +111,7 @@ $('body').on('click', '.icon_like', function (){
                         $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
                         $('.mobile .'+category_id).find('.item').removeClass('selected')
                     }
+                    check_parent_category(test);
                     array_category = $('.category .item.selected').toArray();
                     var a2 =  [];
                     for (i = 0; i < array_category.length ; i++) {
@@ -183,7 +186,6 @@ $('body').on('click', '.icon_like', function (){
             //end - when click item color
             //start - when click item deal
                 case "deals":
-                
                     name_deal = $(this)[0].attributes[1].nodeValue;
                     x = $("input[name='"+name_deal+"']").val();
 
@@ -241,22 +243,41 @@ $('body').on('click', '.icon_like', function (){
   
     // select childs category
     function check_parent_category(test){
-        x = $('.desktop .has-child');
-       
-       var x2 =  [];
-        for (i = 0; i < x.length ; i++) {
-            var x1 = x[i].attributes[2].nodeValue;
-            console.log(x1);
-            total = $('.desktop .'+x1+' .item').length;
-            current = $('.desktop .'+x1+' .item.selected').length;
-            if(total - current == 0){
-                $('.desktop #'+x1).addClass('has-child-selected');
-            }else if(total - current > 0){
-                $('.desktop #'+x1).removeClass('has-child-selected');
-            }
-        };
-
-        x2 =  [];
+        
+        desktop =test.closest('.desktop').length;
+        mobile =test.closest('.mobile').length;
+        
+        if (desktop == 1) {
+            
+            x = $('.desktop .has-child');
+            var x2 =  [];
+            for (i = 0; i < x.length ; i++) {
+                var x1 = x[i].attributes[2].nodeValue;
+                total = $('.desktop .'+x1+' .item').length;
+                current = $('.desktop .'+x1+' .item.selected').length;
+                if(total - current == 0){
+                    $('.desktop #'+x1).addClass('has-child-selected');
+                }else if(total - current > 0){
+                    $('.desktop #'+x1).removeClass('has-child-selected');
+                }
+            };
+            x2 =  [];
+        }else if (mobile == 1) {
+            
+            x = $('.mobile .has-child');
+            var x2 =  [];
+            for (i = 0; i < x.length ; i++) {
+                var x1 = x[i].attributes[2].nodeValue;
+                total = $('.mobile .'+x1+' .item').length;
+                current = $('.mobile .'+x1+' .item.selected').length;
+                if(total - current == 0){
+                    $('.mobile #'+x1).addClass('has-child-selected');
+                }else if(total - current > 0){
+                    $('.mobile #'+x1).removeClass('has-child-selected');
+                }
+            };
+            x2 =  [];
+        }
     }
     //clear filter
  
