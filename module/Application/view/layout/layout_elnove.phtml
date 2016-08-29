@@ -2,17 +2,19 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <?php echo $this->headTitle("El Nove - Dress to the nines")->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
         <meta name="description" content="">
         <meta name="author" content="">
-            
+        <link rel="icon" href="favicon.ico">
+
         <?php if( isset($this->additionalMeta) ) { echo $this->additionalMeta; }?>        
         
         <!-- Le styles -->
         <?php echo $this->headLink()
-                // -------------------profile/myaccount--------------------------------//
                         ->prependStylesheet($this->basePath() . '/css/jquery.gritter.css')
                         ->prependStylesheet($this->basePath() . '/css/lnovecustom.css')
                         ->prependStylesheet($this->basePath() . '/css/normalize.css')
@@ -25,14 +27,18 @@
                         ->appendStylesheet($this->basePath() . '/myalert/css/style.css')
                         ->appendStylesheet($this->basePath() . '/tooltipster/css/tooltipster.css')
                         ->appendStylesheet($this->basePath() . '/tooltipster/css/themes/tooltipster-shadow.css')
-                        // ->prependStylesheet($this->basePath() . '/css/style.css')
-                // -------------------End profile/myaccount--------------------------------//     
+                        ->appendStylesheet($this->basePath() . '/assets/css/bootstrap.min.css')
+                        ->appendStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css')
+                        ->appendStylesheet('https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900')
+                        ->appendStylesheet($this->basePath() . '/showhidepassword/css/example.wink.css')
                     ;
         ?>
+
+        <link href="/assets/css/custom.less" rel="stylesheet/less" type="text/css">
+        <link href="/assets/css/info_about_us.less" rel="stylesheet/less" type="text/css">
+        <link href="/assets/css/info_frequently_ask_question.less" rel="stylesheet/less" type="text/css">
+        <link rel="stylesheet/less" type="text/css" href="/assets/css/careers_page.less" />
         <?php
-        //-------------------------info/how-it-works---------------------------------------//
-        
-        //echo $this->headScript()->prependFile($this->basePath() . '/vendor/modernizr.js');
         echo $this->headScript()->appendFile($this->basePath() . '/js/jquery.js')
                                 ->appendFile($this->basePath() . '/assets/js/bootstrap.min.js')
                                 ->appendFile($this->basePath() . '/assets/js/jquery-ui.js')
@@ -44,34 +50,10 @@
                                 ->appendFile($this->basePath() . '/myalert/js/my_alert.js') 
                                 ->appendFile($this->basePath() . '/js/jquery.gray.js')
                                 ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
-        //-------------------------info/how-it-works---------------------------------------//
+                                ->appendFile($this->basePath() . '/showhidepassword/hideShowPassword.min.js')
+                                ->appendFile('http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js')
                     ;
         ?>
-        
-        <link rel="icon" href="favicon.ico">
-        <title>eLnove.com</title>
-        <!-- Bootstrap core CSS -->
-        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-        <!-- FONT -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900' rel='stylesheet' type='text/css'>
-        <!-- Custom styles for this template -->
-        <link href="/assets/css/custom.less" rel="stylesheet/less" type="text/css">
-        <link href="/assets/css/info_about_us.less" rel="stylesheet/less" type="text/css">
-        <link href="/assets/css/info_frequently_ask_question.less" rel="stylesheet/less" type="text/css">
-        <!-- <link href="/assets/css/custom_header.less" rel="stylesheet/less" type="text/css"> -->
-        <!-- <link href="/assets/css/custom_banner.less" rel="stylesheet/less" type="text/css"> -->
-        <!-- <link href="/assets/css/custom_product_list.less" rel="stylesheet/less" type="text/css"> -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
-        <link rel="stylesheet/less" type="text/css" href="/assets/css/careers_page.less" />
-        <!-- <link rel="stylesheet/less" type="text/css" href="bk/assets/css/quang.less" /> -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
-        
-        <!-- link of signup.phtml -->
-        <script src="<?php echo $this->basePath() ?>/showhidepassword/hideShowPassword.min.js"></script>
-        <link rel="stylesheet" href="<?php echo $this->basePath() ?>/showhidepassword/css/example.wink.css"/>
-        <!-- End link of signup.phtml -->
-
     </head>
 
      <script>
@@ -309,289 +291,13 @@
                 </div>
             </div>
         </div>
-        
-        <!-- <div class="row">
-            <div class="user-mhiden" id="user-mblock">
-                <p class="tit-head">WELCOM,JOHN <span class="fa fa-times" id="hid-userbox"></span></p>
-                <ul class="link-box-user">
-                    <li><a href="#">My Profile</a></li>
-                    <li><a href="#">Log out</a></li>
-                </ul>
-             </div>   
-            
-        </div> -->
     </div>
 </div>
 
 <div id="body-container" class="container-fluid">
   <?php echo $this->content; ?>
-        <!-- Modal -->
         
-        <!-- <div id="modal_total"> -->
-
-        <!-- Modal of Popup Quick-view-product-item -->
-            <!-- <div class="modal fade bs-example-modal-lg modal_quick_view" id="modal_QV" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-lg-6 modal_body_left">
-                                        <img src="../assets/images/product_item_mobile.jpg" alt="">
-                                    </div>
-                                    <div class="col-lg-6 modal_body_right">
-                                        <p class="modal_name_item">Puma Number One Active Hoodie</p>
-                                        <p class="modal_brand_item">PUMA</p>
-                                        <p class="modal_price_item">39.00 CAD</p>
-                                        <div class="modal_buy_product">
-                                            <span class="btn-st-blue">BUY</span>
-                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                        </div>
-                                        <p class="modal_alert_detail">DETAILS</p>
-                                        <p class="modal_alert_detail_atb">A classic branded sweater with lined hood</p>
-                                        <p class="modal_alert_detail_atb">Hooded</p>
-                                        <p class="modal_alert_detail_atb">Long sleeves</p>
-                                        <p class="modal_alert_detail_atb">Front pouch pocket</p>
-                                        <p class="modal_alert_detail_atb">Cotton/polyester</p>
-                                        <p class="modal_alert_detail_atb">Machine wash</p>
-                                        <p class="modal_alert_detail_atb">Imported</p>
-                                        <div class="modal_body_icon_link">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                                            <a href="#"><i class="fa fa-tumblr"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-envelope-o fa_final"></i></a>
-                                        </div>
-                                        <div class="modal_body_footer">
-                                            <i class="fa fa-bell-o" aria-hidden="true"></i>
-                                            <span>Get Sale Alert</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                  
-                    </div>
-                </div>
-            </div>
- -->
-
-        <!-- End Modal of Popup Quick-view-product-item -->
-                
-        <!-- Modal of Popup icon_alert -->
-            <!-- <div class="modal fade bs-example-modal-lg modal_icon_alert" id="modal_alert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">                              
-                    <div class="modal-content modal_alert">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            <h2 class="popup_alert_title">CREATE SALE ALERT</h2>
-                        </div>
-                        <div class="modal-body">
-                            <img src="../assets/images/product_item_detail-mobile.jpg" alt="">
-                            <p class="modal_name_item">Botazzo Textural Derby Sneakers</p>
-                            <p class="modal_brand_item">PEGABO</p>
-                            <p class="modal_price_item">59.50 CAD</p>
-                        </div>
-                        <div class="modal-footer">
-                            <p class="modal_footer_p1">Waiting for this item to go on sale?</p>
-                            <p class="modal_footer_p2">We'll send an email when the price drops.</p>
-                            <form action="" class="modal_form_alert">
-                                <input type="text" name="email-alert" placeholder="Youre Email Address">
-                                <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
-                            </form>
-                            <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
-                        </div>
-                    </div>                                   
-                </div>
-            </div> -->
-                <!-- End Modal of Popup icon_alert -->
-        <!-- </div> -->
-
-        <!-- End Modal -->
 </div>
-<script type="text/javascript">
-    
-    
-        //when click in object '.refine .refine-colum .list-color .color' then check class of object exist "selected", if not then add class "selected" and append tag " <i class='check fa fa-check' aria-hidden='true'></i>" else remove class "select" and remove class ".check" of object.
-    // $('.refine .refine-colum .list-color .color').click(function() {
-
-    //     if ($(this).hasClass("selected") == false) {
-    //         $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
-    //     } else {
-    //         $(this).removeClass('selected');
-    //         ($(this).find(".check").remove());
-    //     }
-    // });
-    //when click in object '.fa-angle-down' then check if object do not exist class "fa-selected" then add class 'fa-selected' for object and add class 'li-up' for "'li#'+x", else then remove class 'fa-selected' and class 'li-up'.
-  // $('.fa-angle-down').click(function(){
-  //       var x = $(this)[0].attributes[0].nodeValue;
-  //       if ($(this).hasClass("fa-selected") == false) {
-  //           $(this).addClass('fa-selected');
-  //           $('li#'+x).addClass('li-up');
-  //       }else{
-  //           $(this).removeClass('fa-selected');
-  //           $('li#'+x).removeClass('li-up');
-  //       }
-  // });
-
-    // $('.refine .refine-colum ul .fa-angle-down').click(function() {
-    //     x = $(this).parents('.category');
-    //     if(x.length == 0){
-    //         if ($(this).hasClass("change") == false) {
-    //             $(this).addClass('change selected');
-    //         } else {
-    //             $(this).removeClass('change selected');
-    //         }
-    //     }
-    //     var attrContent = getComputedStyle(this, ':after').content;
-    //     var currentId = $(this)[0].attributes[0].nodeValue;
-    //     $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum .' + currentId + '').animate({
-    //         left: "+=50",
-    //         height: "toggle"
-    //     }, 800, function() {});
-    // });
-
-    // send catefory to form input
-   //  $('.desktop  .category .has-child').click(function() {
-
-
-   //          if ($(this).hasClass("has-child-selected") == false) {
-   //              $(this).addClass('has-child-selected');
-   //              category_id = $(this).attr('id');
-   //              $('.desktop .'+category_id+' .has-child').addClass('has-child-selected');
-   //              $('.desktop .'+category_id).find('.item').addClass('selected')
-   //          } else {
-   //              $(this).removeClass('has-child-selected');
-   //              category_id = $(this).attr('id');
-   //              $('.desktop .'+category_id+' .has-child').removeClass('has-child-selected');
-   //              $('.desktop .'+category_id).find('.item').removeClass('selected')
-   //          }
-   //      array_category = $('.category .item.selected').toArray();
-   //      var a2 =  [];
-   //      for (i = 0; i < array_category.length ; i++) {
-   //          var a1 = (array_category[i].attributes[0].nodeValue);
-   //          a2.push(a1);
-   //      };
-   //      $("input[name='catids']").val(a2);
-   //      var a2 = [];
-   //      loadProductData();
-            
-   //  });
-   // $('.mobile .category .has-child').click(function() {
-
-   //          if ($(this).hasClass("has-child-selected") == false) {
-   //              $(this).addClass('has-child-selected');
-   //              category_id = $(this).attr('id');
-   //              $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
-   //              $('.mobile .'+category_id).find('.item').addClass('selected')
-   //          } else {
-   //              $(this).removeClass('has-child-selected');
-   //              category_id = $(this).attr('id');
-   //              $('.mobile .'+category_id+' .has-child').removeClass('has-child-selected');
-   //              $('.mobile .'+category_id).find('.item').removeClass('selected')
-   //          }
-   //      array_category = $('.category .item.selected').toArray();
-   //      var a2 =  [];
-   //      for (i = 0; i < array_category.length ; i++) {
-   //          var a1 = (array_category[i].attributes[0].nodeValue);
-   //          a2.push(a1);
-   //      };
-   //      $("input[name='catids']").val(a2);
-   //      var a2 = [];
-   //      loadProductData();
-   //  });
-    //clear filter
-    // $('.clear-filter').click(function(){
-
-    //     $('.item.selected').removeClass('selected');
-    //     $('.has-child-selected').removeClass('has-child-selected');
-    //     $('.color.selected').removeClass('selected');
-    //     $('i.check.fa.fa-check').remove();
-    //     x = $('#productFilterDetail input[type="hidden"]');
-    //    // console.log(x);
-        
-    //     for (i = 0; i < x.length ; i++) {
-    //         y = x[i].attributes[3].nodeValue ;
-    //         console.log("input[name="+y+"]");
-    //         $("input[name="+y+"]").val("");
-    //     };
-    // });
-    //clear filter
-        // when click '.category .item' then check if it has class "selected" then remove class "selected" else add class "selected", and convert '.category .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='catids']", final call function loadProductData().
-    // $('.category .item').click(function(){
-        
-    //     if($(this).hasClass('selected')){
-    //         $(this).removeClass('selected');
-    //     }else{
-    //         $(this).addClass('selected');
-    //     }
-
-    //     array_category = $('.category .item.selected').toArray();
-    //     var a2 =  [];
-    //     for (i = 0; i < array_category.length ; i++) {
-    //         var a1 = (array_category[i].attributes[0].nodeValue);
-    //         a2.push(a1);
-    //     };
-    //     $("input[name='catids']").val(a2);
-    //     var a2 = [];
-    //     loadProductData();
-
-    // });
-        // when click '.brands .list-brand li' then check if it has class "selected" then remove class "selected" else add class "selected", and convert '.brands .item.selected' to array, assign value of array for new array after assign value of new array for "input[name='brands']", final call function loadProductData(). 
-    // $('.brands .list-brand li').click(function(){
-    //     if($(this).hasClass('selected')){
-    //         $(this).removeClass('selected');
-    //     }else{
-    //         $(this).addClass('selected');
-    //     }
-
-    //     array_brand = $('.brands .item.selected').toArray();
-    //     var a2 =  [];
-    //     for (i = 0; i < array_brand.length ; i++) {
-    //         var a1 = (array_brand[i].attributes[0].nodeValue);
-    //         a2.push(a1);
-    //     };
-    //     $("input[name='brands']").val(a2);
-    //     var a2 = [];
-    //     loadProductData();
-        
-    // });
-        //when click '.colors .list-color .color' then convert '.color.selected' to array, ssign value of array for new array after assign value of new array for "input[name='colors']". 
-    // $('.colors .list-color .color').click(function(){
-    //     array_color = $('.color.selected').toArray();
-    //     var a2 =  [];
-    //     for (i = 0; i < array_color.length ; i++) {
-    //         var a1 = (array_color[i].attributes[0].nodeValue);
-    //         a2.push(a1);
-    //     };
-    //     $("input[name='colors']").val(a2);
-    //     var a2 = [];
-    // });
-        //when click '.deals .item' then assign value its for "name_deal", check x = 1 then remove class "selected" and change value of  "input[name='"+name_deal+"']" is empty, else add class "selected" and change value of "input[name='"+name_deal+"']" is 1.
-    // $('.deals .item').click(function(){
-    //     console.log($(this));
-    //         name_deal = $(this)[0].attributes[0].nodeValue;
-    //         x = $("input[name='"+name_deal+"']").val();
-    //         if(x == 1){
-    //             $("input[name='"+name_deal+"']").val('');
-    //             $(this).removeClass('selected');
-    //         }else{
-    //             $("input[name='"+name_deal+"']").val('1');
-    //             $(this).addClass('selected');
-    //         }         
-    // });
-
-
-
-
-    // send to form input
-</script>
-
 <!-- javascript of product-item -->
 
 <script type="text/javascript">
@@ -625,26 +331,6 @@
                     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
                 }
             }, '.uc_contact');
-
-            // $(".product_item_popup").mouseenter(function(){
-            //     $(this).parent().find(".popup_item, .quick_view_v2").show();
-            //     var height1 = $(this).parent().find(".icon_like").height();
-            //     $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
-            // });
-            // $(".uc_contact").mouseleave(function(){
-            //     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
-            // });
-            
-            // $(document).on({
-            //     mouseout: function () {
-            //         $("body").css({"overflow": "auto", "padding-right": "0px"});
-            //     }
-            // }, '#modal_QV, #modal_alert');
-            // $(document).on({
-            //     mouseover: function () {
-            //         $("body").css("overflow", "hidden");
-            //     }
-            // }, '#modal_QV, #modal_alert');
         }
             //when mouse leave '#modal_QV, #modal_alert' then change attribute css of body"
         $(document).on({
@@ -660,11 +346,7 @@
         }, '#modal_QV, #modal_alert');        
 
     });
-        // send "alertdataid" to '/service/getfeedalert', get content form '/service/getfeedalert' assign for "#alert-content"
-    
-        //when click '.modal_body_footer' then hide "#modal_QV", show "#modal_alert", call function  loadAjaxForAlert(alertdataid), change attribute css of '#modal_alert'.
-    
-        // when change width of window then height of '.share_product' equal sum height of ".uc_contact" and ".show_item"
+
     $(window).resize(function() {
         $('.share_product').height(function(){
             var height1 = $(this).parents(".product_item").find(".uc_contact").height();
@@ -673,29 +355,28 @@
         });
     });
     
-        //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-grid"
+    //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-grid"
     $(".sort-list").click(function(){
         $(this).parents("body").find("#load-product-list").removeClass("grid-view");
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-grid").css({"opacity": "1", "cursor": "pointer"});
 
     });
-        //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-list"
+
+    //when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-list"
     $(".sort-grid").click(function(){
         $(this).parents("body").find("#load-product-list").addClass("grid-view");
         $(this).css({"opacity": "0.3", "cursor": "default"});
         $(this).parents(".row").find(".sort-list").css({"opacity": "1", "cursor": "pointer"});
 
     });
-        //when click '.hide_item' then hide ".share_product"
+    
+    //when click '.hide_item' then hide ".share_product"
     $('body').on('click', '.hide_item', function (){
         $(this).parents(".product_item").find(".share_product").hide();
     });
 
-    // $(".hide_item").click(function() {        
-    //     $(this).parents(".product_item").find(".share_product").hide();
-    // });
-        //when click '.show_item' then show and change hieght of '.share_product'
+    //when click '.show_item' then show and change hieght of '.share_product'
     $('body').on('click', '.show_item', function (){
         $(this).parents('.product_item').find('.share_product').show();
         var height1 = $(this).height();
@@ -703,41 +384,7 @@
             var height2 = $(this).parents(".product_item").find(".uc_contact").height();
             return height1 + height2;
         });
-    });
-
-    // $(".show_item").click(function() {
-    //     $(this).parents('.product_item').find('.share_product').show();
-    //     var height1 = $(this).height();
-    //     $(this).parents(".product_item").find(".share_product").height(function(){
-    //         var height2 = $(this).parents(".product_item").find(".uc_contact").height();
-    //         return height1 + height2;
-    //     });
-    // });
-        //when click '.icon_like' then remove or add class "active"
-
-
-
-    // $(".icon_like").click(function() {
-    //     var myClasses = this.classList;
-    //     if (myClasses.contains("active")) {
-    //         myClasses.remove("active");
-    //     } else {
-    //         myClasses.add("active");
-    //     }
-    // });
-
-    // $(".icon_alert").click(function() {
-    //     var myClasses = this.classList;
-    //     if (myClasses.contains("active")) {
-    //         myClasses.remove("active");
-    //     } else {
-    //         myClasses.add("active");
-    //     }
-    // });   
-    
-    // $(".modal_body_icon_link").width(function(){
-    //     return $(this).find(".fa-facebook").width() + $(this).find(".fa_final");
-    // })  ;        
+    });       
 </script> 
 
 <!-- End javascript of product-item -->
@@ -745,7 +392,7 @@
 <!-- Javascript of selected_filter.php/sort-item -->
 
 <script type="text/javascript">
-        //when click ".sort-item" then check if its exist class "active" then remove class "active", ".icon_arrow" add class "fa-chevron-down" and remove class "fa-chevron-up", ".sort-item >.uc_line_content" close slide; else add class "active", ".icon_arrow" remove class "fa-chevron-down" and add class "fa-chevron-up", ".sort-item >.uc_line_content" open slide.
+    //when click ".sort-item" then check if its exist class "active" then remove class "active", ".icon_arrow" add class "fa-chevron-down" and remove class "fa-chevron-up", ".sort-item >.uc_line_content" close slide; else add class "active", ".icon_arrow" remove class "fa-chevron-down" and add class "fa-chevron-up", ".sort-item >.uc_line_content" open slide.
     $(".sort-item").click(function(){
         var myClasses = this.classList;
         if(myClasses.contains("active"))
@@ -841,14 +488,6 @@
         </div>
         </footer>
         <!-- End-Footer -->
-        <script type="text/javascript">
-            // $('.uc_icon.icon_like').click(function(){
-            //     alert(123);
-            // });
-
-
-
-        </script>
         <script>
             //
             $(document).ready(function(){
@@ -941,10 +580,6 @@
                         $("#header-container").find(".row").addClass("wrap-header-top-navbar");
                         $(".searchbox").addClass("searchbox-open").css("z-index", "99");
                     }
-                    // else 
-                    // {
-                    //     $(".form_search").hide();
-                    // }
                 }
                 else 
                 {
@@ -980,23 +615,6 @@
             $("#hid-userbox").click(function(){
                 $("#user-mblock").removeAttr("style");
             });
-
-            // $("#banner").css("margin-top",function(){
-            //  return $(this).parent().find("#header-block").height();
-            // });
-            
-            // $(window).scroll(function(){
-            //     alert("true");
-            //     if($(this).scrollTop() >= $("#header-block").height())
-            //     {
-            //         $("#header-block").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
-            //     }
-            //     else 
-            //     {
-            //         $("#header-block").css("position","static");
-            //     }
-            // });
-            
         </script> 
         <div class="alert">
             <?php include('alert.phtml') ?>
