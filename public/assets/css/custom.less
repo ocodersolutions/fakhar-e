@@ -66,7 +66,6 @@ a{
     font-weight: 400;
     line-height: 40px;
     text-align: center;
-    vertical-align: middle;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     cursor: pointer;
@@ -99,7 +98,6 @@ a{
                 border: 1px solid #eee;
                 margin: 0;
                 padding-right:20px;
-                box-sizing: border-box;
                 position: relative;
                 text-transform: uppercase;
                 letter-spacing: inherit;
@@ -114,43 +112,28 @@ a{
                 .ui-state-active {
                     border-bottom: 0px;
                 }
-                .ui-accordion-header-icon.ui-icon{
-                    position: absolute;
-                    right: 5px;
-                    top:13px;
-                    line-height: 13px;
-                    width: 16px;
-                    height: 16px;
-                    display: block;
-                }
+                
                 .ui-accordion-header-icon.ui-icon {
-                    position: absolute;
-                    right: 5px;
-                    top: 12px;
-                    width: 16px;
-                    height: 16px;
                     display: block;
                     &:after{
+                        position: absolute;
                         font-family: FontAwesome;
                         font-size: 13px;
                         content: "\f078";
                         display: block;
-                        width: 13px;
-                        height: 13px;
-                        margin-bottom: -7px;
+                        top:8px;
+                        right: 5px;
                         transition: all .2s;
                     }
                 }
 
                 .uc_link_tittle {
+                    line-height: 39px;
                     cursor: pointer;
-                    max-height: 38px;
                     box-sizing: border-box;
-                    display: inline-flex;
                     max-width: calc(100% - 5px);
                     font-size: 13px;
                     color: inherit;
-                    line-height: 38px;
                     transition: none;
                     text-decoration: none;
                     font-weight: normal;
@@ -3769,8 +3752,9 @@ footer{
     .myaccount_content {
         margin-left: 0;
         margin-right: 0;
-        margin-top: -522px;
+        // margin-top: -522px;
         background: white;
+        padding-top: 20px;
     }
     .account-btn {
         padding: 0;
@@ -4011,7 +3995,7 @@ footer{
         width: 100%;
     }
     .container1 {
-        margin-top: -520px;
+        // margin-top: -520px;
         // background: #fefefe;
         // background:red;
         section.row {
@@ -4022,7 +4006,7 @@ footer{
                 // background: #fefefe;
                 padding: 70px 0px;
                 .container2 {
-                    padding: 0 30px 0 70px;
+                    padding: 0 50px 0 50px;
                     .pagetitle_new1 {
                         font-size: 38px;
                         text-align: center;
@@ -4530,7 +4514,7 @@ footer{
     #signup-page {
         margin-left: 0;
         margin-right: 0;
-        margin-top: -522px;
+        // margin-top: -522px;
         background: #fff;
         label {
             font-size: 16px;
@@ -4744,6 +4728,7 @@ footer{
                         height: 2px;
                         display: inline-block;
                         width: 23%;
+                        margin-bottom: 3px;
                     }
                     p {
                         text-transform: uppercase;
@@ -4778,6 +4763,70 @@ footer{
         }
     }
 }
+@media (min-width: 320px)and(max-width: 767px) {
+    #profile_signup {
+        #signup-page {
+            padding-left: 15px;
+            padding-right: 15px;
+            .register_box {
+                .form {
+                    .center-box {
+                        width: 100%;
+                        .input-text {
+                            width: 100%;
+                        }
+                    }
+                    .default_venue  {
+                        .radio {
+                            label {
+                                font-size: 13px;
+                            }
+                        }
+                        .radio1 {
+                            text-align: left;
+                        }
+                        .radio3 {
+                            // width: 32%;
+                        }
+                    }
+                    .birth_day {
+                        #suMonth {
+                            margin-right: 2px;
+                        }
+                        #suDay {
+                            margin-right: 2px;
+                            width: 25%;
+                        }
+                        #suYear {
+                            margin-right: 0px;
+                        }
+                    }
+                    .fb {
+                        width: 100%;
+                        div {
+                            width: 14%;
+                        }
+                        p {
+                            font-size: 12px;
+                            margin: 0;
+                        }
+                    }
+                    .signup {
+                        margin: 0 0 40px 0;
+                        line-height: 20px;
+                    }
+                    .password-left {
+                        .hideShowPassword-wrapper {
+                            button {
+                                margin-right: 0px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @media (min-width: 768px) {
     #profile_signup {
         #signup-page {
@@ -4790,8 +4839,6 @@ footer{
 @media (min-width: 768px)and(max-width: 991px) {
     #profile_signup {
        #signup-page {
-        padding-left: 15px;
-        padding-right: 15px;
             .brand-box {
                 padding: 0;
                 .menu-box {
@@ -4804,41 +4851,9 @@ footer{
                         }
                     }
                 }
-            }
-            .register_box {
-                width: 90%;
-                margin-left: auto;
-                margin-right: auto;
-                .form {
-                    .first_name_su {
-                        width: 50%;
-                        float: left;
-                    }
-                    .last_name_su {
-                        width: 50%;
-                        float: right;
-                    }
-                    .password-left {
-                        width: 50%;
-                        float: left;
-                    }
-                    .password-right {
-                        width: 50%;
-                        float: right;
-                    }
-                    .birth_day {
-                        width: 50%;
-                        float: left;
-                    }
-                    .default_venue {
-                        width: 50%;
-                        float: right;
-                    }
-                }
-            }
-       } 
-    }
-    
+            }            
+        } 
+    }    
 }
 @media (min-width: 992px)and(max-width: 1199px) {
     #profile_signup {

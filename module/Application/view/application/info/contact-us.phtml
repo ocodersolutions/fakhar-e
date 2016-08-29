@@ -1,4 +1,44 @@
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<div id="contact_us" class="content-page">
+     <?php echo $this->partial('application/common/banner_header.phtml'); ?> 
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1" id="content-wrap">
+            <section>
+                <div class="skeleton col-lg-8 col-lg-offset-2" style="/*margin: -480px auto 0;">
+
+                    <h1 class="title">DRESS TO THE NINES</h1>
+                    <p class="office">The Office</p>
+                    <p class="p">Address: 97 Ecclesfield Drive, Toronto, Ontario, M1W 2Y3 <br>
+                        Email: <span class="hlink">support@elnove.com</span>
+                    </p>
+
+                    <?php if(isset($_GET['success']) && $_GET['success']='1'){ ?>
+                    <div class="green_box">
+                        <p>Your message has been successfully sent.</p>
+                    </div>
+                    <?php } ?>
+
+                    <form action="<?=isset($this->postURL)?$this->postURL:'/info/contactUs'?>" id="contactForm" method="post" class="col-lg-12">
+                    <input type="text" placeholder="Name" class="label" id="name" name="name"><br/><br/><br/>
+                    <input type="text" placeholder="Email" class="label" id="email" name="email"><br/><br/><br/>
+                    <input type="text" placeholder="Subject" class="label" id="subject" name="subject"><br/><br/><br/>
+                    <span class="label">Your Message</span><br/>
+                    <textarea class="textarea" id="message" name="message"></textarea>
+                    <div class="fr"><button type="submit" class="btn-st-silver">Send</button></div>
+                    </form>
+
+                    <div class="clr"></div>
+
+                    <div class="top_page">
+                        <img src="/img/arrow.png" id="click_to_top">
+                        <p>TOP OF PAGE</p>
+                    </div>
+
+                </div>
+                <div class="clr"></div>
+            </section>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
 
 <script>
@@ -63,51 +103,6 @@ $(document).ready(function(){
    });
  });
 </script>
-
-<style type="text/css">
-    form label { width: 250px; }
-    form label.error {color: #FF0000; }
-</style>
-<div id="contact_us" class="row content-page">
-    <div class="banner2"></div>
-
-    <div class="col-lg-10 col-lg-offset-1" id="content-wrap">
-        <section>
-            <div class="skeleton col-lg-8 col-lg-offset-2" style="/*margin: -480px auto 0;">
-
-                <h1 class="title">DRESS TO THE NINES</h1>
-                <p class="office">The Office</p>
-                <p class="p">Address: 97 Ecclesfield Drive, Toronto, Ontario, M1W 2Y3 <br>
-                    Email: <span class="hlink">support@elnove.com</span>
-                </p>
-
-                <?php if(isset($_GET['success']) && $_GET['success']='1'){ ?>
-                <div class="green_box">
-                    <p>Your message has been successfully sent.</p>
-                </div>
-                <?php } ?>
-
-                <form action="<?=isset($this->postURL)?$this->postURL:'/info/contactUs'?>" id="contactForm" method="post" class="col-lg-12">
-                <input type="text" placeholder="Name" class="label" id="name" name="name"><br/><br/><br/>
-                <input type="text" placeholder="Email" class="label" id="email" name="email"><br/><br/><br/>
-                <input type="text" placeholder="Subject" class="label" id="subject" name="subject"><br/><br/><br/>
-                <span class="label">Your Message</span><br/>
-                <textarea class="textarea" id="message" name="message"></textarea>
-                <div class="fr"><button type="submit" class="btn-st-silver">Send</button></div>
-                </form>
-
-                <div class="clr"></div>
-
-                <div class="top_page">
-                    <img src="/img/arrow.png" id="click_to_top">
-                    <p>TOP OF PAGE</p>
-                </div>
-
-            </div>
-            <div class="clr"></div>
-        </section>
-    </div>
-</div>
 <script type="text/javascript">
     $('.top_page').click(function(){
         $('html, body').animate({scrollTop : 0},800);

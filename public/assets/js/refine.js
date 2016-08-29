@@ -2,16 +2,29 @@
 $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
         id = $(this).attr('id');
-        if (myClasses.contains("active")) {
-            action = 'unlike';
-            ajax_like(id,action);
-            myClasses.remove("active");
-        } else {
-            action = 'like';
-            ajax_like(id,action);
-            myClasses.add("active");
+        check_login = $('#status-login').attr('data-login');
+        if(check_login == 1){
+            //if logged
+            if (myClasses.contains("active")) {
+                action = 'unlike';
+                ajax_like(id,action);
+                myClasses.remove("active");
+            } else {
+                action = 'like';
+                ajax_like(id,action);
+                myClasses.add("active");
+            }
+        }else if(check_login == 0){
+            //if not signed
+             myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login to continue.','');
+            $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                $("button.my_btn_ok").click(function(){ // click button
+                    $('a.close-reveal-modal').trigger('click'); // will close modal
+                });
+            });
         }
     });
+
     function ajax_like(id,action){
         if(action == 'like'){
             url_like = "/service/likeclosset";
