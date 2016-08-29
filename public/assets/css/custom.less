@@ -3752,8 +3752,9 @@ footer{
     .myaccount_content {
         margin-left: 0;
         margin-right: 0;
-        margin-top: -522px;
+        // margin-top: -522px;
         background: white;
+        padding-top: 20px;
     }
     .account-btn {
         padding: 0;
@@ -4513,7 +4514,7 @@ footer{
     #signup-page {
         margin-left: 0;
         margin-right: 0;
-        margin-top: -522px;
+        // margin-top: -522px;
         background: #fff;
         label {
             font-size: 16px;
@@ -4727,6 +4728,7 @@ footer{
                         height: 2px;
                         display: inline-block;
                         width: 23%;
+                        margin-bottom: 3px;
                     }
                     p {
                         text-transform: uppercase;
@@ -4754,6 +4756,70 @@ footer{
                             margin-right: 20px;
                             margin-top: 10px;
                             vertical-align: sub;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: 320px)and(max-width: 767px) {
+    #profile_signup {
+        #signup-page {
+            padding-left: 15px;
+            padding-right: 15px;
+            .register_box {
+                .form {
+                    .center-box {
+                        width: 100%;
+                        .input-text {
+                            width: 100%;
+                        }
+                    }
+                    .default_venue  {
+                        .radio {
+                            label {
+                                font-size: 13px;
+                            }
+                        }
+                        .radio1 {
+                            text-align: left;
+                        }
+                        .radio3 {
+                            // width: 32%;
+                        }
+                    }
+                    .birth_day {
+                        #suMonth {
+                            margin-right: 2px;
+                        }
+                        #suDay {
+                            margin-right: 2px;
+                            width: 25%;
+                        }
+                        #suYear {
+                            margin-right: 0px;
+                        }
+                    }
+                    .fb {
+                        width: 100%;
+                        div {
+                            width: 14%;
+                        }
+                        p {
+                            font-size: 12px;
+                            margin: 0;
+                        }
+                    }
+                    .signup {
+                        margin: 0 0 40px 0;
+                        line-height: 20px;
+                    }
+                    .password-left {
+                        .hideShowPassword-wrapper {
+                            button {
+                                margin-right: 0px;
+                            }
                         }
                     }
                 }
