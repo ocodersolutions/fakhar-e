@@ -140,7 +140,7 @@
 
 </div>
 <script type="text/javascript">
-    jQuery(window).on('load', function ($) {
+    $(window).on('load', function () {
         function valueChanged( data ) {
             $('#' + data.original.attr('id') + 'Hidden').val( data.selectedData.value );
             
@@ -162,23 +162,23 @@
             
         }   
 
-        jQuery(".size_box").css('height', '121px');
-       jQuery("select.selectpicker").each(function () {
+        $(".size_box").css('height', '121px');
+       $("select.selectpicker").each(function () {
             if (this.value == 'other') {
-                jQuery('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'block');
+                $('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'block');
             }
             else {
-                jQuery('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'none');
+                $('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'none');
             }
         });
-        jQuery("select.selectpicker").each(function () {
+        $("select.selectpicker").each(function () {
             if (this.value == 'other') {
                 $(".size_box").css('height', '195px');
             }
 
         });        
 
-        jQuery("#btnNextStep").on("click", function (e) {
+        $("#btnNextStep").on("click", function (e) {
             var allOK = true;
             $("select.selectpicker").each(function () {
                 if ((this.value == '') || (this.value == 'other' && $('#' + this.id.replace("Hidden", "") + 'Other').val() == '')) {
@@ -198,7 +198,7 @@
             }
         });
         var url = "/profile/profiletraking";
-        jQuery.ajax({
+        $.ajax({
             url: url,
             type: 'POST',
             data: {page: 'size'},
@@ -320,7 +320,7 @@
 
 </script>
 <script type="text/javascript">
-    $("#clearFilters").click(function(){
+   $("#clearFilters").click(function(){
         var selectInput = ['waist','inseam','shoeSize','jacketSize','shirtSize'];
         var id =  ['Waist','Inseam','ShoeSize','JacketSize','ShirtSize'];
         var text = ['Waist','Inseam','Shoe Size','Jacket Size','Shirt Size'];
