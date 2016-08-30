@@ -203,7 +203,17 @@ class Module implements
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Cart($dbAdapter));
                     return new TableGateway('carts', $dbAdapter, null, $resultSetPrototype);
                 },
-
+                'ArticleAlertTable' => function($serviceManager) {
+                    $tableGateway = $serviceManager->get('ArticleAlertTableGateway');
+                    $table = new Model\ArticleAlertTable($tableGateway);
+                    return $table;
+                },
+                'ArticleAlertTableGateway' => function ($serviceManager) {
+                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\ArticleAlert($dbAdapter));
+                    return new TableGateway('articlealert', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
             'abstract_factories' => array(
                 'Application\Service\CommonTableAbstractFactory'

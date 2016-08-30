@@ -19,9 +19,42 @@ $title = 'ELNove - '.$this->feedDataDetail['caption'];
 <div class="modal-footer">
     <p class="modal_footer_p1">Waiting for this item to go on sale?</p>
     <p class="modal_footer_p2">We'll send an email when the price drops.</p>
-    <form action="" class="modal_form_alert">
+    <div class="notification">
+        <p class="alert-status" style=" font-weight: bold;"></p>
+        <img style="max-width: 15%; display: none; margin: 0 auto;" src="/assets/images/spinner.gif">
+    </div>
+    <form class="modal_form_alert">
         <input type="text" name="email-alert" placeholder="Youre Email Address">
+        <input type='hidden' type="text" name="feeddataid" value="<?php echo $this->feedDataDetail['id']; ?>">
         <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
     </form>
     <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
 </div>
+<script type="text/javascript">
+    $("form.modal_form_alert button[name='alert-submit']").click(function(event){
+        $('.notification img').css('display','block');
+        email = $('.modal_form_alert input[name="email-alert"]').val();
+        feeddataid = $('.modal_form_alert input[name="feeddataid"]').val();
+        $.ajax({
+            url : "/service/getemailalert",
+            type : "post",
+            dataType:"text",
+            data : {
+                'email' : email,
+                'feeddataid' : feeddataid,
+            },
+            success:function(result) {
+                console.log(result);
+                $('.notification img').css('display','none');
+                if(result == 1 ){  
+                alert('right');           
+                    $('.notification .alert-status').text( 'Done !' ).css('color','green').fadeIn();
+                }else{
+                    alert('false');
+                    $('.notification .alert-status').text( 'Email already exists' ).css('color','red').fadeIn("slow");
+                }
+            }
+        });
+        event.preventDefault();
+    });
+</script>
