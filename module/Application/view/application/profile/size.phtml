@@ -1,7 +1,5 @@
 
-<?php    echo $this->headScript()
-     ->appendFile($this->basePath() . '../js/jquery.ddslick.js') 
-      ?>
+
 
 <style id="css-ddslick" type="text/css">
                 .dd-select{ border-radius:2px; border:solid 1px #ccc; position:relative; cursor:pointer;}
@@ -78,7 +76,7 @@
                  
                  
                  
- <div style="poistion:absolute; display:none">       
+ <div style="poistion:absolute">       
                 
 <select name="<?= $this->waist['name'] ?>" class="select selectpicker" id="idWaistHidden">
 <!-- <option value="" class="option">Waist</option> -->
@@ -142,7 +140,7 @@
 
 </div>
 <script type="text/javascript">
-    $(window).on('load', function () {
+    jQuery(window).on('load', function ($) {
         function valueChanged( data ) {
             $('#' + data.original.attr('id') + 'Hidden').val( data.selectedData.value );
             
@@ -164,23 +162,23 @@
             
         }   
 
-        $(".size_box").css('height', '121px');
-        $("select.selectpicker").each(function () {
+        jQuery(".size_box").css('height', '121px');
+       jQuery("select.selectpicker").each(function () {
             if (this.value == 'other') {
-                $('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'block');
+                jQuery('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'block');
             }
             else {
-                $('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'none');
+                jQuery('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'none');
             }
         });
-        $("select.selectpicker").each(function () {
+        jQuery("select.selectpicker").each(function () {
             if (this.value == 'other') {
                 $(".size_box").css('height', '195px');
             }
 
         });        
 
-        $("#btnNextStep").on("click", function (e) {
+        jQuery("#btnNextStep").on("click", function (e) {
             var allOK = true;
             $("select.selectpicker").each(function () {
                 if ((this.value == '') || (this.value == 'other' && $('#' + this.id.replace("Hidden", "") + 'Other').val() == '')) {
@@ -200,7 +198,7 @@
             }
         });
         var url = "/profile/profiletraking";
-        $.ajax({
+        jQuery.ajax({
             url: url,
             type: 'POST',
             data: {page: 'size'},

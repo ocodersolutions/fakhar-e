@@ -343,6 +343,7 @@ class ProfileController extends AbstractActionController {
     }
 
     public function priceAction() {
+        $this->layout("layout/layout_elnove");
         $oService = $this->getServiceLocator();
         $ouserTraking = $oService->get('UserTrakingTable');
         $sessionManager = new SessionManager();
