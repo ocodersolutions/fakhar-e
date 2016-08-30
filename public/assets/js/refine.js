@@ -16,10 +16,12 @@ $('body').on('click', '.icon_like', function (){
             }
         }else if(check_login == 0){
             //if not signed
-             myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login to continue.','');
+
+             myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login link bellow to continue.','Login');
             $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
                 $("button.my_btn_ok").click(function(){ // click button
-                    $('a.close-reveal-modal').trigger('click'); // will close modal
+                   $('a.close-reveal-modal').trigger('click'); // will close modal
+                   window.location.replace("/auth/login");
                 });
             });
         }

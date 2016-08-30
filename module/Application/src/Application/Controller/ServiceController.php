@@ -846,15 +846,15 @@ class ServiceController extends BaseActionController {
 
             $userId = null;
                $oAuth = $this->getServiceLocator()->get('AuthService');
-            if ($oAuth->hasIdentity()) {
                 $this->layout()->showHeaderLinks = "LOGGED_IN";
                 $userInfo = $oAuth->getIdentity();
-                $userId = $userInfo->userId;
-                $this->layout()->firstName = $userInfo->firstName;
-            } else {
-                $this->redirect()->toRoute('auth');
-            }
-
+                if($userInfo == null){
+                    $userId = 0;
+                }else{
+                    $userId = $userInfo->userId;
+                    $this->layout()->firstName = $userInfo->firstName;
+                }
+                
             $result = $oArticleDetail->getArticleDetailInfo($articleId, $userId);
             if (isset($result) && empty($result)) {
                 $oArticleDetail->saveArticleDetailInfo($articleDetailData);
