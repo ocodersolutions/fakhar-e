@@ -39,10 +39,7 @@
                                 ->prependFile($this->basePath() . '/js/jquery.gray.js')
                                 ->prependFile($this->basePath() . '/js/jquery.js')
                                 ->appendFile($this->basePath() . '/js/jquery.placeholder.min.js')
-                                 ->appendFile($this->basePath() . '/showhidepassword/hideShowPassword.min.js')
-                                ->appendFile('http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js')
-                                ->appendFile($this->basePath() . '/myalert/js/foundation.min.js')
-                                ->appendFile($this->basePath() . '/js/jquery.ddslick.js')
+                             
         //-------------------------info/how-it-works---------------------------------------//
                     ;
         ?>
@@ -595,7 +592,7 @@
                 // if($(this).scrollTop() >= $("#header-block").height())
                 if($(this).scrollTop() >= 20)
                 {
-                    $("#header-container").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
+                    $("#header-container").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#f6f6f4", "z-index": "99"});
                     if(window.innerWidth >= 768) 
                     {                       
                         $("#search").show();
