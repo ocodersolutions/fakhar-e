@@ -1,208 +1,210 @@
 <!--script src="<?php echo $this->basePath() ?>/showhidepassword/hideShowPassword.min.js"></script>
 <link rel="stylesheet" href="<?php echo $this->basePath() ?>/showhidepassword/css/example.wink.css"/-->
-<div id="profile_signup" class="content-page">
+<div class="row">
+    <div id="profile_signup" class="content-page">
 
-    <div class="row">
-        <!-- <div class="banner2"></div> -->
-        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-            <div id="signup-page" class="topnavi row">
-                <div class="brand-box col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-                    <div class="menu-box <?php echo ($this->mode=='edit')?'menu-box-bigger':''?>">
-                        <ul class="about">
-                            <li>
-                                <a href="/profile">LOOK YOU&#39;D WEAR<div class="fa"><i class="fa fa-check green"></i></div></a>
-                            </li>
-                            <li>
-                                <a href="/profile/you">ABOUT YOU<div class="fa"><i class="fa fa-check green"></i></div></a>
-                            </li>
-                            <li>
-                                <a href="/profile/size">YOUR SIZE<div class="fa"><i class="fa fa-check green"></i></div></a>
-                            </li>
-                            <li>
-                                <a href="/profile/price">YOUR LOOK<div class="fa"><i class="fa fa-check green"></i></div></a>
-                            </li>
-                            
-                            <li class="blue">
-                                <a href="javascript:void(0)" class="active">SIGN UP<div class="fa"></div></a>
-                            </li>
-                           
-                        </ul>
-                        <div class="clr"></div>
-                    </div><!--menu-box -->
-                    <div class="form-group">
-                        <ul class="list-radio list-radio-find-stitch list-inline">
-                            <li><div class="radio radio-find-stitch">
-                                <input type="radio" disabled name="radio4" id="radio4" value="option1" checked="" >
-                                <label for="radio4" class="radio-label">
-                                </label>
-                            </div>
-                            </li>
-                            <li>
-                                <div class="radio radio-find-stitch">
-                                    <input type="radio" disabled name="radio4" id="radio2" value="option1" >
-                                    <label for="radio2" class="radio-label">
-                                    </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="radio radio-find-stitch">
-                                    <input type="radio" disabled name="radio4" id="radio3" value="option1" >
-                                    <label for="radio3" class="radio-label">
-                                    </label>
-                                </div>
-                            </li>
-                                 <li><div class="radio radio-find-stitch">
-                                <input type="radio" disabled name="radio4" id="radio4" value="option1" >
-                                <label for="radio4" class="radio-label">
-                                </label>
-                            </div>
-                            </li>
-                            <li>
-                                <div class="radio radio-find-stitch">
-                                    <input type="radio" disabled name="radio4" id="radio2" value="option1" >
-                                    <label for="radio2" class="radio-label">
-                                    </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="radio radio-find-stitch">
-                                    <input type="radio" disabled name="radio4" id="radio3" value="option1" >
-                                    <label for="radio3" class="radio-label">
-                                    </label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="register_box col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-                    <ul class="register_page col-lg-12">
-                        <li class="col-lg-6"><a href="/auth/login">LOGIN</a></li>
-                        <li class="blue col-lg-6"><a href="" class="active "> REGISTER</a> </li>
-                        <!-- <div class="clr"></div> -->
-                    </ul>
-                    <div class="red_box" id="errormsgblock">
-                        <div class="cross_img">
-                            <img src="/img/cross.png" >
-                        </div>
-                        <p id="errormsg"></p>
-                        <div class="cross_img1 fr"><img src="/img/cross.png" >
+        <div class="row">
+            <!-- <div class="banner2"></div> -->
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                <div id="signup-page" class="topnavi row">
+                    <div class="brand-box col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                        <div class="menu-box <?php echo ($this->mode=='edit')?'menu-box-bigger':''?>">
+                            <ul class="about">
+                                <li>
+                                    <a href="/profile">LOOK YOU&#39;D WEAR<div class="fa"><i class="fa fa-check green"></i></div></a>
+                                </li>
+                                <li>
+                                    <a href="/profile/you">ABOUT YOU<div class="fa"><i class="fa fa-check green"></i></div></a>
+                                </li>
+                                <li>
+                                    <a href="/profile/size">YOUR SIZE<div class="fa"><i class="fa fa-check green"></i></div></a>
+                                </li>
+                                <li>
+                                    <a href="/profile/price">YOUR LOOK<div class="fa"><i class="fa fa-check green"></i></div></a>
+                                </li>
+                                
+                                <li class="blue">
+                                    <a href="javascript:void(0)" class="active">SIGN UP<div class="fa"></div></a>
+                                </li>
+                               
+                            </ul>
                             <div class="clr"></div>
+                        </div><!--menu-box -->
+                        <div class="form-group">
+                            <ul class="list-radio list-radio-find-stitch list-inline">
+                                <li><div class="radio radio-find-stitch">
+                                    <input type="radio" disabled name="radio4" id="radio4" value="option1" checked="" >
+                                    <label for="radio4" class="radio-label">
+                                    </label>
+                                </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled name="radio4" id="radio2" value="option1" >
+                                        <label for="radio2" class="radio-label">
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled name="radio4" id="radio3" value="option1" >
+                                        <label for="radio3" class="radio-label">
+                                        </label>
+                                    </div>
+                                </li>
+                                     <li><div class="radio radio-find-stitch">
+                                    <input type="radio" disabled name="radio4" id="radio4" value="option1" >
+                                    <label for="radio4" class="radio-label">
+                                    </label>
+                                </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled name="radio4" id="radio2" value="option1" >
+                                        <label for="radio2" class="radio-label">
+                                        </label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio radio-find-stitch">
+                                        <input type="radio" disabled name="radio4" id="radio3" value="option1" >
+                                        <label for="radio3" class="radio-label">
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- <div class="clr"></div> -->
-                    <form name="signup-form" id="signup-form" method="POST" class="form col-lg-12 col-md-12">
-                        <div class="center-box col-lg-6 col-md-6 col-sm-6 first_name_su">
-                            <label>First Name*</label><br>
-                            <input type="text" class="input-text fl"  value="" maxlength="100" name="firstName" id="firstName">
-                        </div>
-
-                        <div class="center-box col-lg-6 col-md-6 col-sm-6 last_name_su">
-                            <label>Last Name*</label><br>
-                            <input type="text" class="input-text fr"  maxlength="100" name="lastName" id="lastName">
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12 email_su">
-                            <label>Email Address*</label><br>
-                            <input type="text" class="input-email " maxlength="100" name="email" id="email">
-                            <input type="hidden" id="existEmail" name="existEmail" value="0" />
-                        </div>
-
-                        <div class="center-box password-left col-lg-6 col-md-6 col-sm-6">
-                            <label>Password*</label><br>
-                            <input type="password" class="input-text"  maxlength="100" name="password" id="password">
-                        </div>
-
-                        <div class="center-box password-right col-lg-6 col-md-6 col-sm-6">
-                            <label>Re-Enter Password*</label><br>
-                            <input type="password" class="input-text"  maxlength="100" name="repassword" id="repassword">
-                        </div>
-
-                        <div class="center-box birth_day col-lg-6 col-md-6 col-sm-6">
-                            <label>Birthday*</label><br>
-                            <select name="month" class="select_opt fl" name="month" id="suMonth">
-                                <option value="">Month</option>
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                            <select name="day" class="select_opt" id="suDay">
-                                <option value="">Day</option>
-                                <?php for($date='1'; $date <='31'; $date++) { ?>
-                                    <option value="<?php echo $date; ?>"><?php echo $date; ?></option>
-                                <?php } ?>
-                            </select>
-                            <select name="year" class="select_opt fr" id="suYear">
-                                <option value="">Year</option>
-                                <?php 
-                                $currentYear = date("Y");
-                                for($year=$currentYear; $year >='1934'; $year--) { ?>
-                                    <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-                                <?php } 
-                                ?>
-                            </select>                
-                        </div>
-
-                        <div class="center-box default_venue col-lg-6 col-md-6 col-sm-6">
-                            <label> Choose Your Default Venue</label><br/>
-                            <div class="radio radio1">
-                                <input type="radio" id="i1" name="defaultVenue" checked="checked" value="Work" />
-                                <label for="i1" class="outfit11">
-                                <span class="fa-stack ">
-                                    <i class="fa fa-circle-o fa-stack-1x"></i>
-                                    <i class="fa fa-circle fa-stack-1x"></i>
-                                </span>
-                                Work
-                                </label>
+                    
+                    <div class="register_box col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                        <ul class="register_page col-lg-12">
+                            <li class="col-lg-6"><a href="/auth/login">LOGIN</a></li>
+                            <li class="blue col-lg-6"><a href="" class="active "> REGISTER</a> </li>
+                            <!-- <div class="clr"></div> -->
+                        </ul>
+                        <div class="red_box" id="errormsgblock">
+                            <div class="cross_img">
+                                <img src="/img/cross.png" >
                             </div>
-                            <div class="radio radio2">
-                                <input type="radio" id="i2" name="defaultVenue" value="NightOut">
-                                <label for="i2" class="outfit11">
-                                <span class="fa-stack">
-                                    <i class="fa fa-circle-o fa-stack-1x oo"></i>
-                                    <i class="fa fa-circle fa-stack-1x"></i>
-                                </span>
-                                Night Out
-                                </label>
-                            </div>
-                            <div class="radio rt radio3">
-                                <input type="radio" id="i3" name="defaultVenue" value="Casual">
-                                <label for="i3"  class="outfit11">
-                                <span class="fa-stack">
-                                    <i class="fa fa-circle-o fa-stack-1x oo"></i>
-                                    <i class="fa fa-circle fa-stack-1x"></i>
-                                </span>
-                                Casual
-                                </label>
+                            <p id="errormsg"></p>
+                            <div class="cross_img1 fr"><img src="/img/cross.png" >
+                                <div class="clr"></div>
                             </div>
                         </div>
-
                         <!-- <div class="clr"></div> -->
+                        <form name="signup-form" id="signup-form" method="POST" class="form col-lg-12 col-md-12">
+                            <div class="center-box col-lg-6 col-md-6 col-sm-6 first_name_su">
+                                <label>First Name*</label><br>
+                                <input type="text" class="input-text fl"  value="" maxlength="100" name="firstName" id="firstName">
+                            </div>
 
-                        <input type="submit" class="signup" name="btnNextStep" id="btnNextStep" value="SIGN UP">
+                            <div class="center-box col-lg-6 col-md-6 col-sm-6 last_name_su">
+                                <label>Last Name*</label><br>
+                                <input type="text" class="input-text fr"  maxlength="100" name="lastName" id="lastName">
+                            </div>
 
-                        <div class="fb">
-                            <div></div>
-                            <p>or register with facebook</p>
-                            <div></div>
-                        </div> 
+                            <div class="col-lg-12 col-md-12 col-sm-12 email_su">
+                                <label>Email Address*</label><br>
+                                <input type="text" class="input-email " maxlength="100" name="email" id="email">
+                                <input type="hidden" id="existEmail" name="existEmail" value="0" />
+                            </div>
 
-                        <a href="#" class="fb-login"><div class="facebook_btn" id="fb-auth"><i class="fa fa-facebook-square"></i>Facebook</div></a>
+                            <div class="center-box password-left col-lg-6 col-md-6 col-sm-6">
+                                <label>Password*</label><br>
+                                <input type="password" class="input-text"  maxlength="100" name="password" id="password">
+                            </div>
 
-                    </form>
+                            <div class="center-box password-right col-lg-6 col-md-6 col-sm-6">
+                                <label>Re-Enter Password*</label><br>
+                                <input type="password" class="input-text"  maxlength="100" name="repassword" id="repassword">
+                            </div>
 
-                </div><!--register_box -->
-                <div class="clr"></div>
-            </div><!--container-->
+                            <div class="center-box birth_day col-lg-6 col-md-6 col-sm-6">
+                                <label>Birthday*</label><br>
+                                <select name="month" class="select_opt fl" name="month" id="suMonth">
+                                    <option value="">Month</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                <select name="day" class="select_opt" id="suDay">
+                                    <option value="">Day</option>
+                                    <?php for($date='1'; $date <='31'; $date++) { ?>
+                                        <option value="<?php echo $date; ?>"><?php echo $date; ?></option>
+                                    <?php } ?>
+                                </select>
+                                <select name="year" class="select_opt fr" id="suYear">
+                                    <option value="">Year</option>
+                                    <?php 
+                                    $currentYear = date("Y");
+                                    for($year=$currentYear; $year >='1934'; $year--) { ?>
+                                        <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                                    <?php } 
+                                    ?>
+                                </select>                
+                            </div>
+
+                            <div class="center-box default_venue col-lg-6 col-md-6 col-sm-6">
+                                <label> Choose Your Default Venue</label><br/>
+                                <div class="radio radio1">
+                                    <input type="radio" id="i1" name="defaultVenue" checked="checked" value="Work" />
+                                    <label for="i1" class="outfit11">
+                                    <span class="fa-stack ">
+                                        <i class="fa fa-circle-o fa-stack-1x"></i>
+                                        <i class="fa fa-circle fa-stack-1x"></i>
+                                    </span>
+                                    Work
+                                    </label>
+                                </div>
+                                <div class="radio radio2">
+                                    <input type="radio" id="i2" name="defaultVenue" value="NightOut">
+                                    <label for="i2" class="outfit11">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-circle-o fa-stack-1x oo"></i>
+                                        <i class="fa fa-circle fa-stack-1x"></i>
+                                    </span>
+                                    Night Out
+                                    </label>
+                                </div>
+                                <div class="radio rt radio3">
+                                    <input type="radio" id="i3" name="defaultVenue" value="Casual">
+                                    <label for="i3"  class="outfit11">
+                                    <span class="fa-stack">
+                                        <i class="fa fa-circle-o fa-stack-1x oo"></i>
+                                        <i class="fa fa-circle fa-stack-1x"></i>
+                                    </span>
+                                    Casual
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- <div class="clr"></div> -->
+
+                            <input type="submit" class="signup" name="btnNextStep" id="btnNextStep" value="SIGN UP">
+
+                            <div class="fb">
+                                <div></div>
+                                <p>or register with facebook</p>
+                                <div></div>
+                            </div> 
+
+                            <a href="#" class="fb-login"><div class="facebook_btn" id="fb-auth"><i class="fa fa-facebook-square"></i>Facebook</div></a>
+
+                        </form>
+
+                    </div><!--register_box -->
+                    <div class="clr"></div>
+                </div><!--container-->
+            </div>
         </div>
     </div>
 </div>

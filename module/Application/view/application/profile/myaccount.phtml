@@ -19,145 +19,147 @@ if (isset($userdata['user_pp']) && !empty($userdata['user_pp']) && $userdata['us
     $userPPV = 'No';
 }
 ?>
-<div id="profile_myaccount" class="content-page">   
+<div class="row">
+    <div id="profile_myaccount" class="content-page">   
 
-        <?php echo $this->partial('application/common/banner_header.phtml'); ?> 
-        <div class="row">
-        <!-- <div class="banner2"></div> -->
-            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
-                <div class="row myaccount_content">
-                    <div class="account-btn col-lg-3 col-md-3 col-sm-4">
-                        <a href="/profile/myaccount" class="btn-1 myaccount">
-                            ACCOUNT
-                        </a>
-                        <a href="/profile" class="btn-2 edit_msq">
-                            EDIT MY STYLE QUESTIONS
-                        </a>
-                    </div>
+            <?php echo $this->partial('application/common/banner_header.phtml'); ?> 
+            <div class="row">
+            <!-- <div class="banner2"></div> -->
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+                    <div class="row myaccount_content">
+                        <div class="account-btn col-lg-3 col-md-3 col-sm-4">
+                            <a href="/profile/myaccount" class="btn-1 myaccount">
+                                ACCOUNT
+                            </a>
+                            <a href="/profile" class="btn-2 edit_msq">
+                                EDIT MY STYLE QUESTIONS
+                            </a>
+                        </div>
 
-                    <div class="col-lg-9 col-md-9 col-sm-12">
-                        <form name="myForm" id="myForm" method="POST">
-                            <input type="hidden" value="<?php echo $userdata['user_pp']; ?>" id="profile-pp-val" name="profile-pp-val">
-                            <div class="account-box">
-                                <h1>Account</h1>
-                                <div class="red_box" id="errormsgblock">
-                                    <div class="cross_img">
-                                        <img src="/img/cross.png" >
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <form name="myForm" id="myForm" method="POST">
+                                <input type="hidden" value="<?php echo $userdata['user_pp']; ?>" id="profile-pp-val" name="profile-pp-val">
+                                <div class="account-box">
+                                    <h1>Account</h1>
+                                    <div class="red_box" id="errormsgblock">
+                                        <div class="cross_img">
+                                            <img src="/img/cross.png" >
+                                        </div>
+                                        <p id="errormsg"></p>
+                                        <div class="cross_img1 fr"><img src="/img/cross.png" >
+                                            <div class="clr"></div>
+                                        </div>
                                     </div>
-                                    <p id="errormsg"></p>
-                                    <div class="cross_img1 fr"><img src="/img/cross.png" >
-                                        <div class="clr"></div>
-                                    </div>
-                                </div>
 
-                                <?php if ($this->flashmessage) { ?>
-                                    <div class="green_box"><p><?php echo $this->flashmessage; ?></p></div>
-                                <?php } ?>
+                                    <?php if ($this->flashmessage) { ?>
+                                        <div class="green_box"><p><?php echo $this->flashmessage; ?></p></div>
+                                    <?php } ?>
 
-                                <div class="profile-box row">
-                                    <div class="box-one col-lg-3 col-md-3 col-sm-3">
-                                        <?php
-                                        $basePath = $this->basePath('img/profilepic/'.$userdata['user_prp_pic']);
-                                        if (isset($userdata['user_prp_pic']) && !empty($userdata['user_prp_pic'])) {
-                                            ?>
-                                            <img src="<?php echo $basePath; ?>">
-                                            <p><a href="/profile/upload">Change Picture</a></p>
+                                    <div class="profile-box row">
+                                        <div class="box-one col-lg-3 col-md-3 col-sm-3">
                                             <?php
-                                        } else {
-                                            ?>
-                                            <img src="<?php echo $this->basePath('img/profile.png'); ?>">
-                                            <p><a href="/profile/upload">Upload Picture</a></p>
-                                        <?php } ?>
+                                            $basePath = $this->basePath('img/profilepic/'.$userdata['user_prp_pic']);
+                                            if (isset($userdata['user_prp_pic']) && !empty($userdata['user_prp_pic'])) {
+                                                ?>
+                                                <img src="<?php echo $basePath; ?>">
+                                                <p><a href="/profile/upload">Change Picture</a></p>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <img src="<?php echo $this->basePath('img/profile.png'); ?>">
+                                                <p><a href="/profile/upload">Upload Picture</a></p>
+                                            <?php } ?>
 
-                                    </div>
-
-                                    <div class="box-two col-lg-9 col-md-9 col-sm-12">
-                                        <div class="row">
-                                            <div class="first_name_mpf col-lg-5 col-md-6 col-sm-5">
-                                                <h2>First Name</h2>
-                                                <input type="text" class="name" id="firstName" name="firstName" value="<?php echo $userdata['firstName']; ?>">
-                                            </div>
-                                            <div class="last_name_mpf col-lg-7 col-md-6 col-sm-5">
-                                                <h2>Last Name</h2>
-                                                <input type="text" class="name" id="lastName" name="lastName" value="<?php echo $userdata['lastName']; ?>">
-                                            </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="email_address_mpf col-lg-5 col-md-6 col-sm-5">
-                                                <h2>Email Address</h2>
-                                                <div class="bdrnone"><?php echo $userdata['email']; ?></div>
-                                            </div>
-                                            <div class="password_mpf col-lg-7 col-md-6 col-sm-5">
-                                                <h2>Password</h2>
-                                                <div class="simplepwd">********</div>                                
-                                                <a href="/profile/resetpassword" class="reset">Reset your password</a>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="default1 col-lg-5 col-md-6 col-sm-5">
-                                                <h2>Birthday</h2>
-                                                <select name="month" class="fr" name="month" id="suMonth">
-                                                    <option value="">Month</option>
-                                                    <?php foreach ($months as $key => $month) { 
-                                                        echo "<option value='$key' ".(($dob_month == $key) ? 'SELECTED' : '').">$month</option>";
-                                                    } ?>
-                                                </select>
-                                                <select name="day" class="fl" id="suDay">
-                                                    <option value="">Day</option>
-                                                    <?php for ($date = '1'; $date <= '31'; $date++) { ?>
-                                                        <option value="<?php echo $date; ?>" <?php
-                                                        if ($dob_date == $date) {
-                                                            echo 'SELECTED';
-                                                        }
-                                                        ?>><?php echo $date; ?></option>
-                                                            <?php } ?>
-                                                </select>
-                                                <select name="year" class="" id="suYear">
-                                                    <option value="">Year</option>
-                                                    <?php for ($year = '1996'; $year >= '1934'; $year--) { ?>
-                                                        <option value="<?php echo $year; ?>" <?php
-                                                        if ($dob_year == $year) {
-                                                            echo 'SELECTED';
-                                                        }
-                                                        ?>><?php echo $year; ?></option>
-                                                            <?php } ?>
-                                                </select>
 
-                                            </div>
-                                                                                                                                     
-                                            <div class="default col-lg-7 col-md-6 col-sm-5">
-                                                <h2>Your Default Venue</h2>
-                                                <input type="radio" name="defaultVenue" id="radio1" value="Work" <?php echo ($userdata['defaultVenue'] == 'Work') ? 'CHECKED' : ''; ?> />
-                                                <label for="radio1" class="outfit1">Work</label>
-                                                <input type="radio" name="defaultVenue" id="radio2" value="NightOut" <?php echo ($userdata['defaultVenue'] == 'NightOut') ? 'CHECKED' : '' ?> />
-                                                <label for="radio2"  class="outfit1">Night Out</label>
-                                                <input type="radio" name="defaultVenue" id="radio3" value="Casual" <?php echo ($userdata['defaultVenue'] == 'Casual') ? 'CHECKED' : '' ?> />
-                                                <label for="radio3"  class="outfit1 last_label">Casual</label>
-                                                <div class="clr"></div>
-                                                <div class="blue-btn" id="profile-pp">
-                                                    <i class="fa <?php echo $classUpp; ?> fa-lg white "></i>
-                                                    <div class="square"><?php echo $userPPV; ?></div>
+                                        <div class="box-two col-lg-9 col-md-9 col-sm-12">
+                                            <div class="row">
+                                                <div class="first_name_mpf col-lg-5 col-md-6 col-sm-5">
+                                                    <h2>First Name</h2>
+                                                    <input type="text" class="name" id="firstName" name="firstName" value="<?php echo $userdata['firstName']; ?>">
                                                 </div>
-
-                                                
-                                                <p class="head">Let my Closet Public</p>
+                                                <div class="last_name_mpf col-lg-7 col-md-6 col-sm-5">
+                                                    <h2>Last Name</h2>
+                                                    <input type="text" class="name" id="lastName" name="lastName" value="<?php echo $userdata['lastName']; ?>">
+                                                </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="email_address_mpf col-lg-5 col-md-6 col-sm-5">
+                                                    <h2>Email Address</h2>
+                                                    <div class="bdrnone"><?php echo $userdata['email']; ?></div>
+                                                </div>
+                                                <div class="password_mpf col-lg-7 col-md-6 col-sm-5">
+                                                    <h2>Password</h2>
+                                                    <div class="simplepwd">********</div>                                
+                                                    <a href="/profile/resetpassword" class="reset">Reset your password</a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="default1 col-lg-5 col-md-6 col-sm-5">
+                                                    <h2>Birthday</h2>
+                                                    <select name="month" class="fr" name="month" id="suMonth">
+                                                        <option value="">Month</option>
+                                                        <?php foreach ($months as $key => $month) { 
+                                                            echo "<option value='$key' ".(($dob_month == $key) ? 'SELECTED' : '').">$month</option>";
+                                                        } ?>
+                                                    </select>
+                                                    <select name="day" class="fl" id="suDay">
+                                                        <option value="">Day</option>
+                                                        <?php for ($date = '1'; $date <= '31'; $date++) { ?>
+                                                            <option value="<?php echo $date; ?>" <?php
+                                                            if ($dob_date == $date) {
+                                                                echo 'SELECTED';
+                                                            }
+                                                            ?>><?php echo $date; ?></option>
+                                                                <?php } ?>
+                                                    </select>
+                                                    <select name="year" class="" id="suYear">
+                                                        <option value="">Year</option>
+                                                        <?php for ($year = '1996'; $year >= '1934'; $year--) { ?>
+                                                            <option value="<?php echo $year; ?>" <?php
+                                                            if ($dob_year == $year) {
+                                                                echo 'SELECTED';
+                                                            }
+                                                            ?>><?php echo $year; ?></option>
+                                                                <?php } ?>
+                                                    </select>
+
+                                                </div>
+                                                                                                                                         
+                                                <div class="default col-lg-7 col-md-6 col-sm-5">
+                                                    <h2>Your Default Venue</h2>
+                                                    <input type="radio" name="defaultVenue" id="radio1" value="Work" <?php echo ($userdata['defaultVenue'] == 'Work') ? 'CHECKED' : ''; ?> />
+                                                    <label for="radio1" class="outfit1">Work</label>
+                                                    <input type="radio" name="defaultVenue" id="radio2" value="NightOut" <?php echo ($userdata['defaultVenue'] == 'NightOut') ? 'CHECKED' : '' ?> />
+                                                    <label for="radio2"  class="outfit1">Night Out</label>
+                                                    <input type="radio" name="defaultVenue" id="radio3" value="Casual" <?php echo ($userdata['defaultVenue'] == 'Casual') ? 'CHECKED' : '' ?> />
+                                                    <label for="radio3"  class="outfit1 last_label">Casual</label>
+                                                    <div class="clr"></div>
+                                                    <div class="blue-btn" id="profile-pp">
+                                                        <i class="fa <?php echo $classUpp; ?> fa-lg white "></i>
+                                                        <div class="square"><?php echo $userPPV; ?></div>
+                                                    </div>
+
+                                                    
+                                                    <p class="head">Let my Closet Public</p>
+                                                </div>
+                                            </div>
+                                            <div class="des">
+                                                <h2>Description</h2>
+                                                <textarea name="description" class="name" rows="3"><?php echo trim($userdata['description']); ?></textarea>
+                                            </div>  
+                                            <div class="fr"><button class="contact_btn" id="submit">Submit</button></div>
                                         </div>
-                                        <div class="des">
-                                            <h2>Description</h2>
-                                            <textarea name="description" class="name" rows="3"><?php echo trim($userdata['description']); ?></textarea>
-                                        </div>  
-                                        <div class="fr"><button class="contact_btn" id="submit">Submit</button></div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <!-- </div>container -->
+        <!-- </div>container -->
+    </div>
 </div>
 
 <script>
