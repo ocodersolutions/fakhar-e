@@ -524,8 +524,9 @@
 
 /*======= #profile-you-page ======*/
 #profile-you-page{
-	background: #ffffff;
+	float:none;
 	.brand-box{
+		background: #fff;
 		// .menu-box {
 
 		// 		ul {
@@ -571,6 +572,7 @@
 		}
 	}
 	.about_box{
+		background: #fff;
 		.about_block{
 			h2 {
 			    font-size: 13px;
@@ -624,7 +626,7 @@
 					    z-index: 2;
 					}
 					.ui-slider-handle {
-					    margin-left: -0.6em;
+					    margin-left: 0;
 					    top: -0.17em;
 					}
 				}
@@ -736,6 +738,7 @@
 
 #size_profile{
 	.brand-box{
+		background: #fff;
 		h1{
 			color: #254f73;
 		    font-size: 24px;
@@ -745,6 +748,95 @@
 		    text-align: center;
 			//font-weight: lighter;
 		}
+	}
+	form{
+		background: #fff;
+		display: block;
+    	margin-top: 0em;
+		.size_box{
+			// height: 121px;
+		    border-top: 1px solid #eeeeee;
+		    border-bottom: 1px solid #eeeeee;
+		    .dropdown-menu_size{
+				margin-bottom: 33px;
+			    margin-top: 40px;
+			    .select_style{
+			    	display: inline-block;
+			    }
+			    .dd-container {
+				    position: relative;
+				    // float: left;
+				    margin-right: 21px;
+				    .dd-select {
+				    	border-radius:0; 
+					    border: solid 1px #ccc;
+					    position: relative;
+					    cursor: pointer;
+					    .dd-selected-text {
+							font-weight: normal;
+						}
+						.dd-pointer-up {
+						    border: solid 5px transparent !important;
+						    border-bottom: solid 5px #000 !important;
+						    margin-top: -8px;
+						}
+					}
+					.dd-options {
+					    border: solid 1px #b1b0b0;
+					    border-top: none;
+					    list-style: none;
+					    box-shadow: 0px 1px 5px #ddd;
+					    display: none;
+					    position: absolute;
+					    z-index: 2000;
+					    margin: 0;
+					    padding: 0;
+					    background: #c2c0c0;
+					    overflow: auto;
+					    .dd-option-selected {
+						    background: #c2c0c0 url("/img/req2c-tick_03.jpg") no-repeat right 5% center;
+						}
+						.dd-option {
+							font-weight: 300;
+						    padding: 10px;
+						    display: block;
+						    border-bottom: solid 1px #ddd;
+						    overflow: hidden;
+						    text-decoration: none;
+						    color: #fff;
+						    cursor: pointer;
+						    -webkit-transition: all 0.25s ease-in-out;
+						    -moz-transition: all 0.25s ease-in-out;
+						    -o-transition: all 0.25s ease-in-out;
+						    -ms-transition: all 0.25s ease-in-out;
+						    &:hover {
+							    background: #cac9c9;
+							    color: #fff;
+							}
+						}
+					}
+				}
+			}
+			.text_box {
+			    // margin: 0 auto;
+			    // width: 980px;
+			    display: inline-block;
+			    .text-input {
+			    	height: 38px;
+				    width: 175px;
+				    margin-right: 21px;
+				    // float: left;
+				    input {
+
+					    width: 175px;
+					    height: 38px;
+					}
+				}
+			}
+			
+		}
+
+		
 	}
 }
 /* =========== end size page =======*/
