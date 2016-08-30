@@ -5,67 +5,69 @@
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.mouse.js"></script>
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
 
-<div class="container topnavi">
-    <div class="brand-box">
-        <div class="menu-box <?php echo ($this->mode=='edit')?'menu-box-bigger':''?>">
-            <ul class="about">
-                <li>
-                    <a href="/profile">LOOK YOU&#39;D WEAR<div class="fa"><i class="fa fa-check green"></i></div></a>
-                </li>
-                <li>
-                    <a href="/profile/you">ABOUT YOU<div class="fa"><i class="fa fa-check green"></i></div></a>
-                </li>
-                <li>
-                    <a href="/profile/size">YOUR SIZE<div class="fa"><i class="fa fa-check green"></i></div></a>
-                </li>
-                <!-- 
-                <li>
-                    <a>FAVOURITE BRAND<div class="fa"><i class="fa fa-check green"></i></div></a>
-                </li> 
-                -->
-                <li class="blue">
-                    <a class="active">YOUR LOOK<div class="fa"></div></a>
-                </li>
-                <?php if( $this->mode == 'new' ) { ?>
-                <li>
-                    <a href="/profile/signup">SIGN UP<div class="fa"></div></a>
-                </li>
-                <?php }//end if ?>
-            </ul>
-            <div class="clr"></div>
-        </div><!--menu-box -->
+<div id="profile_price" class="content-page">
+    <div class="topnavi">
+        <div class="brand-box">
+            <div class="menu-box <?php echo ($this->mode=='edit')?'menu-box-bigger':''?>">
+                <ul class="about">
+                    <li>
+                        <a href="/profile">LOOK YOU&#39;D WEAR<div class="fa"><i class="fa fa-check green"></i></div></a>
+                    </li>
+                    <li>
+                        <a href="/profile/you">ABOUT YOU<div class="fa"><i class="fa fa-check green"></i></div></a>
+                    </li>
+                    <li>
+                        <a href="/profile/size">YOUR SIZE<div class="fa"><i class="fa fa-check green"></i></div></a>
+                    </li>
+                    <!-- 
+                    <li>
+                        <a>FAVOURITE BRAND<div class="fa"><i class="fa fa-check green"></i></div></a>
+                    </li> 
+                    -->
+                    <li class="blue">
+                        <a class="active">YOUR LOOK<div class="fa"></div></a>
+                    </li>
+                    <?php if( $this->mode == 'new' ) { ?>
+                    <li>
+                        <a href="/profile/signup">SIGN UP<div class="fa"></div></a>
+                    </li>
+                    <?php }//end if ?>
+                </ul>
+                <div class="clr"></div>
+            </div><!--menu-box -->
 
+            <div class="clr"></div>
+
+            <div class="page_one-box">
+                <h1>How Much Would you Spend </h1>
+            </div> <!--page_one-box -->
+        </div><!--brand-box -->
         <div class="clr"></div>
 
-        <div class="page_one-box">
-            <h1>How Much Would you Spend </h1>
-        </div> <!--page_one-box -->
-    </div><!--brand-box -->
-    <div class="clr"></div>
-
-    <div class="about_box" id="HowMuchWouldyouSpend">
-        <?php for ($i = 0; $i < 5; $i++) { ?>
-            <div class="bdr about_content">
-                <h2><?php echo  $this->price[$i]['title'] ?></h2>
-                <input type="text" class="lb" id="<?php echo  $this->price[$i]['name'] ?>Value">
-                <div class="line-bar">
-                    <div style="width:100%; padding:30px">
-                        <div id="<?php echo  $this->price[$i]['name'] ?>"></div>
-                        <div class="sliderSteps"></div>
+        <div class="about_box" id="HowMuchWouldyouSpend">
+            <?php for ($i = 0; $i < 5; $i++) { ?>
+                <div class="bdr about_content">
+                    <h2><?php echo  $this->price[$i]['title'] ?></h2>
+                    <input type="text" class="lb" id="<?php echo  $this->price[$i]['name'] ?>Value">
+                    <div class="line-bar">
+                        <div style="width:100%; padding:30px">
+                            <div id="<?php echo  $this->price[$i]['name'] ?>"></div>
+                            <div class="sliderSteps"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php }//end for ?>
-        <div class="clr"></div>
-    </div>
+            <?php }//end for ?>
+            <div class="clr"></div>
+        </div>
 
-    <div class="brand-box">
-        <a href="javascript:void(0);" class="next fr" id="btnNextStep"><?php echo ($this->mode=='edit'?'SUBMIT':'NEXT')?> ></a>
-        <div class="clr"></div>
-        <a href="javascript:void()" id="clearFilters" class="italic-box fr hlink"> <i>Clear filters</i></a>
-        <div class="clr"></div>
-    </div>
-</div><!--container-->
+        <div class="brand-box">
+            <a href="javascript:void(0);" class="next fr" id="btnNextStep"><?php echo ($this->mode=='edit'?'SUBMIT':'NEXT')?> ></a>
+            <div class="clr"></div>
+            <a href="javascript:void()" id="clearFilters" class="italic-box fr hlink"> <i>Clear filters</i></a>
+            <div class="clr"></div>
+        </div>
+    </div><!--container-->
+</div>
 
 <form id="myForm" method="POST">
     <?php foreach($this->price as $aBox) {
