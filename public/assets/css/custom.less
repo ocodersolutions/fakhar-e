@@ -3764,8 +3764,8 @@ footer{
         width: 100%;
     }
     .myaccount_content {
-        margin-left: 0;
-        margin-right: 0;
+        margin-left: 15px;
+        margin-right: 15px;
         // margin-top: -522px;
         background: white;
         padding-top: 20px;
@@ -4013,8 +4013,8 @@ footer{
         // background: #fefefe;
         // background:red;
         section.row {
-            margin-left: 0;
-            margin-right: 0;
+            margin-left: 15px;
+            margin-right: 15px;
             background: #fefefe;
             .howitwork {
                 // background: #fefefe;
@@ -4926,6 +4926,213 @@ footer{
 
 /***** ----------------------------------style for profile/price-------------------------------------*****/
 
-
-
+#profile_price {
+    * {
+        font-weight: 300;
+    }
+    .topnavi {
+        margin: 0 12px;
+        background: #fff;
+        .brand-box {
+            .page_one-box {
+                h1 {
+                    color: #254f73;
+                    font-family: "Roboto-Light";
+                    // font-size: 24px;
+                    margin: 0;
+                    padding-bottom: 35px;
+                    padding-top: 50px;
+                    text-align: center;
+                }
+            }
+            .next {
+                width: 167px;
+                line-height: 41px;
+                background: #254f73;
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;
+                font-size: 21px;
+                margin-bottom: 2px solid #214666;
+                margin-bottom: 22px;
+                margin-top: 50px;
+                cursor: pointer;
+                color: #fefefe;
+                &:hover {
+                    background: #1b3b57;
+                }
+            }
+            .fr {
+                float: right !important;
+            }
+            .italic-box {
+                font-size: 15px;
+                color: #040707;
+                margin-bottom: 70px;
+                &:hover {
+                    color: #898697;
+                    text-decoration: underline;
+                }
+            }
+        }
+        .about_box {
+            padding: 0px 25px;
+            .about_content {
+                border-top: 1px solid #eeeeee;
+                height: 110px;
+                padding: 0px 19%;
+                h2 {
+                    font-size: 15px;
+                    color: #898697;
+                    width: 220px;
+                    padding: 0;
+                    float: left;
+                    margin: 0;
+                    margin-top: 50px;
+                    font-weight: bold;
+                }
+                .lb {
+                    width: 70px;
+                    line-height: 36px;
+                    background: #fff;
+                    border: 2px solid #c6ccd2;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    float: left;
+                    font-size: 14px;
+                    color: #383737;
+                    text-align: center;
+                    margin-right: 28px;
+                    font-family: 'MyriadPro-Regular';
+                    margin-top: 36px;
+                }
+                .line-bar {
+                    float: left;
+                    margin-top: 20px;
+                    width: 50%;
+                    .line_bar_sub {
+                        width: 100%;
+                        padding: 30px;
+                    }
+                }
+            }
+            .bdr {
+                border-bottom: 1px solid #eeeeee;
+            }
+        }
+    }
+}
+@media (min-width: 1200px)and(max-width: 1365px) {
+    #profile_price {
+        .topnavi {
+            .brand-box {
+                // padding: 0;
+            }
+            .about_box {
+                .about_content {
+                    padding: 0px 14%;
+                }
+            }
+        }
+    }
+}
+@media (min-width: 992px)and(max-width: 1199px) {
+    #profile_price {
+        .topnavi {
+            margin: 0 0 0 15px;
+            .brand-box {
+                padding: 0 40px;
+            }
+            .about_box {
+                padding: 0 10px;
+                .about_content {
+                    padding: 0px 8%;
+                }
+            }
+        }
+    }
+}
+@media (min-width: 768px)and(max-width: 991px){
+    #profile_price {
+        .topnavi {
+            margin: 0 0 0 12px;
+            .brand-box {
+                padding: 0 30px;
+                .menu-box {
+                    ul {
+                        li {
+                            width: 18%;
+                            a {
+                                font-size: 13px;
+                            }
+                        }
+                        li:nth-child(1) {
+                            width: 28%;
+                        }
+                    }
+                }
+                .menu-box.menu-box-bigger {
+                    ul {
+                        li {
+                            width: 24%;
+                        }
+                        li:nth-child(1) {
+                            width: 28%;
+                        }
+                    }
+                }
+            }
+            .about_box {
+                padding: 0 10px;
+                .about_content {
+                    padding: 0 6%;
+                    h2 {
+                        width: 25%;
+                    }
+                    .lb {
+                        margin-left: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (min-width: 320px)and(max-width: 767px) {
+    #profile_price {
+        .topnavi {
+            margin: 0 15px;
+            .brand-box {
+                .page_one-box {
+                    h1 {
+                        font-size: 30px;
+                    }
+                }
+                .next {
+                    margin-top: 30px;
+                }
+            }
+            .about_box {
+                padding: 0 15px;
+                .about_content {
+                    padding: 0;
+                    h2 {
+                        margin-top: 20px;
+                        width: 55%;
+                        text-align: center;
+                    }
+                    .lb {
+                        margin-top: 10px;
+                        margin-right: 0;
+                        margin-left: 15%;
+                    }
+                    .line-bar {
+                        margin-top: 0;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
 /***** ----------------------------------End style for profile/price-------------------------------------*****/

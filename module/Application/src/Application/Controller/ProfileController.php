@@ -359,9 +359,9 @@ class ProfileController extends AbstractActionController {
             $this->layout()->firstName = $userInfo->firstName;
         }
 
-        if (!isset($this->oSession->data['size'])) {
-            $this->redirect()->toUrl('/profile/size');
-        }
+        // if (!isset($this->oSession->data['size'])) {
+        //     $this->redirect()->toUrl('/profile/size');
+        // }
 
         $oAuth = $this->getServiceLocator()->get('AuthService');
 
