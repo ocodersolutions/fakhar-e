@@ -53,6 +53,7 @@
                                 ->appendFile($this->basePath() . '/showhidepassword/hideShowPassword.min.js')
                                 ->appendFile('http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js')
                                 ->appendFile($this->basePath() . '/myalert/js/foundation.min.js')
+                                ->appendFile($this->basePath() . '/js/jquery.ddslick.js')
                     ;
         ?>
     </head>
@@ -492,8 +493,9 @@
         </footer>
         <!-- End-Footer -->
         <script>
-            //
-            $(document).ready(function(){
+            
+            jQuery(document).ready(function($){
+
                 var submitIcon = $('.searchbox-icon');
                 var inputBox = $('.searchbox-input');
                 var searchBox = $('.searchbox');
