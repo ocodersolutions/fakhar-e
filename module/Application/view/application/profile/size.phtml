@@ -1,27 +1,3 @@
-<!-- <style id="css-ddslick" type="text/css">
-                .dd-select{ border-radius:2px; border:solid 1px #ccc; position:relative; cursor:pointer;}
-                .dd-desc { color:#aaa; display:block; overflow: hidden; font-weight:normal; line-height: 1.4em; }
-                .dd-selected{ overflow:hidden; display:block; padding:10px; font-weight:normal; background-color:#e5e5e5; color:#254f73 }
-                .dd-pointer{ width:0; height:0; position:absolute; right:10px; top:50%; margin-top:-3px;}
-                .dd-pointer-down{ border:solid 5px transparent; border-top:solid 5px #000; }
-                .dd-pointer-up{border:solid 5px transparent !important; border-bottom:solid 5px #000 !important; margin-top:-8px;}
-                .dd-options{ border:solid 1px #b1b0b0; border-top:none; list-style:none; box-shadow:0px 1px 5px #ddd; display:none; position:absolute; z-index:2000; margin:0; padding:0;background:#c2c0c0; overflow:auto;}
-                .dd-option{ padding:10px; display:block; border-bottom:solid 1px #ddd; overflow:hidden; text-decoration:none; color:#fff; cursor:pointer;-webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out;-o-transition: all 0.25s ease-in-out;-ms-transition: all 0.25s ease-in-out; }
-                .dd-options > li:last-child > .dd-option{ border-bottom:none;}
-                .dd-option:hover{ background:#cac9c9; color:#fff;}
-                .dd-selected-description-truncated { text-overflow: ellipsis; white-space:nowrap; }
-                .dd-option-selected { background:#c2c0c0  url("/img/req2c-tick_03.jpg")  no-repeat right 5% center }
-                .dd-option-selected:hover{ background:#cac9c9  url("/img/req2c-tick_03.jpg")  no-repeat right 5% center }
-                .dd-option-image, .dd-selected-image { vertical-align:middle; float:left; margin-right:5px; max-width:64px;}
-                .dd-image-right { float:right; margin-right:15px; margin-left:5px;}
-                .dd-container{ position:relative; float:left; margin-right:21px}
-                .dd-selected-text { font-weight:normal}
-                
-                .text-input{width: 175px; margin-right:21px}
-                
-</style> -->
-                
-                
 <div id="size_profile_pages" class="content-page row">             
     <div class="col-lg-10 col-lg-offset-1 topnavi" id="size_profile">
         <div class="brand-box">
@@ -49,10 +25,54 @@
                     <?php }?>
                 </ul>
                 <div class="clr"></div>
+
             </div><!--menu-box -->
 
             <div class="clr"></div>
-
+            <div class="form-group">
+                    <ul class="list-radio list-radio-find-stitch list-inline">
+                        <li><div class="radio radio-find-stitch">
+                            <input type="radio" disabled name="radio4" id="radio1" value="option1" checked="" >
+                            <label for="radio1" class="radio-label">
+                            </label>
+                        </div>
+                        </li>
+                        <li>
+                            <div class="radio radio-find-stitch">
+                                <input type="radio" disabled name="radio4" id="radio2" value="option1" >
+                                <label for="radio2" class="radio-label">
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="radio radio-find-stitch">
+                                <input type="radio" disabled name="radio4" id="radio3" value="option1" >
+                                <label for="radio3" class="radio-label">
+                                </label>
+                            </div>
+                        </li>
+                             <li><div class="radio radio-find-stitch">
+                            <input type="radio" disabled name="radio4" id="radio4" value="option1" >
+                            <label for="radio4" class="radio-label">
+                            </label>
+                        </div>
+                        </li>
+                        <li>
+                            <div class="radio radio-find-stitch">
+                                <input type="radio" disabled name="radio4" id="radio5" value="option1" >
+                                <label for="radio5" class="radio-label">
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="radio radio-find-stitch">
+                                <input type="radio" disabled name="radio6" id="radio6" value="option1" >
+                                <label for="radio6" class="radio-label">
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             <div class="choose-box">
                 <h1>What Size do you Wear?</h1>
             </div><!--choose-box -->
@@ -62,16 +82,12 @@
 
         <form id="myForm" method="POST" class="col-lg-12">
             <div class="size_box row">
-                <div class="dropdown-menu_size col-lg-10 col-lg-offset-1">
+                <div class="dropdown-menu_size">
                     <div class="select_style">
                         <div id="idWaist"></div>
                         <div class="text_box">
                             <div class="text-input"><input type="text" name="waistOther" class="others" id="idWaistOther" value="<?php echo $this->waistOther;?>"/></div>
                         </div>
-                        
-                        
-                        
-                        
                     </div>
                     <div class="select_style">
                         <div id="idInseam"></div>
@@ -99,13 +115,6 @@
                     </div>
                     
                     <div class="clr"></div>
-                    <!-- <div class="text_box">
-                        <div class="text-input"><input type="text" name="waistOther" class="others" id="idWaistOther" value="<?php //echo $this->waistOther;?>"/></div>
-                        <div class="text-input"><input type="text" name="inseamOther" class="others" id="idInseamOther" value="<?php //echo $this->inseamOther;?>"/></div>
-                        <div class="text-input"><input type="text" name="shoeSizeOther" class="others" id="idShoeSizeOther" value="<?php //echo $this->shoeSizeOther;?>"/></div>
-                        <div class="text-input"><input type="text" name="jacketSizeOther" class="others" id="idJacketSizeOther" value="<?php //echo $this->jacketSizeOther;?>"/></div>
-                        <div class="text-input" id="nomargin"><input type="text" name="shirtSizeOther" class="others" id="idShirtSizeOther" value="<?php //echo $this->shirtSizeOther;?>" /></div>
-                    </div> -->
                 </div>
 
                 <div class="clr"></div>
@@ -117,18 +126,16 @@
                         </select>
 
                         <select name="<?= $this->inseam['name'] ?>" class="select selectpicker" id="idInseamHidden">
-                        <!-- <option value="" class="option">Inseam</option> -->
+                       
                         <?php foreach ($this->inseam['list'] as $key => $val) { ?><option value="<?= $key ?>" class="option" <?= ($this->inseam['value'] == $key ? 'selected="selected"' : '') ?>><?= $val ?></option><?php } ?>
                         </select>
 
                         <select name="<?= $this->shoeSize['name'] ?>" class="select selectpicker" id="idShoeSizeHidden">
-                        <!-- <option value="" class="option">Shoe Size</option> -->
                         <?php foreach ($this->shoeSize['list'] as $key => $val) { ?><option value="<?= $key ?>" class="option" <?= ($this->shoeSize['value'] == $key ? 'selected="selected"' : '') ?>><?= $val ?></option><?php } ?>
                         </select>
 
                         <select name="<?= $this->jacketSize['name'] ?>" class="select selectpicker" id="idJacketSizeHidden">
-                        <!-- <option value="" class="option">Jacket Size</option> -->
-                        <?php foreach ($this->jacketSize['list'] as $key => $val) { ?><option  value="<?= $key ?>" class="option" <?= ($this->jacketSize['value'] == $key ? 'selected="selected"' : '') ?>><?= $val ?></option><?php } ?>
+                       <?php foreach ($this->jacketSize['list'] as $key => $val) { ?><option  value="<?= $key ?>" class="option" <?= ($this->jacketSize['value'] == $key ? 'selected="selected"' : '') ?>><?= $val ?></option><?php } ?>
                         </select>
 
                         <select name="<?= $this->shirtSize['name'] ?>" class="select selectpicker nomargin" id="idShirtSizeHidden">
@@ -167,20 +174,17 @@
             }
 
             // $(".size_box").css('height', '121px');
-            // $("select.selectpicker").each(function () {
-            //     if (this.value == 'other') {
-            //         $(".size_box").css('height', '195px');
-            //     }
-
-            // });
+            $("select.selectpicker").each(function () {
+                if (this.value == 'other') {
+                   $(".text-input").css('margin-top', '33px');
+                }
+            });
             
         }   
-
-        // $(".size_box").css('height', '121px');
-       $("select.selectpicker").each(function () {
+        $("select.selectpicker").each(function () {
             if (this.value == 'other') {
                 $('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'block');
-                $(".size_box").css('height', '195px');
+                
             }
             else {
                 $('#' + this.id.replace("Hidden", "") + 'Other').css('display', 'none');
@@ -192,7 +196,6 @@
             var allOK = true;
             $("select.selectpicker").each(function () {
                 if ((this.value == '') || (this.value == 'other' && $('#' + this.id.replace("Hidden", "") + 'Other').val() == '')) {
-                    // swal({title: "Oops...", text:   '"'+ $(this).find('option:first').html() +'" is not selected and is mandatory', type: "error"});  
                     myalert('myalertid1','type_missing','Oops', 'Seems like you forgot to tell us your '+ $(this).find('option:first').html() + '. Don\'t be shy we are here to help.','');      
                      $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
                     $("button.my_btn_ok").click(function(){
@@ -232,8 +235,8 @@
                         },
                         <?php } ?>
                     ],
-                 width: 175,
-                 height: 500,
+                 width: "100%",
+                 height: 300,
                  imagePosition: "left",
                  selectText: "Waist",
                  onSelected: function (data) {
@@ -253,8 +256,8 @@
                         },
                         <?php } ?>
                     ],
-                 width: 175,
-                 height: 500,
+                 width: "100%",
+                 height: 300,
                  imagePosition: "left",
                  selectText: "Inseam",
                  onSelected: function (data) {
@@ -274,8 +277,8 @@
                         },
                         <?php } ?>
                     ],
-                 width: 175,
-                 height: 500,
+                 width: "100%",
+                 height: 300,
                  imagePosition: "left",
                  selectText: "Shoe Size",
                  onSelected: function (data) {
@@ -296,8 +299,8 @@
                         },
                         <?php } ?>
                     ],
-                 width: 175,
-                 height: 500,
+                 width: "100%",
+                 height: 300,
                  imagePosition: "left",
                  selectText: "Jacket Size",
                  onSelected: function (data) {
@@ -318,8 +321,8 @@
                         },
                         <?php } ?>
                     ],
-                 width: 175,
-                 height: 500,
+                 width: "100%",
+                 height: 300,
                  imagePosition: "left",
                  selectText: "Shirt Sizes", 
                  onSelected: function (data) {
@@ -339,7 +342,6 @@
              .removeAttr('selected')
              .filter('[value=""]')
                  .attr('selected', true);
-            //$('select[name=' + value  + '] option:first').attr('selected','selected');
             $('#id'+ id[index] +' .dd-selected-text').text(text[index]);
             $('#id'+ id[index] + ' .dd-selected-value').val("");
             $('#id'+ id[index] +' ul.dd-options li a').each(function (index, element) {
