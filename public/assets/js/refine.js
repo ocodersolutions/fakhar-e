@@ -429,9 +429,12 @@ $(function() {
     });
 });
 
-$('form.searchbox').submit(function(event){
+$('form.searchbox, form.form_search').submit(function(event){
     event.preventDefault(); 
-    x = $('form.searchbox input[name="search1"]').val();
+        x = $('form.searchbox input[name="search1"]').val();
+    if(x == ''){
+        x = $('form.form_search input[name="search1"]').val();
+    }
     check = $('span[data-search="'+x+'"]').length;
     if ( check == 0) {
         $('.option-selected').append('<div class="item" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
@@ -455,6 +458,6 @@ function check_search_tag(){
         }
     };
     $('#productFilterDetail input[name="searchArticle"]').val(y2);
-    $('form.searchbox input[name="search1"]').val('');
+    $('input[name="search1"]').val('');
     Product.loadProductListAjax();
 }
