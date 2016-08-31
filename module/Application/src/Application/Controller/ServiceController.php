@@ -9,7 +9,8 @@
  */
 
 namespace Application\Controller;
-
+use Zend\Validator\Db\RecordExists;
+use Zend\Validator\Db\NoRecordExists;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Json\Json;
@@ -805,7 +806,7 @@ class ServiceController extends BaseActionController {
             if (isset($articleLikes) && !empty($articleLikes)) {
                  $__viewVariables['articlecloset'] = 'Y';
             } else {
-                    $__viewVariables['articlecloset'] = 'N';
+                $__viewVariables['articlecloset'] = 'N';
             }
 
             $oAttributes = $oService->get('ProductAttributesTable');
@@ -829,8 +830,34 @@ class ServiceController extends BaseActionController {
             return  $viewModel;
         }
     }
+    public function getemailalertAction(){
+        $alert = array();
+        $alert['email'] = $this->getRequest()->getPost()['email'];
+        $alert['feeddataid'] = $this->getRequest()->getPost()['feeddataid'];
+        $oService = $this->getServiceLocator();
+        $oFeedData = $oService->get('ArticleAlertTable');
+      
+        //Check that the email address exists in the database
+        $validator = new RecordExists(
+            array(
+                'table'   => 'articlealert',
+                'field'   => 'email',
+                'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+            )
+        );
 
- //Function is used to show alert of feed data
+        if ($validator->isValid($alert['email'])) {
+            // if record not Invalid
+            $result = false;
+        } else {
+            // if record Invalid
+            $result = $oFeedData->insert($alert);
+            
+        }
+
+            return $this->getResponse()->setContent(Json::encode($result));
+    }
+    //Function is used to show alert of feed data
     public function getfeedalertAction(){
         if ($this->getRequest()->isXmlHttpRequest()) {
             $oService = $this->getServiceLocator();
