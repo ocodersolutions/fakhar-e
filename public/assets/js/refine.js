@@ -376,6 +376,28 @@ $(function() {
             Product.loadProductListAjax();
         }
     });
-    // $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-    // $("#max-price").val("$" + $(".slider-3").slider("values", 1));
 });
+
+$('form.searchbox').submit(function(event){
+    event.preventDefault(); 
+    x = $('form.searchbox input[name="search1"]').val();
+    check = $('span[data-search="'+x+'"]').length;
+    if ( check == 0) {
+        $('.option-selected').append('<div class="item" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i onclick="remove_tag_search();" data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+    }
+    array_search = $('.option-selected span');
+    var y2 =  [];
+    for (i = 0; i < array_search.length ; i++) {
+        var y1 = $(array_search[i]).attr('data-search');
+        if(y2.indexOf(y1)==-1){
+            y2.push(y1);
+        }
+    };
+    //$('#productFilterDetail input[name="search"]').val(y2);
+    $('form.searchbox input[name="search1"]').val('');
+});
+
+function remove_tag_search(){
+  
+    console.log(x);
+}
