@@ -97,7 +97,7 @@ if (isset($userdata['user_pp']) && !empty($userdata['user_pp']) && $userdata['us
                                             <div class="row">
                                                 <div class="default1 col-lg-5 col-md-6 col-sm-5">
                                                     <h2>Birthday</h2>
-                                                    <select name="month" class="fr" name="month" id="suMonth">
+                                                    <select name="month" class="" name="month" id="suMonth">
                                                         <option value="">Month</option>
                                                         <?php foreach ($months as $key => $month) { 
                                                             echo "<option value='$key' ".(($dob_month == $key) ? 'SELECTED' : '').">$month</option>";
