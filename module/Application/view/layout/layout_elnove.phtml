@@ -322,28 +322,12 @@
             }, '.product_item_popup');
                 //when mouse leave '.uc_contact' then hide ".popup_item, .quick_view_v2"
             $(document).on({
-                // mouseenter: function () {
-                //     $(this).parent().find(".popup_item, .quick_view_v2").show();
-                //     var height1 = $(this).parent().find(".icon_like").height();
-                //     $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
-                // },
                 mouseleave: function () {
                     $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
                 }
-            }, '.uc_contact');
+            }, '.uc_contact');     
         }
-            //when mouse leave '#modal_QV, #modal_alert' then change attribute css of body"
-        $(document).on({
-            mouseout: function () {
-                $("body").css({"overflow": "auto", "padding-right": "0px"});
-            }
-        }, '#modal_QV, #modal_alert');
-            //when mouse move in '#modal_QV, #modal_alert' then change attribute css of body"
-        $(document).on({
-            mouseover: function () {
-                $("body").css("overflow", "hidden");
-            }
-        }, '#modal_QV, #modal_alert');        
+         
 
     });
 

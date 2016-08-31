@@ -103,7 +103,47 @@ $('body').on('click', '.modal_body_footer', function (){
     Product.productId = $(this).data('alert-id');
     Product.loadAjaxForAlert();
     $('#modal_alert').css("overflow", "auto");
+    $("body").css("overflow", "hidden");
 });  
+
+$(document).keyup(function(e) {
+    if (e.keyCode == 27) 
+    { 
+        $("body").css("overflow", "auto");
+    }
+});
+
+$(document).mouseup(function (e)
+{
+    var container = $("#modal_QV .modal-content");
+    var container2 = $("#modal_alert .modal-content");
+
+    if (!container.is(e.target) && container.has(e.target).length === 0
+        && !container2.is(e.target) && container2.has(e.target).length ===0 )
+    {
+        $("body").css("overflow", "auto");
+    }
+});
+
+$("body").on("click", "#modal_alert .close, #modal_QV .close", function () {
+    $("body").css("overflow", "auto");
+});
+
+// $("body").on("click", "#modal_QV .close", function () {
+//     $("body").css("overflow", "auto");
+// });
+
+$("body").on("click", ".uc_avatar, .icon_alert, .quick_view_v2", function () {
+    $("body").css("overflow", "hidden");
+});
+
+// $("body").on("click", ".icon_alert", function () {
+//     $("body").css("overflow", "hidden");
+// });
+
+// $("body").on("click", ".quick_view_v2", function () {
+//     $("body").css("overflow", "hidden");
+// });
 
 //Click button loadmore 
 $("#load-more>.btn-st-silver").click(function(){
