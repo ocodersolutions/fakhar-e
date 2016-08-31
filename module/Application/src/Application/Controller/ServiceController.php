@@ -664,7 +664,6 @@ class ServiceController extends BaseActionController {
                 $aPostParams['offset'] = $offset;
             }
             $paginator = $oFeedData->getFilterFeedData($aPostParams, true,$userId,null,'service', $returnArr = false); 
-            var_dump($paginator); die;
             $oAttributes = $oService->get('ProductAttributesTable');
             $__viewVariables['attributes'] = $oAttributes->getAttributesTree(1);
             $__viewVariables['feedData'] = $paginator;
