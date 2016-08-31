@@ -2,56 +2,57 @@
 <link rel="stylesheet" href="<?php echo $this->basePath() ?>/showhidepassword/css/example.wink.css">
 
 <?php //$loginUrl = $this->facebook->getLoginUrl(); ?>
-<div class="container topnavi" id="login-page">
-    <div class="register_box">
-        <ul class="register_page">
-            <li class="blue"><a href="" class="active "> LOGIN</a> </li>
-            <li ><a href="/profile"> REGISTER</a> </li>
-            <div class="clr"></div>
-        </ul>
+<div class="row content-page" id="login-page">
+    <div class="col-lg-10 col-lg-offset-1" >
+        <div class="topnavi">
+        <div class="register_box">
+            <ul class="register_page">
+                <li class="blue"><a href="" class="active "> LOGIN</a> </li>
+                <li ><a href="/profile"> REGISTER</a> </li>
+                <div class="clr"></div>
+            </ul>
 
-        <?php if(isset($_GET['status']) && $_GET['status']='-1'){ ?>
-        <script type="text/javascript">$(function() {
-           myalert('signupalert1','type_missing','Sorry your password and email don\'t match','','Reset Password');
-           $(".my_btn a").attr("href", "/profile/forgotpassword");
-        });</script>
-        <?php } ?>
+            <?php if(isset($_GET['status']) && $_GET['status']='-1'){ ?>
+            <script type="text/javascript">$(function() {
+               myalert('signupalert1','type_missing','Sorry your password and email don\'t match','','Reset Password');
+               $(".my_btn a").attr("href", "/profile/forgotpassword");
+            });</script>
+            <?php } ?>
 
-        <div class="clr"></div>
-        
-        <form action="/auth/authenticate" id="loginForm" method="post" class="form">
-            <label>EMAIL *</label><br>
-            <input type="text" value="<?=((isset($_COOKIE['emailcookie']) && $_COOKIE['emailcookie']!='')?$_COOKIE['emailcookie']:'')?>" data-msg-required="" maxlength="100" class="input-text1" name="email" id="email">
-            <label>PASSWORD*</label><br>
-            <input type="password" value="" data-msg-required="" maxlength="100" class="input-text1" name="password" id="password">
-            <div class="remember">
-                <input type="checkbox" value="1" class="brandSelection" id="1" name="option" <?=((isset($_COOKIE['emailcookie']) && $_COOKIE['emailcookie']!='')?'checked="checked"':'')?>>
-                <label for="1">
-                    <span class="fa-stack">
-                        <i class="fa fa-square-o fa-stack-1x"></i>
-                        <i class="fa fa-check-square fa-stack-1x"></i>
-                    </span>
-                    <span class="rememberLabel">Remember me</span>
-                </label>                
-            </div>
-            <div class="remember1 fr"><a href="/profile/forgotpassword">Forgot your Password?</a></div>
             <div class="clr"></div>
-            <input type="submit" class="signup" id="btnNextStep" value="LOGIN">
-            <div class="fb">
-                <div><img src="/img/line.png"></div>
-                <p>or lOGIN with facebook</p>
-                <div><img src="/img/line.png"></div>
-            </div>
+            
+            <form action="/auth/authenticate" id="loginForm" method="post" class="form">
+                <label>EMAIL *</label><br>
+                <input type="text" value="<?=((isset($_COOKIE['emailcookie']) && $_COOKIE['emailcookie']!='')?$_COOKIE['emailcookie']:'')?>" data-msg-required="" maxlength="100" class="input-text1" name="email" id="email">
+                <label>PASSWORD*</label><br>
+                <input type="password" value="" data-msg-required="" maxlength="100" class="input-text1" name="password" id="password">
+                <div class="remember">
+                    <input type="checkbox" value="1" class="brandSelection" id="1" name="option" <?=((isset($_COOKIE['emailcookie']) && $_COOKIE['emailcookie']!='')?'checked="checked"':'')?>>
+                    <label for="1">
+                        <span class="fa-stack">
+                            <i class="fa fa-square-o fa-stack-1x"></i>
+                            <i class="fa fa-check-square fa-stack-1x"></i>
+                        </span>
+                        <span class="rememberLabel">Remember me</span>
+                    </label>                
+                </div>
+                <div class="remember1 fr"><a href="/profile/forgotpassword">Forgot your Password?</a></div>
+                <div class="clr"></div>
+                <input type="submit" class="signup" id="btnNextStep" value="LOGIN">
+                <div class="fb">
+                    <p><span>or register with facebook</span></p>
+                </div> 
+                <div class="clr"></div>
+                <div class="facebook_btn" id="fb-auth" style="cursor:pointer"><i class="fa fa-facebook-square"></i>Facebook</div> 
+            </form>
             <div class="clr"></div>
-            <div class="facebook_btn" id="fb-auth" style="cursor:pointer"><i class="fa fa-facebook-square"></i>Facebook</div> 
-        </form>
-        <div class="clr"></div>
-    </div><!--register_box -->
-</div><!--container-->
+        </div><!--register_box -->
+        </div>
+    </div><!--container-->
 
-<div id="status">
+    <div id="status">
+    </div>
 </div>
-
 <script>
 //Plugin Hide/Show Password
 $('#password').hidePassword(true);     

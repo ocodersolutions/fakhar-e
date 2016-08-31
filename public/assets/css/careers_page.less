@@ -906,6 +906,191 @@
 	}
 }
 /* =========== end size page =======*/
+
+
+/* ===========  login page =======*/
+
+#login-page{
+	.topnavi{
+		background: #fff;
+		.register_box {
+			width: 70%;
+			margin: 0 auto;
+			.register_page{
+				text-align: center;
+		    	padding: 0;
+			    list-style-type: none;
+			    li{
+			    	width: 50%;
+			    	display: block;
+			    	float: left;
+				    border-bottom: 2px solid #d5d8da;
+				    padding: 50px 0 18px;
+				    margin-bottom: 38px;
+				    a{
+				    	color: #959595;
+				    }
+				    .active {
+					    color: #254f73;
+					}
+			    }
+			    .blue {
+				    border-bottom: 2px solid #254f73;
+				}
+		    }
+		    
+		}
+		.form {
+		    text-align: center;
+		    padding-bottom: 80px;
+		    label{
+		    	font-weight: 300;
+		    }
+		    .input-text1 {
+			    height: 48px;
+			    border: 1px solid #e2e2e2;
+			    margin-top: 19px;
+			    margin-bottom: 29px;
+			    padding: 0 15px 0 15px;
+			    line-height: 48px;
+			}
+			.hideShowPassword-wrapper{
+				width: 100%!important;
+			}
+			.hideShowPassword-field {
+			    margin-top: 19px !important;
+			    margin-bottom: 29px !important;
+			}
+			.remember {
+				border-radius: 8px;
+				height: 19px !important;
+				line-height: 19px !important;
+				position: absolute;
+				text-align: center;
+				cursor: pointer;
+				color: #525058;
+				input[type="checkbox"] {
+				    display: none;
+				}
+				label{
+					.fa-stack {
+					    position: relative;
+					    display: inline-block;
+					    width: 2em;
+					    height: 2em;
+					    line-height: 2em;
+					    vertical-align: middle;
+					}
+				}
+				input[type="checkbox"] + label {
+					.fa-square-o {
+					    font-size: 25px;
+					}
+					.fa-check-square {
+					    display: none;
+					    font-size: 25px;
+					}
+				}
+				input[type="checkbox"]:checked + label { 
+					.fa-check-square {
+					    position: relative;
+				        display: block;
+    					color: #254f73;
+					}
+				}		
+			}
+			.remember1 {
+			    width: 50%;
+			    text-align: right;
+			    color: #525058;
+			     a {
+				    color: #525058 !important;
+				}
+			}
+			.signup {
+			    color: #254F7D;
+			    font-weight: bold;
+			    border: 2px solid #bcc5c0;
+			    margin: 38px auto 63px;
+			    width: 70%;
+			    line-height: 41px;
+			    text-transform: uppercase;
+			    background: none;
+			    padding: 10px;
+			    font-size: 17px;
+			    font-weight: 400;
+			    &:hover{
+					background: #F0F4F7;
+					border-color: #F0F4F7;
+				    box-shadow: 0px 2px 3px #888888;
+			    }
+			}
+			.fb {
+			    width: 70%;
+			    margin: 0 auto;
+			    // div {
+       //              background: url("http://elnove.ocoder/img/line.png");
+				   //  height: 2px;
+				   //  display: inline-block;
+				   //  width: 100%;
+				   // // margin-bottom: 3px;
+       //          }
+				p {
+					position: relative;
+					z-index: 1;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                    color: #898697;
+                    // display: inline-block;
+                    width: 100%;
+                    &:before{
+                    	border-top: 3px solid #dfdfdf;
+				        content:"";
+				        margin: 0 auto; /* this centers the line to the full width specified */
+				        position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+				        top: 50%; left: 0; right: 0; bottom: 0;
+				        width: 100%;
+				        z-index: -1;
+                    }
+                    &:after{
+
+                    }
+                    span{
+                    	background: #fff; 
+        				padding: 0 15px; 
+                    }
+                }
+			}
+			.facebook_btn {
+			    background: none repeat scroll 0 0 #F0F4F7;
+			    border: medium none;
+			    color: #415b97;
+			    line-height: 43px;
+			    margin: 38px auto 0;
+			    width: 70%;
+			     i {
+				    color: #415b97;
+				    font-size: 25px;
+				    margin-right: 28px;
+				    margin-top: 10px;
+				}
+				&:hover {
+				    background-color: #F0F4F7;
+			        box-shadow: 0px 2px 3px #888888;
+				}
+			}	
+		}
+		#loginForm {
+			.input-text1 {
+			    width: 100%;
+			    padding: 0 5% !important;
+			}
+		}
+	}
+	
+}
+
+/* =========== end login page =======*/
 @media (min-width:768px){
 	
 	.form-group{
@@ -1012,6 +1197,16 @@
 		}
 		
 	}
+	#login-page {
+		.topnavi {
+			.register_box {
+				padding-left: 15px;
+				padding-right: 15px;
+			    width: 100%;
+			    margin: 0 auto;
+			}
+		}
+	}
 }
 @media (min-width: 320px) and (max-width:480px){
 	#profile-you-page{
@@ -1037,6 +1232,27 @@
 						.content{
 							padding:30px 0;
 						}
+					}
+				}
+			}
+		}
+		
+		#login-page {
+			.topnavi {
+				.form {
+					.signup{
+						width:100%;
+					}
+					.fb{
+						width: 100%;
+						p{
+							span{
+								font-size: 12px;
+							}
+						}
+					}
+					.facebook_btn{
+						width: 100%;
 					}
 				}
 			}

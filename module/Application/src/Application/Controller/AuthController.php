@@ -87,7 +87,7 @@ class AuthController extends AbstractActionController {
         if ($this->getAuthService()->hasIdentity()) {
             $this->redirect()->toUrl('/service');
         }
-        
+        $this->layout('layout/layout_elnove.phtml');
         return array();
     }
 
