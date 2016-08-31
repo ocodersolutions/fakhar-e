@@ -2,7 +2,7 @@
         echo $this->headScript()->appendFile($this->basePath() . '/myalert/js/foundation.min.js')
                                 ;
         ?>
-<div class="row" id="profile">
+<div class="row content-page" id="profile">
     <div class="profile_wear_page col-lg-10 col-lg-offset-1 topnavi">
         <div class="brand-box ">
             <div class="menu-box <?=($this->mode=='edit')?'menu-box-bigger':''?>">
@@ -66,13 +66,7 @@
                             </label>
                         </div>
                     </li>
-                    <li>
-                        <div class="radio radio-find-stitch">
-                            <input type="radio" disabled name="radio4" id="radio3" value="option1" >
-                            <label for="radio3" class="radio-label">
-                            </label>
-                        </div>
-                    </li>
+                    
                 </ul>
             </div>
             <div class="clr"></div>

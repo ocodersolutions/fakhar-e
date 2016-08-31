@@ -1,3 +1,54 @@
+$(document).ready(function() {
+    // apply filterTable to all tables on this page but don't filter content with the no-filter class
+    $('table').filterTable({ignoreClass: 'no-filter'});
+    $('.desktop p.filter-table').prependTo('.desktop .brands .brand');
+    $('.mobile p.filter-table').prependTo('.mobile .brands .brand');
+
+    // set css default of ".sort-list" when document ready
+    $(".sort-list").css({"opacity": "0.3", "cursor": "default"});
+});
+
+//when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-list"
+$(".sort-grid").click(function(){
+    $(this).parents("body").find("#load-product-list").addClass("grid-view");
+    $(this).css({"opacity": "0.3", "cursor": "default"});
+    $(this).parents(".row").find(".sort-list").css({"opacity": "1", "cursor": "pointer"});
+
+});
+
+//when click ".sort-list" then remove class "col-xs-6" of ".product.col-lg-3.col-sm-4", change attribute css of its and ".sort-grid"
+$(".sort-list").click(function(){
+    $(this).parents("body").find("#load-product-list").removeClass("grid-view");
+    $(this).css({"opacity": "0.3", "cursor": "default"});
+    $(this).parents(".row").find(".sort-grid").css({"opacity": "1", "cursor": "pointer"});
+
+});
+//when click ".sort-item" then check if its exist class "active" then remove class "active", ".icon_arrow" add class "fa-chevron-down" and remove class "fa-chevron-up", ".sort-item >.uc_line_content" close slide; else add class "active", ".icon_arrow" remove class "fa-chevron-down" and add class "fa-chevron-up", ".sort-item >.uc_line_content" open slide.
+$(".sort-item").click(function(){
+    var myClasses = this.classList;
+    if(myClasses.contains("active"))
+    {
+        myClasses.remove("active");
+        $(".icon_arrow").removeClass("fa-chevron-up");
+        $(".icon_arrow").addClass("fa-chevron-down");
+        $(".sort-item >.uc_line_content").slideUp();
+    }
+    else
+    {
+        myClasses.add("active");
+        $(".icon_arrow").removeClass("fa-chevron-down");
+        $(".icon_arrow").addClass("fa-chevron-up");
+        $(".sort-item >.uc_line_content").slideDown();
+    }        
+});
+
+    //when click ".sort-item-select" then assign content of it for ".sort-item-selected" and ".uc_line_content" close slide.
+$(".sort-item-select").click(function(){
+    var content_sl = $(this).html();
+    $(this).parents(".sort-item").find(".sort-item-selected").html(content_sl);
+    $(this).parents(".uc_line_content").slideUp();
+});
+
 // Click like & unline 
 $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;

@@ -82,7 +82,52 @@ var Product = {
 $(document).ready(function() {
     //Auto load first Page Products when document ready
     Product.loadProductListAjax();
+
+        //check if width of window >=992 then
+    if(window.innerWidth >= 992)
+    {      
+            //when mouse move in '.product_item_popup' then show ".popup_item, .quick_view_v2" and assign height of ".quick_view_v2" and line hieght of tag "span" equal height of ".icon_like"
+        $(document).on({
+            mouseenter: function () {
+                $(this).parent().find(".popup_item, .quick_view_v2").show();
+                var height1 = $(this).parent().find(".icon_like").height();
+                $(this).parent().find(".quick_view_v2").height(height1).find("span").css("line-height",height1+'px');
+            }
+            // mouseleave: function () {
+            //     $(this).find('.btn-group').fadeOut();
+            // }
+        }, '.product_item_popup');
+            //when mouse leave '.uc_contact' then hide ".popup_item, .quick_view_v2"
+        $(document).on({
+            mouseleave: function () {
+                $(this).parent().find(".popup_item, .quick_view_v2").hide() ;
+            }
+        }, '.uc_contact');     
+    }
 });
+    //change height of ".share_product" when resize window
+$(window).resize(function() {
+    $('.share_product').height(function(){
+        var height1 = $(this).parents(".product_item").find(".uc_contact").height();
+        var height2 = $(this).parents(".product_item").find(".show_item").height();
+        return height1 + height2;
+    });
+});
+
+//when click '.hide_item' then hide ".share_product"
+$('body').on('click', '.hide_item', function (){
+    $(this).parents(".product_item").find(".share_product").hide();
+});
+
+//when click '.show_item' then show and change hieght of '.share_product'
+$('body').on('click', '.show_item', function (){
+    $(this).parents('.product_item').find('.share_product').show();
+    var height1 = $(this).height();
+    $(this).parents(".product_item").find(".share_product").height(function(){
+        var height2 = $(this).parents(".product_item").find(".uc_contact").height();
+        return height1 + height2;
+    });
+});  
 
 // Show Quick view of Product
 $(document).on('click','.quick_view_v2, .uc_avatar',function(){
@@ -106,6 +151,7 @@ $('body').on('click', '.modal_body_footer', function (){
     $("body").css("overflow", "hidden");
 });  
 
+    //change attribute of body when press ESC
 $(document).keyup(function(e) {
     if (e.keyCode == 27) 
     { 
@@ -113,6 +159,7 @@ $(document).keyup(function(e) {
     }
 });
 
+    //change attribute of body when click outsite selector
 $(document).mouseup(function (e)
 {
     var container = $("#modal_QV .modal-content");
@@ -124,7 +171,7 @@ $(document).mouseup(function (e)
         $("body").css("overflow", "auto");
     }
 });
-
+    //change attribute of body when click selector
 $("body").on("click", "#modal_alert .close, #modal_QV .close", function () {
     $("body").css("overflow", "auto");
 });
@@ -133,6 +180,7 @@ $("body").on("click", "#modal_alert .close, #modal_QV .close", function () {
 //     $("body").css("overflow", "auto");
 // });
 
+    //change attribute of body when click selector
 $("body").on("click", ".uc_avatar, .icon_alert, .quick_view_v2", function () {
     $("body").css("overflow", "hidden");
 });
