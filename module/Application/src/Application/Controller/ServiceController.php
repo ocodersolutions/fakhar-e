@@ -628,7 +628,6 @@ class ServiceController extends BaseActionController {
 
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
-        // var_dump($userInfo);
         $userId = isset($userInfo->userId) ? $userInfo->userId : 0;
         // $userId = 0;
         $aQueryParams = $this->params()->fromQuery();
@@ -647,6 +646,7 @@ class ServiceController extends BaseActionController {
             $__viewVariables['likearray'] = $likearray;
 
             $aPostParams = $this->params()->fromPost();
+
             if(isset($aQueryParams['test']) && $aQueryParams['test']=='yes') {
                 $aPostParams = $this->params()->fromQuery();
             }
@@ -657,6 +657,7 @@ class ServiceController extends BaseActionController {
             $aPostParams['deals'] = rtrim($aPostParams['deals'], ',');
             $aPostParams['filterTypeMain'] = rtrim($aPostParams['filterTypeMain'], ',');
             $aPostParams['orderBy'] = rtrim($aPostParams['orderBy'], ',');
+            $aPostParams['searchArticle'] = rtrim($aPostParams['searchArticle'], ',');
             if (!empty($aPostParams['page'])) {
                 $limit = $aPostParams['limit'];
                 $offset = $aPostParams['limit'] * ($aPostParams['page'] - 1);
@@ -665,9 +666,8 @@ class ServiceController extends BaseActionController {
             $paginator = $oFeedData->getFilterFeedData($aPostParams, true,$userId,null,'service', $returnArr = false); 
             $oAttributes = $oService->get('ProductAttributesTable');
             $__viewVariables['attributes'] = $oAttributes->getAttributesTree(1);
-
             $__viewVariables['feedData'] = $paginator;
-            // var_dump($paginator); exit;
+
             $viewModel = new ViewModel($__viewVariables);
             $viewModel->setTerminal(true);
 
@@ -681,6 +681,7 @@ class ServiceController extends BaseActionController {
                     }
                 }
             }
+
             $aPostParams['ip'] = $this->get_client_ip();
             $aPostParams['country'] = $this->ip_info($this->get_client_ip(), "Country");
             $aPostParams['user_id'] = $userId;
@@ -688,6 +689,7 @@ class ServiceController extends BaseActionController {
             $logTable = $this->getServiceLocator()->get('LogTable');
 
             $logTable->saveItem($aPostParams);
+
             return $viewModel;
             // return $this->response;
         }
