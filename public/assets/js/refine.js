@@ -454,6 +454,7 @@ function check_search_tag(){
             y2.push(y1);
         }
     };
-    $('#productFilterDetail input[name="search"]').val(y2);
+    $('#productFilterDetail input[name="searchArticle"]').val(y2);
     $('form.searchbox input[name="search1"]').val('');
+    Product.loadProductListAjax();
 }
