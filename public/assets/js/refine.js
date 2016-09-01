@@ -215,11 +215,16 @@ $('body').on('click', '.icon_like', function (){
                 
             //star - when click item brand
                 case "brands":
-                    
-                   if($(this).hasClass('selected')){
-                    $(this).removeClass('selected');
+                    if(mobile == 1){
+                        y = 'mobile';
+                    }else if(desktop == 1){
+                        y = 'desktop';
+                    }
+                    if($(this).hasClass('selected')){
+                        $(this).removeClass('selected');
                     }else{
                         $(this).addClass('selected');
+                        $(this).closest('tr').prependTo('.'+y+' .list-brand table tbody');
                     }
                     array_brand = $('.brands .item.selected');
                     var a2 =  [];
@@ -268,6 +273,7 @@ $('body').on('click', '.icon_like', function (){
                         $("input[name='"+name_deal+"']").val('1');
                         $(this).addClass('selected');
                     }
+                    var discount = '';
                     discount = $('.item.selected[data-deal="discountcode"]').length;
                     if(discount == 1){
                         $('.deals .price').css('display','block');
@@ -307,9 +313,9 @@ $('body').on('click', '.icon_like', function (){
                 break;
 
         }
-        if(discount != 1){
-            Product.loadProductListAjax(); 
-        }
+        // if(discount != 1){
+        //     Product.loadProductListAjax(); 
+        // }
     });
   
     // select childs category
