@@ -8,3 +8,6 @@ ALTER TABLE `articlealert`
   ADD PRIMARY KEY (`alertid`);
 ALTER TABLE `articlealert`
   MODIFY `alertid` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+
+
+ALTER TABLE `logs` ADD `searchVenue` VARCHAR(500) NOT NULL AFTER `searchArticle`;
