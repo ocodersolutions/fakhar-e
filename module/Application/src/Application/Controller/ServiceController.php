@@ -708,6 +708,8 @@ class ServiceController extends BaseActionController {
             $userInfo = $oAuth->getIdentity();
             $userId = $userInfo->userId;
             $this->layout()->showHeaderLinks = "LOGGED_IN";
+            $userId = $userInfo->userId;
+            $this->layout()->firstName = $userInfo->firstName;
         }
 
         $oService = $this->getServiceLocator();

@@ -2,17 +2,17 @@
 $page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
 $title = 'ELNove - '.$this->feedDataDetail['caption'];
 ?>
-
-<div class="container grey_bg">
+<div id="detail_page" class="content-page row">
+<div class="col-lg-10 col-lg-offset-1 grey_bg">
    <?php
 $page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
 $title = 'ELNove - '.$this->feedDataDetail['caption'];
 ?>
 
-<div class="col-lg-6 modal_body_left">
+<div class="col-lg-6 col-sm-6 modal_body_left">
     <img class="img-responsive" src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="product Image">
 </div>
-<div class="col-lg-6 modal_body_right">
+<div class="col-lg-6 col-sm-6 modal_body_right">
     <p class="modal_name_item"><?php echo $this->feedDataDetail['caption']; ?></p>
     <p class="modal_brand_item"> <?php echo $this->feedDataDetail['brand']; ?></p>
     <p class="modal_price_item"><span><?php echo ($this->feedDataDetail['onsale']=='Y'?$this->feedDataDetail['saleprice']:$this->feedDataDetail['price'])?></span><?php echo $this->feedDataDetail['currency'] ?></p>
@@ -38,7 +38,7 @@ $title = 'ELNove - '.$this->feedDataDetail['caption'];
 
 
 </div>
-
+</div>
 <!-- <div class="continue">
     <div class="container">
         <div class="image-cross fl">
@@ -46,10 +46,10 @@ $title = 'ELNove - '.$this->feedDataDetail['caption'];
         </div>
 
         <div class="btn-con1 fr">
-            <a target="_blank my_tooltip" title="Purchase article through our partner" href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->feedDataDetail['id']))); ?>">BUY NOW</a>
+            <a target="_blank my_tooltip" title="Purchase article through our partner" href="<?php //echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->feedDataDetail['id']))); ?>">BUY NOW</a>
         </div>
     </div><!--container-->
-<!-- </div> continue --> -->
+<!-- </div> continue --> 
 
 <!-- <script src="js/owl.carousel.js"></script>
 <script>

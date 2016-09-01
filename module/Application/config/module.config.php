@@ -14,7 +14,7 @@ return array(
                 'options' => array(
                     'route' => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Application\Controller\Service',
                         'action' => 'index',
                     ),
                 ),
@@ -24,7 +24,7 @@ return array(
                 'options' => array(
                     'route' => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Application\Controller\Service',
                         'action' => 'index',
                     ),
                 ),
