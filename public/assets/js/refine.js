@@ -523,3 +523,27 @@ function check_search_tag(){
     $('input[name="search2"]').val('');
     Product.loadProductListAjax();
 }
+
+
+$('input#check-price').click(function(){
+
+            if ($(this).hasClass("checked") == false) {
+                $(this).addClass('checked');
+            } else {
+                $(this).removeClass('checked');
+            }
+            check_price_checked();
+    // 
+    // 
+    // alert(123);
+});
+function check_price_checked(){
+    x = $('input#check-price.checked').length;
+    if(x == 1){
+        $('.show-price').css('display','none');
+        $('.refine .refine-colum.desktop .price .slider-3').css('opacity','1');
+    }else{
+        $('.show-price').css('display','block');
+        $('.refine .refine-colum.desktop .price .slider-3').css('opacity','0.3');
+    }
+}
