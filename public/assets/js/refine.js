@@ -215,11 +215,17 @@ $('body').on('click', '.icon_like', function (){
                 
             //star - when click item brand
                 case "brands":
-                    
-                   if($(this).hasClass('selected')){
-                    $(this).removeClass('selected');
+                    if(mobile == 1){
+                        y = 'mobile';
+                    }else if(desktop == 1){
+                        y = 'desktop';
+                    }
+                    if($(this).hasClass('selected')){
+                        $(this).removeClass('selected');
+                        $(this).closest('tr').appendTo('.'+y+' .list-brand table tbody');
                     }else{
                         $(this).addClass('selected');
+                        $(this).closest('tr').prependTo('.'+y+' .list-brand table tbody');
                     }
                     array_brand = $('.brands .item.selected');
                     var a2 =  [];
@@ -268,6 +274,7 @@ $('body').on('click', '.icon_like', function (){
                         $("input[name='"+name_deal+"']").val('1');
                         $(this).addClass('selected');
                     }
+                    var discount = '';
                     discount = $('.item.selected[data-deal="discountcode"]').length;
                     if(discount == 1){
                         $('.deals .price').css('display','block');
@@ -286,8 +293,21 @@ $('body').on('click', '.icon_like', function (){
             //end - when click sort item
             //start - when click typemain
                 case "filterTypeMain":
-                    val_order = $(this).attr('value');
-                    $('input[name="filterTypeMain"]').val(val_order);
+                    z = $(this).attr('value');
+                    if( z == 'all'){
+                        val_order = $(this).attr('value');
+                        $('input[name="filterTypeMain"]').val(val_order);
+                    }else{
+
+                    myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login link bellow to continue.','Login');
+                    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                        $("button.my_btn_ok").click(function(){ // click button
+                           $('a.close-reveal-modal').trigger('click'); // will close modal
+                           window.location.replace("/auth/login");
+                        });
+                    });
+                }
+                    
                 break;
             //end - when click typemain
 
@@ -307,9 +327,9 @@ $('body').on('click', '.icon_like', function (){
                 break;
 
         }
-        if(discount != 1){
-            Product.loadProductListAjax(); 
-        }
+        // if(discount != 1){
+        //     Product.loadProductListAjax(); 
+        // }
     });
   
     // select childs category
