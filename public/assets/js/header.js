@@ -85,15 +85,33 @@ function buttonUp(){
     } 
 }
 
-    //show or hide '.searchbox-icon' when click "#show-hide-menu" or '.searchbox-icon'
+var flag = false;
+    //show or hide '.searchbox-icon' when click "#show-hide-menu" or '.searchbox-icon' (sub-page)
 $("#show-hide-menu").click(function(){
     $("#show-hide-menu").toggleClass("angleplus");
     if(flag == false){
-        $('.searchbox-icon').click();
+        $("#search").show();
+        $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+        // $('.searchbox-icon').click();
         flag = true;
     } else {
+        $("#search").hide();
         flag = false;
     }    
+});
+    //show or hide '.searchbox-icon' when click "#show-hide-menu" or '.searchbox-icon' (service page)
+$(document).on("click", "#show-hide-menu", function(){
+    $(this).toggleClass("angleplus");
+    if(flag == false){
+        $("#search").show();
+        $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+        // $('.searchbox-icon').click();
+        flag = true;
+    } else {
+        $("#search").hide();
+        $(".searchbox").removeClass("searchbox-open");
+        flag = false;
+    }   
 });
 
 
