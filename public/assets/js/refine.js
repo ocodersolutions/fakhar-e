@@ -254,7 +254,7 @@ $('body').on('click', '.icon_like', function (){
                 case "deals":
                     name_deal = $(this).attr('data-deal');
                     x = $("input[name='"+name_deal+"']").val();
-
+                    if('.item[data-deal="discountcode"]')
                     if(x == 1){
                         $("input[name='"+name_deal+"']").val('');
                         $(this).removeClass('selected');
@@ -268,6 +268,13 @@ $('body').on('click', '.icon_like', function (){
                         $("input[name='"+name_deal+"']").val('1');
                         $(this).addClass('selected');
                     }
+                    discount = $('.item.selected[data-deal="discountcode"]').length;
+                    if(discount == 1){
+                        $('.deals .price').css('display','block');
+                    }else{
+                        $('.deals .price').css('display','none');
+                    }
+                    
                 break;
             //end - when click item deal
             //start - when click sort item
@@ -300,8 +307,9 @@ $('body').on('click', '.icon_like', function (){
                 break;
 
         }
-
-    Product.loadProductListAjax(); 
+        if(discount != 1){
+            Product.loadProductListAjax(); 
+        }
     });
   
     // select childs category
