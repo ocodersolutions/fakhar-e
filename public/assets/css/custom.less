@@ -3785,17 +3785,26 @@ footer{
             padding: 10px 0px;
         }
         .myaccount {
-            background: #465c8e;
+            background: #2F5C82;
             color: white;
             border-bottom: 2px solid #49506c;
             &:hover {
-                border-bottom: 1px solid #49506c;
+                border-bottom: 2px solid #49506c;
+                box-shadow: 0px 2px 3px #888888;
             }
         }
         .edit_msq {
-            background: #b3b3b1;    
+            background: #F0F4F7;    
             margin-top: 20px;    
-            color: #464646;
+            color: #444444;
+            &:hover{
+                box-shadow: 0px 2px 3px #888888;
+                border-bottom: 0;
+            }
+            &:focus{
+                border-bottom: 0;
+            }
+
         }
     }
     .account-box {
@@ -3981,7 +3990,9 @@ footer{
                         text-transform: uppercase;
                         width: 110px;
                         &:hover {
-                            background-color: #f0f3f1;
+                            background-color: #F0F4F7;
+                            border: 2px solid #F0F4F7;
+                            box-shadow: 0px 2px 3px #888888;
                         }
                     }
                 }
