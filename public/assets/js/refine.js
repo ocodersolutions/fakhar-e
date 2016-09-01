@@ -222,6 +222,7 @@ $('body').on('click', '.icon_like', function (){
                     }
                     if($(this).hasClass('selected')){
                         $(this).removeClass('selected');
+                        $(this).closest('tr').appendTo('.'+y+' .list-brand table tbody');
                     }else{
                         $(this).addClass('selected');
                         $(this).closest('tr').prependTo('.'+y+' .list-brand table tbody');
