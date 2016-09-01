@@ -431,13 +431,32 @@ $(function() {
 
 $('form.searchbox, form.form_search').submit(function(event){
     event.preventDefault(); 
-        x = $('form.searchbox input[name="search1"]').val();
-    if(x == ''){
-        x = $('form.form_search input[name="search1"]').val();
+    y = '';
+    x = '';
+    x = $('form.searchbox input[name="search1"]').val();
+    if (x == "") {
+        x = $('form.searchbox input[name="search2"]').val();
+        (x != '' ) ? y = 1 : y = 0;
     }
+    if (x == "") {
+        x = $('form.form_search input[name="search1"]').val();
+    } 
+    if (x == ""){
+        x = $('form.form_search input[name="search2"]').val();
+        (x != '' ) ? y = 1 : y = 0;
+    }
+
+    if (y == 1) {
+        y = 'venue';
+    }else{
+        y = 'normal';
+    }
+
     check = $('span[data-search="'+x+'"]').length;
-    if ( check == 0) {
-        $('.option-selected').append('<div class="item" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+   
+
+    if ( check == 0 && x != '') {
+        $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
         $('i.fa-times').click(function(){
             x = $(this).attr('data-search');
             $('.item[data-search="'+x+'"]').remove();
@@ -449,15 +468,30 @@ $('form.searchbox, form.form_search').submit(function(event){
 });
 
 function check_search_tag(){
-     array_search = $('.option-selected span');
+    array_search_normal = $('.option-selected .normal span');
+    array_search_venue = $('.option-selected .venue span');
     var y2 =  [];
-    for (i = 0; i < array_search.length ; i++) {
-        var y1 = $(array_search[i]).attr('data-search');
+    for (i = 0; i < array_search_normal.length ; i++) {
+        var y1 = $(array_search_normal[i]).attr('data-search');
         if(y2.indexOf(y1)==-1){
             y2.push(y1);
         }
     };
     $('#productFilterDetail input[name="searchArticle"]').val(y2);
+
+    var y2 =  [];
+    for (i = 0; i < array_search_venue.length ; i++) {
+        var y1 = $(array_search_venue[i]).attr('data-search');
+        if(y2.indexOf(y1)==-1){
+            y2.push(y1);
+        }
+    };
+    $('#productFilterDetail input[name="searchVenue"]').val(y2);
+
+
+
+
     $('input[name="search1"]').val('');
+    $('input[name="search2"]').val('');
     Product.loadProductListAjax();
 }
