@@ -57,6 +57,24 @@ $(document).ready(function(){
         $("p.m-title").css('width',w);
 
     });
+
+    var icons = {
+    header: "ui-icon-circle-arrow-e",
+    activeHeader: "ui-icon-circle-arrow-s"
+    };
+    // show menu khi click "#accordion", "#accordion-m"
+    $( "#accordion" ).accordion({
+        icons: icons,
+        heightStyle:"content",
+        collapsible: true,
+        active: false
+    });
+    $( "#accordion-m" ).accordion({
+        icons: icons,
+        heightStyle:"content",
+        collapsible: true,
+        active: false
+    });
 });
 
 function buttonUp(){
@@ -78,23 +96,7 @@ $("#show-hide-menu").click(function(){
     }    
 });
 
-var icons = {
-    header: "ui-icon-circle-arrow-e",
-    activeHeader: "ui-icon-circle-arrow-s"
-};
-// show menu khi click "#accordion", "#accordion-m"
-$( "#accordion" ).accordion({
-    icons: icons,
-    heightStyle:"content",
-    collapsible: true,
-    active: false
-});
-$( "#accordion-m" ).accordion({
-    icons: icons,
-    heightStyle:"content",
-    collapsible: true,
-    active: false
-});
+
 
     // change attribute of "#header-block" and "#search" when scroll window
 $(window).scroll(function(){
