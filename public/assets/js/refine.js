@@ -373,6 +373,12 @@ $('body').on('click', '.icon_like', function (){
     //dropdown effect
     $('.refine .refine-colum ul .fa-angle-down').click(function() {
          
+        z = $('#prices.li-up').length;
+        if (z == 1) {
+            $('.show-price').css('display','block');
+        }else{
+            $('.show-price').css('display','none');
+        }
         
         x = $(this).parents('.category');
         var attrContent = getComputedStyle(this, ':after').content;
@@ -541,9 +547,9 @@ function check_price_checked(){
     x = $('input#check-price.checked').length;
     if(x == 1){
         $('.show-price').css('display','none');
-        $('.refine .refine-colum.desktop .price .slider-3').css('opacity','1');
+        $('.refine .refine-colum.desktop .price.prices .slider-3').css('opacity','1');
     }else{
         $('.show-price').css('display','block');
-        $('.refine .refine-colum.desktop .price .slider-3').css('opacity','0.3');
+        $('.refine .refine-colum.desktop .price.prices .slider-3').css('opacity','0.3');
     }
 }
