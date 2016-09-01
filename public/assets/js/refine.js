@@ -293,8 +293,21 @@ $('body').on('click', '.icon_like', function (){
             //end - when click sort item
             //start - when click typemain
                 case "filterTypeMain":
-                    val_order = $(this).attr('value');
-                    $('input[name="filterTypeMain"]').val(val_order);
+                    z = $(this).attr('value');
+                    if( z == 'all'){
+                        val_order = $(this).attr('value');
+                        $('input[name="filterTypeMain"]').val(val_order);
+                    }else{
+
+                    myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login link bellow to continue.','Login');
+                    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                        $("button.my_btn_ok").click(function(){ // click button
+                           $('a.close-reveal-modal').trigger('click'); // will close modal
+                           window.location.replace("/auth/login");
+                        });
+                    });
+                }
+                    
                 break;
             //end - when click typemain
 
