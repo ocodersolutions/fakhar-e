@@ -11,7 +11,7 @@ foreach ($this->feedData as $prod) {
             <div class="uc_contact">
                 <div class="product_item_popup">
                     <img class="uc_avatar img-responsive" src="<?php echo ($prod->feedId==4?str_replace(array('/product/thumbnails/', 't.jpg'), array('/product/images/', '.jpg'), $prod->feedimageurl):$prod->feedimageurl) ?>" data-article-id="<?php echo $prod->feeddataid ?>" data-toggle="modal" data-target=".modal_quick_view"/>
-                    <a href="#" target="_blank" class="popup_item"></a>
+                    <a href="/service/feeddatadetail/<?php echo $prod->feeddataid . '/' . time() ?>" target="_blank" class="popup_item"></a>
                 </div>
                 <div class="uc_link">
                     <span class="uc_icon icon_like <?php if (in_array($prod->feeddataid, $likearray)) { echo 'active';} ?>" id="<?php echo  base64_encode($prod->feeddataid); ?>">

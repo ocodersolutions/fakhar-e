@@ -708,10 +708,6 @@ class ServiceController extends BaseActionController {
             $userInfo = $oAuth->getIdentity();
             $userId = $userInfo->userId;
             $this->layout()->showHeaderLinks = "LOGGED_IN";
-        }
-        if($userInfo == null){
-             $userId = 0;
-        }else{
             $userId = $userInfo->userId;
             $this->layout()->firstName = $userInfo->firstName;
         }
