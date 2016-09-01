@@ -709,6 +709,12 @@ class ServiceController extends BaseActionController {
             $userId = $userInfo->userId;
             $this->layout()->showHeaderLinks = "LOGGED_IN";
         }
+        if($userInfo == null){
+             $userId = 0;
+        }else{
+            $userId = $userInfo->userId;
+            $this->layout()->firstName = $userInfo->firstName;
+        }
 
         $oService = $this->getServiceLocator();
         $oFeedData = $oService->get('FeedDataTable');
@@ -759,7 +765,7 @@ class ServiceController extends BaseActionController {
         $__viewVariables['feedDataSizes'] = $oAttributes->getFeedDataSizes($aParams);
         $viewModel = new ViewModel($__viewVariables);
         $viewModel->setTerminal(true);
-        //return $viewModel;
+        $this->layout('layout/layout_elnove.phtml');
         return $__viewVariables;
         // return $this->response;
         //}
