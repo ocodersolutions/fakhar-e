@@ -759,7 +759,7 @@ class ServiceController extends BaseActionController {
         $__viewVariables['feedDataSizes'] = $oAttributes->getFeedDataSizes($aParams);
         $viewModel = new ViewModel($__viewVariables);
         $viewModel->setTerminal(true);
-        //return $viewModel;
+        $this->layout('layout/layout_elnove.phtml');
         return $__viewVariables;
         // return $this->response;
         //}
