@@ -55,6 +55,7 @@
                                 ->appendFile($this->basePath() . '/showhidepassword/hideShowPassword.min.js')
                                 ->appendFile('http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js')
                                 ->appendFile($this->basePath() . '/assets/js/header.js')
+                                ->appendFile($this->basePath() . '/assets/js/common.js')
                     ;
         ?>
     </head>
@@ -285,8 +286,8 @@
                                 <span>Sign up for newsletter</span>
                             </div>
                             <div class="newsletter-input ">
-                                <input placeholder="Your Email Address Here" >
-                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                                <input id="idNewsLetterInput" placeholder="Your Email Address Here" >
+                                <i class="fa fa-paper-plane-o" id="idNewsLetter" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
