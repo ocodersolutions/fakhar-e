@@ -527,8 +527,12 @@ class FeedDataTable extends BasicTableAdapter {
             $sWhere .= " AND `advertisercategory` = '{$aPostParams['category']}' ";
         }
 
-        if (isset($aPostParams['searchArticle']) && !empty($aPostParams['searchArticle']) )  {
-            $sWhere .= " AND `feed`.`name` LIKE '%".$aPostParams['searchArticle']."%' "; 
+        if (isset($aPostParams['searchArticle']) && !empty($aPostParams['searchArticle']) ) {
+            
+            $searcharray = explode(",",$aPostParams['searchArticle']);
+            foreach ($searcharray as $key => $value) {
+              $sWhere .= " AND `feed`.`name` LIKE '%".$value."%' ";
+            }
         }
         
         if (!empty($aPostParams['catids'])) {

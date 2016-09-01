@@ -101,7 +101,7 @@ $(window).scroll(function(){
     // if($(this).scrollTop() >= $("#header-block").height())
     if($(this).scrollTop() >= 20)
     {
-        $("#header-container").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#f6f6f4", "z-index": "99"});
+        $("#header-container").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
         if(window.innerWidth >= 768) 
         {                       
             $("#search").show();
@@ -127,7 +127,7 @@ $(window).scroll(function(){
     }
     if($(this).scrollTop() > 0)
     {
-        $("#mobile-header").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#f6f6f4", "z-index": "99"});
+        $("#mobile-header").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
     }
     else
     {
