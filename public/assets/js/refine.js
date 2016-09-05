@@ -277,9 +277,9 @@ $('body').on('click', '.icon_like', function (){
                     }
                     var discount = '';
                     discount = $('.item.selected[data-deal="discountcode"]').length;
-                    notload = 1;
                     if(discount == 1){
                         $('.deals .price').css('display','block');
+                        notload = 1;
                     }else{
                         $('.deals .price').css('display','none');
                     }
