@@ -327,9 +327,9 @@ $('body').on('click', '.icon_like', function (){
                 break;
 
         }
-        // if(discount != 1){
-        //     Product.loadProductListAjax(); 
-        // }
+        if(discount != 1){
+            Product.loadProductListAjax(); 
+        }
     });
   
     // select childs category
