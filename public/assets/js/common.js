@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     $('#idNewsLetter').click(function() { 
+        
     	var $email = $('#idNewsLetterInput'); //change form to id or containment selector
     	var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
     	if ($email.val() == '' || !re.test($email.val())) 
@@ -9,6 +10,7 @@ $(document).ready(function() {
         }
         else 
         {
+            $("#loading-div-background").show();
             $.ajax({
                 url: "/index/newsletter",
                 type: 'POST',
@@ -24,6 +26,7 @@ $(document).ready(function() {
                     {
                     	 myalert('alert_idNewsLetterInput2', 'type_cancel','Internal Server Error', 'Please contact site administrator.','','',function(){$('#alert_idNewsLetterInput2').foundation('reveal','close'); });
                     }
+                     $("#loading-div-background").hide();
                 }
             });                       	   
         }
