@@ -98,7 +98,7 @@ $('body').on('click', '.icon_like', function (){
 //select fileter    
     //deal
    $('.deals .item, .colors .list-color .color, .brands .list-brand li, .category .item, .category .has-child, .clear-filter, .orderBy li, .filterTypeMain input[name="filter"]').click(function(){
-    
+        notload = 0;
         mobile = $(this).closest('.mobile').length;
         desktop = $(this).closest('.desktop').length;
         parent = $(this).attr("data-parent");
@@ -277,6 +277,7 @@ $('body').on('click', '.icon_like', function (){
                     }
                     var discount = '';
                     discount = $('.item.selected[data-deal="discountcode"]').length;
+                    notload = 1;
                     if(discount == 1){
                         $('.deals .price').css('display','block');
                     }else{
@@ -296,18 +297,24 @@ $('body').on('click', '.icon_like', function (){
                 case "filterTypeMain":
                     z = $(this).attr('value');
                     if( z == 'all'){
-                        val_order = $(this).attr('value');
-                        $('input[name="filterTypeMain"]').val(val_order);
+                        $('input[name="filterTypeMain"]').val(z);
                     }else{
-
-                    myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login link bellow to continue.','Login');
-                    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
-                        $("button.my_btn_ok").click(function(){ // click button
-                           $('a.close-reveal-modal').trigger('click'); // will close modal
-                           window.location.replace("/auth/login");
-                        });
-                    });
-                }
+                        check_login = $('#status-login').attr('data-login');
+                        if(check_login != 1){
+                            myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login link bellow to continue.','Login');
+                            $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+                                $("button.my_btn_ok").click(function(){ // click button
+                                   $('a.close-reveal-modal').trigger('click'); // will close modal
+                                   window.location.replace("/auth/login");
+                                });
+                            });
+                            notload = 1;
+                        }else{
+                            $('input[name="filterTypeMain"]').val(z);
+                        }
+                        
+                        
+                    }
                     
                 break;
             //end - when click typemain
@@ -328,9 +335,10 @@ $('body').on('click', '.icon_like', function (){
                 break;
 
         }
-        if(discount != 1){
+        if(notload != 1){
             Product.loadProductListAjax(); 
         }
+        
     });
   
     // select childs category
