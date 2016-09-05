@@ -227,6 +227,7 @@ $('body').on('click', '.icon_like', function (){
                         $(this).addClass('selected');
                         $(this).closest('tr').prependTo('.'+y+' .list-brand table tbody');
                     }
+                    $('.list-brand').animate({scrollTop: 0}, 800); 
                     array_brand = $('.brands .item.selected');
                     var a2 =  [];
                     for (i = 0; i < array_brand.length ; i++) {
