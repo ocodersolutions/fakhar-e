@@ -327,9 +327,9 @@ $('body').on('click', '.icon_like', function (){
                 break;
 
         }
-        // if(discount != 1){
-        //     Product.loadProductListAjax(); 
-        // }
+        if(discount != 1){
+            Product.loadProductListAjax(); 
+        }
     });
   
     // select childs category
@@ -371,15 +371,18 @@ $('body').on('click', '.icon_like', function (){
     //clear filter
  
     //dropdown effect
-    $('.refine .refine-colum ul .fa-angle-down,.refine .refine-colum > ul > li').click(function() {
-         
+    $('.refine .refine-colum ul .fa-angle-down, .refine .refine-colum > ul > li').click(function() {
         z = $('#prices.li-up').length;
-        if (z == 1) {
-            $('.show-price').css('display','block');
-        }else{
-            $('.show-price').css('display','none');
+        p = $(this).attr('data-class');
+        if(p == 'prices'){
+            if (z > 0) {
+                $('.show-price').css('display','none');
+            }else{
+                $('.show-price').css('display','block');
+            }
         }
-        
+
+
         x = $(this).parents('.category');
         var attrContent = getComputedStyle(this, ':after').content;
         var currentId = $(this).attr("data-class");
@@ -522,9 +525,6 @@ function check_search_tag(){
     };
     $('#productFilterDetail input[name="searchVenue"]').val(y2);
 
-
-
-
     $('input[name="search1"]').val('');
     $('input[name="search2"]').val('');
     Product.loadProductListAjax();
@@ -532,17 +532,14 @@ function check_search_tag(){
 
 
 $('input#check-price').click(function(){
-
-            if ($(this).hasClass("checked") == false) {
-                $(this).addClass('checked');
-            } else {
-                $(this).removeClass('checked');
-            }
-            check_price_checked();
-    // 
-    // 
-    // alert(123);
+    if ($(this).hasClass("checked") == false) {
+        $(this).addClass('checked');
+    } else {
+        $(this).removeClass('checked');
+    }
+    check_price_checked();
 });
+
 function check_price_checked(){
     x = $('input#check-price.checked').length;
     if(x == 1){
