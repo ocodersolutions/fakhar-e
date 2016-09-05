@@ -371,7 +371,7 @@ $('body').on('click', '.icon_like', function (){
     //clear filter
  
     //dropdown effect
-    $('.refine .refine-colum ul .fa-angle-down').click(function() {
+    $('.refine .refine-colum ul .fa-angle-down,.refine .refine-colum > ul > li').click(function() {
          
         z = $('#prices.li-up').length;
         if (z == 1) {
