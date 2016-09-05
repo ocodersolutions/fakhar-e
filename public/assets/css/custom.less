@@ -4561,6 +4561,7 @@ footer{
         margin: 0;
         left:0;
         max-width: 100%;
+        min-height: 0;
     }
 }
 /***** ----------------------------------End style for info/how-it-work-------------------------------------*****/
@@ -5099,6 +5100,18 @@ footer{
                     .line_bar_sub {
                         width: 100%;
                         padding: 30px;
+                        .ui-slider{
+                            position: relative;
+                            text-align: left;
+                        }
+                        .ui-slider-horizontal {
+                            height: .3em;
+                            background: #6B8AD1 !important;
+                            .ui-slider-handle{
+                                margin-left: 0;
+                                top: -0.18em ;
+                            }
+                        }
                     }
                 }
             }
@@ -5214,8 +5227,26 @@ footer{
                     .line-bar {
                         margin-top: 0;
                         width: 100%;
+                        .ui-slider-horizontal {
+                            .ui-slider-handle{
+                                margin-left: 0;
+                                top: -0.8em !important;
+                                width: 1.6em ;
+                                height: 1.6em ;
+                            }
+                        }
                     }
+                    
                 }
+            }
+        }
+    }
+}
+@media (min-width: 320px)and(max-width: 480px) {
+.reveal-modal{
+        .my_body{
+            .paragraph{
+                padding: 0 15px;
             }
         }
     }
