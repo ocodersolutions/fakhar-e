@@ -382,7 +382,6 @@ $('body').on('click', '.icon_like', function (){
             }
         }
 
-
         x = $(this).parents('.category');
         var attrContent = getComputedStyle(this, ':after').content;
         var currentId = $(this).attr("data-class");
@@ -441,8 +440,6 @@ $(function() {
             Product.loadProductListAjax();
         }
     });
-    // $("#min-price").val("$" + $(".slider-3").slider("values", 0));
-    // $("#max-price").val("$" + $(".slider-3").slider("values", 1));
 });
 
 $(function() {
@@ -544,9 +541,9 @@ function check_price_checked(){
     x = $('input#check-price.checked').length;
     if(x == 1){
         $('.show-price').css('display','none');
-        $('.refine .refine-colum.desktop .price.prices .slider-3').css('opacity','1');
+        $('.price.prices .slider-3').css('opacity','1');
     }else{
         $('.show-price').css('display','block');
-        $('.refine .refine-colum.desktop .price.prices .slider-3').css('opacity','0.3');
+        $('.price.prices .slider-3').css('opacity','0.3');
     }
 }
