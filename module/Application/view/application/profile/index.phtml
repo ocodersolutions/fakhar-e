@@ -257,7 +257,7 @@ jQuery(window).load(function () {
     });
 });
 
-jQuery("#clearFilters").click(function($){
+$("#clearFilters").click(function(){
     $(".thumb-info").each(function (index, element) {
         if ($(element).hasClass("lock")) {
             $("#" + element.id + "Input").prop("checked", false);
