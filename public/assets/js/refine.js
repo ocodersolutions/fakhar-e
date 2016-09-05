@@ -402,7 +402,6 @@ $('body').on('click', '.icon_like', function (){
                 $(this).removeClass('change selected');
             }
         }
-        alert(currentId);
         $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum.mobile .' + currentId).animate({
 
             left: "+=50",
