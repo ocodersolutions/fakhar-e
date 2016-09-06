@@ -5,8 +5,8 @@ var pathname = $(location).attr('href');
     
 $(document).ready(function(){
     if (pathname.indexOf("/profile") >0){
-             flag = true;
-             $("#show-hide-menu").addClass('angleplus');
+            $("#show-hide-menu").addClass('angleplus');
+            flag = true;
         }
     // hide "#search" when document ready
     $("#search").hide();
@@ -117,12 +117,13 @@ $(document).on("click", "#show-hide-menu", function(){
         $("#search").show();
         $(".searchbox").addClass("searchbox-open").css("z-index", "99");
          $('#row-top-navbar').removeAttr('style');
+         $("#top-nav").css("opacity","0");
         // $('.searchbox-icon').click();
         flag = true;
     } else {
         $("#search").hide();
         $(".searchbox").removeClass("searchbox-open");
-       
+        $("#top-nav").removeAttr("style");
         $('#row-top-navbar').css("display","block");
         flag = false;
     }   
@@ -132,22 +133,29 @@ $(document).on("click", "#show-hide-menu", function(){
 
     // change attribute of "#header-block" and "#search" when scroll window
 $(window).scroll(function(){
-
     // if($(this).scrollTop() >= $("#header-block").height())
     if($(this).scrollTop() >= 20)
     {
+        if (pathname.indexOf("/profile") > 0){
+                
+                if (flag == true){
+                    $('#row-top-navbar').removeAttr('style');
+                    $("#show-hide-menu").addClass("angleplus");
+                    flag == false;
+                }
+             }
         $("#header-container").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
         if(window.innerWidth >= 768) 
         {                       
             
-            $("#search").show();
-            //$("#top-nav").css("opacity","0");
-            $(".form_search").hide();
-            $("#header-container").find(".row").addClass("wrap-header-top-navbar");
-            $(".searchbox").addClass("searchbox-open").css("z-index", "99");
-            $("#show-hide-menu").addClass("angleplus");
-            flag = true;
-           
+                 $("#search").show();
+                $("#top-nav").css("opacity","0");
+                $(".form_search").hide();
+                $("#header-container").find(".row").addClass("wrap-header-top-navbar");
+                $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+                $("#show-hide-menu").addClass("angleplus");
+                 flag = true;
+             
         }
     }
     else 
@@ -156,15 +164,17 @@ $(window).scroll(function(){
         
         if(window.innerWidth >= 768) 
         {                       
-            $("#search").hide();
-            $(".form_search").show();
-            $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
-            $(".searchbox").removeClass("searchbox-open");
             
-            flag = true;
             if (pathname.indexOf("/profile") < 0){
               $("#show-hide-menu").removeClass("angleplus");
               flag = false;
+              $("#search").hide();
+                $(".form_search").show();
+                $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
+                $(".searchbox").removeClass("searchbox-open");
+                $("#top-nav").removeAttr("style");
+            }else{
+                flag = true;
             }
         }
         // else
