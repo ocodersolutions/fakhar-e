@@ -1,0 +1,10 @@
+/*style -----*/
+#row-top-navbar{
+    display: none;
+}
+#menu #search{
+    display: none !important;
+}
+#search-bar{
+	display: none;
+}

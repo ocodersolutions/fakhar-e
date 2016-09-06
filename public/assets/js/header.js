@@ -1,8 +1,11 @@
-var flag = false;
+var flag = true;
 
 $(document).ready(function(){
+    var pathname = $(location).attr('href');
+    console.log(pathname);
         // hide "#search" when document ready
     $("#search").hide();
+
     var submitIcon = $('.searchbox-icon');
     var inputBox = $('.searchbox-input');
     var searchBox = $('.searchbox');
@@ -105,13 +108,17 @@ $("#show-hide-menu").click(function(){
 $(document).on("click", "#show-hide-menu", function(){
     $(this).toggleClass("angleplus");
     if(flag == false){
+        $("#top-nav").removeAttr("style");
         $("#search").show();
         $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+         $('#row-top-navbar').removeAttr('style');
         // $('.searchbox-icon').click();
         flag = true;
     } else {
         $("#search").hide();
         $(".searchbox").removeClass("searchbox-open");
+       
+        $('#row-top-navbar').css("display","block");
         flag = false;
     }   
 });
@@ -127,6 +134,7 @@ $(window).scroll(function(){
         if(window.innerWidth >= 768) 
         {                       
             $("#search").show();
+            $("#top-nav").css("opacity","0");
             $(".form_search").hide();
             $("#header-container").find(".row").addClass("wrap-header-top-navbar");
             $(".searchbox").addClass("searchbox-open").css("z-index", "99");
@@ -137,6 +145,8 @@ $(window).scroll(function(){
     else 
     {
         $("#header-container").css("position","static");
+        $("#top-nav").removeAttr("style");
+    
         if(window.innerWidth >= 768) 
         {                       
             $("#search").hide();

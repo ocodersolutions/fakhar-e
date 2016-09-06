@@ -2,14 +2,14 @@
 $weightSliderDefault = $this->weight['value'];
 $heightSliderDefault = $this->height['value'];   
 ?>
-
-
+ <?php echo $this->headLink()
+                 ->appendStylesheet($this->basePath() . '/assets/css/you_page.css');
+ ?>
 
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.core.js"></script>
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.widget.js"></script>
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.mouse.js"></script>
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
-
 
 <div class="content-page row" id="profile_you_page">
     <div id="profile-you-page" class="col-lg-10 col-lg-offset-1 topnavi">
@@ -434,5 +434,6 @@ $(window).load(function () {
         dataType: 'json',
         success: function (result) {
         }});
+    
 });
 </script>

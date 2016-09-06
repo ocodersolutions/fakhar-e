@@ -4,7 +4,10 @@
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.widget.js"></script>
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.mouse.js"></script>
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.slider.js"></script>
-
+ <?php echo $this->headLink()
+                 ->appendStylesheet($this->basePath() . '/assets/css/you_page.css');
+ ?>
+ 
 <div class="row">
     <div id="profile_price" class="content-page">
         <div class="row row_here">
