@@ -47,6 +47,7 @@ $(".sort-item-select").click(function(){
     var content_sl = $(this).html();
     $(this).parents(".sort-item").find(".sort-item-selected").html(content_sl);
     $(this).parents(".uc_line_content").slideUp();
+     $(this).parents(".uc_des").prepend('<li data-parent="orderBy" value="" class="sort-item-select" >Sort By</li>');
 });
 
 // Click like & unline 
