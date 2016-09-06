@@ -313,7 +313,6 @@ $('body').on('click', '.icon_like', function (){
                             $('input[name="filterTypeMain"]').val(z);
                         }
                         
-                        
                     }
                     
                 break;
@@ -477,7 +476,7 @@ $(function() {
     });
 });
 
-$('form.searchbox, form.form_search').submit(function(event){
+$('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(event){
     event.preventDefault(); 
     y = '';
     x = '';
@@ -493,6 +492,7 @@ $('form.searchbox, form.form_search').submit(function(event){
         x = $('form.form_search input[name="search2"]').val();
         (x != '' ) ? y = 1 : y = 0;
     }
+
 
     if (y == 1) {
         y = 'venue';
@@ -545,10 +545,13 @@ function check_search_tag(){
 $('input#check-price').click(function(){
     if ($(this).hasClass("checked") == false) {
         $(this).addClass('checked');
+        $('input[name="profileBasePrices"]').val('0');
     } else {
         $(this).removeClass('checked');
+        $('input[name="profileBasePrices"]').val('1');
     }
     check_price_checked();
+    Product.loadProductListAjax(); 
 });
 
 function check_price_checked(){
@@ -561,3 +564,4 @@ function check_price_checked(){
         $('.price.prices .slider-3').css('opacity','0.3');
     }
 }
+
