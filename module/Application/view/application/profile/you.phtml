@@ -208,6 +208,10 @@ $(function() {
         slide: function( event, ui ) {
             $( "#weightSliderValue" ).val( ui.value + (ui.value==weightMax?'+':''));
             $( "#idWeightSliderInput" ).val(ui.value);
+        },
+        change: function( event, ui ) {
+            $( "#weightSliderValue" ).val( ui.value + (ui.value==weightMax?'+':''));
+            $( "#idWeightSliderInput" ).val(ui.value);
         }
     });
     //Process when client input anything to textbox
