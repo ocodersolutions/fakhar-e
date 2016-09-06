@@ -14,13 +14,13 @@ class EngineTable extends BasicTableAdapter {
 
     public function profileBasedProductsQuery() 
     {
-        return ' (1) ';
+        //return ' (1) ';
         $oUserProfile = new UserProfilesTable( $this->getTableGateway() );
         $oUserProfile->setServiceLocator( $this->getServiceLocator() );
         $aUserProfile = $oUserProfile->getUserProfile();
         
         $sQuery = ' ( ';
-        
+            
         # outerwear = jackets
         if( isset($aUserProfile['prices']['jacket']) ) {
             $sPriceFilter = (( $aUserProfile['prices']['jacket'] < 1500 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['jacket']} " : "");
@@ -29,29 +29,29 @@ class EngineTable extends BasicTableAdapter {
         
         # top = dress shirts
         if( isset($aUserProfile['prices']['shirt']) ) {
-            $sPriceFilter = (( $aUserProfile['prices']['shirt'] < 250 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['shirt']} " : "");
+            $sPriceFilter = (( $aUserProfile['prices']['shirt'] < 500 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['shirt']} " : "");
             $sQuery .= " (`feed`.`uid` in (select distinct productUID from ProductAttributes where type = 'categories' and value = 7) {$sPriceFilter} ) or ";
         }
 
         # suits = suits                 # pants = 40% of suits              # shorts = 40% of suits
         if( isset($aUserProfile['prices']['suit']) ) {
-            $sPriceFilter = (( $aUserProfile['prices']['suit'] < 1500 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['suit']} " : "");
+            $sPriceFilter = (( $aUserProfile['prices']['suit'] < 2000 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['suit']} " : "");
             $sQuery .= " (`feed`.`uid` in (select distinct productUID from ProductAttributes where type = 'categories' and value = 36) {$sPriceFilter} ) or ";
             
-            $sPriceFilter = (( $aUserProfile['prices']['suit'] < 1500 ) ? " and `feed`.`price` <= ".($aUserProfile['prices']['suit'] * 0.4)." " : "");
+            $sPriceFilter = (( $aUserProfile['prices']['suit'] < 2000 ) ? " and `feed`.`price` <= ".($aUserProfile['prices']['suit'] * 0.4)." " : "");
             $sQuery .= " (`feed`.`uid` in (select distinct productUID from ProductAttributes where type = 'categories' and value = 37)  {$sPriceFilter} ) or ";
             $sQuery .= " (`feed`.`uid` in (select distinct productUID from ProductAttributes where type = 'categories' and value = 54)  {$sPriceFilter} ) or ";
         }
 
         # Footwear = shoe
         if( isset($aUserProfile['prices']['shoes']) ) {
-            $sPriceFilter = (( $aUserProfile['prices']['shoes'] < 350 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['shoes']} " : "");
+            $sPriceFilter = (( $aUserProfile['prices']['shoes'] < 1000 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['shoes']} " : "");
             $sQuery .= " (`feed`.`uid` in (select distinct productUID from ProductAttributes where type = 'categories' and value = 4)  {$sPriceFilter} ) or ";
         }        
         
         # Accessories = watch
         if( isset($aUserProfile['prices']['watch']) ) {
-            $sPriceFilter = (( $aUserProfile['prices']['watch'] < 350 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['watch']} " : "");
+            $sPriceFilter = (( $aUserProfile['prices']['watch'] < 2000 ) ? " and `feed`.`price` <= {$aUserProfile['prices']['watch']} " : "");
             $sQuery .= " (`feed`.`uid` in (select distinct productUID from ProductAttributes where type = 'categories' and value = 63)  {$sPriceFilter} ) or ";
         }   
 
@@ -60,7 +60,7 @@ class EngineTable extends BasicTableAdapter {
         
         $sQuery .= ' ) ';
          
-        //echo $sQuery;  
+        //echo $sQuery;   die;
         //echo '<pre>'; print_r($aUserProfile); exit(0);        
       
         return $sQuery;
