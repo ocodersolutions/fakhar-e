@@ -1,9 +1,14 @@
-var flag = true;
-
+var flag = false;
+// get url of page
+var pathname = $(location).attr('href');
+   
+    
 $(document).ready(function(){
-    var pathname = $(location).attr('href');
-    console.log(pathname);
-        // hide "#search" when document ready
+    if (pathname.indexOf("/profile") >0){
+             flag = true;
+             $("#show-hide-menu").addClass('angleplus');
+        }
+    // hide "#search" when document ready
     $("#search").hide();
 
     var submitIcon = $('.searchbox-icon');
@@ -127,34 +132,40 @@ $(document).on("click", "#show-hide-menu", function(){
 
     // change attribute of "#header-block" and "#search" when scroll window
 $(window).scroll(function(){
+
     // if($(this).scrollTop() >= $("#header-block").height())
     if($(this).scrollTop() >= 20)
     {
         $("#header-container").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
         if(window.innerWidth >= 768) 
         {                       
+            
             $("#search").show();
-            $("#top-nav").css("opacity","0");
+            //$("#top-nav").css("opacity","0");
             $(".form_search").hide();
             $("#header-container").find(".row").addClass("wrap-header-top-navbar");
             $(".searchbox").addClass("searchbox-open").css("z-index", "99");
             $("#show-hide-menu").addClass("angleplus");
             flag = true;
+           
         }
     }
     else 
     {
         $("#header-container").css("position","static");
-        $("#top-nav").removeAttr("style");
-    
+        
         if(window.innerWidth >= 768) 
         {                       
             $("#search").hide();
             $(".form_search").show();
             $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
             $(".searchbox").removeClass("searchbox-open");
-            $("#show-hide-menu").removeClass("angleplus");
-            flag = false;
+            
+            flag = true;
+            if (pathname.indexOf("/profile") < 0){
+              $("#show-hide-menu").removeClass("angleplus");
+              flag = false;
+            }
         }
         // else
         // {
