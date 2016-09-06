@@ -1,3 +1,5 @@
+var flag = false;
+
 $(document).ready(function(){
         // hide "#search" when document ready
     $("#search").hide();
@@ -85,7 +87,7 @@ function buttonUp(){
     } 
 }
 
-var flag = false;
+
     //show or hide '.searchbox-icon' when click "#show-hide-menu" or '.searchbox-icon' (sub-page)
 $("#show-hide-menu").click(function(){
     $("#show-hide-menu").toggleClass("angleplus");
@@ -128,6 +130,8 @@ $(window).scroll(function(){
             $(".form_search").hide();
             $("#header-container").find(".row").addClass("wrap-header-top-navbar");
             $(".searchbox").addClass("searchbox-open").css("z-index", "99");
+            $("#show-hide-menu").addClass("angleplus");
+            flag = true;
         }
     }
     else 
@@ -139,6 +143,8 @@ $(window).scroll(function(){
             $(".form_search").show();
             $("#header-container").find(".row").removeClass("wrap-header-top-navbar");
             $(".searchbox").removeClass("searchbox-open");
+            $("#show-hide-menu").removeClass("angleplus");
+            flag = false;
         }
         // else
         // {

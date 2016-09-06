@@ -379,8 +379,7 @@ $('body').on('click', '.icon_like', function (){
     //clear filter
  
     //dropdown effect
-    $('.refine .refine-colum ul .fa-angle-down, .refine .refine-colum > ul > li').click(function() {
-        
+    $('.refine .refine-colum ul .fa-angle-down').click(function() {
         z = $('#prices.li-up').length;
         p = $(this).attr('data-class');
         if(p == 'prices'){
@@ -390,6 +389,7 @@ $('body').on('click', '.icon_like', function (){
                 $('.show-price').css('display','block');
             }
         }
+
         x = $(this).parents('.category');
         var attrContent = getComputedStyle(this, ':after').content;
         var currentId = $(this).attr("data-class");
@@ -401,8 +401,7 @@ $('body').on('click', '.icon_like', function (){
                 $(this).removeClass('change selected');
             }
         }
-        $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum.mobile .' + currentId).animate({
-
+        $('.refine .refine-colum .' + currentId +', .fsp-wrapper .refine-colum .' + currentId + '').animate({
             left: "+=50",
             height: "toggle"
         }, 800, function() {});
@@ -414,7 +413,12 @@ $('body').on('click', '.icon_like', function (){
             $('li#'+y).removeClass('li-up');
         }
     });
-   
+   $(".refine .refine-colum > ul > li, #1").click(function () {
+        var tog = $(this).attr("data-class");
+        $("." + tog).slideToggle(800, function () {});
+        var ifa = $(this).closest('ul').find("i" + "[data-class='" + tog +"']");
+            ifa.toggleClass('fa-selected');
+    });
     //add element for price filter
     $(document).ready(function() {
         //price
