@@ -59,6 +59,7 @@ $login = $this->login;
                     $('.notification img').css('display','none');
                     if(result == 1 ){         
                         $('.notification .alert-status').text( 'Removed !' ).css('color','green').fadeIn();
+                        $('span[data-alert-id="'+feeddataid+'"]').removeClass('active');
                     }else{
                         $('.notification .alert-status').text( 'Nothing' ).css('color','red').fadeIn();
                     }
@@ -71,11 +72,12 @@ $login = $this->login;
 
     //sale alert
     $("form.modal_form_alert button[name='alert-submit']").click(function(event){
-        $(this).fadeOut();
+        
         $('.notification img').css('display','block');
         email = $('.modal_form_alert input[name="email-alert"]').val();
         feeddataid = $('.modal_form_alert input[name="feeddataid"]').val();
         if( isEmail(email)) {
+            $(this).fadeOut();
             $.ajax({
                 url : "/service/getemailalert",
                 type : "post",
@@ -88,6 +90,7 @@ $login = $this->login;
                     $('.notification img').css('display','none');
                     if(result == 1 ){         
                         $('.notification .alert-status').text( 'Done !' ).css('color','green').fadeIn();
+                        $('span[data-alert-id="'+feeddataid+'"]').addClass('active');
                     }else{
                         $('.notification .alert-status').text( 'Email already exists' ).css('color','red').fadeIn();
                     }
