@@ -2,13 +2,16 @@
 
 $page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
 $title = 'ELNove - '.$this->feedDataDetail['caption'];
+$exist = $this->recordExists;
+$login = $this->login;
+
 ?>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
     <i class="fa fa-bell-o" aria-hidden="true"></i>
-    <h2 class="popup_alert_title">CREATE SALE ALERT</h2>
+    <h2 class="popup_alert_title"><?php if ($exist == 0) { ?> CREATE SALE ALERT <?php } ?></h2>
 </div>
 <div class="modal-body">
     <img class="img-responsive" src="<?php echo $this->feedDataDetail['imageurl']; ?>" alt="product images"/>
@@ -17,21 +20,58 @@ $title = 'ELNove - '.$this->feedDataDetail['caption'];
     <p class="modal_price_item"><span><?php echo ($this->feedDataDetail['onsale']=='Y'?$this->feedDataDetail['saleprice']:$this->feedDataDetail['price'])?></span><?php echo $this->feedDataDetail['currency'] ?></p>
 </div>
 <div class="modal-footer">
-    <p class="modal_footer_p1">Waiting for this item to go on sale?</p>
-    <p class="modal_footer_p2">We'll send an email when the price drops.</p>
+    <p class="modal_footer_p1"><?php if ($exist == 0) { ?> Waiting for this item to go on sale? <?php } ?></p>
+    <p class="modal_footer_p2"><?php if ($exist == 0) { ?> We'll send an email when the price drops. <?php } ?></p>
     <div class="notification">
         <p class="alert-status" style=" font-weight: bold;"></p>
         <img style="max-width: 15%; display: none; margin: 0 auto;" src="/assets/images/spinner.gif">
     </div>
     <form class="modal_form_alert">
-        <input type="text" name="email-alert" placeholder="Youre Email Address">
+
+
+        <input type="<?php if ($login == 1) { echo 'hidden'; } ?>" value="<?php echo $this->feedEmail; ?>" name="<?php if ($exist == 1) { echo 'remove-alert-submit';}else{echo 'email-alert';} ?>" placeholder="Youre Email Address">
+
         <input type='hidden' type="text" name="feeddataid" value="<?php echo $this->feedDataDetail['id']; ?>">
-        <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
+        
+        <?php if($exist == 1) { ?>
+            <button class="btn-st-blue" type="submit" name="remove-alert-submit">REMOVE SALE ALERT</button>
+        <?php }else{ ?>
+            <button class="btn-st-blue" type="submit" name="alert-submit">SET SALE ALERT</button>
+        <?php } ?>
     </form>
-    <span>By submiting this request,I confirm I agree with the Terms & Conditions</span>                    
+    <?php if ($exist == 0) { ?>  <span>By submiting this request,I confirm I agree with the Terms & Conditions</span> <?php } ?>                    
 </div>
 <script type="text/javascript">
+    //remove sale alert
+    $("form.modal_form_alert button[name='remove-alert-submit']").click(function(event){
+        $(this).fadeOut();
+        email = $('.modal_form_alert input[name="remove-alert-submit"]').val();
+        feeddataid = $('.modal_form_alert input[name="feeddataid"]').val();
+            $.ajax({
+                url : "/service/removeemailalert",
+                type : "post",
+                dataType:"text",
+                data : {
+                    'email' : email,
+                    'feeddataid' : feeddataid,
+                },
+                success:function(result) {
+                    $('.notification img').css('display','none');
+                    if(result == 1 ){         
+                        $('.notification .alert-status').text( 'Removed !' ).css('color','green').fadeIn();
+                    }else{
+                        $('.notification .alert-status').text( 'Nothing' ).css('color','red').fadeIn();
+                    }
+                }
+            });
+
+        event.preventDefault();
+    });
+
+
+    //sale alert
     $("form.modal_form_alert button[name='alert-submit']").click(function(event){
+        $(this).fadeOut();
         $('.notification img').css('display','block');
         email = $('.modal_form_alert input[name="email-alert"]').val();
         feeddataid = $('.modal_form_alert input[name="feeddataid"]').val();
