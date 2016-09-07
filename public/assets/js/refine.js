@@ -62,6 +62,10 @@ $(".sort-item-select").click(function(){
         ishidden = false;
     }
 });
+ //when click ".sort-item-select"inmobile
+ $("#sis-content-popup .sort-item-select").click(function(){
+    $('a.fsp-close').trigger('click') ; 
+ });
 
 // Click like & unline 
 $('body').on('click', '.icon_like', function (){
