@@ -81,7 +81,7 @@ var Product = {
 
 $(document).ready(function() {
     //Auto load first Page Products when document ready
-    Product.loadProductListAjax();
+    //Product.loadProductListAjax();
 
         //check if width of window >=992 then
     if(window.innerWidth >= 992)

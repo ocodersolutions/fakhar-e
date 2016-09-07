@@ -723,7 +723,7 @@ ul {
                 text-transform: uppercase;
                 font-size: 13px;
                 position: relative;
-                padding: 0px;
+                padding: 0;
                 border-bottom: 1px solid #eee;
                 a{
                     padding-left: 34px;
@@ -745,6 +745,13 @@ ul {
                     background: #F0F1F2;
                     font-weight: bold;
                 }
+            }
+        }
+    }
+    #sis-content-popup{
+        ul{
+            li{
+                padding: 0 34px;
             }
         }
     }
@@ -3293,7 +3300,7 @@ footer{
 	    margin: 2px 0;
 
 	}
-	
+
 	.category,.brands,.colors,.deals,.sizes,.stores {
 	    display: none;
 	}
@@ -3315,11 +3322,11 @@ footer{
 		top: 70px;
         i.fa.fa-angle-down{
             color: rgba(255, 0, 0, 0);
-            margin-top: -45px;
+            margin-top: -52px;
             margin-right: 28px;
-            right: 0px;
-            width: 20px;
-            height: 20px;
+            right: -14px;
+            width: 40px;
+            height: 36px;
             position: absolute;
             cursor: pointer;
         }
@@ -3339,7 +3346,11 @@ footer{
 			    top: 0px;
 			    right: 30px;
 		    }
+            
 		}
+        // li#deals{
+        //         margin-bottom: 65px;
+        //     }
         li.item.selected{
             background: #F0F1F2;
         }
@@ -3349,8 +3360,11 @@ footer{
         li.item:after{
             content: "";
         }
-        .li-up:after{
-            content: "\f106";
+        .li-up{
+            background: #f0f1f3;
+                &:after{
+                content: "\f106";
+            }
         }
 		li.change{
 				background-color:#F0F1F2;
@@ -3376,6 +3390,7 @@ footer{
 			}
 			.selected {
 				color:#444444;
+                background-color: #F7F7F7;
 				&:after{
 					content: "\f00c" !important;
 				    font: normal 13px/1 FontAwesome;
@@ -3422,8 +3437,12 @@ footer{
     						content: "";
     						top:8px;
     					}
+
     				}
-    				
+    				.selected{
+                        color: #444444;
+                        font-weight: bold;
+                    }
 			    }
 			}
 		}
@@ -3552,8 +3571,13 @@ footer{
 		}
 	}
 	.m-button-foot{
+        border-top:1px solid #eee;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
         margin-top: 70px;
-		padding: 10px;
+		padding:10px;
+        background: #fff;
 		.btn-refine{
 			padding:0;
 			&:first-child{
@@ -3569,6 +3593,10 @@ footer{
 			color: #444444;
 			line-height: 50px;
 			text-align: center;
+                &:active{
+                    background: #E6ECF1;
+                    box-shadow: 0px 2px 3px #888888;
+                }
 			}
 		}
 		
@@ -3582,6 +3610,8 @@ footer{
 			padding:0 34px;
 			border-bottom: 1px solid #eee;
 			label{
+                cursor: pointer;
+                display: block;
 				line-height: 65px;
 				margin: 0;
 				font-weight: 400;
@@ -3594,6 +3624,10 @@ footer{
 				width: 16px;
 				height: 16px;
 			}
+            input[type=radio]:checked + label{
+                background: #F7F7F7;
+                color:red;
+            }
 		}
 	}
 

@@ -436,6 +436,7 @@ $('body').on('click', '.icon_like', function (){
         $("." + tog).slideToggle(800, function () {});
         var ifa = $(this).closest('ul').find("i" + "[data-class='" + tog +"']");
             ifa.toggleClass('fa-selected');
+            $(this).toggleClass('li-up');
     });
     //add element for price filter
     $(document).ready(function() {
@@ -582,4 +583,9 @@ function check_price_checked(){
         $('.price.prices .slider-3').css('opacity','0.3');
     }
 }
+// function click button apply refine search in mobile
+$('button#apply-submit').click(function(){
+    $("a.fsp-close").trigger('click');
+})
+// function click label radios form
 

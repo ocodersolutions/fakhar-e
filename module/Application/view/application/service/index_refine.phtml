@@ -132,20 +132,20 @@
         <div class="option-filter">
             <form class="filterTypeMain">     
             <div class="option-filter-row">
-                <label><span>ALL</span>
+                <label for="RadioAll"><span>ALL</span>
                 </label>
-                <input data-parent="filterTypeMain" type="radio" name="filter" value="all" checked="checked">
+                <input data-parent="filterTypeMain" type="radio" name="filter" value="all" checked="checked" id="RadioAll">
             </div>
             <div class="option-filter-row">
-                <label><span>SALE</span>
+                <label for="RadioSale"><span>SALE</span>
                 </label>
-                <input data-parent="filterTypeMain" type="radio" name="filter" value="sale">
+                <input data-parent="filterTypeMain" type="radio" name="filter" value="sale" id="RadioSale">
             </div>
 
             <div class="option-filter-row">
-                <label><span>SAVE ITEMS</span>
+                <label for="RadioSaveItem"><span>SAVE ITEMS</span>
                 </label>
-                <input data-parent="filterTypeMain" type="radio" name="filter" value="saveitem">
+                <input data-parent="filterTypeMain" type="radio" name="filter" value="saveitem" id="RadioSaveItem">
             </div>
             </form>
         </div>
@@ -267,7 +267,7 @@
             </ul>
         </div>
     </ul>
-            <div class="m-button-foot col-xs-12">
+            <div class="m-button-foot">
                 <div class="col-xs-6 btn-refine">
                     <button data-parent="clear" type="submit" class="clear-filter" form="form1" value="Submit" name="clear-filter">CLEAR FILTER</button>
                 </div>
