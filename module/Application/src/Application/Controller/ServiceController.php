@@ -624,15 +624,25 @@ class ServiceController extends BaseActionController {
 
     //Function is used to get products on filter basis
     public function getfeedsAction() {
+        $oService = $this->getServiceLocator();
+        $alert = $oService->get('ArticleClosesetTable');
+        
         $request = $this->getRequest();
 
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
+        $email = $userInfo->email;
+        $getAlert = $alert->getAlertArticles($email);
+        $salealertarray = array();
+        if(count($getAlert)>0) {
+            foreach($getAlert as $feeddata) {
+                $salealertarray[] = $feeddata['feeddataid'];
+            }
+        }
+        $__viewVariables['salealertarray'] = $salealertarray;
         $userId = isset($userInfo->userId) ? $userInfo->userId : 0;
-        // $userId = 0;
         $aQueryParams = $this->params()->fromQuery();
         if ($request->isXmlHttpRequest() || (isset($aQueryParams['test']) && $aQueryParams['test']=='yes') ) { 
-            $oService = $this->getServiceLocator();
             $oFeedData = $oService->get('FeedDataTable');
 
             $oArticleCloseset = $oService->get('ArticleClosesetTable');

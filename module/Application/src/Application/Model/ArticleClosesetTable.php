@@ -40,7 +40,20 @@ class ArticleClosesetTable extends BasicTableAdapter {
         $count = $rowset->count();
         return $count;
     }
+    public function getAlertArticles($email) {
+        // $userid = (int) $userid;
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+        $select = $sql->select(array('ac' => 'articlealert'));
+        $select->where(array('ac.email' => $email));
 
+        $resultSet = array();
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new \Zend\Db\ResultSet\ResultSet();
+        $resultSet->initialize($results);
+        $resultSet = $resultSet->toArray();
+        return $resultSet;
+
+    }
     public function getLikedArticles($userid) {
         $userid = (int) $userid;
         $sql = new Sql($this->getServiceLocator()->get('db'));
