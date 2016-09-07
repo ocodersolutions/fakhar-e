@@ -865,7 +865,21 @@ return array(
                     ),
                     
                 ),
-            ),    
+            ),        
+            'style' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/style',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Style',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    
+                ),
+            ),  
             
             /* 'auth' => array(
               'type' => 'Zend\Mvc\Router\Http\Literal',
@@ -946,6 +960,7 @@ return array(
             'Application\Controller\Comingsoon' => 'Application\Controller\ComingsoonController',
             'Application\Controller\Bucket' => 'Application\Controller\BucketController',
             'Application\Controller\Email' => 'Application\Controller\EmailController',
+            'Application\Controller\Style' => 'Application\Controller\StyleController',
         ),
     ),
     'controller_plugins' => array(
