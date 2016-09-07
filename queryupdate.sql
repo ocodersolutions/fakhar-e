@@ -1,3 +1,5 @@
+ALTER TABLE `logs` ADD `filterTypeMain` VARCHAR(50) NOT NULL AFTER `profileBasePrices`, ADD `orderBy` VARCHAR(50) NOT NULL AFTER `filterTypeMain`, ADD `searchArticle` VARCHAR(500) NOT NULL AFTER `orderBy`, ADD `searchVenue` VARCHAR(500) NOT NULL AFTER `searchArticle`;
+
 CREATE TABLE `articlealert` (
   `alertid` int(50) NOT NULL,
   `feeddataid` int(50) NOT NULL,
