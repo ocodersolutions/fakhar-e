@@ -839,7 +839,7 @@ class ServiceController extends BaseActionController {
             return  $viewModel;
         }
     }
-    public function getemailalertAction(){
+    public function removeemailalertAction(){
         $alert = array();
         $alert['email'] = $this->getRequest()->getPost()['email'];
         $alert['feeddataid'] = $this->getRequest()->getPost()['feeddataid'];
@@ -854,17 +854,37 @@ class ServiceController extends BaseActionController {
                 'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
             )
         );
-
         if ($validator->isValid($alert['email'])) {
-            // if record not Invalid
-            $result = false;
+            $result = $oFeedData->delete($alert);
         } else {
-            // if record Invalid
-            $result = $oFeedData->insert($alert);
-            
-        }
+            $result = false;
+        }   
+        return $this->getResponse()->setContent(Json::encode($result));
+    }
 
-            return $this->getResponse()->setContent(Json::encode($result));
+    public function getemailalertAction(){
+        $alert = array();
+        $alert['email'] = $this->getRequest()->getPost()['email'];
+        $alert['feeddataid'] = $this->getRequest()->getPost()['feeddataid'];
+        $oService = $this->getServiceLocator();
+        $oFeedData = $oService->get('ArticleAlertTable');
+
+        $validator = new RecordExists(
+            array(
+                'table'   => 'articlealert',
+                'field'   => 'email',
+                'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
+                'exclude' => 'feeddataid = ' . $alert['feeddataid']
+            )
+        );
+        $validator->isValid($alert['email']) ? $recordExists = 1 : $recordExists = 0;
+        $__viewVariables['recordExists'] = $recordExists;
+
+        if($recordExists == 0){
+            $result = $oFeedData->insert($alert);
+        }
+            
+        return $this->getResponse()->setContent(Json::encode($result));
     }
     //Function is used to show alert of feed data
     public function getfeedalertAction(){
@@ -886,11 +906,13 @@ class ServiceController extends BaseActionController {
                 $userInfo = $oAuth->getIdentity();
                 if($userInfo == null){
                     $userId = 0;
+                    $login = 0;
                 }else{
                     $userId = $userInfo->userId;
+                    $login = 1;
                     $this->layout()->firstName = $userInfo->firstName;
                 }
-                
+
             $result = $oArticleDetail->getArticleDetailInfo($articleId, $userId);
             if (isset($result) && empty($result)) {
                 $oArticleDetail->saveArticleDetailInfo($articleDetailData);
@@ -903,13 +925,35 @@ class ServiceController extends BaseActionController {
             $__viewVariables = array();
             $__viewVariables['feedDataDetail'] = $feedDataDetail;
             $__viewVariables['feedMappingDetail'] = $storeDetail;
+            $__viewVariables['feedUserId'] = $userId;
+
             
+            isset($userInfo) ? $__viewVariables['feedEmail'] = $userInfo->email : $__viewVariables['feedEmail'] = '';
+            $productId = $__viewVariables['feedDataDetail']['id']; 
+            $email = $__viewVariables['feedEmail'];
+            //Check that the email address exists in the database
+            $validator = new RecordExists(
+                array(
+                    'table'   => 'articlealert',
+                    'field'   => 'email',
+                    'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
+                    'exclude' => 'feeddataid = ' . $productId
+                )
+            );
+            if ($validator->isValid($email)) {
+                $recordExists = 1;
+            }else{
+                $recordExists = 0;
+            }
+            $__viewVariables['recordExists'] = $recordExists;
+            $__viewVariables['login'] = $login;
+
             $oArticleClosetData = $oService->get('ArticleClosesetTable');
             $articleLikes = $oArticleClosetData->getArticleLikes($articleId, $userId);
             if (isset($articleLikes) && !empty($articleLikes)) {
                  $__viewVariables['articlecloset'] = 'Y';
             } else {
-                    $__viewVariables['articlecloset'] = 'N';
+                $__viewVariables['articlecloset'] = 'N';
             }
 
             $oAttributes = $oService->get('ProductAttributesTable');
