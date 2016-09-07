@@ -1,3 +1,4 @@
+var ishidden = true;
 $(document).ready(function() {
     // apply filterTable to all tables on this page but don't filter content with the no-filter class
     $('table').filterTable({ignoreClass: 'no-filter'});
@@ -23,8 +24,10 @@ $(".sort-list").click(function(){
     $(this).parents(".row").find(".sort-grid").css({"opacity": "1", "cursor": "pointer"});
 
 });
+
 //when click ".sort-item" then check if its exist class "active" then remove class "active", ".icon_arrow" add class "fa-chevron-down" and remove class "fa-chevron-up", ".sort-item >.uc_line_content" close slide; else add class "active", ".icon_arrow" remove class "fa-chevron-down" and add class "fa-chevron-up", ".sort-item >.uc_line_content" open slide.
 $(".sort-item").click(function(){
+    
     var myClasses = this.classList;
     if(myClasses.contains("active"))
     {
@@ -32,6 +35,7 @@ $(".sort-item").click(function(){
         $(".icon_arrow").removeClass("fa-chevron-up");
         $(".icon_arrow").addClass("fa-chevron-down");
         $(".sort-item >.uc_line_content").slideUp();
+         //$(this).find(".uc_des").prepend('<li data-parent="orderBy" value="" class="sort-item-select" >Sort By</li>');
     }
     else
     {
@@ -39,6 +43,11 @@ $(".sort-item").click(function(){
         $(".icon_arrow").removeClass("fa-chevron-down");
         $(".icon_arrow").addClass("fa-chevron-up");
         $(".sort-item >.uc_line_content").slideDown();
+        if (ishidden){
+            $(this).find(".uc_des li:first-child").hide();
+        }else{
+            $(this).find(".uc_des li:first-child").show();
+        }
     }        
 });
 
@@ -47,7 +56,11 @@ $(".sort-item-select").click(function(){
     var content_sl = $(this).html();
     $(this).parents(".sort-item").find(".sort-item-selected").html(content_sl);
     $(this).parents(".uc_line_content").slideUp();
-     $(this).parents(".uc_des").prepend('<li data-parent="orderBy" value="" class="sort-item-select" >Sort By</li>');
+    if($(this).text()== "Sort By"){
+        ishidden = true;
+    }else{
+        ishidden = false;
+    }
 });
 
 // Click like & unline 
