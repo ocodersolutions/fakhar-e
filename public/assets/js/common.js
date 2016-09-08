@@ -18,6 +18,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function (result) 
                 { 
+                    // alert(result.status);
                     if (result.status == 'success') 
                     { 
                     	$('#idNewsLetterInput').val('');
@@ -25,7 +26,7 @@ $(document).ready(function() {
                     } 
                     else if (result.status == 'success1') 
                     {
-                        myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','This email is already registered',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+                        myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','This email is already registered.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
                     }
                     else 
                     {
