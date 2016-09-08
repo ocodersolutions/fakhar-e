@@ -150,9 +150,11 @@ $heightSliderDefault = $this->height['value'];
                         ?>
                     <a href="#" id="id<?php echo $aBox['name']?>" class="thumb-info skin-tone <?php echo ($aBox['value']?'lock':'')?>">
                     <div class="about_img ">
-                        <img src="/img/profile/<?php echo $aBox['img']?>" alt="image" />
-                        <div class="clr"></div>
-                        <div class="checkmark <?php echo $classes;?>"></div>
+                        <div class="wrap_img">
+                             <img src="/img/profile/<?php echo $aBox['img']?>" alt="image" />
+                            <div class="clr"></div>
+                            <div class="checkmark <?php echo $classes;?>"></div>
+                        </div>        
                     </div>
                     </a>
                     <?php } ?>
