@@ -101,7 +101,10 @@ class IndexController extends AbstractActionController
                 
                 $oJoinBetaTable->addRecord($aData);
             }
-            
+            if($this->checkStatus($email) =='ignore' ) {
+                echo json_encode(array('status'=>'success1'));   
+                exit(0);
+            }
 
             //send mail for registration
             //send email

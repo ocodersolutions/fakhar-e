@@ -22,7 +22,12 @@ $(document).ready(function() {
                     { 
                     	$('#idNewsLetterInput').val('');
                     	myalert('alert_idNewsLetterInput1','type_success','Success','','OK','You have been successfully added to our newsletter.',function(){$('#alert_idNewsLetterInput1').foundation('reveal','close'); });
-                    } else 
+                    } 
+                    else if (result.status == 'success1') 
+                    {
+                        myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','This email is already registered',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+                    }
+                    else 
                     {
                     	 myalert('alert_idNewsLetterInput2', 'type_cancel','Internal Server Error', 'Please contact site administrator.','','',function(){$('#alert_idNewsLetterInput2').foundation('reveal','close'); });
                     }
