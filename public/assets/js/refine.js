@@ -588,4 +588,10 @@ $('button#apply-submit').click(function(){
     $("a.fsp-close").trigger('click');
 })
 // function click label radios form
+// $("#refine-search-popup").on("click",function(){
+//     var thischecked = $('#rfs-content-popup .filterTypeMain input[type=radio]')
+//     if (thischecked.is(":checked")){
+//         thischecked.closest(".option-filter-row").css("background","blue");
+//     }
+// })
 
