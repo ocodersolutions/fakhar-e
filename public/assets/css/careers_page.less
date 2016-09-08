@@ -731,15 +731,19 @@
 			}
 		}
 		.skin_tone {
+
 			.about_img {
-			    float: left;
+				float: left;
 			    margin-top: 10px;
 			    padding: 2px;
 			    margin-right: 45px;
 			    position: relative;
-			    img{
-			    	width: 70px;
-			    }
+				.wrap_img{
+					position: relative;
+				    img{
+				    	width: 70px;
+				    }
+				}
 			}
 		}
 	}
@@ -1281,7 +1285,7 @@
 					text-align: center;
 				}
 				.right_sb{
-					padding-right: 0;
+					// padding-right: 0;
 					text-align: center;
 					.about_img{
 						text-align: center;
@@ -1294,16 +1298,7 @@
 					}
 				}
 			}
-			.skin_tone{
-				.right_sb{
-					padding-right: 0;
-					padding-left: 20px;
-					text-align: center;
-					.about_img{
-						text-align: center;
-					}
-				}
-			}
+			
 
 		}
 		#listBODYSHAPE{
@@ -1363,6 +1358,26 @@
 	 	}
 	}
 }
+@media (min-width: 481px) and (max-width:767px){
+	#profile-you-page{
+		.about_box{
+			.skin_tone{
+				.right_sb{
+					padding-right: 0;
+					padding-left: 20px;
+					text-align: center;
+					.about_img{
+							text-align: center;
+							.wrap_img{
+						}
+					}
+					
+				}
+			}
+		}
+	}
+}
+
 @media (min-width: 320px) and (max-width:480px){
 	#profile-you-page{
 		
@@ -1383,9 +1398,13 @@
 	}
 	#profile-you-page{
 		.about_box{
-			
+			.about_block{
 				.right_sb{
-					padding-right: 0;
+					padding-left: 0px;
+				}
+			}
+				.right_sb{
+					padding-left: 0;
 					.line-bar{
 						width: 54% !important;
 						.content{
@@ -1395,10 +1414,19 @@
 					
 				}
 				.skin-tone{
-						.about_img{
-							margin-right: 20px;
-						}
+
+					.about_img{
+						width: 30%;
+						margin:0 3px;
+						.wrap_img{
+							margin:0 auto;
+							width: 70px;
+							position: relative;
+						}	
 					}
+					
+					
+				}
 			}
 		}
 		
