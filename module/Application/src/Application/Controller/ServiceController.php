@@ -624,6 +624,13 @@ class ServiceController extends BaseActionController {
 
     //Function is used to get products on filter basis
     public function getfeedsAction() {
+        $alertContainer = new Container('alert');
+        $alertList = array();
+        if($alertContainer->offsetExists('alertList')) {
+            $alertList = $alertContainer->offsetGet('alertList');
+        }
+        $__viewVariables['alertList'] = $alertList;
+
         $oService = $this->getServiceLocator();
         $alert = $oService->get('ArticleClosesetTable');
         
@@ -631,7 +638,7 @@ class ServiceController extends BaseActionController {
 
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
-        $email = $userInfo->email;
+        isset($userInfo) ? $email = $userInfo->email : $email ='';
         $getAlert = $alert->getAlertArticles($email);
         $salealertarray = array();
         if(count($getAlert)>0) {
@@ -864,9 +871,22 @@ class ServiceController extends BaseActionController {
                 'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
             )
         );
+
         if ($validator->isValid($alert['email'])) {
             $result = $oFeedData->delete($alert);
+
+
+            $alertContainer = new Container('alert');
+            $alertList = array();
+            if($alertContainer->offsetExists('alertList')) {
+                $alertList = $alertContainer->offsetGet('alertList');
+            }
+           
+            unset($alertList[$alert['feeddataid']]);
+            $alertContainer->offsetSet('alertList', $alertList);
         } else {
+            $alertContainer->offsetUnset('alertList');
+             $alertContainer->offsetSet('alertList', $alertList);
             $result = false;
         }   
         return $this->getResponse()->setContent(Json::encode($result));
@@ -892,8 +912,17 @@ class ServiceController extends BaseActionController {
 
         if($recordExists == 0){
             $result = $oFeedData->insert($alert);
+
+            $alertContainer = new Container('alert');
+            $alertList = array();
+            if($alertContainer->offsetExists('alertList')) {
+                $alertList = $alertContainer->offsetGet('alertList');
+            }
+            $alertList[$alert['feeddataid']] = $alert['email'];
+            $alertContainer->offsetSet('alertList', $alertList);
+        }else{
+            $result = false;
         }
-            
         return $this->getResponse()->setContent(Json::encode($result));
     }
     //Function is used to show alert of feed data
@@ -950,13 +979,21 @@ class ServiceController extends BaseActionController {
                     'exclude' => 'feeddataid = ' . $productId
                 )
             );
-            if ($validator->isValid($email)) {
-                $recordExists = 1;
-            }else{
-                $recordExists = 0;
-            }
-            $__viewVariables['recordExists'] = $recordExists;
+            // if ($validator->isValid($email)) {
+            //     $recordExists = 1;
+            // }else{
+            //     $recordExists = 0;
+            // }
+            //$__viewVariables['recordExists'] = $recordExists;
             $__viewVariables['login'] = $login;
+
+            $alertContainer = new Container('alert');
+            $alertList = array();
+            if($alertContainer->offsetExists('alertList')) {
+                $alertList = $alertContainer->offsetGet('alertList');
+            }
+           
+            $__viewVariables['email'] = $alertList;
 
             $oArticleClosetData = $oService->get('ArticleClosesetTable');
             $articleLikes = $oArticleClosetData->getArticleLikes($articleId, $userId);
