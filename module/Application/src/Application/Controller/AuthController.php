@@ -83,7 +83,8 @@ class AuthController extends AbstractActionController {
     
     public function loginAction() 
     {
-        
+        $alertContainer = new Container('alert');
+        $alertContainer->offsetUnset('alertList');
         if ($this->getAuthService()->hasIdentity()) {
             $this->redirect()->toUrl('/service');
         }
@@ -139,6 +140,8 @@ class AuthController extends AbstractActionController {
     }
 
     public function logoutAction() {
+        $alertContainer = new Container('alert');
+        $alertContainer->offsetUnset('alertList');
         $this->getAuthService()->clearIdentity();
         //$this->flashmessenger()->addMessage("You've been logged out");
         return $this->redirect()->toUrl('/');

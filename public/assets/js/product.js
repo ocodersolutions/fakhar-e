@@ -136,9 +136,28 @@ $(document).on('click','.quick_view_v2, .uc_avatar',function(){
 });
 
 // Show Alert Popup of product
-$(document).on('click','.icon_alert',function(){
-    Product.productId = $(this).data('alert-id');
-    Product.loadAjaxForAlert();
+$(document).on('click','.icon_alert',function(e){
+    login = $('#status-login').attr('data-login');
+    active = $(this).hasClass('active');
+    feeddataid = $(this).attr('data-alert-id');
+    if (login == 1 && active == false ) {
+        $(this).attr('data-toggle','modal');
+            $.ajax({
+                url : "/service/getemailalert",
+                type : "post",
+                dataType:"text",
+                data : {
+                    'feeddataid' : feeddataid,
+                },
+                success:function(result) {}
+            });
+        $(this).addClass('active');
+
+    }else{
+        Product.productId = $(this).data('alert-id');
+        Product.loadAjaxForAlert();
+    }
+    
 });
 
 // Show Alert Popup when client click link in Quickview Popup
