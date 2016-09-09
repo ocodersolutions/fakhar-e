@@ -192,6 +192,7 @@ $(window).scroll(function(){
     }                
 });
 
+    // show/hide userbox (service page)
 $("#m-show-userbox").click(function(event) {
     $("#user-mblock").css('display','block');
 });
@@ -199,3 +200,10 @@ $("#hid-userbox").click(function(){
     $("#user-mblock").removeAttr("style");
 });
 
+    // show/hide userbox (sub-page)
+$(document).on ("click","#m-show-userbox", function(){
+    $("#user-mblock").css('display','block');
+});
+$(document).on ("click","#hid-userbox", function(){
+    $("#user-mblock").removeAttr("style");
+});

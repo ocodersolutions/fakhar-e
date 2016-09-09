@@ -79,6 +79,7 @@ class IndexController extends AbstractActionController
             break;
         }
 
+        $tamtam = 0;
         $aPostParams = $this->params()->fromPost();
         if (count($aPostParams)) {
             $oJoinBetaTable = $this->getServiceLocator()->get('JoinBetaTable');
@@ -94,6 +95,7 @@ class IndexController extends AbstractActionController
                 );
                 $oJoinBetaTable->updateRecord($dataArr);
             } else if($this->checkStatus($email) == 'create' ) {
+                $tamtam = 1;
                 $aData = array();
                 $aData['joinBetaEmail'] = $email;
                 $aData['agreeToReceive'] = 1;
@@ -122,10 +124,17 @@ class IndexController extends AbstractActionController
             $oEmailService->setTo($email);
             $oEmailService->send();
         // end send mail
+            if($tamtam == 1 ) {
+                echo json_encode(array('status'=>'success'));   
+               exit(0);
+            }
+            else {
+                echo json_encode(array('status'=>'success1'));   
+               exit(0);
+            }
             
-            
-           echo json_encode(array('status'=>'success'));	
-           exit(0);
+           // echo json_encode(array('status'=>'success'));	
+           // exit(0);
         }
         
         echo json_encode(array('status'=>'error'));	
