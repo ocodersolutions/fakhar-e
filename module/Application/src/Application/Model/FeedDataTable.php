@@ -503,11 +503,12 @@ class FeedDataTable extends BasicTableAdapter {
         $sWhere = ' 1 ';
         $oEngine = new EngineTable( $this->getTableGateway() );
         $oEngine->setServiceLocator( $this->getServiceLocator() );
-        if( isset($aPostParams['profileBasePrices']) && $aPostParams['profileBasePrices'] ==1 ) {
-            $sProfileBaseQuery = $oEngine->profileBasedProductsQuery();
-            $sWhere = $sProfileBaseQuery;
+        if($userId != 0){
+          if( isset($aPostParams['profileBasePrices']) && $aPostParams['profileBasePrices'] ==1 ) {
+              $sProfileBaseQuery = $oEngine->profileBasedProductsQuery();
+              $sWhere = $sProfileBaseQuery;
+          }
         }
-            
         $sWhere .= ' AND item_count > 0 ';
         if (isset($aPostParams['infoStatus']) && $aPostParams['infoStatus'] == 'yes') {
             $sWhere .= " AND `productInfoAdded` = 'yes' ";
