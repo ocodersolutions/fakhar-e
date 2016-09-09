@@ -68,13 +68,28 @@ $(".sort-item-select").click(function(){
     $('a.fsp-close').trigger('click') ; 
  });
 
+
+$('body').on('click', '.qv-like', function (){
+    id = $(this).attr('id');
+    if($(this).hasClass('liked')){
+        $(this).removeClass('liked');
+        $('span[id="'+id+'"]').removeClass('active');
+        action = 'unlike';
+    }else{
+        $(this).addClass('liked');
+        $('span[id="'+id+'"]').addClass('active');
+        action = 'like';
+    }
+    ajax_like(id,action);
+});
+
+
     // Click like & unline 
     $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
         id = $(this).attr('id');
         check_login = $('#status-login').attr('data-login');
         saveitem = $('input[name="filterTypeMain"]').val();
-        console.log(saveitem);
         if(check_login == 1){
             //if logged
             if (myClasses.contains("active")) {
