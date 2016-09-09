@@ -1,4 +1,5 @@
 var ishidden = true;
+// $demso = 0;
 $(document).ready(function() {
     // apply filterTable to all tables on this page but don't filter content with the no-filter class
     $('table').filterTable({ignoreClass: 'no-filter'});
@@ -124,6 +125,7 @@ $('body').on('click', '.icon_like', function (){
         // parent_category = $(this).closest('div').attr('class');
         // id = $(this).attr('id');
         test = $(this);
+        
         if (desktop == 1){
             
             switch (parent){
@@ -177,7 +179,7 @@ $('body').on('click', '.icon_like', function (){
             }
         }else if(mobile == 1){
             
-
+            
             switch(parent){
                 case "category":
                 if($(this).hasClass('has-child')){
@@ -204,22 +206,44 @@ $('body').on('click', '.icon_like', function (){
                     };
                     $("input[name='catids']").val(a2);
                     var a2 = [];
-                }else if($(this).hasClass('item')){
+                }
+                else if($(this).hasClass('item')){
                     // if click item
-                    var attofthis = $(this).data('parent');
+                    // var attofthis = $(this).data('parent');
+                    
                     if($(this).hasClass('selected')){
                         $(this).removeClass('selected');
-                        parentTag = $( this ).closest('ul.1').addClass('class_name');
-                        alert(parentTag);
+                        // $demso -= 1;
+                        // alert($demso);
+                        // parentTag = $( this ).closest('ul.1').addClass('class_name');
+                        // alert(parentTag);
                         //$(this).closest('.mobile').find('li[data-parent="'+attofthis+'"]').removeClass('has-child-selected');
                         
-                    }else{
-                        $(this).addClass('selected');
-                        //$(this).closest('ul').closest('ul').find('li').addClass('has-child-selected');
-                        parentTag = $( this ).parent(".1").addClass('class_name');
-                        alert(parentTag);
-                        $(this).parent().closest('.mobile').find('m-title').addClass('has-child-selected');
                     }
+                    else {
+                        $(this).addClass('selected');
+                        // $demso += 1;
+                        // alert($demso);
+                        //$(this).closest('ul').closest('ul').find('li').addClass('has-child-selected');
+                        // parentTag = $( this ).parent(".1").addClass('class_name');
+                        // alert(parentTag);
+                        // $(this).parent().closest('.mobile').find('m-title').addClass('has-child-selected');
+                    }
+                    // alert($demso);
+                    // if($demso > 0) {
+                    //     // console.log($(this));
+                    //     if($(this).parents(".accessories")) {
+                    //         // console.log($(this));
+                    //         $(this).parents(".mobile").find("#category").addClass('has-child-selected');
+                    //         console.log($(this).parents(".mobile").find("#accessories").addClass('has-child-selected'));
+                    //         // $(this).parents("#accessories").addClass('has-child-selected');
+                    //     }
+                    //     else { alert("sai");    }
+
+                    // }
+                    // else {
+                    //     alert("error");
+                    // }
                     check_parent_category(test);
                     array_category = $('.category .item.selected').toArray();
                     var a2 =  [];
