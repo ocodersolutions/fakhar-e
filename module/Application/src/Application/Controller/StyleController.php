@@ -30,4 +30,20 @@ class StyleController extends BaseActionController
 
 		return 	$__viewVariables;
 	}
+    public function definationAction() 
+    {
+        $__viewVariables = array();
+        $this->layout('layout/layout_elnove.phtml');
+        $oAuth = $this->getServiceLocator()->get('AuthService');
+        if ($oAuth->hasIdentity() && $oAuth->getIdentity()->userType==2) {
+            $this->layout()->showHeaderLinks = "LOGGED_IN";
+            $userInfo = $oAuth->getIdentity();
+            $this->userId = $userInfo->userId;
+            $this->layout()->firstName = $userInfo->firstName;
+        } else {
+            $this->redirect()->toRoute('auth');
+        }
+
+        return  $__viewVariables;
+    }
 }

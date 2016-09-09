@@ -877,7 +877,20 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    
+                    'defination' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/defination',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Style',
+                                'action' => 'defination',
+                            ),
+                        ),
+                    ),
                 ),
             ),  
             
