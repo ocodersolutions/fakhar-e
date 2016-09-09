@@ -14,9 +14,13 @@ ALTER TABLE `articlealert`
 
 
 /*=== Update by Trung ===*/
+/* CREATE AttributeList View */
+select `p2`.`title` AS `attribute_name`,`p3`.`title` AS `attribute_value` from ((`ProductReferenceAttributes` `p1` join `ProductReferenceAttributes` `p2` on((`p2`.`attributeParentId` = `p1`.`attributeId`))) join `ProductReferenceAttributes` `p3` on((`p3`.`attributeParentId` = `p2`.`attributeId`))) where (`p1`.`attributeParentId` = 2) group by `p2`.`title`,`p3`.`title`
+
 CREATE TABLE IF NOT EXISTS `Venue` (
   `id` int(11) NOT NULL,
   `title` varchar(500) NOT NULL,
+  `parentId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -26,6 +30,8 @@ ALTER TABLE `Venue`
   ADD PRIMARY KEY (`id`);
 ALTER TABLE `Venue`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+INSERT INTO `elnove.local`.`Venue` (`id`, `title`, `parentId`, `userId`, `created`, `updated`, `isActive`) VALUES (NULL, 'Work', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1'), (NULL, 'Night Out', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1'), (NULL, 'Casual', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1');
 
 
 CREATE TABLE IF NOT EXISTS `Style` (
