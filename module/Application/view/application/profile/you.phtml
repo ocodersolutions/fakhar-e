@@ -3,7 +3,9 @@ $weightSliderDefault = $this->weight['value'];
 $heightSliderDefault = $this->height['value'];   
 ?>
  <?php echo $this->headLink()
-                 ->appendStylesheet($this->basePath() . '/assets/css/you_page.css');
+                 ->appendStylesheet($this->basePath() . '/assets/css/you_page.css')
+                 ->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.skinHTML5.css')
+                 ->appendStylesheet($this->basePath() . '/templates/mobile/css/style.css');
  ?>
 
 <script src="/vendor/jqueryui/development-bundle/ui/jquery.ui.core.js"></script>
@@ -181,7 +183,7 @@ $heightSliderDefault = $this->height['value'];
     <input type="hidden" name="myFormBtn" value="yes" />
 </form>
 
-<script>
+<!-- <script>
 $(function() {
     /*** Script for Close Popup alert ***/
     $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
@@ -438,4 +440,238 @@ $(window).load(function () {
         }});
     
 });
+</script> -->
+<script src="<?php echo $this->basePath().'/templates/mobile' ?>/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+<script type="text/javascript">
+    /*** Script for Close Popup alert ***/
+    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+        $("button.my_btn_ok").click(function(){
+            $('a.close-reveal-modal').trigger('click');
+        });
+    });
+
+    $(function () {
+        // var weightSliderDefault = ;
+        
+        // weightSliderDefault = weightSliderDefault >= weightMin ? weightSliderDefault : '';
+        /*** WEIGHT SLIDER ***/
+        var weightValue = '<?php echo $weightSliderDefault ?>';
+        weightMin = <?php echo $this->weight['min']?>;
+        weightMax = <?php echo $this->weight['max']?>;
+        weightStep = <?php echo $this->weight['step']?>;
+
+        $("#weightrange").ionRangeSlider({
+            hide_min_max: true,
+            type: "single",
+            min: weightMin,
+            max: weightMax,
+            from: (weightValue > weightMax) ? weightMax : weightValue,
+            keyboard: true,
+            step: weightStep,
+            hide_from_to:true,
+            onStart: function (value) {
+                if($( "#idHeightSliderInput" ).val() > 0) {
+                    $("#weightSliderValue").val(value.from);
+                    $( "#idWeightSliderInput" ).val(value.from);
+                }
+            },
+            onChange:function(){
+                weightInput = $('#weightrange').prop("value");
+                $("#weightSliderValue").val(weightInput);
+                $("#idWeightSliderInput").val(weightInput);
+            }
+        });
+        //Save slider instance to var for update
+        var weightSlider = $("#weightrange").data("ionRangeSlider");
+        //Set value init when update
+        <?php if(isset($weightValue) && $weightValue>0) {?>
+            $("#weightSliderValue").val(weightValue >= weightMax ? weightMax+'+' : weightValue);
+            $("#idWeightSliderInput").val(weightValue);
+        <?php } ?>
+        //Process when client input anything to textbox
+        $("#weightSliderValue").keyup(function(){
+            this.value = this.value.replace(/[^0-9]/g,'');
+            newWeight = this.value > weightMax ? weightMax : this.value;
+            weightSlider.update({
+                from: newWeight,
+            });
+            $( "#idWeightSliderInput" ).val(newWeight);
+        });
+        //Process when client move out textbox
+        $("#weightSliderValue").change(function(){
+            var newWeight = this.value;
+            if(newWeight < weightMin){
+                $( "#idWeightSliderInput" ).val('');
+                myalert('alertErrorWeight','type_missing','Oops', 'Min weight must be '+weightMin+' lb.','');
+            }
+            if(newWeight > weightMax){
+                $( "#weightSliderValue" ).val(weightMax+'+');
+            }
+        });
+
+        // /*** HEIGHT SLIDER ***/
+        // var heightValue = <?php //echo $heightValue ?>;
+        // var heightMax = <?php //echo $heightMax ?>;
+        // var heightMaxArr = heightMax.toFixed(2).split(".");
+        // heightMaxArr[1] = heightMaxArr[1] > 11 ? heightMaxArr[1]/10 : heightMaxArr[1];
+        // var heightMin = <?php //echo $heightMin ?>;
+        // var heightMinArr = heightMin.toFixed(2).split(".");
+        // heightMinArr[1] = heightMinArr[1] > 11 ? heightMinArr[1]/10 : heightMinArr[1];
+        // var heightStep = <?php //echo $heightStep ?>;
+
+        // <?php 
+        // $iSelectedIndex = 0;
+        // $sHeightValues = array();
+        // for($i=$heightMin; $i<$heightMax; $i++) {
+        //     for($j=0; $j<12; $j++) {
+        //         $sHeightValues[] = "{$i}.{$j}";             
+        //         if($heightValue == "$i.$j"){
+        //             $iSelectedIndex = count($sHeightValues)-1;
+        //         }
+        //     }
+        // }
+        // $sHeightValues[] = $heightMax . '.0';
+        // if($heightValue >= ($this->height['max'])){
+        //     $iSelectedIndex = count($sHeightValues)-1;
+        // }
+        
+        // echo 'var aHeightValues = ["' . implode('","', $sHeightValues) . '"];'; 
+        // ?>
+        
+        // $("#heightrange").ionRangeSlider({
+        //     hide_min_max: true,
+        //     type: "single",
+        //     min: 0,
+        //     max: <?php //echo count($sHeightValues)-1?>,
+        //     from: <?php //echo $iSelectedIndex ?>,
+        //     keyboard: true,
+        //     step: 1,
+        //     hide_from_to:true,
+        //     onStart: function (value) {
+        //         var heightNew = aHeightValues[value.from];
+        //         if($( "#idHeightSliderInput" ).val() > 0) {
+        //             var heightArr = heightNew.split(".");
+        //             $("#heightSliderValue").val(heightNew >= heightMax ? heightMaxArr[0] : heightArr[0]);
+        //             $("#heightSliderValueInch").val(heightNew >= heightMax ? (heightMaxArr[1]>0?heightMaxArr[1]:'0'+'+') : heightArr[1]);
+        //         }
+        //     },
+        //     onChange:function(){
+        //         heightNew = $('#heightrange').prop("value");
+        //         var heightArr = aHeightValues[heightNew].split(".");
+        //         $("#heightSliderValue").val(heightArr[0] >= heightMax ? heightMax : heightArr[0]);
+        //         $("#heightSliderValueInch").val(heightArr[0] >= heightMax ? '0+' : heightArr[1]);
+        //         $("#idHeightSliderInput").val(aHeightValues[heightNew]);
+        //     }
+        // });
+        //Save slider instance to var for update
+        // var heightSlider = $("#heightrange").data("ionRangeSlider");
+        //Process when client input anything to textbox
+        //
+        //Process when client move out textbox
+          
+    })
+
+    //CONTINUE FOR STEP 1
+    // $('.wrap-1 .btn-continue').click(function(){
+    //     if( $( "#idWeightSliderInput" ).val()< 1 ) {
+    //         myalert('alertWeightError','type_missing','Oops', 'Seems like you forgot to tell us your weight. Don\'t be shy we are here to help.','');              
+    //         $('html, body').animate({scrollTop: $("#weightSliderValue").offset().top - 200}, 500);
+    //         return false;
+    //     }
+    //     if( $( "#idHeightSliderInput" ).val() < 1 ) {  
+    //         myalert('alertHeightError','type_missing','Oops', 'Seems like you forgot to tell us your height. Don\'t be shy we are here to help.','');   
+    //         $('html, body').animate({scrollTop: $("#heightSliderValue").offset().top - 200}, 500);
+    //         return false;
+    //     }
+    //     if ($("#listBODYSHAPE .lock").length < 1) {
+    //         myalert('myalertid3','type_missing','Oops','Seems like you forgot to tell us your body shape. Don\'t be shy we are here to help.','');  
+    //         $('html, body').animate({scrollTop: $("#listBODYSHAPE").offset().top - 200}, 500);
+    //         return false;
+    //     }
+
+    //     $(this).parents('.wrap').hide().next().show(); 
+    //     $('html, body').animate({scrollTop : 0},800);
+    //     return false;
+    // });
+
+    
+    /*end */
+    /* relative thumb-info - checkmark check-blank  |  relative thumb-info lock - checkmark check-one fa fa-check*/
+
+    // $(".thumb-info").on("click", function(e) {
+    //     e.preventDefault();
+
+    //     if($(this).hasClass("lock")) {
+    //         if($(this).hasClass("body-shape")) {
+    //             $(this).parents("#listBODYSHAPE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+    //             $(".body-shape").removeClass("lock");
+    //         }
+
+    //         if($(this).hasClass("skin-tone")) {
+    //             $(this).parents( "#listSKINTONE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+    //             $(".skin-tone").removeClass("lock");
+    //         }
+
+    //         $(this).removeClass("lock");
+    //         $(this).find('.checkmark').removeClass("check-one fa fa-check");
+    //         $(this).find('.checkmark').addClass("check-blank");
+
+    //     } else {
+    //         if($(this).hasClass("body-shape")) {
+    //             $(this).parents( "#listBODYSHAPE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+    //             $(".body-shape").removeClass("lock");
+    //         }
+
+    //         if($(this).hasClass("skin-tone")) {
+    //             $(this).parents( "#listSKINTONE" ).find('.checkmark').removeClass("check-one fa fa-check").addClass("check-blank");
+    //             $(".skin-tone").removeClass("lock");
+    //         }
+
+    //         $(this).addClass("lock");
+    //         $(this).find('.checkmark').removeClass("check-blank");
+    //         $(this).find('.checkmark').addClass("check-one fa fa-check");
+    //     }
+
+    //     return false;
+
+    // });
+
+    // $("#btnNextStep").on("click", function(e) {
+
+    //     if ($("#listSKINTONE .lock").length < 1) {
+    //         myalert('myalertid4','type_missing','Oops', 'Seems like you forgot to tell us your skin tone. Don\'t be shy we are here to help.','');  
+    //         $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+    //             $("button.my_btn_ok").click(function(){ // click button
+    //                 $('a.close-reveal-modal').trigger('click'); // will close modal
+    //             });
+    //         });
+              
+    //         return false;
+    //     }
+
+    //     $(".thumb-info").each( function( index, element ){
+    //         if($(element).hasClass("lock")) {
+    //             $("#"+element.id+"Input").prop( "checked", true );
+    //         } else {
+    //             $("#"+element.id+"Input").prop( "checked", false );
+    //         }
+    //     });
+
+    //     // $( "#idWeightSliderInput" ).val( $( "#weightSlider" ).slider( "value" ) );
+    //     // $( "#idHeightSliderInput" ).val( $( "#heightSlider" ).slider( "value" ) );
+
+    //     $( "#myForm" ).submit();
+
+    // });
+
+    $(window).load(function () {
+        var url = "/profile/profiletraking";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {page: 'you'},
+            dataType: 'json',
+            success: function (result) {
+            }});
+    });
 </script>

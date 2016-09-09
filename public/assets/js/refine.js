@@ -180,7 +180,6 @@ $('body').on('click', '.icon_like', function (){
 
             switch(parent){
                 case "category":
-                    
                 if($(this).hasClass('has-child')){
                     // if click category parent
                     
@@ -188,7 +187,8 @@ $('body').on('click', '.icon_like', function (){
                         $(this).addClass('has-child-selected');
                         category_id = $(this).attr('id');
                         $('.mobile .'+category_id+' .has-child').addClass('has-child-selected');
-                        $('.mobile .'+category_id).find('.item').addClass('selected')
+                        $('.mobile .'+category_id).find('.item').addClass('selected');
+                        console.log($(this));
                     } else {
                         $(this).removeClass('has-child-selected');
                         category_id = $(this).attr('id');
@@ -206,11 +206,19 @@ $('body').on('click', '.icon_like', function (){
                     var a2 = [];
                 }else if($(this).hasClass('item')){
                     // if click item
-                    
+                    var attofthis = $(this).data('parent');
                     if($(this).hasClass('selected')){
                         $(this).removeClass('selected');
+                        parentTag = $( this ).closest('ul.1').addClass('class_name');
+                        alert(parentTag);
+                        //$(this).closest('.mobile').find('li[data-parent="'+attofthis+'"]').removeClass('has-child-selected');
+                        
                     }else{
                         $(this).addClass('selected');
+                        //$(this).closest('ul').closest('ul').find('li').addClass('has-child-selected');
+                        parentTag = $( this ).parent(".1").addClass('class_name');
+                        alert(parentTag);
+                        $(this).parent().closest('.mobile').find('m-title').addClass('has-child-selected');
                     }
                     check_parent_category(test);
                     array_category = $('.category .item.selected').toArray();
@@ -241,9 +249,11 @@ $('body').on('click', '.icon_like', function (){
                     if($(this).hasClass('selected')){
                         $(this).removeClass('selected');
                         $(this).closest('tr').appendTo('.'+y+' .list-brand table tbody');
+                        $(this).closest('.mobile > ul').find("#brands").removeClass('has-child-selected');
                     }else{
                         $(this).addClass('selected');
                         $(this).closest('tr').prependTo('.'+y+' .list-brand table tbody');
+                        $(this).closest('.mobile > ul').find("#brands").addClass('has-child-selected');
                     }
                     $('.list-brand').animate({scrollTop: 0}, 800); 
                     array_brand = $('.brands .item.selected');
@@ -261,9 +271,11 @@ $('body').on('click', '.icon_like', function (){
                 
                     if ($(this).hasClass("selected") == false) {
                         $(this).addClass('selected').append(" <i class='check fa fa-check' aria-hidden='true'></i>");
+                        $(this).closest('ul').find('#colors').addClass('has-child-selected');
                     } else {
                         $(this).removeClass('selected');
                         ($(this).find(".check").remove());
+                        $(this).closest('ul').find('#colors').removeClass('has-child-selected');
                     }
                     array_color = $('.colors .selected');
                     var a2 =  [];
@@ -283,6 +295,7 @@ $('body').on('click', '.icon_like', function (){
                     if(x == 1){
                         $("input[name='"+name_deal+"']").val('');
                         $(this).removeClass('selected');
+                        $(this).closest('.mobile').find('#deals').removeClass('has-child-selected');
                     }else{
                         $('.deals .item.selected').removeClass('selected');
                         a = $('.desktop .deals .item');
@@ -292,6 +305,8 @@ $('body').on('click', '.icon_like', function (){
                         };
                         $("input[name='"+name_deal+"']").val('1');
                         $(this).addClass('selected');
+                        $(this).closest('.mobile').find('#deals').addClass('has-child-selected');
+
                     }
                     var discount = '';
                     discount = $('.item.selected[data-deal="discountcode"]').length;
@@ -357,7 +372,7 @@ $('body').on('click', '.icon_like', function (){
         }
         
     });
-  
+   
     // select childs category
     function check_parent_category(test){
         
@@ -436,7 +451,7 @@ $('body').on('click', '.icon_like', function (){
         $("." + tog).slideToggle(800, function () {});
         var ifa = $(this).closest('ul').find("i" + "[data-class='" + tog +"']");
             ifa.toggleClass('fa-selected');
-            $(this).toggleClass('li-up');
+            //$(this).toggleClass('li-up');
     });
     //add element for price filter
     $(document).ready(function() {
