@@ -99,7 +99,7 @@
 					    width: 8px;
 					    height: 8px;
 					    left: 3px;
-					    top: 3px;
+					    top: 6px;
 					    margin-left: -20px;
 					    border-radius: 50%;
 					    background-color: #444444;
@@ -664,36 +664,22 @@
 		    float: left;
 		    margin-top: 20px;
 		    width: 80%;
-		    .content {
-			    width: 100%;
-			    padding: 30px;
-			    .ui-slider{
-		    	    position: relative;
-    				text-align: left;
-			    }
-			    .ui-slider-horizontal {
-				    height: .3em;
-				    background: #6B8AD1 !important;
-				    .ui-state-default {
-					    border: 1px solid #254F73/*{borderColorDefault}*/ !important;
-					    background: #254F73 !important;
-					    font-weight: normal/*{fwDefault}*/;
-					    color: #555555/*{fcDefault}*/;
-					    border-radius: 25px !important;
-					}
-				    .ui-slider-handle {
-					    cursor: default;
-					    height: 0.6em;
-					    position: absolute;
-					    width: 0.6em;
-					    z-index: 2;
-					}
-					.ui-slider-handle {
-					    margin-left: 0;
-					    top: -0.17em;
-					}
+		    .ranger{
+		    	margin-top: -3px;
+		    	.irs-bar-edge{
+		    		background: #6B8AD1;
+		    	}
+		    	.irs-bar{
+					background: #6B8AD1;
 				}
-			}
+		    	.irs-slider {
+				    background: none;
+				    top: 19px;
+				    width: 35px;
+				    height: 35px;
+				    background-color: #254f73;
+				}
+		    }
 		}
 		.body_shape{
 			.about_img {
@@ -775,6 +761,7 @@
 	
 	.lb{
 		width: 70px;
+		height: 40px;
 	    line-height: 36px;
 	    background: #fff;
 	    border: 2px solid #c6ccd2;
@@ -948,6 +935,7 @@
 		    text-align: center;
 		    padding-bottom: 80px;
 		    label{
+		    	cursor: pointer;
 		    	font-weight: 300;
 		    }
 		    .input-text1 {
@@ -966,15 +954,21 @@
 			    margin-bottom: 29px !important;
 			}
 			.remember {
+				float: left;
 				border-radius: 8px;
-				height: 19px !important;
-				line-height: 19px !important;
-				position: absolute;
+				height: 30px !important;
+				line-height: 30px !important;
+				position: relative;
 				text-align: center;
 				cursor: pointer;
 				color: #525058;
 				input[type="checkbox"] {
-				    display: none;
+					cursor: pointer;
+				    opacity: 0;
+				    position: absolute;
+				    top: 3px;
+				    left: 7px;
+				    z-index: 9;
 				}
 				label{
 					.fa-stack {
@@ -1004,6 +998,7 @@
 				}		
 			}
 			.remember1 {
+				line-height: 30px;
 			    width: 50%;
 			    text-align: right;
 			    color: #525058;
@@ -1206,6 +1201,18 @@
 		
 			.about_block{
 				padding: 40px 0 40px 98px;
+				.right_sb{
+					.line-bar{
+						.ranger{
+
+							.irs-slider{
+								top: 28px;
+							    width: 20px;
+							    height: 20px;
+							}
+						}
+					}
+				}
 			}
 		
 	}    
@@ -1406,9 +1413,9 @@
 				.right_sb{
 					padding-left: 0;
 					.line-bar{
-						width: 54% !important;
-						.content{
-							padding:30px 0;
+						width: 50% !important;
+						.ranger{
+							
 						}
 					}
 					
