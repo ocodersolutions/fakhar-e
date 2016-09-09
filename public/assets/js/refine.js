@@ -74,10 +74,12 @@ $('body').on('click', '.qv-like', function (){
     if($(this).hasClass('liked')){
         $(this).removeClass('liked');
         $('span[id="'+id+'"]').removeClass('active');
+        $('span[id="'+id+'"]').closest('.product').fadeOut();
         action = 'unlike';
     }else{
         $(this).addClass('liked');
         $('span[id="'+id+'"]').addClass('active');
+        $('span[id="'+id+'"]').closest('.product').fadeIn();
         action = 'like';
     }
     ajax_like(id,action);
