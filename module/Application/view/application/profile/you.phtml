@@ -91,26 +91,26 @@ $heightSliderDefault = $this->height['value'];
                 <div class="col-lg-3 col-xs-12 left_sb">
                     <h2>How Much Do You Weight?</h2>
                 </div>
-                <div class="col-lg-9 col-xs-12 right_sb">    
-                    <input type="text" class="lb" id="weightSliderValue"/>
-                    <span class="lb_unit">lbs</span>
-                    <div class="line-bar">
-                       <!--  <div class="content ranger">
-                            <div id="weightSlider"></div>
-                            <div class="sliderSteps"></div>
-                            <input type="text" id="weightSlider" value="" name="weightrange" />
-                        </div> -->
-                        <div class="ranger">
-                            <input type="text" id="weightSlider" value="" name="weighSlider" />
-                        </div>
+                <div class="col-lg-9 col-xs-12 right_sb" id="box_weight">
+                    <div class="box_left">
+                        <input type="text" class="lb" id="weightSliderValue"/>
+                        <span class="lb_unit">lbs</span>
+                    </div>    
+                    <div class="box_right">
+                        <div class="line-bar">
+                           <div class="ranger">
+                                <input type="text" id="weightSlider" value="" name="weighSlider" />
+                            </div>
+                        </div>  
                     </div>
+                    
                 </div>
             </div>
             <div class="about_block">
                 <div class="col-lg-3 col-xs-12 left_sb">
                     <h2>How Tall Are You?</h2>
                 </div>
-                <div class="col-lg-9 col-xs-12 right_sb">
+                <div class="col-lg-9 col-xs-12 right_sb" id="box_height">
                     <input type="text" class="lb" id="heightSliderValue" /> 
                     <span class="point-char">.</span> 
                     <input type="text" class="lb" id="heightSliderValueInch" />

@@ -819,6 +819,16 @@ class ServiceController extends BaseActionController {
             if (isset($result) && empty($result)) {
                 $oArticleDetail->saveArticleDetailInfo($articleDetailData);
             }
+
+            $oArticleCloseset = $oService->get('ArticleClosesetTable');
+            $likedarticles = $oArticleCloseset->getLikedArticles($userId);
+            $likearray = array();
+            if(count($likedarticles)>0) {
+                foreach($likedarticles as $likedarticle) {
+                    $likearray[] = $likedarticle['feeddataid'];
+                }
+            }
+            $__viewVariables['likearray'] = $likearray;
             /**         * **********block for inserting data into table when user view this article********** */
             $aParams = array();
             $aParams['mappingType'] = 'store';

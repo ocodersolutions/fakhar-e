@@ -1939,6 +1939,9 @@ ul {
                     width: 60%;
                     font-size: 15px;
                 }
+                .liked {
+                    color: red;
+                }
                 i {
                     vertical-align: middle;
                     margin-left: 30px;
@@ -5240,6 +5243,24 @@ footer{
                     float: left;
                     margin-top: 20px;
                     width: 50%;
+                    .ranger{
+                        .irs{
+                            .irs-bar-edge {
+                                background: none;
+                                background-color: #6b8ad1;
+                            }
+                            .irs-bar {
+                                background: none;
+                                border-top: 1px solid #6b8ad1;
+                                border-bottom: 1px solid #6b8ad1;
+                                background-color: #6b8ad1;
+                            }
+                            .irs-slider {
+                                background: none;
+                                background-color: #254f73;
+                            }
+                        }
+                    }
                     .line_bar_sub {
                         width: 100%;
                         padding: 30px;
@@ -5339,6 +5360,25 @@ footer{
         }
     }
 }
+@media (min-width:768px){
+   #profile_price{
+        .topnavi{
+            .about_box{
+                .line-bar{
+                    .ranger{
+                        .irs{
+                           .irs-slider{
+                                top: 28px;
+                                width: 20px;
+                                height: 20px;
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    }    
+}
 @media (min-width: 320px)and(max-width: 767px) {
     #profile_price {
         .topnavi {
@@ -5370,6 +5410,19 @@ footer{
                     .line-bar {
                         margin-top: 0;
                         width: 100%;
+                        .ranger{
+                            .irs{
+                                .irs-bar-edge{
+                                    width: 18px;
+                                }
+                                .irs-slider {
+                                    top: 19px;
+                                    width: 35px;
+                                    height: 35px;
+                                    
+                                }
+                            }
+                        }
                         .ui-slider-horizontal {
                             .ui-slider-handle{
                                 margin-left: 0;

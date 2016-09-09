@@ -1,3 +1,8 @@
+<?php echo $this->headLink()
+                ->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.css')
+                ->appendStylesheet($this->basePath() . '/templates/mobile/ion.rangeSlider/css/ion.rangeSlider.skinHTML5.css')
+                 ;
+ ?>
 <?php echo $this->partial('application/common/banner_header.phtml'); ?> 
 
 <div id="filter-selected" class="container-fluid" >    
@@ -152,7 +157,7 @@
         <h2 style="color:gray;font-weight:normal;">Please wait....</h2>
     </div>
 </div>  -->
-
+<script src="<?php echo $this->basePath().'/templates/mobile' ?>/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
 <script src="/assets/js/jquery.filtertable.js"></script>
 <script src="/assets/js/product.js"></script>
 <script src="/assets/js/refine.js"></script>
