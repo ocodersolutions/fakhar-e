@@ -37,7 +37,7 @@ if (array_key_exists($feedid, $email)){
 
         
 
-        <input type="text" value="<?php if(isset($email[$feedid])){echo $email[$feedid];}else{echo '';} ?>" name="<?php if ($exist == 1) { echo 'remove-alert-submit';}else{echo 'email-alert';} ?>" placeholder="Youre Email Address">
+        <input type="<?php $login == 1 ? $a = 'hidden' : $a = 'text'; echo $a; ?>" value="<?php if(isset($email[$feedid])){echo $email[$feedid];}elseif(isset($this->feedEmail)){ echo $this->feedEmail;}else{echo '';} ?>" name="<?php if ($exist == 1) { echo 'remove-alert-submit';}else{echo 'email-alert';} ?>" placeholder="Youre Email Address">
 
         <input type='hidden' type="text" name="feeddataid" value="<?php echo $this->feedDataDetail['id']; ?>">
         
