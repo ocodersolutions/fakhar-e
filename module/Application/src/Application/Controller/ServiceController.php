@@ -661,6 +661,7 @@ class ServiceController extends BaseActionController {
                 }
             }
             $__viewVariables['likearray'] = $likearray;
+            $__viewVariables['userid'] = $userId;
 
             $aPostParams = $this->params()->fromPost();
 
@@ -898,7 +899,11 @@ class ServiceController extends BaseActionController {
         $alert['feeddataid'] = $this->getRequest()->getPost()['feeddataid'];
         $oService = $this->getServiceLocator();
         $oFeedData = $oService->get('ArticleAlertTable');
-
+        $oAuth = $this->getServiceLocator()->get('AuthService');
+        $userInfo = $oAuth->getIdentity();
+        if($alert['email'] == null){
+            $alert['email'] = $userInfo->email;
+        }
         $validator = new RecordExists(
             array(
                 'table'   => 'articlealert',
@@ -979,12 +984,12 @@ class ServiceController extends BaseActionController {
                     'exclude' => 'feeddataid = ' . $productId
                 )
             );
-            // if ($validator->isValid($email)) {
-            //     $recordExists = 1;
-            // }else{
-            //     $recordExists = 0;
-            // }
-            //$__viewVariables['recordExists'] = $recordExists;
+            if ($validator->isValid($email)) {
+                $recordExists = 1;
+            }else{
+                $recordExists = 0;
+            }
+            $__viewVariables['recordExists'] = $recordExists;
             $__viewVariables['login'] = $login;
 
             $alertContainer = new Container('alert');

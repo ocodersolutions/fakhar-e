@@ -68,17 +68,20 @@ $(".sort-item-select").click(function(){
     $('a.fsp-close').trigger('click') ; 
  });
 
-// Click like & unline 
-$('body').on('click', '.icon_like', function (){
+    // Click like & unline 
+    $('body').on('click', '.icon_like', function (){
         var myClasses = this.classList;
         id = $(this).attr('id');
         check_login = $('#status-login').attr('data-login');
+        saveitem = $('input[name="filterTypeMain"]').val();
+        console.log(saveitem);
         if(check_login == 1){
             //if logged
             if (myClasses.contains("active")) {
                 action = 'unlike';
                 ajax_like(id,action);
                 myClasses.remove("active");
+                if(saveitem == 'saveitem'){ $(this).closest('.product').fadeOut(); }
             } else {
                 action = 'like';
                 ajax_like(id,action);
