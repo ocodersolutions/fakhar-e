@@ -621,7 +621,7 @@ function check_search_tag(){
 }
 
 check_price_checked()
-$('input#check-price').click(function(){
+$('input[name="check-show-price"]').click(function(){
     $(this).toggleClass('allow_slider');
     // if ($(this).hasClass("allow_slider") == true) {
     //     $(this).addClass('allow_slider');
@@ -639,22 +639,22 @@ $('input#check-price').click(function(){
     //Product.loadProductListAjax(); 
 });
  function check_allow_slide(show){
-    x = $('input#check-price').hasClass("allow_slider");
+    x = $('input[name="check-show-price"]').hasClass("allow_slider");
     if (x == false){
         $('.show-price').css('display','block');
-        $('.ranger').css('opacity','0.3');
+        $('.price.prices .ranger').css('opacity','0.3');
         $('input[name="profileBasePrices"]').val('0');
     }else{
         $('.show-price').css('display','none');
-        $('.ranger').css('opacity','1');
+        $('.price .ranger').css('opacity','1');
          $('input[name="profileBasePrices"]').val('1');
     }
  }
 function check_price_checked(){
-    x = $('input#check-price').hasClass("allow_slider");
+    x = $('input[name="check-show-price"]').hasClass("allow_slider");
     if(x == false){
         $('.show-price').css('display','none');
-        $('.ranger').css('opacity','0.3');
+        $('.price.prices .ranger').css('opacity','0.3');
     }
 }
 // function click button apply refine search in mobile
@@ -710,7 +710,7 @@ $(function() {
                 
                 $("input[name='minamount']").val(mMinprice);
                 $("input[name='maxamount']").val(mMaxprice);
-                //Product.loadProductListAjax();
+                Product.loadProductListAjax();
             }
             
         });
@@ -741,6 +741,7 @@ $(function() {
                 maxdeal = data.old_to;
                 mMindeal = mdata.old_from;
                 mMaxdeal = mdata.old_to;
+                winsdows_size = $(window).width();
                 if ( winsdows_size > 768){
                 $("input[name='minduration']").val(mindeal);
                 $("input[name='maxduration']").val(maxdeal);
