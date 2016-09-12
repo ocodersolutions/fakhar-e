@@ -2714,7 +2714,7 @@ p.m-title{
 				ul{
                     .price{
                         display: block;
-                        height: 30px;
+                        height: auto;
                         .ui-widget-content{
                             margin-top: 25px;
                         }
@@ -2935,7 +2935,7 @@ p.m-title{
 			width: 80%;
 			margin: 0 auto;
 			display: none;
-			height: 65px;
+			//height: 65px;
 			.slider-3{
 				&.ui-widget{
 				    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
@@ -2994,6 +2994,7 @@ p.m-title{
 				.ui-state-hover{
 					
 				}
+
 			}
 			.ui-widget-content{
 				background: #F3F6F9;
@@ -3003,8 +3004,49 @@ p.m-title{
 			.ui-corner-all{
 					border-radius: 0;
 				}
+            .ranger{
+                margin-top: 0;
+                 .irs-from{
+                        display: block!important;
+                        width: 35px;
+                        text-align: center;
+                        // margin-left: -12px;
+                        background: none;
+                        color: #444444;
+                        font-weight: bold;
+                        margin-top: 10px;
+                    }
+                    .irs-to{
+                        display: block !important;
+                        width: 35px;
+                        text-align: center;
+                        // margin-left: -12px;
+                        background: none;
+                        color: #444444;
+                        font-weight: bold;
+                        margin-top: 10px;
+                    }
+                .irs-line{
+                    height: 8px;
+                   
+                }
+                .irs-bar-edge{
+                    background: #6B8AD1;
+                }
+                .irs-bar{
+                    height: 8px;
+                    background: #6B8AD1;
+                }
+                .irs-slider {
+                    background: none;
+                    top: 26px;
+                    width: 10px;
+                    height: 22px;
+                    background-color: #254f73;
+                }
+            }
 		}
-
+        
 	}
 }
 
@@ -3497,7 +3539,7 @@ footer{
 		.price{
 			margin: 0 auto;
 		    display: none;
-		    height: 65px;
+		    // height: 65px;
 		    padding: 0 60px;
 		    border-bottom: 1px solid #eee;
 		    .slider-3.ui-slider {

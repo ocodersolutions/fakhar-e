@@ -483,59 +483,59 @@ $(".sort-item-select").click(function(){
     //add element for price filter
     $(document).ready(function() {
         //price
-        $(".desktop .slider-3 span:eq(0)").append("<p>0</p>");
-        $(".desktop .slider-3 span:eq(1)").append("<p>1000+</p>");
-        $(".mobile .slider-3 span:eq(0)").append("<p>0</p>");
-        $(".mobile .slider-3 span:eq(1)").append("<p>1000+</p>");
+        //$(".desktop .ranger span.irs-slider .from").append("<p>0</p>");
+        //$(".desktop .slider-3 span:eq(1)").append("<p>1000+</p>");
+        //$(".mobile .slider-3 span:eq(0)").append("<p>0</p>");
+        //$(".mobile .slider-3 span:eq(1)").append("<p>1000+</p>");
         //deals
-        $(".desktop .deals .slider-3 span:eq(0)").append("<p>0%</p>");
-        $(".desktop .deals .slider-3 span:eq(1)").append("<p>100%</p>");
-        $(".mobile .deals .slider-3 span:eq(0)").append("<p>0%</p>");
-        $(".mobile .deals .slider-3 span:eq(1)").append("<p>100%</p>");
+        // $(".desktop .deals .slider-3 span:eq(0)").append("<p>0%</p>");
+        // $(".desktop .deals .slider-3 span:eq(1)").append("<p>100%</p>");
+        // $(".mobile .deals .slider-3 span:eq(0)").append("<p>0%</p>");
+        // $(".mobile .deals .slider-3 span:eq(1)").append("<p>100%</p>");
     });
     //end-select filter
 
 // select filter price
-$(function() {
-    $(".prices .slider-3").slider({
-        range: true,
-        min: 0,
-        max: 1000,
-        values: [0, 1000],
-        change: function(event, ui) {
-            minprice = (ui.values[0]);
-            maxprice = (ui.values[1]);
-            $('.desktop .slider-3 span:eq(0) p').empty().append(minprice);
-            $('.desktop .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
-            $('.mobile .slider-3 span:eq(0) p').empty().append(minprice);
-            $('.mobile .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
-            $("input[name='minamount']").val(minprice);
-            $("input[name='maxamount']").val(maxprice);
-            Product.loadProductListAjax();
-        }
-    });
-});
+// $(function() {
+//     $(".prices .slider-3").slider({
+//         range: true,
+//         min: 0,
+//         max: 1000,
+//         values: [0, 1000],
+//         change: function(event, ui) {
+//             minprice = (ui.values[0]);
+//             maxprice = (ui.values[1]);
+//             $('.desktop .slider-3 span:eq(0) p').empty().append(minprice);
+//             $('.desktop .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+//             $('.mobile .slider-3 span:eq(0) p').empty().append(minprice);
+//             $('.mobile .slider-3 span:eq(1) p').empty().append(maxprice == 1000 ? '1000+' : maxprice);
+//             $("input[name='minamount']").val(minprice);
+//             $("input[name='maxamount']").val(maxprice);
+//             //Product.loadProductListAjax();
+//         }
+//     });
+// });
 
-$(function() {
-    $(".deals .slider-3").slider({
-        range: true,
-        min: 0,
-        max: 100,
-        values: [0, 100],
-        change: function(event, ui) {
-            minprice = (ui.values[0]);
-            maxprice = (ui.values[1]);
-            $('.desktop .deals .slider-3 span:eq(0) p').empty().append(minprice+'%');
-            $('.desktop .deals .slider-3 span:eq(1) p').empty().append(maxprice+'%');
-            $('.mobile .deals .slider-3 span:eq(0) p').empty().append(minprice+'%');
-            $('.mobile .deals .slider-3 span:eq(1) p').empty().append(maxprice+'%');
+// $(function() {
+//     $(".deals .slider-3").slider({
+//         range: true,
+//         min: 0,
+//         max: 100,
+//         values: [0, 100],
+//         change: function(event, ui) {
+//             minprice = (ui.values[0]);
+//             maxprice = (ui.values[1]);
+//             $('.desktop .deals .slider-3 span:eq(0) p').empty().append(minprice+'%');
+//             $('.desktop .deals .slider-3 span:eq(1) p').empty().append(maxprice+'%');
+//             $('.mobile .deals .slider-3 span:eq(0) p').empty().append(minprice+'%');
+//             $('.mobile .deals .slider-3 span:eq(1) p').empty().append(maxprice+'%');
            
-            $("input[name='minduration']").val(minprice);
-            $("input[name='maxduration']").val(maxprice);
-            Product.loadProductListAjax();
-        }
-    });
-});
+//             $("input[name='minduration']").val(minprice);
+//             $("input[name='maxduration']").val(maxprice);
+//             //Product.loadProductListAjax();
+//         }
+//     });
+// });
 
 $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(event){
     event.preventDefault(); 
@@ -602,27 +602,41 @@ function check_search_tag(){
     Product.loadProductListAjax();
 }
 
-
+check_price_checked()
 $('input#check-price').click(function(){
-    if ($(this).hasClass("checked") == false) {
-        $(this).addClass('checked');
-        $('input[name="profileBasePrices"]').val('0');
-    } else {
-        $(this).removeClass('checked');
-        $('input[name="profileBasePrices"]').val('1');
-    }
-    check_price_checked();
-    Product.loadProductListAjax(); 
+    $(this).toggleClass('allow_slider');
+    // if ($(this).hasClass("allow_slider") == true) {
+    //     $(this).addClass('allow_slider');
+    //     $('input[name="profileBasePrices"]').val('0');
+    //     $('.show-price').css('display','block');
+    //     $('.ranger').css('opacity','0.3');
+        
+    // } else {
+    //     $(this).removeClass('allow_slider');
+    //     $('input[name="profileBasePrices"]').val('1');
+    //     $('.show-price').css('display','none');
+    //     $('.ranger').css('opacity','1');
+    // }
+    check_allow_slide();
+    //Product.loadProductListAjax(); 
 });
-
-function check_price_checked(){
-    x = $('input#check-price.checked').length;
-    if(x == 1){
-        $('.show-price').css('display','none');
-        $('.price.prices .slider-3').css('opacity','1');
-    }else{
+ function check_allow_slide(show){
+    x = $('input#check-price').hasClass("allow_slider");
+    if (x == false){
         $('.show-price').css('display','block');
-        $('.price.prices .slider-3').css('opacity','0.3');
+        $('.ranger').css('opacity','0.3');
+        $('input[name="profileBasePrices"]').val('0');
+    }else{
+        $('.show-price').css('display','none');
+        $('.ranger').css('opacity','1');
+         $('input[name="profileBasePrices"]').val('1');
+    }
+ }
+function check_price_checked(){
+    x = $('input#check-price').hasClass("allow_slider");
+    if(x == false){
+        $('.show-price').css('display','none');
+        $('.ranger').css('opacity','0.3');
     }
 }
 // function click button apply refine search in mobile
@@ -636,4 +650,89 @@ $('button#apply-submit').click(function(){
 //         thischecked.closest(".option-filter-row").css("background","blue");
 //     }
 // })
+$(function() {
+    //test ionslider 
+    var from = 0;
+    var to = 1000;
 
+    $(".priceSlider").ionRangeSlider({
+            hide_min_max: true,
+            type: "double",
+            min: 0,
+            max: 1000,
+            from: from,
+            to: to,
+            keyboard: true,
+            step: 1,
+            hide_from_to:false,
+            onChange:function(data){
+                data = $("#priceSlider").data("ionRangeSlider");
+                mdata= $ ("#mPriceSlider").data("ionRangeSlider");
+               
+                 maxprice = data.old_to;
+               if (maxprice == 1000){
+                   $(".irs-to").html('1000+');
+                }
+            },
+            onFinish: function (data) {
+                data = $("#priceSlider").data("ionRangeSlider");
+                mdata= $ ("#mPriceSlider").data("ionRangeSlider");
+                minprice = data.old_from;
+                maxprice = data.old_to;
+                mMinprice = mdata.old_from;
+                mMaxprice = mdata.old_to;
+                winsdows_size = $(window).width();
+                if ( winsdows_size > 768){
+                    $("input[name='minamount']").val(minprice);
+                    $("input[name='maxamount']").val(maxprice);
+                }else{
+                    $("input[name='minamount']").val(mMinprice);
+                $("input[name='maxamount']").val(mMaxprice);
+                }
+                
+                $("input[name='minamount']").val(mMinprice);
+                $("input[name='maxamount']").val(mMaxprice);
+                //Product.loadProductListAjax();
+            }
+            
+        });
+    var dealfrom = 0;
+    var dealto = 100;
+    //test ion slider
+    $(".dealsSlider").ionRangeSlider({
+            hide_min_max: true,
+            type: "double",
+            min: 0,
+            max: 100,
+            from: dealfrom,
+            to: dealto,
+            keyboard: true,
+            postfix: "%",
+            step: 1,
+            hide_from_to:false,
+            onChange:function(data){
+                data = $("#dealsSlider").data("ionRangeSlider");
+                mdata= $ ("#mdealsSlider").data("ionRangeSlider");
+            },
+            onFinish: function (data) {
+                data = $("#dealsSlider").data("ionRangeSlider");
+                mdata= $ ("#mdealsSlider").data("ionRangeSlider");
+                console.log(data);
+                //console.log(mdata);
+                mindeal = data.old_from;
+                maxdeal = data.old_to;
+                mMindeal = mdata.old_from;
+                mMaxdeal = mdata.old_to;
+                if ( winsdows_size > 768){
+                $("input[name='minduration']").val(mindeal);
+                $("input[name='maxduration']").val(maxdeal);
+                }else{
+                   $("input[name='minduration']").val(mMindeal);
+                    $("input[name='maxduration']").val(mMaxdeal);
+                }
+                
+                Product.loadProductListAjax();
+            }
+            
+        });
+});
