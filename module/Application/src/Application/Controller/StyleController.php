@@ -39,6 +39,7 @@ class StyleController extends BaseActionController
 	}
     public function definationAction() 
     {
+        $id= $this->params('id');
         $__viewVariables = array();
         $this->layout('layout/layout_elnove.phtml');
         $oAuth = $this->getServiceLocator()->get('AuthService');
