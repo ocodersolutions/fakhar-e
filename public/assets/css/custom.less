@@ -3048,6 +3048,33 @@ p.m-title{
                     background-color: #254f73;
                 }
             }
+            input[type=checkbox]{
+                display: none;
+            }
+            input[type="checkbox"]:checked + label .fa-check-square {
+                position: relative;
+                display: block;
+                color: #254f73;
+            }
+            input[type="checkbox"] + label .fa-check-square {
+                display: none;
+                font-size: 13px;
+            }
+            input[type="checkbox"] + label .fa-square-o {
+                font-size: 13px;
+            }
+            label{
+                font-weight: 400;
+                cursor: pointer;
+                 .fa-stack {
+                    position: relative;
+                    display: inline-block;
+                    width: 2em;
+                    height: 2em;
+                    line-height: 2em;
+                    vertical-align: middle;
+                }
+            }
 		}
         
 	}
@@ -3393,6 +3420,7 @@ footer{
 
 	}
     .ranger{
+        margin-bottom: 20px;
         margin-top: 10px;
         .irs-bar-edge{
             background: #6B8AD1;
@@ -3622,6 +3650,34 @@ footer{
 			    font-size: 12px;
 			    border-bottom: none;
 		    }
+            /*********/
+             input[type=checkbox]{
+                display: none;
+            }
+            input[type="checkbox"]:checked + label .fa-check-square {
+                position: relative;
+                display: block;
+                color: #254f73;
+            }
+            input[type="checkbox"] + label .fa-check-square {
+                display: none;
+                font-size: 25px;
+            }
+            input[type="checkbox"] + label .fa-square-o {
+                font-size: 25px;
+            }
+            label{
+                font-weight: 400;
+                cursor: pointer;
+                 .fa-stack {
+                    position: relative;
+                    display: inline-block;
+                    width: 2em;
+                    height: 2em;
+                    line-height: 2em;
+                    vertical-align: middle;
+                }
+            }
 		}
 
 	.colors {
