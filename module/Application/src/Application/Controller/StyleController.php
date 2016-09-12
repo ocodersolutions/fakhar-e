@@ -46,4 +46,9 @@ class StyleController extends BaseActionController
 
         return  $__viewVariables;
     }
+    public function mystyleAction() {
+        echo "12131";
+        die("success");
+        // $this->redirect()->toRoute('style/defination');
+    }
 }
