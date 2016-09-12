@@ -1,6 +1,7 @@
 <?php
 $page_url = $this->serverUrl().'/service/feeddatadetail/'.$this->feedDataDetail['id'].'/'.rand();
 $title = 'ELNove - '.$this->feedDataDetail['caption'];
+$likearray = $this->likearray;
 ?>
 
 <div class="col-lg-6 modal_body_left">
@@ -12,7 +13,7 @@ $title = 'ELNove - '.$this->feedDataDetail['caption'];
     <p class="modal_price_item"><span><?php echo ($this->feedDataDetail['onsale']=='Y'?$this->feedDataDetail['saleprice']:$this->feedDataDetail['price'])?></span><?php echo $this->feedDataDetail['currency'] ?></p>
     <div class="modal_buy_product">
         <a href="<?php echo $this->url('service/articlebought', array('feeddataid' => base64_encode($this->feedDataDetail['id']))); ?>" target="_blank"><span class="btn-st-blue">BUY</span></a>
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <i style="cursor: pointer;" class="qv-like fa fa-heart-o <?php if (in_array($this->feedDataDetail['id'], $likearray)) { echo 'liked';} ?>" id="<?php echo  base64_encode($this->feedDataDetail['id']); ?>" aria-hidden="true"></i>
     </div>
     <p class="modal_alert_detail">DETAILS</p>
     <p><?php echo $this->feedDataDetail['description']; ?></p>
