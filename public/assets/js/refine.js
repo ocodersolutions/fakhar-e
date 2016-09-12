@@ -496,7 +496,7 @@ $('body').on('click', '.qv-like', function (){
         $("." + tog).slideToggle(800, function () {});
         var ifa = $(this).closest('ul').find("i" + "[data-class='" + tog +"']");
             ifa.toggleClass('fa-selected');
-            //$(this).toggleClass('li-up');
+            $(this).toggleClass('li-up');
     });
     //add element for price filter
     $(document).ready(function() {
@@ -636,7 +636,7 @@ $('input[name="check-show-price"]').click(function(){
     //     $('.ranger').css('opacity','1');
     // }
     check_allow_slide();
-    //Product.loadProductListAjax(); 
+    Product.loadProductListAjax(); 
 });
  function check_allow_slide(show){
     x = $('input[name="check-show-price"]').hasClass("allow_slider");
@@ -701,15 +701,14 @@ $(function() {
                 mMaxprice = mdata.old_to;
                 winsdows_size = $(window).width();
                 if ( winsdows_size > 768){
+                    alert(minprice);
+                    alert(maxprice);
                     $("input[name='minamount']").val(minprice);
                     $("input[name='maxamount']").val(maxprice);
                 }else{
                     $("input[name='minamount']").val(mMinprice);
-                $("input[name='maxamount']").val(mMaxprice);
+                    $("input[name='maxamount']").val(mMaxprice);
                 }
-                
-                $("input[name='minamount']").val(mMinprice);
-                $("input[name='maxamount']").val(mMaxprice);
                 Product.loadProductListAjax();
             }
             
@@ -736,7 +735,6 @@ $(function() {
                 data = $("#dealsSlider").data("ionRangeSlider");
                 mdata= $ ("#mdealsSlider").data("ionRangeSlider");
                 console.log(data);
-                //console.log(mdata);
                 mindeal = data.old_from;
                 maxdeal = data.old_to;
                 mMindeal = mdata.old_from;
