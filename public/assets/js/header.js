@@ -107,6 +107,10 @@ $("#show-hide-menu").click(function(){
     } else {
         $("#search").hide();
         flag = false;
+        /*** check input search if have content do search ***/
+        if ($('.searchbox-input').val() != ""){
+            $('.searchbox-icon').click();
+        }
     }    
 });
     //show or hide '.searchbox-icon' when click "#show-hide-menu" or '.searchbox-icon' (service page)
@@ -126,6 +130,10 @@ $(document).on("click", "#show-hide-menu", function(){
         $("#top-nav").removeAttr("style");
         $('#row-top-navbar').css("display","block");
         flag = false;
+        /*** check input search if have content do search ***/
+        if ($('.searchbox-input').val() != ""){
+            $('.searchbox-icon').click();
+        }
     }   
 });
 

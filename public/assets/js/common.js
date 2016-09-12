@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    $(".chosen_select_left").chosen();
+    $(".chosen_select_right").chosen(); 
+
     $('#idNewsLetter').click(function() { 
         
     	var $email = $('#idNewsLetterInput'); //change form to id or containment selector

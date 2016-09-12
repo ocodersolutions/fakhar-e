@@ -668,9 +668,15 @@ $('input[name="check-show-price"]').click(function(){
  }
 function check_price_checked(){
     x = $('input[name="check-show-price"]').hasClass("allow_slider");
+    check_login = $('#status-login').attr('data-login');
     if(x == false){
         $('.show-price').css('display','none');
-        $('.price.prices .ranger').css('opacity','0.3');
+        if(check_login == 1 ){
+            $('.price.prices .ranger').css('opacity','0.3');
+        }else{
+            $('.price.prices .ranger').css('opacity','1');
+        }
+        
     }
 }
 // function click button apply refine search in mobile
@@ -717,8 +723,8 @@ $(function() {
                 mMaxprice = mdata.old_to;
                 winsdows_size = $(window).width();
                 if ( winsdows_size > 768){
-                    alert(minprice);
-                    alert(maxprice);
+                    // alert(minprice);
+                    // alert(maxprice);
                     $("input[name='minamount']").val(minprice);
                     $("input[name='maxamount']").val(maxprice);
                 }else{
