@@ -408,6 +408,7 @@ $('body').on('click', '.qv-like', function (){
                         $("input[name="+y+"]").val("");
                     };
                     $("input[name='limit']").val("50");
+                    $("a.fsp-close").trigger('click');
                 break;
 
         }
