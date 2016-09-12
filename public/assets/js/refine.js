@@ -71,18 +71,34 @@ $(".sort-item-select").click(function(){
 
 $('body').on('click', '.qv-like', function (){
     id = $(this).attr('id');
-    if($(this).hasClass('liked')){
-        $(this).removeClass('liked');
-        $('span[id="'+id+'"]').removeClass('active');
-        $('span[id="'+id+'"]').closest('.product').fadeOut();
-        action = 'unlike';
-    }else{
-        $(this).addClass('liked');
-        $('span[id="'+id+'"]').addClass('active');
-        $('span[id="'+id+'"]').closest('.product').fadeIn();
-        action = 'like';
+    check_login = $('#status-login').attr('data-login');
+    saveitem = $('input[name="filterTypeMain"]').val();
+
+    if(check_login == 1){
+        if($(this).hasClass('liked')){
+            $(this).removeClass('liked');
+            $('span[id="'+id+'"]').removeClass('active');
+            if(saveitem == 'saveitem'){ 
+                $('span[id="'+id+'"]').closest('.product').fadeOut();
+            }
+            action = 'unlike';
+        }else{
+            $(this).addClass('liked');
+            $('span[id="'+id+'"]').addClass('active');
+            $('span[id="'+id+'"]').closest('.product').fadeIn();
+            action = 'like';
+        }
+        ajax_like(id,action);
+    }else if(check_login == 0){
+        myalert('myalertid2','type_missing','Oops','You are not logged in to use this feature, please login link bellow to continue.','Login');
+        $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+            $("button.my_btn_ok").click(function(){ // click button
+               $('a.close-reveal-modal').trigger('click'); // will close modal
+               window.location.replace("/auth/login");
+            });
+        });
     }
-    ajax_like(id,action);
+
 });
 
 
