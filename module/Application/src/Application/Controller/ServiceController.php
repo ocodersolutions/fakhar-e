@@ -63,6 +63,7 @@ class ServiceController extends BaseActionController {
             }
         }
         $__viewVariables['userEmail'] = @$userInfo->email; 
+        $__viewVariables['userId'] = $userId; 
 
         $oService = $this->getServiceLocator();
         $oFeedData = $oService->get('FeedDataTable');
