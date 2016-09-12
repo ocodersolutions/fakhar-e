@@ -192,11 +192,18 @@ $(window).scroll(function(){
     }
     if($(this).scrollTop() > 0)
     {
-        $("#mobile-header").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
+        //alert("");
+        //$("#mobile-header").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
+        $("#mtop-bar").hide();
+        $("#menu-logo").hide();
+        $("#search-bar").css({"position": "fixed", "width": "100%", "top": "0px", "background": "#fff", "z-index": "99"});
     }
     else
     {
-        $("#mobile-header").css("position","static");
+        $("#mtop-bar").show();
+        $("#menu-logo").show();
+        //$("#mobile-header").css("position","static");
+        $("#search-bar").css("position","static");
     }                
 });
 
