@@ -9,8 +9,8 @@ class StyleListTable extends BasicTableAdapter {
 	public function insert(){
 		
 	}
-	public function delete(){
-	
+	public function delete($id){
+		$this->tableGateway->delete(array('id' => $id));
 	}
 	public function viewlist($userId){
 
