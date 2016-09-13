@@ -40,5 +40,34 @@ $(document).ready(function() {
             });                       	   
         }
 
-    });            
+    });   
+
+    $(".no_delete_style").click(function(){
+        $(".close").click();
+    }); 
+
+    $(".delete_style").click(function(){
+        $del_style = $(this).attr("data-delete");
+        $.ajax({
+            url: "style/deletestyle",
+            type: "POST",
+            data: { del_style : $del_style },
+            dataType: "html",
+            success: function (result)
+            {
+                  // alert(result);
+                $("#result_data").html(result);
+            }
+        });
+    });
+
+    $(".sb_create_style").click(function(){
+        $(this).parents(".style_page").find("#top_left").animate({ left: "+=50", height: "toggle" }, 1000, function() {});
+    });
+
+});
+
+$(document).on("click","#btn_delete_style", function(){
+    var x = $(this).attr("data-delete");
+    $('.delete_style').attr("data-delete",x);
 });
