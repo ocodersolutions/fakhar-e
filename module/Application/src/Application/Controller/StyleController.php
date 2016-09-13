@@ -55,8 +55,8 @@ class StyleController extends BaseActionController
             $this->redirect()->toRoute('auth');
         }
 
-        // $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
-        // $attrItem = $oAttrList->getAttributeName();
+        $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
+        $attrItem = $oAttrList->getAttributeName();
 
 
         $oStyleList = $this->getServiceLocator()->get('StyleListTable');
