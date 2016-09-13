@@ -32,8 +32,8 @@ class StyleListTable extends BasicTableAdapter {
 
 		$userId = 1;
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('ac' => 'Style'));
-        $select->where(array('ac.userId' => $userId));
+        $select = $sql->select(array('sl' => 'Style'));
+        $select->where(array('sl.userId' => $userId));
 
         $resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();
@@ -42,6 +42,11 @@ class StyleListTable extends BasicTableAdapter {
         $resultSet = $resultSet->toArray();
 
         return $resultSet;
+	}
+	public function viewsingleitem($id){
+        $rowset = $this->tableGateway->select(array('id' => $id));
+        $row = $rowset->current();
+        return $row;
 	}
   
 	

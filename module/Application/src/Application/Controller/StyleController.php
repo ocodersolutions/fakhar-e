@@ -4,6 +4,7 @@ namespace Application\Controller;
 use Zend\View\Model\ViewModel;
 use Application\Model\FeedDataTable;
 use Application\Model\StyleListTable;
+use Application\Model\AttributeListTable;
 use Zend\Session\Container;
 use Zend\Console\Request as ConsoleRequest;
 use Ocoder\Base\BaseActionController;
@@ -53,11 +54,18 @@ class StyleController extends BaseActionController
         } else {
             $this->redirect()->toRoute('auth');
         }
+
+        $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
+        $attrItem = $oAttrList->getAttributeName();
+
+
+        $oStyleList = $this->getServiceLocator()->get('StyleListTable');
         $aPostParams = $this->params()->fromPost();
         if(isset($aPostParams['submit'])){
-            $oStyleList = $this->getServiceLocator()->get('StyleListTable');
             $listItem = $oStyleList->update($userId, $id, $aPostParams );
         }
+        $singleItem = $oStyleList->viewsingleitem($id);
+        $__viewVariables['singleItem'] = $singleItem;
         return  $__viewVariables;
     }
     public function deletestyleAction() 
