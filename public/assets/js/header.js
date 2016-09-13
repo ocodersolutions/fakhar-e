@@ -236,4 +236,35 @@ $(window).scroll(function() {
         $('#click_back_to_top').css("opacity","0");
     }
 });
+// autocomple search box
+$( function() {
+    
+    $("#search-venue").autocomplete({
+      // source: availableTags,
+      source: function( request, response ) {
+                $.ajax({
+                    url: "/service/getvenue/",
+                    type: 'POST',
+                    data: 'json',
+                    dataType: {get_param: 'value'},
+                    success: function( data ) {
+                        
+                    }
+                });
+            },
+      select: function( event, ui ) {
+        $('form.searchbox, form.form_search, form.searchbox-mobile').submit();
+        return false;
+      }
+    });
+    
+    // click select search autocomplete
+    // $("#ui-id-3 .ui-menu-item").click(function(event) {
+    //     /* Act on the event */
+    //     alert("selected");
+    // })
+        
+    //     $('form.searchbox, form.form_search, form.searchbox-mobile').submit();
+    // });
+  });
 
