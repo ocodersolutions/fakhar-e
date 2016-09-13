@@ -1,3 +1,4 @@
+<?php $singleItem = $this->singleItem; ?>
 <div class="row content-page" id="defination_page">
 	<div class="defination_page col-lg-10 col-lg-offset-1">
 		<div id="top_left" >
@@ -6,14 +7,16 @@
 				<form method="post">
 					<div class="style_title col-lg-5 col-lg-offset-1">
 						<label for="">Style: </label>
-						<input type="text" name="name_style" value="">
+						<input type="text" name="name_style" value="<?php if(isset($singleItem->title)){echo $singleItem->title;}else{echo '';};?>">
 					</div>
 					<div class="style_status col-lg-5">
 						<label for="">Status: </label>
 						<div class="style_status_content">
 							<select name="status_select">
-							  <option value="1">Enable</option>
-							  <option value="0">Disable</option>
+							  <option <?php if(isset($singleItem->isActive) && $singleItem->isActive == 1){ echo 'selected="selected"';}?> value="1">Enable 
+							  </option>
+							  <option <?php if(isset($singleItem->isActive) && $singleItem->isActive == 0){ echo 'selected="selected"';}?> value="0">Disable
+							  </option>
 							</select>
 						</div>
 					</div>
@@ -34,36 +37,8 @@
 						<option value="AL">Alabama3</option>
 						<option value="WY">Wyoming</option>
 					</select>
-					<select style="width:350px;" class="chosen_select_left" >
-						<option value="AL">Alabama</option>
-						<option value="AL">Alabama1</option>
-						<option value="AL">Alabama2</option>
-						<option value="AL">Alabama3</option>
-						<option value="WY">Wyoming</option>
-					</select>
-					<select style="width:350px;" class="chosen_select_left" >
-						<option value="AL">Alabama</option>
-						<option value="AL">Alabama1</option>
-						<option value="AL">Alabama2</option>
-						<option value="AL">Alabama3</option>
-						<option value="WY">Wyoming</option>
-					</select>
 				</div>
 				<div class="top_right_attValue col-lg-5">
-					<select data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right">
-						<option value="AL">Alabama</option>
-						<option value="AL">Alabama1</option>
-						<option value="AL">Alabama2</option>
-						<option value="AL">Alabama3</option>
-						<option value="WY">Wyoming</option>
-					</select>
-					<select data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right">
-						<option value="AL">Alabama</option>
-						<option value="AL">Alabama1</option>
-						<option value="AL">Alabama2</option>
-						<option value="AL">Alabama3</option>
-						<option value="WY">Wyoming</option>
-					</select>
 					<select data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right">
 						<option value="AL">Alabama</option>
 						<option value="AL">Alabama1</option>
