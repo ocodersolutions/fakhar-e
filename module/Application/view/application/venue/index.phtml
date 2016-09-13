@@ -1,4 +1,10 @@
 <?php 
 $listItem = $this->listItem;
-
+$dataVenue = [];
+foreach ($listItem as $value) {
+	# code...
+	$datavalue = $value['title'];
+	array_push($dataVenue, $datavalue);
+}
+echo json_encode($dataVenue);
 ?>
