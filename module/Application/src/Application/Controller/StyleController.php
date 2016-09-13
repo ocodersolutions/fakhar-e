@@ -4,6 +4,7 @@ namespace Application\Controller;
 use Zend\View\Model\ViewModel;
 use Application\Model\FeedDataTable;
 use Application\Model\StyleListTable;
+use Application\Model\AttributeListTable;
 use Zend\Session\Container;
 use Zend\Console\Request as ConsoleRequest;
 use Ocoder\Base\BaseActionController;
@@ -53,26 +54,63 @@ class StyleController extends BaseActionController
         } else {
             $this->redirect()->toRoute('auth');
         }
+
+        $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
+        $attrItem = $oAttrList->getAttributeName();
+
+
+        $oStyleList = $this->getServiceLocator()->get('StyleListTable');
         $aPostParams = $this->params()->fromPost();
         if(isset($aPostParams['submit'])){
-            $oStyleList = $this->getServiceLocator()->get('StyleListTable');
             $listItem = $oStyleList->update($userId, $id, $aPostParams );
         }
+        $singleItem = $oStyleList->viewsingleitem($id);
+        $__viewVariables['singleItem'] = $singleItem;
         return  $__viewVariables;
     }
     public function deletestyleAction() 
     {
         // $listItem = $this->listItem;
-        $listItem = $this->getServiceLocator()->get("StyleListTable");
-        $userName = $this->userName; 
+        $oAuth = $this->getServiceLocator()->get('AuthService');
+        $userInfo = $oAuth->getIdentity();
+        $this->userId = $userInfo->userId;
+        $userId = $userInfo->userId;
+        $userName = $userInfo->firstName;
+        $this->layout()->firstName = $userInfo->firstName;
+        $oStyleList = $this->getServiceLocator()->get('StyleListTable');
+        $listItem = $oStyleList->viewlist($userId);
+
         $aPostParams = $this->params()->fromPost();
+
+        $result_data = "";
         if (count($aPostParams)) {
             foreach ($listItem as $item) {
-                if($item["id"] == $data_delete)
+                
+                if($item["id"] == $aPostParams["del_style"])
                 {
+                    $oStyleList->delete($item["id"]); 
+                    $listItem = $oStyleList->viewlist($userId);
+                    
+                    foreach($listItem as $item ) 
+                    {
+                        $result_data .= 
+                         "<tr>
+                         <td>" . $item["id"] . "</td>
+                         <td>" . $item["title"] . "</td>
+                         <td>" . $userName . "</td>
+                         <td>" . $item["isActive"] . "</td>
+                         <td> <button type='button' class='btn btn-info'><a href='style/defination/" . $item["id"] . "'>Edit</a></button> 
+                                    <button type='button' class='btn btn-danger' id='btn_delete_style' data-toggle='modal' data-delete='" . $item["id"] . "' data-target='#myModal'>Delete</button> 
+                             </td>
+                         </tr>";
+                    }
+                    
 
+                    break;
                 }
             }
+            // exit($result_data);
+            echo $result_data;
         }
     }
     public function mystyleAction() {

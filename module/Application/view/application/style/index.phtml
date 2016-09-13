@@ -6,16 +6,41 @@ $userName = $this->userName;
 <div class="row content-page" id="style_page">
 	<div class="style_page col-lg-10 col-lg-offset-1">
 		<div class="create_style">
-			<a href="/style/defination" class="sb_create_style">Creat Style</a>
+			<span class="sb_create_style">Create Style</span>
 		</div>
+		<div id="top_left" >
+			<div class="row">
+				<div class="top_left_title top_title_style">Style</div>
+				<form method="post">
+					<div class="style_title col-lg-5 col-lg-offset-1">
+						<label for="">Style: </label>
+						<input type="text" name="name_style" value="<?php if(isset($singleItem->title)){echo $singleItem->title;}else{echo '';};?>">
+					</div>
+					<div class="style_status col-lg-5">
+						<label for="">Status: </label>
+						<div class="style_status_content">
+							<select name="status_select">
+							  <option <?php if(isset($singleItem->isActive) && $singleItem->isActive == 1){ echo 'selected="selected"';}?> value="1">Enable 
+							  </option>
+							  <option <?php if(isset($singleItem->isActive) && $singleItem->isActive == 0){ echo 'selected="selected"';}?> value="0">Disable
+							  </option>
+							</select>
+						</div>
+					</div>
+					<input type="submit" name="submit" class="upgrade_style btn btn-primary col-lg-1"  value="Update">
+				</form>
+			</div>
+		</div>
+		<div class="clr"></div>
+
 		<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	        <thead>
 	            <tr>
-	                <th>ID</th>
-	                <th>Title</th>
-	                <th>Creator</th>
-	                <th>Staus</th>
-	                <th>Option</th>
+	                <th style="width: 10%">ID</th>
+	                <th style="width: 40%">Title</th>
+	                <th style="width: 30%">Creator</th>
+	                <th style="width: 10%">Staus</th>
+	                <th style="width: 10%">Option</th>
 	            </tr>
 	        </thead>
 	        <tfoot>
@@ -34,158 +59,35 @@ $userName = $this->userName;
 	                <td><?php echo ($item['id']); ?></td>
 	                <td><?php echo ($item['title']); ?></td>
 	                <td><?php echo ($userName); ?></td>
-	                <td><?php echo ($item['isActive']); ?></td>
+	                <td><?php echo ($item['isActive'] == 1 ? '<span class="label label-success">Enable</span>' : '<span class="label label-danger">Disable</span>'); ?></td>
 	                <td>
-	                	<a href="/style/defination/<?php echo ($item['id']); ?>"><button type="button" class="btn btn-info">Edit</button></a>
-	                	<button type="button" class="btn btn-danger">Delete</button>
+	                	<a href="/style/defination/<?php echo ($item['id']); ?>"><button type="button" class="btn"><span class="glyphicon glyphicon-edit"></span></button></a>
+	                	<button type="button" class="btn" id="btn_delete_style" data-toggle="modal" data-delete="<?php echo ($item['id']); ?>" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button>
 	                </td>
 	            </tr>
 
   			<?php } ?>
-
-	            <!-- <tr>
-	                <td>2</td>
-	                <td>Accountant</td>
-	                <td>Tokyo</td>
-	                <td>63</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>3</td>
-	                <td>Junior Technical Author</td>
-	                <td>San Francisco</td>
-	                <td>66</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>4</td>
-	                <td>Senior Javascript Developer</td>
-	                <td>Edinburgh</td>
-	                <td>22</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>5</td>
-	                <td>Accountant</td>
-	                <td>Tokyo</td>
-	                <td>33</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>6</td>
-	                <td>Integration Specialist</td>
-	                <td>New York</td>
-	                <td>61</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>7</td>
-	                <td>Sales Assistant</td>
-	                <td>San Francisco</td>
-	                <td>59</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>8</td>
-	                <td>Integration Specialist</td>
-	                <td>Tokyo</td>
-	                <td>55</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>9</td>
-	                <td>Javascript Developer</td>
-	                <td>San Francisco</td>
-	                <td>39</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>10</td>
-	                <td>Software Engineer</td>
-	                <td>Edinburgh</td>
-	                <td>23</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>11</td>
-	                <td>Office Manager</td>
-	                <td>London</td>
-	                <td>30</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>12</td>
-	                <td>Support Lead</td>
-	                <td>Edinburgh</td>
-	                <td>22</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>13</td>
-	                <td>Regional Director</td>
-	                <td>San Francisco</td>
-	                <td>36</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>14</td>
-	                <td>Senior Marketing Designer</td>
-	                <td>London</td>
-	                <td>43</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr>
-	            <tr>
-	                <td>15</td>
-	                <td>Regional Director</td>
-	                <td>London</td>
-	                <td>19</td>
-	                <td>
-	                	<button type="button" class="btn btn-info">Edit</button>
-	                	<button type="button" class="btn btn-danger">Delete</button>
-	                </td>
-	            </tr> -->
-	            
 	        </tbody>
 	    </table>
+
+	    <!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<!-- <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
+					</div>
+					<div class="modal-body">
+						Do you want to delete or not
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger delete_style" data-dismiss="modal">Yes</button>
+						<button type="button" class="btn btn-default no_delete_style">No</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 
@@ -193,7 +95,7 @@ $userName = $this->userName;
 
 <script type="text/javascript">
 	$('#example').dataTable( {
-	  "pageLength": 999,
+	  "pageLength": 25,
 	  "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
 	} );
 
