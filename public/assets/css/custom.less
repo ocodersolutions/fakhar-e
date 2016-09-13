@@ -5605,8 +5605,62 @@ footer{
                 }
             }
         }
+        .top_title_style {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        #top_left {
+            display: none;
+            .row {
+                border-bottom: 1px solid #cccccc;
+                padding-bottom: 60px;
+                margin: 0;
+            }
+            .style_title {
+                label {
+                    width: 50px;
+                    margin-right: 20px;
+                }
+                input {
+                    padding: 5px;
+                    width: 200px;
+                }            
+            }
+            .style_venue {
+                label {
+                    width: 50px;
+                    margin-right: 20px;
+                }
+                .style_venue_content {
+                    display: inline-block;
+                    select {
+                        width: 200px;
+                        padding: 5px;
+                    }
+                }                   
+            }
+            .style_status {
+                label {
+                    width: 50px;
+                    margin-right: 20px;
+                }
+                .style_status_content {
+                    display: inline-block;
+                    select {
+                        width: 200px;
+                        padding: 5px;
+                    }
+                }
+            }
+            .upgrade_style {
+
+            }
+        }
         #example_wrapper {
             margin-bottom: 40px;
+            margin-top: 60px;
         }
     }
     .modal-body {
@@ -5717,21 +5771,21 @@ footer{
 
 /***** ---------------------------------- End style for style/defination page-------------------------------------*****/
 /***** style for autocomplete search box ****/
-#ui-id-3{
-    width: 328px;
+.ui-autocomplete {
+    //width: 328px;
     z-index: 999;
     line-height: 25px;
     background: #fff;
     color: #444444;
-    left: 880px !important;
-    width: 342px !important;
+    //left: 880px !important;
+    //width: 342px !important;
     position: fixed !important;
-    top:113px !important;
+    //top:113px !important;
     li{
         padding-left: 15px;
         cursor: pointer;
         &:hover{
-            background: #f7f7f7;
+            color: #85A2BB;
         }
     }
 }

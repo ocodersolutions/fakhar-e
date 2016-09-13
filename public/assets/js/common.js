@@ -78,6 +78,11 @@ $('.chosen_select_left').change(function(){
             }
         });
     });
+
+    $(".sb_create_style").click(function(){
+        $(this).parents(".style_page").find("#top_left").animate({ left: "+=50", height: "toggle" }, 1000, function() {});
+    });
+
 });
 
 $(document).on("click","#btn_delete_style", function(){
