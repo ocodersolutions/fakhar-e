@@ -3,23 +3,26 @@
 		<div id="top_left" >
 			<div class="row">
 				<div class="top_left_title top_title_style">Style</div>
-				<div class="style_title col-lg-5 col-lg-offset-1">
-					<label for="">Style: </label>
-					<input type="text" name="firstname" value="my_style">
-				</div>
-				<div class="style_status col-lg-5">
-					<label for="">Status: </label>
-					<div class="style_status_content">
-						<select>
-						  <option value="volvo">Enable</option>
-						  <option value="saab">Disable</option>
-						</select>
+				<form action="mystyle" method="post">
+					<div class="style_title col-lg-5 col-lg-offset-1">
+						<label for="">Style: </label>
+						<input type="text" name="name_style" value="">
 					</div>
-				</div>
-				<div class="upgrade_style btn btn-primary col-lg-1">Upgrade</div>
+					<div class="style_status col-lg-5">
+						<label for="">Status: </label>
+						<div class="style_status_content">
+							<select name="status_select">
+							  <option value="1">Enable</option>
+							  <option value="0">Disable</option>
+							</select>
+						</div>
+					</div>
+					<input type="submit" class="upgrade_style btn btn-primary col-lg-1" value="Upgrade">
+				</form>
 			</div>
 		</div>
 		<div class="clr"></div>
+
 		<div id="top_right">
 			<div class="row">
 				<div class="top_right_title top_title_style">Defination</div>

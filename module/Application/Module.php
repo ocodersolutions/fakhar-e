@@ -214,6 +214,17 @@ class Module implements
                     $resultSetPrototype->setArrayObjectPrototype(new Model\ArticleAlert($dbAdapter));
                     return new TableGateway('articlealert', $dbAdapter, null, $resultSetPrototype);
                 },
+                'StyleListTable' => function($serviceManager) {
+                    $tableGateway = $serviceManager->get('StyleListTableGateway');
+                    $table = new Model\StyleListTable($tableGateway);
+                    return $table;
+                },
+                'StyleListTableGateway' => function ($serviceManager) {
+                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\StyleList($dbAdapter));
+                    return new TableGateway('style', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
             'abstract_factories' => array(
                 'Application\Service\CommonTableAbstractFactory'

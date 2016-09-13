@@ -880,14 +880,29 @@ return array(
                     'defination' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/defination',
+                            'route' => '/defination[/:id]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Style',
+                                'action' => 'defination',
+                            ),
+                        ),
+                    ),
+                    'mystyle' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/mystyle',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
                                 'controller' => 'Application\Controller\Style',
-                                'action' => 'defination',
+                                'action' => 'mystyle',
                             ),
                         ),
                     ),
