@@ -7,15 +7,15 @@
 				<form method="post">
 					<div class="style_title col-lg-5 col-lg-offset-1">
 						<label for="">Style: </label>
-						<input type="text" name="name_style" value="<?php echo $singleItem->title;?>">
+						<input type="text" name="name_style" value="<?php if(isset($singleItem->title)){echo $singleItem->title;}else{echo '';};?>">
 					</div>
 					<div class="style_status col-lg-5">
 						<label for="">Status: </label>
 						<div class="style_status_content">
 							<select name="status_select">
-							  <option <?php if($singleItem->isActive == 1){ echo 'selected="selected"';} ?> value="1">Enable 
+							  <option <?php if(isset($singleItem->isActive) && $singleItem->isActive == 1){ echo 'selected="selected"';}?> value="1">Enable 
 							  </option>
-							  <option <?php if($singleItem->isActive == 0){ echo 'selected="selected"';} ?> value="0">Disable
+							  <option <?php if(isset($singleItem->isActive) && $singleItem->isActive == 0){ echo 'selected="selected"';}?> value="0">Disable
 							  </option>
 							</select>
 						</div>
