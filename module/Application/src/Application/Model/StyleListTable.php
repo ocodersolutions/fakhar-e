@@ -14,8 +14,8 @@ class StyleListTable extends BasicTableAdapter {
 	public function insert(){
 		
 	}
-	public function delete(){
-	
+	public function delete($id){
+		$this->tableGateway->delete(array('id' => $id));
 	}
 	public function update($userId, $id, $aPostParams){
 		$nextWeek = time() + (7 * 24 * 60 * 60);
