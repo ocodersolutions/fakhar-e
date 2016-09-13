@@ -895,10 +895,11 @@ return array(
                     'mystyle' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/mystyle',
+                            'route' => '/mystyle[/:id]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9]+',
                             ),
                             'defaults' => array(
                                 'controller' => 'Application\Controller\Style',
