@@ -235,6 +235,7 @@ class Module implements
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\AttributeList($dbAdapter));
                     return new TableGateway('attributelist', $dbAdapter, null, $resultSetPrototype);
+                },    
                 'VenueTable' => function($serviceManager) {
                     $tableGateway = $serviceManager->get('VenueTableGateway');
                     $table = new Model\VenueTable($tableGateway);
