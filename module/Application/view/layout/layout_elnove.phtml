@@ -166,7 +166,7 @@
                         <form class="searchbox">
                             <input type="search" placeholder="Search by Product..." name="search1" class="searchbox-input">
                             <div class="charater-center"></div>
-                            <input type="search" placeholder="Search by Venue..." name="search2" class="searchbox-input">
+                            <input type="search"  id="search-venue" placeholder="Search by Venue..." name="search2" class="searchbox-input">
                             <button type="submit" class="searchbox-submit">
                                 <span class="searchbox-icon"><i class="fa fa-search" aria-hidden="true" id="search_btn"></i></span>
                             </button>
@@ -270,7 +270,9 @@
         <div id="body-container" class="container-fluid">
           <?php echo $this->content; ?>  
         </div>
-
+        <div class="top_page" id="click_back_to_top" >
+            <a><img src="/img/arrow.png"></a>
+        </div>
         <!-- Footer -->
         <footer class="container-fluid">
             <div class="row">
