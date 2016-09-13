@@ -225,6 +225,17 @@ class Module implements
                     $resultSetPrototype->setArrayObjectPrototype(new Model\StyleList($dbAdapter));
                     return new TableGateway('style', $dbAdapter, null, $resultSetPrototype);
                 },
+                'AttributeListTable' => function($serviceManager) {
+                    $tableGateway = $serviceManager->get('AttributeListTableGateway');
+                    $table = new Model\AttributeListTable($tableGateway);
+                    return $table;
+                },
+                'AttributeListTableGateway' => function ($serviceManager) {
+                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\AttributeList($dbAdapter));
+                    return new TableGateway('attributelist', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
             'abstract_factories' => array(
                 'Application\Service\CommonTableAbstractFactory'
