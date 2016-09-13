@@ -48,18 +48,38 @@ class StyleController extends BaseActionController
             $this->layout()->showHeaderLinks = "LOGGED_IN";
             $userInfo = $oAuth->getIdentity();
             $this->userId = $userInfo->userId;
+            $userId = $userInfo->userId;
             $this->layout()->firstName = $userInfo->firstName;
         } else {
             $this->redirect()->toRoute('auth');
         }
-
+        $aPostParams = $this->params()->fromPost();
+        if(isset($aPostParams['submit'])){
+            $oStyleList = $this->getServiceLocator()->get('StyleListTable');
+            $listItem = $oStyleList->update($userId, $id, $aPostParams );
+        }
         return  $__viewVariables;
+    }
+    public function deletestyleAction() 
+    {
+        // $listItem = $this->listItem;
+        $listItem = $this->getServiceLocator()->get("StyleListTable");
+        $userName = $this->userName; 
+        $aPostParams = $this->params()->fromPost();
+        if (count($aPostParams)) {
+            foreach ($listItem as $item) {
+                if($item["id"] == $data_delete)
+                {
+
+                }
+            }
+        }
     }
     public function mystyleAction() {
         echo "12131";
-        // die("success");
-         $id= $this->params('id');
-        var_dump($_REQUEST); 
+        // // die("success");
+        //  $id= $this->params('id');
+        // var_dump($_REQUEST); 
         
         // $this->redirect()->toRoute('style/defination/2');
     }
