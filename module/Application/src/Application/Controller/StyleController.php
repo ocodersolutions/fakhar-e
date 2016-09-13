@@ -27,13 +27,14 @@ class StyleController extends BaseActionController
             $userId = $userInfo->userId;
             $userName = $userInfo->firstName;
             $this->layout()->firstName = $userInfo->firstName;
+            $oStyleList = $this->getServiceLocator()->get('StyleListTable');
+            $listItem = $oStyleList->viewlist($userId);
+            $__viewVariables['listItem'] = $listItem;
+            $__viewVariables['userName'] = $userName;
         } else {
             $this->redirect()->toRoute('auth');
         }
-        $oStyleList = $this->getServiceLocator()->get('StyleListTable');
-        $listItem = $oStyleList->viewlist($userId);
-        $__viewVariables['listItem'] = $listItem;
-        $__viewVariables['userName'] = $userName;
+        
 
 		return 	$__viewVariables;
 	}
@@ -55,7 +56,11 @@ class StyleController extends BaseActionController
         return  $__viewVariables;
     }
     public function mystyleAction() {
-
-       
+        echo "12131";
+        // die("success");
+         $id= $this->params('id');
+        var_dump($_REQUEST); 
+        
+        // $this->redirect()->toRoute('style/defination/2');
     }
 }
