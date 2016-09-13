@@ -1,4 +1,7 @@
-<?php $singleItem = $this->singleItem; ?>
+<?php 	$singleItem = $this->singleItem; 
+		$listAttrValue = $this->listAttrValue; 
+		
+?>
 <div class="row content-page" id="defination_page">
 	<div class="defination_page col-lg-10 col-lg-offset-1">
 		<div id="top_left" >
@@ -31,20 +34,19 @@
 				<div class="top_right_title top_title_style">Defination</div>
 				<div class="top_right_attName col-lg-5 col-lg-offset-1">
 					<select style="width:350px;" class="chosen_select_left" >
-						<option value="AL">Alabama</option>
-						<option value="AL">Alabama1</option>
-						<option value="AL">Alabama2</option>
-						<option value="AL">Alabama3</option>
-						<option value="WY">Wyoming</option>
+						<option selected disabled >Select </option>
+						<?php foreach($listAttrValue as $attr ){ ?>
+						<option value=" <?php echo $attr;?> "> <?php echo $attr;?></option>
+						<?php }  ?>
 					</select>
 				</div>
 				<div class="top_right_attValue col-lg-5">
 					<select data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right">
-						<option value="AL">Alabama</option>
-						<option value="AL">Alabama1</option>
-						<option value="AL">Alabama2</option>
-						<option value="AL">Alabama3</option>
-						<option value="WY">Wyoming</option>
+						<option value="AL">11</option>
+						<option value="AL">22</option>
+						<option value="AL">Alab33ama2</option>
+						<option value="AL">Alab44ama3</option>
+						<option value="WY">Wyomi44ng</option>
 					</select>
 				</div>
 				<div class="add_attr btn btn-primary col-lg-1">Add</div>
@@ -53,3 +55,4 @@
 		<div class="clr"></div>
 	</div>
 </div>
+

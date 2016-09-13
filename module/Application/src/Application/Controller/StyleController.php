@@ -57,8 +57,14 @@ class StyleController extends BaseActionController
 
         $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
         $attrItem = $oAttrList->getAttributeName();
-
-
+        $arrayAttr = array();
+        
+        foreach($attrItem as $item){
+            if (!in_array($item['attribute_name'], $arrayAttr)){
+                array_push($arrayAttr,$item['attribute_name']);
+            }
+        }
+        $__viewVariables['listAttrValue'] = $arrayAttr;
         $oStyleList = $this->getServiceLocator()->get('StyleListTable');
         $aPostParams = $this->params()->fromPost();
         if(isset($aPostParams['submit'])){

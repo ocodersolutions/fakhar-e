@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+$('.chosen_select_left').change(function(){
+    console.log($(this).attr('value'));
+    // $.ajax({
+    //     url : ,
+    //     type : "post",
+    //     dataType:"text",
+    //     data : {
+    //         'closesetId' : id,
+    //     },
+    // });
+});
+
+
+
+
     $(".chosen_select_left").chosen();
     $(".chosen_select_right").chosen(); 
 
@@ -66,3 +81,5 @@ $(document).on("click","#btn_delete_style", function(){
     var x = $(this).attr("data-delete");
     $('.delete_style').attr("data-delete",x);
 });
+
+
