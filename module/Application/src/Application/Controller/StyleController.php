@@ -55,6 +55,21 @@ class StyleController extends BaseActionController
 
         return  $__viewVariables;
     }
+    public function deletestyleAction() 
+    {
+        // $listItem = $this->listItem;
+        $listItem = $this->getServiceLocator()->get("StyleListTable");
+        $userName = $this->userName; 
+        $aPostParams = $this->params()->fromPost();
+        if (count($aPostParams)) {
+            foreach ($listItem as $item) {
+                if($item["id"] == $data_delete)
+                {
+
+                }
+            }
+        }
+    }
     public function mystyleAction() {
         echo "12131";
         // die("success");
