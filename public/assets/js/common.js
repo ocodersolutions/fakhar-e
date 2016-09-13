@@ -1,15 +1,18 @@
 $(document).ready(function() {
 
 $('.chosen_select_left').change(function(){
-    console.log($(this).attr('value'));
-    // $.ajax({
-    //     url : ,
-    //     type : "post",
-    //     dataType:"text",
-    //     data : {
-    //         'closesetId' : id,
-    //     },
-    // });
+    selected = $(this).val();
+    $.ajax({
+        url : "/style/getAttributeValue",
+        type : "post",
+        dataType:"text",
+        data : {
+            'selected' : selected,
+        },
+        success: function (result){
+            alert(result); 
+        }
+    });
 });
 
 
