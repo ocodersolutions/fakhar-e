@@ -6,11 +6,27 @@ use Zend\Db\Sql\Sql;
 
 class StyleListTable extends BasicTableAdapter {
 	protected $table = 'Style';
+	protected $tableGateway;
+
+	public function __construct(TableGateway $tableGateway){
+	     $this->tableGateway = $tableGateway;
+	}
 	public function insert(){
 		
 	}
 	public function delete($id){
 		$this->tableGateway->delete(array('id' => $id));
+	}
+	public function update($userId, $id, $aPostParams){
+		$nextWeek = time() + (7 * 24 * 60 * 60);
+		$timeupdate = date('Y-m-d H:i:s' );	
+		$data = array(
+			    "title" => $aPostParams['name_style'],
+			    "isActive" => $aPostParams['status_select'],
+			    "updated" => $timeupdate
+		);
+		$update = $this->tableGateway->update($data, array('id' => $id));
+		return $update;
 	}
 	public function viewlist($userId){
 
@@ -30,3 +46,4 @@ class StyleListTable extends BasicTableAdapter {
   
 	
 }
+	

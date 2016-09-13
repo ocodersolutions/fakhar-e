@@ -670,10 +670,13 @@ function check_price_checked(){
     x = $('input[name="check-show-price"]').hasClass("allow_slider");
     check_login = $('#status-login').attr('data-login');
     if(x == false){
-        $('.show-price').css('display','none');
-        if(check_login == 1 ){
+        
+        if(check_login == 0 ){
+            $('.show-price').hide();
             $('.price.prices .ranger').css('opacity','0.3');
         }else{
+            $('input[name="check-show-price"],label[for=check-price]').hide();
+            $('.show-price').hide();
             $('.price.prices .ranger').css('opacity','1');
         }
         

@@ -36,7 +36,6 @@ INSERT INTO `elnove.local`.`Venue` (`id`, `title`, `parentId`, `userId`, `create
 
 CREATE TABLE IF NOT EXISTS `Style` (
   `id` int(11) NOT NULL,
-  `venueId` int(11) NOT NULL,
   `title` varchar(500) NOT NULL,
   `userId` int(11) NOT NULL,
   `created` datetime NOT NULL,
