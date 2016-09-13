@@ -53,13 +53,19 @@ class StyleController extends BaseActionController
             $this->redirect()->toRoute('auth');
         }
 
+        $aPostParams = $this->params()->fromPost();
+        if (count($aPostParams)) {
+            echo 'have submit';
+            // die('have submit');
+        }
+
         return  $__viewVariables;
     }
     public function mystyleAction() {
         echo "12131";
-        // die("success");
-         $id= $this->params('id');
-        var_dump($_REQUEST); 
+        // // die("success");
+        //  $id= $this->params('id');
+        // var_dump($_REQUEST); 
         
         // $this->redirect()->toRoute('style/defination/2');
     }

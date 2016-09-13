@@ -764,79 +764,90 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'index' => array(
+                    'default' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/index',
+                            'route' => '/[:action][/]',
                             'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                 'controller' => 'Application\Controller\Bucket',
-                                 'action' => 'index',
-                            ),
-                        ),
-                    ),
-                    'add' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/add',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                 'controller' => 'Application\Controller\Bucket',
-                                 'action' => 'add',
-                            ),
-                        ),
-                    ),
-                    'delete' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/delete/:id',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id' => '[0-9]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Bucket',
-                                'action' => 'delete',
-                            ),
-                        ),
-                    ),
-                    'edit' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/edit',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id' => '[0-9]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Bucket',
-                                'action' => 'edit',
-                            ),
-                        ),
-                    ),
-                    'edit-bucket-attribute' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/edit-bucket-attribute',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Bucket',
-                                'action' => 'edit-bucket-attribute',
                             ),
                         ),
                     ),
                 ),
+                // 'child_routes' => array(add
+                //     'index' => array(
+                //         'type' => 'Segment',
+                //         'options' => array(
+                //             'route' => '/index',
+                //             'constraints' => array(
+                //                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //             ),
+                //             'defaults' => array(
+                //                  'controller' => 'Application\Controller\Bucket',
+                //                  'action' => 'index',
+                //             ),
+                //         ),
+                //     ),
+                //     'add' => array(
+                //         'type' => 'Segment',
+                //         'options' => array(
+                //             'route' => '/add',
+                //             'constraints' => array(
+                //                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //             ),
+                //             'defaults' => array(
+                //                  'controller' => 'Application\Controller\Bucket',
+                //                  'action' => 'add',
+                //             ),
+                //         ),
+                //     ),
+                //     'delete' => array(
+                //         'type' => 'Segment',
+                //         'options' => array(
+                //             'route' => '/delete/:id',
+                //             'constraints' => array(
+                //                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'id' => '[0-9]*',
+                //             ),
+                //             'defaults' => array(
+                //                 'controller' => 'Application\Controller\Bucket',
+                //                 'action' => 'delete',
+                //             ),
+                //         ),
+                //     ),
+                //     'edit' => array(
+                //         'type' => 'Segment',
+                //         'options' => array(
+                //             'route' => '/edit',
+                //             'constraints' => array(
+                //                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'id' => '[0-9]*',
+                //             ),
+                //             'defaults' => array(
+                //                 'controller' => 'Application\Controller\Bucket',
+                //                 'action' => 'edit',
+                //             ),
+                //         ),
+                //     ),
+                //     'edit-bucket-attribute' => array(
+                //         'type' => 'Segment',
+                //         'options' => array(
+                //             'route' => '/edit-bucket-attribute',
+                //             'constraints' => array(
+                //                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //             ),
+                //             'defaults' => array(
+                //                 'controller' => 'Application\Controller\Bucket',
+                //                 'action' => 'edit-bucket-attribute',
+                //             ),
+                //         ),
+                //     ),
+                // ),
             ), 
             'email' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
@@ -877,36 +888,52 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'defination' => array(
+                    'default' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/defination[/:id]',
+                            'route' => '/[:action[/:id]][/]',
                             'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'id'     => '[0-9]+',
                             ),
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Style',
-                                'action' => 'defination',
-                            ),
-                        ),
-                    ),
-                    'mystyle' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/mystyle',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Style',
-                                'action' => 'mystyle',
-                            ),
+                            // 'defaults' => array(
+                            //     'controller' => 'Application\Controller\Style',
+                            //     'action' => 'defination',
+                            // ),
                         ),
                     ),
                 ),
+                // 'child_routes' => array(
+                //     'defination' => array(
+                //         'type' => 'Segment',
+                //         'options' => array(
+                //             'route' => '/defination[/:id]',
+                //             'constraints' => array(
+                //                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'id'     => '[0-9]+',
+                //             ),
+                //             'defaults' => array(
+                //                 'controller' => 'Application\Controller\Style',
+                //                 'action' => 'defination',
+                //             ),
+                //         ),
+                //     ),
+                //     'mystyle' => array(
+                //         'type' => 'Segment',
+                //         'options' => array(
+                //             'route' => '/mystyle',
+                //             'constraints' => array(
+                //                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                //             ),
+                //             'defaults' => array(
+                //                 'controller' => 'Application\Controller\Style',
+                //                 'action' => 'mystyle',
+                //             ),
+                //         ),
+                //     ),
+                // ),
             ),  
             
             /* 'auth' => array(
