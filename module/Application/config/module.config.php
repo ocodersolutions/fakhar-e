@@ -908,7 +908,16 @@ return array(
                     ),
                 ),
             ),  
-            
+            'venue' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/venue',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Venue',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             /* 'auth' => array(
               'type' => 'Zend\Mvc\Router\Http\Literal',
               'options' => array(
@@ -989,6 +998,7 @@ return array(
             'Application\Controller\Bucket' => 'Application\Controller\BucketController',
             'Application\Controller\Email' => 'Application\Controller\EmailController',
             'Application\Controller\Style' => 'Application\Controller\StyleController',
+            'Application\Controller\Venue' => 'Application\Controller\VenueController',
         ),
     ),
     'controller_plugins' => array(
