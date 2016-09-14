@@ -8,6 +8,7 @@ use Application\Model\AttributeListTable;
 use Zend\Session\Container;
 use Zend\Console\Request as ConsoleRequest;
 use Ocoder\Base\BaseActionController;
+use Zend\Json\Json;
 
 class StyleController extends BaseActionController
 {
@@ -39,6 +40,18 @@ class StyleController extends BaseActionController
 
 		return 	$__viewVariables;
 	}
+    public function getAttributeValueAction() 
+    {
+        $aPostParams = $this->params()->fromPost();
+        $value = $aPostParams['selected'];
+        $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
+        $attrItem = $oAttrList->getAttributeValue($value);
+        $listItem = array();
+        foreach($attrItem as $item){
+            $listItem[] = $item['attribute_value'];
+        }       
+        return $this->getResponse()->setContent(Json::encode($listItem));
+    }
     public function definationAction() 
     {
         $id= $this->params('id');
