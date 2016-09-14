@@ -60,23 +60,20 @@ $('.chosen_select_left').change(function(){
 
     });   
 
-    $(".no_delete_style").click(function(){
-        $(".close").click();
-    }); 
-
-    $(".delete_style").click(function(){
-        $del_style = $(this).attr("data-delete");
-        $.ajax({
-            url: "style/deletestyle",
-            type: "POST",
-            data: { del_style : $del_style },
-            dataType: "html",
-            success: function ()
-            {
-                  // alert(result);
-            }
-        });
-    });
+    // $(".my_delete_yes").click(function(){
+    //     $del_style = $(this).attr("data-delete");
+    //     alert($del_style);
+    //     $.ajax({
+    //         url: "style/deletestyle",
+    //         type: "POST",
+    //         data: { del_style : $del_style },
+    //         dataType: "html",
+    //         success: function ()
+    //         {
+    //               // alert(result);
+    //         }
+    //     });
+    // });
 
     $(".sb_create_style").click(function(){
         $(this).parents(".style_page").find("#top_left").animate({ left: "+=50", height: "toggle" }, 1000, function() {});
@@ -84,11 +81,25 @@ $('.chosen_select_left').change(function(){
 
 });
 
-$(document).on("click",".btn_delete_style", function(){
-    var x = $(this).attr("data-delete");
-    $('.delete_style').attr("data-delete",x);
-});
+$(document).on("click", ".my_delete_yes", function(){
+    $del_style = $(this).attr("data-delete");
+    // alert($del_style);
+    $.ajax({
+        url: "style/deletestyle",
+        type: "POST",
+        data: { del_style : $del_style },
+        dataType: "html",
+        success: function ()
+        {
+              // alert(result);
+        }
+    });
+}); 
 
-// $(document).on( 'click', '.delete_style', function () {
-//         table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
-//     } );
+$(document).on("click",".btn_delete_style", function(){
+    $(".my_cancel, .my_btn").css("display", "none");
+    $(".my_delete_yes, .my_delete_no").css("display", "block");
+    var x = $(this).attr("data-delete");
+    $('.my_delete_yes').attr("data-delete",x);
+    myalert('alert_idNewsLetterInput3','type_remove','Ooops!','','OK','Do you want to delete or not?',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+});
