@@ -18,11 +18,17 @@ class VenueController extends BaseActionController
 	public function indexAction() 
 	{
 		 $__viewVariables = array();
-		 //$this->layout('layout/layout_elnove.phtml');
+		 $this->layout('layout/layout_elnove.phtml');
 
          $oVenueList = $this->getServiceLocator()->get('VenueTable');
-         $isActive = 1;
-         $listItem = $oVenueList->viewlist($isActive);
+         $title = '';
+         if ($this->getRequest()->isPost()){
+             $aPostParams = $this->params()->fromPost('term');
+             $title = $aPostParams;
+         }else{
+            echo 'console.log("No data posted")';
+         }
+         $listItem = $oVenueList->viewlist( $title);
          $__viewVariables['listItem'] = $listItem;
          $jsonvenueArr = array();
          if (!empty($listItem)) {
@@ -32,9 +38,10 @@ class VenueController extends BaseActionController
         }
         $jsonvenue = json_encode($jsonBrandArr);
         echo $jsonvenue;
+        
         exit();
         $__viewVariables['jsonvenue'] = $jsonvenue;
-
+        
         return  $__viewVariables;
 		
 	}
