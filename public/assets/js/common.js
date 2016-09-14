@@ -21,8 +21,35 @@ $('.chosen_select_left').change(function(){
     });
 });
 
+$('#form-defination').submit(function () {
+ alert(123);
+ return false;
+});
 
 
+$(".add_attr").click(function() {
+    
+
+
+var y = document.getElementById('form-defination');
+console.log(y.innerHTML);
+$('#kaka').append(y.innerHTML);
+    //console.log(y);
+    //alert(123);
+    // var url = "/style/"; // the script where you handle the form input.
+    // $.ajax({
+    //        type: "POST",
+    //        url: url,
+    //        data: $("#idForm").serialize(), // serializes the form's elements.
+    //        success: function(data)
+    //        {
+    //            alert(data); // show response from the php script.
+    // }
+      return false; 
+
+         });
+
+  
 
     $(".chosen_select_left").chosen();
     $(".chosen_select_right").chosen(); 
@@ -95,6 +122,6 @@ $(document).on("click",".btn_delete_style", function(){
     $('.delete_style').attr("data-delete",x);
 });
 
-// $(document).on( 'click', '.delete_style', function () {
-//         table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
-//     } );
+$(document).on( 'click', '.delete_style', function () {
+        table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
+    } );
