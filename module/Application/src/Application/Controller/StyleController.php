@@ -32,11 +32,22 @@ class StyleController extends BaseActionController
             $listItem = $oStyleList->viewlist($userId);
             $__viewVariables['listItem'] = $listItem;
             $__viewVariables['userName'] = $userName;
+
+            $aPostParams = $this->params()->fromPost();
+            if(array_key_exists('submit', $aPostParams) && $aPostParams['submit'] == "Create") {
+                $result = $oStyleList->insert($aPostParams);
+                $this->redirect()->toRoute('style/default', array('action' => 'defination', 'id' => $result));    
+                // $this->redirect()->toRoute('Application',
+                //     array(
+                //         'controller'=>'Style',
+                //         'action' => 'defination',
+                //         'params' => $result
+                //     )
+                // );
+            }
         } else {
             $this->redirect()->toRoute('auth');
         }
-        
-
 		return 	$__viewVariables;
 	}
     public function definationAction() 

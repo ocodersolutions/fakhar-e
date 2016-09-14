@@ -20,6 +20,9 @@ class ArticleAlertTable extends BasicTableAdapter {
             'userId' => $userId,
         );
         $result = $this->tableGateway->insert($data);
+        if($result){
+            $result = $this->tableGateway->lastInsertValue;
+        }
         return $result;
 	}
 	public function delete($alert){
