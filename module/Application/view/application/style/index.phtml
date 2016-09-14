@@ -13,7 +13,7 @@ $userName = $this->userName;
 				<div class="top_left_title top_title_style">Style</div>
 				<form method="post">
 					<div class="style_title col-lg-5 col-lg-offset-1">
-						<label for="">Style: </label>
+						<label for="">Name: </label>
 						<input type="text" name="name_style" value="<?php if(isset($singleItem->title)){echo $singleItem->title;}else{echo '';};?>">
 					</div>
 					<div class="style_status col-lg-5">
@@ -27,7 +27,7 @@ $userName = $this->userName;
 							</select>
 						</div>
 					</div>
-					<input type="submit" name="submit" class="upgrade_style btn btn-primary col-lg-1"  value="Update">
+					<input type="submit" name="submit" class="upgrade_style btn btn-primary col-lg-1"  value="Create">
 				</form>
 			</div>
 		</div>
@@ -62,7 +62,7 @@ $userName = $this->userName;
 	                <td><?php echo ($item['isActive'] == 1 ? '<span class="label label-success">Enable</span>' : '<span class="label label-danger">Disable</span>'); ?></td>
 	                <td>
 	                	<a href="/style/defination/<?php echo ($item['id']); ?>"><button type="button" class="btn"><span class="glyphicon glyphicon-edit"></span></button></a>
-	                	<button type="button" class="btn" id="btn_delete_style" data-toggle="modal" data-delete="<?php echo ($item['id']); ?>" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button>
+	                	<button type="button" class="btn btn_delete_style" data-toggle="modal" data-delete="<?php echo ($item['id']); ?>" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button>
 	                </td>
 	            </tr>
 
@@ -94,9 +94,12 @@ $userName = $this->userName;
 </div>
 
 <script type="text/javascript">
-	$('#example').dataTable( {
+	var table = $('#example').DataTable( {
 	  "pageLength": 25,
 	  "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
 	} );
-
+ 
+	$('#example tbody').on( 'click', '.btn_delete_style', function () {
+	    table.row( $(this).parents('tr') ).remove().draw();
+	} );
 </script>
