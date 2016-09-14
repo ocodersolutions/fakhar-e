@@ -21,33 +21,26 @@ $('.chosen_select_left').change(function(){
     });
 });
 
-$('#form-defination').submit(function () {
- alert(123);
- return false;
-});
+// $('#form-defination').submit(function () {
+//  alert(123);
+//  return false;
+// });
 
+// function myFunction(){
+//     alert(12111);
+// }
 
-$(".add_attr").click(function() {
+// $(".add_attr").click(function() {
     
 
 
-var y = document.getElementById('form-defination');
-console.log(y.innerHTML);
-$('#kaka').append(y.innerHTML);
-    //console.log(y);
-    //alert(123);
-    // var url = "/style/"; // the script where you handle the form input.
-    // $.ajax({
-    //        type: "POST",
-    //        url: url,
-    //        data: $("#idForm").serialize(), // serializes the form's elements.
-    //        success: function(data)
-    //        {
-    //            alert(data); // show response from the php script.
-    // }
-      return false; 
+// var y = document.getElementById('form-defination');
+// console.log(y.innerHTML);
+// $('#kaka').append(y.innerHTML);
+   
+//       return false; 
 
-         });
+//          });
 
   
 

@@ -46,7 +46,15 @@
 						<select data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right">
 							</select>
 					</div>
-					<input id="add_attr" class="add_attr btn btn-primary col-lg-1" value="Add">
+					<input class="add_attr btn btn-primary col-lg-1" value="Add" onclick="myFunction()" >
+					<script type="text/javascript">
+						
+						function myFunction(){
+						    var y = document.getElementById('form-defination');
+							console.log(y.innerHTML);
+							$('#kaka').append(y.innerHTML);
+						}
+					</script>
 				</form>
 
 			</div>
