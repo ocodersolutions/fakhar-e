@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
 $('.chosen_select_left').change(function(){
+    $('#loading').css('display','block');
+    $(".chosen_select_right option").remove();
     selected = $(this).val();
     $.ajax({
         url : "/style/getAttributeValue",
@@ -10,7 +12,11 @@ $('.chosen_select_left').change(function(){
             'selected' : selected,
         },
         success: function (result){
-            alert(result); 
+            $('#loading').css('display','none');
+            var employeeData = JSON.parse(result);
+            for(i = 0; employeeData.length >i; i++){
+                $('.chosen_select_right').append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+            }
         }
     });
 });
