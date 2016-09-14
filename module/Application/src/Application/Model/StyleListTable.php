@@ -11,8 +11,21 @@ class StyleListTable extends BasicTableAdapter {
 	public function __construct(TableGateway $tableGateway){
 	     $this->tableGateway = $tableGateway;
 	}
-	public function insert(){
+	public function insert($style){
+       	$oAuth = $this->getServiceLocator()->get('AuthService');
+        $userInfo = $oAuth->getIdentity();
+		$userId = $userInfo == null ? 0 : $userInfo->userId;
 		
+	   	$data = array(
+            'title' => $style['title'],
+            'isActive' => $style['isActive'],
+            'userId' => $userId,
+        );
+        $result = $this->tableGateway->insert($data);
+        if($result){
+            $result = $this->tableGateway->lastInsertValue;
+        }
+        return $result;
 	}
 	public function delete($id){
 		$this->tableGateway->delete(array('id' => $id));
