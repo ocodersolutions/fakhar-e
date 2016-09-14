@@ -101,41 +101,7 @@ class StyleController extends BaseActionController
 
         $result_data = "";
         if (count($aPostParams)) {
-            foreach ($listItem as $item) {
-                
-                if($item["id"] == $aPostParams["del_style"])
-                {
-                    $oStyleList->delete($item["id"]); 
-                    $listItem = $oStyleList->viewlist($userId);
-                    
-                    foreach($listItem as $item ) 
-                    {
-                        $result_data .= 
-                         "<tr>
-                         <td>" . $item["id"] . "</td>
-                         <td>" . $item["title"] . "</td>
-                         <td>" . $userName . "</td>
-                         <td>" . $item["isActive"] . "</td>
-                         <td> <button type='button' class='btn btn-info'><a href='style/defination/" . $item["id"] . "'>Edit</a></button> 
-                                    <button type='button' class='btn btn-danger' id='btn_delete_style' data-toggle='modal' data-delete='" . $item["id"] . "' data-target='#myModal'>Delete</button> 
-                             </td>
-                         </tr>";
-                    }
-                    
-
-                    break;
-                }
-            }
-            // exit($result_data);
-            echo $result_data;
+            $oStyleList->delete($aPostParams["del_style"]);             
         }
-    }
-    public function mystyleAction() {
-        echo "12131";
-        // // die("success");
-        //  $id= $this->params('id');
-        // var_dump($_REQUEST); 
-        
-        // $this->redirect()->toRoute('style/defination/2');
     }
 }
