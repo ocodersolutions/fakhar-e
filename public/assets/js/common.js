@@ -77,10 +77,9 @@ $('.chosen_select_left').change(function(){
             type: "POST",
             data: { del_style : $del_style },
             dataType: "html",
-            success: function (result)
+            success: function ()
             {
                   // alert(result);
-                $("#result_data").html(result);
             }
         });
     });
@@ -91,9 +90,11 @@ $('.chosen_select_left').change(function(){
 
 });
 
-$(document).on("click","#btn_delete_style", function(){
+$(document).on("click",".btn_delete_style", function(){
     var x = $(this).attr("data-delete");
     $('.delete_style').attr("data-delete",x);
 });
 
-
+// $(document).on( 'click', '.delete_style', function () {
+//         table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
+//     } );

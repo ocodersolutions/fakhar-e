@@ -7,7 +7,6 @@ use Zend\Db\Sql\Sql;
 class AttributeListTable extends BasicTableAdapter {
 
 	public function getAttributeName(){
-       
                 $sql = new Sql($this->getServiceLocator()->get('db'));
                 $select = $sql->select(array('sl' => 'attributeslist'));
                 $resultSet = array();
@@ -16,6 +15,7 @@ class AttributeListTable extends BasicTableAdapter {
                 $resultSet->initialize($results);
                 $resultSet = $resultSet->toArray();
                 return $resultSet;
+
         
 	}
 	public function getAttributeValue($value){

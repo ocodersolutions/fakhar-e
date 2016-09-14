@@ -234,7 +234,7 @@ class Module implements
                     $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\AttributeList($dbAdapter));
-                    return new TableGateway('attributelist', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('attributeslist', $dbAdapter, null, $resultSetPrototype);
                 },    
                 'VenueTable' => function($serviceManager) {
                     $tableGateway = $serviceManager->get('VenueTableGateway');

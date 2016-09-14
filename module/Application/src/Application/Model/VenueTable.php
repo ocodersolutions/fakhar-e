@@ -12,10 +12,12 @@ class VenueTable extends BasicTableAdapter {
 	public function delete(){
 	
 	}
-	public function viewlist($isActive){
+	public function viewlist($string){
         $sql = new Sql($this->getServiceLocator()->get('db'));
         $select = $sql->select(array('v' => 'venue'));
-        $select->where(array('v.isActive' =>$isActive));
+        $where = new \Zend\Db\Sql\Where();
+        $where -> like('v.title', '%'.$string.'%');
+        $select->where($where);
 
         $resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();
