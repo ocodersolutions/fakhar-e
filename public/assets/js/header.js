@@ -208,7 +208,7 @@ $(window).scroll(function(){
         $("#mtop-bar").show();
         $("#menu-logo").show();
         //$("#mobile-header").css("position","static");
-        $("#search-bar").css("position","static");
+        $("#search-bar").css({"position":"static","width": "auto"});
     }                
 });
 
@@ -242,23 +242,38 @@ $( function() {
     
     $( "input[name='search2']" ).autocomplete({
       source: function(request, response) {
+        console.log(request.term);
         $.ajax({
             dataType: "json",
+            data:
+            {
+                term: request.term,
+            },
             type: 'POST',
             url: "/venue",
             success: function(data) {
                 response(data);
                 
             },
-            error: function(data) {
-                console.log(data);
-            }
+            error: function (request, error) {
+                console.log(request);
+                //console.log(error);
+            },
         });
       },
+      // response: function (event, ui) {
+      //     // body...
+         
+      //     $("ul.ui-autocomplete.ui-widget-content").css("width",w);
+      // },
       select: function(event, ui) {
         $(this).val(ui.item.value);
         $('form.searchbox, form.form_search, form.searchbox-mobile').submit();
-      }
+      },
+      open: function(event, ui) {
+            w = $(this).width() + 30;
+            $(".ui-autocomplete").css("width", w);
+        }
     });
 });
     
