@@ -10,7 +10,7 @@ class AttributeListTable extends BasicTableAdapter {
        
         $userId = 1;
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('sl' => 'attributelist'));
+        $select = $sql->select(array('sl' => 'attributeslist'));
 
         $resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();
