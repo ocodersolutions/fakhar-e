@@ -99,7 +99,7 @@ $userName = $this->userName;
 	  "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
 	} );
  
-	$('#example tbody').on( 'click', '.btn_delete_style', function () {
-	    table.row( $(this).parents('tr') ).remove().draw();
+	$('body').on( 'click', '.delete_style', function () {
+	    table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
 	} );
 </script>
