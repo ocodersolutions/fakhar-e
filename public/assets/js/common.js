@@ -3,6 +3,8 @@ $(document).ready(function() {
 $('.chosen_select_left').each(function(i, obj) {
     var attrName = $(obj).find(":selected").text();
     var number = $(obj).data('number');
+    var value = $(obj).data('value');
+
     selected = $.trim(attrName);
     $.ajax({
         url : "/style/getAttributeValue",
@@ -15,8 +17,13 @@ $('.chosen_select_left').each(function(i, obj) {
             $('#loading').css('display','none');
             var employeeData = JSON.parse(result);
             for(i = 0; employeeData.length >i; i++){
+                if(employeeData[i] == value){
+                    selected = 'selected';
+                }else{
+                    selected = '';
+                }
                 var className = '#select-right-' + number;
-                $(className).append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+                $(className).append( "<option "+selected+">"+employeeData[i]+"</option>" ).trigger("chosen:updated");
             }
         }
     });
@@ -110,8 +117,12 @@ $(function () {
 
   
 
-    $(".chosen_select_left").chosen();
-    $(".chosen_select_right").chosen(); 
+    $(".chosen_select_left").chosen({
+    no_results_text: "Oops, nothing found!",
+  });
+    $(".chosen_select_right").chosen({
+    no_results_text: "Oops, nothing found!",
+  }); 
 
     $('#idNewsLetter').click(function() { 
         
