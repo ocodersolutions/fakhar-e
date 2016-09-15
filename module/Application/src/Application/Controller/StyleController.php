@@ -100,6 +100,7 @@ class StyleController extends BaseActionController
     }
     public function deletestyleAction() 
     {
+        // exit();
         // $listItem = $this->listItem;
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
@@ -114,7 +115,7 @@ class StyleController extends BaseActionController
 
         $result_data = "";
         if (count($aPostParams)) {
-            $oStyleList->delete($aPostParams["del_style"]);             
+            $oStyleList->delete($aPostParams["del_style"]);  
         }
     }
 }

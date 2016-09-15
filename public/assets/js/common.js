@@ -88,24 +88,32 @@ $('.chosen_select_left').change(function(){
 });
 
 $(document).on("click", ".my_delete_yes", function(){
-    $del_style = $(this).attr("data-delete");
-    // alert($del_style);
+    del_style = $(this).attr("data-delete2");
+    $('[data-delete='+del_style+']').parents('tr').remove();
+    // alert(del_style);
     $.ajax({
         url: "style/deletestyle",
         type: "POST",
-        data: { del_style : $del_style },
-        dataType: "html",
-        success: function ()
+        data: { del_style : del_style },
+        // dataType: "html",
+        success: function (html)
         {
               // alert(result);
+            // $('[data-delete='+del_style+']').parents('tr').remove();
         }
     });
+    location.reload();
 }); 
 
-$(document).on("click",".btn_delete_style", function(){
+$(document).on("click",".btn_delete_style", function(e){
+    e.preventDefault();
     $(".my_cancel, .my_btn").css("display", "none");
     $(".my_delete_yes, .my_delete_no").css("display", "block");
     var x = $(this).attr("data-delete");
-    $('.my_delete_yes').attr("data-delete",x);
+    $('.my_delete_yes').attr("data-delete2",x);
+    // var that = $(this),
+    // tableRow = that.parents('.test_id');
+    // alert(tableRow.index());
+    // $(".my_delete_yes").attr("data-index",tableRow.index());
     myalert('alert_idNewsLetterInput3','type_remove','Ooops!','','OK','Do you want to delete or not?',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
 });
