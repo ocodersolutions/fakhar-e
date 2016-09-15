@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
-
+use Zend\Validator\Db\RecordExists;
+use Zend\Validator\Db\NoRecordExists;
 use Zend\View\Model\ViewModel;
 use Application\Model\FeedDataTable;
 use Application\Model\StyleListTable;
@@ -117,11 +118,25 @@ class StyleController extends BaseActionController
         isset($aPostParams['attr_name']) ? $attr = $aPostParams['attr_name'] : $attr = false;
         isset($aPostParams['attr_value']) ? $value = $aPostParams['attr_value'] : $value = false;
         isset($aPostParams['id-attr']) ? $id = $aPostParams['id-attr'] : $id = false;
-            if($attr == false || $value == false){
+        $validator = new RecordExists(
+            array(
+                'table'   => 'styledefination',
+                'field'   => 'styleId',
+                'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
+                'exclude' => ' attribute = "'.$attr.'" AND value = "'.$value.'"'
+            )
+        );
+        $validator->isValid($id) ? $recordExists = 1 : $recordExists = 0;
+        if($recordExists == 0){
+             if($attr == false || $value == false){
                 $attribute = 'Not Empty';
             }else{
                 $attribute = $oDefination->insert($attr, $value, $id);
             }
+        }else{
+            $attribute = 'Record Exist';
+        }
+
         return $this->getResponse()->setContent(Json::encode($attribute));
     }
     public function updatestyledefinationAction() 

@@ -63,7 +63,7 @@ $('.chosen_select_left').change(function(){
             url: '/style/styledefination',
             data: $('form').serialize(),
             success: function (result) {
-
+alert(result);
               if(result == 1){
                 alert('Created');
                 location.reload();
