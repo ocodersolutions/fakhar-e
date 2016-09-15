@@ -53,7 +53,7 @@ $userName = $this->userName;
 	        <tbody>
 
 	        <?php foreach($listItem as $item ){ ?>
-	            <tr>
+	            <tr id="tr-<?php echo ($item['id']); ?>">
 	                <td><?php echo ($item['id']); ?></td>
 	                <td><?php echo ($item['title']); ?></td>
 	                <td><?php echo ($userName); ?></td>
@@ -98,6 +98,7 @@ $userName = $this->userName;
 	} );
  
 	$('body').on( 'click', '.delete_style', function () {
-	    table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
+		var itemName = 'tr#tr-'+$(this).data('delete');
+	    table.row( $(".btn_delete_style").parents(itemName) ).remove().draw();
 	} );
 </script>
