@@ -5,6 +5,7 @@ use Zend\View\Model\ViewModel;
 use Application\Model\FeedDataTable;
 use Application\Model\StyleListTable;
 use Application\Model\AttributeListTable;
+use Application\Model\Table;
 use Zend\Session\Container;
 use Zend\Console\Request as ConsoleRequest;
 use Ocoder\Base\BaseActionController;
@@ -97,6 +98,21 @@ class StyleController extends BaseActionController
         $singleItem = $oStyleList->viewsingleitem($id);
         $__viewVariables['singleItem'] = $singleItem;
         return  $__viewVariables;
+    }
+    public function styledefinationAction() 
+    {
+        
+        $aPostParams = $this->params()->fromPost();
+        $oDefination = $this->getServiceLocator()->get('StyleDefinationTable');
+        isset($aPostParams['attribute']) ? $attr = $aPostParams['attribute'] : $attr = false;
+        isset($aPostParams['value']) ? $value = $aPostParams['value'] : $value = false;
+        isset($aPostParams['id-attr']) ? $id = $aPostParams['id-attr'] : $id = false;
+        if($attr == false || $value == false){
+            $attribute = 'Not Empty';
+        }else{
+            $attribute = $oDefination->insert($attr, $value, $id);
+        }
+        return $this->getResponse()->setContent(Json::encode($attribute));
     }
     public function deletestyleAction() 
     {

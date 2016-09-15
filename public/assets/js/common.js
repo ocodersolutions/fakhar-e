@@ -21,6 +21,24 @@ $('.chosen_select_left').change(function(){
     });
 });
 
+    $(function () {
+        $('form#form-defination').bind('submit', function () {
+          $.ajax({
+            type: 'post',
+            url: '/style/styledefination',
+            data: $('form#form-defination').serialize(),
+            success: function (result) {
+              if(result == 1){
+                console.log($('#form-defination').context);
+                // $('#top_right .row').append($('#form-defination').html());
+              }
+            }
+          });
+          return false;
+        });
+    });
+
+
 
 
 
