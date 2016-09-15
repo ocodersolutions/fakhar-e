@@ -97,6 +97,16 @@ class StyleController extends BaseActionController
         }
         $singleItem = $oStyleList->viewsingleitem($id);
         $__viewVariables['singleItem'] = $singleItem;
+
+
+        $oStyleDefination = $this->getServiceLocator()->get('StyleDefinationTable');
+        $styleItem = $oStyleDefination->liststyle($id);
+        $__viewVariables['styleItem'] = $styleItem;
+
+
+
+
+
         return  $__viewVariables;
     }
     public function styledefinationAction() 
@@ -104,8 +114,8 @@ class StyleController extends BaseActionController
         
         $aPostParams = $this->params()->fromPost();
         $oDefination = $this->getServiceLocator()->get('StyleDefinationTable');
-        isset($aPostParams['attribute']) ? $attr = $aPostParams['attribute'] : $attr = false;
-        isset($aPostParams['value']) ? $value = $aPostParams['value'] : $value = false;
+        isset($aPostParams['attr_name']) ? $attr = $aPostParams['attr_name'] : $attr = false;
+        isset($aPostParams['attr_value']) ? $value = $aPostParams['attr_value'] : $value = false;
         isset($aPostParams['id-attr']) ? $id = $aPostParams['id-attr'] : $id = false;
         if($attr == false || $value == false){
             $attribute = 'Not Empty';

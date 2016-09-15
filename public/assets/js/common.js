@@ -1,5 +1,29 @@
 $(document).ready(function() {
 
+$('.chosen_select_left').each(function(i, obj) {
+    var attrName = $(obj).find(":selected").text();
+    var number = $(obj).data('number');
+    selected = $.trim(attrName);
+    $.ajax({
+        url : "/style/getAttributeValue",
+        type : "post",
+        dataType:"text",
+        data : {
+            'selected' : selected,
+        },
+        success: function (result){
+            $('#loading').css('display','none');
+            var employeeData = JSON.parse(result);
+            for(i = 0; employeeData.length >i; i++){
+                var className = '#select-right-' + number;
+                $(className).append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+            }
+        }
+    });
+});
+//lay ve het cac select hien tai
+//for cac select -> lay ve option dang duoc chon -> 
+
 $('.chosen_select_left').change(function(){
     $('#loading').css('display','block');
     $(".chosen_select_right option").remove();
@@ -23,14 +47,15 @@ $('.chosen_select_left').change(function(){
 
     $(function () {
         $('form#form-defination').bind('submit', function () {
+            console.log($('form#form-defination').serialize());
           $.ajax({
             type: 'post',
             url: '/style/styledefination',
-            data: $('form#form-defination').serialize(),
+            data: $('form').serialize(),
             success: function (result) {
+                  alert(result);
               if(result == 1){
-                console.log($('#form-defination').context);
-                // $('#top_right .row').append($('#form-defination').html());
+                alert('add attribute complete');
               }
             }
           });
