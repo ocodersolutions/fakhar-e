@@ -48,7 +48,7 @@ $('.chosen_select_left').change(function(){
 
     });
 });
-
+//form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
           $.ajax({
@@ -58,7 +58,7 @@ $('.chosen_select_left').change(function(){
             success: function (result) {
 
               if(result == 1){
-                alert('Success');
+                alert('Created');
                 location.reload();
               }else{
                 alert('has error');
@@ -69,9 +69,9 @@ $('.chosen_select_left').change(function(){
         });
     });
 
-
+//form update 
 $(function () {
-    $('form').bind('submit', function () {
+    $('form.style-update').bind('submit', function () {
         $.ajax({
             type: 'post',
             url: '/style/updatestyledefination',
@@ -88,7 +88,6 @@ $(function () {
           });
           return false;
         });
-        return false;
     });
 
 
