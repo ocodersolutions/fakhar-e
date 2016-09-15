@@ -5,9 +5,6 @@
 		foreach($styleItem as $style){
 			$listStyle[] = $style['styleId'];
 		}
-		//echo '<pre>';
-		var_dump($styleItem);
-		var_dump($listStyle);
 ?>
 <div class="row content-page" id="defination_page">
 	<div class="defination_page col-lg-10 col-lg-offset-1">
@@ -44,10 +41,7 @@
 	<?php 
 	$count = 0;
 	foreach($styleItem as $style){
-		$count++; 
-			//echo $style['value']; ?>
-		
-				<?php //if(in_array($singleItem->id,$listStyle )){ ?>
+		$count++;  ?>
 
 					<form method="post">
 						
@@ -68,11 +62,34 @@
 									</select>
 							</div>
 							<input type="hidden" name='id-attr' value="<?php echo $singleItem->id; ?>">
+							<input class="add_attr btn btn-primary col-lg-1" type="submit" value="Update">
+
+					</form>	
+	<?php }?>
+					
+
+					<form id="add-new" method="post">
+						
+							<div class="top_right_attName col-lg-5 col-lg-offset-1">
+								<select style="width:350px;" name='attr_name' class="chosen_select_left" data-number="<?php echo 'add' ?>" >
+									<option selected disabled >Select </option>
+									<?php foreach($listAttrValue as $attr ){ ?>
+									<option value="<?php echo $attr;?>"> <?php echo $attr;?></option>
+									<?php }  ?>
+								</select>
+							</div>
+
+							<div class="top_right_attValue col-lg-5">
+								<img src="/assets/images/loading.gif" style="margin-top: -12px; display: none;margin-left: -55px; position: absolute; float: left;">
+
+									<select name='attr_value' data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right" id="select-right-add">
+
+									</select>
+							</div>
+							<input type="hidden" name='id-attr' value="<?php echo $singleItem->id; ?>">
 							<input class="add_attr btn btn-primary col-lg-1" type="submit" value="Add">
 
 					</form>	
-				<?php //} ?>
-	<?php }?>
 
 
 

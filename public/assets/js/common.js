@@ -25,6 +25,8 @@ $('.chosen_select_left').each(function(i, obj) {
 //for cac select -> lay ve option dang duoc chon -> 
 
 $('.chosen_select_left').change(function(){
+    var number = $(this).data('number');
+    
     $('#loading').css('display','block');
     $(".chosen_select_right option").remove();
     selected = $(this).val();
@@ -38,24 +40,29 @@ $('.chosen_select_left').change(function(){
         success: function (result){
             $('#loading').css('display','none');
             var employeeData = JSON.parse(result);
+            var className = '#select-right-' + number;
             for(i = 0; employeeData.length >i; i++){
-                $('.chosen_select_right').append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+                $(className).append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
             }
         }
+
     });
 });
 
     $(function () {
-        $('form#form-defination').bind('submit', function () {
-            console.log($('form#form-defination').serialize());
+        $('form#add-new').bind('submit', function () {
+        
           $.ajax({
             type: 'post',
             url: '/style/styledefination',
             data: $('form').serialize(),
             success: function (result) {
-                  alert(result);
+
               if(result == 1){
-                alert('add attribute complete');
+                alert('Success');
+                location.reload();
+              }else{
+                alert('has error');
               }
             }
           });
