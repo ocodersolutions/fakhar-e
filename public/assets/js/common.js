@@ -51,7 +51,6 @@ $('.chosen_select_left').change(function(){
 
     $(function () {
         $('form#add-new').bind('submit', function () {
-        
           $.ajax({
             type: 'post',
             url: '/style/styledefination',
@@ -68,6 +67,28 @@ $('.chosen_select_left').change(function(){
           });
           return false;
         });
+    });
+
+
+$(function () {
+    $('form').bind('submit', function () {
+        $.ajax({
+            type: 'post',
+            url: '/style/updatestyledefination',
+            data: $(this).serialize(),
+            success: function (result) {
+               if(result == 1){
+                alert('Update Success');
+                location.reload();
+              }else{
+                alert('has error');
+              }
+          
+            }
+          });
+          return false;
+        });
+        return false;
     });
 
 
