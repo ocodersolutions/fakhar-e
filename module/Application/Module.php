@@ -223,7 +223,7 @@ class Module implements
                     $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\StyleList($dbAdapter));
-                    return new TableGateway('style', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('Style', $dbAdapter, null, $resultSetPrototype);
                 },
                 'AttributeListTable' => function($serviceManager) {
                     $tableGateway = $serviceManager->get('AttributeListTableGateway');
