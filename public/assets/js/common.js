@@ -21,8 +21,28 @@ $('.chosen_select_left').change(function(){
     });
 });
 
+// $('#form-defination').submit(function () {
+//  alert(123);
+//  return false;
+// });
+
+// function myFunction(){
+//     alert(12111);
+// }
+
+// $(".add_attr").click(function() {
+    
 
 
+// var y = document.getElementById('form-defination');
+// console.log(y.innerHTML);
+// $('#kaka').append(y.innerHTML);
+   
+//       return false; 
+
+//          });
+
+  
 
     $(".chosen_select_left").chosen();
     $(".chosen_select_right").chosen(); 
@@ -117,3 +137,6 @@ $(document).on("click",".btn_delete_style", function(e){
     // $(".my_delete_yes").attr("data-index",tableRow.index());
     myalert('alert_idNewsLetterInput3','type_remove','Ooops!','','OK','Do you want to delete or not?',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
 });
+$(document).on( 'click', '.delete_style', function () {
+        table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
+    } );
