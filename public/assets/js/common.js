@@ -3,6 +3,8 @@ $(document).ready(function() {
 $('.chosen_select_left').each(function(i, obj) {
     var attrName = $(obj).find(":selected").text();
     var number = $(obj).data('number');
+    var value = $(obj).data('value');
+
     selected = $.trim(attrName);
     $.ajax({
         url : "/style/getAttributeValue",
@@ -15,8 +17,13 @@ $('.chosen_select_left').each(function(i, obj) {
             $('#loading').css('display','none');
             var employeeData = JSON.parse(result);
             for(i = 0; employeeData.length >i; i++){
+                if(employeeData[i] == value){
+                    selected = 'selected';
+                }else{
+                    selected = '';
+                }
                 var className = '#select-right-' + number;
-                $(className).append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+                $(className).append( "<option "+selected+">"+employeeData[i]+"</option>" ).trigger("chosen:updated");
             }
         }
     });
@@ -48,22 +55,42 @@ $('.chosen_select_left').change(function(){
 
     });
 });
-
+//form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
-        
           $.ajax({
             type: 'post',
             url: '/style/styledefination',
             data: $('form').serialize(),
             success: function (result) {
-
+alert(result);
               if(result == 1){
-                alert('Success');
+                alert('Created');
                 location.reload();
               }else{
                 alert('has error');
               }
+            }
+          });
+          return false;
+        });
+    });
+
+//form update 
+$(function () {
+    $('form.style-update').bind('submit', function () {
+        $.ajax({
+            type: 'post',
+            url: '/style/updatestyledefination',
+            data: $(this).serialize(),
+            success: function (result) {
+               if(result == 1){
+                alert('Update Success');
+                location.reload();
+              }else{
+                alert('has error');
+              }
+          
             }
           });
           return false;
@@ -90,8 +117,12 @@ $('.chosen_select_left').change(function(){
 
   
 
-    $(".chosen_select_left").chosen();
-    $(".chosen_select_right").chosen(); 
+    $(".chosen_select_left").chosen({
+    no_results_text: "Oops, nothing found!",
+  });
+    $(".chosen_select_right").chosen({
+    no_results_text: "Oops, nothing found!",
+  }); 
 
     $('#idNewsLetter').click(function() { 
         

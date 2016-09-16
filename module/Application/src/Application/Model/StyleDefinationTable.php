@@ -20,6 +20,14 @@ class StyleDefinationTable extends BasicTableAdapter {
     	$result = $this->tableGateway->insert($data);
         return $result;
 	}
+    public function update($attr, $value, $number, $id ){
+           $data = array(
+                "attribute" => $attr,
+                "value" => $value
+        );
+        $update = $this->tableGateway->update($data, array("id" => $id));
+        return $update;
+    }
 	public function liststyle($id){
         $sql = new Sql($this->getServiceLocator()->get('db'));
         $select = $sql->select(array('sl' => 'StyleDefination'));
