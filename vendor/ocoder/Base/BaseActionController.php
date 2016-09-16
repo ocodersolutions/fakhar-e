@@ -62,9 +62,8 @@ class BaseActionController extends AbstractActionController {
         if($userInfo!=null) {
             $this->userId = $userInfo->userId;
             $this->getCart();
-            $this->layout()->userLogged = $userInfo;
         }
-        
+        $this->layout()->userLogged = $userInfo;
     }
  
      protected function get_client_ip() {
