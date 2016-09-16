@@ -5,7 +5,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 
 class VenueTable extends BasicTableAdapter {
-	protected $table = 'venue';
+	protected $table = 'Venue';
 	public function insert(){
 		
 	}
@@ -14,7 +14,7 @@ class VenueTable extends BasicTableAdapter {
 	}
 	public function viewlist($string){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('v' => 'venue'));
+        $select = $sql->select(array('v' => 'Venue'));
         $where = new \Zend\Db\Sql\Where();
         $where -> like('v.title', '%'.$string.'%');
         $select->where($where);
