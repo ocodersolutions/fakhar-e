@@ -5,7 +5,6 @@
 		foreach($styleItem as $style){
 			$listStyle[] = $style['styleId'];
 		}
-		
 ?>
 <div class="row content-page" id="defination_page">
 	<div class="defination_page col-lg-10 col-lg-offset-1">
@@ -45,7 +44,6 @@
 		$count++;  ?>
 
 					<form class="style-update" id="style-update-<?php echo $count ?>" method="post">
-						 <?php //var_dump($style['value']); die;?>
 							<div class="top_right_attName col-lg-5 col-lg-offset-1">
 								<select style="width:350px;" name='attr_name-<?php echo $count ?>'  class="chosen_select_left" data-number="<?php echo $count ?>" data-value-<?php echo $count ?>="<?php echo $style['value']; ?>">
 									<option selected disabled >Select </option>
@@ -85,7 +83,7 @@
 
 							<div class="top_right_attValue col-lg-5">
 								<img src="/assets/images/loading.gif" style="margin-top: -12px; display: none;margin-left: -55px; position: absolute; float: left;">
-
+									
 									<select name='attr_value' data-placeholder="Choose style defination..." style="width:350px;" multiple="multiple" class="chosen_select_right" id="select-right-add">
 										
 									</select>

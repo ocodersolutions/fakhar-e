@@ -9,33 +9,36 @@ $('.chosen_select_left').each(function(i, obj) {
     var temp = new Array();
     if (typeof(value) != "undefined"){ temp = value.split(","); }
     selected = $.trim(attrName);
-    $.ajax({
-        url : "/style/getAttributeValue",
-        type : "post",
-        dataType:"text",
-        data : {
-            'selected' : selected,
-        },
-        success: function (result){
-            $('#loading').css('display','none');
-            var employeeData = JSON.parse(result);
-            for(i = 0; employeeData.length >i; i++){
-      
-
-                $.each(temp, function(key, value) { 
-                    console.log(value);
-                    if(value == employeeData[i]){
-                        selected = 'selected';
-                        return false;
-                    }else{
-                        selected = '';
-                    } 
-                });
+        $.ajax({
+            url : "/style/getAttributeValue",
+            type : "post",
+            dataType:"text",
+            data : {
+                'selected' : selected,
+            },
+            success: function (result){
+                $('#loading').css('display','none');
+                var employeeData = JSON.parse(result);
+                var optionString = '';
+                for(i = 0; employeeData.length >i; i++){
+          
+                    $.each(temp, function(key, value) { 
+                        
+                        if(value == employeeData[i]){
+                            selected = 'selected';
+                            return false;
+                        }else{
+                            selected = '';
+                        } 
+                    });
+                    optionString += "<option "+selected+" >"+employeeData[i]+"</option>";
+                   
+                }
                 var className = '#select-right-' + number;
-                $(className).append( "<option "+selected+">"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+                $(className).append( optionString).trigger("chosen:updated");
             }
-        }
-    });
+        });
+   
 });
 //lay ve het cac select hien tai
 //for cac select -> lay ve option dang duoc chon -> 
@@ -49,23 +52,44 @@ $('.chosen_select_left').change(function(){
     $('#loading').css('display','block');
     $(".chosen_select_right option").remove();
     selected = $(this).val();
-    $.ajax({
-        url : "/style/getAttributeValue",
-        type : "post",
-        dataType:"text",
-        data : {
-            'selected' : selected,
-        },
-        success: function (result){
-            $('#loading').css('display','none');
-            var employeeData = JSON.parse(result);
-            var className = '#select-right-' + number;
-            for(i = 0; employeeData.length >i; i++){
-                $(className).append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+    // if(selected != 'Brand'){
+        $.ajax({
+            url : "/style/getAttributeValue",
+            type : "post",
+            dataType:"text",
+            data : {
+                'selected' : selected,
+            },
+            success: function (result){
+                $('#loading').css('display','none');
+                //console.log(result);
+                var employeeData = JSON.parse(result);
+                console.log(employeeData);
+                var className = '#select-right-' + number;
+                var optionString = '';
+                for(i = 0; employeeData.length >i; i++){
+                    optionString += "<option>"+employeeData[i]+"</option>";
+                }
+                $(className).append( optionString ).trigger("chosen:updated");
             }
-        }
+        }); 
+    // }else{
+    //     var brand_store = $('#brand-store option');
+    //     brand_list = [];
 
-    });
+    //     for(i=0; brand_store.length>i;i++ ){
+    //         brand_list.push(brand_store[i].value);
+    //     }
+
+    //     var className = '#select-right-' + number;
+    //     var optionString = '';
+    //     for(i = 0; brand_list.length >i; i++){
+    //         optionString += "<option>"+brand_list[i]+"</option>";
+    //     }
+    //     $(className).append( optionString ).trigger("chosen:updated");
+    //     //console.log(brand_list);
+    //     //console.log(brand_list);
+    // }
 });
 //form add new 
     $(function () {

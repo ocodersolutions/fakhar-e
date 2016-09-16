@@ -62,7 +62,7 @@ class StyleController extends BaseActionController
         $listItem = array();
         foreach($attrItem as $item){
             $listItem[] = $item['attribute_value'];
-        }       
+        }
         return $this->getResponse()->setContent(Json::encode($listItem));
     }
     public function definationAction() 
@@ -99,15 +99,9 @@ class StyleController extends BaseActionController
         $singleItem = $oStyleList->viewsingleitem($id);
         $__viewVariables['singleItem'] = $singleItem;
 
-
         $oStyleDefination = $this->getServiceLocator()->get('StyleDefinationTable');
         $styleItem = $oStyleDefination->liststyle($id);
         $__viewVariables['styleItem'] = $styleItem;
-
-
-
-
-
         return  $__viewVariables;
     }
     public function styledefinationAction() 
@@ -185,8 +179,7 @@ class StyleController extends BaseActionController
     }
     public function deletestyleAction() 
     {
-        // exit();
-        // $listItem = $this->listItem;
+        
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
         $this->userId = $userInfo->userId;
