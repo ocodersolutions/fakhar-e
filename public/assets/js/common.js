@@ -3,8 +3,9 @@ $(document).ready(function() {
 $('.chosen_select_left').each(function(i, obj) {
     var attrName = $(obj).find(":selected").text();
     var number = $(obj).data('number');
-    var value = $(obj).data('value');
-
+    var value = $(obj).data('value-'+number);
+    var temp = new Array();
+    if (typeof(value) != "undefined"){ temp = value.split(","); }
     selected = $.trim(attrName);
     $.ajax({
         url : "/style/getAttributeValue",
@@ -17,11 +18,17 @@ $('.chosen_select_left').each(function(i, obj) {
             $('#loading').css('display','none');
             var employeeData = JSON.parse(result);
             for(i = 0; employeeData.length >i; i++){
-                if(employeeData[i] == value){
-                    selected = 'selected';
-                }else{
-                    selected = '';
-                }
+      
+
+                $.each(temp, function(key, value) { 
+                    console.log(value);
+                    if(value == employeeData[i]){
+                        selected = 'selected';
+                        return false;
+                    }else{
+                        selected = '';
+                    } 
+                });
                 var className = '#select-right-' + number;
                 $(className).append( "<option "+selected+">"+employeeData[i]+"</option>" ).trigger("chosen:updated");
             }
@@ -30,6 +37,9 @@ $('.chosen_select_left').each(function(i, obj) {
 });
 //lay ve het cac select hien tai
 //for cac select -> lay ve option dang duoc chon -> 
+
+
+ 
 
 $('.chosen_select_left').change(function(){
     var number = $(this).data('number');
@@ -77,13 +87,33 @@ alert(result);
     });
 
 //form update 
+   
+    // $('.chosen_select_right').on('change', function (e) {
+    //     id = $(this).attr('id');   
+    //     $('#'+id+'.chosen_select_right :selected').each(function (i, selected) {
+    //         foo[i] = $(selected).text();
+    //     });
+    // });
+
+
+
 $(function () {
+    //var array_val = [];
     $('form.style-update').bind('submit', function () {
+        // id = $(this).attr('id'); 
+        // $('#'+id+' .chosen_select_right :selected').each(function (i, selected) {
+        //     array_val[i] = $(selected).text();
+        // });
+        form = $(this).serialize();
+        //console.log(array_val);
         $.ajax({
             type: 'post',
             url: '/style/updatestyledefination',
-            data: $(this).serialize(),
+             data : {
+                'form' : form,
+            },
             success: function (result) {
+                alert(result);
                if(result == 1){
                 alert('Update Success');
                 location.reload();
@@ -117,12 +147,8 @@ $(function () {
 
   
 
-    $(".chosen_select_left").chosen({
-    no_results_text: "Oops, nothing found!",
-  });
-    $(".chosen_select_right").chosen({
-    no_results_text: "Oops, nothing found!",
-  }); 
+    $(".chosen_select_left").chosen();
+    $(".chosen_select_right").chosen(); 
 
     $('#idNewsLetter').click(function() { 
         

@@ -141,17 +141,35 @@ class StyleController extends BaseActionController
     }
     public function updatestyledefinationAction() 
     {
+        $finalArray = array();
         $aPostParams = $this->params()->fromPost();
-        $number = $aPostParams['number'];
+        //$number = $aPostParams['id'];
+        $aPost = explode("&",$aPostParams['form']); 
+        // var_dump($aPost );die;
+        foreach( $aPost as $val ){
+          $tmp = explode( '=', $val );
+          if (strpos($tmp[0], 'attr_value') !== false) {
+                $finalArray[ $tmp[0]][] = $tmp[1];
+            } else {
+                $finalArray[ $tmp[0]] = $tmp[1];
+            }
+        }
+
+
+        $number = $finalArray['number'];
+        
         $oDefination = $this->getServiceLocator()->get('StyleDefinationTable');
-        isset($aPostParams['attr_name-'.$number]) ? $attr = $aPostParams['attr_name-'.$number] : $attr = false;
-        isset($aPostParams['attr_value-'.$number]) ? $value = $aPostParams['attr_value-'.$number] : $value = false;
-        isset($aPostParams['id']) ? $id = $aPostParams['id'] : $id = false;
+        isset($finalArray['attr_name-'.$number]) ? $attr = $finalArray['attr_name-'.$number] : $attr = false;
+        isset($finalArray['attr_value-'.$number]) ? $value = $finalArray['attr_value-'.$number] : $value = false;
+        isset($finalArray['id']) ? $id = $finalArray['id'] : $id = false;
+        
+
             if($attr == false || $value == false){
                 $attribute = 'Not Empty';
             }else{
                 $attribute = $oDefination->update($attr, $value, $number, $id );
             }
+            var_dump($attribute); die;
         return $this->getResponse()->setContent(Json::encode($attribute));
     }
     public function deletestyleAction() 

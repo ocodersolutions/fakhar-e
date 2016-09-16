@@ -21,10 +21,18 @@ class StyleDefinationTable extends BasicTableAdapter {
         return $result;
 	}
     public function update($attr, $value, $number, $id ){
+        $arr_style = array();
+        foreach($value as $val){
+            $arr_style[]  = str_replace('+',' ',$val);
+        }
+        $value = implode(",",$arr_style);
+        $attr = str_replace('+',' ',$attr);
            $data = array(
                 "attribute" => $attr,
                 "value" => $value
+        
         );
+           
         $update = $this->tableGateway->update($data, array("id" => $id));
         return $update;
     }
@@ -38,6 +46,7 @@ class StyleDefinationTable extends BasicTableAdapter {
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
         $resultSet->initialize($results);
         $resultSet = $resultSet->toArray();
+       // var_dump($resultSet); die;
         return $resultSet;
 	}
   
