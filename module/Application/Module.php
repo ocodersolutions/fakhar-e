@@ -229,7 +229,7 @@ class Module implements
                     $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\StyleList($dbAdapter));
-                    return new TableGateway('style', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('Style', $dbAdapter, null, $resultSetPrototype);
                 },
                 'AttributeListTable' => function($serviceManager) {
                     $tableGateway = $serviceManager->get('AttributeListTableGateway');
@@ -240,7 +240,7 @@ class Module implements
                     $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\AttributeList($dbAdapter));
-                    return new TableGateway('attributeslist', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('AttributesList', $dbAdapter, null, $resultSetPrototype);
                 },    
                 'VenueTable' => function($serviceManager) {
                     $tableGateway = $serviceManager->get('VenueTableGateway');
@@ -251,7 +251,18 @@ class Module implements
                     $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Venue($dbAdapter));
-                    return new TableGateway('venue', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('Venue', $dbAdapter, null, $resultSetPrototype);
+                },
+                 'StyleDefinationTable' => function($serviceManager) {
+                    $tableGateway = $serviceManager->get('StyleDefinationTableGateway');
+                    $table = new Model\StyleDefinationTable($tableGateway);
+                    return $table;
+                },
+                'StyleDefinationTableGateway' => function ($serviceManager) {
+                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\StyleDefination($dbAdapter));
+                    return new TableGateway('StyleDefination', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
             'abstract_factories' => array(

@@ -56,7 +56,13 @@
               	
                   $('#'+modalID + " .my_cancel").click(function(){
                 	  $('#'+modalID).foundation('reveal','close'); 
-                  });                    	
+                  });   
+                  $('#'+modalID + " .my_delete_yes").click(function(){
+                    $('#'+modalID).foundation('reveal','close'); 
+                  });
+                  $('#'+modalID + " .my_delete_no").click(function(){
+                    $('#'+modalID).foundation('reveal','close'); 
+                  });                 	
               });        	  
         	  
           }          

@@ -53,14 +53,14 @@ $userName = $this->userName;
 	        <tbody>
 
 	        <?php foreach($listItem as $item ){ ?>
-	            <tr>
+	            <tr class="test_id" id="tr-<?php echo ($item['id']); ?>">
 	                <td><?php echo ($item['id']); ?></td>
 	                <td><?php echo ($item['title']); ?></td>
 	                <td><?php echo ($userName); ?></td>
 	                <td><?php echo ($item['isActive'] == 1 ? '<span class="label label-success">Enable</span>' : '<span class="label label-danger">Disable</span>'); ?></td>
 	                <td>
 	                	<a href="/style/defination/<?php echo ($item['id']); ?>"><button type="button" class="btn"><span class="glyphicon glyphicon-edit"></span></button></a>
-	                	<button type="button" class="btn btn_delete_style" data-toggle="modal" data-delete="<?php echo ($item['id']); ?>" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button>
+	                	<button type="button" class="btn btn_delete_style" data-delete="<?php echo ($item['id']); ?>"><span class="glyphicon glyphicon-remove"></span></button>
 	                </td>
 	            </tr>
 
@@ -69,13 +69,13 @@ $userName = $this->userName;
 	    </table>
 
 	    <!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<!--div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<!-- <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
-					</div>
+					<!--/div>
 					<div class="modal-body">
 						Do you want to delete or not
 					</div>
@@ -85,7 +85,7 @@ $userName = $this->userName;
 					</div>
 				</div>
 			</div>
-		</div>
+		</div-->
 
 	</div>
 
@@ -97,7 +97,14 @@ $userName = $this->userName;
 	  "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
 	} );
  
-	$('body').on( 'click', '.delete_style', function () {
-	    table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
+	$('body').on( 'click', '.my_delete_yes', function () {
+		// var itemName = '#tr-'+$(this).data('delete');
+		// var itemName = $(this).data('delete2');
+		// $('[data-delete='+itemName+']').parents('tr').remove();
+		// location.reload();
+		// alert(itemName);
+		// x = $(this).attr("data-delete");
+		// document.getElementById("example").deleteRow(x);
+		// table.row( $(".btn_delete_style").parents(itemName)).remove().draw();
 	} );
 </script>
