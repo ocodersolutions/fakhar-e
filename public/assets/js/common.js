@@ -65,9 +65,9 @@ $('.chosen_select_left').change(function(){
             url: '/style/styledefination',
             data: $('form').serialize(),
             success: function (result) {
-alert(result);
+// alert(result);
               if(result == 1){
-                alert('Created');
+                // alert('Created');
                 location.reload();
               }else{
                 alert('has error');
@@ -87,7 +87,7 @@ $(function () {
             data: $(this).serialize(),
             success: function (result) {
                if(result == 1){
-                alert('Update Success');
+                // alert('Update Success');
                 location.reload();
               }else{
                 alert('has error');
