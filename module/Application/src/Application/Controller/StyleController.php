@@ -40,13 +40,6 @@ class StyleController extends BaseActionController
             if(array_key_exists('submit', $aPostParams) && $aPostParams['submit'] == "Create") {
                 $result = $oStyleList->insert($aPostParams);
                 $this->redirect()->toRoute('style/default', array('action' => 'defination', 'id' => $result));    
-                // $this->redirect()->toRoute('Application',
-                //     array(
-                //         'controller'=>'Style',
-                //         'action' => 'defination',
-                //         'params' => $result
-                //     )
-                // );
             }
         } else {
             $this->redirect()->toRoute('auth');
@@ -124,7 +117,7 @@ class StyleController extends BaseActionController
         isset($finalArray['id-attr']) ? $id = $finalArray['id-attr'] : $id = false;
         $validator = new RecordExists(
             array(
-                'table'   => 'styledefination',
+                'table'   => 'StyleDefination',
                 'field'   => 'styleId',
                 'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
                 'exclude' => ' attribute = "'.$attr.'"'
