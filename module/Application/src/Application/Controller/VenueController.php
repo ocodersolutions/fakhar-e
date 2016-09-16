@@ -19,16 +19,18 @@ class VenueController extends BaseActionController
 	{
 		 $__viewVariables = array();
 		 $this->layout('layout/layout_elnove.phtml');
-
+         $isActive = 1;
          $oVenueList = $this->getServiceLocator()->get('VenueTable');
          $title = '';
          if ($this->getRequest()->isPost()){
-             $aPostParams = $this->params()->fromPost('term');
-             $title = $aPostParams;
+            $aPostParams = $this->params()->fromPost('term');
+            $title = $aPostParams;
+        
          }else{
             echo 'console.log("No data posted")';
          }
-         $listItem = $oVenueList->viewlist( $title);
+         //var_dump($title);
+         $listItem = $oVenueList->viewlist( $isActive);
          $__viewVariables['listItem'] = $listItem;
          $jsonvenueArr = array();
          if (!empty($listItem)) {
@@ -38,7 +40,8 @@ class VenueController extends BaseActionController
         }
         $jsonvenue = json_encode($jsonBrandArr);
         echo $jsonvenue;
-        
+        //$helper = $this->view->getHelper('getvenue_helper');
+        //$this->view->getvenue_helper($jsonBrandArr[0],$title);
         exit();
         $__viewVariables['jsonvenue'] = $jsonvenue;
         

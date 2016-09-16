@@ -1019,7 +1019,8 @@ return array(
     'view_helpers' => array(
         'invokables'=> array(
             'string_helper' => 'Application\View\Helper\Stringhelper',
-            'percentage_helper' => 'Application\View\Helper\Percentagehelper'
+            'percentage_helper' => 'Application\View\Helper\Percentagehelper',
+            'getvenue_helper' => 'Application\View\Helper\Getvenuehelper'
         )
     ),
 
