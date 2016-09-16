@@ -173,5 +173,6 @@ class StyleController extends BaseActionController
         if (count($aPostParams)) {
             $oStyleList->delete($aPostParams["del_style"]);  
         }
+        return 0;
     }
 }

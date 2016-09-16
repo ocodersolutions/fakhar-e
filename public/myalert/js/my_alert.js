@@ -58,9 +58,13 @@
                 	  $('#'+modalID).foundation('reveal','close'); 
                   });   
                   $('#'+modalID + " .my_delete_yes").click(function(){
+                    $(".my_cancel, .my_btn").css("display", "block");
+                    $(".my_delete_yes, .my_delete_no").css("display", "none");
                     $('#'+modalID).foundation('reveal','close'); 
                   });
                   $('#'+modalID + " .my_delete_no").click(function(){
+                    $(".my_cancel, .my_btn").css("display", "block");
+                    $(".my_delete_yes, .my_delete_no").css("display", "none");
                     $('#'+modalID).foundation('reveal','close'); 
                   });                 	
               });        	  

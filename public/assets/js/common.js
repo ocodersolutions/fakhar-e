@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+var table = $('#example').DataTable();
+
 $('.chosen_select_left').each(function(i, obj) {
     var attrName = $(obj).find(":selected").text();
     var number = $(obj).data('number');
@@ -184,22 +186,25 @@ $(function () {
 
 });
 
+
+
 $(document).on("click", ".my_delete_yes", function(){
     del_style = $(this).attr("data-delete2");
-    $('[data-delete='+del_style+']').parents('tr').remove();
+    // $('[data-delete='+del_style+']').parents('tr').remove();
+    table.row( $('[data-delete='+del_style+']').parents('tr')).remove().draw();
     // alert(del_style);
     $.ajax({
         url: "style/deletestyle",
         type: "POST",
         data: { del_style : del_style },
-        // dataType: "html",
-        success: function (html)
+        dataType: "test",
+        success: function ()
         {
               // alert(result);
             // $('[data-delete='+del_style+']').parents('tr').remove();
         }
     });
-    location.reload();
+    // location.reload();
 }); 
 
 $(document).on("click",".btn_delete_style", function(e){
