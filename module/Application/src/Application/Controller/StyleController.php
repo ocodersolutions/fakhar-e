@@ -113,25 +113,38 @@ class StyleController extends BaseActionController
     public function styledefinationAction() 
     {
         
+        $finalArray = array();
         $aPostParams = $this->params()->fromPost();
+        $aPost = explode("&",$aPostParams['form']); 
+        foreach( $aPost as $val ){
+          $tmp = explode( '=', $val );
+          if (strpos($tmp[0], 'attr_value') !== false) {
+                $finalArray[ $tmp[0]][] = $tmp[1];
+            } else {
+                $finalArray[ $tmp[0]] = $tmp[1];
+            }
+        }
         $oDefination = $this->getServiceLocator()->get('StyleDefinationTable');
-        isset($aPostParams['attr_name']) ? $attr = $aPostParams['attr_name'] : $attr = false;
-        isset($aPostParams['attr_value']) ? $value = $aPostParams['attr_value'] : $value = false;
-        isset($aPostParams['id-attr']) ? $id = $aPostParams['id-attr'] : $id = false;
+        isset($finalArray['attr_name']) ? $attr = str_replace('+',' ',$finalArray['attr_name']) : $attr = false;
+        isset($finalArray['attr_value']) ? $value = $finalArray['attr_value'] : $value = false;
+        isset($finalArray['id-attr']) ? $id = $finalArray['id-attr'] : $id = false;
         $validator = new RecordExists(
             array(
                 'table'   => 'styledefination',
                 'field'   => 'styleId',
                 'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
-                'exclude' => ' attribute = "'.$attr.'" AND value = "'.$value.'"'
+                'exclude' => ' attribute = "'.$attr.'"'
             )
         );
         $validator->isValid($id) ? $recordExists = 1 : $recordExists = 0;
+       
         if($recordExists == 0){
              if($attr == false || $value == false){
                 $attribute = 'Not Empty';
             }else{
+                //var_dump($value); die;
                 $attribute = $oDefination->insert($attr, $value, $id);
+
             }
         }else{
             $attribute = 'Record Exist';
@@ -143,9 +156,7 @@ class StyleController extends BaseActionController
     {
         $finalArray = array();
         $aPostParams = $this->params()->fromPost();
-        //$number = $aPostParams['id'];
         $aPost = explode("&",$aPostParams['form']); 
-        // var_dump($aPost );die;
         foreach( $aPost as $val ){
           $tmp = explode( '=', $val );
           if (strpos($tmp[0], 'attr_value') !== false) {

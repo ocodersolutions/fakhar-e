@@ -70,18 +70,21 @@ $('.chosen_select_left').change(function(){
 //form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
-          $.ajax({
+            form = $(this).serialize();
+            $.ajax({
             type: 'post',
             url: '/style/styledefination',
-            data: $('form').serialize(),
+            data : {
+                'form' : form,
+            },
             success: function (result) {
-alert(result);
+                alert(result);
               if(result == 1){
                 alert('Created');
-                location.reload();
               }else{
                 alert('has error');
               }
+              location.reload();
             }
           });
           return false;
@@ -90,39 +93,23 @@ alert(result);
 
 //form update 
    
-    // $('.chosen_select_right').on('change', function (e) {
-    //     id = $(this).attr('id');   
-    //     $('#'+id+'.chosen_select_right :selected').each(function (i, selected) {
-    //         foo[i] = $(selected).text();
-    //     });
-    // });
-
-
-
 $(function () {
-    //var array_val = [];
     $('form.style-update').bind('submit', function () {
-        // id = $(this).attr('id'); 
-        // $('#'+id+' .chosen_select_right :selected').each(function (i, selected) {
-        //     array_val[i] = $(selected).text();
-        // });
         form = $(this).serialize();
-        //console.log(array_val);
         $.ajax({
             type: 'post',
             url: '/style/updatestyledefination',
-             data : {
+            data : {
                 'form' : form,
             },
             success: function (result) {
-                alert(result);
-               if(result == 1){
+            alert(result);
+            if(result == 1){
                 alert('Update Success');
-                location.reload();
-              }else{
+            }else{
                 alert('has error');
-              }
-          
+            }
+            location.reload();
             }
           });
           return false;
@@ -130,24 +117,6 @@ $(function () {
     });
 
 
-
-// function myFunction(){
-//     alert(12111);
-// }
-
-// $(".add_attr").click(function() {
-    
-
-
-// var y = document.getElementById('form-defination');
-// console.log(y.innerHTML);
-// $('#kaka').append(y.innerHTML);
-   
-//       return false; 
-
-//          });
-
-  
 
     $(".chosen_select_left").chosen();
     $(".chosen_select_right").chosen(); 
