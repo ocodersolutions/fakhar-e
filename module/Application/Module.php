@@ -64,12 +64,18 @@ class Module implements
         return array(
             'invokables' => array(
                 'cmsLinkAdmin'       => '\Ocoder\View\Helper\CmsLinkAdmin',
+                
             ),
             'factories' => array(
                 'Params' => function ($serviceManager) {
                     $services = $serviceManager->getServiceLocator();
                     $app = $services->get('Application');
                     return new View\Helper\Params($app->getRequest(), $app->getMvcEvent());
+                },
+                'Getvenue' => function ($serviceManager) {
+                    $services = $serviceManager->getServiceLocator();
+                    $app = $services->get('Application');
+                    return new View\Helper\Getvenue($app->getRequest(), $app->getMvcEvent());
                 },
             ),
         );
