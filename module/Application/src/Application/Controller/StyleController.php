@@ -139,6 +139,24 @@ class StyleController extends BaseActionController
 
         return $this->getResponse()->setContent(Json::encode($attribute));
     }
+    public function deletestyledefinationAction() 
+    {
+         $finalArray = array();
+        $aPostParams = $this->params()->fromPost();
+        $aPost = explode("&",$aPostParams['form']); 
+        foreach( $aPost as $val ){
+          $tmp = explode( '=', $val );
+          if (strpos($tmp[0], 'attr_value') !== false) {
+                $finalArray[ $tmp[0]][] = $tmp[1];
+            } else {
+                $finalArray[ $tmp[0]] = $tmp[1];
+            }
+        }
+        $id = $finalArray['id'];
+        $oDefination = $this->getServiceLocator()->get('StyleDefinationTable');
+        $attribute = $oDefination->delete($id);
+        return $this->getResponse()->setContent(Json::encode($attribute));
+    }
     public function updatestyledefinationAction() 
     {
         $finalArray = array();
@@ -167,7 +185,6 @@ class StyleController extends BaseActionController
             }else{
                 $attribute = $oDefination->update($attr, $value, $number, $id );
             }
-            var_dump($attribute); die;
         return $this->getResponse()->setContent(Json::encode($attribute));
     }
     public function deletestyleAction() 

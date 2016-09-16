@@ -28,6 +28,7 @@
 						</div>
 					</div>
 					<input type="submit" name="submit" class="upgrade_style btn btn-primary col-lg-1"  value="Update">
+
 				</form>
 			</div>
 		</div>
@@ -35,7 +36,7 @@
 
 		<div id="top_right">
 
-			<div class="row" id='kaka'>
+			<div class="row">
 				<div class="top_right_title top_title_style">Defination</div>
 				
 	<?php 
@@ -64,7 +65,8 @@
 
 							<input type="hidden" name='number' value="<?php echo $count ?>">
 							<input type="hidden" name='id' value="<?php echo $style['id']; ?>">
-							<input class="add_attr btn btn-primary col-lg-1" type="submit" value="Update">
+							<input class="add_attr btn btn-primary col-lg-1" type="submit" data-action='update' value="Update">
+							<input class="delete_style btn btn-danger col-lg-1" type="submit" data-action='delete' value="Delete">
 
 					</form>	
 	<?php }?>

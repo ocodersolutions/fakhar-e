@@ -105,10 +105,11 @@ $('.chosen_select_left').change(function(){
                 alert(result);
               if(result == 1){
                 alert('Created');
+                location.reload();
               }else{
                 alert('has error');
               }
-              location.reload();
+              
             }
           });
           return false;
@@ -118,27 +119,53 @@ $('.chosen_select_left').change(function(){
 //form update 
    
 $(function () {
-    $('form.style-update').bind('submit', function () {
-        form = $(this).serialize();
-        $.ajax({
-            type: 'post',
-            url: '/style/updatestyledefination',
-            data : {
-                'form' : form,
-            },
-            success: function (result) {
-            alert(result);
-            if(result == 1){
-                alert('Update Success');
-            }else{
-                alert('has error');
-            }
-            location.reload();
-            }
-          });
-          return false;
-        });
+    $('form.style-update').bind('submit', function (event) {
+        var action = $(this).find("input[type=submit]:focus").attr('data-action');
+        var form = $(this).serialize();
+        alert(action);
+        if(action == 'update'){
+            $.ajax({
+                type: 'post',
+                url: '/style/updatestyledefination',
+                data : {
+                    'form' : form,
+                },
+                success: function (result) {
+                alert(result);
+                if(result == 1){
+                    alert('Update Success');
+                    location.reload();
+                }else{
+                    alert('has error');
+                }
+                
+                }
+              });
+        }else if(action == 'delete'){
+           
+             $.ajax({
+                type: 'post',
+                url: '/style/deletestyledefination',
+                data : {
+                    'form' : form,
+                },
+                success: function (result) {
+                //alert(result);
+                if(result == 1){
+                    alert('Delete Success');
+                    location.reload();
+                }else{
+                    alert('has error');
+                }
+                
+                }
+              });
+
+
+        }
+        return false;
     });
+});
 
 
 

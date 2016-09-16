@@ -41,6 +41,11 @@ class StyleDefinationTable extends BasicTableAdapter {
         $update = $this->tableGateway->update($data, array("id" => $id));
         return $update;
     }
+    public function delete($id ){
+         
+       $delete = $this->tableGateway->delete(array('id' => (int) $id));
+       return $delete;
+    }
 	public function liststyle($id){
         $sql = new Sql($this->getServiceLocator()->get('db'));
         $select = $sql->select(array('sl' => 'styledefination'));
@@ -51,7 +56,7 @@ class StyleDefinationTable extends BasicTableAdapter {
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
         $resultSet->initialize($results);
         $resultSet = $resultSet->toArray();
-       // var_dump($resultSet); die;
+       
         return $resultSet;
 	}
   
