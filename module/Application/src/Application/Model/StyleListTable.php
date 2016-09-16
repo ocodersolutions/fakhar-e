@@ -46,14 +46,14 @@ class StyleListTable extends BasicTableAdapter {
 		$userId = 1;
         $sql = new Sql($this->getServiceLocator()->get('db'));
         $select = $sql->select(array('sl' => 'Style'));
-        // $select->where(array('sl.userId' => $userId));
-        $select->order('id DESC');
+        $select->where(array('sl.userId' => $userId));
 
         $resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
         $resultSet->initialize($results);
         $resultSet = $resultSet->toArray();
+
         return $resultSet;
 	}
 	public function viewsingleitem($id){

@@ -5,8 +5,9 @@ var table = $('#example').DataTable();
 $('.chosen_select_left').each(function(i, obj) {
     var attrName = $(obj).find(":selected").text();
     var number = $(obj).data('number');
-    var value = $(obj).data('value');
-
+    var value = $(obj).data('value-'+number);
+    var temp = new Array();
+    if (typeof(value) != "undefined"){ temp = value.split(","); }
     selected = $.trim(attrName);
     $.ajax({
         url : "/style/getAttributeValue",
@@ -19,11 +20,17 @@ $('.chosen_select_left').each(function(i, obj) {
             $('#loading').css('display','none');
             var employeeData = JSON.parse(result);
             for(i = 0; employeeData.length >i; i++){
-                if(employeeData[i] == value){
-                    selected = 'selected';
-                }else{
-                    selected = '';
-                }
+      
+
+                $.each(temp, function(key, value) { 
+                    console.log(value);
+                    if(value == employeeData[i]){
+                        selected = 'selected';
+                        return false;
+                    }else{
+                        selected = '';
+                    } 
+                });
                 var className = '#select-right-' + number;
                 $(className).append( "<option "+selected+">"+employeeData[i]+"</option>" ).trigger("chosen:updated");
             }
@@ -32,6 +39,9 @@ $('.chosen_select_left').each(function(i, obj) {
 });
 //lay ve het cac select hien tai
 //for cac select -> lay ve option dang duoc chon -> 
+
+
+ 
 
 $('.chosen_select_left').change(function(){
     var number = $(this).data('number');
@@ -60,18 +70,21 @@ $('.chosen_select_left').change(function(){
 //form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
-          $.ajax({
+            form = $(this).serialize();
+            $.ajax({
             type: 'post',
             url: '/style/styledefination',
-            data: $('form').serialize(),
+            data : {
+                'form' : form,
+            },
             success: function (result) {
-// alert(result);
+                alert(result);
               if(result == 1){
-                // alert('Created');
-                location.reload();
+                alert('Created');
               }else{
                 alert('has error');
               }
+              location.reload();
             }
           });
           return false;
@@ -79,20 +92,24 @@ $('.chosen_select_left').change(function(){
     });
 
 //form update 
+   
 $(function () {
     $('form.style-update').bind('submit', function () {
+        form = $(this).serialize();
         $.ajax({
             type: 'post',
             url: '/style/updatestyledefination',
-            data: $(this).serialize(),
+            data : {
+                'form' : form,
+            },
             success: function (result) {
-               if(result == 1){
-                // alert('Update Success');
-                location.reload();
-              }else{
+            alert(result);
+            if(result == 1){
+                alert('Update Success');
+            }else{
                 alert('has error');
-              }
-          
+            }
+            location.reload();
             }
           });
           return false;
@@ -101,30 +118,8 @@ $(function () {
 
 
 
-// function myFunction(){
-//     alert(12111);
-// }
-
-// $(".add_attr").click(function() {
-    
-
-
-// var y = document.getElementById('form-defination');
-// console.log(y.innerHTML);
-// $('#kaka').append(y.innerHTML);
-   
-//       return false; 
-
-//          });
-
-  
-
-    $(".chosen_select_left").chosen({
-    no_results_text: "Oops, nothing found!",
-  });
-    $(".chosen_select_right").chosen({
-    no_results_text: "Oops, nothing found!",
-  }); 
+    $(".chosen_select_left").chosen();
+    $(".chosen_select_right").chosen(); 
 
     $('#idNewsLetter').click(function() { 
         
