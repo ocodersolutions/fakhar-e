@@ -48,7 +48,8 @@ $('.chosen_select_left').each(function(i, obj) {
 
  
 $('.chosen_select_right').on('change', function(evt, params) {
-     var number = $(this).closest('.style-update').find('.top_right_attName .chosen_select_left').attr('data-number');
+    
+     var number = $(this).closest('form').find('.top_right_attName .chosen_select_left').attr('data-number');
      if(params.selected == 'all'){
         $('.chosen_select_right#select-right-'+number+' option').removeAttr('selected');
         $(this).val('all');
@@ -63,11 +64,9 @@ $('.chosen_select_right').on('change', function(evt, params) {
 
 $('.chosen_select_left').change(function(){
     var number = $(this).data('number');
-    
     $('#loading').css('display','block');
-    $(".chosen_select_right option").remove();
+    $(".chosen_select_right#select-right-"+number+" option").remove();
     selected = $(this).val();
-    // if(selected != 'Brand'){
         $.ajax({
             url : "/style/getAttributeValue",
             type : "post",
@@ -77,10 +76,10 @@ $('.chosen_select_left').change(function(){
             },
             success: function (result){
                 $('#loading').css('display','none');
-                //console.log(result);
                 var employeeData = JSON.parse(result);
                 var className = '#select-right-' + number;
-                var optionString = '';
+                var optionString = '<option class="all" value="all">All</option>';
+
                 for(i = 0; employeeData.length >i; i++){
                     optionString += "<option>"+employeeData[i]+"</option>";
                 }
