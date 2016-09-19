@@ -5,7 +5,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 
 class StyleDefinationTable extends BasicTableAdapter {
-	protected $table = 'styledefination';
+	protected $table = 'StyleDefination';
 	protected $tableGateway;
 
 	public function __construct(TableGateway $tableGateway){
@@ -48,7 +48,7 @@ class StyleDefinationTable extends BasicTableAdapter {
     }
 	public function liststyle($id){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('sl' => 'styledefination'));
+        $select = $sql->select(array('sl' => 'StyleDefination'));
         $select->where(array('sl.styleId' => $id));
 
         $resultSet = array();
