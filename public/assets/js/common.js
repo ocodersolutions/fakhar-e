@@ -36,9 +36,6 @@ $('.chosen_select_left').each(function(i, obj) {
                         optionString += "<option "+selected+" >"+employeeData[i]+"</option>";
                 
                 }
-                if(value == 'all'){
-                    optionString += "<option value='all' selected='selected' >Select All</option>";
-                }
                 var className = '#select-right-' + number;
                 $(className).append( optionString).trigger("chosen:updated");
             }
@@ -50,12 +47,14 @@ $('.chosen_select_left').each(function(i, obj) {
 
 
  
-$('.chosen_select_right').change(function(){ 
-     all = this.value;
+$('.chosen_select_right').on('change', function(evt, params) {
      var number = $(this).closest('.style-update').find('.top_right_attName .chosen_select_left').attr('data-number');
-     if(all == 'all'){
+     if(params.selected == 'all'){
         $('.chosen_select_right#select-right-'+number+' option').removeAttr('selected');
         $(this).val('all');
+        $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
+     }else{
+        $('.chosen_select_right#select-right-'+number+' option.all').removeAttr('selected');
         $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
      }
  
@@ -80,7 +79,6 @@ $('.chosen_select_left').change(function(){
                 $('#loading').css('display','none');
                 //console.log(result);
                 var employeeData = JSON.parse(result);
-                console.log(employeeData);
                 var className = '#select-right-' + number;
                 var optionString = '';
                 for(i = 0; employeeData.length >i; i++){
@@ -118,7 +116,6 @@ $('.chosen_select_left').change(function(){
                 'form' : form,
             },
             success: function (result) {
-                alert(result);
               if(result == 1){
                 alert('Created');
                 location.reload();
@@ -138,7 +135,6 @@ $(function () {
     $('form.style-update').bind('submit', function (event) {
         var action = $(this).find("input[type=submit]:focus").attr('data-action');
         var form = $(this).serialize();
-        alert(action);
         if(action == 'update'){
             $.ajax({
                 type: 'post',
@@ -147,7 +143,6 @@ $(function () {
                     'form' : form,
                 },
                 success: function (result) {
-                alert(result);
                 if(result == 1){
                     alert('Update Success');
                     location.reload();
