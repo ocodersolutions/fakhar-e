@@ -116,7 +116,7 @@ $('.chosen_select_left').change(function(){
             },
             success: function (result) {
               if(result == 1){
-                alert('Created');
+                // alert('Created');
                 location.reload();
               }else{
                 alert('has error');
@@ -143,7 +143,7 @@ $(function () {
                 },
                 success: function (result) {
                 if(result == 1){
-                    alert('Update Success');
+                    // alert('Update Success');
                     location.reload();
                 }else{
                     alert('has error');
@@ -162,7 +162,7 @@ $(function () {
                 success: function (result) {
                 //alert(result);
                 if(result == 1){
-                    alert('Delete Success');
+                    // alert('Delete Success');
                     location.reload();
                 }else{
                     alert('has error');
