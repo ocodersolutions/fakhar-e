@@ -571,6 +571,7 @@ $('body').on('click', '.qv-like', function (){
 //     });
 // });
 
+
 $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(event){
     event.preventDefault(); 
     y = '';
@@ -586,6 +587,7 @@ $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(eve
     if (x == ""){
         x = $('form.form_search input[name="search2"]').val();
         (x != '' ) ? y = 1 : y = 0;
+
     }
 
 
@@ -599,12 +601,33 @@ $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(eve
    
 
     if ( check == 0 && x != '') {
-        $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
-        $('i.fa-times').click(function(){
-            x = $(this).attr('data-search');
-            $('.item[data-search="'+x+'"]').remove();
-            check_search_tag();
+       var string;
+        $.ajax({
+            url : "/venue/search",
+            type : "post",
+            dataType: "json",
+            success: function(result) {
+             string = result;
+             console.log(string);
+            if (string.indexOf(x)<0){
+                $(".my_venue_alert").css("display","block");
+                myalert('myalertid3','type_missing','Ooops!','','OK','Please enter valid email address.',function(){$('#myalertid3').foundation('reveal','close'); });
+                 
+            }else{
+                $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+                $('i.fa-times').click(function(){
+                    x = $(this).attr('data-search');
+                    $('.item[data-search="'+x+'"]').remove();
+                    check_search_tag();
+                });
+            }
+            },
+            error: function() {
+                alert('Error occured');
+            }
         });
+  
+       
     }
     check_search_tag();
    
@@ -777,4 +800,15 @@ $(function() {
             }
             
         });
+});
+
+$(document).mouseup(function (e)
+{
+    var container = $(".reveal-modal");
+    
+
+    if (!container.is(e.target) && container.has(e.target).length === 0 )
+    {
+        $(".my_venue_alert").css("display", "none");
+    }
 });

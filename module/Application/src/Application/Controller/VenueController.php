@@ -7,46 +7,74 @@ use Application\Model\VenueTable;
 use Zend\Session\Container;
 use Zend\Console\Request as ConsoleRequest;
 use Ocoder\Base\BaseActionController;
+use Application\View\Helper\Getvenuehelper;
 
 class VenueController extends BaseActionController
 {
-	protected $_userid;
-	protected $_oService;
     public function __construct(){
     }
 
-	public function indexAction() 
-	{
-		 $__viewVariables = array();
-		 $this->layout('layout/layout_elnove.phtml');
-         $isActive = 1;
+    public function indexAction() {
+        $__viewVariables = array();
+         $this->layout('layout/layout_elnove.phtml');
+        return  $__viewVariables;
+    }
+
+
+    public function venueautocompleAction() 
+    {
+        
+         $__viewVariables = array();
+         $this->layout('layout/layout_elnove.phtml');
          $oVenueList = $this->getServiceLocator()->get('VenueTable');
          $title = '';
+         
          if ($this->getRequest()->isPost()){
-            $aPostParams = $this->params()->fromPost('term');
-            $title = $aPostParams;
-        
-         }else{
-            echo 'console.log("No data posted")';
+             $aPostParams = $this->params()->fromPost('term');
+             $title = $aPostParams;
+
          }
-         //var_dump($title);
-         $listItem = $oVenueList->viewlist( $isActive);
+         $listItem = $oVenueList->viewlist( $title);
          $__viewVariables['listItem'] = $listItem;
          $jsonvenueArr = array();
          if (!empty($listItem)) {
             foreach ($listItem as $vItem) {
-                $jsonBrandArr[] = array('value' => $vItem['title']);
+                 $jsonvenueArr[] =  $vItem['title'];
             }
         }
-        $jsonvenue = json_encode($jsonBrandArr);
+        $jsonvenue = json_encode($jsonvenueArr);
         echo $jsonvenue;
-        //$helper = $this->view->getHelper('getvenue_helper');
-        //$this->view->getvenue_helper($jsonBrandArr[0],$title);
+        
         exit();
         $__viewVariables['jsonvenue'] = $jsonvenue;
         
         return  $__viewVariables;
-		
-	}
-    
+        
+    }
+     public function searchAction() 
+    {
+        $__viewVariables = array();
+        $this->layout('layout/layout_elnove.phtml');
+        $oVenueList = $this->getServiceLocator()->get('VenueTable');
+        $isActive = 1;
+        $listItem = $oVenueList->getAllVenue($isActive);
+        $jsonArr = array();
+        if ($listItem != ''){
+           foreach ($listItem as $item) {
+               $jsonArr[]= $item['title'];
+            }
+            
+        }
+         // $s = "cawors";
+         // $s1 = "casual";
+        //  $help = new Getvenuehelper;
+        // $kq =$help->comparestring($s,$s1);
+        
+        $jsonvenue = json_encode($jsonArr);
+        echo $jsonvenue;
+        exit();
+        // $__viewVariables['comparers'] =$kq ;
+        return  $__viewVariables;
+    }
+
 }

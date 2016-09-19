@@ -1,10 +1,125 @@
-<?php 
-$listItem = $this->listItem;
-$dataVenue = [];
-foreach ($listItem as $value) {
-	# code...
-	$datavalue = $value['title'];
-	array_push($dataVenue, $datavalue);
-}
-echo json_encode($dataVenue);
-?>
+<?php
+        echo $this->headScript()->appendFile($this->basePath() . '/assets/js/tree.jquery.js')
+                                ;
+        ?>
+<?php echo $this->headLink()
+                 ->appendStylesheet($this->basePath() . '/assets/css/jqtree.css');
+ ?> 
+ 
+<div class="row" id="venue_style_page">
+	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
+		<h5>Venue</h5>
+		<div id="tree1"></div>
+	</div>
+	<div class="venue_main_content col-lg-8 col-sm-9">
+		<h3 class="row">Venue 1</h3>
+		<div class="row">
+			<div class="style_left col-lg-3">
+				<p>Style 1</p>
+			</div>
+			<div class="style_des_right col-lg-3">
+				<p>Color <span> Red ,Green</span></p>
+				
+				<p>Brand <span> Brand 1 ,Brand 2</span></p>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="style_left col-lg-3">
+				<p>Style 2</p>
+			</div>
+			<div class="style_des_right col-lg-3">
+				<p>Color <span> Red ,Green</span></p>
+				<p>Brand <span> Brand 1 ,Brand 2</span></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="style_left col-lg-4">
+				<p>Pick Styles</p>
+				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
+
+					<option selected="" disabled="">Select </option>
+					<option value="Belt Loop"> Belt Loop</option>
+					<option value="Brand"> Brand</option>
+					<option value="Break"> Break</option>
+					<option value="Buttons/Zipper"> Buttons/Zipper</option>
+					<option value="Canvas"> Canvas</option>
+					<option value="Color"> Color</option>
+					<option value="Cuff"> Cuff</option>
+					<option value="Darts"> Darts</option>
+					<option value="Fabric"> Fabric</option>
+					<option value="Feature"> Feature</option>
+					<option value="Fit"> Fit</option>
+					<option value="Fly Type"> Fly Type</option>
+					<option value="Hood"> Hood</option>
+					<option value="In-Seam Rise"> In-Seam Rise</option>
+					<option value="Lapel"> Lapel</option>
+					<option value="Leg Opening"> Leg Opening</option>
+					<option value="Neck"> Neck</option>
+					<option value="Pattern"> Pattern</option>
+					<option value="Pockets"> Pockets</option>
+					<option value="Season"> Season</option>
+					<option value="Sleeve Length"> Sleeve Length</option>
+					<option value="Sleeves"> Sleeves</option>
+					<option value="Stitch"> Stitch</option>
+					<option value="Type"> Type</option>
+					<option value="Vents"> Vents</option>
+					<option value="Wash"> Wash</option>
+					<option value="Washing Instructions"> Washing Instructions</option>
+					<option value="Waterproof"> Waterproof</option>
+				</select>
+			</div>
+			<div class="style_des_right col-lg-3">
+				<p>Color <span> Red ,Green</span></p>
+				<p>Brand <span> Brand 1 ,Brand 2</span></p>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+var data = [
+    {
+        name: 'Clothing',
+        url: '/about-us',
+        children: [
+            { name: 'child1',url: '/about-us' },
+            { name: 'child2',url: '/about-us' },
+            {
+		        name: 'node1.1',
+		        url: '/about-us',
+		        children: [
+		            { name: 'child1.1' , url: '/about-us',},
+		            { name: 'child2.1', url: '/about-us', },
+		        ]
+		    },
+        ]
+    },
+    {
+        name: 'Footwear',
+        url: '/about-us',
+        children: [
+            { name: 'child3',url: '/about-us', }
+        ]
+    },
+    {
+        name: 'Accessories',
+        children: [
+            { name: 'child3' }
+        ]
+    }
+];
+$(function() {
+    $('#tree1').tree({
+        data: data,
+        selectable: true,
+        closedIcon: $('<i class="fa fa-plus"/>'),
+    	openedIcon: $('<i class="fa fa-minus"/>'),
+        onCreateLi: function(node, $li) {
+        	var a = $li.find('span')[0];
+        	a.outerHTML = '<a href="' + node.url + '">' + a.outerHTML + '</a>';
+        }
+    });
+    $(".chosen-select").chosen() 
+});
+</script>

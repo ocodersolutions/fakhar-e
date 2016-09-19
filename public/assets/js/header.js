@@ -4,6 +4,7 @@ var pathname = $(location).attr('href');
    
     
 $(document).ready(function(){
+    $('html, body').animate({scrollTop : 0},800);
     if (pathname.indexOf("/profile") >0){
             $("#show-hide-menu").addClass('angleplus');
             flag = true;
@@ -242,7 +243,6 @@ $( function() {
     
     $( "input[name='search2']" ).autocomplete({
       source: function(request, response) {
-        console.log(request.term);
         $.ajax({
             dataType: "json",
             data:
@@ -250,7 +250,7 @@ $( function() {
                 term: request.term,
             },
             type: 'POST',
-            url: "/venue",
+            url: "/venue/venueautocomple",
             success: function(data) {
                 response(data);
                 
@@ -261,11 +261,7 @@ $( function() {
             },
         });
       },
-      // response: function (event, ui) {
-      //     // body...
-         
-      //     $("ul.ui-autocomplete.ui-widget-content").css("width",w);
-      // },
+      
       select: function(event, ui) {
         $(this).val(ui.item.value);
         $('form.searchbox, form.form_search, form.searchbox-mobile').submit();
@@ -277,6 +273,5 @@ $( function() {
     });
 });
     
-    
-
+ //********************* popup when search venue**************************//   
 

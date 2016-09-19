@@ -909,6 +909,19 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:action[/:id]][/]',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9]+',
+                            ),
+                        ),
+                    ),
+                ),
             ),
             /* 'auth' => array(
               'type' => 'Zend\Mvc\Router\Http\Literal',

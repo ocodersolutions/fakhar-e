@@ -72,11 +72,6 @@ class Module implements
                     $app = $services->get('Application');
                     return new View\Helper\Params($app->getRequest(), $app->getMvcEvent());
                 },
-                'Getvenue' => function ($serviceManager) {
-                    $services = $serviceManager->getServiceLocator();
-                    $app = $services->get('Application');
-                    return new View\Helper\Getvenue($app->getRequest(), $app->getMvcEvent());
-                },
             ),
         );
     }

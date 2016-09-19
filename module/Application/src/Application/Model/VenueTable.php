@@ -12,19 +12,12 @@ class VenueTable extends BasicTableAdapter {
 	public function delete(){
 	
 	}
-	public function viewlist($isActive){
+	public function viewlist($string){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('v' => 'Venue'));
+        $select = $sql->select(array('v' => 'venue'));
         $where = new \Zend\Db\Sql\Where();
-        $select->where($isActive);
-        /******/
-  //       $spec = function (Where $string) {
-		//     $where->where("MATCH(v.title) AGAINST(".$string." in boolean mode)");
-		// };
-
-		// $select->where($spec);
-
-        /*******/
+        $where -> like('v.title', '%'.$string.'%');
+        $select->where($where);
         $resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
@@ -33,6 +26,18 @@ class VenueTable extends BasicTableAdapter {
 
         return $resultSet;
 	}
-  
+  	public function getAllVenue($isActive){
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+        $select = $sql->select(array('v' => 'venue'));
+        $where = new \Zend\Db\Sql\Where();
+        $select->where(array('v.isActive'=>$isActive));
+        $resultSet = array();
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new \Zend\Db\ResultSet\ResultSet();
+        $resultSet->initialize($results);
+        $resultSet = $resultSet->toArray();
+
+        return $resultSet;
+	}
 	
 }

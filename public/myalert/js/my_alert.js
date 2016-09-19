@@ -52,6 +52,9 @@
               $(document).on('opened.fndtn.reveal', '#'+modalID, function () {
             	  //alert('OK2')
             	  $('#'+modalID + " button.my_btn_type").unbind( "click" );
+                  $('#'+modalID + " button.my_btn_type").click(function(){
+                    $(".my_venue_alert").css("display", "none");
+                  });
               	  $('#'+modalID + " button.my_btn_type").click(callback);
               	
                   $('#'+modalID + " .my_cancel").click(function(){
@@ -62,7 +65,18 @@
                   });
                   $('#'+modalID + " .my_delete_no").click(function(){
                     $('#'+modalID).foundation('reveal','close'); 
-                  });                 	
+                  });    
+
+                  $(document).keyup(function(e) {
+                    if (e.keyCode == 27) 
+                    { 
+                        $(".my_venue_alert").css("display", "none");
+                    }
+                  }); 
+
+                  $(".my_wrap_close").click(function(){
+                    $(".my_venue_alert").css("display", "none");
+                  });            	
               });        	  
         	  
           }          

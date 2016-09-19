@@ -4,32 +4,30 @@ use Zend\View\Helper\AbstractHelper;
  
 class Getvenuehelper extends AbstractHelper
 {
-	protected $stringSearch;
-
-    protected $falsify;
-    public function __invoke($stringSearch, $falsify)
+	// public function __invoke($stringSearch, $falsify)
+ //    {
+        
+	// }
+	 public function comparestring($stringSearch , $result)
     {
-        $falsify = Round($stringSearch.length() * 0.3);
-	}
-	 public function compareResult($result, $stringSearch)
-    {
-        if (($result.length()<($stringSearch - $falsify) || ($result.length()>($stringSearch + $falsify))
+        $falsify = round(strlen($stringSearch) * 0.3);
+        if ((strlen($result) < (strlen($stringSearch) + $falsify)) || (strlen($result)>(strlen($stringSearch) - $falsify)))
         {
-            return false;
+            $compare ='';
             $i=$j=$err=0;
-            while ($i < ($stringSearch - $falsify) && $j < ($stringSearch - $falsify))
+            while ($i < strlen($stringSearch) && $j < strlen($result))
             {
-            	if ($stringSearch[i] != $result[j])
+            	if ($stringSearch[$i] != $result[$j])
             	{
             		$err += 1;
             		for ($k = 0; $k <= $falsify; $k++)
             		{
-            			if (($i + $k < $stringSearch.length()) && $stringSearch[$i + $k] == $result[$j])
+            			if (($i + $k < strlen($stringSearch)) && $stringSearch[$i + $k] == $result[$j])
 	                    {
 	                        $i += $k;
 	                        break;
 	                    }
-	                    else if (($j + $k < $result.length()) && $stringSearch[$i] == $result[$j + $k])
+	                    else if (($j + $k < strlen($result)) && $stringSearch[$i] == $result[$j + $k])
 	                    {
 	                        $j += $k;
 	                        break;
@@ -39,13 +37,21 @@ class Getvenuehelper extends AbstractHelper
             	$i++;
             	$j++;
             }
-            $err +=  $stringSearch.length() - i + $result.length() - j;
+            $err +=  strlen($stringSearch) - $i + strlen($result) - $j;
         	if ($err <= $falsify)
-        	{
-        		return true;
+        	{  
+                $compare=$result;
+        		return $compare;   
         	}else{
-        		return false;
+        		$compare='';
+                return $compare;
         	} 
-    	}	
+    	}
+
 	}
+     public function test($string)
+        {
+            $output = round(strlen($string)*0.3);
+            echo $output;
+        }   
 }

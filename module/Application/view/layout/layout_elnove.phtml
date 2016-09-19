@@ -162,8 +162,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-10 col-lg-offseet-1 col-xs-10 col-xs-offset-1" id="search">
-                        <form class="searchbox">
+                    <div class="col-lg-10 col-lg-offseet-1 col-xs-10 col-xs-offset-1" id="search" >
+                        <form class="searchbox" id="search-form" method="POST" action="/venue">
                             <input type="search" placeholder="Search by Product..." name="search1" class="searchbox-input">
                             <div class="charater-center"></div>
                             <input type="search"  id="search-venue" placeholder="Search by Venue..." name="search2" class="searchbox-input">
@@ -237,7 +237,7 @@
                     </div>
                 </div>
                 <div class="row" id="search-bar">
-                    <form class="searchbox-mobile col-xs-12">
+                    <form class="searchbox-mobile col-xs-12" id="search-mobile-form" method="POST" action="/venue">
                         <input type="search" placeholder="Search by Product..." name="search1" class="m-searchbox-input">
                             <div class="charater-center"></div>
                             <input type="search" placeholder="Search by Venue..." name="search2" class="m-searchbox-input" >
