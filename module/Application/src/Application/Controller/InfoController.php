@@ -14,65 +14,33 @@ use Zend\View\Model\ViewModel;
 use Zend\Mail;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Part as MimePart;
+use Ocoder\Base\BaseActionController;
 
-class InfoController extends AbstractActionController
+class InfoController extends BaseActionController
 {
     public function howItWorksAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
-    	$__viewVariables = array();
-    	 
-    	// $this->layout('layout/home_layout.phtml');
         $this->layout('layout/layout_elnove.phtml');
-
+    	$__viewVariables = array();
     	return $__viewVariables;
     }
     
     public function aboutUsAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
-        $__viewVariables = array();
-    
-    	// $this->layout('layout/home_layout.phtml');
         $this->layout('layout/layout_elnove.phtml');
-    
+        $__viewVariables = array();
     	return $__viewVariables;
     }
 
     public function careersAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
+        $this->layout('layout/layout_elnove.phtml');
         $__viewVariables = array();
         
         $aPostParams = $this->params()->fromPost();
-        
+
         if (count($aPostParams)) {
-            //print_r($aPostParams); die();
-        
+            //Send email
             $body = 'Hello Admin,<br/>A user send you a message via "LNove Careers". Details are below:<br/><br/>';
             $body .= 'Name: '.$aPostParams['name'].'<br/>';
             $body .= 'Email: '.$aPostParams['email'].'<br/>';
@@ -84,7 +52,6 @@ class InfoController extends AbstractActionController
             $oEmailService->setHtmlBody( $body );
             
             if( isset($_FILES['subject']['name']) ) {
-               
                 $size = new \Zend\Validator\File\Size(array('max'=>6000000)); //minimum bytes filesize
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
                 $adapter->setValidators(array($size), $_FILES['subject']['name']);
@@ -106,64 +73,28 @@ class InfoController extends AbstractActionController
             $oEmailService->send();          
 
             $this->redirect()->toUrl('/info/careers?success=1');
-        }        
-
-       $this->layout('layout/layout_elnove.phtml');
-
+        }       
         return $__viewVariables;
     }
-    public function privacyAndPoliciesAction()
-    {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
 
-        $__viewVariables = array();
-
-       // $this->layout('layout/home_layout.phtml');
+    public function privacyAndPoliciesAction() {
         $this->layout('layout/layout_elnove.phtml');
+        $__viewVariables = array();
         return $__viewVariables;
     }
 	
-	public function termsAndConditionsAction()
-   {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
-        $__viewVariables = array();
-
+	public function termsAndConditionsAction() {
         $this->layout('layout/layout_elnove.phtml');
-
+        $__viewVariables = array();
         return $__viewVariables;
     }
 
     public function contactUsAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
         $aPostParams = $this->params()->fromPost();
 
         if (count($aPostParams)) {
-            //print_r($aPostParams); die();
-
+            //Send Email
             $body = 'Hello Admin,<br/>A user send you a message via contact us form. His details are below:<br/><br/>';
             $body .= 'Name: '.$aPostParams['name'].'<br/>';
             $body .= 'Email: '.$aPostParams['email'].'<br/>';
@@ -180,83 +111,36 @@ class InfoController extends AbstractActionController
         }
 
         $__viewVariables = array();
-    
     	$this->layout('layout/layout_elnove.phtml');
-    
     	return $__viewVariables;
     }    
 
     public function frequentlyAskedQuestionsAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
         $__viewVariables = array();
-    
         $__viewVariables['queryParams'] = $this->params()->fromQuery();
-        
-    	//$this->layout('layout/home_layout.phtml');
         $this->layout('layout/layout_elnove.phtml');
     	return $__viewVariables;
     }
 
     public function shippingAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
         $__viewVariables = array();
-    
-    	$this->layout('layout/home_layout.phtml');
-    
+    	$this->layout('layout/layout_elnove.phtml');
     	return $__viewVariables;
     }   
 
     public function pricingAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
         $__viewVariables = array();
-    
-    	$this->layout('layout/home_layout.phtml');
-    
+    	$this->layout('layout/layout_elnove.phtml');
     	return $__viewVariables;
     }
 
     public function exchangeAndReturnAction()
     {
-        $this->layout()->showSmallHeader = true;
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
-        $oAuth = $this->getServiceLocator()->get('AuthService');
-        if ($oAuth->hasIdentity()) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-            $this->layout()->firstName = $userInfo->firstName;
-        }
-
         $__viewVariables = array();
-    
-    	$this->layout('layout/home_layout.phtml');
-    
+    	$this->layout('layout/layout_elnove.phtml');
     	return $__viewVariables;
     }    
 }

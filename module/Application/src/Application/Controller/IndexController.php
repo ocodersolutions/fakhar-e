@@ -9,12 +9,12 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Crypt\BlockCipher;
 use Zend\Db\Sql\Where;
+use Ocoder\Base\BaseActionController;
 
-class IndexController extends AbstractActionController
+class IndexController extends BaseActionController
 {
     private $secretKey = 'AUvSAfcDTwEu6GIcBYtYUFQGX6nfWEVebeerSWpIkx13K';
     
@@ -28,23 +28,9 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        
-        // if ($this->getServiceLocator()->get('AuthService')->hasIdentity()) {
-        //     $this->redirect()->toUrl('/service');
-        // }
-                
-        $this->layout()->showHeaderLinks = "NOT_LOGGED_IN";
         $oAuth = $this->getServiceLocator()->get('AuthService');
-        if( $oAuth->hasIdentity() ) {
-            $this->layout()->showHeaderLinks = "LOGGED_IN";
-            $userInfo = $oAuth->getIdentity();
-
-            $this->layout()->firstName = $userInfo->firstName;
-        }
     	$__viewVariables = array();
-    	
     	$this->layout('layout/home_layout.phtml');
-    	
     	return $__viewVariables;
     }
     

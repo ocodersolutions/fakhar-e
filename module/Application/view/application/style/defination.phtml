@@ -10,6 +10,7 @@
 	<div class="defination_page col-lg-10 col-lg-offset-1">
 		<div id="top_left" >
 			<div class="row">
+				<a href="/style" class="back-to">&lt; Back to List Styles</a>
 				<div class="top_left_title top_title_style">Style</div>
 				<form method="post">
 					<div class="style_title col-lg-5 col-lg-offset-1">
@@ -28,6 +29,7 @@
 						</div>
 					</div>
 					<input type="submit" name="submit" class="upgrade_style btn btn-primary col-lg-1"  value="Update">
+
 				</form>
 			</div>
 		</div>
@@ -35,7 +37,7 @@
 
 		<div id="top_right">
 
-			<div class="row" id='kaka'>
+			<div class="row">
 				<div class="top_right_title top_title_style">Defination</div>
 				
 	<?php 
@@ -44,13 +46,12 @@
 		$count++;  ?>
 
 					<form class="style-update" id="style-update-<?php echo $count ?>" method="post">
-						 <?php //var_dump($style['value']); die;?>
 							<div class="top_right_attName col-lg-5 col-lg-offset-1">
-								<select style="width:350px;" name='attr_name-<?php echo $count ?>'  class="chosen_select_left" data-number="<?php echo $count ?>" data-value="<?php echo $style['value']; ?>">
+								<select style="width:350px;" name='attr_name-<?php echo $count ?>'  class="chosen_select_left" data-number="<?php echo $count ?>" data-value-<?php echo $count ?>="<?php echo $style['value']; ?>">
 									<option selected disabled >Select </option>
-									<?php foreach($listAttrValue as $attr ){ ?>
-									<option <?php if($style['attribute'] == $attr){echo 'selected';}?> value="<?php echo $attr;?>"> <?php echo $attr;?></option>
-									<?php }  ?>
+										<?php foreach($listAttrValue as $attr ){ ?>
+										<option <?php if($style['attribute'] == $attr){echo 'selected';}?> value="<?php echo $attr;?>"> <?php echo $attr;?></option>
+										<?php }  ?>
 								</select>
 							</div>
 
@@ -58,6 +59,7 @@
 								<img src="/assets/images/loading.gif" style="margin-top: -12px; display: none;margin-left: -55px; position: absolute; float: left;">
 
 									<select name='attr_value-<?php echo $count ?>' data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right" id="select-right-<?php echo $count ?>">
+										<option value='all' <?php if($style['value'] == 'all'){echo 'selected="selected"';} ?> class="all" >All</option>
 										
         
 									</select>
@@ -65,7 +67,8 @@
 
 							<input type="hidden" name='number' value="<?php echo $count ?>">
 							<input type="hidden" name='id' value="<?php echo $style['id']; ?>">
-							<input class="add_attr btn btn-primary col-lg-1" type="submit" value="Update">
+							<input class="add_attr btn btn-primary col-lg-1" type="submit" data-action='update' value="Update">
+							<input class="delete_style btn btn-danger col-lg-1" type="submit" data-action='delete' value="Delete">
 
 					</form>	
 	<?php }?>
@@ -84,8 +87,8 @@
 
 							<div class="top_right_attValue col-lg-5">
 								<img src="/assets/images/loading.gif" style="margin-top: -12px; display: none;margin-left: -55px; position: absolute; float: left;">
-
-									<select name='attr_value' data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right" id="select-right-add">
+									
+									<select name='attr_value' data-placeholder="Choose style defination..." style="width:350px;" multiple="multiple" class="chosen_select_right" id="select-right-add">
 										
 									</select>
 							</div>

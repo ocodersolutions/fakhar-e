@@ -1,75 +1,127 @@
 $(document).ready(function() {
 
+var table = $('#example').DataTable();
+
 $('.chosen_select_left').each(function(i, obj) {
     var attrName = $(obj).find(":selected").text();
     var number = $(obj).data('number');
-    var value = $(obj).data('value');
-
+    var value = $(obj).data('value-'+number);
+    var temp = new Array();
+    if (typeof(value) != "undefined"){ temp = value.split(","); }
     selected = $.trim(attrName);
-    $.ajax({
-        url : "/style/getAttributeValue",
-        type : "post",
-        dataType:"text",
-        data : {
-            'selected' : selected,
-        },
-        success: function (result){
-            $('#loading').css('display','none');
-            var employeeData = JSON.parse(result);
-            for(i = 0; employeeData.length >i; i++){
-                if(employeeData[i] == value){
-                    selected = 'selected';
-                }else{
-                    selected = '';
+
+        $.ajax({
+            url : "/style/getAttributeValue",
+            type : "post",
+            dataType:"text",
+            data : {
+                'selected' : selected,
+            },
+            success: function (result){
+                $('#loading').css('display','none');
+    
+                var employeeData = JSON.parse(result);
+                var optionString = '';
+                for(i = 0; employeeData.length >i; i++){
+          
+                    $.each(temp, function(key, value) { 
+                        
+                        if(value == employeeData[i]){
+                            selected = 'selected';
+                            return false;
+                        }else{
+                            selected = '';
+                        } 
+                    });
+                        optionString += "<option "+selected+" >"+employeeData[i]+"</option>";
+                
                 }
                 var className = '#select-right-' + number;
-                $(className).append( "<option "+selected+">"+employeeData[i]+"</option>" ).trigger("chosen:updated");
+                $(className).append( optionString).trigger("chosen:updated");
             }
-        }
-    });
+        });
+   
 });
 //lay ve het cac select hien tai
 //for cac select -> lay ve option dang duoc chon -> 
 
+
+ 
+$('.chosen_select_right').on('change', function(evt, params) {
+    
+     var number = $(this).closest('form').find('.top_right_attName .chosen_select_left').attr('data-number');
+     if(params.selected == 'all'){
+        $('.chosen_select_right#select-right-'+number+' option').removeAttr('selected');
+        $(this).val('all');
+        $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
+     }else{
+        $('.chosen_select_right#select-right-'+number+' option.all').removeAttr('selected');
+        $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
+     }
+ 
+
+});
+
 $('.chosen_select_left').change(function(){
     var number = $(this).data('number');
-    
     $('#loading').css('display','block');
-    $(".chosen_select_right option").remove();
+    $(".chosen_select_right#select-right-"+number+" option").remove();
     selected = $(this).val();
-    $.ajax({
-        url : "/style/getAttributeValue",
-        type : "post",
-        dataType:"text",
-        data : {
-            'selected' : selected,
-        },
-        success: function (result){
-            $('#loading').css('display','none');
-            var employeeData = JSON.parse(result);
-            var className = '#select-right-' + number;
-            for(i = 0; employeeData.length >i; i++){
-                $(className).append( "<option>"+employeeData[i]+"</option>" ).trigger("chosen:updated");
-            }
-        }
+        $.ajax({
+            url : "/style/getAttributeValue",
+            type : "post",
+            dataType:"text",
+            data : {
+                'selected' : selected,
+            },
+            success: function (result){
+                $('#loading').css('display','none');
+                var employeeData = JSON.parse(result);
+                var className = '#select-right-' + number;
+                var optionString = '<option class="all" value="all">All</option>';
 
-    });
+                for(i = 0; employeeData.length >i; i++){
+                    optionString += "<option>"+employeeData[i]+"</option>";
+                }
+                $(className).append( optionString ).trigger("chosen:updated");
+            }
+        }); 
+    // }else{
+    //     var brand_store = $('#brand-store option');
+    //     brand_list = [];
+
+    //     for(i=0; brand_store.length>i;i++ ){
+    //         brand_list.push(brand_store[i].value);
+    //     }
+
+    //     var className = '#select-right-' + number;
+    //     var optionString = '';
+    //     for(i = 0; brand_list.length >i; i++){
+    //         optionString += "<option>"+brand_list[i]+"</option>";
+    //     }
+    //     $(className).append( optionString ).trigger("chosen:updated");
+    //     //console.log(brand_list);
+    //     //console.log(brand_list);
+    // }
 });
 //form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
-          $.ajax({
+            form = $(this).serialize();
+            $.ajax({
             type: 'post',
             url: '/style/styledefination',
-            data: $('form').serialize(),
+            data : {
+                'form' : form,
+            },
             success: function (result) {
-alert(result);
               if(result == 1){
-                alert('Created');
+                // alert('Created');
                 location.reload();
               }else{
                 alert('has error');
               }
+              
             }
           });
           return false;
@@ -77,52 +129,58 @@ alert(result);
     });
 
 //form update 
-$(function () {
-    $('form.style-update').bind('submit', function () {
-        $.ajax({
-            type: 'post',
-            url: '/style/updatestyledefination',
-            data: $(this).serialize(),
-            success: function (result) {
-               if(result == 1){
-                alert('Update Success');
-                location.reload();
-              }else{
-                alert('has error');
-              }
-          
-            }
-          });
-          return false;
-        });
-    });
-
-
-
-// function myFunction(){
-//     alert(12111);
-// }
-
-// $(".add_attr").click(function() {
-    
-
-
-// var y = document.getElementById('form-defination');
-// console.log(y.innerHTML);
-// $('#kaka').append(y.innerHTML);
    
-//       return false; 
+$(function () {
+    $('form.style-update').bind('submit', function (event) {
+        var action = $(this).find("input[type=submit]:focus").attr('data-action');
+        var form = $(this).serialize();
+        if(action == 'update'){
+            $.ajax({
+                type: 'post',
+                url: '/style/updatestyledefination',
+                data : {
+                    'form' : form,
+                },
+                success: function (result) {
+                if(result == 1){
+                    // alert('Update Success');
+                    location.reload();
+                }else{
+                    alert('has error');
+                }
+                
+                }
+              });
+        }else if(action == 'delete'){
+           
+             $.ajax({
+                type: 'post',
+                url: '/style/deletestyledefination',
+                data : {
+                    'form' : form,
+                },
+                success: function (result) {
+                //alert(result);
+                if(result == 1){
+                    // alert('Delete Success');
+                    location.reload();
+                }else{
+                    alert('has error');
+                }
+                
+                }
+              });
 
-//          });
 
-  
+        }
+        return false;
+    });
+});
 
-    $(".chosen_select_left").chosen({
-    no_results_text: "Oops, nothing found!",
-  });
-    $(".chosen_select_right").chosen({
-    no_results_text: "Oops, nothing found!",
-  }); 
+
+
+    $(".chosen_select_left").chosen();
+    $(".chosen_select_right").chosen(); 
 
     $('#idNewsLetter').click(function() { 
         
@@ -184,22 +242,25 @@ $(function () {
 
 });
 
+
+
 $(document).on("click", ".my_delete_yes", function(){
     del_style = $(this).attr("data-delete2");
-    $('[data-delete='+del_style+']').parents('tr').remove();
+    // $('[data-delete='+del_style+']').parents('tr').remove();
+    table.row( $('[data-delete='+del_style+']').parents('tr')).remove().draw();
     // alert(del_style);
     $.ajax({
         url: "style/deletestyle",
         type: "POST",
         data: { del_style : del_style },
-        // dataType: "html",
-        success: function (html)
+        dataType: "test",
+        success: function ()
         {
               // alert(result);
             // $('[data-delete='+del_style+']').parents('tr').remove();
         }
     });
-    location.reload();
+    // location.reload();
 }); 
 
 $(document).on("click",".btn_delete_style", function(e){

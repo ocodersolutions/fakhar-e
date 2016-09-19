@@ -95,22 +95,17 @@ class AuthController extends AbstractActionController {
     public function authenticateAction() {
         $aPostParams = $this->params()->fromPost();
         if (count($aPostParams)) {
-
             $this->getAuthService()->getAdapter()
                     ->setTableName('Users')
                     ->setIdentity($aPostParams['email'])
                     ->setCredential(md5($aPostParams['password']));
                     
-                    
-            if(isset($aPostParams['option']) && $aPostParams['option'] == 1)
-            {        
+            if(isset($aPostParams['option']) && $aPostParams['option'] == 1) {        
 				$cookie1 = new \Zend\Http\Header\SetCookie('emailcookie', $aPostParams['email'], time() + (((30*24)*60)*60));
 				$cookie2 = new \Zend\Http\Header\SetCookie('passwordcookie', $aPostParams['password'], time() + (((30*24)*60)*60));
 				$this->getResponse()->getHeaders()->addHeader($cookie1);
 				$this->getResponse()->getHeaders()->addHeader($cookie2);
-			}
-			else 
-			{
+			} else {
 				$prevdatetime = strtotime('-1 day', strtotime(date('Y-m-d')));					
 				$cookie1 = new \Zend\Http\Header\SetCookie('emailcookie', $aPostParams['email'], $prevdatetime);
 				$cookie2 = new \Zend\Http\Header\SetCookie('passwordcookie', $aPostParams['password'], $prevdatetime);

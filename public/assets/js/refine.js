@@ -1,6 +1,27 @@
 var ishidden = true;
 // $demso = 0;
 $(document).ready(function() {
+    searchArticle = $('input[name="searchArticle"]').val();
+    if(searchArticle != ''){ 
+        $('.option-selected').append('<div class="item" data-search="'+searchArticle+'"><span data-search="'+searchArticle+'">'+searchArticle+'</span><i data-search="'+searchArticle+'" class="fa fa-times" aria-hidden="true"></i></div>');
+          $('i.fa-times').click(function(){
+            x = $(this).attr('data-search');
+            $('.item[data-search="'+x+'"]').remove();
+            check_search_tag();
+        });
+    } 
+    searchVenue = $('input[name="searchVenue"]').val();
+    //console.log(searchVenue);
+    if(searchVenue != ''){ 
+        $('.option-selected').append('<div class="item venue" data-search="'+searchVenue+'"><span data-search="'+searchVenue+'">'+searchVenue+'</span><i data-search="'+searchVenue+'" class="fa fa-times" aria-hidden="true"></i></div>');
+          $('i.fa-times').click(function(){
+            x = $(this).attr('data-search');
+            $('.item[data-search="'+x+'"]').remove();
+            check_search_tag();
+        });
+    }
+    //console.log(searchArticle, searchVenue );
+
     // apply filterTable to all tables on this page but don't filter content with the no-filter class
     $('table').filterTable({ignoreClass: 'no-filter'});
     $('.desktop p.filter-table').prependTo('.desktop .brands .brand');

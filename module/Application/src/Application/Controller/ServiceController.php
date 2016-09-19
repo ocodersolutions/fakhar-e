@@ -80,7 +80,6 @@ class ServiceController extends BaseActionController {
             }
         }
         $__viewVariables['likearray'] = $likearray;
-
         $aPostParams = $this->params()->fromPost();
         if (isset($aPostParams['ArticlesPerPage'])) {
             $oAuth->getStorage()->set('service', array('ArticlesPerPage' => $aPostParams['ArticlesPerPage']));
@@ -203,12 +202,12 @@ class ServiceController extends BaseActionController {
         if( isset($aGetParams['mapped']) && $aGetParams['mapped']=='true' ) $sGetAttributesTreeFunction = 'getAttributesTreeForUIMapped';
         else $sGetAttributesTreeFunction = 'getAttributesTreeForUI';
         $aAttributes = $oAttributes->{$sGetAttributesTreeFunction}( isset($aGetParams['id']) && !empty($aGetParams['id']) ? $aGetParams['id'] : 1 );
-        //print_r($aAttributes); exit(0);
         $iLevel = isset($aGetParams['levels']) && !empty($aGetParams['levels']) ? $aGetParams['levels'] : 4;
         $aExcludeCats = isset($aGetParams['ec']) && !empty($aGetParams['ec']) ? explode(',', $aGetParams['ec']) : array();
         $aJson = $this->printAttributes( $aAttributes, $iLevel, $aExcludeCats );
         $__viewVariables['aJson'] = $aJson;
-        
+        $request = $this->getRequest()->getQuery();
+        $__viewVariables['arrSearch'] = $request;
         return $__viewVariables;
     }
 

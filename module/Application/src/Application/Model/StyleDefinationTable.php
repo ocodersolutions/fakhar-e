@@ -12,6 +12,9 @@ class StyleDefinationTable extends BasicTableAdapter {
 	     $this->tableGateway = $tableGateway;
 	}
 	public function insert($attr, $value, $id){
+        $value = implode(",",$value);
+        $value = str_replace('+',' ',$value);
+        $attr = str_replace('%2F','/',$attr);
     		$data = array(
             'styleId' => $id,
             'attribute' => $attr,
@@ -21,12 +24,27 @@ class StyleDefinationTable extends BasicTableAdapter {
         return $result;
 	}
     public function update($attr, $value, $number, $id ){
+
+        $arr_style = array();
+        foreach($value as $val){
+            $arr_style[]  = str_replace('+',' ',$val);
+        }
+        $value = implode(",",$arr_style);
+        $attr = str_replace('+',' ',$attr);
+        $attr = str_replace('%2F','/',$attr);
            $data = array(
                 "attribute" => $attr,
                 "value" => $value
+        
         );
+           
         $update = $this->tableGateway->update($data, array("id" => $id));
         return $update;
+    }
+    public function delete($id ){
+         
+       $delete = $this->tableGateway->delete(array('id' => (int) $id));
+       return $delete;
     }
 	public function liststyle($id){
         $sql = new Sql($this->getServiceLocator()->get('db'));
@@ -38,6 +56,7 @@ class StyleDefinationTable extends BasicTableAdapter {
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
         $resultSet->initialize($results);
         $resultSet = $resultSet->toArray();
+       
         return $resultSet;
 	}
   
