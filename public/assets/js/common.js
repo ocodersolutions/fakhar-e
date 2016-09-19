@@ -9,6 +9,7 @@ $('.chosen_select_left').each(function(i, obj) {
     var temp = new Array();
     if (typeof(value) != "undefined"){ temp = value.split(","); }
     selected = $.trim(attrName);
+
         $.ajax({
             url : "/style/getAttributeValue",
             type : "post",
@@ -18,6 +19,7 @@ $('.chosen_select_left').each(function(i, obj) {
             },
             success: function (result){
                 $('#loading').css('display','none');
+    
                 var employeeData = JSON.parse(result);
                 var optionString = '';
                 for(i = 0; employeeData.length >i; i++){
@@ -31,14 +33,16 @@ $('.chosen_select_left').each(function(i, obj) {
                             selected = '';
                         } 
                     });
-                    optionString += "<option "+selected+" >"+employeeData[i]+"</option>";
-                   
+                        optionString += "<option "+selected+" >"+employeeData[i]+"</option>";
+                
+                }
+                if(value == 'all'){
+                    optionString += "<option value='all' selected='selected' >Select All</option>";
                 }
                 var className = '#select-right-' + number;
                 $(className).append( optionString).trigger("chosen:updated");
             }
         });
-        //$(className).append( optionString).trigger("chosen:updated");
    
 });
 //lay ve het cac select hien tai
@@ -46,50 +50,15 @@ $('.chosen_select_left').each(function(i, obj) {
 
 
  
-$('.chosen_select_right').change(function(event){ 
-    //$('.chosen_select_right option.all').ttr('selected');
+$('.chosen_select_right').change(function(){ 
      all = this.value;
-     var array = all.split("-");
-     var number = array[1];
-   //var result = all.text().split('-');
-//console.log( number);
-     if(array[0] == 'all'){
-        //$('.chosen_select_right#select-right-'+number+' option:selected').removeAttr('selected');
-        $('.chosen_select_right#select-right-'+number+' option').remove();
-        // $('.chosen_select_right#select-right-'+number+' option.all').attr('selected','');
-        optionString = "<option 'selected' >testte</option>";
-        
- //return false
-     }//false
-     
-
-        $('.chosen_select_right').append( optionString).trigger("chosen:maxselected");
-     
-     
-     //return false
-     // $('.chosen_select_right option.all-'+number).attr('selected','selected');
-      //$('.chosen_select_right option.all').removeAttr('selected');
-     //$('.chosen_select_right option:selected').removeAttr('selected');
-     //console.log($(this));
-//      // if(all == 'all'){
-//      //    x = $('.chosen_select_right option').prop('selected', true);x
-//      //    // console.log(x);
-//      //    console.log($(x[0]).removeAttr( 'selected' ));
-//      // }
-        
-//     //     x = $(this).closest('.chosen_select_right');
-//     //     option = x.find('option'); 
-//     //     for(i = 0; option.length >i; i++){
-          
-//     //         value = $(option[i]).val();
-//     //         $(option[i]).attr('selected','selected');
-//     //     }
-
-//     //     alert('start');
-        
-//     //  }
-    // $('.chosen_select_right').trigger("chosen:updated");
-//     // $(option[0]).removeAttr( 'selected' );
+     var number = $(this).closest('.style-update').find('.top_right_attName .chosen_select_left').attr('data-number');
+     if(all == 'all'){
+        $('.chosen_select_right#select-right-'+number+' option').removeAttr('selected');
+        $(this).val('all');
+        $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
+     }
+ 
 
 });
 

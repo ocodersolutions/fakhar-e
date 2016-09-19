@@ -1,6 +1,7 @@
 <?php 	$singleItem = $this->singleItem; 
 		$listAttrValue = $this->listAttrValue;
 		$styleItem = $this->styleItem;
+		//var_dump($styleItem); die;
 		$listStyle = array();
 		foreach($styleItem as $style){
 			$listStyle[] = $style['styleId'];
@@ -48,9 +49,9 @@
 							<div class="top_right_attName col-lg-5 col-lg-offset-1">
 								<select style="width:350px;" name='attr_name-<?php echo $count ?>'  class="chosen_select_left" data-number="<?php echo $count ?>" data-value-<?php echo $count ?>="<?php echo $style['value']; ?>">
 									<option selected disabled >Select </option>
-									<?php foreach($listAttrValue as $attr ){ ?>
-									<option <?php if($style['attribute'] == $attr){echo 'selected';}?> value="<?php echo $attr;?>"> <?php echo $attr;?></option>
-									<?php }  ?>
+										<?php foreach($listAttrValue as $attr ){ ?>
+										<option <?php if($style['attribute'] == $attr){echo 'selected';}?> value="<?php echo $attr;?>"> <?php echo $attr;?></option>
+										<?php }  ?>
 								</select>
 							</div>
 
@@ -58,7 +59,7 @@
 								<img src="/assets/images/loading.gif" style="margin-top: -12px; display: none;margin-left: -55px; position: absolute; float: left;">
 
 									<select name='attr_value-<?php echo $count ?>' data-placeholder="Choose style defination..." style="width:350px;" multiple class="chosen_select_right" id="select-right-<?php echo $count ?>">
-										<option value='all-<?php echo $count ?>'  class="all" >Select All</option>
+										<option value='all' class="all" >Select All</option>
 										
         
 									</select>

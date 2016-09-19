@@ -171,7 +171,7 @@ class StyleController extends BaseActionController
             }
         }
 
-
+        //var_dump($finalArray); die;
         $number = $finalArray['number'];
         
         $oDefination = $this->getServiceLocator()->get('StyleDefinationTable');
