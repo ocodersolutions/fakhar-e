@@ -36,7 +36,7 @@
                 </form>
             </div>
             <div class="option-selected">
-                
+               
             </div>
             <div class="sort-item " id="accordion-select" >
                 <span class="uc_head_line">
@@ -115,8 +115,9 @@
     <input type="hidden" id="profileBasePrices" name="profileBasePrices" value="1">
     <input type="hidden" id="filterTypeMain" name="filterTypeMain" value="all">
     <input type="hidden" id="orderBy" name="orderBy">
-    <input type="hidden" id="searchArticle" name="searchArticle">
-    <input type="hidden" id="searchVenue" name="searchVenue">
+    <?php $arrSearch = $this->arrSearch; ?>
+    <input type="hidden" id="searchArticle" name="searchArticle" value="<?php echo $arrSearch['search1'];?>">
+    <input type="hidden" id="searchVenue" name="searchVenue" value="<?php echo $arrSearch['search2'];?>">
 </form>
 
 <!-- Modal -->
