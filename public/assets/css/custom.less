@@ -5859,35 +5859,51 @@ footer{
  #venue_style_page{
     .venue_cat{
         padding-top: 40px;
-        h5{
-            cursor: pointer;
-            position: relative;
-            font-size: 16px;
-            &:before{
-                font-family: FontAwesome;
-                content:  "\f107";
-                margin-right: 10px;
+        
+        .open {
+            #tree1{
+                display: block!important;
             }
-            
+            h5{
+                &:before{
+                    font-family: FontAwesome;
+                    content:  "\f106"!important;
+                    margin-right: 10px;
+                }
+            }
         }
-        #tree1{
-            color : #eee;
-            ul.jqtree-tree{
-                .jqtree-toggler{
-                    color: #859ed8;
-                    .jqtree-toggler-left{
-                        color : #959595;
-                    }
-                    .jqtree-title.jqtree-title-folder{
-                       
-                    }
+        .venue_cat_wrap{
+            h5{
+                cursor: pointer;
+                position: relative;
+                font-size: 16px;
+                &:before{
+                    font-family: FontAwesome;
+                    content:  "\f107";
+                    margin-right: 10px;
                 }
-                .jqtree-title{
-                    font-weight: bold;
-                     color:  #959595;
-                }
-                li.jqtree-selected > .jqtree-element,li.jqtree-selected > .jqtree-element:hover{
-                    background: none;
+                
+            }
+            #tree1{
+                display: none;
+                color : #eee;
+                ul.jqtree-tree{
+                    .jqtree-toggler{
+                        color: #859ed8;
+                        .jqtree-toggler-left{
+                            color : #959595;
+                        }
+                        .jqtree-title.jqtree-title-folder{
+                           
+                        }
+                    }
+                    .jqtree-title{
+                        font-weight: bold;
+                         color:  #959595;
+                    }
+                    li.jqtree-selected > .jqtree-element,li.jqtree-selected > .jqtree-element:hover{
+                        background: none;
+                    }
                 }
             }
         }
@@ -5930,7 +5946,7 @@ footer{
                 
             }  
             .style_des_right{
-                // margin-left: 20px;
+                
                 padding-left: 30px;
             }
         }
@@ -5944,6 +5960,7 @@ footer{
         }
         .style_item{
             .style_des_right{
+                margin-left: 20px;
                 border-left: 2px solid #959595;
                 p{
                     line-height: 25px;

@@ -124,5 +124,13 @@ $(function() {
         }
     });
     $(".chosen-select").chosen(); 
+    $(".venue_cat_wrap h5").click(function(){
+    	$(this).parent('.venue_cat_wrap').toggleClass('open');
+    	// if($(this).parent('.venue_cat_wrap').hasClass('open')){
+    	// 	$("#tree1").show();
+    	// }else{
+    	// 	$("#tree1").hide();
+    	// }
+    });
 });
 </script>
