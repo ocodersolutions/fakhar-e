@@ -82,35 +82,10 @@
 </div>
 <script>
 var data = [
-    {
-        name: 'Clothing',
-        url: '',
-        children: [
-            { name: 'child1',url: '/about-us' },
-            { name: 'child2',url: '/about-us' },
-            {
-		        name: 'node1.1',
-		        url: '/about-us',
-		        children: [
-		            { name: 'child1.1' , url: '/about-us',},
-		            { name: 'child2.1', url: '/about-us', },
-		        ]
-		    },
-        ]
-    },
-    {
-        name: 'Footwear',
-        url: '/about-us',
-        children: [
-            { name: 'child3',url: '/about-us', }
-        ]
-    },
-    {
-        name: 'Accessories',
-        children: [
-            { name: 'child3' }
-        ]
-    }
+    <?php 
+		$data_tree = $this->data_tree;
+		echo $data_tree;
+	?>
 ];
 $(function() {
     $('#tree1').tree({
