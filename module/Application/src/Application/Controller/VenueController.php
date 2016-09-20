@@ -16,7 +16,86 @@ class VenueController extends BaseActionController
 
     public function indexAction() {
         $__viewVariables = array();
-         $this->layout('layout/layout_elnove.phtml');
+        $this->layout('layout/layout_elnove.phtml');
+        $oVenueList = $this->getServiceLocator()->get('VenueTable');
+        $ListItem = $oVenueList->getAllVenue(1);
+        $my_parent = $viewTitle = array();
+        foreach( $ListItem as $item)
+        {
+            $viewTitle[$item["id"]] = $item["title"];
+            if($item["parentId"] == 0 )
+            {
+                $my_parent[$item["id"]] = "";
+            }
+        }
+        foreach ($my_parent as $key_item => $value_item) 
+        {
+            foreach($ListItem as $sub_item)
+            {
+                if($sub_item["parentId"] == $key_item)
+                {
+                    $my_parent[$key_item][$sub_item["id"]] = "";
+                }
+            }
+        }
+        foreach ($my_parent as $key_item => $value_item) 
+        {
+            if($value_item !== "")
+            {
+                foreach($value_item as $key_sub_item => $value_sub_item)
+                {
+                    foreach($ListItem as $sub_item)
+                    {
+                        if($sub_item["parentId"] == $key_sub_item)
+                        {
+                            $my_parent[$key_item][$key_sub_item][$sub_item["id"]] = "";
+                        }
+                    }
+                }
+            }
+        }
+        $data_tree = "";
+        foreach ($my_parent as $key => $value) 
+        {
+            if($value == "")
+            {
+                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/info/about-us',},";
+            }
+            else
+            {
+                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/info/about-us',children: [";
+                foreach ($value as $key_1 => $value_1) 
+                {
+                    if($value_1 == "")
+                    {
+                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/info/about-us',},";
+                    }
+                    else
+                    {
+                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/info/about-us',children: [";
+                        foreach ($value_1 as $key_2 => $value_2) 
+                        {
+                            if($value_2 == "")
+                            {
+                                $data_tree .= "{name:'" . $viewTitle[$key_2] . "',url: '/info/about-us',},";
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        $data_tree .= "]},";
+                    }
+                }
+                $data_tree .= "]},";
+            }
+        }
+
+        $__viewVariables["my_parent"] = $my_parent;
+        $__viewVariables["ListItem"] = $ListItem;
+        $__viewVariables["viewTitle"] = $viewTitle;
+        $__viewVariables["data_tree"] = $data_tree;
+
         return  $__viewVariables;
     }
 
