@@ -8,37 +8,40 @@
  
 <div class="row" id="venue_style_page">
 	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
-		<h5>Venue</h5>
+	<div class="venue_cat_wrap">
+		<h5>Venues</h5>
 		<div id="tree1"></div>
+	</div>
+		
 	</div>
 	<div class="venue_main_content col-lg-8 col-sm-9">
 		<h3 class="row">Venue 1</h3>
-		<div class="row">
-			<div class="style_left col-lg-3">
+		<div class="row style_item">
+			<div class="style_left col-lg-3 col-sm-3 ">
 				<p>Style 1</p>
 			</div>
-			<div class="style_des_right col-lg-3">
+			<div class="style_des_right col-lg-8 col-sm-8 ">
 				<p>Color <span> Red ,Green</span></p>
 				
 				<p>Brand <span> Brand 1 ,Brand 2</span></p>
 				
 			</div>
 		</div>
-		<div class="row">
-			<div class="style_left col-lg-3">
+		<div class="row style_item">
+			<div class="style_left col-lg-3 col-sm-3">
 				<p>Style 2</p>
 			</div>
-			<div class="style_des_right col-lg-3">
+			<div class="style_des_right col-lg-8 col-sm-8">
 				<p>Color <span> Red ,Green</span></p>
 				<p>Brand <span> Brand 1 ,Brand 2</span></p>
 			</div>
 		</div>
-		<div class="row">
-			<div class="style_left col-lg-4">
+		<div class="row style_item" id="pick_style_row">
+			<div class="style_left pick_style col-lg-5 col-sm-5">
 				<p>Pick Styles</p>
 				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
 
-					<option selected="" disabled="">Select </option>
+					<option selected="" disabled="">Brand</option>
 					<option value="Belt Loop"> Belt Loop</option>
 					<option value="Brand"> Brand</option>
 					<option value="Break"> Break</option>
@@ -69,7 +72,7 @@
 					<option value="Waterproof"> Waterproof</option>
 				</select>
 			</div>
-			<div class="style_des_right col-lg-3">
+			<div class="style_des_right col-lg-7 col-sm-7">
 				<p>Color <span> Red ,Green</span></p>
 				<p>Brand <span> Brand 1 ,Brand 2</span></p>
 				
@@ -79,10 +82,35 @@
 </div>
 <script>
 var data = [
-	<?php 
-		$data_tree = $this->data_tree;
-		echo $data_tree;
-	?>
+    {
+        name: 'Clothing',
+        url: '',
+        children: [
+            { name: 'child1',url: '/about-us' },
+            { name: 'child2',url: '/about-us' },
+            {
+		        name: 'node1.1',
+		        url: '/about-us',
+		        children: [
+		            { name: 'child1.1' , url: '/about-us',},
+		            { name: 'child2.1', url: '/about-us', },
+		        ]
+		    },
+        ]
+    },
+    {
+        name: 'Footwear',
+        url: '/about-us',
+        children: [
+            { name: 'child3',url: '/about-us', }
+        ]
+    },
+    {
+        name: 'Accessories',
+        children: [
+            { name: 'child3' }
+        ]
+    }
 ];
 $(function() {
     $('#tree1').tree({
@@ -95,6 +123,14 @@ $(function() {
         	a.outerHTML = '<a href="' + node.url + '">' + a.outerHTML + '</a>';
         }
     });
-    $(".chosen-select").chosen() 
+    $(".chosen-select").chosen(); 
+    $(".venue_cat_wrap h5").click(function(){
+    	$(this).parent('.venue_cat_wrap').toggleClass('open');
+    	// if($(this).parent('.venue_cat_wrap').hasClass('open')){
+    	// 	$("#tree1").show();
+    	// }else{
+    	// 	$("#tree1").hide();
+    	// }
+    });
 });
 </script>
