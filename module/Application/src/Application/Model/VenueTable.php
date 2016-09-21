@@ -41,7 +41,7 @@ class VenueTable extends BasicTableAdapter {
 	}
     public function getVenueStyle($id){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('s' => 'venuestyle'));
+        $select = $sql->select(array('s' => 'VenueStyle'));
         $where = new \Zend\Db\Sql\Where();
         $select->where(array('s.venue_id'=>$id));
         $resultSet = array();
