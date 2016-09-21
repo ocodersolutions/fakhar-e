@@ -106,19 +106,18 @@ $(function() {
 $(function() {
 	$("#add_style").click(function(event) {
 		styleid = $("input[name='hiddenStyleid']").val();
-		//venueid = <?php echo $this->venue_id;?>;
-		//alert(id);
+		venueid = '<?php echo $this->venue_id;?>';
 		$.ajax({
-		url : "/venue/savestylevenue",
-        type : "post",
-        // dataType:"text",
-        data : {
-            'styleId' : styleid,
-            'venueid' : venueid,
-        },
-        success:function(){
-
-        }
+			url : "/venue/savestylevenue",
+	        type : "post",
+	        dataType:"text",
+	        data : {
+	            'styleId' : styleid,
+	            'venueid' : venueid,
+	        },
+	        success:function(){
+	        	location.reload();
+	        }
 		});
 	});
 });

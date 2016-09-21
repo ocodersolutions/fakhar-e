@@ -221,16 +221,15 @@ class VenueController extends BaseActionController
         // $id=$this->params('id');
         // var_dump($id);
         if ($this->getRequest()->isPost()){
-            $styleid = $this->params()->fromPost();
-            var_dump($styleid);
-            // $venueid = $this->params()->fromPost('venueid');
+            $styleid = $this->params()->fromPost('styleId');
+            $venueid = $this->params()->fromPost('venueid');
 
-            // $data =array(
-            //     'style_id'=>$styleid,
-            //     'venue_id'=>$venueid
-            // );
-            // $oSavestyle = $this->getServiceLocator()->get('VenueStyleTable');
-            // $saveItem = $oSavestyle->insert($data);
+            $data =array(
+                'style_id'=>$styleid,
+                'venue_id'=>$venueid
+            );
+            $oSavestyle = $this->getServiceLocator()->get('VenueStyleTable');
+            $saveItem = $oSavestyle->insert($data);
             
          }
         return 0;
