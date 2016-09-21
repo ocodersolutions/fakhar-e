@@ -1,69 +1,48 @@
 <?php
-        echo $this->headScript()->appendFile($this->basePath() . '/assets/js/tree.jquery.js')
-                                ;
-        ?>
-<?php echo $this->headLink()
-                 ->appendStylesheet($this->basePath() . '/assets/css/jqtree.css');
- ?> 
-<?php
-	$listAttrValue = $this->listAttrValue;
+echo $this->headScript()->appendFile($this->basePath() . '/assets/js/tree.jquery.js');
+echo $this->headLink()->appendStylesheet($this->basePath() . '/assets/css/jqtree.css');
+
+$listAttrValue = $this->listAttrValue;
 ?>
 
 <div class="row" id="venue_style_page">
 	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
-	<div class="venue_cat_wrap">
+	<!-- <div class="venue_cat_wrap"> -->
 		<h5>Venues</h5>
 		<div id="tree1"></div>
-	</div>
+	<!-- </div> -->
 		
 	</div>
 	<div class="venue_main_content col-lg-8 col-sm-9">
-		<h3 class="row"><?php echo $this->venue_name ;?></h3>
+		<?php if(!$this->venue_name){ ?>
+			<p>Please choose Venue</p>
+		<?php } else { ?>
+		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
 		<?php 
 		$style_arr = $this->style_attr;
 		foreach( $style_arr as $style_name=>$style_attr ){?>
 			<div class="row style_item">
-				<div class="style_left col-lg-3 col-sm-3 ">
+				<div class="style_left col-lg-2 col-sm-2 ">
 					<p><?php  echo $style_name ?></p>
 				</div>
-				<div class="style_des_right col-lg-8 col-sm-8 ">
-				<?php foreach ($style_attr as $AtrrName => $Atrrvalue) {
-					?><p><?php echo $AtrrName ?> <span> <?php echo $Atrrvalue ?></span></p><?php
-				} ?>
-					
+				<div class="style_des_right col-lg-9 col-sm-9 ">
+					<div class="row">
+						<?php foreach ($style_attr as $AtrrName => $Atrrvalue) { ?>
+							<div class="col-sm-3"><?php echo $AtrrName ?></div>
+							<div class="col-sm-9" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
+						<?php } ?>
+					</div>	
 				</div>
 			</div>
 		<?php }?>
-		<!-- <div class="row style_item">
-			<div class="style_left col-lg-3 col-sm-3 ">
-				<p>Style 1</p>
-			</div>
-			<div class="style_des_right col-lg-8 col-sm-8 ">
-				<p>Color <span> Red ,Green</span></p>
-				
-				<p>Brand <span> Brand 1 ,Brand 2</span></p>
-				
-			</div>
-		</div>
-		<div class="row style_item">
-			<div class="style_left col-lg-3 col-sm-3">
-				<p>Style 2</p>
-			</div>
-			<div class="style_des_right col-lg-8 col-sm-8">
-				<p>Color <span> Red ,Green</span></p>
-				<p>Brand <span> Brand 1 ,Brand 2</span></p>
-			</div>
-		</div> -->
 		<div class="row style_item" id="pick_style_row">
 			<div class="style_left pick_style col-lg-5 col-sm-5">
 				<p>Pick Styles</p>
 				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
-
 					<option selected disabled >Select</option>
 					<?php foreach($listAttrValue as $strrid=>$attr ){ ?>
 						<option value="<?php echo $attr;?>" data-styleId="<?php echo $strrid ?>"> <?php echo $attr;?></option>
 					<?php }  ?>
-					
 				</select>
 				<input type="hidden" id="getstyleid" name="hiddenStyleid" value="">
 			</div>
@@ -73,6 +52,7 @@
 				<button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button>
 			</div>
 		</div>
+		<?php } ?>
 	</div>
 </div>
 <script>
@@ -95,9 +75,9 @@ $(function() {
     });
     $(".chosen-select").chosen(); 
     $(".chosen-select").chosen().change(function(){
-		     selectedValue = $(this).find("option:selected").data('styleid');
-		     $("input[name='hiddenStyleid']").val(selectedValue);
-		});
+		selectedValue = $(this).find("option:selected").data('styleid');
+		$("input[name='hiddenStyleid']").val(selectedValue);
+	});
     $(".venue_cat_wrap h5").click(function(){
     	$(this).parent('.venue_cat_wrap').toggleClass('open');
     	
