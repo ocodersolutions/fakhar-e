@@ -14,7 +14,7 @@ class VenueTable extends BasicTableAdapter {
 	}
 	public function viewlist($string){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('v' => 'venue'));
+        $select = $sql->select(array('v' => 'Venue'));
         $where = new \Zend\Db\Sql\Where();
         $where -> like('v.title', '%'.$string.'%');
         $select->where($where);
@@ -28,7 +28,7 @@ class VenueTable extends BasicTableAdapter {
 	}
   	public function getAllVenue($isActive){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('v' => 'venue'));
+        $select = $sql->select(array('v' => 'Venue'));
         $where = new \Zend\Db\Sql\Where();
         $select->where(array('v.isActive'=>$isActive));
         $resultSet = array();
