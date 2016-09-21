@@ -5,7 +5,10 @@
 <?php echo $this->headLink()
                  ->appendStylesheet($this->basePath() . '/assets/css/jqtree.css');
  ?> 
- 
+<?php
+	$listAttrValue = $this->listAttrValue;
+?>
+
 <div class="row" id="venue_style_page">
 	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
 	<div class="venue_cat_wrap">
@@ -42,35 +45,11 @@
 				<p>Pick Styles</p>
 				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
 
-					<option selected="" disabled="">Brand</option>
-					<option value="Belt Loop"> Belt Loop</option>
-					<option value="Brand"> Brand</option>
-					<option value="Break"> Break</option>
-					<option value="Buttons/Zipper"> Buttons/Zipper</option>
-					<option value="Canvas"> Canvas</option>
-					<option value="Color"> Color</option>
-					<option value="Cuff"> Cuff</option>
-					<option value="Darts"> Darts</option>
-					<option value="Fabric"> Fabric</option>
-					<option value="Feature"> Feature</option>
-					<option value="Fit"> Fit</option>
-					<option value="Fly Type"> Fly Type</option>
-					<option value="Hood"> Hood</option>
-					<option value="In-Seam Rise"> In-Seam Rise</option>
-					<option value="Lapel"> Lapel</option>
-					<option value="Leg Opening"> Leg Opening</option>
-					<option value="Neck"> Neck</option>
-					<option value="Pattern"> Pattern</option>
-					<option value="Pockets"> Pockets</option>
-					<option value="Season"> Season</option>
-					<option value="Sleeve Length"> Sleeve Length</option>
-					<option value="Sleeves"> Sleeves</option>
-					<option value="Stitch"> Stitch</option>
-					<option value="Type"> Type</option>
-					<option value="Vents"> Vents</option>
-					<option value="Wash"> Wash</option>
-					<option value="Washing Instructions"> Washing Instructions</option>
-					<option value="Waterproof"> Waterproof</option>
+					<option selected disabled >Select</option>
+					<?php foreach($listAttrValue as $attr ){ ?>
+						<option value="<?php echo $attr;?>"> <?php echo $attr;?></option>
+					<?php }  ?>
+					
 				</select>
 			</div>
 			<div class="style_des_right col-lg-7 col-sm-7">
