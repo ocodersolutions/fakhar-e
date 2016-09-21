@@ -92,6 +92,17 @@ class VenueController extends BaseActionController
         $__viewVariables["viewTitle"] = $viewTitle;
         $__viewVariables["data_tree"] = $data_tree;
 
+        $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
+        $attrItem = $oAttrList->getAttributeName();
+        $arrayAttr = array();
+        
+        foreach($attrItem as $item){
+            if (!in_array($item['attribute_name'], $arrayAttr)){
+                array_push($arrayAttr,$item['attribute_name']);
+            }
+        }
+        $__viewVariables['listAttrValue'] = $arrayAttr;
+
         return  $__viewVariables;
     }
 

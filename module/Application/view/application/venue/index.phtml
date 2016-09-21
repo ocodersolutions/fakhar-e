@@ -6,7 +6,7 @@
                  ->appendStylesheet($this->basePath() . '/assets/css/jqtree.css');
  ?> 
 <?php
-	
+	$listAttrValue = $this->listAttrValue;
 ?>
 
 <div class="row" id="venue_style_page">
@@ -45,7 +45,9 @@
 				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
 
 					<option selected disabled >Select</option>
-					<option value="Belt Loop"> Belt Loop</option>
+					<?php foreach($listAttrValue as $attr ){ ?>
+						<option value="<?php echo $attr;?>"> <?php echo $attr;?></option>
+					<?php }  ?>
 					
 				</select>
 			</div>
