@@ -59,25 +59,29 @@ class VenueController extends BaseActionController
         {
             if($value == "")
             {
-                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/" . $key . "',},";
+                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/info/about-us',},";
             }
             else
             {
-                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/" . $key . "',children: [";
+                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/info/about-us',children: [";
                 foreach ($value as $key_1 => $value_1) 
                 {
                     if($value_1 == "")
                     {
-                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/venue/" . $key_1 . "',},";
+                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/info/about-us',},";
                     }
                     else
                     {
-                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url:'/venue/" . $key_1 . "',children: [";
+                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/info/about-us',children: [";
                         foreach ($value_1 as $key_2 => $value_2) 
                         {
                             if($value_2 == "")
                             {
-                                $data_tree .= "{name:'" . $viewTitle[$key_2] . "',url: '/venue/" . $key_2 . "',},";
+                                $data_tree .= "{name:'" . $viewTitle[$key_2] . "',url: '/info/about-us',},";
+                            }
+                            else
+                            {
+
                             }
                         }
                         $data_tree .= "]},";

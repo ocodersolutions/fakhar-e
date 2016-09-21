@@ -39,5 +39,8 @@ class VenueTable extends BasicTableAdapter {
 
         return $resultSet;
 	}
+    public function getVenuebyId($isActive){
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+    }
 	
 }
