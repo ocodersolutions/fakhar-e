@@ -4,6 +4,7 @@ namespace Application\Controller;
 use Zend\View\Model\ViewModel;
 use Application\Model\Venue;
 use Application\Model\VenueTable;
+use Application\Model\VenueStyleTable;
 use Zend\Session\Container;
 use Zend\Console\Request as ConsoleRequest;
 use Ocoder\Base\BaseActionController;
@@ -21,14 +22,16 @@ class VenueController extends BaseActionController
         $oVenueList = $this->getServiceLocator()->get('VenueTable');
         $ListItem = $oVenueList->getAllVenue(1);
         $listStyleV = $oVenueList->getVenueStyle($id);
+        $listStyleArr = [];
+        $ResultArr = [];
         if(!empty($listStyleV)){
-            $listStyleArr = [];
+            ;
             foreach ($listStyleV as $StyleV) {
                 $listStyleArr[] = $StyleV['style_id'];
                 
             }
             if(!empty($listStyleArr)){
-                $ResultArr = [];
+                
                 foreach ($listStyleArr as $StyleId) {
                     $oStyleList = $this->getServiceLocator()->get('StyleListTable');
                     $ListstyleItem = $oStyleList->viewsingleitem($StyleId);
@@ -50,11 +53,7 @@ class VenueController extends BaseActionController
                     // $ResultArr['name'] = $StyleName;
                     // $ResultArr['name']['value'] = $oAttrofStyle;
                 }
-                // foreach ($ResultArr as $key => $value) {
-                //     var_dump($value);
-                //      var_dump($key);
-                // }
-                
+               
             }
         }
         $my_parent = $viewTitle = array();
@@ -146,15 +145,17 @@ class VenueController extends BaseActionController
         $__viewVariables["style_arr"] = $listStyleArr;
         $__viewVariables["style_attr"] =  $ResultArr;
 
-        $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
-        $attrItem = $oAttrList->getAttributeName();
+        $oAttrList = $this->getServiceLocator()->get('StyleListTable');
+        $attrItem = $oAttrList->viewlist(1);
         $arrayAttr = array();
         
         foreach($attrItem as $item){
-            if (!in_array($item['attribute_name'], $arrayAttr)){
-                array_push($arrayAttr,$item['attribute_name']);
-            }
+            //var_dump($item);
+            // if (!in_array($item['title'], $arrayAttr)){
+                $arrayAttr[$item['id']]=$item['title'];
+            // }
         }
+
         $__viewVariables['listAttrValue'] = $arrayAttr;
 
         return  $__viewVariables;
@@ -216,5 +217,23 @@ class VenueController extends BaseActionController
         // $__viewVariables['comparers'] =$kq ;
         return  $__viewVariables;
     }
+     public function savestylevenueAction(){
+        // $id=$this->params('id');
+        // var_dump($id);
+        if ($this->getRequest()->isPost()){
+            $styleid = $this->params()->fromPost();
+            var_dump($styleid);
+            // $venueid = $this->params()->fromPost('venueid');
 
+            // $data =array(
+            //     'style_id'=>$styleid,
+            //     'venue_id'=>$venueid
+            // );
+            // $oSavestyle = $this->getServiceLocator()->get('VenueStyleTable');
+            // $saveItem = $oSavestyle->insert($data);
+            
+         }
+        return 0;
+
+     }
 }

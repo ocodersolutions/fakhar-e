@@ -60,16 +60,17 @@
 				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
 
 					<option selected disabled >Select</option>
-					<?php foreach($listAttrValue as $attr ){ ?>
-						<option value="<?php echo $attr;?>"> <?php echo $attr;?></option>
+					<?php foreach($listAttrValue as $strrid=>$attr ){ ?>
+						<option value="<?php echo $attr;?>" data-styleId="<?php echo $strrid ?>"> <?php echo $attr;?></option>
 					<?php }  ?>
 					
 				</select>
+				<input type="hidden" id="getstyleid" name="hiddenStyleid" value="">
 			</div>
 			<div class="style_des_right col-lg-7 col-sm-7">
 				<!-- <p>Color <span> Red ,Green</span></p>
 				<p>Brand <span> Brand 1 ,Brand 2</span></p> -->
-				<button type="button" class="btn-st-blue btn-primary">Add</button>
+				<button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button>
 			</div>
 		</div>
 	</div>
@@ -93,13 +94,32 @@ $(function() {
         }
     });
     $(".chosen-select").chosen(); 
+    $(".chosen-select").chosen().change(function(){
+		     selectedValue = $(this).find("option:selected").data('styleid');
+		     $("input[name='hiddenStyleid']").val(selectedValue);
+		});
     $(".venue_cat_wrap h5").click(function(){
     	$(this).parent('.venue_cat_wrap').toggleClass('open');
-    	// if($(this).parent('.venue_cat_wrap').hasClass('open')){
-    	// 	$("#tree1").show();
-    	// }else{
-    	// 	$("#tree1").hide();
-    	// }
+    	
     });
+});
+$(function() {
+	$("#add_style").click(function(event) {
+		styleid = $("input[name='hiddenStyleid']").val();
+		//venueid = <?php echo $this->venue_id;?>;
+		//alert(id);
+		$.ajax({
+		url : "/venue/savestylevenue",
+        type : "post",
+        // dataType:"text",
+        data : {
+            'styleId' : styleid,
+            'venueid' : venueid,
+        },
+        success:function(){
+
+        }
+		});
+	});
 });
 </script>
