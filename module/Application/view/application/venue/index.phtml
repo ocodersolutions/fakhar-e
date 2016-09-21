@@ -18,9 +18,23 @@
 		
 	</div>
 	<div class="venue_main_content col-lg-8 col-sm-9">
-		<h3 class="row">Venue 1</h3>
-		<h5><?php echo $this->$id ;?></h5>
-		<div class="row style_item">
+		<h3 class="row"><?php echo $this->venue_name ;?></h3>
+		<?php 
+		$style_arr = $this->style_attr;
+		foreach( $style_arr as $style_name=>$style_attr ){?>
+			<div class="row style_item">
+				<div class="style_left col-lg-3 col-sm-3 ">
+					<p><?php  echo $style_name ?></p>
+				</div>
+				<div class="style_des_right col-lg-8 col-sm-8 ">
+				<?php foreach ($style_attr as $AtrrName => $Atrrvalue) {
+					?><p><?php echo $AtrrName ?> <span> <?php echo $Atrrvalue ?></span></p><?php
+				} ?>
+					
+				</div>
+			</div>
+		<?php }?>
+		<!-- <div class="row style_item">
 			<div class="style_left col-lg-3 col-sm-3 ">
 				<p>Style 1</p>
 			</div>
@@ -39,7 +53,7 @@
 				<p>Color <span> Red ,Green</span></p>
 				<p>Brand <span> Brand 1 ,Brand 2</span></p>
 			</div>
-		</div>
+		</div> -->
 		<div class="row style_item" id="pick_style_row">
 			<div class="style_left pick_style col-lg-5 col-sm-5">
 				<p>Pick Styles</p>

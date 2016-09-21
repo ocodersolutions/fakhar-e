@@ -15,13 +15,60 @@ class VenueController extends BaseActionController
     }
 
     public function indexAction() {
+        $id = $this->params('id');
         $__viewVariables = array();
         $this->layout('layout/layout_elnove.phtml');
         $oVenueList = $this->getServiceLocator()->get('VenueTable');
         $ListItem = $oVenueList->getAllVenue(1);
+        $listStyleV = $oVenueList->getVenueStyle($id);
+        if(!empty($listStyleV)){
+            $listStyleArr = [];
+            foreach ($listStyleV as $StyleV) {
+                $listStyleArr[] = $StyleV['style_id'];
+                
+            }
+            if(!empty($listStyleArr)){
+                $ResultArr = [];
+                foreach ($listStyleArr as $StyleId) {
+                    $oStyleList = $this->getServiceLocator()->get('StyleListTable');
+                    $ListstyleItem = $oStyleList->viewsingleitem($StyleId);
+                    if (!empty($ListstyleItem)){
+                        $StyleName = $ListstyleItem->title;
+                        //var_dump($StyleId);
+                    }else{
+                        $StyleName = "";
+                    }
+                    $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
+                    $oAttrofStyleArr =  $oAttrofStyleList->liststyle($StyleId);
+                    //var_dump ( $oAttrofStyleArr);
+                    foreach ($oAttrofStyleArr as $oAttrofStyle) {
+                        //var_dump($oAttrofStyle);die;
+                        $ResultArr[$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
+                        //$ResultArr[$StyleId][$oAttrofStyle['attribute']]= $oAttrofStyle['attribute'];
+                    }
+                    //var_dump($oAttrofStyle);
+                    // $ResultArr['name'] = $StyleName;
+                    // $ResultArr['name']['value'] = $oAttrofStyle;
+                }
+                // foreach ($ResultArr as $key => $value) {
+                //     var_dump($value);
+                //      var_dump($key);
+                // }
+                
+            }
+        }
         $my_parent = $viewTitle = array();
         foreach( $ListItem as $item)
         {
+            if (!empty($id)){
+                 if($item['id'] == $id){
+                $vName = $item['title'];
+                // var_dump($vName);
+                }
+            }
+            else{
+                $vName = '';
+            }
             $viewTitle[$item["id"]] = $item["title"];
             if($item["parentId"] == 0 )
             {
@@ -90,11 +137,14 @@ class VenueController extends BaseActionController
                 $data_tree .= "]},";
             }
         }
-
+        $__viewVariables["venue_id"] = $id;
+        $__viewVariables["venue_name"] = $vName;
         $__viewVariables["my_parent"] = $my_parent;
         $__viewVariables["ListItem"] = $ListItem;
         $__viewVariables["viewTitle"] = $viewTitle;
         $__viewVariables["data_tree"] = $data_tree;
+        $__viewVariables["style_arr"] = $listStyleArr;
+        $__viewVariables["style_attr"] =  $ResultArr;
 
         $oAttrList = $this->getServiceLocator()->get('AttributeListTable');
         $attrItem = $oAttrList->getAttributeName();
