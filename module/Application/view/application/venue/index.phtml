@@ -94,7 +94,15 @@ $(function() {
     });
     tagA=$("#tree1").find("a[href='"+pathname+"']");
     tagA.find("span").css("color","#859ed8");
-    
+    li1=tagA.closest('li');
+    ul1=li1.closest('ul');
+	if(ul1.attr("display","none"))
+	{
+		ul1.css("display","block");
+	}
+	
+    	
+
  //    if(tagA.indexOf("/venue/2")>0)
 	// {
 	// 	$this=tagA;
