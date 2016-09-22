@@ -21,18 +21,26 @@ $listAttrValue = $this->listAttrValue;
 		<?php 
 		$style_arr = $this->style_attr;
 		foreach( $style_arr as $style_name=>$style_attr ){?>
+			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
 			<div class="row style_item">
 				<div class="style_left col-lg-2 col-sm-2 ">
-					<p><?php  echo $style_name ?></p>
+					<p><?php  echo $styleId ?></p>
 				</div>
-				<div class="style_des_right col-lg-9 col-sm-9 ">
+				
+				<div class="style_des_right col-lg-7 col-sm-7 ">
 					<div class="row">
-						<?php foreach ($style_attr as $AtrrName => $Atrrvalue) { ?>
+						
+						<?php foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
 							<div class="col-sm-3"><?php echo $AtrrName ?></div>
 							<div class="col-sm-9" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
 						<?php } ?>
 					</div>	
 				</div>
+				<div class="style_des_right col-lg-2 col-sm-2 ">
+					<input type="text" name="hiddenDelid" value="<?php echo $style_name?>">
+					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
+				</div>
+				<?php }?>
 			</div>
 		<?php }?>
 		<div class="row style_item" id="pick_style_row">
@@ -63,6 +71,8 @@ var data = [
 	?>
 ];
 $(function() {
+	 pathname = window.location.pathname; 
+	 
     $('#tree1').tree({
         data: data,
         selectable: true,
@@ -82,6 +92,15 @@ $(function() {
     	$(this).parent('.venue_cat_wrap').toggleClass('open');
     	
     });
+    tagA=$("#tree1").find("a[href='"+pathname+"']");
+    tagA.find("span").css("color","#859ed8");
+    
+ //    if(tagA.indexOf("/venue/2")>0)
+	// {
+	// 	$this=tagA;
+ //    	$this.css("background","red");
+	// }
+    
 });
 $(function() {
 	$("#add_style").click(function(event) {
@@ -100,5 +119,24 @@ $(function() {
 	        }
 		});
 	});
+
+	//delete stylevenue
+	$("button[name='delstylevenue']").click(function(){
+		delstId = $(this).parent('.style_des_right').find("input[name='hiddenDelid']").val();
+		venueId = '<?php echo $this->venue_id;?>';
+		alert(delstId);
+		$.ajax({
+			url : "/venue/delstylevenue",
+	        type : "post",
+	        dataType:"text",
+	        data : {
+	            'delstId' : delstId,
+	            'venueId' :venueId,
+	        },
+	        success:function(){
+	        	location.reload();
+	        }
+		});
+	})
 });
 </script>

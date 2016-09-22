@@ -24,6 +24,7 @@ class VenueController extends BaseActionController
         $listStyleV = $oVenueList->getVenueStyle($id);
         $listStyleArr = [];
         $ResultArr = [];
+        $StyleName = "";
         if(!empty($listStyleV)){
             foreach ($listStyleV as $StyleV) {
                 $listStyleArr[] = $StyleV['style_id'];
@@ -34,26 +35,31 @@ class VenueController extends BaseActionController
                 foreach ($listStyleArr as $StyleId) {
                     $oStyleList = $this->getServiceLocator()->get('StyleListTable');
                     $ListstyleItem = $oStyleList->viewsingleitem($StyleId);
-                    if (!empty($ListstyleItem)){
+                    //var_dump($ListstyleItem);
+                   
                         $StyleName = $ListstyleItem->title;
+                        $StyleId = $ListstyleItem ->id;
                         //var_dump($StyleId);
-                    }else{
-                        $StyleName = "";
-                    }
+                    // foreach ($ListstyleItem as $key => $value) {
+                    //     # code...
+                    // }
+                     
+                  
                     $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
                     $oAttrofStyleArr =  $oAttrofStyleList->liststyle($StyleId);
                     //var_dump ( $oAttrofStyleArr);
                     foreach ($oAttrofStyleArr as $oAttrofStyle) {
-                        //var_dump($oAttrofStyle);die;
-                        $ResultArr[$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
+                        //var_dump($oAttrofStyle);
+                        $ResultArr[$StyleId][$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
                         //$ResultArr[$StyleId][$oAttrofStyle['attribute']]= $oAttrofStyle['attribute'];
                     }
-                    //var_dump($oAttrofStyle);
+                    
                     // $ResultArr['name'] = $StyleName;
                     // $ResultArr['name']['value'] = $oAttrofStyle;
                 }
-               
+                 //var_dump($ResultArr);
             }
+            //var_dump($ResultArr);
         }
         $my_parent = $viewTitle = array();
         foreach( $ListItem as $item)
@@ -205,20 +211,12 @@ class VenueController extends BaseActionController
             }
             
         }
-         // $s = "cawors";
-         // $s1 = "casual";
-        //  $help = new Getvenuehelper;
-        // $kq =$help->comparestring($s,$s1);
-        
         $jsonvenue = json_encode($jsonArr);
         echo $jsonvenue;
         exit();
-        // $__viewVariables['comparers'] =$kq ;
         return  $__viewVariables;
     }
      public function savestylevenueAction(){
-        // $id=$this->params('id');
-        // var_dump($id);
         if ($this->getRequest()->isPost()){
             $styleid = $this->params()->fromPost('styleId');
             $venueid = $this->params()->fromPost('venueid');
@@ -233,5 +231,17 @@ class VenueController extends BaseActionController
          }
         return 0;
 
+     }
+     public function delstylevenueAction(){
+        
+         if ($this->getRequest()->isPost()){
+            $style_id = $this->params()->fromPost('delstId');
+            $venue_id = $this->params()->fromPost('venueId');
+            
+            $oDelstyle = $this->getServiceLocator()->get('VenueStyleTable');
+            $DelItem = $oDelstyle->delete($style_id,$venue_id);
+            
+         }
+         return  $DelItem;
      }
 }
