@@ -26,6 +26,7 @@ ul.jqtree-tree {
     ul.jqtree-tree .jqtree-toggler.jqtree-closed {
       background-position: 0 0; }
     ul.jqtree-tree .jqtree-toggler.jqtree-toggler-left {
+      color: #859ed8;
       margin-right: 0.5em; }
     ul.jqtree-tree .jqtree-toggler.jqtree-toggler-right {
       margin-left: 0.5em; }
@@ -33,7 +34,9 @@ ul.jqtree-tree {
     cursor: pointer;
     position: relative; }
   ul.jqtree-tree .jqtree-title {
-    color: #1C4257;
+    font-style: 16px;
+    font-weight: bold;
+    color: #959595;
     vertical-align: middle;
     margin-left: 1.5em; }
     ul.jqtree-tree .jqtree-title.jqtree-title-folder {
@@ -83,12 +86,8 @@ ul.jqtree-tree {
     box-sizing: content-box; }
   ul.jqtree-tree li.jqtree-selected > .jqtree-element,
   ul.jqtree-tree li.jqtree-selected > .jqtree-element:hover {
-    background-color: #97BDD6;
-    background: -webkit-gradient(linear, left top, left bottom, from(#BEE0F5), to(#89AFCA));
-    background: -moz-linear-gradient(top, #BEE0F5, #89AFCA);
-    background: -ms-linear-gradient(top, #BEE0F5, #89AFCA);
-    background: -o-linear-gradient(top, #BEE0F5, #89AFCA);
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
+    background-color: none;
+    font-weight: bold;}
   ul.jqtree-tree .jqtree-moving > .jqtree-element .jqtree-title {
     outline: dashed 1px #0000ff; }
 

@@ -259,6 +259,17 @@ class Module implements
                     $resultSetPrototype->setArrayObjectPrototype(new Model\StyleDefination($dbAdapter));
                     return new TableGateway('StyleDefination', $dbAdapter, null, $resultSetPrototype);
                 },
+                 'VenueStyleTable' => function($serviceManager) {
+                    $tableGateway = $serviceManager->get('VenueStyleTableGateway');
+                    $table = new Model\VenueStyleTable($tableGateway);
+                    return $table;
+                },
+                'VenueStyleTableGateway' => function ($serviceManager) {
+                    $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\VenueStyle($dbAdapter));
+                    return new TableGateway('VenueStyle', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
             'abstract_factories' => array(
                 'Application\Service\CommonTableAbstractFactory'

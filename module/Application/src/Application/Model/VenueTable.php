@@ -14,7 +14,7 @@ class VenueTable extends BasicTableAdapter {
 	}
 	public function viewlist($string){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('v' => 'venue'));
+        $select = $sql->select(array('v' => 'Venue'));
         $where = new \Zend\Db\Sql\Where();
         $where -> like('v.title', '%'.$string.'%');
         $select->where($where);
@@ -28,7 +28,7 @@ class VenueTable extends BasicTableAdapter {
 	}
   	public function getAllVenue($isActive){
         $sql = new Sql($this->getServiceLocator()->get('db'));
-        $select = $sql->select(array('v' => 'venue'));
+        $select = $sql->select(array('v' => 'Venue'));
         $where = new \Zend\Db\Sql\Where();
         $select->where(array('v.isActive'=>$isActive));
         $resultSet = array();
@@ -39,5 +39,18 @@ class VenueTable extends BasicTableAdapter {
 
         return $resultSet;
 	}
+    public function getVenueStyle($id){
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+        $select = $sql->select(array('s' => 'VenueStyle'));
+        $where = new \Zend\Db\Sql\Where();
+        $select->where(array('s.venue_id'=>$id));
+        $resultSet = array();
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new \Zend\Db\ResultSet\ResultSet();
+        $resultSet->initialize($results);
+        $resultSet = $resultSet->toArray();
+
+        return $resultSet;
+    }
 	
 }

@@ -61,7 +61,6 @@ class StyleListTable extends BasicTableAdapter {
         $row = $rowset->current();
         return $row;
 	}
-  
-	
+		
 }
 	
