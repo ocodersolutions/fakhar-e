@@ -144,22 +144,68 @@ class VenueController extends BaseActionController
         $oVenueList = $this->getServiceLocator()->get('VenueTable');
         $isActive = 1;
         $listItem = $oVenueList->getAllVenue($isActive);
-        $jsonArr = array();
+        $jsonArr = $arrFind = array();
         if ($listItem != ''){
            foreach ($listItem as $item) {
-               $jsonArr[]= $item['title'];
-            }
-            
+               $jsonArr[$item["id"]]= $item['title'];
+               $arrFind[$item["title"]] = 0;
+            }            
         }
-         // $s = "cawors";
-         // $s1 = "casual";
-        //  $help = new Getvenuehelper;
-        // $kq =$help->comparestring($s,$s1);
-        
-        $jsonvenue = json_encode($jsonArr);
-        echo $jsonvenue;
-        exit();
-        // $__viewVariables['comparers'] =$kq ;
+        $aPostParams = $this->params()->fromPost(); 
+        $data_imp = $aPostParams['data_form'];
+        $data_imp = str_replace("+", " ", trim($data_imp));
+        $result = "error";
+        foreach ($jsonArr as $key => $value) {
+            if(strtolower($data_imp) == strtolower($value)) {   $result = $value; break; }
+            else
+            {
+                $data_imp_2 = strtolower(str_replace(" ", "", $data_imp));
+                $length_data = strlen($data_imp_2);
+                $length_value = strlen(str_replace(" ", "", $value));
+                $value_2 = strtolower(trim($value));
+                $value_2 = str_replace(" ", "", $value_2);
+                for($i = 1; $i <= $length_data; $i++)
+                {
+                    $length_index = "";
+                    if($length_data > $length_value)
+                    {
+                        $length_index = $length_value;
+                    }
+                    else
+                    {
+                        $length_index = $length_data;
+                    }
+                    for($j = 1; $j <= $length_index; $j++)
+                    {
+                        $sub_string = substr($data_imp_2, $i-1, $j);
+                        $arrFind[$value] += substr_count($value_2, $sub_string);
+                    }
+                }
+            }
+        }
+        $five_max = array();
+        $max = 0;
+        foreach ($arrFind as $key => $value) {
+            $five_max[] = $value . "-" . $key;
+        }
+        rsort($five_max);        
+
+        foreach ($five_max as $key => $value) {
+            $temporary = explode("-", $value);
+            $five_max[$key] = $temporary[1];
+        }
+
+        $result_2 = "<div>" . $five_max[0] . "</div> <div>" . $five_max[1] . "</div> <div>" . $five_max[2] . "</div> <div>" . $five_max[3] . "</div> <div>" . $five_max[4] . "</div>";
+        if($result == "error" ) 
+        {
+            $result_post = json_encode(array('status1'=>$result, 'max_1'=>$result_2));
+        }
+        else
+        {
+            $result_post = json_encode(array('status1'=>$result));
+        }
+        echo $result_post; exit(0);
+
         return  $__viewVariables;
     }
 
