@@ -264,7 +264,8 @@ $( function() {
       
       select: function(event, ui) {
         $(this).val(ui.item.value);
-        $('form.searchbox, form.form_search, form.searchbox-mobile').submit();
+        $(this). parents("form").submit();
+        // $('form.searchbox, form.form_search, form.searchbox-mobile').submit();
       },
       open: function(event, ui) {
             w = $(this).width() + 30;

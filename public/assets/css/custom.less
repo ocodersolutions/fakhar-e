@@ -5851,8 +5851,22 @@ footer{
 }
 .my_venue_alert {
     display: none;
-    text-align: center;
+    padding-left: 40%;
+    div {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+            color: red;
+            font-weight: bold;
+        }
+    }
 }
+
+.sub_title.text-center {
+    font-size: 17px;
+    font-weight: bold;
+}
+
  /// style venue page//
  #venue_style_page{
     .venue_cat{

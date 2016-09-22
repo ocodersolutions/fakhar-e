@@ -611,47 +611,73 @@ $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(eve
 
     }
 
-
     if (y == 1) {
         y = 'venue';
     }else{
         y = 'normal';
     }
 
-    check = $('span[data-search="'+x+'"]').length;
-   
+    check = $('span[data-search="'+x+'"]').length;   
 
     if ( check == 0 && x != '') {
-       var string;
-        $.ajax({
-            url : "/venue/search",
-            type : "post",
-            dataType: "json",
-            success: function(result) {
-             string = result;
-             console.log(string);
-            if (string.indexOf(x)<0){
-                $(".my_venue_alert").css("display","block");
-                myalert('myalertid3','type_missing','Ooops!','','OK','Please enter valid email address.',function(){$('#myalertid3').foundation('reveal','close'); });
-                 
-            }else{
-                $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
-                $('i.fa-times').click(function(){
-                    x = $(this).attr('data-search');
-                    $('.item[data-search="'+x+'"]').remove();
-                    check_search_tag();
-                });
-            }
-            },
-            error: function() {
-                alert('Error occured');
-            }
-        });
-  
-       
-    }
-    check_search_tag();
-   
+        if(y == "normal")
+        {
+            $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+            $('i.fa-times').click(function()
+            {
+                x = $(this).attr('data-search');
+                $('.item[data-search="'+x+'"]').remove();
+                check_search_tag();
+            });
+            check_search_tag();
+        }
+        else
+        {
+            $.ajax ({
+                url : "/venue/search",
+                type : "post",
+                data : {    data_form: x,  },
+                dataType: "json",
+                success: function(result) 
+                {
+                    string = result.status1;
+                    if (result.status1 == "error")
+                    {
+                        $(".my_venue_alert").html(result.max_1).css("display", "block");
+                        myalert('myalertid3','type_missing','Ooops!','','OK', 'You can refer to the suggestions below:'   ,function(){$('#myalertid3').foundation('reveal','close'); });
+                        $(".my_venue_alert div").click(function(){
+                            x = $(this).html();
+                            $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+                            $("button.my_btn_type").click();
+                            check_search_tag();
+                            $('i.fa-times').click(function()
+                            {
+                                x = $(this).attr('data-search');
+                                $('.item[data-search="'+x+'"]').remove();  
+                                check_search_tag();                          
+                            });
+                        });
+                    }
+                    else
+                    {
+                        x = result.status1;
+                        $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+                        $('i.fa-times').click(function()
+                        {
+                            x = $(this).attr('data-search');
+                            $('.item[data-search="'+x+'"]').remove();  
+                            check_search_tag();                          
+                        });
+                        check_search_tag();
+                    }
+                },
+                error: function() 
+                {
+                    alert('Error occured');
+                }
+            });
+        }
+    }   
 });
 
 function check_search_tag(){

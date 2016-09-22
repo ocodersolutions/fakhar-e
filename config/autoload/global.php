@@ -22,9 +22,12 @@ return array(
 		),
 	'db'                => array(
 		'driver'	=> 'Pdo_Mysql',
+		// 'database'	=> 'elnove.local',
 		'database'	=> 'elnove.ocoder',
 		'username'	=> 'root',
+		// 'password'	=> 'mysql',
 		'password'	=> '',
+		// 'hostname'	=> '192.168.0.104',
 		'hostname'	=> '192.168.1.138',
 		'charset'  => 'utf8',
 		'driver_options' => array(
