@@ -640,7 +640,6 @@ $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(eve
                 dataType: "json",
                 success: function(result) 
                 {
-                    string = result.status1;
                     if (result.status1 == "error")
                     {
                         $(".my_venue_alert").html(result.max_1).css("display", "block");
