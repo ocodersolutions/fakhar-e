@@ -676,6 +676,7 @@ class ServiceController extends BaseActionController {
             $aPostParams['filterTypeMain'] = rtrim($aPostParams['filterTypeMain'], ',');
             $aPostParams['orderBy'] = rtrim($aPostParams['orderBy'], ',');
             $aPostParams['searchArticle'] = rtrim($aPostParams['searchArticle'], ',');
+            $aPostParams['searchVenue'] = rtrim($aPostParams['searchVenue'], ',');
             if (!empty($aPostParams['page'])) {
                 $limit = $aPostParams['limit'];
                 $offset = $aPostParams['limit'] * ($aPostParams['page'] - 1);

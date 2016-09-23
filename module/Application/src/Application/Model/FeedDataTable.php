@@ -536,6 +536,14 @@ class FeedDataTable extends BasicTableAdapter {
               $sWhere .= " AND `feed`.`name` LIKE '%".$value."%' ";
             }
         }
+
+        if (isset($aPostParams['searchVenue']) && !empty($aPostParams['searchVenue']) ) {
+            
+            $searcharray = explode(",",$aPostParams['searchVenue']);
+            foreach ($searcharray as $key => $value) {
+              $sWhere .= " AND `feed`.`name` LIKE '%".$value."%' ";
+            }
+        }
         
         if (!empty($aPostParams['catids'])) {
             $sWhere .= " AND `feed`.`uid` IN (select distinct productUID from ProductCategories where value IN (" . $aPostParams['catids'] . ") )";
