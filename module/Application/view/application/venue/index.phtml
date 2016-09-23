@@ -17,7 +17,26 @@ $listAttrValue = $this->listAttrValue;
 		<?php if(!$this->venue_name){ ?>
 			<p>Please choose Venue</p>
 		<?php } else { ?>
+			<div class="row style_item" id="pick_style_row">
+			<div class="style_left pick_style col-lg-5 col-sm-5">
+				<p>Pick Styles</p>
+				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
+					<option selected disabled >Select</option>
+					<?php foreach($listAttrValue as $strrid=>$attr ){ ?>
+						<option value="<?php echo $attr;?>" data-styleId="<?php echo $strrid ?>"> <?php echo $attr;?></option>
+					<?php }  ?>
+				</select>
+				<input type="hidden" id="getstyleid" name="hiddenStyleid" value="">
+			</div>
+			<div class="style_des_right col-lg-7 col-sm-7">
+				<!-- <p>Color <span> Red ,Green</span></p>
+				<p>Brand <span> Brand 1 ,Brand 2</span></p> -->
+				<button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button>
+			</div>
+		</div>
+		<p class="tree_title">My styles</p>
 		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
+
 		<?php 
 		$style_arr = $this->style_attr;
 		foreach( $style_arr as $style_name=>$style_attr ){?>
@@ -37,30 +56,14 @@ $listAttrValue = $this->listAttrValue;
 					</div>	
 				</div>
 				<div class="style_des_right col-lg-2 col-sm-2 ">
-					<input type="text" name="hiddenDelid" value="<?php echo $style_name?>">
+					<input type="hidden" name="hiddenDelid" value="<?php echo $style_name?>">
 					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
 				</div>
 				<?php }?>
 			</div>
 		<?php }?>
-		<div class="row style_item" id="pick_style_row">
-			<div class="style_left pick_style col-lg-5 col-sm-5">
-				<p>Pick Styles</p>
-				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
-					<option selected disabled >Select</option>
-					<?php foreach($listAttrValue as $strrid=>$attr ){ ?>
-						<option value="<?php echo $attr;?>" data-styleId="<?php echo $strrid ?>"> <?php echo $attr;?></option>
-					<?php }  ?>
-				</select>
-				<input type="hidden" id="getstyleid" name="hiddenStyleid" value="">
-			</div>
-			<div class="style_des_right col-lg-7 col-sm-7">
-				<!-- <p>Color <span> Red ,Green</span></p>
-				<p>Brand <span> Brand 1 ,Brand 2</span></p> -->
-				<button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button>
-			</div>
-		</div>
 		<?php } ?>
+
 	</div>
 </div>
 <script>
