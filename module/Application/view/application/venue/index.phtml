@@ -50,19 +50,52 @@ $listAttrValue = $this->listAttrValue;
 					<div class="row">
 						
 						<?php foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
-							<div class="col-sm-3"><?php echo $AtrrName ?></div>
-							<div class="col-sm-9" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
+							<div class="col-sm-5"><?php echo $AtrrName ?></div>
+							<div class="col-sm-7" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
 						<?php } ?>
 					</div>	
 				</div>
 				<div class="style_des_right col-lg-2 col-sm-2 ">
-					<input type="hidden" name="hiddenDelid" value="<?php echo $style_name?>">
+					<input type="hidden" name="hiddenDelid" value=<?php echo $style_name?>">
 					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
 				</div>
 				<?php }?>
 			</div>
 		<?php }?>
 		<?php } ?>
+		
+		<?php $ChildrenArr = $this->child_arr;
+			if(!empty($ChildrenArr)){?>
+				<p class="tree_title">Child styles</p>
+				<?php foreach ($ChildrenArr as $name_venue => $venue_value) {?>
+					<h3 class="row">Venue: <i>"<?php echo $name_venue ;?>"</i></h3>
+				<?php 
+				if(!empty($venue_value)){
+					foreach ($venue_value as $name_st => $attr_arr) {?>
+						<div class="row style_item">
+							<div class="style_left col-lg-3 col-sm-3 ">
+								<p><?php echo $name_st ?></p>
+							</div>
+							
+							<div class="style_des_right col-lg-8 col-sm-8 ">
+								<div class="row">
+									<?php if (is_array($attr_arr)){
+										foreach ($attr_arr as $key => $value) {?>
+											<div class="col-sm-5"><?php echo $key?></div>
+											<div class="col-sm-7" style="font-weight: normal;"><?php echo $value?></div>
+										<?php }
+									}?>
+									
+									</div>	
+							</div>
+							
+						</div>
+					<?php }
+				}
+				//var_dump($venue_value);
+			}
+			}
+		?>
 
 	</div>
 </div>

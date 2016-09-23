@@ -52,7 +52,6 @@ class VenueController extends BaseActionController
             if (!empty($id)){
                  if($item['id'] == $id){
                 $vName = $item['title'];
-                // var_dump($vName);
                 }
             }
             else{
@@ -103,7 +102,6 @@ class VenueController extends BaseActionController
             if($key == $id)
             {
                $childArr[] = $value;
-               
             }
              if($value == "")
             {
@@ -151,26 +149,32 @@ class VenueController extends BaseActionController
                 $data_tree .= "]},";
             }
         }
-        //var_dump($childArr);
+        var_dump($childArr);
         foreach ($childArr as $child_key => $child_value) {
-            //var_dump($child_value);
+            //var_dump($child_key);
             if(is_array($child_value)){
-             //   var_dump($child_value);
+                //var_dump($child_value);
              foreach ($child_value as $childitem_key => $chilitem_value) {
                 $child_id = $childitem_key;
+                var_dump($child_id);
+                
                 $oVenueNameList = $this->getServiceLocator()->get('VenueTable');
                 $ListNamevenueArr = $oVenueNameList->getnameVenue($child_id);
+                
                 foreach ($ListNamevenueArr as $key_name => $value_name) {
                      $nameChild=$value_name['title'];
                 }
                 $childStyleV = $oVenueList->getVenueStyle($child_id);
-                if(is_array($childStyleV)){
+                        
+                if(!empty($childStyleV)){
                     foreach ($childStyleV as $key_v => $value_v) {
                         $nameStyle =$oStyleList->viewsingleitem($StyleId);
+                        //var_dump($nameStyle);
                         $name = $nameStyle->title;
                         $child_st_id[]=$value_v['style_id'];
                         if (is_array($child_st_id)){
                             foreach ($child_st_id as $item_id) {
+                                //var_dump($item_id);
                                 $StAttrArr =  $oAttrofStyleList->liststyle($item_id);
                                 if(is_array($StAttrArr)){
                                     foreach ($StAttrArr as $name_attr => $value_attr) {
@@ -180,9 +184,16 @@ class VenueController extends BaseActionController
                                 
                             }
                         }
+                        // if (!empty($value_v)){
+                        //     foreach ($value_v as $key_l => $value_l) {
+                        //        $last_id = $key_l;
+                        //        $lastnameV =$oVenueList->getVenueStyle($last_id);
+                        //     }
+                        // }
+                        //var_dump($child_st_id);
                     }
                 }else{
-                    //$resultChildArr[$nameChild][$name][$value_attr['attribute']]= $value_attr['value'];
+                    $resultChildArr[$nameChild][$name]= '';
                 }
             }
            }else{
