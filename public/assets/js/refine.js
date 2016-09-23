@@ -13,12 +13,74 @@ $(document).ready(function() {
     searchVenue = $('input[name="searchVenue"]').val();
     //console.log(searchVenue);
     if(searchVenue != ''){ 
-        $('.option-selected').append('<div class="item venue" data-search="'+searchVenue+'"><span data-search="'+searchVenue+'">'+searchVenue+'</span><i data-search="'+searchVenue+'" class="fa fa-times" aria-hidden="true"></i></div>');
-          $('i.fa-times').click(function(){
-            x = $(this).attr('data-search');
-            $('.item[data-search="'+x+'"]').remove();
-            check_search_tag();
-        });
+        // $('.option-selected').append('<div class="item venue" data-search="'+searchVenue+'"><span data-search="'+searchVenue+'">'+searchVenue+'</span><i data-search="'+searchVenue+'" class="fa fa-times" aria-hidden="true"></i></div>');
+        //   $('i.fa-times').click(function(){
+        //     x = $(this).attr('data-search');
+        //     $('.item[data-search="'+x+'"]').remove();
+        //     check_search_tag();
+        // });
+        y = "venue";
+        x = searchVenue.replace("+", " ");
+        check = $('span[data-search="'+x+'"]').length;   
+
+        if ( check == 0 && x != '') {
+            if(y == "normal")
+            {
+                $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+                $('i.fa-times').click(function()
+                {
+                    x = $(this).attr('data-search');
+                    $('.item[data-search="'+x+'"]').remove();
+                    check_search_tag();
+                });
+                check_search_tag();
+            }
+            else
+            {
+                $.ajax ({
+                    url : "/venue/search",
+                    type : "post",
+                    data : {    data_form: x,  },
+                    dataType: "json",
+                    success: function(result) 
+                    {
+                        if (result.status1 == "error")
+                        {
+                            $(".my_venue_alert").html(result.max_1).css("display", "block");
+                            myalert('myalertid3','type_missing','Ooops!','','OK', 'You can refer to the suggestions below:'   ,function(){$('#myalertid3').foundation('reveal','close'); });
+                            $(".my_venue_alert div").click(function(){
+                                x = $(this).html();
+                                $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+                                $("button.my_btn_type").click();
+                                check_search_tag();
+                                $('i.fa-times').click(function()
+                                {
+                                    x = $(this).attr('data-search');
+                                    $('.item[data-search="'+x+'"]').remove();  
+                                    check_search_tag();                          
+                                });
+                            });
+                        }
+                        else
+                        {
+                            x = result.status1;
+                            $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+                            $('i.fa-times').click(function()
+                            {
+                                x = $(this).attr('data-search');
+                                $('.item[data-search="'+x+'"]').remove();  
+                                check_search_tag();                          
+                            });
+                            check_search_tag();
+                        }
+                    },
+                    error: function() 
+                    {
+                        alert('Error occured');
+                    }
+                });
+            }
+        } 
     }
     //console.log(searchArticle, searchVenue );
 
@@ -640,7 +702,6 @@ $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(eve
                 dataType: "json",
                 success: function(result) 
                 {
-                    string = result.status1;
                     if (result.status1 == "error")
                     {
                         $(".my_venue_alert").html(result.max_1).css("display", "block");
