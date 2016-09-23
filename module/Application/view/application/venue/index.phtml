@@ -94,21 +94,43 @@ $(function() {
     });
     tagA=$("#tree1").find("a[href='"+pathname+"']");
     tagA.find("span").css("color","#859ed8");
-    li1=tagA.closest('li');
-    ul1=li1.closest('ul');
-	if(ul1.attr("display","none"))
-	{
-		ul1.css("display","block");
-	}
-	
+    $this=tagA.find("span");
+    if($this.attr('aria-level')==3)
+    {
+    	li2=$this.closest('li.jqtree_common .jqtree-folder');
+    	if(li2.hasClass('jqtree-closed')){
+    		li2.removeClass('jqtree-closed');
+    		li2.addClass('123');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').removeClass('jqtree-closed');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    	}
+    	ul2=li2.closest('ul');
+    	if(ul2.attr('display','none')){
+    		ul2.css('display','block');
+    	}
+    	li1=ul2.closest('li');
+    	if(li1.hasClass('jqtree-closed')){
+    		li1.removeClass('jqtree-closed');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    	}
+    	$this.closest('li.jqtree_common .jqtree-folder').find('ul').css('display','block');
+    	//$this.closest('li.jqtree_common .jqtree-folder').find('ul').addClass('class_name');
+    }else if ($this.attr('aria-level')==2)
+    {
+    	ul1=$this.closest('ul');
+    	if(ul1.attr('display','none')){
+    		ul1.css('display','block');
+    	}
+    	li1=ul1.closest('li');
+    	if(li1.hasClass('jqtree-closed')){
+    		li1.removeClass('jqtree-closed');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').removeClass('fa-plus');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').addClass('fa-minus');
+    	}
     	
-
- //    if(tagA.indexOf("/venue/2")>0)
-	// {
-	// 	$this=tagA;
- //    	$this.css("background","red");
-	// }
-    
+    }
 });
 $(function() {
 	$("#add_style").click(function(event) {
