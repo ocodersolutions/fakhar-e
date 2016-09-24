@@ -27,7 +27,7 @@ return array(
 		'username'	=> 'root',
 		// 'password'	=> 'mysql',
 		'password'	=> '',
-		// 'hostname'	=> '192.168.0.104',
+		// 'hostname'	=> 'localhost',
 		'hostname'	=> '192.168.1.138',
 		'charset'  => 'utf8',
 		'driver_options' => array(
