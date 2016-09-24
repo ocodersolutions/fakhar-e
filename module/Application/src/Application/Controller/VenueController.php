@@ -25,41 +25,26 @@ class VenueController extends BaseActionController
         $listStyleArr = [];
         $ResultArr = [];
         $StyleName = "";
+        $parentStArr = [];
         if(!empty($listStyleV)){
             foreach ($listStyleV as $StyleV) {
                 $listStyleArr[] = $StyleV['style_id'];
-                
             }
             if(!empty($listStyleArr)){
                 
                 foreach ($listStyleArr as $StyleId) {
                     $oStyleList = $this->getServiceLocator()->get('StyleListTable');
                     $ListstyleItem = $oStyleList->viewsingleitem($StyleId);
-                    //var_dump($ListstyleItem);
-                   
-                        $StyleName = $ListstyleItem->title;
-                        $StyleId = $ListstyleItem ->id;
-                        //var_dump($StyleId);
-                    // foreach ($ListstyleItem as $key => $value) {
-                    //     # code...
-                    // }
-                     
-                  
+                    $StyleName = $ListstyleItem->title;
+                    $StyleId = $ListstyleItem ->id;
                     $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
                     $oAttrofStyleArr =  $oAttrofStyleList->liststyle($StyleId);
-                    //var_dump ( $oAttrofStyleArr);
                     foreach ($oAttrofStyleArr as $oAttrofStyle) {
-                        //var_dump($oAttrofStyle);
                         $ResultArr[$StyleId][$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
-                        //$ResultArr[$StyleId][$oAttrofStyle['attribute']]= $oAttrofStyle['attribute'];
                     }
                     
-                    // $ResultArr['name'] = $StyleName;
-                    // $ResultArr['name']['value'] = $oAttrofStyle;
                 }
-                 //var_dump($ResultArr);
             }
-            //var_dump($ResultArr);
         }
         $my_parent = $viewTitle = array();
         foreach( $ListItem as $item)
@@ -67,7 +52,6 @@ class VenueController extends BaseActionController
             if (!empty($id)){
                  if($item['id'] == $id){
                 $vName = $item['title'];
-                // var_dump($vName);
                 }
             }
             else{
@@ -81,6 +65,7 @@ class VenueController extends BaseActionController
         }
         foreach ($my_parent as $key_item => $value_item) 
         {
+            
             foreach($ListItem as $sub_item)
             {
                 if($sub_item["parentId"] == $key_item)
@@ -106,9 +91,19 @@ class VenueController extends BaseActionController
             }
         }
         $data_tree = "";
+        $lv1Arr=[];
+        $lv2Arr=[];
+        $lv3Arr=[];
+        $childArr = [];
+        $parentArr = [];
+        $resultChildArr=[];
         foreach ($my_parent as $key => $value) 
         {
-            if($value == "")
+            if($key == $id)
+            {
+               $childArr[] = $value;
+            }
+             if($value == "")
             {
                 $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/".$key."',},";
             }
@@ -116,7 +111,14 @@ class VenueController extends BaseActionController
             {
                 $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/".$key."',children: [";
                 foreach ($value as $key_1 => $value_1) 
-                {
+                {   
+                    if($key_1 == $id)
+                    {
+                       $parentArr[] = $key;
+                       $childArr[] = $value_1;
+                       
+                    }
+
                     if($value_1 == "")
                     {
                         $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/venue/".$key_1."',},";
@@ -126,6 +128,12 @@ class VenueController extends BaseActionController
                         $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/venue/".$key_1."',children: [";
                         foreach ($value_1 as $key_2 => $value_2) 
                         {
+                             if($key_2 == $id)
+                            {
+                               $parentArr[] = $key_1;
+                               $childArr[] = $value_2;
+                               
+                            }
                             if($value_2 == "")
                             {
                                 $data_tree .= "{name:'" . $viewTitle[$key_2] . "',url: '/venue/".$key_2."',},";
@@ -141,6 +149,59 @@ class VenueController extends BaseActionController
                 $data_tree .= "]},";
             }
         }
+        var_dump($childArr);
+        foreach ($childArr as $child_key => $child_value) {
+            //var_dump($child_key);
+            if(is_array($child_value)){
+                //var_dump($child_value);
+             foreach ($child_value as $childitem_key => $chilitem_value) {
+                $child_id = $childitem_key;
+                var_dump($child_id);
+                
+                $oVenueNameList = $this->getServiceLocator()->get('VenueTable');
+                $ListNamevenueArr = $oVenueNameList->getnameVenue($child_id);
+                
+                foreach ($ListNamevenueArr as $key_name => $value_name) {
+                     $nameChild=$value_name['title'];
+                }
+                $childStyleV = $oVenueList->getVenueStyle($child_id);
+                        
+                if(!empty($childStyleV)){
+                    foreach ($childStyleV as $key_v => $value_v) {
+                        $nameStyle =$oStyleList->viewsingleitem($StyleId);
+                        //var_dump($nameStyle);
+                        $name = $nameStyle->title;
+                        $child_st_id[]=$value_v['style_id'];
+                        if (is_array($child_st_id)){
+                            foreach ($child_st_id as $item_id) {
+                                //var_dump($item_id);
+                                $StAttrArr =  $oAttrofStyleList->liststyle($item_id);
+                                if(is_array($StAttrArr)){
+                                    foreach ($StAttrArr as $name_attr => $value_attr) {
+                                       $resultChildArr[$nameChild][$name][$value_attr['attribute']]= $value_attr['value'];
+                                    }
+                                }
+                                
+                            }
+                        }
+                        // if (!empty($value_v)){
+                        //     foreach ($value_v as $key_l => $value_l) {
+                        //        $last_id = $key_l;
+                        //        $lastnameV =$oVenueList->getVenueStyle($last_id);
+                        //     }
+                        // }
+                        //var_dump($child_st_id);
+                    }
+                }else{
+                    $resultChildArr[$nameChild][$name]= '';
+                }
+            }
+           }else{
+               $resultChildArr=[];
+           }
+        }
+//var_dump($resultChildArr);
+
         $__viewVariables["venue_id"] = $id;
         $__viewVariables["venue_name"] = $vName;
         $__viewVariables["my_parent"] = $my_parent;
@@ -149,11 +210,11 @@ class VenueController extends BaseActionController
         $__viewVariables["data_tree"] = $data_tree;
         $__viewVariables["style_arr"] = $listStyleArr;
         $__viewVariables["style_attr"] =  $ResultArr;
+        $__viewVariables["child_arr"] =  $resultChildArr;
 
         $oAttrList = $this->getServiceLocator()->get('StyleListTable');
         $attrItem = $oAttrList->viewlist(1);
         $arrayAttr = array();
-        
         foreach($attrItem as $item){
             //var_dump($item);
             // if (!in_array($item['title'], $arrayAttr)){
@@ -204,18 +265,71 @@ class VenueController extends BaseActionController
         $oVenueList = $this->getServiceLocator()->get('VenueTable');
         $isActive = 1;
         $listItem = $oVenueList->getAllVenue($isActive);
-        $jsonArr = array();
+        $jsonArr = $arrFind = array();
         if ($listItem != ''){
            foreach ($listItem as $item) {
-               $jsonArr[]= $item['title'];
-            }
-            
+               $jsonArr[$item["id"]]= $item['title'];
+               $arrFind[$item["title"]] = 0;
+            }            
         }
-        $jsonvenue = json_encode($jsonArr);
-        echo $jsonvenue;
-        exit();
+        $aPostParams = $this->params()->fromPost(); 
+        $data_imp = $aPostParams['data_form'];
+        $data_imp = str_replace("+", " ", trim($data_imp));
+        $result = "error";
+        foreach ($jsonArr as $key => $value) {
+            if(strtolower($data_imp) == strtolower($value)) {   $result = $value; break; }
+            else
+            {
+                $data_imp_2 = strtolower(str_replace(" ", "", $data_imp));
+                $length_data = strlen($data_imp_2);
+                $length_value = strlen(str_replace(" ", "", $value));
+                $value_2 = strtolower(trim($value));
+                $value_2 = str_replace(" ", "", $value_2);
+                for($i = 1; $i <= $length_data; $i++)
+                {
+                    $length_index = "";
+                    if($length_data > $length_value)
+                    {
+                        $length_index = $length_value;
+                    }
+                    else
+                    {
+                        $length_index = $length_data;
+                    }
+                    for($j = 1; $j <= $length_index; $j++)
+                    {
+                        $sub_string = substr($data_imp_2, $i-1, $j);
+                        $arrFind[$value] += substr_count($value_2, $sub_string);
+                    }
+                }
+            }
+        }
+        $five_max = array();
+        $max = 0;
+        foreach ($arrFind as $key => $value) {
+            $five_max[] = $value . "-" . $key;
+        }
+        rsort($five_max);        
+
+        foreach ($five_max as $key => $value) {
+            $temporary = explode("-", $value);
+            $five_max[$key] = $temporary[1];
+        }
+
+        $result_2 = "<div>" . $five_max[0] . "</div> <div>" . $five_max[1] . "</div> <div>" . $five_max[2] . "</div> <div>" . $five_max[3] . "</div> <div>" . $five_max[4] . "</div>";
+        if($result == "error" ) 
+        {
+            $result_post = json_encode(array('status1'=>$result, 'max_1'=>$result_2));
+        }
+        else
+        {
+            $result_post = json_encode(array('status1'=>$result));
+        }
+        echo $result_post; exit(0);
+
         return  $__viewVariables;
     }
+
      public function savestylevenueAction(){
         if ($this->getRequest()->isPost()){
             $styleid = $this->params()->fromPost('styleId');

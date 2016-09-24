@@ -52,5 +52,43 @@ class VenueTable extends BasicTableAdapter {
 
         return $resultSet;
     }
-	
+     public function getnameVenue($id){
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+        $select = $sql->select(array('s' => 'Venue'));
+        $where = new \Zend\Db\Sql\Where();
+        $select->where(array('s.id'=>$id));
+        $resultSet = array();
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new \Zend\Db\ResultSet\ResultSet();
+        $resultSet->initialize($results);
+        $resultSet = $resultSet->toArray();
+
+        return $resultSet;
+    }
+    public function getchildrentId($id){
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+        $select = $sql->select(array('s' => 'Venue'));
+        $where = new \Zend\Db\Sql\Where();
+        $select->where(array('s.parentId'=>$id));
+        $resultSet = array();
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new \Zend\Db\ResultSet\ResultSet();
+        $resultSet->initialize($results);
+        $resultSet = $resultSet->toArray();
+
+        return $resultSet;
+    }
+	function getstyleLevel1($id=0){
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+        $select = $sql->select(array('s' => 'Venue'));
+        $where = new \Zend\Db\Sql\Where();
+        $select->where(array('s.parentId'=>$id));
+        $resultSet = array();
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new \Zend\Db\ResultSet\ResultSet();
+        $resultSet->initialize($results);
+        $resultSet = $resultSet->toArray();
+
+        return $resultSet;
+    }
 }

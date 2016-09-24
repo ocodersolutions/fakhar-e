@@ -17,33 +17,7 @@ $listAttrValue = $this->listAttrValue;
 		<?php if(!$this->venue_name){ ?>
 			<p>Please choose Venue</p>
 		<?php } else { ?>
-		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
-		<?php 
-		$style_arr = $this->style_attr;
-		foreach( $style_arr as $style_name=>$style_attr ){?>
-			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
-			<div class="row style_item">
-				<div class="style_left col-lg-2 col-sm-2 ">
-					<p><?php  echo $styleId ?></p>
-				</div>
-				
-				<div class="style_des_right col-lg-7 col-sm-7 ">
-					<div class="row">
-						
-						<?php foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
-							<div class="col-sm-3"><?php echo $AtrrName ?></div>
-							<div class="col-sm-9" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
-						<?php } ?>
-					</div>	
-				</div>
-				<div class="style_des_right col-lg-2 col-sm-2 ">
-					<input type="text" name="hiddenDelid" value="<?php echo $style_name?>">
-					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
-				</div>
-				<?php }?>
-			</div>
-		<?php }?>
-		<div class="row style_item" id="pick_style_row">
+			<div class="row style_item" id="pick_style_row">
 			<div class="style_left pick_style col-lg-5 col-sm-5">
 				<p>Pick Styles</p>
 				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
@@ -60,7 +34,69 @@ $listAttrValue = $this->listAttrValue;
 				<button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button>
 			</div>
 		</div>
+		<p class="tree_title">My styles</p>
+		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
+
+		<?php 
+		$style_arr = $this->style_attr;
+		foreach( $style_arr as $style_name=>$style_attr ){?>
+			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
+			<div class="row style_item">
+				<div class="style_left col-lg-2 col-sm-2 ">
+					<p><?php  echo $styleId ?></p>
+				</div>
+				
+				<div class="style_des_right col-lg-7 col-sm-7 ">
+					<div class="row">
+						
+						<?php foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
+							<div class="col-sm-5"><?php echo $AtrrName ?></div>
+							<div class="col-sm-7" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
+						<?php } ?>
+					</div>	
+				</div>
+				<div class="style_des_right col-lg-2 col-sm-2 ">
+					<input type="hidden" name="hiddenDelid" value=<?php echo $style_name?>">
+					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
+				</div>
+				<?php }?>
+			</div>
+		<?php }?>
 		<?php } ?>
+		
+		<?php $ChildrenArr = $this->child_arr;
+			if(!empty($ChildrenArr)){?>
+				<p class="tree_title">Child styles</p>
+				<?php foreach ($ChildrenArr as $name_venue => $venue_value) {?>
+					<h3 class="row">Venue: <i>"<?php echo $name_venue ;?>"</i></h3>
+				<?php 
+				if(!empty($venue_value)){
+					foreach ($venue_value as $name_st => $attr_arr) {?>
+						<div class="row style_item">
+							<div class="style_left col-lg-3 col-sm-3 ">
+								<p><?php echo $name_st ?></p>
+							</div>
+							
+							<div class="style_des_right col-lg-8 col-sm-8 ">
+								<div class="row">
+									<?php if (is_array($attr_arr)){
+										foreach ($attr_arr as $key => $value) {?>
+											<div class="col-sm-5"><?php echo $key?></div>
+											<div class="col-sm-7" style="font-weight: normal;"><?php echo $value?></div>
+										<?php }
+									}?>
+									
+									</div>	
+							</div>
+							
+						</div>
+					<?php }
+				}
+				//var_dump($venue_value);
+			}
+			}
+		?>
+
 	</div>
 </div>
 <script>
@@ -94,13 +130,43 @@ $(function() {
     });
     tagA=$("#tree1").find("a[href='"+pathname+"']");
     tagA.find("span").css("color","#859ed8");
-    
- //    if(tagA.indexOf("/venue/2")>0)
-	// {
-	// 	$this=tagA;
- //    	$this.css("background","red");
-	// }
-    
+    $this=tagA.find("span");
+    if($this.attr('aria-level')==3)
+    {
+    	li2=$this.closest('li.jqtree_common .jqtree-folder');
+    	if(li2.hasClass('jqtree-closed')){
+    		li2.removeClass('jqtree-closed');
+    		li2.addClass('123');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').removeClass('jqtree-closed');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    	}
+    	ul2=li2.closest('ul');
+    	if(ul2.attr('display','none')){
+    		ul2.css('display','block');
+    	}
+    	li1=ul2.closest('li');
+    	if(li1.hasClass('jqtree-closed')){
+    		li1.removeClass('jqtree-closed');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    	}
+    	$this.closest('li.jqtree_common .jqtree-folder').find('ul').css('display','block');
+    	//$this.closest('li.jqtree_common .jqtree-folder').find('ul').addClass('class_name');
+    }else if ($this.attr('aria-level')==2)
+    {
+    	ul1=$this.closest('ul');
+    	if(ul1.attr('display','none')){
+    		ul1.css('display','block');
+    	}
+    	li1=ul1.closest('li');
+    	if(li1.hasClass('jqtree-closed')){
+    		li1.removeClass('jqtree-closed');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').removeClass('fa-plus');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').addClass('fa-minus');
+    	}
+    	
+    }
 });
 $(function() {
 	$("#add_style").click(function(event) {
