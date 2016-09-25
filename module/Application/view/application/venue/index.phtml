@@ -39,6 +39,9 @@ $listAttrValue = $this->listAttrValue;
 
 		<?php 
 		$style_arr = $this->style_attr;
+		if(empty($style_arr)){
+			echo "<i>please add style for Venue</i>";
+		}
 		foreach( $style_arr as $style_name=>$style_attr ){?>
 			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
 			<div class="row style_item">
@@ -63,11 +66,66 @@ $listAttrValue = $this->listAttrValue;
 			</div>
 		<?php }?>
 		<?php } ?>
-		
+		<!-- start parent -->
+		<?php $parentArr = $this->Parent_Arr;
+			  $GrandParent_Arr = $this->GrandParent_Arr;
+			  
+			  if((!empty($parentArr)) || (!empty($parentArr))){
+			  	echo "<p class='tree_title'>Parents styles</p>";
+			  	if (!empty($parentArr)){
+			  		echo '<h3>Immi diate Parent Venue</h3>';
+			  		foreach ($parentArr as $parentkey => $parentvalue) { ?>
+				  		<div class="row style_item">
+							<div class="style_left col-lg-3 col-sm-3 ">
+								<p><?php echo $parentkey ?></p>
+							</div>
+							
+							<div class="style_des_right col-lg-8 col-sm-8 ">
+								<div class="row">
+									<?php if (is_array($parentvalue)){
+										foreach ($parentvalue as $attrb => $attrbvalue) {?>
+											<div class="col-sm-5"><?php echo $attrb?></div>
+											<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrbvalue?></div>
+										<?php }
+									}?>
+									
+									</div>	
+							</div>
+							
+						</div>
+				  	<?php }
+			  	}
+			  	if (!empty($GrandParent_Arr)){
+			  		echo '<h3>Grand Parent Venue</h3>';
+			  		foreach ($GrandParent_Arr as $GrandParentkey => $GrandParentvalue) { ?>
+				  		<div class="row style_item">
+							<div class="style_left col-lg-3 col-sm-3 ">
+								<p><?php echo $GrandParentkey ?></p>
+							</div>
+							
+							<div class="style_des_right col-lg-8 col-sm-8 ">
+								<div class="row">
+									<?php if (is_array($GrandParentvalue)){
+										foreach ($GrandParentvalue as $GrandParentattrb => $GrandParentattrbvalue) {?>
+											<div class="col-sm-5"><?php echo $GrandParentattrb?></div>
+											<div class="col-sm-7" style="font-weight: normal;"><?php echo $GrandParentattrbvalue?></div>
+										<?php }
+									}?>
+									
+									</div>	
+							</div>
+							
+						</div>
+				  	<?php }
+			  	}
+			  }
+		?>
+		<!-- end parent -->
+		<!-- child -->
 		<?php $ChildrenArr = $this->child_arr;
 			if(!empty($ChildrenArr)){?>
 				<p class="tree_title">Child styles</p>
-				<p>Immi diate Child Venue</p>
+				<h3>Immi diate Child Venue</h3>
 				<?php foreach ($ChildrenArr as $name_venue => $venue_value) {?>
 					<?php 
 					if(!empty($venue_value)){
@@ -98,7 +156,25 @@ $listAttrValue = $this->listAttrValue;
 			<?php $GranChildrenArr = $this->GrandChild_Arr;
 			//var_dump($GranChildrenArr);
 				if (!empty($GranChildrenArr)){
-					echo"<p>Grand Child Venue</p>";
+					echo"<h3>Grand Child Venue</h3>";
+					foreach ($GranChildrenArr as $nameGrChild => $GrChildvalue) { ?>
+					<div class="row style_item">
+						<div class="style_left col-lg-3 col-sm-3 ">
+							<p><?php echo $nameGrChild ?></p>
+						</div>
+						<div class="style_des_right col-lg-8 col-sm-8 ">
+							<div class="row">
+						<?php if (is_array($GrChildvalue)){
+							foreach ($GrChildvalue as $attrname => $attrvalue) {?>
+								<div class="col-sm-5"><?php echo $attrname?></div>
+								<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrvalue ?></div>
+						<?php	}
+						}?>
+							</div>	
+						</div>
+							
+					</div>
+					<?php }
 				}
 			?>
 
