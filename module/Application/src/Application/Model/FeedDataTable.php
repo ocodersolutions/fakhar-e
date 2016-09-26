@@ -540,8 +540,60 @@ class FeedDataTable extends BasicTableAdapter {
         if (isset($aPostParams['searchVenue']) && !empty($aPostParams['searchVenue']) ) {
             
             $searcharray = explode(",",$aPostParams['searchVenue']);
+            $AttrsArr = [];
             foreach ($searcharray as $key => $value) {
+              //value is name of venue
+              $newSql = new Sql($this->getServiceLocator()->get('db'));
+              $Vselect = $newSql->select(array('s' => 'Venue'));
+              $Vselect->where(array('title' => $value));
+              $resultSet = array();
+              $results = $newSql->prepareStatementForSqlObject($Vselect)->execute();
+              $resultSet = new \Zend\Db\ResultSet\ResultSet();
+              $resultSet->initialize($results);
+              $vresultSet = $resultSet->toArray();
+              foreach ($vresultSet as $Vvalue) {
+                $Vid = $Vvalue['id'];
+                $StSql = new Sql($this->getServiceLocator()->get('db'));
+                $Stselect = $StSql->select(array('st' => 'Venuestyle'));
+                $Stselect->where(array('venue_id' => $Vid));
+                $resultSet = array();
+                $results = $newSql->prepareStatementForSqlObject($Stselect)->execute();
+                $resultSet = new \Zend\Db\ResultSet\ResultSet();
+                $resultSet->initialize($results);
+                $StresultSet = $resultSet->toArray();
+                foreach ($StresultSet as $St_key => $Stvalue) {
+                  $stId = $Stvalue['style_id'];
+                  $AttrSql = new Sql($this->getServiceLocator()->get('db'));
+                  $Attrselect = $AttrSql->select(array('att' => 'styledefination'));
+                  $Attrselect->where(array('styleId' => $stId));
+                  $resultSet = array();
+                  $results = $AttrSql->prepareStatementForSqlObject($Attrselect)->execute();
+                  $resultSet = new \Zend\Db\ResultSet\ResultSet();
+                  $resultSet->initialize($results);
+                  $AttresultSet = $resultSet->toArray();
+                  foreach ($AttresultSet as $AttrKey => $AttrValue) {
+                    $AttrsArr[$AttrValue['attribute']] = $AttrValue ['value'];
+                    foreach ($AttrsArr as $type => $Attr_value) {
+                      $ProdSql = new Sql($this->getServiceLocator()->get('db'));
+                      $Prodselect = $ProdSql->select(array('prod' => 'productattributes'));
+                      $Prodselect->where(array('type' => $type , 'value' => $Attr_value));
+                      $resultSet = array();
+                      $results = $AttrSql->prepareStatementForSqlObject($Prodselect)->execute();
+                      $resultSet = new \Zend\Db\ResultSet\ResultSet();
+                      $resultSet->initialize($results);
+                      $ProdresultSet = $resultSet->toArray();
+                      
+                    }
+                    echo "<pre>";
+                      var_dump($Attr_value);
+                      echo "</pre>";
+                  }
+                  
+                }
+              }
               $sWhere .= " AND `feed`.`name` LIKE '%".$value."%' ";
+             // var_dump( $AttrsArr);
+              // var_dump($Attr_value);
             }
         }
         

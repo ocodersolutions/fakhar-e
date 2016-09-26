@@ -18,239 +18,247 @@ class VenueController extends BaseActionController
     }
 
     public function indexAction() {
+       
         $id = $this->params('id');
         $__viewVariables = array();
         $this->layout('layout/layout_elnove.phtml');
-        $oVenueList = $this->getServiceLocator()->get('VenueTable');
-        $oStyleList = $this->getServiceLocator()->get('StyleListTable');
-        $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
-        $ListItem = $oVenueList->getAllVenue(1);
-        $listStyleV = $oVenueList->getVenueStyle($id);
-        $listStyleArr = [];
-        $ResultArr = [];
-        $StyleName = "";
-        $parentStArr = [];
-        if(!empty($listStyleV)){
-            foreach ($listStyleV as $StyleV) {
-                $listStyleArr[] = $StyleV['style_id'];
+
+        $oAuth = $this->getServiceLocator()->get('AuthService');
+        if ($oAuth->hasIdentity() && $oAuth->getIdentity()->userType==2) 
+        {
+
+            $oVenueList = $this->getServiceLocator()->get('VenueTable');
+            $oStyleList = $this->getServiceLocator()->get('StyleListTable');
+            $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
+            $ListItem = $oVenueList->getAllVenue(1);
+            $listStyleV = $oVenueList->getVenueStyle($id);
+            $listStyleArr = [];
+            $ResultArr = [];
+            $StyleName = "";
+            $parentStArr = [];
+            if(!empty($listStyleV)){
+                foreach ($listStyleV as $StyleV) {
+                    $listStyleArr[] = $StyleV['style_id'];
+                }
+                if(!empty($listStyleArr)){
+                    
+                    foreach ($listStyleArr as $StyleId) {
+                        $ListstyleItem = $oStyleList->viewsingleitem($StyleId);
+                        $StyleName = $ListstyleItem->title;
+                        $StyleId = $ListstyleItem ->id;
+                        $oAttrofStyleArr =  $oAttrofStyleList->liststyle($StyleId);
+                        foreach ($oAttrofStyleArr as $oAttrofStyle) {
+                            $ResultArr[$StyleId][$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
+                        }
+                        
+                    }
+                }
             }
-            if(!empty($listStyleArr)){
+            $my_parent = $viewTitle = array();
+            foreach( $ListItem as $item)
+            {
+                if (!empty($id)){
+                     if($item['id'] == $id){
+                    $vName = $item['title'];
+                    }
+                }
+                else{
+                    $vName = '';
+                }
+                $viewTitle[$item["id"]] = $item["title"];
+                if($item["parentId"] == 0 )
+                {
+                    $my_parent[$item["id"]] = "";
+                }
+            }
+            foreach ($my_parent as $key_item => $value_item) 
+            {
                 
-                foreach ($listStyleArr as $StyleId) {
-                    $ListstyleItem = $oStyleList->viewsingleitem($StyleId);
-                    $StyleName = $ListstyleItem->title;
-                    $StyleId = $ListstyleItem ->id;
-                    $oAttrofStyleArr =  $oAttrofStyleList->liststyle($StyleId);
-                    foreach ($oAttrofStyleArr as $oAttrofStyle) {
-                        $ResultArr[$StyleId][$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
+                foreach($ListItem as $sub_item)
+                {
+                    if($sub_item["parentId"] == $key_item)
+                    {
+                        $my_parent[$key_item][$sub_item["id"]] = "";
                     }
-                    
                 }
             }
-        }
-        $my_parent = $viewTitle = array();
-        foreach( $ListItem as $item)
-        {
-            if (!empty($id)){
-                 if($item['id'] == $id){
-                $vName = $item['title'];
-                }
-            }
-            else{
-                $vName = '';
-            }
-            $viewTitle[$item["id"]] = $item["title"];
-            if($item["parentId"] == 0 )
+            foreach ($my_parent as $key_item => $value_item) 
             {
-                $my_parent[$item["id"]] = "";
+                if($value_item !== "")
+                {
+                    foreach($value_item as $key_sub_item => $value_sub_item)
+                    {
+                        foreach($ListItem as $sub_item)
+                        {
+                            if($sub_item["parentId"] == $key_sub_item)
+                            {
+                                $my_parent[$key_item][$key_sub_item][$sub_item["id"]] = "";
+                            }
+                        }
+                    }
+                }
             }
-        }
-        foreach ($my_parent as $key_item => $value_item) 
-        {
+            $data_tree = "";
+            $childArr = [];
+            $ResultChild = [];
+            $GrandChildArr=[];
+            $parentArr = [];
+            $resultparentArr=[];
+            $GrandParentArr=[];
+            $resultGrparentArr=[];
+            $resultChildArr=[];
             
-            foreach($ListItem as $sub_item)
+            foreach ($my_parent as $key => $value) 
             {
-                if($sub_item["parentId"] == $key_item)
+                if($key == $id)
                 {
-                    $my_parent[$key_item][$sub_item["id"]] = "";
+                   $childArr[$key] = $value;
                 }
-            }
-        }
-        foreach ($my_parent as $key_item => $value_item) 
-        {
-            if($value_item !== "")
-            {
-                foreach($value_item as $key_sub_item => $value_sub_item)
+                 if($value == "")
                 {
-                    foreach($ListItem as $sub_item)
-                    {
-                        if($sub_item["parentId"] == $key_sub_item)
-                        {
-                            $my_parent[$key_item][$key_sub_item][$sub_item["id"]] = "";
-                        }
-                    }
+                    $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/".$key."',},";
                 }
-            }
-        }
-        $data_tree = "";
-        $childArr = [];
-        $ResultChild = [];
-        $GrandChildArr=[];
-        $parentArr = [];
-        $resultparentArr=[];
-        $GrandParentArr=[];
-        $resultGrparentArr=[];
-        $resultChildArr=[];
-        
-        foreach ($my_parent as $key => $value) 
-        {
-            if($key == $id)
-            {
-               $childArr[$key] = $value;
-            }
-             if($value == "")
-            {
-                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/".$key."',},";
-            }
-            else
-            {
-                $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/".$key."',children: [";
-                foreach ($value as $key_1 => $value_1) 
-                {   
-                    if($key_1 == $id)
-                    {
-                        $GrandParentArr=[];
-                        $parentArr[$key] = '';
-                        $childArr[$key_1] = $value_1;
-                       
-                    }
-
-                    if($value_1 == "")
-                    {
-                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/venue/".$key_1."',},";
-                    }
-                    else
-                    {
-                        $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/venue/".$key_1."',children: [";
-                        foreach ($value_1 as $key_2 => $value_2) 
+                else
+                {
+                    $data_tree .= "{name:'" . $viewTitle[$key] . "',url: '/venue/".$key."',children: [";
+                    foreach ($value as $key_1 => $value_1) 
+                    {   
+                        if($key_1 == $id)
                         {
-                             if($key_2 == $id)
-                            {
-                                $GrandParentArr[$key]='';
-                                $parentArr[$key_1] ='' ;
-                                $childArr[$key_2] = $value_2;
-                               
-                            }
-                            if($value_2 == "")
-                            {
-                                $data_tree .= "{name:'" . $viewTitle[$key_2] . "',url: '/venue/".$key_2."',},";
-                            }
-                            else
-                            {
-
-                            }
+                            $GrandParentArr=[];
+                            $parentArr[$key] = '';
+                            $childArr[$key_1] = $value_1;
+                           
                         }
-                        $data_tree .= "]},";
-                    }
-                }
-                $data_tree .= "]},";
-            }
-        }
 
-        
-        // child array
-        foreach ($childArr as $current => $Child) {
-            //var_dump($Child);
-            if(is_array($Child)){
-                foreach ($Child as $ChildId => $valueChild) {//4 - 10
-                    $listStyChild = $oVenueList->getVenueStyle($ChildId);
-                        foreach ($listStyChild as $StyChildId => $StyChild_value) { //StyChild_value is array style 26 & 171
-                            $StyChild_id = $StyChild_value['style_id'];
-                            $nameStyChild =$oStyleList->viewsingleitem($StyChild_id);
-                            $ResultChild[$StyChild_id][$nameStyChild->title]='';
-                            $ListAttofChild=$oAttrofStyleList->liststyle($StyChild_id);
-                            if(!empty($ListAttofChild)){
-                                foreach ($ListAttofChild as $Attrkey => $Attrvalue) {
-                                    $ResultChild[$StyChild_id][$nameStyChild->title][$Attrvalue['attribute']]=$Attrvalue['value'];
+                        if($value_1 == "")
+                        {
+                            $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/venue/".$key_1."',},";
+                        }
+                        else
+                        {
+                            $data_tree .= "{name:'" . $viewTitle[$key_1] . "',url: '/venue/".$key_1."',children: [";
+                            foreach ($value_1 as $key_2 => $value_2) 
+                            {
+                                 if($key_2 == $id)
+                                {
+                                    $GrandParentArr[$key]='';
+                                    $parentArr[$key_1] ='' ;
+                                    $childArr[$key_2] = $value_2;
+                                   
+                                }
+                                if($value_2 == "")
+                                {
+                                    $data_tree .= "{name:'" . $viewTitle[$key_2] . "',url: '/venue/".$key_2."',},";
+                                }
+                                else
+                                {
+
                                 }
                             }
+                            $data_tree .= "]},";
                         }
-                    if(!empty($valueChild)){
-                        foreach ($valueChild as $GranchildId => $Granchildvalue) { 
-                            $GranchildStyle = $oVenueList->getVenueStyle($GranchildId);
-                            foreach ($GranchildStyle as $arrId) {
-                                $GrandChilId = $arrId['style_id'];
-                                $nameStyGrandChild =$oStyleList->viewsingleitem($GrandChilId);
-                                $StyGrandChildname=$nameStyGrandChild->title;
-                                $GrandChildArr[$StyGrandChildname]='';
-                                $ListAttofGrandChild=$oAttrofStyleList->liststyle($GrandChilId);
-                                foreach ($ListAttofGrandChild as $key => $value) {
-                                    $GrandChildArr[$StyGrandChildname][$value['attribute']]=$value['value'];
+                    }
+                    $data_tree .= "]},";
+                }
+            }
+
+            
+            // child array
+            foreach ($childArr as $current => $Child) {
+                //var_dump($Child);
+                if(is_array($Child)){
+                    foreach ($Child as $ChildId => $valueChild) {//4 - 10
+                        $listStyChild = $oVenueList->getVenueStyle($ChildId);
+                            foreach ($listStyChild as $StyChildId => $StyChild_value) { //StyChild_value is array style 26 & 171
+                                $StyChild_id = $StyChild_value['style_id'];
+                                $nameStyChild =$oStyleList->viewsingleitem($StyChild_id);
+                                $ResultChild[$StyChild_id][$nameStyChild->title]='';
+                                $ListAttofChild=$oAttrofStyleList->liststyle($StyChild_id);
+                                if(!empty($ListAttofChild)){
+                                    foreach ($ListAttofChild as $Attrkey => $Attrvalue) {
+                                        $ResultChild[$StyChild_id][$nameStyChild->title][$Attrvalue['attribute']]=$Attrvalue['value'];
+                                    }
                                 }
                             }
-                            
+                        if(!empty($valueChild)){
+                            foreach ($valueChild as $GranchildId => $Granchildvalue) { 
+                                $GranchildStyle = $oVenueList->getVenueStyle($GranchildId);
+                                foreach ($GranchildStyle as $arrId) {
+                                    $GrandChilId = $arrId['style_id'];
+                                    $nameStyGrandChild =$oStyleList->viewsingleitem($GrandChilId);
+                                    $StyGrandChildname=$nameStyGrandChild->title;
+                                    $GrandChildArr[$StyGrandChildname]='';
+                                    $ListAttofGrandChild=$oAttrofStyleList->liststyle($GrandChilId);
+                                    foreach ($ListAttofGrandChild as $key => $value) {
+                                        $GrandChildArr[$StyGrandChildname][$value['attribute']]=$value['value'];
+                                    }
+                                }
+                                
+                            }
                         }
                     }
+                }else{
+                    $ResultChild=[];
                 }
-            }else{
-                $ResultChild=[];
             }
-        }
 
-        //parent array
-        
-            foreach ($parentArr as $Pid => $Pvalue) {
-                $listStyParent = $oVenueList->getVenueStyle($Pid);
-                    foreach ($listStyParent as $StParentId) {
-                        $StParentId = $StParentId['style_id'];
-                        $nameStyParentList =$oStyleList->viewsingleitem($StParentId);
-                        $nameStyParent=$nameStyParentList->title;
-                        $ListAttofparent=$oAttrofStyleList->liststyle($StParentId);
-                        foreach ($ListAttofparent as $Attofparentkey => $Attofparentvalue) {
-                          $resultparentArr[$nameStyParent][$Attofparentvalue['attribute']] = $Attofparentvalue['value'];
+            //parent array
+            
+                foreach ($parentArr as $Pid => $Pvalue) {
+                    $listStyParent = $oVenueList->getVenueStyle($Pid);
+                        foreach ($listStyParent as $StParentId) {
+                            $StParentId = $StParentId['style_id'];
+                            $nameStyParentList =$oStyleList->viewsingleitem($StParentId);
+                            $nameStyParent=$nameStyParentList->title;
+                            $ListAttofparent=$oAttrofStyleList->liststyle($StParentId);
+                            foreach ($ListAttofparent as $Attofparentkey => $Attofparentvalue) {
+                              $resultparentArr[$nameStyParent][$Attofparentvalue['attribute']] = $Attofparentvalue['value'];
+                            }
                         }
                     }
-                }
-        // grand parent array
+            // grand parent array
 
-            foreach ($GrandParentArr as $GrPeid => $GrPvalue) {
-                $listStyGrParent = $oVenueList->getVenueStyle($GrPeid);
-                foreach ($listStyGrParent as $StGrParentId) {
-                    $StGrParent_Id = $StGrParentId['style_id'];
-                    $nameStyGrParentList =$oStyleList->viewsingleitem($StGrParent_Id);
-                    $nameStyGrParent=$nameStyGrParentList->title;
-                    $ListAttofGrparent=$oAttrofStyleList->liststyle($StGrParent_Id);
-                    $resultGrparentArr[$nameStyGrParent]='';
-                    
-                    
-                    foreach ($ListAttofGrparent as $AttofGrparentkey => $AttofGrparentvalue) {
-                        $resultGrparentArr[$nameStyGrParent][$AttofGrparentvalue['attribute']]=$AttofGrparentvalue['value'];
+                foreach ($GrandParentArr as $GrPeid => $GrPvalue) {
+                    $listStyGrParent = $oVenueList->getVenueStyle($GrPeid);
+                    foreach ($listStyGrParent as $StGrParentId) {
+                        $StGrParent_Id = $StGrParentId['style_id'];
+                        $nameStyGrParentList =$oStyleList->viewsingleitem($StGrParent_Id);
+                        $nameStyGrParent=$nameStyGrParentList->title;
+                        $ListAttofGrparent=$oAttrofStyleList->liststyle($StGrParent_Id);
+                        $resultGrparentArr[$nameStyGrParent]='';
+                        
+                        
+                        foreach ($ListAttofGrparent as $AttofGrparentkey => $AttofGrparentvalue) {
+                            $resultGrparentArr[$nameStyGrParent][$AttofGrparentvalue['attribute']]=$AttofGrparentvalue['value'];
+                        }
                     }
-                }
-           }
+               }
 
-        $__viewVariables["venue_id"] = $id;
-        $__viewVariables["venue_name"] = $vName;
-        $__viewVariables["my_parent"] = $my_parent;
-        //$__viewVariables["listAttrValue"] = $ListItem;
-        $__viewVariables["viewTitle"] = $viewTitle;
-        $__viewVariables["data_tree"] = $data_tree;
-        $__viewVariables["style_arr"] = $listStyleArr;
-        $__viewVariables["style_attr"] =  $ResultArr;
-        $__viewVariables["child_arr"] =  $ResultChild;
-        $__viewVariables["GrandChild_Arr"] =  $GrandChildArr;
-        $__viewVariables["Parent_Arr"] =  $resultparentArr;
-        $__viewVariables["GrandParent_Arr"] =  $resultGrparentArr;
+            $__viewVariables["venue_id"] = $id;
+            $__viewVariables["venue_name"] = $vName;
+            $__viewVariables["my_parent"] = $my_parent;
+            //$__viewVariables["listAttrValue"] = $ListItem;
+            $__viewVariables["viewTitle"] = $viewTitle;
+            $__viewVariables["data_tree"] = $data_tree;
+            $__viewVariables["style_arr"] = $listStyleArr;
+            $__viewVariables["style_attr"] =  $ResultArr;
+            $__viewVariables["child_arr"] =  $ResultChild;
+            $__viewVariables["GrandChild_Arr"] =  $GrandChildArr;
+            $__viewVariables["Parent_Arr"] =  $resultparentArr;
+            $__viewVariables["GrandParent_Arr"] =  $resultGrparentArr;
 
-        $oAttrList = $this->getServiceLocator()->get('StyleListTable');
-        $attrItem = $oAttrList->viewlist(1);
-        $arrayAttr = array();
-        foreach($attrItem as $item){
-               $arrayAttr[$item['id']]=$item['title'];
+            $oAttrList = $this->getServiceLocator()->get('StyleListTable');
+            $attrItem = $oAttrList->viewlist(1);
+            $arrayAttr = array();
+            foreach($attrItem as $item){
+                   $arrayAttr[$item['id']]=$item['title'];
+            }
+
+            $__viewVariables['listAttrValue'] = $arrayAttr;
+        }else{
+             $this->redirect()->toRoute('auth');
         }
-
-        $__viewVariables['listAttrValue'] = $arrayAttr;
-
         return  $__viewVariables;
     }
 
