@@ -91,6 +91,13 @@ $(document).ready(function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
+
+    // fix footer
+    windowHeight = $(window).height();
+    bodyHeight = $('body').height();
+    if (bodyHeight < windowHeight){
+        $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" });
+    }
 });
 
 function buttonUp(){
@@ -98,6 +105,7 @@ function buttonUp(){
     inputVal = $.trim(inputVal).length;
     if( inputVal == 0){
          $('.searchbox-input').val('');
+         
     } 
 }
 
