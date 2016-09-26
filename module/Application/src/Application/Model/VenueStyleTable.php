@@ -12,11 +12,8 @@ class VenueStyleTable extends BasicTableAdapter {
          $this->tableGateway = $tableGateway;
     }
 
-    public function insert($venueStyle){
+    public function AddVenue($venueStyle){
         $result = $this->tableGateway->insert($venueStyle);
-        // if($result){
-        //     $result = $this->tableGateway->lastInsertValue;
-        // }
         return $result;
     }
     public function delete($styleid,$venueid){

@@ -1,6 +1,8 @@
 <?php
 namespace Application\Controller;
 
+use Zend\Validator\Db\RecordExists;
+use Zend\Validator\Db\NoRecordExists;
 use Zend\View\Model\ViewModel;
 use Application\Model\Venue;
 use Application\Model\VenueTable;
@@ -9,7 +11,7 @@ use Zend\Session\Container;
 use Zend\Console\Request as ConsoleRequest;
 use Ocoder\Base\BaseActionController;
 use Application\View\Helper\Getvenuehelper;
-
+use Zend\Json\Json;
 class VenueController extends BaseActionController
 {
     public function __construct(){
@@ -230,7 +232,7 @@ class VenueController extends BaseActionController
         $__viewVariables["venue_id"] = $id;
         $__viewVariables["venue_name"] = $vName;
         $__viewVariables["my_parent"] = $my_parent;
-        $__viewVariables["ListItem"] = $ListItem;
+        //$__viewVariables["listAttrValue"] = $ListItem;
         $__viewVariables["viewTitle"] = $viewTitle;
         $__viewVariables["data_tree"] = $data_tree;
         $__viewVariables["style_arr"] = $listStyleArr;
@@ -359,16 +361,29 @@ class VenueController extends BaseActionController
         if ($this->getRequest()->isPost()){
             $styleid = $this->params()->fromPost('styleId');
             $venueid = $this->params()->fromPost('venueid');
-
             $data =array(
                 'style_id'=>$styleid,
                 'venue_id'=>$venueid
             );
             $oSavestyle = $this->getServiceLocator()->get('VenueStyleTable');
-            $saveItem = $oSavestyle->insert($data);
-            
-         }
-        return 0;
+
+
+            $validator = new RecordExists(
+                array(
+                    'table'   => 'venuestyle',
+                    'field'   => 'style_id',
+                    'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
+                    'exclude' => ' venue_id = '.$venueid
+                )
+            );
+            $validator->isValid($styleid) ? $recordExists = 1 : $recordExists = 0;
+            if($recordExists == 0){
+                $saveItem = $oSavestyle->AddVenue($data);
+            }else{
+                $saveItem = "style already exits";
+            }
+        }
+        return $this->getResponse()->setContent(Json::encode($saveItem));
 
      }
      public function delstylevenueAction(){

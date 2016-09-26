@@ -150,7 +150,6 @@ $listAttrValue = $this->listAttrValue;
 							</div>
 						<?php }
 					}
-					
 				}
 			}?>
 			<?php $GranChildrenArr = $this->GrandChild_Arr;
@@ -261,8 +260,14 @@ $(function() {
 	            'styleId' : styleid,
 	            'venueid' : venueid,
 	        },
-	        success:function(){
-	        	location.reload();
+	        success:function(result){
+	        	console.log(result);
+	        	if(result!=1){
+	        		//myalert('myalertid1','type_missing','Oops', 'Style alredy exits.','');
+	        		myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','Style alredy exits.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+	        	}else{
+	        		location.reload();
+	        	}
 	        }
 		});
 	});
