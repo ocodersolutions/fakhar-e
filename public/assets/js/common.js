@@ -63,10 +63,42 @@ $(document).ready(function() {
     });
 
     $('.chosen_select_left').change(function(){
+
+        x = $('.style-update .chosen_select_left option:selected');
         var number = $(this).data('number');
+
         $('#loading').css('display','block');
         $(".chosen_select_right#select-right-"+number+" option").remove();
         selected = $(this).val();
+        form_action = $(this).closest('.style-update').length;
+        exist = 0;
+
+        if (form_action == 1 ) {
+            // console.log(selected);
+            arr_left = [];
+             for(i = 0; x.length >i; i++){
+
+                if($.inArray($(x[i]).val(), arr_left) != -1){
+                    exist = 1;
+                    break;
+                }
+                arr_left.push($(x[i]).val());
+               
+            }
+        }else{
+
+            for(i = 0; x.length >i; i++){
+                if(selected == $(x[i]).val()){
+                    exist = 1;
+                    break;
+                }
+            }
+        }
+        if (exist == 1) {
+            alert ('Style already exists ');
+            $('.chosen_select_right#select-right-'+number+' option.all').removeAttr('selected');
+            $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
+        }else{
             $.ajax({
                 url : "/style/getAttributeValue",
                 type : "post",
@@ -86,23 +118,7 @@ $(document).ready(function() {
                     $(className).append( optionString ).trigger("chosen:updated");
                 }
             }); 
-        // }else{
-        //     var brand_store = $('#brand-store option');
-        //     brand_list = [];
-
-        //     for(i=0; brand_store.length>i;i++ ){
-        //         brand_list.push(brand_store[i].value);
-        //     }
-
-        //     var className = '#select-right-' + number;
-        //     var optionString = '';
-        //     for(i = 0; brand_list.length >i; i++){
-        //         optionString += "<option>"+brand_list[i]+"</option>";
-        //     }
-        //     $(className).append( optionString ).trigger("chosen:updated");
-        //     //console.log(brand_list);
-        //     //console.log(brand_list);
-        // }
+        }
     });
 
  $(function () {
