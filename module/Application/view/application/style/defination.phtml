@@ -12,10 +12,11 @@
 			<div class="row">
 				<a href="/style" class="back-to">&lt; Back to List Styles</a>
 				<div class="top_left_title top_title_style">Style</div>
-				<form method="post">
+				<form method="post" id="update-style">
 					<div class="style_title col-lg-5 col-lg-offset-1">
 						<label for="">Name: </label>
 						<input type="text" name="name_style" value="<?php if(isset($singleItem->title)){echo $singleItem->title;}else{echo '';};?>">
+						<input type="hidden" name="update-style" value="<?php if(isset($singleItem->id)){echo $singleItem->id;} ?>">
 					</div>
 					<div class="style_status col-lg-5">
 						<label for="">Status: </label>
@@ -27,6 +28,7 @@
 							  </option>
 							</select>
 						</div>
+						<img id="df-notice" src="http://www.freeiconspng.com/uploads/success-icon-7.png">
 					</div>
 					<input type="submit" name="submit" class="upgrade_style btn btn-primary col-lg-1"  value="Update">
 

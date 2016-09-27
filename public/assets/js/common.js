@@ -104,6 +104,37 @@ $(document).ready(function() {
         //     //console.log(brand_list);
         // }
     });
+
+ $(function () {
+        $('form#update-style').bind('submit', function () {
+            form = $(this).serialize();
+            // action = $('input[name="update-style"]').val();
+            $.ajax({
+            type: 'post',
+            url: '/style/defination',
+            data : {
+                'form' : form,
+                // 'action' : action
+            },
+            success: function (result) {
+                $('#df-notice').fadeIn(1000).fadeOut(2000);
+                console.log(result);
+              // if(result == 1){
+              //   // alert('Created');
+              //   location.reload();
+              // }else{
+              //   alert('has error');
+              // }
+              
+            }
+          });
+            return false;
+        });
+    });
+
+
+
+
     //form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
