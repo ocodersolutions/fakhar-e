@@ -48,8 +48,12 @@
 		$count++;  ?>
 
 					<form class="style-update" id="style-update-<?php echo $count ?>" method="post">
+				<!-- 	<img id="" style="width: 25px; position: absolute; " src="http://www.freeiconspng.com/uploads/success-icon-7.png"> -->
+				
 							<div class="top_right_attName col-lg-5 col-lg-offset-1">
-								<select style="width:350px;" name='attr_name-<?php echo $count ?>'  class="chosen_select_left" data-number="<?php echo $count ?>" data-value-<?php echo $count ?>="<?php echo $style['value']; ?>">
+							<img class="df-item-update-success"  src="http://www.freeiconspng.com/uploads/success-icon-7.png">
+							<img class="df-item-update-error"  src="http://www.clker.com/cliparts/0/7/e/a/12074327311562940906milker_X_icon.svg.hi.png">
+								<select style="width:350px; " name='attr_name-<?php echo $count ?>'  class="chosen_select_left" data-number="<?php echo $count ?>" data-value-<?php echo $count ?>="<?php echo $style['value']; ?>">
 									<option selected disabled >Select </option>
 										<?php foreach($listAttrValue as $attr ){ ?>
 										<option <?php if($style['attribute'] == $attr){echo 'selected';}?> value="<?php echo $attr;?>"> <?php echo $attr;?></option>

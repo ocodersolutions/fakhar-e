@@ -133,7 +133,7 @@ $(document).ready(function() {
                 // 'action' : action
             },
             success: function (result) {
-                $('#df-notice').fadeIn(1000).fadeOut(2000);
+                $('#df-notice').fadeIn(200).fadeOut(3000);
                 console.log(result);
               // if(result == 1){
               //   // alert('Created');
@@ -179,6 +179,7 @@ $(document).ready(function() {
    
     $(function () {
         $('form.style-update').bind('submit', function (event) {
+            var number = $(this).closest('form').find('.top_right_attName .chosen_select_left').attr('data-number');
             var action = $(this).find("input[type=submit]:focus").attr('data-action');
             var form = $(this).serialize();
             if(action == 'update'){
@@ -189,12 +190,19 @@ $(document).ready(function() {
                         'form' : form,
                     },
                     success: function (result) {
-                    if(result == 1){
-                        // alert('Update Success');
-                        location.reload();
-                    }else{
-                        alert('has error');
-                    }
+                        if(result == 1){
+                            $('#style-update-'+number+' .df-item-update-success').fadeIn(200).fadeOut(3000);
+                        }else{
+                            $('#style-update-'+number+' .df-item-update-error').fadeIn(200).fadeOut(3000);
+                        }
+                        
+                        console.log(result);
+                    // if(result == 1){
+                    //     // alert('Update Success');
+                    //     location.reload();
+                    // }else{
+                    //     alert('has error');
+                    // }
                     
                     }
                   });
@@ -207,14 +215,9 @@ $(document).ready(function() {
                         'form' : form,
                     },
                     success: function (result) {
-                    //alert(result);
-                    if(result == 1){
-                        // alert('Delete Success');
-                        location.reload();
-                    }else{
-                        alert('has error');
-                    }
-                    
+                        if (result == 1) {
+                            $('#style-update-'+number).fadeOut(2000);
+                        }
                     }
                   });
 
