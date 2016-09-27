@@ -60,7 +60,7 @@ class StyleController extends BaseActionController
     }
     public function definationAction() 
     {
-        $id= $this->params('id');
+        $id = $this->params('id');
         $__viewVariables = array();
         $this->layout('layout/layout_elnove.phtml');
         $oAuth = $this->getServiceLocator()->get('AuthService');
@@ -86,8 +86,10 @@ class StyleController extends BaseActionController
         $__viewVariables['listAttrValue'] = $arrayAttr;
         $oStyleList = $this->getServiceLocator()->get('StyleListTable');
         $aPostParams = $this->params()->fromPost();
-        if(isset($aPostParams['submit'])){
-            $listItem = $oStyleList->update($userId, $id, $aPostParams );
+        if(isset($aPostParams['form'])){
+            $listItem = $oStyleList->update($userId, $aPostParams );
+            return $this->getResponse()->setContent(Json::encode($listItem));
+            // exit();
         }
         $singleItem = $oStyleList->viewsingleitem($id);
         $__viewVariables['singleItem'] = $singleItem;

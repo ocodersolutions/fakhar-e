@@ -30,14 +30,26 @@ class StyleListTable extends BasicTableAdapter {
 	public function delete($id){
 		$this->tableGateway->delete(array('id' => $id));
 	}
-	public function update($userId, $id, $aPostParams){
+	public function update($userId, $aPostParams){
+		$value = explode("&",$aPostParams['form']);
+		$arr_style = [];
+        foreach($value as $val){
+        	$tmp = explode( '=', $val );
+            $arr_style[ $tmp[0] ] = $tmp[1];
+        }
+      	$arr_style['name_style'] = str_replace('+',' ',$arr_style['name_style']);
+      	$id = $arr_style['update-style'];
+
+
 		$nextWeek = time() + (7 * 24 * 60 * 60);
 		$timeupdate = date('Y-m-d H:i:s' );	
 		$data = array(
-			    "title" => $aPostParams['name_style'],
-			    "isActive" => $aPostParams['status_select'],
+			    "title" => $arr_style['name_style'],
+			    "isActive" => $arr_style['status_select'],
 			    "updated" => $timeupdate
 		);
+
+		
 		$update = $this->tableGateway->update($data, array('id' => $id));
 		return $update;
 	}

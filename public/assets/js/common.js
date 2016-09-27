@@ -63,10 +63,42 @@ $(document).ready(function() {
     });
 
     $('.chosen_select_left').change(function(){
+
+        x = $('.style-update .chosen_select_left option:selected');
         var number = $(this).data('number');
+
         $('#loading').css('display','block');
         $(".chosen_select_right#select-right-"+number+" option").remove();
         selected = $(this).val();
+        form_action = $(this).closest('.style-update').length;
+        exist = 0;
+
+        if (form_action == 1 ) {
+            // console.log(selected);
+            arr_left = [];
+             for(i = 0; x.length >i; i++){
+
+                if($.inArray($(x[i]).val(), arr_left) != -1){
+                    exist = 1;
+                    break;
+                }
+                arr_left.push($(x[i]).val());
+               
+            }
+        }else{
+
+            for(i = 0; x.length >i; i++){
+                if(selected == $(x[i]).val()){
+                    exist = 1;
+                    break;
+                }
+            }
+        }
+        if (exist == 1) {
+            alert ('Style already exists ');
+            $('.chosen_select_right#select-right-'+number+' option.all').removeAttr('selected');
+            $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
+        }else{
             $.ajax({
                 url : "/style/getAttributeValue",
                 type : "post",
@@ -86,24 +118,39 @@ $(document).ready(function() {
                     $(className).append( optionString ).trigger("chosen:updated");
                 }
             }); 
-        // }else{
-        //     var brand_store = $('#brand-store option');
-        //     brand_list = [];
-
-        //     for(i=0; brand_store.length>i;i++ ){
-        //         brand_list.push(brand_store[i].value);
-        //     }
-
-        //     var className = '#select-right-' + number;
-        //     var optionString = '';
-        //     for(i = 0; brand_list.length >i; i++){
-        //         optionString += "<option>"+brand_list[i]+"</option>";
-        //     }
-        //     $(className).append( optionString ).trigger("chosen:updated");
-        //     //console.log(brand_list);
-        //     //console.log(brand_list);
-        // }
+        }
     });
+
+ $(function () {
+        $('form#update-style').bind('submit', function () {
+            form = $(this).serialize();
+            // action = $('input[name="update-style"]').val();
+            $.ajax({
+            type: 'post',
+            url: '/style/defination',
+            data : {
+                'form' : form,
+                // 'action' : action
+            },
+            success: function (result) {
+                $('#df-notice').fadeIn(200).fadeOut(3000);
+                console.log(result);
+              // if(result == 1){
+              //   // alert('Created');
+              //   location.reload();
+              // }else{
+              //   alert('has error');
+              // }
+              
+            }
+          });
+            return false;
+        });
+    });
+
+
+
+
     //form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
@@ -132,6 +179,7 @@ $(document).ready(function() {
    
     $(function () {
         $('form.style-update').bind('submit', function (event) {
+            var number = $(this).closest('form').find('.top_right_attName .chosen_select_left').attr('data-number');
             var action = $(this).find("input[type=submit]:focus").attr('data-action');
             var form = $(this).serialize();
             if(action == 'update'){
@@ -142,12 +190,19 @@ $(document).ready(function() {
                         'form' : form,
                     },
                     success: function (result) {
-                    if(result == 1){
-                        // alert('Update Success');
-                        location.reload();
-                    }else{
-                        alert('has error');
-                    }
+                        if(result == 1){
+                            $('#style-update-'+number+' .df-item-update-success').fadeIn(200).fadeOut(3000);
+                        }else{
+                            $('#style-update-'+number+' .df-item-update-error').fadeIn(200).fadeOut(3000);
+                        }
+                        
+                        console.log(result);
+                    // if(result == 1){
+                    //     // alert('Update Success');
+                    //     location.reload();
+                    // }else{
+                    //     alert('has error');
+                    // }
                     
                     }
                   });
@@ -160,14 +215,9 @@ $(document).ready(function() {
                         'form' : form,
                     },
                     success: function (result) {
-                    //alert(result);
-                    if(result == 1){
-                        // alert('Delete Success');
-                        location.reload();
-                    }else{
-                        alert('has error');
-                    }
-                    
+                        if (result == 1) {
+                            $('#style-update-'+number).fadeOut(2000);
+                        }
                     }
                   });
 
