@@ -112,7 +112,7 @@ class VenueController extends BaseActionController
             {
                 if($key == $id)
                 {
-                   $childArr[$key] = $value;
+                   $childArr[$viewTitle[$key]] = $value;
                 }
                  if($value == "")
                 {
@@ -127,8 +127,7 @@ class VenueController extends BaseActionController
                         {
                             $GrandParentArr=[];
                             $parentArr[$key] = '';
-                            $childArr[$key_1] = $value_1;
-                           
+                            $childArr[$viewTitle[$key_1]] = $value_1;
                         }
 
                         if($value_1 == "")
@@ -143,9 +142,8 @@ class VenueController extends BaseActionController
                                  if($key_2 == $id)
                                 {
                                     $GrandParentArr[$key]='';
-                                    $parentArr[$key_1] ='' ;
-                                    $childArr[$key_2] = $value_2;
-                                   
+                                    $parentArr[$viewTitle[$key_2]] ='' ;
+                                    $childArr[ $viewTitle[$key_2]] = $value_2;
                                 }
                                 if($value_2 == "")
                                 {
@@ -166,32 +164,33 @@ class VenueController extends BaseActionController
             
             // child array
             foreach ($childArr as $current => $Child) {
-                //var_dump($Child);
                 if(is_array($Child)){
-                    foreach ($Child as $ChildId => $valueChild) {//4 - 10
+                    foreach ($Child as $ChildId => $valueChild) {
+                        $nameV =$oVenueList ->getnameVenue($ChildId);
                         $listStyChild = $oVenueList->getVenueStyle($ChildId);
                             foreach ($listStyChild as $StyChildId => $StyChild_value) { //StyChild_value is array style 26 & 171
                                 $StyChild_id = $StyChild_value['style_id'];
                                 $nameStyChild =$oStyleList->viewsingleitem($StyChild_id);
-                                $ResultChild[$StyChild_id][$nameStyChild->title]='';
+                                $ResultChild[$nameV][$nameStyChild->title]='';
                                 $ListAttofChild=$oAttrofStyleList->liststyle($StyChild_id);
                                 if(!empty($ListAttofChild)){
                                     foreach ($ListAttofChild as $Attrkey => $Attrvalue) {
-                                        $ResultChild[$StyChild_id][$nameStyChild->title][$Attrvalue['attribute']]=$Attrvalue['value'];
+                                        $ResultChild[$nameV][$nameStyChild->title][$Attrvalue['attribute']]=$Attrvalue['value'];
                                     }
                                 }
                             }
                         if(!empty($valueChild)){
                             foreach ($valueChild as $GranchildId => $Granchildvalue) { 
+                                $GrannameV =$oVenueList ->getnameVenue($GranchildId);
                                 $GranchildStyle = $oVenueList->getVenueStyle($GranchildId);
                                 foreach ($GranchildStyle as $arrId) {
                                     $GrandChilId = $arrId['style_id'];
                                     $nameStyGrandChild =$oStyleList->viewsingleitem($GrandChilId);
                                     $StyGrandChildname=$nameStyGrandChild->title;
-                                    $GrandChildArr[$StyGrandChildname]='';
+                                    $GrandChildArr[$GrannameV][$StyGrandChildname]='';
                                     $ListAttofGrandChild=$oAttrofStyleList->liststyle($GrandChilId);
                                     foreach ($ListAttofGrandChild as $key => $value) {
-                                        $GrandChildArr[$StyGrandChildname][$value['attribute']]=$value['value'];
+                                        $GrandChildArr[$GrannameV][$StyGrandChildname][$value['attribute']]=$value['value'];
                                     }
                                 }
                                 
@@ -206,6 +205,7 @@ class VenueController extends BaseActionController
             //parent array
             
                 foreach ($parentArr as $Pid => $Pvalue) {
+                    $PrnameV =$oVenueList ->getnameVenue($Pid);
                     $listStyParent = $oVenueList->getVenueStyle($Pid);
                         foreach ($listStyParent as $StParentId) {
                             $StParentId = $StParentId['style_id'];
@@ -213,7 +213,7 @@ class VenueController extends BaseActionController
                             $nameStyParent=$nameStyParentList->title;
                             $ListAttofparent=$oAttrofStyleList->liststyle($StParentId);
                             foreach ($ListAttofparent as $Attofparentkey => $Attofparentvalue) {
-                              $resultparentArr[$nameStyParent][$Attofparentvalue['attribute']] = $Attofparentvalue['value'];
+                              $resultparentArr[$PrnameV][$nameStyParent][$Attofparentvalue['attribute']] = $Attofparentvalue['value'];
                             }
                         }
                     }
@@ -238,7 +238,6 @@ class VenueController extends BaseActionController
             $__viewVariables["venue_id"] = $id;
             $__viewVariables["venue_name"] = $vName;
             $__viewVariables["my_parent"] = $my_parent;
-            //$__viewVariables["listAttrValue"] = $ListItem;
             $__viewVariables["viewTitle"] = $viewTitle;
             $__viewVariables["data_tree"] = $data_tree;
             $__viewVariables["style_arr"] = $listStyleArr;

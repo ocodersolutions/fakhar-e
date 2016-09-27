@@ -34,14 +34,13 @@ $listAttrValue = $this->listAttrValue;
 				<button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button>
 			</div>
 		</div>
-		<p class="tree_title">My styles</p>
-		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
-
 		<?php 
 		$style_arr = $this->style_attr;
-		if(empty($style_arr)){
-			echo "<i>please add style for Venue</i>";
-		}
+		//var_dump($style_arr);
+		if(!empty($style_arr)){?>
+			<p class="tree_title">My styles</p>
+			<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
+		<?php }
 		foreach( $style_arr as $style_name=>$style_attr ){?>
 			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
 			<div class="row style_item">
@@ -73,8 +72,13 @@ $listAttrValue = $this->listAttrValue;
 			  if((!empty($parentArr)) || (!empty($parentArr))){
 			  	echo "<p class='tree_title'>Parents styles</p>";
 			  	if (!empty($parentArr)){
-			  		echo '<h3>Immi diate Parent Venue</h3>';
-			  		foreach ($parentArr as $parentkey => $parentvalue) { ?>
+			  		foreach ($parentArr as $Prname => $Prvalue) {?>
+			  			<h3>Venue: <i>"<?php echo $Prname ?>"</i></h3>
+			  		<?php }
+			  		if (!empty($Prvalue)){
+			  		foreach ($Prvalue as $parentkey => $parentvalue) { 
+
+			  			?>
 				  		<div class="row style_item">
 							<div class="style_left col-lg-3 col-sm-3 ">
 								<p><?php echo $parentkey ?></p>
@@ -94,6 +98,7 @@ $listAttrValue = $this->listAttrValue;
 							
 						</div>
 				  	<?php }
+				  	}
 			  	}
 			  	if (!empty($GrandParent_Arr)){
 			  		echo '<h3>Grand Parent Venue</h3>';
@@ -123,10 +128,15 @@ $listAttrValue = $this->listAttrValue;
 		<!-- end parent -->
 		<!-- child -->
 		<?php $ChildrenArr = $this->child_arr;
+		$GranChildrenArr = $this->GrandChild_Arr;
+		if (!empty($ChildrenArr) || !empty($GranChildrenArr)){
+			echo '<p class="tree_title">Child styles</p>';
+		}
 			if(!empty($ChildrenArr)){?>
-				<p class="tree_title">Child styles</p>
-				<h3>Immi diate Child Venue</h3>
+				
+				
 				<?php foreach ($ChildrenArr as $name_venue => $venue_value) {?>
+					<h3>Venue:<i> "<?php echo $name_venue ?>"</i></h3>
 					<?php 
 					if(!empty($venue_value)){
 						foreach ($venue_value as $name_st => $attr_arr) {?>
@@ -152,27 +162,34 @@ $listAttrValue = $this->listAttrValue;
 					}
 				}
 			}?>
-			<?php $GranChildrenArr = $this->GrandChild_Arr;
+			<?php 
 			//var_dump($GranChildrenArr);
 				if (!empty($GranChildrenArr)){
-					echo"<h3>Grand Child Venue</h3>";
 					foreach ($GranChildrenArr as $nameGrChild => $GrChildvalue) { ?>
-					<div class="row style_item">
-						<div class="style_left col-lg-3 col-sm-3 ">
-							<p><?php echo $nameGrChild ?></p>
-						</div>
-						<div class="style_des_right col-lg-8 col-sm-8 ">
-							<div class="row">
-						<?php if (is_array($GrChildvalue)){
-							foreach ($GrChildvalue as $attrname => $attrvalue) {?>
-								<div class="col-sm-5"><?php echo $attrname?></div>
-								<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrvalue ?></div>
-						<?php	}
-						}?>
-							</div>	
-						</div>
-							
-					</div>
+					<h3>Venue:<i> "<?php echo $nameGrChild ?>"</i></h3>	
+					<?php if (!empty($GrChildvalue))
+					{
+						foreach ($GrChildvalue as $NameGrstyle => $Grstylevalue) {?>
+							<div class="row style_item">
+								<div class="style_left col-lg-3 col-sm-3 ">
+									<p><?php echo $NameGrstyle ?></p>
+								</div>
+								<div class="style_des_right col-lg-8 col-sm-8 ">
+									<div class="row">
+								<?php if (is_array($Grstylevalue)){
+									foreach ($Grstylevalue as $attrname => $attrvalue) {?>
+										<div class="col-sm-5"><?php echo $attrname?></div>
+										<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrvalue ?></div>
+								<?php	}
+								}?>
+									</div>	
+								</div>
+									
+							</div>
+						<?php }
+					}
+					?>
+					
 					<?php }
 				}
 			?>
@@ -276,7 +293,6 @@ $(function() {
 	$("button[name='delstylevenue']").click(function(){
 		delstId = $(this).parent('.style_des_right').find("input[name='hiddenDelid']").val();
 		venueId = '<?php echo $this->venue_id;?>';
-		alert(delstId);
 		$.ajax({
 			url : "/venue/delstylevenue",
 	        type : "post",

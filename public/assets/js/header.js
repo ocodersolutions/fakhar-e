@@ -2,7 +2,8 @@ var flag = false;
 // get url of page
 var pathname = $(location).attr('href');
 var pathurl = window.location.pathname;   
-    
+var windowHeight = $(window).height();
+var bodyHeight = $('body').height();    
 $(document).ready(function(){
     $('html, body').animate({scrollTop : 0},800);
     if (pathname.indexOf("/profile") >0){
@@ -93,8 +94,7 @@ $(document).ready(function(){
     });
 
     // fix footer
-    windowHeight = $(window).height();
-    bodyHeight = $('body').height();
+    
     if (bodyHeight < windowHeight){
         $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" });
     }
@@ -162,8 +162,10 @@ $(document).on("click", "#show-hide-menu", function(){
 
 
     // change attribute of "#header-block" and "#search" when scroll window
+
 $(window).scroll(function(){
     // if($(this).scrollTop() >= $("#header-block").height())
+
     if($(this).scrollTop() >= 20)
     {
         if (pathname.indexOf("/profile") > 0){
@@ -291,4 +293,3 @@ $( function() {
 });
     
  //********************* popup when search venue**************************//   
-
