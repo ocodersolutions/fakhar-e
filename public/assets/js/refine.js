@@ -69,7 +69,7 @@ $(document).ready(function() {
                             {
                                 x = $(this).attr('data-search');
                                 $('.item[data-search="'+x+'"]').remove();  
-                                check_search_tag();                          
+                                check_search_tag();
                             });
                             check_search_tag();
                         }

@@ -41,12 +41,12 @@ class StyleListTable extends BasicTableAdapter {
 		$update = $this->tableGateway->update($data, array('id' => $id));
 		return $update;
 	}
-	public function viewlist($userId){
+	public function viewlist(){
 
-		$userId = 1;
+		
         $sql = new Sql($this->getServiceLocator()->get('db'));
         $select = $sql->select(array('sl' => 'Style'));
-        $select->where(array('sl.userId' => $userId));
+       
 
         $resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();

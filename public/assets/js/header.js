@@ -1,7 +1,7 @@
 var flag = false;
 // get url of page
 var pathname = $(location).attr('href');
-   
+var pathurl = window.location.pathname;   
     
 $(document).ready(function(){
     $('html, body').animate({scrollTop : 0},800);
@@ -98,6 +98,14 @@ $(document).ready(function(){
     if (bodyHeight < windowHeight){
         $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" });
     }
+    // hide menu and footer in 3 page style , styleDefination and style
+    
+    //pathArr = ("/style","/style/defination","/venue");
+   //alert(pathname);
+   if ((pathname.indexOf("/venue") > 0) ||(pathname.indexOf("/style") > 0)) {
+    $("nav#menu").hide();
+    $("footer").hide();
+   }
 });
 
 function buttonUp(){

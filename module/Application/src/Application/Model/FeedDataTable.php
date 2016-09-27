@@ -574,21 +574,26 @@ class FeedDataTable extends BasicTableAdapter {
                   foreach ($AttresultSet as $AttrKey => $AttrValue) {
                     $AttrsArr[$AttrValue['attribute']] = $AttrValue ['value'];
                     foreach ($AttrsArr as $type => $Attr_value) {
+                      $productArr =[];
                       $ProdSql = new Sql($this->getServiceLocator()->get('db'));
                       $Prodselect = $ProdSql->select(array('prod' => 'productattributes'));
-                      $Prodselect->where(array('type' => $type , 'value' => $Attr_value));
+                      $Prodselect->where(array('prod.type' => $type , 'prod.value' => strtoupper($Attr_value)));
                       $resultSet = array();
                       $results = $AttrSql->prepareStatementForSqlObject($Prodselect)->execute();
                       $resultSet = new \Zend\Db\ResultSet\ResultSet();
                       $resultSet->initialize($results);
                       $ProdresultSet = $resultSet->toArray();
+                      foreach ($ProdresultSet as $keyProduct => $valueProduct) {
+                        //$productArr = $valueProduct['productUID'];
+                        array_push($productArr,$valueProduct['productUID']);
+                      }
                       
                     }
-                    echo "<pre>";
-                      var_dump($Attr_value);
-                      echo "</pre>";
+                    //$sWhere .= " AND `feed`.`uid` IN (" . $productArr[] . ")";
                   }
-                  
+                  // echo "<pre>";
+                  //     var_dump($productArr);
+                  //     echo "</pre>";
                 }
               }
               $sWhere .= " AND `feed`.`name` LIKE '%".$value."%' ";
