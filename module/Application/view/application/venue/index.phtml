@@ -36,11 +36,12 @@ $listAttrValue = $this->listAttrValue;
 		</div>
 		<?php 
 		$style_arr = $this->style_attr;
-		//var_dump($style_arr);
 		if(!empty($style_arr)){?>
 			<p class="tree_title">My styles</p>
 			<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
-		<?php }
+		<?php }else{
+			echo '<i>No result</i>';
+		}
 		foreach( $style_arr as $style_name=>$style_attr ){?>
 			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
 			<div class="row style_item">
@@ -67,7 +68,7 @@ $listAttrValue = $this->listAttrValue;
 		<?php } ?>
 		<!-- start parent -->
 		<?php $parentArr = $this->Parent_Arr;
-			  $GrandParent_Arr = $this->GrandParent_Arr;
+			$GrandParent_Arr = $this->GrandParent_Arr;
 			  
 			  if((!empty($parentArr)) || (!empty($parentArr))){
 			  	echo "<p class='tree_title'>Parents styles</p>";
@@ -100,10 +101,11 @@ $listAttrValue = $this->listAttrValue;
 				  	<?php }
 				  	}
 			  	}
-			  	if (!empty($GrandParent_Arr)){
-			  		echo '<h3>Grand Parent Venue</h3>';
-			  		foreach ($GrandParent_Arr as $GrandParentkey => $GrandParentvalue) { ?>
-				  		<div class="row style_item">
+			  	if (!empty($GrandParent_Arr)){ 
+			  		foreach ($GrandParent_Arr as $NameKey => $GrandParent) { ?>
+			  			<h3>Venue: <i>"<?php echo $NameKey ?>"</i></h3>
+			  			<?php foreach ($GrandParent as $GrandParentkey  => $GrandParentvalue) {?>
+			  				<div class="row style_item">
 							<div class="style_left col-lg-3 col-sm-3 ">
 								<p><?php echo $GrandParentkey ?></p>
 							</div>
@@ -115,12 +117,16 @@ $listAttrValue = $this->listAttrValue;
 											<div class="col-sm-5"><?php echo $GrandParentattrb?></div>
 											<div class="col-sm-7" style="font-weight: normal;"><?php echo $GrandParentattrbvalue?></div>
 										<?php }
+									}else{
+										echo "<i> No result</i>";
 									}?>
 									
 									</div>	
 							</div>
 							
 						</div>
+			  			<?php }?>
+				  		
 				  	<?php }
 			  	}
 			  }
@@ -132,10 +138,8 @@ $listAttrValue = $this->listAttrValue;
 		if (!empty($ChildrenArr) || !empty($GranChildrenArr)){
 			echo '<p class="tree_title">Child styles</p>';
 		}
-			if(!empty($ChildrenArr)){?>
-				
-				
-				<?php foreach ($ChildrenArr as $name_venue => $venue_value) {?>
+			if(!empty($ChildrenArr)){
+				foreach ($ChildrenArr as $name_venue => $venue_value) {?>
 					<h3>Venue:<i> "<?php echo $name_venue ?>"</i></h3>
 					<?php 
 					if(!empty($venue_value)){
@@ -159,6 +163,8 @@ $listAttrValue = $this->listAttrValue;
 								
 							</div>
 						<?php }
+					}else {
+						echo "<i> No Result </i>";
 					}
 				}
 			}?>
@@ -187,6 +193,8 @@ $listAttrValue = $this->listAttrValue;
 									
 							</div>
 						<?php }
+					}else {
+						echo "<i>No result</i>";
 					}
 					?>
 					

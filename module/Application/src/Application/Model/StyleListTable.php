@@ -59,7 +59,7 @@ class StyleListTable extends BasicTableAdapter {
 		
         $sql = new Sql($this->getServiceLocator()->get('db'));
         $select = $sql->select(array('sl' => 'Style'));
-       
+       	$select ->order(array('id DESC','id'));
 
         $resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();

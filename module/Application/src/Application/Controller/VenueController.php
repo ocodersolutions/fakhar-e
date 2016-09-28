@@ -39,13 +39,13 @@ class VenueController extends BaseActionController
             if(!empty($listStyleV)){
                 foreach ($listStyleV as $StyleV) {
                     $listStyleArr[] = $StyleV['style_id'];
+
                 }
                 if(!empty($listStyleArr)){
-                    
+
                     foreach ($listStyleArr as $StyleId) {
-                        $ListstyleItem = $oStyleList->viewsingleitem($StyleId);
-                        $StyleName = $ListstyleItem->title;
-                        $StyleId = $ListstyleItem ->id;
+                        $StyleNameArr = $oStyleList ->viewsingleitem($StyleId);
+                        $StyleName = $StyleNameArr ->title;
                         $oAttrofStyleArr =  $oAttrofStyleList->liststyle($StyleId);
                         foreach ($oAttrofStyleArr as $oAttrofStyle) {
                             $ResultArr[$StyleId][$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
@@ -107,7 +107,6 @@ class VenueController extends BaseActionController
             $GrandParentArr=[];
             $resultGrparentArr=[];
             $resultChildArr=[];
-            
             foreach ($my_parent as $key => $value) 
             {
                 if($key == $id)
@@ -142,8 +141,8 @@ class VenueController extends BaseActionController
                                  if($key_2 == $id)
                                 {
                                     $GrandParentArr[$key]='';
-                                    $parentArr[$viewTitle[$key_2]] ='' ;
-                                    $childArr[ $viewTitle[$key_2]] = $value_2;
+                                    $parentArr[$key_1] ='' ;
+                                    $childArr[$viewTitle[$key_2]] = $value_2;
                                 }
                                 if($value_2 == "")
                                 {
@@ -160,28 +159,28 @@ class VenueController extends BaseActionController
                     $data_tree .= "]},";
                 }
             }
-
-            
-            // child array
             foreach ($childArr as $current => $Child) {
                 if(is_array($Child)){
-                    foreach ($Child as $ChildId => $valueChild) {
+                    foreach ($Child as $ChildId => $valueChild) { // work office-office (7) or work1 (14)
                         $nameV =$oVenueList ->getnameVenue($ChildId);
+                        $ResultChild[$nameV]= '';
                         $listStyChild = $oVenueList->getVenueStyle($ChildId);
-                            foreach ($listStyChild as $StyChildId => $StyChild_value) { //StyChild_value is array style 26 & 171
-                                $StyChild_id = $StyChild_value['style_id'];
-                                $nameStyChild =$oStyleList->viewsingleitem($StyChild_id);
-                                $ResultChild[$nameV][$nameStyChild->title]='';
-                                $ListAttofChild=$oAttrofStyleList->liststyle($StyChild_id);
-                                if(!empty($ListAttofChild)){
-                                    foreach ($ListAttofChild as $Attrkey => $Attrvalue) {
-                                        $ResultChild[$nameV][$nameStyChild->title][$Attrvalue['attribute']]=$Attrvalue['value'];
-                                    }
+                        foreach ($listStyChild as $StyChildId => $StyChild_value) { 
+
+                            $StyChild_id = $StyChild_value['style_id'];
+                            $nameStyChild =$oStyleList->viewsingleitem($StyChild_id);
+                            $ResultChild[$nameV][$nameStyChild->title]='';
+                            $ListAttofChild=$oAttrofStyleList->liststyle($StyChild_id);
+                            if(!empty($ListAttofChild)){
+                                foreach ($ListAttofChild as $Attrkey => $Attrvalue) {
+                                    $ResultChild[$nameV][$nameStyChild->title][$Attrvalue['attribute']]=$Attrvalue['value'];
                                 }
                             }
+                        }
                         if(!empty($valueChild)){
                             foreach ($valueChild as $GranchildId => $Granchildvalue) { 
-                                $GrannameV =$oVenueList ->getnameVenue($GranchildId);
+                                $GrannameV = $oVenueList ->getnameVenue($GranchildId);
+                                $GrandChildArr[$GrannameV]='';
                                 $GranchildStyle = $oVenueList->getVenueStyle($GranchildId);
                                 foreach ($GranchildStyle as $arrId) {
                                     $GrandChilId = $arrId['style_id'];
@@ -211,26 +210,29 @@ class VenueController extends BaseActionController
                             $StParentId = $StParentId['style_id'];
                             $nameStyParentList =$oStyleList->viewsingleitem($StParentId);
                             $nameStyParent=$nameStyParentList->title;
+                            $resultparentArr[$PrnameV][$nameStyParent]='';
                             $ListAttofparent=$oAttrofStyleList->liststyle($StParentId);
                             foreach ($ListAttofparent as $Attofparentkey => $Attofparentvalue) {
                               $resultparentArr[$PrnameV][$nameStyParent][$Attofparentvalue['attribute']] = $Attofparentvalue['value'];
                             }
                         }
                     }
+                    
             // grand parent array
 
                 foreach ($GrandParentArr as $GrPeid => $GrPvalue) {
+                    $GrPrnameV =$oVenueList ->getnameVenue($GrPeid);
                     $listStyGrParent = $oVenueList->getVenueStyle($GrPeid);
                     foreach ($listStyGrParent as $StGrParentId) {
                         $StGrParent_Id = $StGrParentId['style_id'];
                         $nameStyGrParentList =$oStyleList->viewsingleitem($StGrParent_Id);
                         $nameStyGrParent=$nameStyGrParentList->title;
                         $ListAttofGrparent=$oAttrofStyleList->liststyle($StGrParent_Id);
-                        $resultGrparentArr[$nameStyGrParent]='';
+                        $resultGrparentArr[$GrPrnameV][$nameStyGrParent]='';
                         
                         
                         foreach ($ListAttofGrparent as $AttofGrparentkey => $AttofGrparentvalue) {
-                            $resultGrparentArr[$nameStyGrParent][$AttofGrparentvalue['attribute']]=$AttofGrparentvalue['value'];
+                            $resultGrparentArr[$GrPrnameV][$nameStyGrParent][$AttofGrparentvalue['attribute']]=$AttofGrparentvalue['value'];
                         }
                     }
                }
