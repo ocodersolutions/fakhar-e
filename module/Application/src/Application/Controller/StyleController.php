@@ -190,7 +190,7 @@ class StyleController extends BaseActionController
         return $this->getResponse()->setContent(Json::encode($attribute));
     }
     public function deletestyleAction() 
-    {
+    { 
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
         $this->userId = $userInfo->userId;
