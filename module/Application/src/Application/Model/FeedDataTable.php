@@ -584,21 +584,15 @@ class FeedDataTable extends BasicTableAdapter {
                       $resultSet->initialize($results);
                       $ProdresultSet = $resultSet->toArray();
                       foreach ($ProdresultSet as $keyProduct => $valueProduct) {
-                        //$productArr = $valueProduct['productUID'];
                         array_push($productArr,$valueProduct['productUID']);
                       }
-                      
+                      foreach ($productArr as $key => $value) {
+                       $sWhere .= " AND `feed`.`uid` LIKE '%".$value."%' ";
+                      }
                     }
-                    //$sWhere .= " AND `feed`.`uid` IN (" . $productArr[] . ")";
                   }
-                  // echo "<pre>";
-                  //     var_dump($productArr);
-                  //     echo "</pre>";
                 }
               }
-              $sWhere .= " AND `feed`.`name` LIKE '%".$value."%' ";
-             // var_dump( $AttrsArr);
-              // var_dump($Attr_value);
             }
         }
         
@@ -610,7 +604,7 @@ class FeedDataTable extends BasicTableAdapter {
         if (!empty($aPostParams['colors'])) {
             //$sWhere.= " AND FIND_IN_SET(feed.color,'{$aPostParams['colors']}')";
             $sWhere .= " AND `feed`.`uid` IN (select distinct productUID from ProductAttributes where type = 'color' AND value IN ('" . str_replace(',', "','", $aPostParams['colors']) . "') )"; 
-            //$prodattJoin = true;            
+            //$prodattJoin = true;
         }
         if (!empty($aPostParams['stores'])) {
             // $sWhere .= " AND FIND_IN_SET(feedmapbrand.id,'{$aPostParams['brands']}')";
@@ -1011,7 +1005,7 @@ class FeedDataTable extends BasicTableAdapter {
             @$aBrand[ fix(implode(' ', $aTemp)) ]++;
         }        
         
-        $aBrand = array_merge($aBrand, array_flip(array("3.1 Phillip Lim","A.P.C.","Acne Studios","Adieu","Alexander McQueen","AMI Alexandre Mattiussi","Ann Demeulemeester","Arc'teryx Veilance","Balenciaga","Balmain","Bao Bao Issey Miyake","Belstaff","Black Limited Edition","Boris Bidjan Saberi","Burberry Brit","Burberry London","Burberry Prorsum","Calvin Klein Underwear","Canada Goose","Carven","Christopher Kane","Comme des Garçons Play","Comme des Garçons Wallets","Common Projects","Côte & Ciel","Cottweiler","Craig Green","Diemme","Diesel","Diesel Black Gold","Dior Homme","Dita","Dolce & Gabbana","Dsquared2","Eytys","Feit","Fendi","Giuseppe Zanotti","Givenchy","Golden Goose","Grenson","H by Hudson","Haerfest","Helmut Lang","Homme Plissé Issey Miyake","Issey Miyake Men","J.W.Anderson","Jil Sander","Jimmy Choo","John Undercover","Julius","Juun.J","Kenzo","Lanvin","Le Gramme","Loewe","Maison Margiela","Marc Jacobs","Marcelo Burlon County of Milan","Markus Lupfer","Marni","Marsèll","Marsèll Gomma","Master & Dynamic","McQ Alexander Mcqueen","Moncler","Moncler A","Mostly Heard Rarely Seen","Naked & Famous Denim","Neil Barrett","Noon Goons","Nudie Jeans","OAMC","Off-White","Officine Creative","Palm Angels","Paul Smith","Paul Smith Jeans","Paul Smith London","PB 0110","Pearls Before Swine","Phoebe English","Pierre Balmain","Pierre Hardy","Pigalle","Porter","PS by Paul Smith","Public School","R13","Rag & Bone","Ray-Ban","Reebok Classics","Rick Owens","Robert Clergerie","Sacai","Saint Laurent","Sasquatchfabrix","Super","T by Alexander Wang","Thamanyah","Thom Browne","Tiger of Sweden","Tom Ford","Underground","Valentino","Versace","Versace Underwear","Versus","Visvim","Wales Bonner","Want Les Essentiels de la Vie","Wooyoungmi","Y-3","Yang Li","Season 1")));
+        $aBrand = array_merge($aBrand, array_flip(array("3.1 Phillip Lim","A.P.C.","Acne Studios","Adieu","Alexander McQueen","AMI Alexandre Mattiussi","Ann Demeulemeester","Arc'teryx Veilance","Balenciaga","Balmain","Bao Bao Issey Miyake","Belstaff","Black Limited Edition","Boris Bidjan Saberi","Burberry Brit","Burberry London","Burberry Prorsum","Calvin Klein Underwear","Canada Goose","Carven","Christopher Kane","Comme des GarÃ§ons Play","Comme des GarÃ§ons Wallets","Common Projects","CÃ´te & Ciel","Cottweiler","Craig Green","Diemme","Diesel","Diesel Black Gold","Dior Homme","Dita","Dolce & Gabbana","Dsquared2","Eytys","Feit","Fendi","Giuseppe Zanotti","Givenchy","Golden Goose","Grenson","H by Hudson","Haerfest","Helmut Lang","Homme PlissÃ© Issey Miyake","Issey Miyake Men","J.W.Anderson","Jil Sander","Jimmy Choo","John Undercover","Julius","Juun.J","Kenzo","Lanvin","Le Gramme","Loewe","Maison Margiela","Marc Jacobs","Marcelo Burlon County of Milan","Markus Lupfer","Marni","MarsÃ¨ll","MarsÃ¨ll Gomma","Master & Dynamic","McQ Alexander Mcqueen","Moncler","Moncler A","Mostly Heard Rarely Seen","Naked & Famous Denim","Neil Barrett","Noon Goons","Nudie Jeans","OAMC","Off-White","Officine Creative","Palm Angels","Paul Smith","Paul Smith Jeans","Paul Smith London","PB 0110","Pearls Before Swine","Phoebe English","Pierre Balmain","Pierre Hardy","Pigalle","Porter","PS by Paul Smith","Public School","R13","Rag & Bone","Ray-Ban","Reebok Classics","Rick Owens","Robert Clergerie","Sacai","Saint Laurent","Sasquatchfabrix","Super","T by Alexander Wang","Thamanyah","Thom Browne","Tiger of Sweden","Tom Ford","Underground","Valentino","Versace","Versace Underwear","Versus","Visvim","Wales Bonner","Want Les Essentiels de la Vie","Wooyoungmi","Y-3","Yang Li","Season 1")));
         
         foreach($aBrand as $k => $v) {
             $v = strtoupper($v);
