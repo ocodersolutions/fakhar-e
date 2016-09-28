@@ -235,6 +235,7 @@ $(function () {
                 'form' : form,
             },
             success: function (result) {
+                console.log(result);
                 if (result == 1) {
                     window.location.href = '/style'; 
                 }
@@ -313,22 +314,25 @@ $(function () {
 
 
 $(document).on("click", ".my_delete_yes", function(){
-    del_style = $(this).attr("data-delete2");
+    form = $(this).attr("data-delete2");
     // $('[data-delete='+del_style+']').parents('tr').remove();
-    table.row( $('[data-delete='+del_style+']').parents('tr')).remove().draw();
-    // alert(del_style);
-    $.ajax({
-        url: "style/deletestyle",
-        type: "POST",
-        data: { del_style : del_style },
-        dataType: "test",
-        success: function ()
-        {
-              // alert(result);
-            // $('[data-delete='+del_style+']').parents('tr').remove();
-        }
-    });
-    // location.reload();
+    //table.row( $('[data-delete='+del_style+']').parents('tr')).remove().draw();
+    string = 'update-style='+form;
+     $.ajax({
+            type: 'post',
+            url: '/style/deletestyle',
+            data : {
+                'form' : string,
+            },
+            success: function (result) {
+               if(result == 1){
+                    $('#tr-'+form).fadeOut(2000, function() {
+                        $('#tr-'+form).remove();
+                    });
+               }
+            }
+        });
+    return false
 }); 
 
 $(document).on("click",".btn_delete_style", function(e){
@@ -341,7 +345,13 @@ $(document).on("click",".btn_delete_style", function(e){
     // tableRow = that.parents('.test_id');
     // alert(tableRow.index());
     // $(".my_delete_yes").attr("data-index",tableRow.index());
-    myalert('alert_idNewsLetterInput3','type_remove','Ooops!','','OK','Do you want to delete or not?',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+    myalert('alert_idNewsLetterInput3','type_remove','Ooops!','','OK','Do you want to delete or not?',function(){
+
+
+
+
+        $('#alert_idNewsLetterInput3').foundation('reveal','close'); 
+    });
 });
 // $(document).on( 'click', '.delete_style', function () {
 //     table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
