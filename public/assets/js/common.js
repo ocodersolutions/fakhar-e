@@ -67,6 +67,8 @@ $(document).ready(function() {
         x = $('.style-update .chosen_select_left option:selected');
         var number = $(this).data('number');
 
+         
+
         $('#loading').css('display','block');
         $(".chosen_select_right#select-right-"+number+" option").remove();
         selected = $(this).val();
@@ -98,9 +100,11 @@ $(document).ready(function() {
             
             myalert('alert_idNewsLetterInput3','type_missing','Error!','','OK','Style name already exist.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
 
-
-            $('.chosen_select_right#select-right-'+number+' option.all').removeAttr('selected');
-            $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
+           $('.chosen_select_right#select-right-'+number+' option.all').removeAttr('selected');
+           $('#style-update-'+number+' .chosen_select_left option').removeAttr('selected');
+           $('#style-update-'+number+' .chosen_select_left option:disabled').attr('selected','selected');
+           $('#style-update-'+number+' .chosen_select_left').trigger('chosen:updated');
+           $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
         }else{
             $.ajax({
                 url : "/style/getAttributeValue",
