@@ -63,7 +63,7 @@ class VenueTable extends BasicTableAdapter {
         $resultSet->initialize($results);
         $resultSet = $resultSet->toArray();
 
-        return $resultSet;
+        return $resultSet[0]['title'];
     }
     public function getchildrentId($id){
         $sql = new Sql($this->getServiceLocator()->get('db'));
