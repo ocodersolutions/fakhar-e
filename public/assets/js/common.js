@@ -124,22 +124,22 @@ $(document).ready(function() {
         }
     });
 
- $(function () {
-        $('form#update-style').bind('submit', function () {
-            form = $(this).serialize();
-            $.ajax({
-            type: 'post',
-            url: '/style/defination',
-            data : {
-                'form' : form,
-            },
-            success: function (result) {
-                $('#df-notice').fadeIn(200).fadeOut(3000);
-            }
-          });
-            return false;
-        });
-    });
+ // $(function () {
+ //        $('form#update-style').bind('submit', function () {
+ //            form = $(this).serialize();
+ //            $.ajax({
+ //            type: 'post',
+ //            url: '/style/defination',
+ //            data : {
+ //                'form' : form,
+ //            },
+ //            success: function (result) {
+ //                $('#df-notice').fadeIn(200).fadeOut(3000);
+ //            }
+ //          });
+ //            return false;
+ //        });
+ //    });
 
 
 
@@ -156,7 +156,7 @@ $(document).ready(function() {
                 'form' : form,
             },
             success: function (result) {
-                $('#top_right #list-form-update').append('aaaaaaaaaaaa');
+                location.reload();
             }
           });
           return false;
@@ -210,19 +210,37 @@ $(document).ready(function() {
 // delete style
 $(function () {
     $('form#main-style').bind('submit', function (event) {
+        
+        var action = $(this).find("input[type=submit]:focus").attr('data-action');
+      
         form = $(this).serialize();
+    if(action == 'update'){
+        
         $.ajax({
-        type: 'post',
-        url: '/style/deletestyle',
-        data : {
-            'form' : form,
-        },
-        success: function (result) {
-            if (result == 1) {
-                window.location.href = '/style'; 
+            type: 'post',
+            url: '/style/defination',
+            data : {
+                'form' : form,
+            },
+            success: function (result) {
+                $('#df-notice').fadeIn(200).fadeOut(3000);
             }
-        }
-      });
+        });
+
+    }else if(action == 'delete'){
+        $.ajax({
+            type: 'post',
+            url: '/style/deletestyle',
+            data : {
+                'form' : form,
+            },
+            success: function (result) {
+                if (result == 1) {
+                    window.location.href = '/style'; 
+                }
+            }
+        });
+    }
             return false
     });
 });
