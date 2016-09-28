@@ -28,7 +28,8 @@ class StyleListTable extends BasicTableAdapter {
         return $result;
 	}
 	public function delete($id){
-		$this->tableGateway->delete(array('id' => $id));
+		$delete = $this->tableGateway->delete(array('id' => $id));
+		return $delete;
 	}
 	public function update($userId, $aPostParams){
 		$value = explode("&",$aPostParams['form']);

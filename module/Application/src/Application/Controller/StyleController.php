@@ -191,7 +191,6 @@ class StyleController extends BaseActionController
     }
     public function deletestyleAction() 
     {
-        
         $oAuth = $this->getServiceLocator()->get('AuthService');
         $userInfo = $oAuth->getIdentity();
         $this->userId = $userInfo->userId;
@@ -202,11 +201,15 @@ class StyleController extends BaseActionController
         $listItem = $oStyleList->viewlist($userId);
 
         $aPostParams = $this->params()->fromPost();
-
-        $result_data = "";
-        if (count($aPostParams)) {
-            $oStyleList->delete($aPostParams["del_style"]);  
+        $value = explode("&",$aPostParams['form']);
+        $arr_style = [];
+        foreach($value as $val){
+            $tmp = explode( '=', $val );
+            $arr_style[ $tmp[0] ] = $tmp[1];
         }
-        return 0;
+        if (isset($arr_style["update-style"])) {
+            $style = $oStyleList->delete($arr_style["update-style"]); 
+        }
+        return $this->getResponse()->setContent(Json::encode($style));
     }
 }

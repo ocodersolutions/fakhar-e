@@ -12,13 +12,13 @@
 			<div class="row">
 				<a href="/style" class="back-to">&lt; Back to List Styles</a>
 				<div class="top_left_title top_title_style">Style</div>
-				<form method="post" id="update-style">
+				<form method="post" id="main-style">
 					<div class="style_title col-lg-5 col-lg-offset-1">
 						<label for="">Name: </label>
 						<input type="text" name="name_style" value="<?php if(isset($singleItem->title)){echo $singleItem->title;}else{echo '';};?>">
 						<input type="hidden" name="update-style" value="<?php if(isset($singleItem->id)){echo $singleItem->id;} ?>">
 					</div>
-					<div class="style_status col-lg-5">
+					<div class="style_status col-lg-5" style="width: 32%">
 						<label for="">Status: </label>
 						<div class="style_status_content">
 							<select name="status_select">
@@ -31,6 +31,7 @@
 						<img id="df-notice" src="http://www.freeiconspng.com/uploads/success-icon-7.png">
 					</div>
 					<input type="submit" name="submit" class="upgrade_style btn btn-primary col-lg-1"  value="Update">
+					<input style="float: right;" class="delete_style btn btn-danger col-lg-1" type="submit" data-action='delete' value="Delete">
 
 				</form>
 			</div>
@@ -39,17 +40,15 @@
 
 		<div id="top_right">
 
-			<div class="row">
+			<div>
 				<div class="top_right_title top_title_style">Defination</div>
-				
+				<div id="list-form-update" class="row">
 	<?php 
 	$count = 0;
 	foreach($styleItem as $style){
 		$count++;  ?>
-
-					<form class="style-update" id="style-update-<?php echo $count ?>" method="post">
-				<!-- 	<img id="" style="width: 25px; position: absolute; " src="http://www.freeiconspng.com/uploads/success-icon-7.png"> -->
 				
+					<form class="style-update" id="style-update-<?php echo $count ?>" method="post">
 							<div class="top_right_attName col-lg-5 col-lg-offset-1">
 							<img class="df-item-update-success"  src="http://www.freeiconspng.com/uploads/success-icon-7.png">
 							<img class="df-item-update-error"  src="http://www.clker.com/cliparts/0/7/e/a/12074327311562940906milker_X_icon.svg.hi.png">
@@ -77,8 +76,9 @@
 							<input class="delete_style btn btn-danger col-lg-1" type="submit" data-action='delete' value="Delete">
 
 					</form>	
+				
 	<?php }?>
-					
+				</div>	
 
 					<form id="add-new" method="post">
 						

@@ -95,7 +95,10 @@ $(document).ready(function() {
             }
         }
         if (exist == 1) {
-            alert ('Style already exists ');
+            
+            myalert('alert_idNewsLetterInput3','type_missing','Error!','','OK','Style name already exist.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+
+
             $('.chosen_select_right#select-right-'+number+' option.all').removeAttr('selected');
             $('.chosen_select_right#select-right-'+number).trigger('chosen:updated');
         }else{
@@ -124,24 +127,14 @@ $(document).ready(function() {
  $(function () {
         $('form#update-style').bind('submit', function () {
             form = $(this).serialize();
-            // action = $('input[name="update-style"]').val();
             $.ajax({
             type: 'post',
             url: '/style/defination',
             data : {
                 'form' : form,
-                // 'action' : action
             },
             success: function (result) {
                 $('#df-notice').fadeIn(200).fadeOut(3000);
-                console.log(result);
-              // if(result == 1){
-              //   // alert('Created');
-              //   location.reload();
-              // }else{
-              //   alert('has error');
-              // }
-              
             }
           });
             return false;
@@ -154,6 +147,7 @@ $(document).ready(function() {
     //form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
+        
             form = $(this).serialize();
             $.ajax({
             type: 'post',
@@ -162,13 +156,7 @@ $(document).ready(function() {
                 'form' : form,
             },
             success: function (result) {
-              if(result == 1){
-                // alert('Created');
-                location.reload();
-              }else{
-                alert('has error');
-              }
-              
+                $('#top_right #list-form-update').append('aaaaaaaaaaaa');
             }
           });
           return false;
@@ -195,15 +183,6 @@ $(document).ready(function() {
                         }else{
                             $('#style-update-'+number+' .df-item-update-error').fadeIn(200).fadeOut(3000);
                         }
-                        
-                        console.log(result);
-                    // if(result == 1){
-                    //     // alert('Update Success');
-                    //     location.reload();
-                    // }else{
-                    //     alert('has error');
-                    // }
-                    
                     }
                   });
             }else if(action == 'delete'){
@@ -216,7 +195,9 @@ $(document).ready(function() {
                     },
                     success: function (result) {
                         if (result == 1) {
-                            $('#style-update-'+number).fadeOut(2000);
+                            $('#style-update-'+number).fadeOut(2000, function() {
+                                $('#style-update-'+number).remove();
+                            });
                         }
                     }
                   });
@@ -226,7 +207,25 @@ $(document).ready(function() {
             return false;
         });
     });
-
+// delete style
+$(function () {
+    $('form#main-style').bind('submit', function (event) {
+        form = $(this).serialize();
+        $.ajax({
+        type: 'post',
+        url: '/style/deletestyle',
+        data : {
+            'form' : form,
+        },
+        success: function (result) {
+            if (result == 1) {
+                window.location.href = '/style'; 
+            }
+        }
+      });
+            return false
+    });
+});
 
 
     $(".chosen_select_left").chosen();
@@ -326,9 +325,9 @@ $(document).on("click",".btn_delete_style", function(e){
     // $(".my_delete_yes").attr("data-index",tableRow.index());
     myalert('alert_idNewsLetterInput3','type_remove','Ooops!','','OK','Do you want to delete or not?',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
 });
-$(document).on( 'click', '.delete_style', function () {
-    table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
-} );
+// $(document).on( 'click', '.delete_style', function () {
+//     table.row( $(".btn_delete_style").parents('tr') ).remove().draw();
+// } );
 
 
 
