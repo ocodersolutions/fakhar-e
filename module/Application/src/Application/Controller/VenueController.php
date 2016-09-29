@@ -396,16 +396,16 @@ class VenueController extends BaseActionController
                 $saveItem = "style already exits";
             }
         }
-        return $this->getResponse()->setContent(Json::encode($saveItem));
-
+        //return $this->getResponse()->setContent(Json::encode($saveItem));
         $oStyleList = $this->getServiceLocator()->get('StyleListTable');
         $StyleArr = $oStyleList->viewsingleitem($styleid);
         $name = $StyleArr->title;
         $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
         $style = $oAttrofStyleList->liststyle($styleid);
         $ResultoView = [];
+        $ResultoView['name']=$name;
         foreach ($style as $key => $value) {
-                    $ResultoView[$value['attribute']]= $value['value'];
+            $ResultoView['attributes'][]=$value['attribute'].' - '.$value['value'];
                 } 
          $__viewVariables['name_style_add'] =  $name; 
          $__viewVariables['ResultoView'] =   $ResultoView;

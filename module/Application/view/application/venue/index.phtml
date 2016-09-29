@@ -295,14 +295,22 @@ $(function() {
 		        },
 		        success:function(result){
 		        	console.log(result);
-		        	if(result!=1){
-		        		//myalert('myalertid1','type_missing','Oops', 'Style alredy exits.','');
-		        		myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','Style alredy exits.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
-		        	}else{
-		        		html = '<div class="row style_item" data-style ="'+styleid+'"><div class="style_left col-lg-2 col-sm-2 "><p>name Style</p></div><div class="style_des_right col-lg-7 col-sm-7 "><div class="row"><div class="col-sm-5">attr</div><div class="col-sm-7" style="font-weight: normal;">value</div></div></div><div class="style_des_right col-lg-2 col-sm-2 "><input type="hidden" name="hiddenDelid" value="'+styleid+'"><button type="button" class="btn btn-danger" name="delstylevenue">Delete</button></div></div>';
-		        		$(html).appendTo('.style_item_wrap').hide().fadeIn(2000);
+		        	var text='';
+		        	$result=JSON.parse(result);
+		        	name = $result.name;
+		        	attrs = $result.attributes;
+		        	var attrString = '';
+		        	for (i=0;i< attrs.length;i++)
+		        	{
+		        		attrArr = attrs[i].split(" - ");
+						// attrNew[attrArr[0]] =  attrArr[1];
+						attrString += '<div class="col-sm-5">'+attrArr[0]+'</div><div class="col-sm-7" style="font-weight: normal;">'+attrArr[1]+'</div>';
 		        	}
-		        }
+
+		        	//console.log(text);
+		        	html = '<div class="row style_item" data-style ="'+styleid+'"><div class="style_left col-lg-2 col-sm-2 "><p>'+name+'</p></div><div class="style_des_right col-lg-7 col-sm-7 "><div class="row">'+attrString+'</div></div><div class="style_des_right col-lg-2 col-sm-2 "><input type="hidden" name="hiddenDelid" value="'+styleid+'"><button type="button" class="btn btn-danger" name="delstylevenue">Delete</button></div></div>';
+	        		$(html).appendTo('.style_item_wrap').hide().fadeIn(2000);
+		        	}
 			});
 		}
 
@@ -310,7 +318,7 @@ $(function() {
 	});
 	
 	//delete stylevenue
-	$("button[name='delstylevenue']").click(function(){
+	$(document).on("click", "button[name='delstylevenue']", function(){
 		delstId = $(this).parent('.style_des_right').find("input[name='hiddenDelid']").val();
 		venueId = '<?php echo $this->venue_id;?>';
 		$.ajax({
