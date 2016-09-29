@@ -34,14 +34,14 @@ $listAttrValue = $this->listAttrValue;
 				<button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button>
 			</div>
 		</div>
+		<p class="tree_title">My styles</p>
+		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
 		<?php 
 		$style_arr = $this->style_attr;
-		if(!empty($style_arr)){?>
-			<p class="tree_title">My styles</p>
-			<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
-		<?php }else{
-			echo '<i>No Styles</i>';
-		}
+		if(empty($style_arr)){?>
+			<i>No styles</i>
+			
+		<?php }
 		foreach( $style_arr as $style_name=>$style_attr ){?>
 			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
 			<div class="row style_item">
