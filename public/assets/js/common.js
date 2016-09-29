@@ -66,7 +66,6 @@ $(document).ready(function() {
 
         x = $('.style-update .chosen_select_left option:selected');
         var number = $(this).data('number');
-alert(111);
         $('#loading').css('display','block');
         $(".chosen_select_right#select-right-"+number+" option").remove();
         selected = $(this).val();
@@ -152,19 +151,18 @@ alert(111);
     //form add new 
     $(function () {
         $('form#add-new').bind('submit', function () {
-        
             form = $(this).serialize();
             $.ajax({
-            type: 'post',
-            url: '/style/styledefination',
-            data : {
-                'form' : form,
-            },
-            success: function (result) {
-                location.reload();
-            }
-          });
-          return false;
+                type: 'post',
+                url: '/style/styledefination',
+                data : {
+                    'form' : form,
+                },
+                success: function (result) {
+                    location.reload();
+                }
+            });
+            return false;
         });
     });
 
