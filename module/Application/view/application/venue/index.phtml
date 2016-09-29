@@ -15,9 +15,9 @@ $listAttrValue = $this->listAttrValue;
 	</div>
 	<div class="venue_main_content col-lg-8 col-sm-9">
 		<?php if(!$this->venue_name){ ?>
-			<p>Please choose Venue</p>
+			<p style="margin-top: 17px;">Please choose Venue</p>
 		<?php } else { ?>
-			<div class="row style_item" id="pick_style_row">
+		<div class="row style_item" id="pick_style_row">
 			<div class="style_left pick_style col-lg-5 col-sm-5">
 				<p>Pick Styles</p>
 				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
@@ -296,8 +296,8 @@ $(function() {
 		        success:function(result){
 		        	console.log(result);
 		        	if(result!=1){
-		        		//myalert('myalertid1','type_missing','Oops', 'Style alredy exits.','');
-		        		myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','Style alredy exits.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+		        		//myalert('myalertid1','type_missing','Oops', 'Style alredy exist.','');
+		        		myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','Style alredy exist.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
 		        	}else{
 		        		html = '<div class="row style_item" data-style ="'+styleid+'"><div class="style_left col-lg-2 col-sm-2 "><p>name Style</p></div><div class="style_des_right col-lg-7 col-sm-7 "><div class="row"><div class="col-sm-5">attr</div><div class="col-sm-7" style="font-weight: normal;">value</div></div></div><div class="style_des_right col-lg-2 col-sm-2 "><input type="hidden" name="hiddenDelid" value="'+styleid+'"><button type="button" class="btn btn-danger" name="delstylevenue">Delete</button></div></div>';
 		        		$(html).appendTo('.style_item_wrap').hide().fadeIn(2000);
