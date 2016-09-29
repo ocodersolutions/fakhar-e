@@ -276,25 +276,33 @@ $(function() {
 $(function() {
 	$("#add_style").click(function(event) {
 		styleid = $("input[name='hiddenStyleid']").val();
-		venueid = '<?php echo $this->venue_id;?>';
-		$.ajax({
-			url : "/venue/savestylevenue",
-	        type : "post",
-	        dataType:"text",
-	        data : {
-	            'styleId' : styleid,
-	            'venueid' : venueid,
-	        },
-	        success:function(result){
-	        	console.log(result);
-	        	if(result!=1){
-	        		//myalert('myalertid1','type_missing','Oops', 'Style alredy exits.','');
-	        		myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','Style alredy exits.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
-	        	}else{
-	        		location.reload();
-	        	}
-	        }
-		});
+		if (styleid ==''){
+
+			myalert('alert_idNewsLetterInput1','type_missing','Ooops!','','OK','Seems You not yet pick choosse styles.',function(){$('#alert_idNewsLetterInput1').foundation('reveal','close'); });
+			event.preventDefault();
+		}else{
+			venueid = '<?php echo $this->venue_id;?>';
+			$.ajax({
+				url : "/venue/savestylevenue",
+		        type : "post",
+		        dataType:"text",
+		        data : {
+		            'styleId' : styleid,
+		            'venueid' : venueid,
+		        },
+		        success:function(result){
+		        	console.log(result);
+		        	if(result!=1){
+		        		//myalert('myalertid1','type_missing','Oops', 'Style alredy exits.','');
+		        		myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','Style alredy exits.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
+		        	}else{
+		        		location.reload();
+		        	}
+		        }
+			});
+		}
+
+		
 	});
 
 	//delete stylevenue
