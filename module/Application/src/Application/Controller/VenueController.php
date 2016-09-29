@@ -205,6 +205,7 @@ class VenueController extends BaseActionController
             
                 foreach ($parentArr as $Pid => $Pvalue) {
                     $PrnameV =$oVenueList ->getnameVenue($Pid);
+                    $resultparentArr[$PrnameV] = '';
                     $listStyParent = $oVenueList->getVenueStyle($Pid);
                         foreach ($listStyParent as $StParentId) {
                             $StParentId = $StParentId['style_id'];
@@ -217,7 +218,7 @@ class VenueController extends BaseActionController
                             }
                         }
                     }
-                    
+                    //var_dump($resultparentArr);
             // grand parent array
 
                 foreach ($GrandParentArr as $GrPeid => $GrPvalue) {

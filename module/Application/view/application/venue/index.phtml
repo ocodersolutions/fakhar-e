@@ -36,15 +36,15 @@ $listAttrValue = $this->listAttrValue;
 		</div>
 		<p class="tree_title">My styles</p>
 		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
+		<div class = style_item_wrap>
 		<?php 
 		$style_arr = $this->style_attr;
 		if(empty($style_arr)){?>
 			<i>No styles</i>
-			
 		<?php }
 		foreach( $style_arr as $style_name=>$style_attr ){?>
 			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
-			<div class="row style_item">
+			<div class="row style_item" data-style="<?php echo $style_name?>">
 				<div class="style_left col-lg-2 col-sm-2 ">
 					<p><?php  echo $styleId ?></p>
 				</div>
@@ -59,20 +59,22 @@ $listAttrValue = $this->listAttrValue;
 					</div>	
 				</div>
 				<div class="style_des_right col-lg-2 col-sm-2 ">
-					<input type="hidden" name="hiddenDelid" value=<?php echo $style_name?>">
+					<input type="hidden" name="hiddenDelid" value=<?php echo $style_name?>>
 					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
 				</div>
 				<?php }?>
 			</div>
 		<?php }?>
 		<?php } ?>
+		</div>
 		<!-- start parent -->
 		<?php $parentArr = $this->Parent_Arr;
 			$GrandParent_Arr = $this->GrandParent_Arr;
-			  
-			  if((!empty($parentArr)) || (!empty($parentArr))){
+			  if((!empty($parentArr)) || (!empty($GrandParent_Arr))){
 			  	echo "<p class='tree_title'>Parents styles</p>";
+
 			  	if (!empty($parentArr)){
+
 			  		foreach ($parentArr as $Prname => $Prvalue) {?>
 			  			<h3>Venue: <i>"<?php echo $Prname ?>"</i></h3>
 			  		<?php }
@@ -99,6 +101,8 @@ $listAttrValue = $this->listAttrValue;
 							
 						</div>
 				  	<?php }
+				  	}else {
+				  		echo "<i>No Styles</i>";
 				  	}
 			  	}
 			  	if (!empty($GrandParent_Arr)){ 
@@ -285,7 +289,6 @@ $(function() {
 			$.ajax({
 				url : "/venue/savestylevenue",
 		        type : "post",
-		        dataType:"text",
 		        data : {
 		            'styleId' : styleid,
 		            'venueid' : venueid,
@@ -296,7 +299,8 @@ $(function() {
 		        		//myalert('myalertid1','type_missing','Oops', 'Style alredy exits.','');
 		        		myalert('alert_idNewsLetterInput3','type_missing','Ooops!','','OK','Style alredy exits.',function(){$('#alert_idNewsLetterInput3').foundation('reveal','close'); });
 		        	}else{
-		        		location.reload();
+		        		html = '<div class="row style_item"><div class="style_left col-lg-3 col-sm-3 "><p><?php echo $name_st ?></p></div><div class="style_des_right col-lg-8 col-sm-8 "><div class="row"><?php if (is_array($attr_arr)){ foreach ($attr_arr as $key => $value) {?><div class="col-sm-5"><?php echo $key?></div><div class="col-sm-7" style="font-weight: normal;"><?php echo $value?></div><?php }}?></div></div></div>';
+		        		$(html).appendTo('.style_item_wrap').hide().fadeIn(2000);
 		        	}
 		        }
 			});
@@ -304,7 +308,7 @@ $(function() {
 
 		
 	});
-
+	
 	//delete stylevenue
 	$("button[name='delstylevenue']").click(function(){
 		delstId = $(this).parent('.style_des_right').find("input[name='hiddenDelid']").val();
@@ -312,15 +316,17 @@ $(function() {
 		$.ajax({
 			url : "/venue/delstylevenue",
 	        type : "post",
-	        dataType:"text",
 	        data : {
 	            'delstId' : delstId,
 	            'venueId' :venueId,
 	        },
-	        success:function(){
-	        	location.reload();
+	        success:function(result){
+	        	$(".style_item[data-style='"+delstId+"']").fadeOut('4000', function() {
+	        		$(".style_item[data-style='"+delstId+"']").hide();
+	        	});
 	        }
 		});
 	})
 });
+
 </script>
