@@ -369,6 +369,7 @@ class VenueController extends BaseActionController
 
      public function savestylevenueAction(){
         if ($this->getRequest()->isPost()){
+
             $styleid = $this->params()->fromPost('styleId');
             $venueid = $this->params()->fromPost('venueid');
             $data =array(
@@ -395,6 +396,12 @@ class VenueController extends BaseActionController
         }
         return $this->getResponse()->setContent(Json::encode($saveItem));
 
+        $oStyleList = $this->getServiceLocator()->get('StyleListTable');
+        $StyleArr = $oStyleList->viewsingleitem($styleid);
+        $name = $StyleArr->title;
+        $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
+        $style = $oAttrofStyleList->liststyle($styleid);
+        
      }
      public function delstylevenueAction(){
         
