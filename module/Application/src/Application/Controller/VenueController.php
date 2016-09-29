@@ -368,6 +368,8 @@ class VenueController extends BaseActionController
     }
 
      public function savestylevenueAction(){
+        $__viewVariables = array();
+        $this->layout('layout/layout_elnove.phtml');
         if ($this->getRequest()->isPost()){
 
             $styleid = $this->params()->fromPost('styleId');
@@ -401,7 +403,13 @@ class VenueController extends BaseActionController
         $name = $StyleArr->title;
         $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
         $style = $oAttrofStyleList->liststyle($styleid);
-        
+        $ResultoView = [];
+        foreach ($style as $key => $value) {
+                    $ResultoView[$value['attribute']]= $value['value'];
+                } 
+         $__viewVariables['name_style_add'] =  $name; 
+         $__viewVariables['ResultoView'] =   $ResultoView;
+        return $this->getResponse()->setContent(Json::encode($ResultoView));          
      }
      public function delstylevenueAction(){
         
