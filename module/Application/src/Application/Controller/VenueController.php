@@ -250,6 +250,7 @@ class VenueController extends BaseActionController
             $__viewVariables["Parent_Arr"] =  $resultparentArr;
             $__viewVariables["GrandParent_Arr"] =  $resultGrparentArr;
 
+            
             $oAttrList = $this->getServiceLocator()->get('StyleListTable');
             $attrItem = $oAttrList->viewlist(1);
             $arrayAttr = array();
@@ -379,23 +380,25 @@ class VenueController extends BaseActionController
                 'venue_id'=>$venueid
             );
             $oSavestyle = $this->getServiceLocator()->get('VenueStyleTable');
+            $saveItem = $oSavestyle->AddVenue($data);
 
-
-            $validator = new RecordExists(
-                array(
-                    'table'   => 'venuestyle',
-                    'field'   => 'style_id',
-                    'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
-                    'exclude' => ' venue_id = '.$venueid
-                )
-            );
-            $validator->isValid($styleid) ? $recordExists = 1 : $recordExists = 0;
-            if($recordExists == 0){
-                $saveItem = $oSavestyle->AddVenue($data);
-            }else{
-                $saveItem = "style already exits";
-            }
+            // $validator = new RecordExists(
+            //     array(
+            //         'table'   => 'venuestyle',
+            //         'field'   => 'style_id',
+            //         'adapter' => $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter'),
+            //         'exclude' => ' venue_id = '.$venueid
+            //     )
+            // );
+            // $validator->isValid($styleid) ? $recordExists = 1 : $recordExists = 0;
+            // if($recordExists == 0){
+            //     $saveItem = $oSavestyle->AddVenue($data);
+            // }else{
+            //     $saveItem = "style already exits";
+            // }
         }
+        if ($saveItem!=0)
+        {
         //return $this->getResponse()->setContent(Json::encode($saveItem));
         $oStyleList = $this->getServiceLocator()->get('StyleListTable');
         $StyleArr = $oStyleList->viewsingleitem($styleid);
@@ -409,6 +412,9 @@ class VenueController extends BaseActionController
                 } 
          $__viewVariables['name_style_add'] =  $name; 
          $__viewVariables['ResultoView'] =   $ResultoView;
+        }else{
+            $ResultoView = 0;
+        }
         return $this->getResponse()->setContent(Json::encode($ResultoView));          
      }
      public function delstylevenueAction(){

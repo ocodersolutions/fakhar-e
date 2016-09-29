@@ -295,22 +295,27 @@ $(function() {
 		        },
 		        success:function(result){
 		        	console.log(result);
-		        	var text='';
-		        	$result=JSON.parse(result);
-		        	name = $result.name;
+		        	if(result == 0){
+		        		myalert('alert_idNewsLetterInput2','type_missing','Ooops!','','OK','Seems styles already exits.',function(){$('#alert_idNewsLetterInput2').foundation('reveal','close'); });
+		        	}else{
+	        		$result=JSON.parse(result);
+
+		        	name = $result.name;alert($result);
 		        	attrs = $result.attributes;
 		        	var attrString = '';
 		        	for (i=0;i< attrs.length;i++)
 		        	{
 		        		attrArr = attrs[i].split(" - ");
-						// attrNew[attrArr[0]] =  attrArr[1];
 						attrString += '<div class="col-sm-5">'+attrArr[0]+'</div><div class="col-sm-7" style="font-weight: normal;">'+attrArr[1]+'</div>';
 		        	}
 
-		        	//console.log(text);
 		        	html = '<div class="row style_item" data-style ="'+styleid+'"><div class="style_left col-lg-2 col-sm-2 "><p>'+name+'</p></div><div class="style_des_right col-lg-7 col-sm-7 "><div class="row">'+attrString+'</div></div><div class="style_des_right col-lg-2 col-sm-2 "><input type="hidden" name="hiddenDelid" value="'+styleid+'"><button type="button" class="btn btn-danger" name="delstylevenue">Delete</button></div></div>';
 	        		$(html).appendTo('.style_item_wrap').hide().fadeIn(2000);
 		        	}
+        			
+		        	}
+		       
+
 			});
 		}
 
