@@ -40,7 +40,7 @@ $listAttrValue = $this->listAttrValue;
 		<?php 
 		$style_arr = $this->style_attr;
 		if(empty($style_arr)){?>
-			<i>No styles</i>
+			<i id="empty_alert">No styles</i>
 		<?php }
 		foreach( $style_arr as $style_name=>$style_attr ){?>
 			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
@@ -279,6 +279,7 @@ $(function() {
 });
 $(function() {
 	$("#add_style").click(function(event) {
+		$("#empty_alert").hide();
 		styleid = $("input[name='hiddenStyleid']").val();
 		if (styleid ==''){
 
@@ -295,7 +296,6 @@ $(function() {
 		        },
 		        success:function(result){
 		        	console.log(result);
-
 		        	if(result == 0){
 		        		myalert('alert_idNewsLetterInput2','type_missing','Ooops!','','OK','Seems styles already exits.',function(){$('#alert_idNewsLetterInput2').foundation('reveal','close'); });
 		        	}else{
@@ -325,6 +325,8 @@ $(function() {
 	
 	//delete stylevenue
 	$(document).on("click", "button[name='delstylevenue']", function(){
+		n = $(".style_item_wrap").find('.row.style_item').size();
+		
 		delstId = $(this).parent('.style_des_right').find("input[name='hiddenDelid']").val();
 		venueId = '<?php echo $this->venue_id;?>';
 		$.ajax({
@@ -335,9 +337,12 @@ $(function() {
 	            'venueId' :venueId,
 	        },
 	        success:function(result){
-	        	$(".style_item[data-style='"+delstId+"']").fadeOut('4000', function() {
+	        	$(".style_item[data-style='"+delstId+"']").fadeOut('2000', function() {
 	        		$(".style_item[data-style='"+delstId+"']").remove();
 	        	});
+	        	if(n==1){
+					$("#empty_alert").show('2000');
+				}
 	        }
 		});
 	})
