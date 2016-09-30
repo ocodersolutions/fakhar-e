@@ -552,7 +552,7 @@ class FeedDataTable extends BasicTableAdapter {
               $resultSet->initialize($results);
               $vresultSet = $resultSet->toArray();
               foreach ($vresultSet as $Vvalue) {
-                $Vid = $Vvalue['id'];
+                $Vid = $Vvalue['id'];// lay id cua search
                 $StSql = new Sql($this->getServiceLocator()->get('db'));
                 $Stselect = $StSql->select(array('st' => 'Venuestyle'));
                 $Stselect->where(array('venue_id' => $Vid));
@@ -562,7 +562,7 @@ class FeedDataTable extends BasicTableAdapter {
                 $resultSet->initialize($results);
                 $StresultSet = $resultSet->toArray();
                 foreach ($StresultSet as $St_key => $Stvalue) {
-                  $stId = $Stvalue['style_id'];
+                  $stId = $Stvalue['style_id'];// lay id cua style search
                   $AttrSql = new Sql($this->getServiceLocator()->get('db'));
                   $Attrselect = $AttrSql->select(array('att' => 'styledefination'));
                   $Attrselect->where(array('styleId' => $stId));
@@ -584,11 +584,14 @@ class FeedDataTable extends BasicTableAdapter {
                       $resultSet->initialize($results);
                       $ProdresultSet = $resultSet->toArray();
                       foreach ($ProdresultSet as $keyProduct => $valueProduct) {
-                        array_push($productArr,$valueProduct['productUID']);
+                         array_push($productArr,$valueProduct['productUID']);
+                         //$sWhere .= " AND `feed`.`uid` LIKE '".$productArr[]."' ";
                       }
-                      foreach ($productArr as $key => $value) {
-                       $sWhere .= " AND `feed`.`uid` LIKE '%".$value."%' ";
-                      }
+                      //var_dump($productArr);
+                       // foreach ($productArr as $key => $value) {
+                        $string =implode(",",$productArr);$st=str_replace(',', "','", $string );
+                        $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
+                       // }
                     }
                   }
                 }
@@ -605,6 +608,7 @@ class FeedDataTable extends BasicTableAdapter {
             //$sWhere.= " AND FIND_IN_SET(feed.color,'{$aPostParams['colors']}')";
             $sWhere .= " AND `feed`.`uid` IN (select distinct productUID from ProductAttributes where type = 'color' AND value IN ('" . str_replace(',', "','", $aPostParams['colors']) . "') )"; 
             //$prodattJoin = true;
+            var_dump(str_replace(',', "','", $aPostParams['colors']));
         }
         if (!empty($aPostParams['stores'])) {
             // $sWhere .= " AND FIND_IN_SET(feedmapbrand.id,'{$aPostParams['brands']}')";
