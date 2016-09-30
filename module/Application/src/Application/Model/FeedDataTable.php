@@ -541,8 +541,8 @@ class FeedDataTable extends BasicTableAdapter {
             
             $searcharray = explode(",",$aPostParams['searchVenue']);
             $AttrsArr = [];
+            $productArr=[];
             foreach ($searcharray as $key => $value) {
-              //value is name of venue
               $newSql = new Sql($this->getServiceLocator()->get('db'));
               $Vselect = $newSql->select(array('s' => 'Venue'));
               $Vselect->where(array('title' => $value));
@@ -561,6 +561,7 @@ class FeedDataTable extends BasicTableAdapter {
                 $resultSet = new \Zend\Db\ResultSet\ResultSet();
                 $resultSet->initialize($results);
                 $StresultSet = $resultSet->toArray();
+                if (!empty($StresultSet)){
                 foreach ($StresultSet as $St_key => $Stvalue) {
                   $stId = $Stvalue['style_id'];// lay id cua style search
                   $AttrSql = new Sql($this->getServiceLocator()->get('db'));
@@ -574,7 +575,7 @@ class FeedDataTable extends BasicTableAdapter {
                   foreach ($AttresultSet as $AttrKey => $AttrValue) {
                     $AttrsArr[$AttrValue['attribute']] = $AttrValue ['value'];
                     foreach ($AttrsArr as $type => $Attr_value) {
-                      $productArr =[];
+                      //$productArr=[];
                       $ProdSql = new Sql($this->getServiceLocator()->get('db'));
                       $Prodselect = $ProdSql->select(array('prod' => 'productattributes'));
                       $Prodselect->where(array('prod.type' => $type , 'prod.value' => strtoupper($Attr_value)));
@@ -585,17 +586,127 @@ class FeedDataTable extends BasicTableAdapter {
                       $ProdresultSet = $resultSet->toArray();
                       foreach ($ProdresultSet as $keyProduct => $valueProduct) {
                          array_push($productArr,$valueProduct['productUID']);
-                         //$sWhere .= " AND `feed`.`uid` LIKE '".$productArr[]."' ";
                       }
-                      //var_dump($productArr);
-                       // foreach ($productArr as $key => $value) {
-                        $string =implode(",",$productArr);$st=str_replace(',', "','", $string );
-                        $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
-                       // }
+                    }
+                  }
+                }
+               } 
+              }
+              //Child Style
+                $venueChildSql = new Sql($this->getServiceLocator()->get('db'));
+                $VChildselect = $venueChildSql->select(array('st' => 'Venue'));
+                $VChildselect->where(array('parentId' => $Vid));
+                $VCresultSet = array();
+                $VCresults = $newSql->prepareStatementForSqlObject($VChildselect)->execute();
+                $VCresultSet = new \Zend\Db\ResultSet\ResultSet();
+                $VCresultSet->initialize($VCresults);
+                $VCresultSet = $VCresultSet->toArray();
+                if(!empty($VCresultSet)){
+                  $childArr =[];
+                  foreach ($VCresultSet as $Vchild => $Vchildvalue) {
+                    $VchildId = $Vchildvalue['id'];
+                    array_push($childArr,$VchildId);
+                    $ChStSql = new Sql($this->getServiceLocator()->get('db'));
+                    $ChStselect = $ChStSql->select(array('st' => 'Venuestyle'));
+                    $ChStselect->where(array('venue_id' => $VchildId));
+                    $ChresultSet = array();
+                    $Chresults = $ChStSql->prepareStatementForSqlObject($ChStselect)->execute();
+                    $ChresultSet = new \Zend\Db\ResultSet\ResultSet();
+                    $ChresultSet->initialize($Chresults);
+                    $ChStresultSet = $ChresultSet->toArray();
+                    if ($ChStresultSet){
+                      foreach ($ChStresultSet as $sttr => $attrvalue) {
+                        $StChild =  $attrvalue['style_id'];
+                        $AttrChSql = new Sql($this->getServiceLocator()->get('db'));
+                        $AttrChselect = $AttrChSql->select(array('att' => 'styledefination'));
+                        $AttrChselect->where(array('styleId' => $StChild));
+                        $AChresultSet = array();
+                        $AChresults = $AttrChSql->prepareStatementForSqlObject($AttrChselect)->execute();
+                        $AChresultSet = new \Zend\Db\ResultSet\ResultSet();
+                        $AChresultSet->initialize($AChresults);
+                        $AttrChesultSet = $AChresultSet->toArray();
+                        if(!empty($AttrChesultSet)){
+                          foreach ($AttrChesultSet as $keyAC => $ACvalue) {
+                            $ProdChSql = new Sql($this->getServiceLocator()->get('db'));
+                            $ProdChselect = $ProdChSql->select(array('prod' => 'productattributes'));
+                            $ProdChselect->where(array('prod.type' => $ACvalue['attribute'] , 'prod.value' => strtoupper($ACvalue['value'])));
+                            $PCresultSet = array();
+                            $PCresults = $AttrSql->prepareStatementForSqlObject($ProdChselect)->execute();
+                            $PCresultSet = new \Zend\Db\ResultSet\ResultSet();
+                            $PCresultSet->initialize($PCresults);
+                            $ProdChresultSet = $PCresultSet->toArray();//var_dump($ProdChresultSet);
+                            foreach ($ProdChresultSet as $keyCProduct => $valueCProduct) {
+                               array_push($productArr,$valueCProduct['productUID']);
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              //Grand child
+              if(!empty($childArr)){
+                foreach ($childArr as $ChID) {
+                  $venueGrChSql = new Sql($this->getServiceLocator()->get('db'));
+                  $VGrChildselect = $venueGrChSql->select(array('st' => 'Venue'));
+                  $VGrChildselect->where(array('parentId' => $ChID));
+                  $VGrCresultSet = array();
+                  $VGrCresults = $venueGrChSql->prepareStatementForSqlObject($VGrChildselect)->execute();
+                  $VGrCresultSet = new \Zend\Db\ResultSet\ResultSet();
+                  $VGrCresultSet->initialize($VGrCresults);
+                  $VGrCresultSet = $VGrCresultSet->toArray();
+                  if(!empty($VGrCresultSet)){
+                    foreach ($VGrCresultSet as $VGrCr => $VGrCrArr) {
+                      $GrChId = $VGrCrArr['id'];
+                      $GrChStSql = new Sql($this->getServiceLocator()->get('db'));
+                      $GrChStselect = $GrChStSql->select(array('st' => 'Venuestyle'));
+                      $GrChStselect->where(array('venue_id' => $GrChId));
+                      $GrChresultSet = array();
+                      $GrChresults = $GrChStSql->prepareStatementForSqlObject($GrChStselect)->execute();
+                      $GrChresultSet = new \Zend\Db\ResultSet\ResultSet();
+                      $GrChresultSet->initialize($GrChresults);
+                      $GrChStresultSet = $GrChresultSet->toArray();
+                      $listStGrand = [];
+                      if(!empty($GrChStresultSet))
+                      { 
+                        foreach ($GrChStresultSet as $keyAGrC => $AGrCvalue) {
+                          array_push($listStGrand, $AGrCvalue['style_id']);
+                        }
+                        if(!empty($listStGrand)){
+                          foreach ($listStGrand as $GrStKe => $GranChStId) {
+                            $AttrGrChSql = new Sql($this->getServiceLocator()->get('db'));
+                            $AttrGrChselect = $AttrChSql->select(array('att' => 'styledefination'));
+                            $AttrGrChselect->where(array('styleId' => $GranChStId));
+                            $AGrChresultSet = array();
+                            $AChresults = $AttrGrChSql->prepareStatementForSqlObject($AttrGrChselect)->execute();
+                            $AGrChresultSet = new \Zend\Db\ResultSet\ResultSet();
+                            $AGrChresultSet->initialize($AChresults);
+                            $AttrGrChesultSet = $AGrChresultSet->toArray();
+                            if(!empty($AttrGrChesultSet))
+                            {
+                              foreach ($AttrGrChesultSet as $AttrGrChkey => $AttrGrChArr) {
+                                $ProdGrChSql = new Sql($this->getServiceLocator()->get('db'));
+                                $ProdGrChselect = $ProdGrChSql->select(array('prod' => 'productattributes'));
+                                $ProdGrChselect->where(array('prod.type' => $AttrGrChArr['attribute'] , 'prod.value' => strtoupper($AttrGrChArr['value'])));
+                                $PGrCresultSet = array();
+                                $PGrCresults = $ProdGrChSql->prepareStatementForSqlObject($ProdGrChselect)->execute();
+                                $PGrCresultSet = new \Zend\Db\ResultSet\ResultSet();
+                                $PGrCresultSet->initialize($PGrCresults);
+                                $ProdGrChresultSet = $PGrCresultSet->toArray();
+                                foreach ($ProdGrChresultSet as $keyGrCProduct => $valueGrCProduct) {
+                                   array_push($productArr,$valueGrCProduct['productUID']);
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }                     
                     }
                   }
                 }
               }
+              $string =implode(",",$productArr);$st=str_replace(',', "','", $string );
+              $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
             }
         }
         
