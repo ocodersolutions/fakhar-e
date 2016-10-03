@@ -42,8 +42,9 @@ $listAttrValue = $this->listAttrValue;
 		if(empty($style_arr)){?>
 			<i id="empty_alert">No styles</i>
 		<?php }
-		foreach( $style_arr as $style_name=>$style_attr ){?>
-			<?php foreach ($style_attr as $styleId => $AtrrArr) { ?>
+		foreach( $style_arr as $style_name=>$style_attr ){
+			if (!empty($style_attr)){
+		 	foreach ($style_attr as $styleId => $AtrrArr) { ?>
 			<div class="row style_item" data-style="<?php echo $style_name?>">
 				<div class="style_left col-lg-2 col-sm-2 ">
 					<p><?php  echo $styleId ?></p>
@@ -52,17 +53,21 @@ $listAttrValue = $this->listAttrValue;
 				<div class="style_des_right col-lg-7 col-sm-7 ">
 					<div class="row">
 						
-						<?php foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
+						<?php if(is_array($AtrrArr)){
+							foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
 							<div class="col-sm-5"><?php echo $AtrrName ?></div>
 							<div class="col-sm-7" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
-						<?php } ?>
+						<?php }
+						 }else{?>
+						 	<div class="col-sm-12">No styles</div>
+						<?php }?>
 					</div>	
 				</div>
 				<div class="style_des_right col-lg-2 col-sm-2 ">
 					<input type="hidden" name="hiddenDelid" value=<?php echo $style_name?>>
 					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
 				</div>
-				<?php }?>
+				<?php }}?>
 			</div>
 		<?php }?>
 		<?php } ?>
@@ -94,7 +99,9 @@ $listAttrValue = $this->listAttrValue;
 											<div class="col-sm-5"><?php echo $attrb?></div>
 											<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrbvalue?></div>
 										<?php }
-									}?>
+									}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
 									
 									</div>	
 							</div>
@@ -121,9 +128,9 @@ $listAttrValue = $this->listAttrValue;
 											<div class="col-sm-5"><?php echo $GrandParentattrb?></div>
 											<div class="col-sm-7" style="font-weight: normal;"><?php echo $GrandParentattrbvalue?></div>
 										<?php }
-									}else{
-										echo "<i> No Stlyes</i>";
-									}?>
+									}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
 									
 									</div>	
 							</div>
@@ -160,7 +167,9 @@ $listAttrValue = $this->listAttrValue;
 												<div class="col-sm-5"><?php echo $key?></div>
 												<div class="col-sm-7" style="font-weight: normal;"><?php echo $value?></div>
 											<?php }
-										}?>
+										}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
 										
 										</div>	
 								</div>
@@ -191,7 +200,9 @@ $listAttrValue = $this->listAttrValue;
 										<div class="col-sm-5"><?php echo $attrname?></div>
 										<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrvalue ?></div>
 								<?php	}
-								}?>
+								}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
 									</div>	
 								</div>
 									
@@ -300,17 +311,20 @@ $(function() {
 		        		myalert('alert_idNewsLetterInput2','type_missing','Ooops!','','OK','Seems styles already exits.',function(){$('#alert_idNewsLetterInput2').foundation('reveal','close'); });
 		        	}else{
 	        		$result=JSON.parse(result);
-
+	        		var attrString = '';
 		        	name = $result.name;
 		        	attrs = $result.attributes;
-		        	var attrString = '';
-		        	for (i=0;i< attrs.length;i++)
-		        	{
-		        		attrArr = attrs[i].split(" - ");
-						attrString += '<div class="col-sm-5">'+attrArr[0]+'</div><div class="col-sm-7" style="font-weight: normal;">'+attrArr[1]+'</div>';
+		        	if (attrs){
+		        		for (i=0;i< attrs.length;i++)
+			        	{
+			        		attrArr = attrs[i].split(" - ");
+							attrString += '<div class="col-sm-5">'+attrArr[0]+'</div><div class="col-sm-7" style="font-weight: normal;">'+attrArr[1]+'</div>';
+			        	}
+		        	}else{
+		        		attrString = '<div class="col-sm-12">No styles</div>';
 		        	}
-
-		        	html = '<div class="row style_item" data-style ="'+styleid+'"><div class="style_left col-lg-2 col-sm-2 "><p>'+name+'</p></div><div class="style_des_right col-lg-7 col-sm-7 "><div class="row">'+attrString+'</div></div><div class="style_des_right col-lg-2 col-sm-2 "><input type="hidden" name="hiddenDelid" value="'+styleid+'"><button type="button" class="btn btn-danger" name="delstylevenue">Delete</button></div></div>';
+		        	
+		           	html = '<div class="row style_item" data-style ="'+styleid+'"><div class="style_left col-lg-2 col-sm-2 "><p>'+name+'</p></div><div class="style_des_right col-lg-7 col-sm-7 "><div class="row">'+attrString+'</div></div><div class="style_des_right col-lg-2 col-sm-2 "><input type="hidden" name="hiddenDelid" value="'+styleid+'"><button type="button" class="btn btn-danger" name="delstylevenue">Delete</button></div></div>';
 	        		$(html).appendTo('.style_item_wrap').hide().fadeIn(2000);
 		        	}
         			
@@ -341,6 +355,9 @@ $(function() {
 	        		$(".style_item[data-style='"+delstId+"']").remove();
 	        	});
 	        	if(n==1){
+	        		if($("#empty_alert").size()==0){
+	        			$('.style_item_wrap').append('<i class="empty_alert"> No Styles </i>');
+	        		}
 					$("#empty_alert").show('2000');
 				}
 	        }

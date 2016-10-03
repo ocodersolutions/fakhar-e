@@ -31,7 +31,7 @@ class VenueController extends BaseActionController
             $oStyleList = $this->getServiceLocator()->get('StyleListTable');
             $oAttrofStyleList = $this->getServiceLocator()->get('StyleDefinationTable');
             $ListItem = $oVenueList->getAllVenue(1);
-            $listStyleV = $oVenueList->getVenueStyle($id);
+            $listStyleV = $oVenueList->getVenueStyle($id);//var_dump($listStyleV);
             $listStyleArr = [];
             $ResultArr = [];
             $StyleName = "";
@@ -46,6 +46,7 @@ class VenueController extends BaseActionController
                     foreach ($listStyleArr as $StyleId) {
                         $StyleNameArr = $oStyleList ->viewsingleitem($StyleId);
                         $StyleName = $StyleNameArr ->title;
+                        $ResultArr[$StyleId][$StyleName]='';
                         $oAttrofStyleArr =  $oAttrofStyleList->liststyle($StyleId);
                         foreach ($oAttrofStyleArr as $oAttrofStyle) {
                             $ResultArr[$StyleId][$StyleName][$oAttrofStyle['attribute']]= $oAttrofStyle['value'];
@@ -54,6 +55,7 @@ class VenueController extends BaseActionController
                     }
                 }
             }
+            //var_dump($ResultArr);
             $my_parent = $viewTitle = array();
             foreach( $ListItem as $item)
             {

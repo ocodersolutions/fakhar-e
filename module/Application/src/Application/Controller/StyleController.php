@@ -21,7 +21,7 @@ class StyleController extends BaseActionController
 
 	public function indexAction() 
 	{
-		$__viewVariables = array();
+        $__viewVariables = array();
 		$this->layout('layout/layout_elnove.phtml');
         $oAuth = $this->getServiceLocator()->get('AuthService');
         if ($oAuth->hasIdentity() && $oAuth->getIdentity()->userType==2) {
@@ -32,7 +32,7 @@ class StyleController extends BaseActionController
             $userName = $userInfo->firstName;
             $this->layout()->firstName = $userInfo->firstName;
             $oStyleList = $this->getServiceLocator()->get('StyleListTable');
-            $listItem = $oStyleList->viewlist($userId);
+            $listItem = $oStyleList->viewlistall();
             $__viewVariables['listItem'] = $listItem;
             $__viewVariables['userName'] = $userName;
 

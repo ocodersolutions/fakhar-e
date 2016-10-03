@@ -54,13 +54,26 @@ class StyleListTable extends BasicTableAdapter {
 		$update = $this->tableGateway->update($data, array('id' => $id));
 		return $update;
 	}
-	public function viewlist(){
+	public function viewlist($isActive){
 
 		
         $sql = new Sql($this->getServiceLocator()->get('db'));
         $select = $sql->select(array('sl' => 'Style'));
-       	
+       	$select ->where (array('sl.isActive'=> $isActive));
         $resultSet = array();
+        $results = $sql->prepareStatementForSqlObject($select)->execute();
+        $resultSet = new \Zend\Db\ResultSet\ResultSet();
+        $resultSet->initialize($results);
+        $resultSet = $resultSet->toArray();
+
+        return $resultSet;
+	}
+	public function viewlistall(){
+
+		
+        $sql = new Sql($this->getServiceLocator()->get('db'));
+        $select = $sql->select(array('sl' => 'Style'));
+       	$resultSet = array();
         $results = $sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new \Zend\Db\ResultSet\ResultSet();
         $resultSet->initialize($results);
