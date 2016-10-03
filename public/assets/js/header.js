@@ -93,11 +93,7 @@ $(document).ready(function(){
         return false;
     });
 
-    // fix footer
-    // if (bodyHeight < windowHeight){
-    //     $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" });
-    // }
-    // hide menu and footer in 3 page style , styleDefination and style
+   // hide menu and footer in 3 page style , styleDefination and style
     
     //pathArr = ("/style","/style/defination","/venue");
    //alert(pathname);
@@ -292,3 +288,11 @@ $( function() {
 });
     
  //********************* popup when search venue**************************//   
+ $( function() {
+        bodyH = $('body').height();
+        winH = $(window).height();
+        if(bodyH < winH){
+            $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" , "z-index" : "9999"});
+            $('footer').find('.copyright').css("background","#fff");
+        }
+    });
