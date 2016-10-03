@@ -675,7 +675,7 @@ class FeedDataTable extends BasicTableAdapter {
                         if(!empty($listStGrand)){
                           foreach ($listStGrand as $GrStKe => $GranChStId) {
                             $AttrGrChSql = new Sql($this->getServiceLocator()->get('db'));
-                            $AttrGrChselect = $AttrChSql->select(array('att' => 'styledefination'));
+                            $AttrGrChselect = $AttrGrChSql->select(array('att' => 'styledefination'));
                             $AttrGrChselect->where(array('styleId' => $GranChStId));
                             $AGrChresultSet = array();
                             $AChresults = $AttrGrChSql->prepareStatementForSqlObject($AttrGrChselect)->execute();
