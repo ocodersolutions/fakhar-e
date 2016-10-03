@@ -40,7 +40,7 @@ $listAttrValue = $this->listAttrValue;
 		<?php 
 		$style_arr = $this->style_attr;
 		if(empty($style_arr)){?>
-			<i id="empty_alert">No styles</i>
+			<i class="empty_alert">No styles</i>
 		<?php }
 		foreach( $style_arr as $style_name=>$style_attr ){
 			if (!empty($style_attr)){
@@ -290,7 +290,7 @@ $(function() {
 });
 $(function() {
 	$("#add_style").click(function(event) {
-		$("#empty_alert").hide();
+		$(".empty_alert").hide().fadeOut('2000');
 		styleid = $("input[name='hiddenStyleid']").val();
 		if (styleid ==''){
 
@@ -306,10 +306,12 @@ $(function() {
 		            'venueid' : venueid,
 		        },
 		        success:function(result){
+
 		        	console.log(result);
 		        	if(result == 0){
 		        		myalert('alert_idNewsLetterInput2','type_missing','Ooops!','','OK','Seems styles already exits.',function(){$('#alert_idNewsLetterInput2').foundation('reveal','close'); });
 		        	}else{
+	        		//$("#empty_alert").hide();
 	        		$result=JSON.parse(result);
 	        		var attrString = '';
 		        	name = $result.name;
