@@ -231,6 +231,7 @@
 				form {
 				    display: block;
 				    margin-top: 0em;
+				    margin-bottom: 5em;
 				    input {
 				    	border-radius: 0;
 				    	display: block;
@@ -576,7 +577,11 @@
 				    
 				}
 			    
-					
+				.next{
+					a{
+						color: #fff;
+					}
+				}	
 				}
 				
 			}
@@ -948,6 +953,11 @@
 			}
 			.hideShowPassword-wrapper{
 				width: 100%!important;
+				.hideShowPassword-toggle{
+					&:focus{
+						border: none;
+					}
+				}
 			}
 			.hideShowPassword-field {
 			    margin-top: 19px !important;

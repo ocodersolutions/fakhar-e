@@ -327,7 +327,6 @@ $(function() {
             },
             onChange:function(){
                 heightNew = $('#heightSlider').prop("value");
-                console.log(heightNew);
                 var heightArr = aHeightValues[heightNew].split(".");
                 $("#heightSliderValue").val(heightArr[0] >= heightMax ? heightMax : heightArr[0]);
                 $("#heightSliderValueInch").val(heightArr[0] >= heightMax ? '0+' : heightArr[1]);
@@ -444,8 +443,9 @@ $(function() {
         $("#weightSliderValue").val("");
         $("#idHeightSliderInput").val(0);
         $("#heightSliderValue").val("");
-        $("#weightSlider").slider({ value: 0 });
-        $("#heightSlider").slider({ value: 0 });
+        $("#weightSlider").data("ionRangeSlider").reset();
+        $("#heightSlider").data("ionRangeSlider").reset();
+        $("#heightSliderValueInch").val('');
     });
 
     /*** CHOOSE OPTION THUMBNAIL ***/

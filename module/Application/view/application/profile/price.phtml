@@ -199,9 +199,7 @@ $(function () {
             $(value).val("");
         });
         <?php foreach ($this->price as $aBox) { ?>
-            $("#<?php echo $aBox['name'] ?>").slider({
-                value: 0,
-            });
+           $("#<?php echo  $aBox['name'] ?>range").data("ionRangeSlider").reset();
             $("#<?php echo  $aBox['name'] ?>Value").val('');        
         <?php }//end foreach ?>
     });
