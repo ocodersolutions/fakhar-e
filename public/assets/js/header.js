@@ -94,10 +94,9 @@ $(document).ready(function(){
     });
 
     // fix footer
-    
-    if (bodyHeight < windowHeight){
-        $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" });
-    }
+    // if (bodyHeight < windowHeight){
+    //     $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" });
+    // }
     // hide menu and footer in 3 page style , styleDefination and style
     
     //pathArr = ("/style","/style/defination","/venue");
