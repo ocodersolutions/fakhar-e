@@ -32,5 +32,8 @@ class VenueStyleTable extends BasicTableAdapter {
         $delete = $this->tableGateway->delete(array('style_id' => (int) $styleid,'venue_id' =>(int) $venueid));
        return $delete;
     }
-
+    public function deleterbystyleid($styleid){
+        $delete = $this->tableGateway->delete(array('style_id' => (int) $styleid));
+       return $delete;
+    }
 }

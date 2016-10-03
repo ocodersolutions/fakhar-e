@@ -143,7 +143,7 @@ class StyleController extends BaseActionController
     }
     public function deletestyledefinationAction() 
     {
-         $finalArray = array();
+        $finalArray = array();
         $aPostParams = $this->params()->fromPost();
         $aPost = explode("&",$aPostParams['form']); 
         foreach( $aPost as $val ){
@@ -198,6 +198,7 @@ class StyleController extends BaseActionController
         $userName = $userInfo->firstName;
         $this->layout()->firstName = $userInfo->firstName;
         $oStyleList = $this->getServiceLocator()->get('StyleListTable');
+        $oVenueStyleList = $this->getServiceLocator()->get('VenuestyleTable');
         $listItem = $oStyleList->viewlist($userId);
 
         $aPostParams = $this->params()->fromPost();
@@ -208,7 +209,8 @@ class StyleController extends BaseActionController
             $arr_style[ $tmp[0] ] = $tmp[1];
         }
         if (isset($arr_style["update-style"])) {
-            $style = $oStyleList->delete($arr_style["update-style"]); 
+            $style = $oStyleList->delete($arr_style["update-style"]);
+            $DelVenuest=$oVenueStyleList->deleterbystyleid($arr_style["update-style"]);
         }
         return $this->getResponse()->setContent(Json::encode($style));
     }
