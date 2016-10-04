@@ -719,7 +719,6 @@ class FeedDataTable extends BasicTableAdapter {
             //$sWhere.= " AND FIND_IN_SET(feed.color,'{$aPostParams['colors']}')";
             $sWhere .= " AND `feed`.`uid` IN (select distinct productUID from ProductAttributes where type = 'color' AND value IN ('" . str_replace(',', "','", $aPostParams['colors']) . "') )"; 
             //$prodattJoin = true;
-            var_dump(str_replace(',', "','", $aPostParams['colors']));
         }
         if (!empty($aPostParams['stores'])) {
             // $sWhere .= " AND FIND_IN_SET(feedmapbrand.id,'{$aPostParams['brands']}')";

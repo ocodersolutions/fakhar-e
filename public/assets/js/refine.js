@@ -507,6 +507,8 @@ $('body').on('click', '.qv-like', function (){
                         $("input[name="+y+"]").val("");
                     };
                     $("input[name='limit']").val("50");
+                    $("#mdealsSlider").data("ionRangeSlider").reset();
+                    $ ("#mPriceSlider").data("ionRangeSlider").reset();
                     $("a.fsp-close").trigger('click');
                 break;
 
@@ -806,7 +808,7 @@ function check_price_checked(){
             $('.show-price').hide();
             $('.price.prices .ranger').css('opacity','0.3');
         }else{
-            $('input[name="check-show-price"],label[for=check-price]').hide();
+            $('input[name="check-show-price"],label[for=check-price],label[for=mobile-check-price]').hide();
             $('.show-price').hide();
             $('.price.prices .ranger').css('opacity','1');
         }

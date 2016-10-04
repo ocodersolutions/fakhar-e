@@ -288,15 +288,16 @@ $( function() {
 });
     
  //********************* popup when search venue**************************//   
- $( function() {
-        bodyH = $('body').height();
-        winH = $(window).height();
-        winW = $(window).width();
-        if (winW >769){
-            if(bodyH < winH){
+ $( function() 
+ {
+    bodyH = $('body').height();
+    winH = $(window).height();
+    winW = $(window).width();
+    if (winW >769){
+        if(bodyH < winH){
             $('footer').css({"position": "fixed", "bottom": "0" ,"width" : "100%" , "z-index" : "9999"});
             $('footer').find('.copyright').css("background","#fff");
         }
-        }
+    }
         
-    });
+});
