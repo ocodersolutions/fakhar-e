@@ -62,8 +62,20 @@ $(document).ready(function() {
 
     });
 
-    $('.chosen_select_left').change(function(){
+        $(".chosen_select_left").chosen().on('chosen:showing_dropdown', function () {
+            x = $('.chosen-single span');
+            z = this.options[this.selectedIndex].value;
+            for ( i = 0; i < x.length; i++) {
+                f = x[i].innerText;
+                $('option[value="'+f+'"]').attr('disabled','')
+                $('.chosen_select_left').trigger('chosen:updated');
+            };
+            
+        });
 
+    $('.chosen_select_left').change(function(){
+        $('option[value="'+z+'"]').removeAttr('disabled');
+        $('.chosen_select_left').trigger('chosen:updated');
         x = $('.style-update .chosen_select_left option:selected');
         var number = $(this).data('number');
         $('#loading').css('display','block');
