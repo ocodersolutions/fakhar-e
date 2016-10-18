@@ -4,7 +4,12 @@ echo $this->headLink()->appendStylesheet($this->basePath() . '/assets/css/jqtree
 
 $listAttrValue = $this->listAttrValue;
 ?>
+<style type="text/css">
+	.jqtree_common.load-more{
+		display: none;
+	}
 
+</style>>
 <div class="row" id="venue_style_page">
 	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
 	<!-- <div class="venue_cat_wrap"> -->
@@ -226,19 +231,52 @@ var data = [
 		echo $data_tree;
 	?>
 ];
+
+	
+	  
+
 $(function() {
 	 pathname = window.location.pathname; 
-	 
     $('#tree1').tree({
         data: data,
         selectable: true,
-        closedIcon: $('<i class="fa fa-plus"/>'),
+        closedIcon: $('<i class="fa fa-plus" " />'),
     	openedIcon: $('<i class="fa fa-minus"/>'),
         onCreateLi: function(node, $li) {
         	var a = $li.find('span')[0];
         	a.outerHTML = '<a href="' + node.url + '">' + a.outerHTML + '</a>';
         }
     });
+
+  	$('#tree1 div.jqtree-element a.jqtree-closed').click(function(){
+			x = $(this).closest('li.jqtree_common.jqtree-folder');
+			if ( !x.hasClass( "selected" ) ) {
+				x.addClass('selected');
+				level = parseInt(x.find('a span').attr('aria-level'));
+				level +=1;
+				list = x.find("ul li a span[aria-level='"+level+"']").closest("li.jqtree_common");
+				
+				limit = 9;
+				for (i = 0; i < list.length; i++) {
+					if(i > limit ){$(list[i]).addClass('load-more');}
+				};
+				
+				e_loadmore = x.find('ul.jqtree_common .un-loadmore').length;
+				exist_loadmore = x.find('.load-more').length;
+
+				if(e_loadmore == 0 && exist_loadmore >0 ){
+					x.find('ul.jqtree_common').first().append('<a class="un-loadmore"><li style="color: blue;" class="jqtree-title">Load More</li></a>');
+					$('.un-loadmore').click(function(){
+						$(this).closest('ul .jqtree_common').find('.load-more').removeClass('load-more');
+						$(this).remove();
+					});
+				}
+				
+			}else{
+				x.removeClass('selected');
+			}		
+    });
+
     $(".chosen-select").chosen(); 
     $(".chosen-select").chosen().change(function(){
 		selectedValue = $(this).find("option:selected").data('styleid');
@@ -253,38 +291,38 @@ $(function() {
     $this=tagA.find("span");
     if($this.attr('aria-level')==3)
     {
-    	li2=$this.closest('li.jqtree_common .jqtree-folder');
-    	if(li2.hasClass('jqtree-closed')){
-    		li2.removeClass('jqtree-closed');
-    		li2.addClass('123');
-    		li2.find('div.jqtree_common').find('a.jqtree-toggler').removeClass('jqtree-closed');
-    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
-    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
-    	}
-    	ul2=li2.closest('ul');
-    	if(ul2.attr('display','none')){
-    		ul2.css('display','block');
-    	}
-    	li1=ul2.closest('li');
-    	if(li1.hasClass('jqtree-closed')){
-    		li1.removeClass('jqtree-closed');
-    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
-    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
-    	}
-    	$this.closest('li.jqtree_common .jqtree-folder').find('ul').css('display','block');
+    	// li2=$this.closest('li.jqtree_common .jqtree-folder');
+    	// if(li2.hasClass('jqtree-closed')){
+    	// 	li2.removeClass('jqtree-closed');
+    	// 	li2.addClass('123');
+    	// 	li2.find('div.jqtree_common').find('a.jqtree-toggler').removeClass('jqtree-closed');
+    	// 	li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    	// 	li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    	// }
+    	// ul2=li2.closest('ul');
+    	// if(ul2.attr('display','none')){
+    	// 	ul2.css('display','block');
+    	// }
+    	// li1=ul2.closest('li');
+    	// if(li1.hasClass('jqtree-closed')){
+    	// 	li1.removeClass('jqtree-closed');
+    	// 	li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    	// 	li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    	// }
+    	// $this.closest('li.jqtree_common .jqtree-folder').find('ul').css('display','block');
     	//$this.closest('li.jqtree_common .jqtree-folder').find('ul').addClass('class_name');
     }else if ($this.attr('aria-level')==2)
     {
-    	ul1=$this.closest('ul');
-    	if(ul1.attr('display','none')){
-    		ul1.css('display','block');
-    	}
-    	li1=ul1.closest('li');
-    	if(li1.hasClass('jqtree-closed')){
-    		li1.removeClass('jqtree-closed');
-    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').removeClass('fa-plus');
-    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').addClass('fa-minus');
-    	}
+    	// ul1=$this.closest('ul');
+    	// if(ul1.attr('display','none')){
+    	// 	ul1.css('display','block');
+    	// }
+    	// li1=ul1.closest('li');
+    	// if(li1.hasClass('jqtree-closed')){
+    	// 	li1.removeClass('jqtree-closed');
+    	// 	li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').removeClass('fa-plus');
+    	// 	li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').addClass('fa-minus');
+    	// }
     	
     }
 });

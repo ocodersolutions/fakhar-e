@@ -33,6 +33,26 @@ ALTER TABLE `Venue`
 
 INSERT INTO `elnove.local`.`Venue` (`id`, `title`, `parentId`, `userId`, `created`, `updated`, `isActive`) VALUES (NULL, 'Work', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1'), (NULL, 'Night Out', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1'), (NULL, 'Casual', '0', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '1');
 
+CREATE TABLE `venuestyle` (
+  `id` int(11) NOT NULL,
+  `style_id` int(11) NOT NULL,
+  `venue_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `venuestyle`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `venuestyle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+
+
+  INSERT INTO `venuestyle` (`id`, `style_id`, `venue_id`) VALUES
+(59, 29, 13),
+(61, 30, 5),
+(62, 33, 11),
+(63, 29, 2),
+(64, 33, 8),
+(65, 33, 2);
+
+
 
 CREATE TABLE IF NOT EXISTS `Style` (
   `id` int(11) NOT NULL,
