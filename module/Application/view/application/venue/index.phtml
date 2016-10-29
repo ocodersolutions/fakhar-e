@@ -9,7 +9,7 @@ $listAttrValue = $this->listAttrValue;
 		display: none;
 	}
 
-</style>>
+</style>
 <div class="row" id="venue_style_page">
 	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
 	<!-- <div class="venue_cat_wrap"> -->
@@ -233,7 +233,7 @@ var data = [
 ];
 
 	
-	  
+
 
 $(function() {
 	 pathname = window.location.pathname; 
@@ -248,34 +248,34 @@ $(function() {
         }
     });
 
-  	$('#tree1 div.jqtree-element a.jqtree-closed').click(function(){
-			x = $(this).closest('li.jqtree_common.jqtree-folder');
-			if ( !x.hasClass( "selected" ) ) {
-				x.addClass('selected');
-				level = parseInt(x.find('a span').attr('aria-level'));
-				level +=1;
-				list = x.find("ul li a span[aria-level='"+level+"']").closest("li.jqtree_common");
+  	// $('#tree1 div.jqtree-element a.jqtree-closed').click(function(){
+			// x = $(this).closest('li.jqtree_common.jqtree-folder');
+			// if ( !x.hasClass( "selected" ) ) {
+			// 	x.addClass('selected');
+			// 	level = parseInt(x.find('a span').attr('aria-level'));
+			// 	level +=1;
+			// 	list = x.find("ul li a span[aria-level='"+level+"']").closest("li.jqtree_common");
 				
-				limit = 20;
-				for (i = 0; i < list.length; i++) {
-					if(i > limit ){$(list[i]).addClass('load-more');}
-				};
+			// 	limit = 20;
+			// 	for (i = 0; i < list.length; i++) {
+			// 		if(i > limit ){$(list[i]).addClass('load-more');}
+			// 	};
 				
-				e_loadmore = x.find('ul.jqtree_common .un-loadmore').length;
-				exist_loadmore = x.find('.load-more').length;
+			// 	e_loadmore = x.find('ul.jqtree_common .un-loadmore').length;
+			// 	exist_loadmore = x.find('.load-more').length;
 
-				if(e_loadmore == 0 && exist_loadmore >0 ){
-					x.find('ul.jqtree_common').first().append('<a class="un-loadmore"><li style="color: blue;" class="jqtree-title">Load More</li></a>');
-					$('.un-loadmore').click(function(){
-						$(this).closest('ul .jqtree_common').find('.load-more').removeClass('load-more');
-						$(this).remove();
-					});
-				}
+			// 	if(e_loadmore == 0 && exist_loadmore >0 ){
+			// 		x.find('ul.jqtree_common').first().append('<select class="un-loadmore"><option value="volvo">Volvo</option><option value="saab">Saab</option></select>');
+			// 		$('.un-loadmore').click(function(){
+			// 			//$(this).closest('ul .jqtree_common').find('.load-more').removeClass('load-more');
+			// 			$(this).remove();
+			// 		});
+			// 	}
 				
-			}else{
-				x.removeClass('selected');
-			}		
-    });
+			// }else{
+			// 	x.removeClass('selected');
+			// }		
+   //  });
 
     $(".chosen-select").chosen(); 
     $(".chosen-select").chosen().change(function(){
@@ -294,11 +294,23 @@ $(function() {
     	li2=$this.closest('li.jqtree_common .jqtree-folder');
     	if(li2.hasClass('jqtree-closed')){
     		li2.removeClass('jqtree-closed');
-    		li2.addClass('123');
+    		li2.addClass('fl_selected');
     		li2.find('div.jqtree_common').find('a.jqtree-toggler').removeClass('jqtree-closed');
     		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
     		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
-    	}
+    		$('.fl_selected ul li').slice( 20, 10000 ).addClass('load-more');
+    		$('.fl_selected ul').append('<select style="width:85%; margin-left: 1.3em;" id="list_dropdown" ></select>');
+    		$('.jqtree_common.load-more').appendTo('#list_dropdown');
+    		x = $('#list_dropdown .jqtree_common.load-more');
+    		for (i = 0; i < x.length; i++) {
+				$(x[i]).wrap('<option></option>');
+			}
+			$('#list_dropdown').on('change', function() {
+			  y = $(this).find('option:selected').find('a').attr('href'); 
+			  window.location.replace(y);
+			});
+    	}    	
+    	$(tagA).closest('option').attr('selected','');
     	ul2=li2.closest('ul');
     	if(ul2.attr('display','none')){
     		ul2.css('display','block');

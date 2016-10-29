@@ -1,4 +1,6 @@
-
+ul.jqtree-tree .jqtree-title{
+      white-space: nowrap;
+}
 /* Tweak navbar brand link to be super sleek
 -------------------------------------------------- */
 .oss-bar {
