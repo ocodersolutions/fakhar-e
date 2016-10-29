@@ -248,18 +248,52 @@ $(function() {
         }
     });
 
-  	// $('#tree1 div.jqtree-element a.jqtree-closed').click(function(){
-			// x = $(this).closest('li.jqtree_common.jqtree-folder');
-			// if ( !x.hasClass( "selected" ) ) {
-			// 	x.addClass('selected');
-			// 	level = parseInt(x.find('a span').attr('aria-level'));
-			// 	level +=1;
-			// 	list = x.find("ul li a span[aria-level='"+level+"']").closest("li.jqtree_common");
+  	$('#tree1 div.jqtree-element a.jqtree-closed').click(function(){
+  		
+			x = $(this).closest('li.jqtree_common.jqtree-folder');
+			if ( !x.hasClass( "selected" ) ) {
+				x.addClass('selected');
+				level = parseInt(x.find('a span').attr('aria-level'));
+				level +=1;
+				list = x.find("ul li a span[aria-level='"+level+"']").closest("li.jqtree_common");
+				$(list).slice( 20, 10000 ).addClass('load-more');
 				
-			// 	limit = 20;
-			// 	for (i = 0; i < list.length; i++) {
-			// 		if(i > limit ){$(list[i]).addClass('load-more');}
-			// 	};
+				y = $(this).closest('.jqtree_common.jqtree-folder.selected');
+				// console.log(y);
+				// if () {
+
+				// }
+				// z = $(y).find('ul.jqtree_common').addClass('2nd_selected').find('.contain-option');
+				
+				// if(z.length == 0){
+				// 	alert(111);
+				// 	$(y).find('ul.jqtree_common').addClass('2nd_selected').append('<p>aaaaaaaaaaaa</p>')
+				// }
+
+
+
+
+
+
+
+
+				
+				// $(this).append('<select style="width:85%; margin-left: 1.3em;" id="list_dropdown" ></select>');
+
+				// $('.jqtree_common.load-more').appendTo('#list_dropdown');
+	   //  		x = $('#list_dropdown .jqtree_common.load-more');
+	   //  		for (i = 0; i < x.length; i++) {
+				// 	$(x[i]).wrap('<option></option>');
+				// }
+
+
+
+
+				
+			// 	// limit = 20;
+			// 	// for (i = 0; i < list.length; i++) {
+			// 	// 	if(i > limit ){$(list[i]).addClass('load-more');}
+			// 	// };
 				
 			// 	e_loadmore = x.find('ul.jqtree_common .un-loadmore').length;
 			// 	exist_loadmore = x.find('.load-more').length;
@@ -272,10 +306,10 @@ $(function() {
 			// 		});
 			// 	}
 				
-			// }else{
-			// 	x.removeClass('selected');
-			// }		
-   //  });
+			}else{
+				x.removeClass('selected');
+			}		
+    });
 
     $(".chosen-select").chosen(); 
     $(".chosen-select").chosen().change(function(){
