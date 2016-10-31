@@ -249,62 +249,35 @@ $(function() {
     });
 
   	$('#tree1 div.jqtree-element a.jqtree-closed').click(function(){
-  		
-			x = $(this).closest('li.jqtree_common.jqtree-folder');
-			if ( !x.hasClass( "selected" ) ) {
+	  		
+				x = $(this).closest('li.jqtree_common.jqtree-folder');
+				if ( !x.hasClass( "selected" ) ) {
 				x.addClass('selected');
 				level = parseInt(x.find('a span').attr('aria-level'));
 				level +=1;
 				list = x.find("ul li a span[aria-level='"+level+"']").closest("li.jqtree_common");
 				$(list).slice( 20, 10000 ).addClass('load-more');
-				
 				y = $(this).closest('.jqtree_common.jqtree-folder.selected');
-				// console.log(y);
-				// if () {
-
-				// }
-				// z = $(y).find('ul.jqtree_common').addClass('2nd_selected').find('.contain-option');
-				
-				// if(z.length == 0){
-				// 	alert(111);
-				// 	$(y).find('ul.jqtree_common').addClass('2nd_selected').append('<p>aaaaaaaaaaaa</p>')
-				// }
-
-
-
-
-
-
-
-
-				
-				// $(this).append('<select style="width:85%; margin-left: 1.3em;" id="list_dropdown" ></select>');
-
-				// $('.jqtree_common.load-more').appendTo('#list_dropdown');
-	   //  		x = $('#list_dropdown .jqtree_common.load-more');
-	   //  		for (i = 0; i < x.length; i++) {
-				// 	$(x[i]).wrap('<option></option>');
-				// }
-
-
-
-
-				
-			// 	// limit = 20;
-			// 	// for (i = 0; i < list.length; i++) {
-			// 	// 	if(i > limit ){$(list[i]).addClass('load-more');}
-			// 	// };
-				
-			// 	e_loadmore = x.find('ul.jqtree_common .un-loadmore').length;
-			// 	exist_loadmore = x.find('.load-more').length;
-
-			// 	if(e_loadmore == 0 && exist_loadmore >0 ){
-			// 		x.find('ul.jqtree_common').first().append('<select class="un-loadmore"><option value="volvo">Volvo</option><option value="saab">Saab</option></select>');
-			// 		$('.un-loadmore').click(function(){
-			// 			//$(this).closest('ul .jqtree_common').find('.load-more').removeClass('load-more');
-			// 			$(this).remove();
-			// 		});
-			// 	}
+				has_child = $(y).find('a .fa').length;
+				if(has_child <= 1 ){
+					exits_option = $(y).find('.list_dropdown').length;
+					if (exits_option == 0) {
+							length = $(y).find('.jqtree_common.load-more').length;
+							if (length > 0) {
+								$(y).find('ul.jqtree_common').addClass('2nd_selected').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown" ></select>');	
+							}
+							
+						list_dropdown = $(y).find('.jqtree_common.load-more');
+						$(list_dropdown).appendTo($(y).find('.list_dropdown'));
+						for (i = 0; i < list_dropdown.length; i++) {
+							$(list_dropdown[i]).wrap('<option></option>');
+						}
+					}
+				}
+				$('.list_dropdown').on('change', function() {
+				  y = $(this).find('option:selected').find('a').attr('href'); 
+				  window.location.replace(y);
+				});
 				
 			}else{
 				x.removeClass('selected');
@@ -333,13 +306,16 @@ $(function() {
     		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
     		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
     		$('.fl_selected ul li').slice( 20, 10000 ).addClass('load-more');
-    		$('.fl_selected ul').append('<select style="width:85%; margin-left: 1.3em;" id="list_dropdown" ></select>');
-    		$('.jqtree_common.load-more').appendTo('#list_dropdown');
-    		x = $('#list_dropdown .jqtree_common.load-more');
+    		length = $('.fl_selected .jqtree_common.load-more').length;
+    		if (length > 0) {
+    			$('.fl_selected ul').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown" ></select>');
+    		}
+    		$('.jqtree_common.load-more').appendTo('.list_dropdown');
+    		x = $('.list_dropdown .jqtree_common.load-more');
     		for (i = 0; i < x.length; i++) {
 				$(x[i]).wrap('<option></option>');
 			}
-			$('#list_dropdown').on('change', function() {
+			$('.list_dropdown').on('change', function() {
 			  y = $(this).find('option:selected').find('a').attr('href'); 
 			  window.location.replace(y);
 			});
