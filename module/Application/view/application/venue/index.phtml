@@ -264,7 +264,7 @@ $(function() {
 					if (exits_option == 0) {
 							length = $(y).find('.jqtree_common.load-more').length;
 							if (length > 0) {
-								$(y).find('ul.jqtree_common').addClass('2nd_selected').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown" ></select>');	
+								$(y).find('ul.jqtree_common').addClass('2nd_selected').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown"><option disabled selected>Select</option></select>');	
 							}
 							
 						list_dropdown = $(y).find('.jqtree_common.load-more');
@@ -308,7 +308,7 @@ $(function() {
     		$('.fl_selected ul li').slice( 20, 10000 ).addClass('load-more');
     		length = $('.fl_selected .jqtree_common.load-more').length;
     		if (length > 0) {
-    			$('.fl_selected ul').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown" ></select>');
+    			$('.fl_selected ul').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown" ><option disabled selected>Select</option></select>');
     		}
     		$('.jqtree_common.load-more').appendTo('.list_dropdown');
     		x = $('.list_dropdown .jqtree_common.load-more');
