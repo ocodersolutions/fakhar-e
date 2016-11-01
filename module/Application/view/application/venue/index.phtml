@@ -328,8 +328,8 @@ $(function() {
     	li1=ul2.closest('li');
     	if(li1.hasClass('jqtree-closed')){
     		li1.removeClass('jqtree-closed');
-    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
-    		li1.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    		li1.find('div.jqtree_common').first().find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    		li1.find('div.jqtree_common').first().find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
     	}
     	$this.closest('li.jqtree_common .jqtree-folder').find('ul').css('display','block');
     	$this.closest('li.jqtree_common .jqtree-folder').find('ul').addClass('class_name');
