@@ -150,7 +150,7 @@ $listAttrValue = $this->listAttrValue;
 		}
 			if(!empty($ChildrenArr)){
 				foreach ($ChildrenArr as $name_venue => $venue_value) {?>
-					<h3>Venue:<i> "<?php echo $name_venue ?>"</i></h3>
+					
 					<?php 
 					if(!empty($venue_value)){
 						foreach ($venue_value as $name_st => $attr_arr) {?>
@@ -176,7 +176,7 @@ $listAttrValue = $this->listAttrValue;
 							</div>
 						<?php }
 					}else {
-						echo "<i> No Styles </i>";
+						
 					}
 				}
 			}?>
