@@ -258,7 +258,7 @@ class FeedDataTable extends BasicTableAdapter {
         if( isset($aPostParams['profileBasePrices']) && $aPostParams['profileBasePrices'] ==1 ) {
             
             $sProfileBaseQuery = $oEngine->profileBasedProductsQuery();
-            $sWhere = $sProfileBaseQuery; echo $sWhere; die; 
+            $sWhere = $sProfileBaseQuery; 
         }
             
         $sWhere .= ' AND item_count > 0 ';
