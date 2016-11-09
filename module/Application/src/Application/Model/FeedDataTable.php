@@ -258,7 +258,7 @@ class FeedDataTable extends BasicTableAdapter {
         if( isset($aPostParams['profileBasePrices']) && $aPostParams['profileBasePrices'] ==1 ) {
             
             $sProfileBaseQuery = $oEngine->profileBasedProductsQuery();
-            $sWhere = $sProfileBaseQuery;
+            $sWhere = $sProfileBaseQuery; echo $sWhere; die; 
         }
             
         $sWhere .= ' AND item_count > 0 ';
@@ -541,12 +541,13 @@ class FeedDataTable extends BasicTableAdapter {
             
             $searcharray = explode(",",$aPostParams['searchVenue']);
             $AttrsArr = [];
-            $productArr=[];
+            $productArr=[]; 
             foreach ($searcharray as $key => $value) {
               $newSql = new Sql($this->getServiceLocator()->get('db'));
               $Vselect = $newSql->select(array('s' => 'Venue'));
               $Vselect->where(array('title' => $value));
               $resultSet = array();
+              //echo $newSql->getSqlStringForSqlObject($Vselect); die;
               $results = $newSql->prepareStatementForSqlObject($Vselect)->execute();
               $resultSet = new \Zend\Db\ResultSet\ResultSet();
               $resultSet->initialize($results);
@@ -554,9 +555,10 @@ class FeedDataTable extends BasicTableAdapter {
               foreach ($vresultSet as $Vvalue) {
                 $Vid = $Vvalue['id'];// lay id cua search
                 $StSql = new Sql($this->getServiceLocator()->get('db'));
-                $Stselect = $StSql->select(array('st' => 'Venuestyle'));
+                $Stselect = $StSql->select(array('st' => 'VenueStyle'));
                 $Stselect->where(array('venue_id' => $Vid));
                 $resultSet = array();
+                //echo $newSql->getSqlStringForSqlObject($Stselect); die;
                 $results = $newSql->prepareStatementForSqlObject($Stselect)->execute();
                 $resultSet = new \Zend\Db\ResultSet\ResultSet();
                 $resultSet->initialize($results);
@@ -565,9 +567,10 @@ class FeedDataTable extends BasicTableAdapter {
                 foreach ($StresultSet as $St_key => $Stvalue) {
                   $stId = $Stvalue['style_id'];// lay id cua style search
                   $AttrSql = new Sql($this->getServiceLocator()->get('db'));
-                  $Attrselect = $AttrSql->select(array('att' => 'styledefination'));
+                  $Attrselect = $AttrSql->select(array('att' => 'StyleDefination'));
                   $Attrselect->where(array('styleId' => $stId));
                   $resultSet = array();
+                  //echo $newSql->getSqlStringForSqlObject($Attrselect); die;
                   $results = $AttrSql->prepareStatementForSqlObject($Attrselect)->execute();
                   $resultSet = new \Zend\Db\ResultSet\ResultSet();
                   $resultSet->initialize($results);
@@ -577,9 +580,10 @@ class FeedDataTable extends BasicTableAdapter {
                     foreach ($AttrsArr as $type => $Attr_value) {
                       //$productArr=[];
                       $ProdSql = new Sql($this->getServiceLocator()->get('db'));
-                      $Prodselect = $ProdSql->select(array('prod' => 'productattributes'));
-                      $Prodselect->where(array('prod.type' => $type , 'prod.value' => strtoupper($Attr_value)));
+                      $Prodselect = $ProdSql->select(array('prod' => 'ProductAttributes')); 
+                      $Prodselect->where("prod.type = '{$type}' AND prod.value IN ('".implode("','", explode(',', $Attr_value))."')");
                       $resultSet = array();
+                      //echo $newSql->getSqlStringForSqlObject($Prodselect); die;
                       $results = $AttrSql->prepareStatementForSqlObject($Prodselect)->execute();
                       $resultSet = new \Zend\Db\ResultSet\ResultSet();
                       $resultSet->initialize($results);
@@ -597,6 +601,7 @@ class FeedDataTable extends BasicTableAdapter {
                 $VChildselect = $venueChildSql->select(array('st' => 'Venue'));
                 $VChildselect->where(array('parentId' => $Vid));
                 $VCresultSet = array();
+                //echo $newSql->getSqlStringForSqlObject($VChildselect); die;
                 $VCresults = $newSql->prepareStatementForSqlObject($VChildselect)->execute();
                 $VCresultSet = new \Zend\Db\ResultSet\ResultSet();
                 $VCresultSet->initialize($VCresults);
@@ -607,9 +612,10 @@ class FeedDataTable extends BasicTableAdapter {
                     $VchildId = $Vchildvalue['id'];
                     array_push($childArr,$VchildId);
                     $ChStSql = new Sql($this->getServiceLocator()->get('db'));
-                    $ChStselect = $ChStSql->select(array('st' => 'Venuestyle'));
+                    $ChStselect = $ChStSql->select(array('st' => 'VenueStyle'));
                     $ChStselect->where(array('venue_id' => $VchildId));
                     $ChresultSet = array();
+                    //echo $ChStSql->getSqlStringForSqlObject($ChStselect); die;
                     $Chresults = $ChStSql->prepareStatementForSqlObject($ChStselect)->execute();
                     $ChresultSet = new \Zend\Db\ResultSet\ResultSet();
                     $ChresultSet->initialize($Chresults);
@@ -618,7 +624,7 @@ class FeedDataTable extends BasicTableAdapter {
                       foreach ($ChStresultSet as $sttr => $attrvalue) {
                         $StChild =  $attrvalue['style_id'];
                         $AttrChSql = new Sql($this->getServiceLocator()->get('db'));
-                        $AttrChselect = $AttrChSql->select(array('att' => 'styledefination'));
+                        $AttrChselect = $AttrChSql->select(array('att' => 'StyleDefination'));
                         $AttrChselect->where(array('styleId' => $StChild));
                         $AChresultSet = array();
                         $AChresults = $AttrChSql->prepareStatementForSqlObject($AttrChselect)->execute();
@@ -628,8 +634,9 @@ class FeedDataTable extends BasicTableAdapter {
                         if(!empty($AttrChesultSet)){
                           foreach ($AttrChesultSet as $keyAC => $ACvalue) {
                             $ProdChSql = new Sql($this->getServiceLocator()->get('db'));
-                            $ProdChselect = $ProdChSql->select(array('prod' => 'productattributes'));
-                            $ProdChselect->where(array('prod.type' => $ACvalue['attribute'] , 'prod.value' => strtoupper($ACvalue['value'])));
+                            $ProdChselect = $ProdChSql->select(array('prod' => 'ProductAttributes'));
+                            //$ProdChselect->where(array('prod.type' => $ACvalue['attribute'] , 'prod.value' => strtoupper($ACvalue['value'])));
+                            $ProdChselect->where("prod.type = '{$type}' AND prod.value IN ('".implode("','", explode(',', strtoupper($ACvalue['value'])))."')");
                             $PCresultSet = array();
                             $PCresults = $AttrSql->prepareStatementForSqlObject($ProdChselect)->execute();
                             $PCresultSet = new \Zend\Db\ResultSet\ResultSet();
@@ -675,7 +682,7 @@ class FeedDataTable extends BasicTableAdapter {
                         if(!empty($listStGrand)){
                           foreach ($listStGrand as $GrStKe => $GranChStId) {
                             $AttrGrChSql = new Sql($this->getServiceLocator()->get('db'));
-                            $AttrGrChselect = $AttrGrChSql->select(array('att' => 'styledefination'));
+                            $AttrGrChselect = $AttrGrChSql->select(array('att' => 'styleDefination'));
                             $AttrGrChselect->where(array('styleId' => $GranChStId));
                             $AGrChresultSet = array();
                             $AChresults = $AttrGrChSql->prepareStatementForSqlObject($AttrGrChselect)->execute();
@@ -686,8 +693,9 @@ class FeedDataTable extends BasicTableAdapter {
                             {
                               foreach ($AttrGrChesultSet as $AttrGrChkey => $AttrGrChArr) {
                                 $ProdGrChSql = new Sql($this->getServiceLocator()->get('db'));
-                                $ProdGrChselect = $ProdGrChSql->select(array('prod' => 'productattributes'));
-                                $ProdGrChselect->where(array('prod.type' => $AttrGrChArr['attribute'] , 'prod.value' => strtoupper($AttrGrChArr['value'])));
+                                $ProdGrChselect = $ProdGrChSql->select(array('prod' => 'ProductAttributes'));
+                                //$ProdGrChselect->where(array('prod.type' => $AttrGrChArr['attribute'] , 'prod.value' => strtoupper($AttrGrChArr['value'])));
+                                $ProdGrChselect->where("prod.type = '{$type}' AND prod.value IN ('".implode("','", explode(',', strtoupper($AttrGrChArr['value'])))."')");
                                 $PGrCresultSet = array();
                                 $PGrCresults = $ProdGrChSql->prepareStatementForSqlObject($ProdGrChselect)->execute();
                                 $PGrCresultSet = new \Zend\Db\ResultSet\ResultSet();
@@ -709,7 +717,7 @@ class FeedDataTable extends BasicTableAdapter {
               $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
             }
         }
-        
+        //echo "here"; die;
         if (!empty($aPostParams['catids'])) {
             $sWhere .= " AND `feed`.`uid` IN (select distinct productUID from ProductCategories where value IN (" . $aPostParams['catids'] . ") )";
             //$prodattJoin = true;

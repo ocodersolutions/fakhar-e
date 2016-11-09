@@ -18,6 +18,44 @@ use Ocoder\Base\BaseActionController;
 
 class InfoController extends BaseActionController
 {
+    public function placesAction()
+    {
+        
+        $__viewVariables = array();
+        $aPostParams = $this->params()->fromPost();
+                
+        if( isset($aPostParams['query']) ) {
+
+            
+            $plugin = $this->ReadXMLByNodePlugin();
+            
+            $url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?key=AIzaSyBFdKVJAJCp50vbPOFJ6UoNdCn1ZGvC1hg&query=".urlencode($aPostParams['query']);
+            $sContents = file_get_contents($url);
+                        
+            $plugin	->setFileContents( $sContents )->setParentNode('result');
+            $res = $unq_types = array();
+            while( $sNode = $plugin->getNodeFromContents() ) {
+                 
+                $res[] = array(
+                    'name' => (string)$sNode->name,
+                    'type' => (array)$sNode->type,
+                    'formatted_address' => (string)$sNode->formatted_address,
+                );
+            
+                $unq_types = array_merge($unq_types, (array)$sNode->type);
+            }
+            
+            $__viewVariables['summary'] = array_unique($unq_types);
+            $__viewVariables['result'] = $res;
+            $__viewVariables['query'] = $aPostParams['query'];
+        }
+
+        $viewModel = new ViewModel( $__viewVariables );
+        $viewModel->setTerminal(true);        
+        return $viewModel;
+
+    }
+    
     public function howItWorksAction()
     {
         $this->layout('layout/layout_elnove.phtml');
