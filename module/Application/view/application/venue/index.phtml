@@ -151,12 +151,11 @@ $listAttrValue = $this->listAttrValue;
 			if(!empty($ChildrenArr)){
 				foreach ($ChildrenArr as $name_venue => $venue_value) {
 				if($venue_value != ""){ ?>
-
 				<h3>Venue:<i> <?php  echo '"'.$name_venue.'"'; } ?></i></h3>
 					<?php if(!empty($venue_value)){
 						foreach ($venue_value as $name_st => $attr_arr) {?>
 							
-							<div class="row style_item" ffff>
+							<div class="row style_item" >
 								<div class="style_left col-lg-3 col-sm-3 ">
 									<p><?php echo $name_st ?></p>
 								</div>
@@ -185,12 +184,13 @@ $listAttrValue = $this->listAttrValue;
 			<?php 
 			//var_dump($GranChildrenArr);
 				if (!empty($GranChildrenArr)){
-					foreach ($GranChildrenArr as $nameGrChild => $GrChildvalue) { ?>
-						
+					foreach ($GranChildrenArr as $nameGrChild => $GrChildvalue) {
+						if($GrChildvalue != "" ){?>
+						<h3>Venue:<i> <?php echo '"'.$nameGrChild.'"';} ?></i></h3>
 					<?php if (!empty($GrChildvalue))
 					{
 						foreach ($GrChildvalue as $NameGrstyle => $Grstylevalue) {?>
-						<h3>Venue:<i> "<?php echo $nameGrChild ?>"</i></h3>
+						
 							<div class="row style_item">
 								<div class="style_left col-lg-3 col-sm-3 ">
 									<p><?php echo $NameGrstyle ?></p>
