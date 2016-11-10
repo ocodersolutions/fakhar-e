@@ -149,11 +149,13 @@ $listAttrValue = $this->listAttrValue;
 			echo '<p class="tree_title">Child styles</p>';
 		}
 			if(!empty($ChildrenArr)){
-				foreach ($ChildrenArr as $name_venue => $venue_value) {?>
-					<?php 
-					if(!empty($venue_value)){
+				foreach ($ChildrenArr as $name_venue => $venue_value) {
+				if($venue_value != ""){ ?>
+
+				<h3>Venue:<i> <?php  echo '"'.$name_venue.'"'; } ?></i></h3>
+					<?php if(!empty($venue_value)){
 						foreach ($venue_value as $name_st => $attr_arr) {?>
-							<h3>Venue:<i> "<?php echo $name_venue ?>"</i></h3>
+							
 							<div class="row style_item" ffff>
 								<div class="style_left col-lg-3 col-sm-3 ">
 									<p><?php echo $name_st ?></p>
