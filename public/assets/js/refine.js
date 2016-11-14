@@ -659,88 +659,46 @@ $('body').on('click', '.qv-like', function (){
 
 $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(event){
     event.preventDefault(); 
-    y = '';
-    x = '';
-    x = $('form.searchbox input[name="search1"]').val();
-    if (x == "") {
-        x = $('form.searchbox input[name="search2"]').val();
-        (x != '' ) ? y = 1 : y = 0;
-    }
-    if (x == "") {
-        x = $('form.form_search input[name="search1"]').val();
-    } 
-    if (x == ""){
-        x = $('form.form_search input[name="search2"]').val();
-        (x != '' ) ? y = 1 : y = 0;
+    normal_s1 = [];
+    venue_s2 = [];
+    above_s1 = $('form.searchbox input[name="search1"]').val();
+    above_s2 = $('form.searchbox input[name="search2"]').val();
+    below_s1 = $('form.form_search input[name="search1"]').val();
+    below_s2 = $('form.form_search input[name="search2"]').val();
+    mobile_s1 = $('form.searchbox-mobile input[name="search1"]').val();
+    mobile_s2 = $('form.searchbox-mobile input[name="search2"]').val();
+    normal_s1.push(above_s1,below_s1,mobile_s1);
+    venue_s2.push(above_s2,below_s2,mobile_s2);
 
-    }
-
-    if (y == 1) {
-        y = 'venue';
-    }else{
-        y = 'normal';
-    }
-
-    check = $('span[data-search="'+x+'"]').length;   
-
-    if ( check == 0 && x != '') {
-        if(y == "normal")
-        {
-            $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
+    for (var i = 0; i < normal_s1.length; i++) {
+        check = $('span[data-search="'+normal_s1[i]+'"]').length;
+        type_search = 'normal';
+        if(normal_s1[i] != '' && check == 0){
+            $('.option-selected').append('<div class="item '+type_search+'" data-search="'+normal_s1[i]+'"><span data-search="'+normal_s1[i]+'">'+normal_s1[i]+'</span><i data-search="'+normal_s1[i]+'" class="fa fa-times" aria-hidden="true"></i></div>');
             $('i.fa-times').click(function()
             {
-                x = $(this).attr('data-search');
-                $('.item[data-search="'+x+'"]').remove();
+                normal_s1[i] = $(this).attr('data-search');
+                $('.item[data-search="'+normal_s1[i]+'"]').remove();
                 check_search_tag();
             });
             check_search_tag();
         }
-        else
-        {
-            $.ajax ({
-                url : "/venue/search",
-                type : "post",
-                data : {    data_form: x,  },
-                dataType: "json",
-                success: function(result) 
-                {
-                    if (result.status1 == "error")
-                    {
-                        $(".my_venue_alert").html(result.max_1).css("display", "block");
-                        myalert('myalertid3','type_missing','Ooops!','','OK', 'You can refer to the suggestions below:'   ,function(){$('#myalertid3').foundation('reveal','close'); });
-                        $(".my_venue_alert div").click(function(){
-                            x = $(this).html();
-                            $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
-                            $("button.my_btn_type").click();
-                            check_search_tag();
-                            $('i.fa-times').click(function()
-                            {
-                                x = $(this).attr('data-search');
-                                $('.item[data-search="'+x+'"]').remove();  
-                                check_search_tag();                          
-                            });
-                        });
-                    }
-                    else
-                    {
-                        x = result.status1;
-                        $('.option-selected').append('<div class="item '+y+'" data-search="'+x+'"><span data-search="'+x+'">'+x+'</span><i data-search="'+x+'" class="fa fa-times" aria-hidden="true"></i></div>');
-                        $('i.fa-times').click(function()
-                        {
-                            x = $(this).attr('data-search');
-                            $('.item[data-search="'+x+'"]').remove();  
-                            check_search_tag();                          
-                        });
-                        check_search_tag();
-                    }
-                },
-                error: function() 
-                {
-                    alert('Error occured');
-                }
+    };
+
+    for (var i = 0; i < venue_s2.length; i++) {
+        check = $('span[data-search="'+venue_s2[i]+'"]').length;
+        type_search = 'venue';
+        if(venue_s2[i] != '' && check == 0){
+            $('.option-selected').append('<div class="item '+type_search+'" data-search="'+venue_s2[i]+'"><span data-search="'+venue_s2[i]+'">'+venue_s2[i]+'</span><i data-search="'+venue_s2[i]+'" class="fa fa-times" aria-hidden="true"></i></div>');
+            $('i.fa-times').click(function()
+            {
+                venue_s2[i] = $(this).attr('data-search');
+                $('.item[data-search="'+venue_s2[i]+'"]').remove();
+                check_search_tag();
             });
+            check_search_tag();
         }
-    }   
+    };
 });
 
 function check_search_tag(){
