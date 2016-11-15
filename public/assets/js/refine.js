@@ -658,7 +658,11 @@ $('body').on('click', '.qv-like', function (){
 
 
 $('form.searchbox, form.form_search, form.searchbox-mobile').submit(function(event){
+
     event.preventDefault(); 
+    $('html, body').animate({
+        scrollTop: $("#refineseacrch-left").offset().top - 300
+    }, 1000);
     normal_s1 = [];
     venue_s2 = [];
     above_s1 = $('form.searchbox input[name="search1"]').val();
