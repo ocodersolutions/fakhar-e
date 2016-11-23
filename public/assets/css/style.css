@@ -1,14 +1,4 @@
-.wrap_title-page{
-  padding: 25px 22%;
-}
-h1.title-page{
-    border: 3px solid #53b82e;
-    line-height: 60px;
-    box-shadow: 3px 3px 3px #888888;
-}
-.wrap_title-page .shadow_title-page{
-    box-shadow: inset 3px 3px 3px 3px #888888;
-}
+
 button:focus { outline: none; }
 input::-webkit-input-placeholder { /* WebKit browsers */
   padding-left: 10px
