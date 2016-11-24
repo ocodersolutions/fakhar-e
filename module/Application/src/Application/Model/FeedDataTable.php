@@ -537,6 +537,7 @@ class FeedDataTable extends BasicTableAdapter {
             }
         }
 
+        $aPostParams['searchVenue'] = str_replace("'","\"",$aPostParams['searchVenue']);
         if (isset($aPostParams['searchVenue']) && !empty($aPostParams['searchVenue']) ) {
             
             $searcharray = explode(",",$aPostParams['searchVenue']);

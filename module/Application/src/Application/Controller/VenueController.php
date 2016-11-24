@@ -286,7 +286,7 @@ class VenueController extends BaseActionController
          $jsonvenueArr = array();
          if (!empty($listItem)) {
             foreach ($listItem as $vItem) {
-                 $jsonvenueArr[] =  $vItem['title'];
+                 $jsonvenueArr[] =  str_replace('"','\'',$vItem['title']);
             }
         }
         $jsonvenue = json_encode($jsonvenueArr);
