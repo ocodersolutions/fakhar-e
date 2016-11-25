@@ -279,6 +279,9 @@ $( function() {
         $(this).val(ui.item.value);
         $(this). parents("form").submit();
         // $('form.searchbox, form.form_search, form.searchbox-mobile').submit();
+        $(this).attr("value","");
+        return false
+        
       },
       open: function(event, ui) {
             w = $(this).width() + 30;

@@ -636,9 +636,10 @@ class FeedDataTable extends BasicTableAdapter {
                           foreach ($AttrChesultSet as $keyAC => $ACvalue) {
                             $ProdChSql = new Sql($this->getServiceLocator()->get('db'));
                             $ProdChselect = $ProdChSql->select(array('prod' => 'ProductAttributes'));
-                            //$ProdChselect->where(array('prod.type' => $ACvalue['attribute'] , 'prod.value' => strtoupper($ACvalue['value'])));
-                            $ProdChselect->where("prod.type = '{$type}' AND prod.value IN ('".implode("','", explode(',', strtoupper($ACvalue['value'])))."')");
+                            $ProdChselect->where(array('prod.type' => $ACvalue['attribute'] , 'prod.value' => strtoupper($ACvalue['value'])));
+                            // $ProdChselect->where("prod.type = '{$type}' AND prod.value IN ('".implode("','", explode(',', strtoupper($ACvalue['value'])))."')");
                             $PCresultSet = array();
+                            $AttrSql = new Sql($this->getServiceLocator()->get('db'));
                             $PCresults = $AttrSql->prepareStatementForSqlObject($ProdChselect)->execute();
                             $PCresultSet = new \Zend\Db\ResultSet\ResultSet();
                             $PCresultSet->initialize($PCresults);
@@ -695,8 +696,9 @@ class FeedDataTable extends BasicTableAdapter {
                               foreach ($AttrGrChesultSet as $AttrGrChkey => $AttrGrChArr) {
                                 $ProdGrChSql = new Sql($this->getServiceLocator()->get('db'));
                                 $ProdGrChselect = $ProdGrChSql->select(array('prod' => 'ProductAttributes'));
-                                //$ProdGrChselect->where(array('prod.type' => $AttrGrChArr['attribute'] , 'prod.value' => strtoupper($AttrGrChArr['value'])));
-                                $ProdGrChselect->where("prod.type = '{$type}' AND prod.value IN ('".implode("','", explode(',', strtoupper($AttrGrChArr['value'])))."')");
+                                $ProdGrChselect->where(array('prod.type' => $AttrGrChArr['attribute'] , 'prod.value' => strtoupper($AttrGrChArr['value'])));
+                                // $ProdGrChselect->where("prod.type = '{$type}' AND prod.value IN ('".implode("','", explode(',', strtoupper($AttrGrChArr['value'])))."')");
+
                                 $PGrCresultSet = array();
                                 $PGrCresults = $ProdGrChSql->prepareStatementForSqlObject($ProdGrChselect)->execute();
                                 $PGrCresultSet = new \Zend\Db\ResultSet\ResultSet();
