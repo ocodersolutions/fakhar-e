@@ -716,11 +716,15 @@ class FeedDataTable extends BasicTableAdapter {
                   }
                 }
               }
-              $string =implode(",",$productArr);$st=str_replace(',', "','", $string );
-              $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
+              
+              $string =implode(",",$productArr);
+
+              if($string != ''){
+                $st=str_replace(',', "','", $string );
+                $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
+              }
             }
         }
-        //echo "here"; die;
         if (!empty($aPostParams['catids'])) {
             $sWhere .= " AND `feed`.`uid` IN (select distinct productUID from ProductCategories where value IN (" . $aPostParams['catids'] . ") )";
             //$prodattJoin = true;
