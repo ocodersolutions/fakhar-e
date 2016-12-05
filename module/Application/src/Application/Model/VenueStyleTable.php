@@ -20,12 +20,50 @@ class VenueStyleTable extends BasicTableAdapter {
         return $row;
     }
     public function AddVenue($venueStyle){
-        if ($this->GetVenue($venueStyle)) {
-                $result=0;
-             } else {
-                $result = $this->tableGateway->insert($venueStyle);
-             }
-        // $result = $this->tableGateway->insert($VenueStyle);
+        $oVenueList = $this->getServiceLocator()->get('VenueTable');
+        $getChild = $oVenueList->getchildrentId($venueStyle['venue_id']);
+
+         if ($this->GetVenue($venueStyle)) {
+            $result=0;
+         } else {
+            $result = $this->tableGateway->insert($venueStyle);
+         }  
+
+
+        if (!empty($getChild)) {
+
+            //loop 1
+            foreach ($getChild as $key) {
+                 $venueStyle['venue_id'] = $key['id'];
+                 $getChild_lv2 = $oVenueList->getchildrentId($key['id']);
+
+                 if ($this->GetVenue($venueStyle)) {
+                        $result = 0;
+                     } else {
+                        $result = $this->tableGateway->insert($venueStyle);
+                }
+
+                 if (!empty($getChild_lv2)) {
+                        foreach ($getChild_lv2 as $key2) {
+                            $venueStyle['venue_id'] = $key2['id'];
+                            // check exist
+                             if ($this->GetVenue($venueStyle)) {
+                                $result = 0;
+                             } else {
+                                $result = $this->tableGateway->insert($venueStyle);
+                             }
+                        }
+                 }
+
+            }
+            
+        }
+                // die;
+
+                
+
+
+             
         return $result;
     }
     public function delete($styleid,$venueid){
