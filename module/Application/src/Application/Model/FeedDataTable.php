@@ -577,6 +577,7 @@ class FeedDataTable extends BasicTableAdapter {
                   $resultSet->initialize($results);
                   $AttresultSet = $resultSet->toArray();
                   foreach ($AttresultSet as $AttrKey => $AttrValue) {
+                    
                     $AttrsArr[$AttrValue['attribute']] = $AttrValue ['value'];
                     foreach ($AttrsArr as $type => $Attr_value) {
                       //$productArr=[];
@@ -591,14 +592,15 @@ class FeedDataTable extends BasicTableAdapter {
                       $ProdresultSet = $resultSet->toArray();
                       foreach ($ProdresultSet as $keyProduct => $valueProduct) {
                          array_push($productArr,$valueProduct['productUID']);
-                      }
+                      }  
                       $string =implode(",",$productArr);
                       if($string != ''){
                         $st=str_replace(',', "','", $string );
-                        $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
+                        $sWhere .= " AND `feed`.`uid` IN ('".$st."') ";
+                        $productArr = [];
                       }
-                    }
-                  }
+                    }$AttrsArr = [];
+                  } 
                 }
                } 
               }
