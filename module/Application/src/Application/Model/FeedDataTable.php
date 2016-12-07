@@ -592,6 +592,11 @@ class FeedDataTable extends BasicTableAdapter {
                       foreach ($ProdresultSet as $keyProduct => $valueProduct) {
                          array_push($productArr,$valueProduct['productUID']);
                       }
+                      $string =implode(",",$productArr);
+                      if($string != ''){
+                        $st=str_replace(',', "','", $string );
+                        $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
+                      }
                     }
                   }
                 }
@@ -715,13 +720,6 @@ class FeedDataTable extends BasicTableAdapter {
                     }
                   }
                 }
-              }
-              
-              $string =implode(",",$productArr);
-
-              if($string != ''){
-                $st=str_replace(',', "','", $string );
-                $sWhere .= " AND `feed`.`uid` IN ('" . $st. "') ";
               }
             }
         }
