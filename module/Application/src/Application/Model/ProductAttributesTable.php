@@ -18,7 +18,7 @@ use Zend\Db\Sql\Where;
 class ProductAttributesTable extends BasicTableAdapter {
 
     protected $productAttributesTable = 'ProductAttributes';
-    protected $productReferenceAttributesTable = 'ProductReferenceAttributes';
+    protected $productReferenceAttributesTable = 'ProductReferenceAttributesCatMapping';
 
 
     public function getAttributes( $sUID ) {
@@ -117,7 +117,7 @@ class ProductAttributesTable extends BasicTableAdapter {
         $tmp = $select;        
         $tmp = $sql->prepareStatementForSqlObject($select)->execute()->current();
         
-        if( $tmp['depth'] == 3 ) {
+        if( $tmp['depth'] == 4 ) {
             $select->where("t.title = 'Type' and isActive = 'yes'");
             //echo $sql->getSqlStringForSqlObject($select);die;
         
