@@ -13,7 +13,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10+ */
   padding-left: 10px;
 }
 ul.jqtree-tree .jqtree-title{
-      white-space: nowrap;
+      /*white-space: nowrap;*/
 }
 /* Tweak navbar brand link to be super sleek
 -------------------------------------------------- */

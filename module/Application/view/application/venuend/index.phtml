@@ -1,0 +1,530 @@
+<?php
+echo $this->headScript()->appendFile($this->basePath() . '/assets/js/tree.jquery.js');
+echo $this->headLink()->appendStylesheet($this->basePath() . '/assets/css/jqtree.css');
+
+$listAttrValue = $this->listAttrValue;
+?>
+<style type="text/css">
+	
+	#tree1 input[type=checkbox]{
+		width: 30px;
+		float: left;
+	}
+	#notification{
+		text-align: center;
+	}
+	#notification{
+		font-weight: bold;
+    	color: green;
+	}
+	#loading {
+		display: none;
+		margin: 0 auto;
+		margin-top: 20px;
+		border: 5px solid #f3f3f3;
+		border-radius: 50%;
+		border-top: 5px solid #000;
+		width: 50px;
+		height: 50px;
+		-webkit-animation: spin 2s linear infinite;
+		animation: spin 2s linear infinite;
+	}
+
+	@-webkit-keyframes spin {
+	  0% { -webkit-transform: rotate(0deg); }
+	  100% { -webkit-transform: rotate(360deg); }
+	}
+
+	@keyframes spin {
+	  0% { transform: rotate(0deg); }
+	  100% { transform: rotate(360deg); }
+	}
+</style>
+
+<script type="text/javascript">
+$(function(){
+	$('#add-checked').click(function(){
+		$( "#notification" ).empty();
+		$( ".style_item_wrap" ).empty();
+		
+		item_checked = $('input[name="check"]:checked');
+		list_venueid = [];
+		$.each(item_checked, function( i, l ){
+		  list_venueid.push($(l).attr('value')); 
+		});
+		styleid = $("input[name='hiddenStyleid']").val();
+		if (styleid ==''){
+			myalert('alert_idNewsLetterInput1','type_missing','Ooops!','','OK','Seems You not yet pick choosse styles.',function(){$('#alert_idNewsLetterInput1').foundation('reveal','close'); });
+			event.preventDefault();
+		}else{
+			$('#loading').css('display','block');
+			$('.style_item_wrap').append("<p class='tree_title'>Following venues has just add style</p>");
+			$.each(list_venueid, function(i,l){
+				text_venue = $('input[value="'+l+'"]').closest('.jqtree_common').find('span').text();
+				$('.style_item_wrap').append("<span>"+text_venue+"</span><br>");
+			});
+			$.ajax({
+				url : "/venuend/savestylevenuechecked",
+		        type : "post",
+		        data : {
+		            'styleId' : styleid,
+		            'list_venueid' : list_venueid,
+		        },
+		        success:function(result){
+		        	$('#loading').css('display','none');
+		        	$('#notification').append("<span>OK</span>");
+		        }
+			});
+		}
+
+	});
+});
+</script>
+<div class="row" id="venue_style_page">
+	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
+	<!-- <div class="venue_cat_wrap"> -->
+		
+		
+		
+		<h5>Venues</h5>
+		<div id="tree1"></div>
+	<!-- </div> -->
+		
+	</div>
+	<div class="venue_main_content col-lg-8 col-sm-9">
+		<?php if(!$this->venue_name){ ?>
+			<p style="margin-top: 17px;">Please choose Venue</p>
+		<?php } else { ?>
+		<div class="row style_item" id="pick_style_row">
+			<div class="style_left pick_style col-lg-5 col-sm-5">
+				<p>Pick Styles</p>
+				<select data-placeholder="Choose a country..." style="width:100%" class="chosen-select">
+					<option selected disabled >Select</option>
+					<?php foreach($listAttrValue as $strrid=>$attr ){ ?>
+						<option value="<?php echo $attr;?>" data-styleId="<?php echo $strrid ?>"> <?php echo $attr;?></option>
+					<?php }  ?>
+				</select>
+				<input type="hidden" id="getstyleid" name="hiddenStyleid" value="">
+			</div>
+			<div class="style_des_right col-lg-7 col-sm-7">
+				<!-- <p>Color <span> Red ,Green</span></p>
+				<p>Brand <span> Brand 1 ,Brand 2</span></p> -->
+				<!-- <button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button> -->
+				<button class="btn-st-blue btn-primary" style="width: 100%" id="add-checked">Add checked</button>
+				<div id="notification"></div><div id="loading"></div>
+			</div>
+			
+		</div>
+
+		
+		<div class="style_item_wrap">
+		</div>
+		<!-- <p class="tree_title">My styles</p>
+		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
+		<div class = style_item_wrap>
+		<?php 
+		$style_arr = $this->style_attr;
+		if(empty($style_arr)){?>
+			<i class="empty_alert">No styles</i>
+		<?php }
+		foreach( $style_arr as $style_name=>$style_attr ){
+			if (!empty($style_attr)){
+		 	foreach ($style_attr as $styleId => $AtrrArr) { ?>
+			<div class="row style_item" data-style="<?php echo $style_name?>">
+				<div class="style_left col-lg-2 col-sm-2 ">
+					<p><?php  echo $styleId ?></p>
+				</div>
+				
+				<div class="style_des_right col-lg-7 col-sm-7 ">
+					<div class="row">
+						
+						<?php if(is_array($AtrrArr)){
+							foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
+							<div class="col-sm-5"><?php echo $AtrrName ?></div>
+							<div class="col-sm-7" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
+						<?php }
+						 }else{?>
+						 	<div class="col-sm-12">No styles</div>
+						<?php }?>
+					</div>	
+				</div>
+				<div class="style_des_right col-lg-2 col-sm-2 ">
+					<input type="hidden" name="hiddenDelid" value=<?php echo $style_name?>>
+					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
+				</div>
+				<?php }}?>
+			</div>
+		<?php }?>
+		<?php } ?>
+		</div> -->
+		<!-- start parent -->
+		<!-- <?php $parentArr = $this->Parent_Arr;
+			$GrandParent_Arr = $this->GrandParent_Arr;
+			  if((!empty($parentArr)) || (!empty($GrandParent_Arr))){
+			  	echo "<p class='tree_title' style='display:none;'>Parents styles</p>";
+
+			  	if (!empty($parentArr)){
+
+			  		foreach ($parentArr as $Prname => $Prvalue) {?>
+			  			<h3 style='display:none;'>Venue: <i>"<?php echo $Prname ?>"</i></h3>
+			  		<?php }
+			  		if (!empty($Prvalue)){
+			  		foreach ($Prvalue as $parentkey => $parentvalue) { 
+
+			  			?>
+				  		<div style='display:none;' class="row style_item">
+							<div class="style_left col-lg-3 col-sm-3 ">
+								<p><?php echo $parentkey ?></p>
+							</div>
+							
+							<div class="style_des_right col-lg-8 col-sm-8 ">
+								<div class="row">
+									<?php if (is_array($parentvalue)){
+										foreach ($parentvalue as $attrb => $attrbvalue) {?>
+											<div class="col-sm-5"><?php echo $attrb?></div>
+											<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrbvalue?></div>
+										<?php }
+									}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
+									
+									</div>	
+							</div>
+							
+						</div>
+				  	<?php }
+				  	}else {
+				  		//echo "<i>No Styles</i>";
+				  	}
+			  	}
+			  	if (!empty($GrandParent_Arr)){ 
+			  		foreach ($GrandParent_Arr as $NameKey => $GrandParent) { ?>
+			  			<h3>Venue: <i>"<?php echo $NameKey ?>"</i></h3>
+			  			<?php foreach ($GrandParent as $GrandParentkey  => $GrandParentvalue) {?>
+			  				<div class="row style_item">
+							<div class="style_left col-lg-3 col-sm-3 ">
+								<p><?php echo $GrandParentkey ?></p>
+							</div>
+							
+							<div class="style_des_right col-lg-8 col-sm-8 ">
+								<div class="row">
+									<?php if (is_array($GrandParentvalue)){
+										foreach ($GrandParentvalue as $GrandParentattrb => $GrandParentattrbvalue) {?>
+											<div class="col-sm-5"><?php echo $GrandParentattrb?></div>
+											<div class="col-sm-7" style="font-weight: normal;"><?php echo $GrandParentattrbvalue?></div>
+										<?php }
+									}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
+									
+									</div>	
+							</div>
+							
+						</div>
+			  			<?php }?>
+				  		
+				  	<?php }
+			  	}
+			  }
+		?> -->
+		<!-- end parent -->
+		<!-- child -->
+		<!-- <?php $ChildrenArr = $this->child_arr;
+		$GranChildrenArr = $this->GrandChild_Arr;
+		if (!empty($ChildrenArr) || !empty($GranChildrenArr)){
+			echo '<p class="tree_title">Child styles</p>';
+		}
+			if(!empty($ChildrenArr)){
+				foreach ($ChildrenArr as $name_venue => $venue_value) {
+				if($venue_value != ""){ ?>
+				<h3>Venue:<i> <?php  echo '"'.$name_venue.'"'; } ?></i></h3>
+					<?php if(!empty($venue_value)){
+						foreach ($venue_value as $name_st => $attr_arr) {?>
+							
+							<div class="row style_item" >
+								<div class="style_left col-lg-3 col-sm-3 ">
+									<p><?php echo $name_st ?></p>
+								</div>
+								
+								<div class="style_des_right col-lg-8 col-sm-8 ">
+									<div class="row">
+										<?php if (is_array($attr_arr)){
+											foreach ($attr_arr as $key => $value) {?>
+												<div class="col-sm-5"><?php echo $key?></div>
+												<div class="col-sm-7" style="font-weight: normal;"><?php echo $value?></div>
+											<?php }
+										}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
+										
+										</div>	
+								</div>
+								
+							</div>
+						<?php }
+					}else {
+						// echo "<i> No Styles </i>";
+					}
+				}
+			}?>
+			<?php 
+			//var_dump($GranChildrenArr);
+				if (!empty($GranChildrenArr)){
+					foreach ($GranChildrenArr as $nameGrChild => $GrChildvalue) {
+						if($GrChildvalue != "" ){?>
+						<h3>Venue:<i> <?php echo '"'.$nameGrChild.'"';} ?></i></h3>
+					<?php if (!empty($GrChildvalue))
+					{
+						foreach ($GrChildvalue as $NameGrstyle => $Grstylevalue) {?>
+						
+							<div class="row style_item">
+								<div class="style_left col-lg-3 col-sm-3 ">
+									<p><?php echo $NameGrstyle ?></p>
+								</div>
+								<div class="style_des_right col-lg-8 col-sm-8 ">
+									<div class="row">
+								<?php if (is_array($Grstylevalue)){
+									foreach ($Grstylevalue as $attrname => $attrvalue) {?>
+										<div class="col-sm-5"><?php echo $attrname?></div>
+										<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrvalue ?></div>
+								<?php	}
+								}else{ ?>
+											<div class="col-sm-12">No styles</div>
+										<?php }?>
+									</div>	
+								</div>
+									
+							</div>
+						<?php }
+					}else {
+						// echo "<i>No Styles</i>";
+					}
+					?>
+					
+					<?php }
+				}
+			?> -->
+
+	</div>
+</div>
+<script>
+var data = [
+    <?php 
+		$data_tree = $this->data_tree;
+		echo $data_tree;
+	?>
+];
+
+	
+
+
+$(function() {
+	 pathname = window.location.pathname; 
+    $('#tree1').tree({
+        data: data,
+        selectable: true,
+        closedIcon: $('<i class="fa fa-plus" " />'),
+    	openedIcon: $('<i class="fa fa-minus"/>'),
+        onCreateLi: function(node, $li) {
+        	var a = $li.find('span')[0];
+        	str = node.url;
+        	a.outerHTML = '<input type="checkbox" value="'+str.replace("/venue/","")+'"  name="check" /><a href="/venuend/' +str.replace("/venue/","") + '">' + a.outerHTML + '</a>';
+        }
+
+       
+    });
+
+    $('input[name="check"]').change(function() {
+
+    	x = $(this).closest('li').find('ul li input[name="check"]');
+    	if($(this).is(":checked")) {
+           $.each(x, function(i,l){
+           		$(l).prop('checked','true');
+           });
+        }else{
+        	$.each(x, function(i,l){
+           		$(l).removeAttr('checked');
+           });
+        }
+	});
+
+  	$('#tree1 div.jqtree-element a.jqtree-closed').click(function(){
+	  		
+				x = $(this).closest('li.jqtree_common.jqtree-folder');
+				if ( !x.hasClass( "selected" ) ) {
+				x.addClass('selected');
+				level = parseInt(x.find('a span').attr('aria-level'));
+				level +=1;
+				list = x.find("ul li a span[aria-level='"+level+"']").closest("li.jqtree_common");
+				$(list).slice( 20, 10000 ).addClass('load-more');
+				y = $(this).closest('.jqtree_common.jqtree-folder.selected');
+				has_child = $(y).find('a .fa').length;
+				if(has_child <= 1 ){
+					exits_option = $(y).find('.list_dropdown').length;
+					if (exits_option == 0) {
+							length = $(y).find('.jqtree_common.load-more').length;
+							// if (length > 0) {
+								// $(y).find('ul.jqtree_common').addClass('2nd_selected').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown"><option disabled selected>Select</option></select>');	
+							// }
+							
+						// list_dropdown = $(y).find('.jqtree_common.load-more');
+						// $(list_dropdown).appendTo($(y).find('.list_dropdown'));
+						// for (i = 0; i < list_dropdown.length; i++) {
+							// $(list_dropdown[i]).wrap('<option></option>');
+						// }
+					}
+				}
+				$('.list_dropdown').on('change', function() {
+				  y = $(this).find('option:selected').find('a').attr('href'); 
+				  window.location.replace(y);
+				});
+				
+			}else{
+				x.removeClass('selected');
+			}		
+    });
+
+    $(".chosen-select").chosen(); 
+    $(".chosen-select").chosen().change(function(){
+		selectedValue = $(this).find("option:selected").data('styleid');
+		$("input[name='hiddenStyleid']").val(selectedValue);
+	});
+    $(".venue_cat_wrap h5").click(function(){
+    	$(this).parent('.venue_cat_wrap').toggleClass('open');
+    	
+    });
+    tagA=$("#tree1").find("a[href='"+pathname+"']");
+    tagA.find("span").css("color","#859ed8");
+    $this=tagA.find("span");
+    if($this.attr('aria-level')==3)
+    {
+    	li2=$this.closest('li.jqtree_common .jqtree-folder');
+    	if(li2.hasClass('jqtree-closed')){
+    		li2.removeClass('jqtree-closed');
+    		li2.addClass('fl_selected');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').removeClass('jqtree-closed');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    		li2.find('div.jqtree_common').find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    		$('.fl_selected ul li').slice( 20, 10000 ).addClass('load-more');
+    		length = $('.fl_selected .jqtree_common.load-more').length;
+    		// if (length > 0) {
+    			// $('.fl_selected ul').append('<select style="width:85%; margin-left: 1.3em;" class="list_dropdown" ><option disabled selected>Select</option></select>');
+    		// }
+    		// $('.jqtree_common.load-more').appendTo('.list_dropdown');
+    		// x = $('.list_dropdown .jqtree_common.load-more');
+   //  		for (i = 0; i < x.length; i++) {
+			// 	$(x[i]).wrap('<option></option>');
+			// }
+			$('.list_dropdown').on('change', function() {
+			  y = $(this).find('option:selected').find('a').attr('href'); 
+			  window.location.replace(y);
+			});
+    	}    	
+    	$(tagA).closest('option').attr('selected','');
+    	ul2=li2.closest('ul');
+    	if(ul2.attr('display','none')){
+    		ul2.css('display','block');
+    	}
+    	li1=ul2.closest('li');
+    	if(li1.hasClass('jqtree-closed')){
+    		li1.removeClass('jqtree-closed');
+    		li1.find('div.jqtree_common').first().find('a.jqtree-toggler').find('i.fa').removeClass('fa-plus');
+    		li1.find('div.jqtree_common').first().find('a.jqtree-toggler').find('i.fa').addClass('fa-minus');
+    	}
+    	$this.closest('li.jqtree_common .jqtree-folder').find('ul').css('display','block');
+    	$this.closest('li.jqtree_common .jqtree-folder').find('ul').addClass('class_name');
+    }else if ($this.attr('aria-level')==2)
+    {
+    	ul1=$this.closest('ul');
+    	if(ul1.attr('display','none')){
+    		ul1.css('display','block');
+    	}
+    	li1=ul1.closest('li');
+    	if(li1.hasClass('jqtree-closed')){
+    		li1.removeClass('jqtree-closed');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').removeClass('fa-plus');
+    		li1.find('div.jqtree_common').find('a.jqtree-toggler').first().find('i.fa:first-child').addClass('fa-minus');
+    	}
+    	
+    }
+});
+$(function() {
+	$("#add_style").click(function(event) {
+		$(".empty_alert").hide().fadeOut('2000');
+		styleid = $("input[name='hiddenStyleid']").val();
+		if (styleid ==''){
+
+			myalert('alert_idNewsLetterInput1','type_missing','Ooops!','','OK','Seems You not yet pick choosse styles.',function(){$('#alert_idNewsLetterInput1').foundation('reveal','close'); });
+			event.preventDefault();
+		}else{
+			venueid = '<?php echo $this->venue_id;?>';
+			$.ajax({
+				url : "/venue/savestylevenue",
+		        type : "post",
+		        data : {
+		            'styleId' : styleid,
+		            'venueid' : venueid,
+		        },
+		        success:function(result){
+
+		        	// console.log(result);
+		        	if(result == 0){
+		        		myalert('alert_idNewsLetterInput2','type_missing','Ooops!','','OK','Seems styles already exits.',function(){$('#alert_idNewsLetterInput2').foundation('reveal','close'); });
+		        	}else{
+	        		//$("#empty_alert").hide();
+	        		$result=JSON.parse(result);
+	        		var attrString = '';
+		        	name = $result.name;
+		        	attrs = $result.attributes;
+		        	if (attrs){
+		        		for (i=0;i< attrs.length;i++)
+			        	{
+			        		attrArr = attrs[i].split(" - ");
+							attrString += '<div class="col-sm-5">'+attrArr[0]+'</div><div class="col-sm-7" style="font-weight: normal;">'+attrArr[1]+'</div>';
+			        	}
+		        	}else{
+		        		attrString = '<div class="col-sm-12">No styles</div>';
+		        	}
+		        	
+		           	html = '<div class="row style_item" data-style ="'+styleid+'"><div class="style_left col-lg-2 col-sm-2 "><p>'+name+'</p></div><div class="style_des_right col-lg-7 col-sm-7 "><div class="row">'+attrString+'</div></div><div class="style_des_right col-lg-2 col-sm-2 "><input type="hidden" name="hiddenDelid" value="'+styleid+'"><button type="button" class="btn btn-danger" name="delstylevenue">Delete</button></div></div>';
+	        		$(html).appendTo('.style_item_wrap').hide().fadeIn(2000);
+		        	}
+        			
+		        }
+		       
+
+			});
+		}
+
+		
+	});
+	
+	//delete stylevenue
+	$(document).on("click", "button[name='delstylevenue']", function(){
+		n = $(".style_item_wrap").find('.row.style_item').size();
+		
+		delstId = $(this).parent('.style_des_right').find("input[name='hiddenDelid']").val();
+		venueId = '<?php echo $this->venue_id;?>';
+		$.ajax({
+			url : "/venue/delstylevenue",
+	        type : "post",
+	        data : {
+	            'delstId' : delstId,
+	            'venueId' :venueId,
+	        },
+	        success:function(result){
+	        	$(".style_item[data-style='"+delstId+"']").fadeOut('2000', function() {
+	        		$(".style_item[data-style='"+delstId+"']").remove();
+	        	});
+	        	if(n==1){
+	        		if($("#empty_alert").size()==0){
+	        			$('.style_item_wrap').append('<i class="empty_alert"> No Styles </i>');
+	        		}
+					$("#empty_alert").show('2000');
+				}
+	        }
+		});
+	})
+});
+
+</script>

@@ -923,6 +923,29 @@ return array(
                     ),
                 ),
             ),
+            'venuend' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/venuend',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Venuend',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '[/:action][/:id][/]',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'id'     => '[0-9]+',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
             /* 'auth' => array(
               'type' => 'Zend\Mvc\Router\Http\Literal',
               'options' => array(
@@ -1004,6 +1027,7 @@ return array(
             'Application\Controller\Email' => 'Application\Controller\EmailController',
             'Application\Controller\Style' => 'Application\Controller\StyleController',
             'Application\Controller\Venue' => 'Application\Controller\VenueController',
+             'Application\Controller\Venuend' => 'Application\Controller\VenuendController',
         ),
     ),
     'controller_plugins' => array(
