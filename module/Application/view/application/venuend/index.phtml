@@ -10,13 +10,13 @@ $listAttrValue = $this->listAttrValue;
 		width: 30px;
 		float: left;
 	}
-	#notification{
+	/*#notification{
 		text-align: center;
-	}
-	#notification{
+	}*/
+	/*#notification{
 		font-weight: bold;
     	color: green;
-	}
+	}*/
 	#loading {
 		display: none;
 		margin: 0 auto;
@@ -44,7 +44,7 @@ $listAttrValue = $this->listAttrValue;
 <script type="text/javascript">
 $(function(){
 	$('#add-checked').click(function(){
-		$( "#notification" ).empty();
+		// $( "#notification" ).empty();
 		$( ".style_item_wrap" ).empty();
 		
 		item_checked = $('input[name="check"]:checked');
@@ -58,11 +58,6 @@ $(function(){
 			event.preventDefault();
 		}else{
 			$('#loading').css('display','block');
-			$('.style_item_wrap').append("<p class='tree_title'>Following venues has just add style</p>");
-			$.each(list_venueid, function(i,l){
-				text_venue = $('input[value="'+l+'"]').closest('.jqtree_common').find('span').text();
-				$('.style_item_wrap').append("<span>"+text_venue+"</span><br>");
-			});
 			$.ajax({
 				url : "/venuend/savestylevenuechecked",
 		        type : "post",
@@ -72,7 +67,12 @@ $(function(){
 		        },
 		        success:function(result){
 		        	$('#loading').css('display','none');
-		        	$('#notification').append("<span>OK</span>");
+		        	// $('#notification').append("<span>OK</span>");
+		        	$('.style_item_wrap').append("<p class='tree_title'>Following venues has just add style</p>");
+					$.each(list_venueid, function(i,l){
+						text_venue = $('input[value="'+l+'"]').closest('.jqtree_common').find('span').text();
+						$('.style_item_wrap').append("<span>"+text_venue+"</span><br>");
+					});
 		        }
 			});
 		}
@@ -111,7 +111,8 @@ $(function(){
 				<p>Brand <span> Brand 1 ,Brand 2</span></p> -->
 				<!-- <button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button> -->
 				<button class="btn-st-blue btn-primary" style="width: 100%" id="add-checked">Add checked</button>
-				<div id="notification"></div><div id="loading"></div>
+				<!-- <div id="notification"></div> -->
+				<div id="loading"></div>
 			</div>
 			
 		</div>
