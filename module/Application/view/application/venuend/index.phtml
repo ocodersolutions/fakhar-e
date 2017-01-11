@@ -10,13 +10,6 @@ $listAttrValue = $this->listAttrValue;
 		width: 30px;
 		float: left;
 	}
-	/*#notification{
-		text-align: center;
-	}*/
-	/*#notification{
-		font-weight: bold;
-    	color: green;
-	}*/
 	#loading {
 		display: none;
 		margin: 0 auto;
@@ -82,19 +75,10 @@ $(function(){
 </script>
 <div class="row" id="venue_style_page">
 	<div class="venue_cat col-lg-2 col-lg-offset-1 col-sm-3">
-	<!-- <div class="venue_cat_wrap"> -->
-		
-		
-		
 		<h5>Venues</h5>
 		<div id="tree1"></div>
-	<!-- </div> -->
-		
 	</div>
 	<div class="venue_main_content col-lg-8 col-sm-9">
-		<?php if(!$this->venue_name){ ?>
-			<p style="margin-top: 17px;">Please choose Venue</p>
-		<?php } else { ?>
 		<div class="row style_item" id="pick_style_row">
 			<div class="style_left pick_style col-lg-5 col-sm-5">
 				<p>Pick Styles</p>
@@ -107,205 +91,11 @@ $(function(){
 				<input type="hidden" id="getstyleid" name="hiddenStyleid" value="">
 			</div>
 			<div class="style_des_right col-lg-7 col-sm-7">
-				<!-- <p>Color <span> Red ,Green</span></p>
-				<p>Brand <span> Brand 1 ,Brand 2</span></p> -->
-				<!-- <button type="button" class="btn-st-blue btn-primary" name="add_style" id="add_style">Add</button> -->
-				<button class="btn-st-blue btn-primary" style="width: 100%" id="add-checked">Add checked</button>
-				<!-- <div id="notification"></div> -->
+				<button class="btn-st-blue btn-primary" style="width: 100%" id="add-checked">Add</button>
 				<div id="loading"></div>
 			</div>
-			
 		</div>
-
-		
-		<div class="style_item_wrap">
-		</div>
-		<!-- <p class="tree_title">My styles</p>
-		<h3 class="row">Venue: <i>"<?php echo $this->venue_name ;?>"</i></h3>
-		<div class = style_item_wrap>
-		<?php 
-		$style_arr = $this->style_attr;
-		if(empty($style_arr)){?>
-			<i class="empty_alert">No styles</i>
-		<?php }
-		foreach( $style_arr as $style_name=>$style_attr ){
-			if (!empty($style_attr)){
-		 	foreach ($style_attr as $styleId => $AtrrArr) { ?>
-			<div class="row style_item" data-style="<?php echo $style_name?>">
-				<div class="style_left col-lg-2 col-sm-2 ">
-					<p><?php  echo $styleId ?></p>
-				</div>
-				
-				<div class="style_des_right col-lg-7 col-sm-7 ">
-					<div class="row">
-						
-						<?php if(is_array($AtrrArr)){
-							foreach ($AtrrArr as $AtrrName => $Atrrvalue) {?>
-							<div class="col-sm-5"><?php echo $AtrrName ?></div>
-							<div class="col-sm-7" style="font-weight: normal;"><?php echo $Atrrvalue ?></div>
-						<?php }
-						 }else{?>
-						 	<div class="col-sm-12">No styles</div>
-						<?php }?>
-					</div>	
-				</div>
-				<div class="style_des_right col-lg-2 col-sm-2 ">
-					<input type="hidden" name="hiddenDelid" value=<?php echo $style_name?>>
-					<button type="button" class="btn btn-danger" name="delstylevenue">Delete</button>
-				</div>
-				<?php }}?>
-			</div>
-		<?php }?>
-		<?php } ?>
-		</div> -->
-		<!-- start parent -->
-		<!-- <?php $parentArr = $this->Parent_Arr;
-			$GrandParent_Arr = $this->GrandParent_Arr;
-			  if((!empty($parentArr)) || (!empty($GrandParent_Arr))){
-			  	echo "<p class='tree_title' style='display:none;'>Parents styles</p>";
-
-			  	if (!empty($parentArr)){
-
-			  		foreach ($parentArr as $Prname => $Prvalue) {?>
-			  			<h3 style='display:none;'>Venue: <i>"<?php echo $Prname ?>"</i></h3>
-			  		<?php }
-			  		if (!empty($Prvalue)){
-			  		foreach ($Prvalue as $parentkey => $parentvalue) { 
-
-			  			?>
-				  		<div style='display:none;' class="row style_item">
-							<div class="style_left col-lg-3 col-sm-3 ">
-								<p><?php echo $parentkey ?></p>
-							</div>
-							
-							<div class="style_des_right col-lg-8 col-sm-8 ">
-								<div class="row">
-									<?php if (is_array($parentvalue)){
-										foreach ($parentvalue as $attrb => $attrbvalue) {?>
-											<div class="col-sm-5"><?php echo $attrb?></div>
-											<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrbvalue?></div>
-										<?php }
-									}else{ ?>
-											<div class="col-sm-12">No styles</div>
-										<?php }?>
-									
-									</div>	
-							</div>
-							
-						</div>
-				  	<?php }
-				  	}else {
-				  		//echo "<i>No Styles</i>";
-				  	}
-			  	}
-			  	if (!empty($GrandParent_Arr)){ 
-			  		foreach ($GrandParent_Arr as $NameKey => $GrandParent) { ?>
-			  			<h3>Venue: <i>"<?php echo $NameKey ?>"</i></h3>
-			  			<?php foreach ($GrandParent as $GrandParentkey  => $GrandParentvalue) {?>
-			  				<div class="row style_item">
-							<div class="style_left col-lg-3 col-sm-3 ">
-								<p><?php echo $GrandParentkey ?></p>
-							</div>
-							
-							<div class="style_des_right col-lg-8 col-sm-8 ">
-								<div class="row">
-									<?php if (is_array($GrandParentvalue)){
-										foreach ($GrandParentvalue as $GrandParentattrb => $GrandParentattrbvalue) {?>
-											<div class="col-sm-5"><?php echo $GrandParentattrb?></div>
-											<div class="col-sm-7" style="font-weight: normal;"><?php echo $GrandParentattrbvalue?></div>
-										<?php }
-									}else{ ?>
-											<div class="col-sm-12">No styles</div>
-										<?php }?>
-									
-									</div>	
-							</div>
-							
-						</div>
-			  			<?php }?>
-				  		
-				  	<?php }
-			  	}
-			  }
-		?> -->
-		<!-- end parent -->
-		<!-- child -->
-		<!-- <?php $ChildrenArr = $this->child_arr;
-		$GranChildrenArr = $this->GrandChild_Arr;
-		if (!empty($ChildrenArr) || !empty($GranChildrenArr)){
-			echo '<p class="tree_title">Child styles</p>';
-		}
-			if(!empty($ChildrenArr)){
-				foreach ($ChildrenArr as $name_venue => $venue_value) {
-				if($venue_value != ""){ ?>
-				<h3>Venue:<i> <?php  echo '"'.$name_venue.'"'; } ?></i></h3>
-					<?php if(!empty($venue_value)){
-						foreach ($venue_value as $name_st => $attr_arr) {?>
-							
-							<div class="row style_item" >
-								<div class="style_left col-lg-3 col-sm-3 ">
-									<p><?php echo $name_st ?></p>
-								</div>
-								
-								<div class="style_des_right col-lg-8 col-sm-8 ">
-									<div class="row">
-										<?php if (is_array($attr_arr)){
-											foreach ($attr_arr as $key => $value) {?>
-												<div class="col-sm-5"><?php echo $key?></div>
-												<div class="col-sm-7" style="font-weight: normal;"><?php echo $value?></div>
-											<?php }
-										}else{ ?>
-											<div class="col-sm-12">No styles</div>
-										<?php }?>
-										
-										</div>	
-								</div>
-								
-							</div>
-						<?php }
-					}else {
-						// echo "<i> No Styles </i>";
-					}
-				}
-			}?>
-			<?php 
-			//var_dump($GranChildrenArr);
-				if (!empty($GranChildrenArr)){
-					foreach ($GranChildrenArr as $nameGrChild => $GrChildvalue) {
-						if($GrChildvalue != "" ){?>
-						<h3>Venue:<i> <?php echo '"'.$nameGrChild.'"';} ?></i></h3>
-					<?php if (!empty($GrChildvalue))
-					{
-						foreach ($GrChildvalue as $NameGrstyle => $Grstylevalue) {?>
-						
-							<div class="row style_item">
-								<div class="style_left col-lg-3 col-sm-3 ">
-									<p><?php echo $NameGrstyle ?></p>
-								</div>
-								<div class="style_des_right col-lg-8 col-sm-8 ">
-									<div class="row">
-								<?php if (is_array($Grstylevalue)){
-									foreach ($Grstylevalue as $attrname => $attrvalue) {?>
-										<div class="col-sm-5"><?php echo $attrname?></div>
-										<div class="col-sm-7" style="font-weight: normal;"><?php echo $attrvalue ?></div>
-								<?php	}
-								}else{ ?>
-											<div class="col-sm-12">No styles</div>
-										<?php }?>
-									</div>	
-								</div>
-									
-							</div>
-						<?php }
-					}else {
-						// echo "<i>No Styles</i>";
-					}
-					?>
-					
-					<?php }
-				}
-			?> -->
-
+		<div class="style_item_wrap"></div>
 	</div>
 </div>
 <script>
